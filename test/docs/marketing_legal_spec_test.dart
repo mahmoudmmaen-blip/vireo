@@ -3,6 +3,18 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  group('docs/README index', () {
+    test('indexes §6, §9, and §13 final documentation', () {
+      final readme = File('docs/README.md').readAsStringSync();
+      expect(readme, contains('§6'));
+      expect(readme, contains('§9'));
+      expect(readme, contains('§13'));
+      expect(readme, contains('marketing/app_store_aso_en.md'));
+      expect(readme, contains('legal/README.md'));
+      expect(readme, contains('faq/faq_en_ar.md'));
+    });
+  });
+
   group('§6 App Store ASO copy', () {
     const asoFiles = [
       'docs/marketing/app_store_aso_en.md',
@@ -55,10 +67,10 @@ void main() {
 
   group('§9 Legal documents (Terms + Privacy)', () {
     const legalFiles = [
-      'legal/terms_of_service_en.md',
-      'legal/terms_of_service_ar.md',
-      'legal/privacy_policy_en.md',
-      'legal/privacy_policy_ar.md',
+      'docs/legal/terms_of_service_en.md',
+      'docs/legal/terms_of_service_ar.md',
+      'docs/legal/privacy_policy_en.md',
+      'docs/legal/privacy_policy_ar.md',
     ];
 
     test('bilingual Terms and Privacy files exist', () {
@@ -68,7 +80,7 @@ void main() {
     });
 
     test('Terms include medical disclaimer and subscription clauses', () {
-      final terms = File('legal/terms_of_service_en.md').readAsStringSync().toLowerCase();
+      final terms = File('docs/legal/terms_of_service_en.md').readAsStringSync().toLowerCase();
       expect(terms, contains('not a medical'));
       expect(terms, contains('auto-renewal'));
       expect(terms, contains('delete your account'));
@@ -76,7 +88,7 @@ void main() {
     });
 
     test('Privacy Policy covers health-adjacent data and deletion', () {
-      final privacy = File('legal/privacy_policy_en.md').readAsStringSync().toLowerCase();
+      final privacy = File('docs/legal/privacy_policy_en.md').readAsStringSync().toLowerCase();
       expect(privacy, contains('health screening'));
       expect(privacy, contains('progress photos'));
       expect(privacy, contains('delete'));
@@ -84,7 +96,7 @@ void main() {
     });
 
     test('legal README indexes all four documents', () {
-      final readme = File('legal/README.md').readAsStringSync();
+      final readme = File('docs/legal/README.md').readAsStringSync();
       for (final doc in legalFiles) {
         expect(readme, contains(doc.split('/').last));
       }
@@ -93,7 +105,7 @@ void main() {
 
   group('§13 FAQ', () {
     test('FAQ has bilingual Q/A pairs and swap-meal entry', () {
-      final faq = File('docs/copy/faq_en_ar.md').readAsStringSync();
+      final faq = File('docs/faq/faq_en_ar.md').readAsStringSync();
       expect(faq, contains('Section 13'));
       expect(faq, contains('**EN — Q:**'));
       expect(faq, contains('**AR — Q:**'));
@@ -102,7 +114,7 @@ void main() {
     });
 
     test('FAQ covers at least 15 topics', () {
-      final faq = File('docs/copy/faq_en_ar.md').readAsStringSync();
+      final faq = File('docs/faq/faq_en_ar.md').readAsStringSync();
       final headings = RegExp(r'^## \d+\.', multiLine: true).allMatches(faq);
       expect(headings.length, greaterThanOrEqualTo(16));
     });

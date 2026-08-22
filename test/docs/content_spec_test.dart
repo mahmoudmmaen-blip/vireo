@@ -8,7 +8,6 @@ void main() {
     const copyFiles = [
       'docs/copy/push_notifications.json',
       'docs/copy/empty_error_states.json',
-      'docs/copy/faq_en_ar.md',
       'docs/copy/app_store_screenshot_captions.md',
     ];
 
@@ -41,8 +40,8 @@ void main() {
       }
     });
 
-    test('FAQ includes Arabic and English headings', () {
-      final faq = File('docs/copy/faq_en_ar.md').readAsStringSync();
+    test('FAQ lives under docs/faq with bilingual headings', () {
+      final faq = File('docs/faq/faq_en_ar.md').readAsStringSync();
       expect(faq, contains('English'));
       expect(faq, contains('Egyptian Arabic'));
     });

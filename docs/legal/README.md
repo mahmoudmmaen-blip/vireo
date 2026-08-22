@@ -1,5 +1,6 @@
 # Vireo — Legal Documents (Section 9)
 
+Canonical location: `docs/legal/`  
 Bilingual Terms of Service and Privacy Policy for App Store / Google Play compliance and in-app consent (§2.2 Step 5).
 
 | Document | English | Arabic |
