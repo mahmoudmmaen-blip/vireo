@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/widgets/language_selector.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
@@ -56,7 +57,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 32),
+              const LanguageSelector(),
+              const SizedBox(height: 24),
+              const SizedBox(height: 8),
               Text(
                 l10n.authWelcomeTitle,
                 style: Theme.of(context).textTheme.headlineMedium,

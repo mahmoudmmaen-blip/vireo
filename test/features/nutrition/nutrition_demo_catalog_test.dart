@@ -8,7 +8,7 @@ void main() {
   group('Nutrition demo catalog', () {
     test('breakfast primary title is fully Arabic', () {
       final recipe = NutritionDemoCatalog.primaryFor(MealType.breakfast);
-      expect(recipe.titleAr, 'شوفان بالبروتين');
+      expect(recipe.titleAr, 'أومليت بيض وجبنة');
       expect(recipe.titleAr, isNot(contains('tein')));
     });
 

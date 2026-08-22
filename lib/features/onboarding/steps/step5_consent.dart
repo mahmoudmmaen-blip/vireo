@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
 
@@ -12,6 +14,7 @@ class Step5Consent extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final state = ref.watch(onboardingProvider);
     final draft = state.draft;
+    final colors = context.vireoColors;
 
     return OnboardingStepShell(
       stepIndex: 4,
@@ -22,17 +25,26 @@ class Step5Consent extends ConsumerWidget {
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onContinue: () => ref.read(onboardingProvider.notifier).nextStep(),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              l10n.legalDisclaimerText,
-              style: Theme.of(context).textTheme.bodyMedium,
+            constraints: const BoxConstraints(maxHeight: 340),
+            decoration: VireoDecorations.premiumCard(colors),
+            child: Scrollbar(
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _DisclaimerSection(icon: '⚠️', text: l10n.legalDisclaimerSection1),
+                    _DisclaimerSection(icon: '🏥', text: l10n.legalDisclaimerSection2),
+                    _DisclaimerSection(icon: '💊', text: l10n.legalDisclaimerSection3),
+                    _DisclaimerSection(icon: '🧬', text: l10n.legalDisclaimerSection4),
+                    _DisclaimerSection(icon: '⚖️', text: l10n.legalDisclaimerSection5),
+                  ],
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -50,6 +62,38 @@ class Step5Consent extends ConsumerWidget {
                     ),
                   );
             },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DisclaimerSection extends StatelessWidget {
+  const _DisclaimerSection({required this.icon, required this.text});
+
+  final String icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 18)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: colors.text,
+                    height: 1.5,
+                  ),
+            ),
           ),
         ],
       ),

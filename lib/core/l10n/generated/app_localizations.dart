@@ -509,8 +509,50 @@ abstract class AppLocalizations {
   /// No description provided for @legalDisclaimerText.
   ///
   /// In en, this message translates to:
-  /// **'[legal disclaimer text]'**
+  /// **'Vireo is an organizational fitness tool and is not a substitute for direct medical advice. Content (workouts, meal plans, and health information) is for general guidance only.\n\nIf you have any chronic condition — such as heart disease, diabetes, high blood pressure, or current joint injuries — or take medication, consult your doctor before starting any exercise or nutrition program.\n\nDietary supplements and hormone-related guidance (such as testosterone) are general educational information only. They are not medical prescriptions or treatment recommendations.\n\nBy participating in any in-app program, I confirm I have read the terms and understand Vireo is not liable for injury or health complications from using the app without medical consultation.'**
   String get legalDisclaimerText;
+
+  /// No description provided for @legalDisclaimerSection1.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo is an organizational fitness tool and is not a substitute for direct medical advice. Content (workouts, meal plans, and health information) is for general guidance only.'**
+  String get legalDisclaimerSection1;
+
+  /// No description provided for @legalDisclaimerSection2.
+  ///
+  /// In en, this message translates to:
+  /// **'If you have any chronic condition — such as heart disease, diabetes, high blood pressure, or current joint injuries — or take medication, consult your doctor before starting any exercise or nutrition program.'**
+  String get legalDisclaimerSection2;
+
+  /// No description provided for @legalDisclaimerSection3.
+  ///
+  /// In en, this message translates to:
+  /// **'Dietary supplements are general educational information only. They are not medical prescriptions or treatment recommendations.'**
+  String get legalDisclaimerSection3;
+
+  /// No description provided for @legalDisclaimerSection4.
+  ///
+  /// In en, this message translates to:
+  /// **'Hormone-related guidance (such as testosterone) is general educational information only. It is not a medical prescription or treatment recommendation.'**
+  String get legalDisclaimerSection4;
+
+  /// No description provided for @legalDisclaimerSection5.
+  ///
+  /// In en, this message translates to:
+  /// **'By participating in any in-app program, I confirm I have read the terms and understand Vireo is not liable for injury or health complications from using the app without medical consultation.'**
+  String get legalDisclaimerSection5;
+
+  /// No description provided for @languageArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'العربية'**
+  String get languageArabic;
+
+  /// No description provided for @languageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
 
   /// No description provided for @consentCheckboxLabel.
   ///
@@ -1615,6 +1657,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Resubscribe to continue your full training program. Basic tracking remains available on the free plan.'**
   String get workoutPhaseLockedBody;
+
+  /// No description provided for @homeGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello {name} 👋'**
+  String homeGreeting(String name);
+
+  /// No description provided for @homeDayPhase.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} · {phase} phase'**
+  String homeDayPhase(int day, String phase);
+
+  /// No description provided for @homeGuestBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re in guest mode — sign up to save your progress'**
+  String get homeGuestBanner;
+
+  /// No description provided for @homeGuestSignUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get homeGuestSignUp;
+
+  /// No description provided for @homeGuestCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up now — free for 7 days'**
+  String get homeGuestCta;
+
+  /// No description provided for @homeStreakDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} day streak'**
+  String homeStreakDays(int days);
+
+  /// No description provided for @homeStartStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your streak today'**
+  String get homeStartStreak;
+
+  /// No description provided for @homeTodayWorkoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s workout'**
+  String get homeTodayWorkoutTitle;
+
+  /// No description provided for @homeStartWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Start workout'**
+  String get homeStartWorkout;
+
+  /// No description provided for @homeRestDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Active rest day 🧘'**
+  String get homeRestDay;
+
+  /// No description provided for @homeBreakfast.
+  ///
+  /// In en, this message translates to:
+  /// **'Breakfast'**
+  String get homeBreakfast;
+
+  /// No description provided for @homeMealConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed ✓'**
+  String get homeMealConfirmed;
+
+  /// No description provided for @homeMealPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get homeMealPending;
+
+  /// No description provided for @homeWalkingSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {goal} steps'**
+  String homeWalkingSteps(int current, int goal);
+
+  /// No description provided for @homeWeeklyProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{completed} / 7 days complete'**
+  String homeWeeklyProgress(int completed);
+
+  /// No description provided for @homeCheckInBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ Weekly check-in ready — just one minute'**
+  String get homeCheckInBanner;
+
+  /// No description provided for @homeRecoveryScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery score'**
+  String get homeRecoveryScore;
+
+  /// No description provided for @homeRecoveryReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Your body is ready to train'**
+  String get homeRecoveryReady;
+
+  /// No description provided for @homeGuestName.
+  ///
+  /// In en, this message translates to:
+  /// **'Champion'**
+  String get homeGuestName;
+
+  /// No description provided for @homePhaseFoundation.
+  ///
+  /// In en, this message translates to:
+  /// **'Foundation'**
+  String get homePhaseFoundation;
+
+  /// No description provided for @nutritionFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get nutritionFilterAll;
+
+  /// No description provided for @nutritionFilterQuick.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick'**
+  String get nutritionFilterQuick;
+
+  /// No description provided for @nutritionFilterLowCalorie.
+  ///
+  /// In en, this message translates to:
+  /// **'Low calorie'**
+  String get nutritionFilterLowCalorie;
+
+  /// No description provided for @nutritionMacroSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{calories} cal · {protein}g protein'**
+  String nutritionMacroSummary(int calories, int protein);
+
+  /// No description provided for @nutritionMacroBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Cal | Protein | Carbs | Fat'**
+  String get nutritionMacroBar;
+
+  /// No description provided for @nutritionMealConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed ✓'**
+  String get nutritionMealConfirmed;
+
+  /// No description provided for @nutritionFridgeBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'📷 Scan your fridge — {remaining} scans left this month'**
+  String nutritionFridgeBanner(int remaining);
+
+  /// No description provided for @nutritionFridgeScanCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan'**
+  String get nutritionFridgeScanCta;
+
+  /// No description provided for @workoutWarmUpStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Shoulder circles — 30 seconds'**
+  String get workoutWarmUpStep1;
+
+  /// No description provided for @workoutWarmUpStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'March in place — 60 seconds'**
+  String get workoutWarmUpStep2;
+
+  /// No description provided for @workoutWarmUpStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Light squats — 10 reps'**
+  String get workoutWarmUpStep3;
+
+  /// No description provided for @workoutSkipWarmUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip warm-up'**
+  String get workoutSkipWarmUp;
+
+  /// No description provided for @workoutStartMainWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Start main workout'**
+  String get workoutStartMainWorkout;
+
+  /// No description provided for @workoutWarmUpComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Warm-up done — ready!'**
+  String get workoutWarmUpComplete;
 }
 
 class _AppLocalizationsDelegate

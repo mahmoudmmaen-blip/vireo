@@ -17,6 +17,7 @@ class MainShell extends ConsumerStatefulWidget {
 }
 
 class _MainShellState extends ConsumerState<MainShell> {
+  /// Home is always the default tab (index 0).
   int _index = 0;
 
   static const _screens = <Widget>[
@@ -39,6 +40,7 @@ class _MainShellState extends ConsumerState<MainShell> {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         onDestinationSelected: (value) => setState(() => _index = value),
         destinations: [
           NavigationDestination(

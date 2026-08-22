@@ -218,7 +218,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get goalAllOfAboveDesc => 'خطة متوازنة لكل الأهداف';
 
   @override
-  String get legalDisclaimerText => '[legal disclaimer text]';
+  String get legalDisclaimerText =>
+      'تطبيق Vireo هو أداة تنظيمية للياقة البدنية وليس بديلاً عن الاستشارة الطبية المباشرة. المحتوى المقدم (تمارين، خطط غذائية، ومعلومات صحية) يهدف للتوجيه العام فقط.\n\nإذا كنت تعاني من أي حالة صحية مزمنة — مثل أمراض القلب، السكري، ضغط الدم المرتفع، إصابات المفاصل الحالية — أو تتناول أدوية حالياً، يجب استشارة طبيبك المعالج قبل البدء بأي برنامج تمارين أو تغذية.\n\nالمكملات الغذائية والنصائح المتعلقة بالهرمونات (مثل التستيستيرون) هي معلومات تعليمية عامة فقط. لا يُعتبر وصفة طبية ولا توصية علاجية.\n\nبالمشاركة في أي برنامج داخل التطبيق، أقر بأنني قرأت الشروط وأفهم أن Vireo لا يتحمل مسؤولية أي إصابة أو مضاعفات صحية ناتجة عن استخدام التطبيق دون استشارة طبية.';
+
+  @override
+  String get legalDisclaimerSection1 =>
+      'تطبيق Vireo هو أداة تنظيمية للياقة البدنية وليس بديلاً عن الاستشارة الطبية المباشرة. المحتوى المقدم (تمارين، خطط غذائية، ومعلومات صحية) يهدف للتوجيه العام فقط.';
+
+  @override
+  String get legalDisclaimerSection2 =>
+      'إذا كنت تعاني من أي حالة صحية مزمنة — مثل أمراض القلب، السكري، ضغط الدم المرتفع، إصابات المفاصل الحالية — أو تتناول أدوية حالياً، يجب استشارة طبيبك المعالج قبل البدء بأي برنامج تمارين أو تغذية.';
+
+  @override
+  String get legalDisclaimerSection3 =>
+      'المكملات الغذائية هي معلومات تعليمية عامة فقط. لا تُعتبر وصفة طبية ولا توصية علاجية.';
+
+  @override
+  String get legalDisclaimerSection4 =>
+      'النصائح المتعلقة بالهرمونات (مثل التستيستيرون) هي معلومات تعليمية عامة فقط. لا تُعتبر وصفة طبية ولا توصية علاجية.';
+
+  @override
+  String get legalDisclaimerSection5 =>
+      'بالمشاركة في أي برنامج داخل التطبيق، أقر بأنني قرأت الشروط وأفهم أن Vireo لا يتحمل مسؤولية أي إصابة أو مضاعفات صحية ناتجة عن استخدام التطبيق دون استشارة طبية.';
+
+  @override
+  String get languageArabic => 'العربية';
+
+  @override
+  String get languageEnglish => 'English';
 
   @override
   String get consentCheckboxLabel =>
@@ -841,4 +868,120 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get workoutPhaseLockedBody =>
       'أعد الاشتراك لمتابعة برنامجك الكامل. التتبع الأساسي يبقى متاحاً في الخطة المجانية.';
+
+  @override
+  String homeGreeting(String name) {
+    return 'أهلاً $name 👋';
+  }
+
+  @override
+  String homeDayPhase(int day, String phase) {
+    return 'اليوم $day · مرحلة $phase';
+  }
+
+  @override
+  String get homeGuestBanner => 'أنت في وضع الضيف — سجّل الآن عشان تحفظ تقدمك';
+
+  @override
+  String get homeGuestSignUp => 'سجّل';
+
+  @override
+  String get homeGuestCta => 'سجّل الآن — مجاناً لـ 7 أيام';
+
+  @override
+  String homeStreakDays(int days) {
+    return '$days أيام متتالية';
+  }
+
+  @override
+  String get homeStartStreak => 'ابدأ سلسلتك اليوم';
+
+  @override
+  String get homeTodayWorkoutTitle => 'تمرين اليوم';
+
+  @override
+  String get homeStartWorkout => 'ابدأ التمرين';
+
+  @override
+  String get homeRestDay => 'يوم راحة نشطة 🧘';
+
+  @override
+  String get homeBreakfast => 'الفطار';
+
+  @override
+  String get homeMealConfirmed => 'مؤكد ✓';
+
+  @override
+  String get homeMealPending => 'لسه';
+
+  @override
+  String homeWalkingSteps(int current, int goal) {
+    return '$current / $goal خطوة';
+  }
+
+  @override
+  String homeWeeklyProgress(int completed) {
+    return '$completed / ٧ أيام مكتملة';
+  }
+
+  @override
+  String get homeCheckInBanner => '⏱️ Check-in الأسبوعي جاهز — دقيقة واحدة بس';
+
+  @override
+  String get homeRecoveryScore => 'نسبة التعافي';
+
+  @override
+  String get homeRecoveryReady => 'جسمك جاهز للتمرين';
+
+  @override
+  String get homeGuestName => 'بطل';
+
+  @override
+  String get homePhaseFoundation => 'التأسيس';
+
+  @override
+  String get nutritionFilterAll => 'الكل';
+
+  @override
+  String get nutritionFilterQuick => 'سريع';
+
+  @override
+  String get nutritionFilterLowCalorie => 'سعرات منخفضة';
+
+  @override
+  String nutritionMacroSummary(int calories, int protein) {
+    return '$calories سعرة · ${protein}g بروتين';
+  }
+
+  @override
+  String get nutritionMacroBar => 'سعرات | بروتين | كارب | دهون';
+
+  @override
+  String get nutritionMealConfirmed => 'مؤكد ✓';
+
+  @override
+  String nutritionFridgeBanner(int remaining) {
+    return '📷 صوّر تلاجتك — باقي $remaining مسحات هذا الشهر';
+  }
+
+  @override
+  String get nutritionFridgeScanCta => 'صوّر';
+
+  @override
+  String get workoutWarmUpStep1 => 'دوران الكتفين — 30 ثانية';
+
+  @override
+  String get workoutWarmUpStep2 => 'مشي في المكان — 60 ثانية';
+
+  @override
+  String get workoutWarmUpStep3 => 'سكوات خفيف — 10 تكرار';
+
+  @override
+  String get workoutSkipWarmUp => 'تخطي الإحماء';
+
+  @override
+  String get workoutStartMainWorkout => 'ابدأ التمرين الرئيسي';
+
+  @override
+  String get workoutWarmUpComplete => 'تم الإحماء — جاهز!';
 }

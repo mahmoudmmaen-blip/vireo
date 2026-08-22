@@ -7,6 +7,7 @@ import 'package:vireo/data/repositories/workout_repository.dart';
 import 'package:vireo/features/workout/providers/workout_flow_provider.dart';
 import 'package:vireo/features/workout/screens/active_exercise_screen.dart';
 import 'package:vireo/features/workout/screens/mobility_phase_screen.dart';
+import 'package:vireo/features/workout/screens/warm_up_screen.dart';
 import 'package:vireo/features/workout/screens/workout_feedback_screen.dart';
 import 'package:vireo/features/workout/widgets/pause_overlay.dart';
 import 'package:vireo/features/workout/widgets/rest_timer_overlay.dart';
@@ -102,13 +103,10 @@ class _PhaseBody extends ConsumerWidget {
 
     switch (flow.phase) {
       case WorkoutFlowPhase.warmUp:
-        return MobilityPhaseScreen(
-          title: l10n.workoutWarmUpTitle,
-          subtitle: l10n.workoutWarmUpSubtitle,
-          exercises: flow.session.warmUp,
-          continueLabel: l10n.workoutBeginWorkout,
-          onContinue: notifier.beginActivePhase,
+        return WarmUpScreen(
           showMedicalBanner: showMedical,
+          onSkip: notifier.beginActivePhase,
+          onComplete: notifier.beginActivePhase,
         );
       case WorkoutFlowPhase.active:
         if (flow.exercises.isEmpty) {

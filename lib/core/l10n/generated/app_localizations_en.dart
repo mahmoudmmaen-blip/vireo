@@ -222,7 +222,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get goalAllOfAboveDesc => 'Balanced plan across goals';
 
   @override
-  String get legalDisclaimerText => '[legal disclaimer text]';
+  String get legalDisclaimerText =>
+      'Vireo is an organizational fitness tool and is not a substitute for direct medical advice. Content (workouts, meal plans, and health information) is for general guidance only.\n\nIf you have any chronic condition — such as heart disease, diabetes, high blood pressure, or current joint injuries — or take medication, consult your doctor before starting any exercise or nutrition program.\n\nDietary supplements and hormone-related guidance (such as testosterone) are general educational information only. They are not medical prescriptions or treatment recommendations.\n\nBy participating in any in-app program, I confirm I have read the terms and understand Vireo is not liable for injury or health complications from using the app without medical consultation.';
+
+  @override
+  String get legalDisclaimerSection1 =>
+      'Vireo is an organizational fitness tool and is not a substitute for direct medical advice. Content (workouts, meal plans, and health information) is for general guidance only.';
+
+  @override
+  String get legalDisclaimerSection2 =>
+      'If you have any chronic condition — such as heart disease, diabetes, high blood pressure, or current joint injuries — or take medication, consult your doctor before starting any exercise or nutrition program.';
+
+  @override
+  String get legalDisclaimerSection3 =>
+      'Dietary supplements are general educational information only. They are not medical prescriptions or treatment recommendations.';
+
+  @override
+  String get legalDisclaimerSection4 =>
+      'Hormone-related guidance (such as testosterone) is general educational information only. It is not a medical prescription or treatment recommendation.';
+
+  @override
+  String get legalDisclaimerSection5 =>
+      'By participating in any in-app program, I confirm I have read the terms and understand Vireo is not liable for injury or health complications from using the app without medical consultation.';
+
+  @override
+  String get languageArabic => 'العربية';
+
+  @override
+  String get languageEnglish => 'English';
 
   @override
   String get consentCheckboxLabel =>
@@ -855,4 +882,121 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get workoutPhaseLockedBody =>
       'Resubscribe to continue your full training program. Basic tracking remains available on the free plan.';
+
+  @override
+  String homeGreeting(String name) {
+    return 'Hello $name 👋';
+  }
+
+  @override
+  String homeDayPhase(int day, String phase) {
+    return 'Day $day · $phase phase';
+  }
+
+  @override
+  String get homeGuestBanner =>
+      'You\'re in guest mode — sign up to save your progress';
+
+  @override
+  String get homeGuestSignUp => 'Sign up';
+
+  @override
+  String get homeGuestCta => 'Sign up now — free for 7 days';
+
+  @override
+  String homeStreakDays(int days) {
+    return '$days day streak';
+  }
+
+  @override
+  String get homeStartStreak => 'Start your streak today';
+
+  @override
+  String get homeTodayWorkoutTitle => 'Today\'s workout';
+
+  @override
+  String get homeStartWorkout => 'Start workout';
+
+  @override
+  String get homeRestDay => 'Active rest day 🧘';
+
+  @override
+  String get homeBreakfast => 'Breakfast';
+
+  @override
+  String get homeMealConfirmed => 'Confirmed ✓';
+
+  @override
+  String get homeMealPending => 'Pending';
+
+  @override
+  String homeWalkingSteps(int current, int goal) {
+    return '$current / $goal steps';
+  }
+
+  @override
+  String homeWeeklyProgress(int completed) {
+    return '$completed / 7 days complete';
+  }
+
+  @override
+  String get homeCheckInBanner => '⏱️ Weekly check-in ready — just one minute';
+
+  @override
+  String get homeRecoveryScore => 'Recovery score';
+
+  @override
+  String get homeRecoveryReady => 'Your body is ready to train';
+
+  @override
+  String get homeGuestName => 'Champion';
+
+  @override
+  String get homePhaseFoundation => 'Foundation';
+
+  @override
+  String get nutritionFilterAll => 'All';
+
+  @override
+  String get nutritionFilterQuick => 'Quick';
+
+  @override
+  String get nutritionFilterLowCalorie => 'Low calorie';
+
+  @override
+  String nutritionMacroSummary(int calories, int protein) {
+    return '$calories cal · ${protein}g protein';
+  }
+
+  @override
+  String get nutritionMacroBar => 'Cal | Protein | Carbs | Fat';
+
+  @override
+  String get nutritionMealConfirmed => 'Confirmed ✓';
+
+  @override
+  String nutritionFridgeBanner(int remaining) {
+    return '📷 Scan your fridge — $remaining scans left this month';
+  }
+
+  @override
+  String get nutritionFridgeScanCta => 'Scan';
+
+  @override
+  String get workoutWarmUpStep1 => 'Shoulder circles — 30 seconds';
+
+  @override
+  String get workoutWarmUpStep2 => 'March in place — 60 seconds';
+
+  @override
+  String get workoutWarmUpStep3 => 'Light squats — 10 reps';
+
+  @override
+  String get workoutSkipWarmUp => 'Skip warm-up';
+
+  @override
+  String get workoutStartMainWorkout => 'Start main workout';
+
+  @override
+  String get workoutWarmUpComplete => 'Warm-up done — ready!';
 }

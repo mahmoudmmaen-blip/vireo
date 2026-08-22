@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/models/recipe.dart';
 import 'package:vireo/data/repositories/meal_plan_repository.dart';
+import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
+import 'package:vireo/features/nutrition/widgets/meal_swap_sheet.dart';
 
 class MealCard extends ConsumerWidget {
   const MealCard({
@@ -24,46 +27,86 @@ class MealCard extends ConsumerWidget {
     final colors = context.vireoColors;
     final locale = Localizations.localeOf(context).languageCode;
     final recipe = entry.recipe;
+    final confirmed = ref.watch(confirmedMealsProvider).contains(entry.mealType);
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 14),
+      decoration: VireoDecorations.premiumCard(colors, glow: confirmed),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 48,
-                  height: 48,
+                  width: 56,
+                  height: 56,
                   decoration: BoxDecoration(
-                    color: colors.surfaceRaised,
-                    borderRadius: BorderRadius.circular(10),
+                    gradient: VireoDecorations.mealThumbnail(colors),
+                    borderRadius: BorderRadius.circular(14),
                   ),
-                  child: Icon(_iconFor(entry.mealType), color: colors.ember),
+                  child: Icon(_iconFor(entry.mealType), color: colors.text),
                 ),
-                const SizedBox(width: 14),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         recipe.localizedTitle(locale),
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w800,
+                            ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          _GoalTagChip(tag: recipe.goalTag, l10n: l10n),
+                          if (confirmed) ...[
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              decoration: BoxDecoration(
+                                color: colors.success.withValues(alpha: 0.18),
+                                borderRadius: BorderRadius.circular(VireoDecorations.chipRadius),
+                              ),
+                              child: Text(
+                                l10n.nutritionMealConfirmed,
+                                style: TextStyle(color: colors.success, fontSize: 11),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      const SizedBox(height: 6),
                       Text(
-                        l10n.nutritionPrepMinutes(recipe.prepTimeMinutes),
-                        style: TextStyle(color: colors.textMute, fontSize: 13),
+                        '⏱️ ${l10n.nutritionPrepMinutes(recipe.prepTimeMinutes)}',
+                        style: TextStyle(color: colors.textMute, fontSize: 12),
                       ),
                     ],
                   ),
                 ),
-                _GoalTagChip(tag: recipe.goalTag, l10n: l10n),
               ],
             ),
-            const SizedBox(height: 12),
+            if (recipe.calories > 0) ...[
+              const SizedBox(height: 12),
+              Text(
+                l10n.nutritionMacroBar,
+                style: TextStyle(color: colors.textMute, fontSize: 11),
+              ),
+              const SizedBox(height: 6),
+              Row(
+                children: [
+                  _MacroChip(label: '${recipe.calories}', colors: colors),
+                  _MacroChip(label: '${recipe.proteinG}g', colors: colors),
+                  _MacroChip(label: '${recipe.carbsG}g', colors: colors),
+                  _MacroChip(label: '${recipe.fatG}g', colors: colors),
+                ],
+              ),
+            ],
+            const SizedBox(height: 14),
             OutlinedButton.icon(
               onPressed: () => _swapMeal(context, ref, l10n),
               icon: const Icon(Icons.swap_horiz, size: 18),
@@ -104,14 +147,10 @@ class MealCard extends ConsumerWidget {
       return;
     }
 
-    final picked = await showModalBottomSheet<Recipe>(
-      context: context,
-      showDragHandle: true,
-      builder: (ctx) => _SwapMealSheet(
-        alternatives: alternatives,
-        l10n: l10n,
-        locale: Localizations.localeOf(context).languageCode,
-      ),
+    final picked = await MealSwapSheet.show(
+      context,
+      alternatives: alternatives,
+      locale: Localizations.localeOf(context).languageCode,
     );
     if (picked == null || !context.mounted) return;
 
@@ -122,59 +161,36 @@ class MealCard extends ConsumerWidget {
   }
 
   IconData _iconFor(MealType type) {
-    switch (type) {
-      case MealType.breakfast:
-        return Icons.free_breakfast_outlined;
-      case MealType.lunch:
-        return Icons.lunch_dining_outlined;
-      case MealType.dinner:
-        return Icons.dinner_dining_outlined;
-      case MealType.snack:
-        return Icons.cookie_outlined;
-    }
+    return switch (type) {
+      MealType.breakfast => Icons.free_breakfast_outlined,
+      MealType.lunch => Icons.lunch_dining_outlined,
+      MealType.dinner => Icons.dinner_dining_outlined,
+      MealType.snack => Icons.cookie_outlined,
+    };
   }
 }
 
-class _SwapMealSheet extends StatelessWidget {
-  const _SwapMealSheet({
-    required this.alternatives,
-    required this.l10n,
-    required this.locale,
-  });
+class _MacroChip extends StatelessWidget {
+  const _MacroChip({required this.label, required this.colors});
 
-  final List<Recipe> alternatives;
-  final AppLocalizations l10n;
-  final String locale;
+  final String label;
+  final VireoColors colors;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              l10n.nutritionSwapMeal,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              l10n.nutritionSwapMealSubtitle,
-              style: TextStyle(color: context.vireoColors.textMute),
-            ),
-            const SizedBox(height: 16),
-            ...alternatives.map(
-              (recipe) => ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.restaurant_outlined),
-                title: Text(recipe.localizedTitle(locale)),
-                subtitle: Text(l10n.nutritionPrepMinutes(recipe.prepTimeMinutes)),
-                onTap: () => Navigator.of(context).pop(recipe),
-              ),
-            ),
-          ],
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsetsDirectional.only(end: 6),
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        decoration: BoxDecoration(
+          color: colors.surface,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: colors.line),
+        ),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11, color: colors.textMute),
         ),
       ),
     );
@@ -190,22 +206,19 @@ class _GoalTagChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
-    final label = switch (tag) {
-      RecipeGoalTag.highProtein => l10n.nutritionTagHighProtein,
-      RecipeGoalTag.quickEasy => l10n.nutritionTagQuickEasy,
-      RecipeGoalTag.lightEnergy => l10n.nutritionTagLightEnergy,
+    final (label, color) = switch (tag) {
+      RecipeGoalTag.highProtein => (l10n.nutritionTagHighProtein, colors.ember),
+      RecipeGoalTag.quickEasy => (l10n.nutritionTagQuickEasy, colors.gold),
+      RecipeGoalTag.lightEnergy => (l10n.nutritionTagLightEnergy, colors.success),
     };
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: colors.ember.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(8),
+        color: color.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(VireoDecorations.chipRadius),
       ),
-      child: Text(
-        label,
-        style: TextStyle(color: colors.ember, fontSize: 11),
-      ),
+      child: Text(label, style: TextStyle(color: color, fontSize: 11)),
     );
   }
 }

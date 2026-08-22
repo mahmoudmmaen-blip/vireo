@@ -7,6 +7,7 @@ import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/dietary_restriction.dart';
 import 'package:vireo/data/models/onboarding_draft.dart';
 import 'package:vireo/data/models/unit_preference.dart';
+import 'package:vireo/core/widgets/language_selector.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
 
@@ -103,6 +104,8 @@ class _Step1BodyMetricsState extends ConsumerState<Step1BodyMetrics> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          const LanguageSelector(),
+          const SizedBox(height: 20),
           SegmentedButton<UnitPreference>(
             segments: [
               ButtonSegment(

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
-import 'package:vireo/core/services/locale_provider.dart';
-import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/widgets/language_selector.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
-import 'package:vireo/features/home/widgets/daily_program_card.dart';
-import 'package:vireo/features/walking/walking_tracker_screen.dart';
+import 'package:vireo/features/home/widgets/home_dashboard_body.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -13,54 +11,16 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final colors = context.vireoColors;
 
     return FeatureScaffold(
       title: l10n.homeTitle,
       actions: [
-        IconButton(
-          onPressed: () => ref.read(localeProvider.notifier).toggleLocale(),
-          tooltip: l10n.languageToggle,
-          icon: Text(
-            l10n.languageToggle,
-            style: TextStyle(color: colors.ember, fontWeight: FontWeight.w600),
-          ),
+        Padding(
+          padding: const EdgeInsetsDirectional.only(end: 8),
+          child: LanguageSelector(compact: true),
         ),
       ],
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-        children: [
-          const DailyProgramCard(),
-          const SizedBox(height: 16),
-          Card(
-            margin: EdgeInsets.zero,
-            child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              leading: Icon(Icons.fitness_center, color: colors.ember),
-              title: Text(l10n.setupComplete),
-              subtitle: Text(l10n.homeWelcomeSubtitle),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Card(
-            margin: EdgeInsets.zero,
-            child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              leading: Icon(Icons.directions_walk, color: colors.ember),
-              title: Text(l10n.walkingTitle),
-              subtitle: Text(l10n.homeWalkingCardSubtitle),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const WalkingTrackerScreen(),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+      body: const HomeDashboardBody(),
     );
   }
 }

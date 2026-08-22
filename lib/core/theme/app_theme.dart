@@ -1,10 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/theme/vireo_decorations.dart';
 
 /// Dark-only theme configuration for Vireo.
 abstract final class AppTheme {
   static ThemeData get dark {
     const colors = VireoColors.dark;
+
+    final cairo = GoogleFonts.cairoTextTheme();
+    final tajawal = GoogleFonts.tajawalTextTheme();
+
+    TextStyle heading(TextStyle? base) => (base ?? const TextStyle()).copyWith(
+          fontFamily: GoogleFonts.cairo().fontFamily,
+          fontWeight: FontWeight.w800,
+          color: colors.text,
+        );
+
+    TextStyle body(TextStyle? base) => (base ?? const TextStyle()).copyWith(
+          fontFamily: GoogleFonts.tajawal().fontFamily,
+          color: colors.text,
+        );
+
+    final textTheme = TextTheme(
+      displayLarge: heading(cairo.displayLarge),
+      displayMedium: heading(cairo.displayMedium),
+      displaySmall: heading(cairo.displaySmall),
+      headlineLarge: heading(cairo.headlineLarge),
+      headlineMedium: heading(cairo.headlineMedium),
+      headlineSmall: heading(cairo.headlineSmall),
+      titleLarge: heading(cairo.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
+      titleMedium: body(tajawal.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+      titleSmall: body(tajawal.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+      bodyLarge: body(tajawal.bodyLarge),
+      bodyMedium: body(tajawal.bodyMedium),
+      bodySmall: body(tajawal.bodySmall?.copyWith(color: colors.textMute)),
+      labelLarge: body(tajawal.labelLarge?.copyWith(fontWeight: FontWeight.w700)),
+      labelMedium: body(tajawal.labelMedium?.copyWith(color: colors.textMute)),
+      labelSmall: body(tajawal.labelSmall?.copyWith(color: colors.textMute)),
+    );
 
     final colorScheme = ColorScheme.dark(
       surface: colors.surface,
@@ -30,43 +64,39 @@ abstract final class AppTheme {
         foregroundColor: colors.text,
         elevation: 0,
         centerTitle: true,
+        titleTextStyle: heading(cairo.titleLarge),
       ),
       cardTheme: CardThemeData(
         color: colors.surfaceRaised,
         elevation: 0,
         margin: const EdgeInsets.symmetric(vertical: 6),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
           side: BorderSide(color: colors.line.withValues(alpha: 0.75)),
         ),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: colors.surface,
+        indicatorColor: colors.ember.withValues(alpha: 0.2),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          return body(tajawal.labelSmall).copyWith(
+            fontWeight: states.contains(WidgetState.selected)
+                ? FontWeight.w700
+                : FontWeight.w500,
+          );
+        }),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: colors.ember,
         foregroundColor: colors.text,
       ),
       dividerTheme: DividerThemeData(color: colors.line),
-      textTheme: TextTheme(
-        displayLarge: TextStyle(color: colors.text, fontWeight: FontWeight.bold),
-        displayMedium: TextStyle(color: colors.text, fontWeight: FontWeight.bold),
-        displaySmall: TextStyle(color: colors.text, fontWeight: FontWeight.w600),
-        headlineLarge: TextStyle(color: colors.text, fontWeight: FontWeight.w600),
-        headlineMedium: TextStyle(color: colors.text, fontWeight: FontWeight.w600),
-        headlineSmall: TextStyle(color: colors.text, fontWeight: FontWeight.w600),
-        titleLarge: TextStyle(color: colors.text, fontWeight: FontWeight.w600),
-        titleMedium: TextStyle(color: colors.text),
-        titleSmall: TextStyle(color: colors.text),
-        bodyLarge: TextStyle(color: colors.text),
-        bodyMedium: TextStyle(color: colors.text),
-        bodySmall: TextStyle(color: colors.textMute),
-        labelLarge: TextStyle(color: colors.text, fontWeight: FontWeight.w600),
-        labelMedium: TextStyle(color: colors.textMute),
-        labelSmall: TextStyle(color: colors.textMute),
-      ),
+      textTheme: textTheme,
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: colors.surfaceRaised,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(VireoDecorations.buttonRadius),
           borderSide: BorderSide.none,
         ),
         hintStyle: TextStyle(color: colors.textMute),
@@ -76,7 +106,21 @@ abstract final class AppTheme {
           backgroundColor: colors.ember,
           foregroundColor: colors.text,
           minimumSize: const Size(48, 48),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(VireoDecorations.buttonRadius),
+          ),
+          elevation: 4,
+          shadowColor: colors.ember.withValues(alpha: 0.35),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: colors.ember,
+          side: BorderSide(color: colors.line),
+          minimumSize: const Size(48, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(VireoDecorations.buttonRadius),
+          ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -87,7 +131,7 @@ abstract final class AppTheme {
       ),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: colors.surfaceRaised,
-        contentTextStyle: TextStyle(color: colors.text),
+        contentTextStyle: body(tajawal.bodyMedium),
         behavior: SnackBarBehavior.floating,
       ),
     );

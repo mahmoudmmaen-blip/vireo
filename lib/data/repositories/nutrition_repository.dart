@@ -4,7 +4,6 @@ import 'package:vireo/data/demo/nutrition_demo_catalog.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/data/models/food_item.dart';
-import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/models/recipe.dart';
 import 'package:vireo/data/repositories/fridge_scan_repository.dart';
 
