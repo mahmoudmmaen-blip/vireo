@@ -11,9 +11,9 @@ class LocaleNotifier extends Notifier<Locale> {
   Locale build() {
     if (HiveService.isInitialized) {
       final code = HiveService.settingsBox.get(_localeKey) as String?;
-      if (code == 'ar') return const Locale('ar');
+      if (code == 'en') return const Locale('en');
     }
-    return const Locale('en');
+    return const Locale('ar');
   }
 
   Future<void> setLocale(Locale locale) async {
