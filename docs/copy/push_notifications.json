@@ -1,0 +1,154 @@
+{
+  "daily_workout_reminder": {
+    "event": "daily_workout_reminder",
+    "variants": [
+      {
+        "id": "A",
+        "title_ar": "وقت تمرينك 💪",
+        "body_ar": "جلسة قصيرة النهارده هتزود طاقتك. جاهز؟",
+        "title_en": "Workout time 💪",
+        "body_en": "A short session today can boost your energy. Ready?"
+      },
+      {
+        "id": "B",
+        "title_ar": "خطوة للقدّام",
+        "body_ar": "برنامجك النهارده جاهز — يلا نبدأ لما تكون فاضي.",
+        "title_en": "Move forward",
+        "body_en": "Today's plan is set — start when you have a free window."
+      }
+    ]
+  },
+  "weekly_checkin_due": {
+    "event": "weekly_checkin_due",
+    "variants": [
+      {
+        "id": "A",
+        "title_ar": "تقييم الأسبوع",
+        "body_ar": "دقيقة واحدة تقيّم فيها طاقتك والتزامك — يساعدنا نظبط البرنامج.",
+        "title_en": "Weekly check-in",
+        "body_en": "Take a minute to log energy and adherence — it fine-tunes your plan."
+      },
+      {
+        "id": "B",
+        "title_ar": "إزيك هذا الأسبوع؟",
+        "body_ar": "شاركنا quick check-in — كل أسبوع بيخلي Vireo أذكى ليك.",
+        "title_en": "How's your week?",
+        "body_en": "Share a quick check-in — each week makes Vireo smarter for you."
+      }
+    ]
+  },
+  "walking_goal_80_percent": {
+    "event": "walking_goal_80_percent",
+    "variants": [
+      {
+        "id": "A",
+        "title_ar": "قربت من الهدف 🚶",
+        "body_ar": "80% من خطواتك النهارده — مشية قصيرة تكمّلها!",
+        "title_en": "Almost there 🚶",
+        "body_en": "80% of today's steps — a short walk finishes it off!"
+      },
+      {
+        "id": "B",
+        "title_ar": "خطواتك قربت تكمل",
+        "body_ar": "فاضل شوية على هدف النهارده — 10 دقائق مشي تفرق.",
+        "title_en": "Steps nearly done",
+        "body_en": "You're close to today's goal — 10 minutes of walking helps."
+      }
+    ]
+  },
+  "monthly_reassessment_due": {
+    "event": "monthly_reassessment_due",
+    "variants": [
+      {
+        "id": "A",
+        "title_ar": "وقت المراجعة الشهرية",
+        "body_ar": "حدّث وزنك ونشاطك — نظبط البرنامج على وضعك الحالي.",
+        "title_en": "Monthly review",
+        "body_en": "Update weight and activity — we'll tune your program to now."
+      },
+      {
+        "id": "B",
+        "title_ar": "شهر جديد، خطوة جديدة",
+        "body_ar": "Re-assessment سريع يخلي خطتك مناسبة أكتر ليك.",
+        "title_en": "New month, fresh tune",
+        "body_en": "A quick re-assessment keeps your plan aligned with you."
+      }
+    ]
+  },
+  "free_trial_ending_2_days": {
+    "event": "free_trial_ending_2_days",
+    "variants": [
+      {
+        "id": "A",
+        "title_ar": "تجربتك قربت تخلص",
+        "body_ar": "فاضل يومين على التجربة — اختار الخطة اللي تناسبك.",
+        "title_en": "Trial ending soon",
+        "body_en": "2 days left on your trial — pick the plan that fits you."
+      },
+      {
+        "id": "B",
+        "title_ar": "استمر بدون انقطاع",
+        "body_ar": "Premium يفضل معاك بعد التجربة — شوف الخطط دلوقتي.",
+        "title_en": "Keep the momentum",
+        "body_en": "Stay on Premium after your trial — view plans now."
+      }
+    ]
+  },
+  "streak_about_to_break": {
+    "event": "streak_about_to_break",
+    "variants": [
+      {
+        "id": "A",
+        "title_ar": "Seriesك لسه alive 🔥",
+        "body_ar": "مفيش ضغط — جلسة خفيفة النهارده تحافظ على streakك.",
+        "title_en": "Streak still alive 🔥",
+        "body_en": "No pressure — a light session today keeps your streak going."
+      },
+      {
+        "id": "B",
+        "title_ar": "نكمل من جديد؟",
+        "body_ar": "يوم واحد خفيف يرجّعك للمسار — إنت قادر.",
+        "title_en": "Pick it back up?",
+        "body_en": "One easy day gets you back on track — you've got this."
+      }
+    ]
+  },
+  "new_weekly_meal_plan_ready": {
+    "event": "new_weekly_meal_plan_ready",
+    "variants": [
+      {
+        "id": "A",
+        "title_ar": "وجبات الأسبوع جاهزة 🥗",
+        "body_ar": "خطة جديدة على ذوقك — افتح التغذية وشوفها.",
+        "title_en": "Meals are ready 🥗",
+        "body_en": "A fresh plan tailored to you — open Nutrition to view."
+      },
+      {
+        "id": "B",
+        "title_ar": "أسبوع أكل منظم",
+        "body_ar": "وجبات الأسبوع اتظبطت — اختيارات متنوعة ومتوازنة.",
+        "title_en": "Your food week is set",
+        "body_en": "Weekly meals are planned — varied, balanced choices."
+      }
+    ]
+  },
+  "subscription_payment_failed": {
+    "event": "subscription_payment_failed",
+    "variants": [
+      {
+        "id": "A",
+        "title_ar": "محتاجين تحديث الدفع",
+        "body_ar": "في مشكلة في الاشتراك — حدّث طريقة الدفع في المتجر.",
+        "title_en": "Payment update needed",
+        "body_en": "There was an issue with your subscription — update payment in the store."
+      },
+      {
+        "id": "B",
+        "title_ar": "تأكد من اشتراكك",
+        "body_ar": "الدفع ما اتسجلش — راجع App Store أو Google Play.",
+        "title_en": "Check your subscription",
+        "body_en": "Payment didn't go through — review App Store or Google Play."
+      }
+    ]
+  }
+}

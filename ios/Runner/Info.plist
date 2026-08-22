@@ -66,5 +66,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Vireo reads your step count from Apple Health to track daily walking progress.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Vireo does not write health data.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Vireo uses the camera to scan ingredients in your fridge.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Vireo accesses photos to scan ingredients from your fridge.</string>
 </dict>
 </plist>

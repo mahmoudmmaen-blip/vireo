@@ -1,0 +1,50 @@
+{
+  "rest_day_no_workout": {
+    "headline_ar": "يوم راحة اليوم",
+    "supporting_ar": "جسمك بيستفيد من الراحة — ركز على المشي أو النوم كويس.",
+    "button_ar": "شوف خطة الأسبوع",
+    "headline_en": "Rest day today",
+    "supporting_en": "Recovery counts — focus on a walk or good sleep instead.",
+    "button_en": "View week plan"
+  },
+  "fridge_scan_zero_ingredients": {
+    "headline_ar": "مش لاقيين مكونات",
+    "supporting_ar": "الصورة مش واضحة أو التلاجة فاضية — جرّب تاني أو أضف يدوي.",
+    "button_ar": "أضف يدوي",
+    "headline_en": "No ingredients found",
+    "supporting_en": "The photo may be unclear or empty — try again or add manually.",
+    "button_en": "Add manually"
+  },
+  "health_permission_denied": {
+    "headline_ar": "محتاجين إذن الخطوات",
+    "supporting_ar": "Vireo بيقرأ خطواتك من Health Connect أو Apple Health للدقة.",
+    "button_ar": "فتح الإعدادات",
+    "headline_en": "Steps access needed",
+    "supporting_en": "Vireo reads steps from Health Connect or Apple Health for accuracy.",
+    "button_en": "Open Settings"
+  },
+  "subscription_restore_failed": {
+    "headline_ar": "مافيش اشتراك يتسترجع",
+    "supporting_ar": "تأكد إنك مسجّل بنفس Apple ID أو Google account اللي اشتريت بيه.",
+    "button_ar": "حاول تاني",
+    "headline_en": "Nothing to restore",
+    "supporting_en": "Make sure you're signed in with the same Apple ID or Google account used to purchase.",
+    "button_en": "Try again"
+  },
+  "network_offline": {
+    "headline_ar": "إنت offline",
+    "supporting_ar": "بعض الميزات محدودة — سجل الوزن والمشي لسه شغالين.",
+    "button_ar": "حاول الاتصال",
+    "headline_en": "You're offline",
+    "supporting_en": "Some features are limited — weight and walking logs still work.",
+    "button_en": "Retry connection"
+  },
+  "video_failed_to_load": {
+    "headline_ar": "الفيديو مش بيحمّل",
+    "supporting_ar": "اتأكد من النت — تقدر تكمل التمرين من غير الفيديو.",
+    "button_ar": "إعادة المحاولة",
+    "headline_en": "Video won't load",
+    "supporting_en": "Check your connection — you can still complete the exercise without video.",
+    "button_en": "Retry"
+  }
+}
