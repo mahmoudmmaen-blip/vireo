@@ -228,6 +228,8 @@
   "nutritionSwapMeal": "بدّل الوجبة",
   "nutritionSwapMealSubtitle": "اختار وصفة مختلفة — بدون تكرار خلال 14 يوم.",
   "nutritionSwapMealEmpty": "مفيش وجبات بديلة متاحة دلوقتي.",
+  "nutritionDemoQuickMeals": "وجبات صحية تجريبية سريعة",
+  "nutritionTryDemoScan": "جرب مسح تجريبي",
   "homeWelcomeSubtitle": "مركز لياقتك الشخصي.",
   "homeWalkingCardSubtitle": "تتبع خطواتك اليومية من Apple Health أو Health Connect.",
   "homeDailyProgramTitle": "البرنامج اليومي",

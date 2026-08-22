@@ -646,6 +646,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'No alternative meals available right now.';
 
   @override
+  String get nutritionDemoQuickMeals => 'Quick healthy demo meals';
+
+  @override
+  String get nutritionTryDemoScan => 'Try demo scan';
+
+  @override
   String get homeWelcomeSubtitle => 'Your personalized fitness hub.';
 
   @override

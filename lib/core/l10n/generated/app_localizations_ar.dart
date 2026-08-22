@@ -637,6 +637,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get nutritionSwapMealEmpty => 'مفيش وجبات بديلة متاحة دلوقتي.';
 
   @override
+  String get nutritionDemoQuickMeals => 'وجبات صحية تجريبية سريعة';
+
+  @override
+  String get nutritionTryDemoScan => 'جرب مسح تجريبي';
+
+  @override
   String get homeWelcomeSubtitle => 'مركز لياقتك الشخصي.';
 
   @override

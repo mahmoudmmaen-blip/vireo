@@ -21,8 +21,15 @@ class Recipe {
   final String? cuisineTag;
   final List<String> dietaryTags;
 
-  String localizedTitle(String languageCode) =>
-      languageCode == 'ar' ? titleAr : titleEn;
+  String localizedTitle(String languageCode) {
+    if (languageCode == 'ar') {
+      return titleAr
+          .replaceAll('بروtein', 'بروتين')
+          .replaceAll('Protein', 'بروتين')
+          .replaceAll('protein', 'بروتين');
+    }
+    return titleEn;
+  }
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(

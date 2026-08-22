@@ -7,6 +7,7 @@ import 'package:vireo/data/models/recipe.dart';
 import 'package:vireo/data/repositories/meal_plan_repository.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
 import 'package:vireo/features/home/providers/daily_program_provider.dart';
+import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 
 /// Summary card for today's workout and upcoming meal.
 class DailyProgramCard extends ConsumerWidget {
@@ -18,7 +19,7 @@ class DailyProgramCard extends ConsumerWidget {
     final colors = context.vireoColors;
     final locale = Localizations.localeOf(context).languageCode;
     final workoutAsync = ref.watch(todayWorkoutProvider);
-    final mealsAsync = ref.watch(todayMealsProvider);
+    final mealsAsync = ref.watch(effectiveTodayMealsProvider);
     final nextMealType = ref.watch(nextMealTypeProvider);
 
     return Card(
@@ -53,7 +54,7 @@ class DailyProgramCard extends ConsumerWidget {
                     : null;
                 final title = lead == null
                     ? l10n.workoutTitle
-                    : (locale == 'ar' ? lead.nameAr : lead.name);
+                    : lead.localizedName(locale);
                 return _ProgramRow(
                   icon: Icons.fitness_center_outlined,
                   label: l10n.homeTodayWorkout,

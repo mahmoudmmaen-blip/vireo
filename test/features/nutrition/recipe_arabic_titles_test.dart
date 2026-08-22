@@ -11,7 +11,7 @@ void main() {
       final meals = await repo.fetchTodayMeals();
       final breakfast = meals.firstWhere((m) => m.mealType == MealType.breakfast);
 
-      expect(breakfast.recipe.titleAr, 'شوفان بالزبادي والموز');
+      expect(breakfast.recipe.titleAr, 'شوفان بالبروتين');
       expect(breakfast.recipe.titleAr, isNot(contains('tein')));
       expect(breakfast.recipe.titleAr, isNot(contains('Protein')));
     });

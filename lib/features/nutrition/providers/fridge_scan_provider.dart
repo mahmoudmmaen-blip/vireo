@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/data/demo/nutrition_demo_catalog.dart';
 import 'package:vireo/data/repositories/fridge_scan_repository.dart';
 import 'package:vireo/data/repositories/nutrition_repository.dart';
 import 'package:vireo/core/services/analytics_service.dart';
@@ -45,6 +46,13 @@ class FridgeScanFlowNotifier extends Notifier<FridgeScanFlowState> {
 
   void reset() {
     state = const FridgeScanFlowState();
+  }
+
+  void loadDemoScan() {
+    state = FridgeScanFlowState(
+      scanId: NutritionDemoCatalog.demoScanId,
+      ingredients: NutritionDemoCatalog.demoFridgeIngredients,
+    );
   }
 
   void setIngredients(List<String> items) {

@@ -5,10 +5,16 @@ import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/models/recipe.dart';
 
 class RecipeSuggestionCard extends StatelessWidget {
-  const RecipeSuggestionCard({super.key, required this.recipe, required this.locale});
+  const RecipeSuggestionCard({
+    super.key,
+    required this.recipe,
+    required this.locale,
+    this.onTap,
+  });
 
   final Recipe recipe;
   final String locale;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +28,12 @@ class RecipeSuggestionCard extends StatelessWidget {
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(14),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -55,6 +64,7 @@ class RecipeSuggestionCard extends StatelessWidget {
               ],
             ),
           ],
+        ),
         ),
       ),
     );

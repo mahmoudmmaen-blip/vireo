@@ -3,7 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-BREAKFAST_AR = "شوفان بالزبادي والموز"
+BREAKFAST_AR = "شوفان بالبروتين"
 CHICKEN_AR = "طبق دجاج بالأرز والخضار"
 TAG_AR = "\u0628\u0631\u0648\u062a\u064a\u0646 \u0639\u0627\u0644\u064a"
 

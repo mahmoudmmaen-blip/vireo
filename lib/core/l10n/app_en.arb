@@ -234,6 +234,8 @@
   "nutritionSwapMeal": "Swap meal",
   "nutritionSwapMealSubtitle": "Pick a different recipe — no repeats within 14 days.",
   "nutritionSwapMealEmpty": "No alternative meals available right now.",
+  "nutritionDemoQuickMeals": "Quick healthy demo meals",
+  "nutritionTryDemoScan": "Try demo scan",
   "homeWelcomeSubtitle": "Your personalized fitness hub.",
   "homeWalkingCardSubtitle": "Track daily steps from Apple Health or Health Connect.",
   "homeDailyProgramTitle": "Daily program",

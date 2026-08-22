@@ -61,7 +61,7 @@ insert into public.food_items (name_en, name_ar, category) values
   ('Milk', 'حليب', 'dairy'),
   ('Cheese', 'جبن', 'dairy'),
   ('Tuna', 'تونة', 'protein'),
-  ('Salmon', 'سلmon', 'protein'),
+  ('Salmon', 'سلمون', 'protein'),
   ('Beef', 'لحم بقر', 'protein'),
   ('Potato', 'بطاطس', 'vegetable'),
   ('Sweet potato', 'بطاطا حلوة', 'vegetable'),
@@ -77,12 +77,12 @@ on conflict do nothing;
 insert into public.recipes (
   id, title_en, title_ar, prep_time_minutes, goal_tag, cuisine_tag, meal_type, dietary_tags, steps_en, steps_ar
 ) values
-  ('11111111-1111-1111-1111-111111111101', 'Protein Oats Bowl', 'شوفان بالبروtein', 10, 'high_protein', 'international_healthy', 'breakfast', '{halal}', '{Mix oats with yogurt and top with banana.}', '{اخلط الشوفان مع الزبادي وزيّن بالموز.}'),
+  ('11111111-1111-1111-1111-111111111101', 'Protein Oats Bowl', 'شوفان بالبروتين', 10, 'high_protein', 'international_healthy', 'breakfast', '{halal}', '{Mix oats with yogurt and top with banana.}', '{اخلط الشوفان مع الزبادي وزيّن بالموز.}'),
   ('11111111-1111-1111-1111-111111111102', 'Shakshuka Lite', 'شكشوكة خفيفة', 20, 'light_energy', 'levantine', 'breakfast', '{halal}', '{Simmer tomatoes with eggs and spices.}', '{اطبخ الطماطم مع البيض والبهارات.}'),
   ('11111111-1111-1111-1111-111111111201', 'Grilled Chicken Plate', 'طبق دجاج مشوي', 25, 'high_protein', 'international_healthy', 'lunch', '{halal,gluten_free}', '{Grill chicken with salad and olive oil.}', '{اشوي الدجاج مع سلطة وزيت زيتون.}'),
   ('11111111-1111-1111-1111-111111111202', 'Lentil Soup', 'شوربة عدس', 30, 'light_energy', 'egyptian', 'lunch', '{halal,vegan,vegetarian}', '{Simmer lentils with onion and cumin.}', '{اسلق العدس مع البصل والكمون.}'),
-  ('11111111-1111-1111-1111-111111111301', 'Salmon & Greens', 'سلmon مع خضار', 20, 'high_protein', 'international_healthy', 'dinner', '{halal,gluten_free}', '{Pan-sear salmon with steamed broccoli.}', '{حمّر السلمon مع بروكلي على البخار.}'),
+  ('11111111-1111-1111-1111-111111111301', 'Salmon & Greens', 'سلمون مع خضار', 20, 'high_protein', 'international_healthy', 'dinner', '{halal,gluten_free}', '{Pan-sear salmon with steamed broccoli.}', '{حمّر السلمون مع بروكلي على البخار.}'),
   ('11111111-1111-1111-1111-111111111302', 'Chickpea Salad', 'سلطة حمص', 15, 'quick_easy', 'levantine', 'dinner', '{halal,vegan,vegetarian}', '{Toss chickpeas with cucumber and lemon.}', '{اخلط الحمص مع الخيار والليمون.}'),
   ('11111111-1111-1111-1111-111111111401', 'Greek Yogurt & Fruit', 'زبادي وفاكهة', 5, 'quick_easy', 'international_healthy', 'snack', '{halal,vegetarian}', '{Top yogurt with apple slices.}', '{زيّن الزبادي بشرائح التفاح.}'),
-  ('11111111-1111-1111-1111-111111111402', 'Hummus & Veggies', 'حummus وخضار', 8, 'light_energy', 'levantine', 'snack', '{halal,vegan,vegetarian}', '{Serve hummus with carrot sticks.}', '{قدّم الحummus مع أعواد الجزر.}')
+  ('11111111-1111-1111-1111-111111111402', 'Hummus & Veggies', 'حمص وخضار', 8, 'light_energy', 'levantine', 'snack', '{halal,vegan,vegetarian}', '{Serve hummus with carrot sticks.}', '{قدّم الحمص مع أعواد الجزر.}')
 on conflict (id) do nothing;

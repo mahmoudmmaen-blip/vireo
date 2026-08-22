@@ -5,6 +5,7 @@ import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/repositories/meal_plan_repository.dart';
 import 'package:vireo/data/repositories/nutrition_repository.dart';
+import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 import 'package:vireo/features/nutrition/screens/fridge_scan_screen.dart';
 import 'package:vireo/features/nutrition/screens/manual_food_entry_screen.dart';
 import 'package:vireo/features/nutrition/widgets/meal_card.dart';
@@ -103,7 +104,7 @@ class _MealTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final mealsAsync = ref.watch(todayMealsProvider);
+    final mealsAsync = ref.watch(effectiveTodayMealsProvider);
 
     return mealsAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),

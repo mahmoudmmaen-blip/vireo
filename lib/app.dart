@@ -21,7 +21,10 @@ class VireoApp extends ConsumerWidget {
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.dark,
       locale: locale,
-      supportedLocales: AppLocalizations.supportedLocales,
+      supportedLocales: const [
+        Locale('ar'),
+        Locale('en'),
+      ],
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

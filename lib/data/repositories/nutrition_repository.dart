@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/config/app_config.dart';
+import 'package:vireo/data/demo/nutrition_demo_catalog.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/data/models/food_item.dart';
@@ -81,34 +82,7 @@ class NutritionRepository {
     }
   }
 
-  List<Recipe> _demoSuggestions() {
-    return [
-      Recipe(
-        id: 'demo-r1',
-        titleEn: 'Quick Veggie Omelette',
-        titleAr: 'أومлет خضار سريع',
-        prepTimeMinutes: 12,
-        goalTag: RecipeGoalTag.quickEasy,
-        mealType: MealType.lunch,
-      ),
-      Recipe(
-        id: 'demo-r2',
-        titleEn: 'High-Protein Chicken Bowl',
-        titleAr: 'طبق دجاج بالأرز والخضار',
-        prepTimeMinutes: 20,
-        goalTag: RecipeGoalTag.highProtein,
-        mealType: MealType.dinner,
-      ),
-      Recipe(
-        id: 'demo-r3',
-        titleEn: 'Light Lentil Soup',
-        titleAr: 'شوربة عدس خفيفة',
-        prepTimeMinutes: 25,
-        goalTag: RecipeGoalTag.lightEnergy,
-        mealType: MealType.dinner,
-      ),
-    ];
-  }
+  List<Recipe> _demoSuggestions() => NutritionDemoCatalog.fridgeQuickMeals;
 
   Future<int?> remainingScansThisMonth({required bool isPremium}) async {
     if (isPremium) return null;

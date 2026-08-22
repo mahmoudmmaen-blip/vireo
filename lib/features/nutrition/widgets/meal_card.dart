@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/models/recipe.dart';
 import 'package:vireo/data/repositories/meal_plan_repository.dart';
+import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 
 class MealCard extends ConsumerWidget {
   const MealCard({
@@ -78,17 +80,44 @@ class MealCard extends ConsumerWidget {
     WidgetRef ref,
     AppLocalizations l10n,
   ) async {
-    final updated = await ref.read(mealPlanRepositoryProvider).swapMeal(entry);
+    if (SupabaseService.isInitialized) {
+      final updated =
+          await ref.read(mealPlanRepositoryProvider).swapMeal(entry);
+      if (!context.mounted) return;
+      if (updated != null) {
+        ref.invalidate(todayMealsProvider);
+        onSwapped?.call();
+        return;
+      }
+    }
+
+    final alternatives = ref.read(mealPlanRepositoryProvider).demoAlternativesFor(
+          entry.mealType,
+          excludeRecipeId: entry.recipe.id,
+        );
     if (!context.mounted) return;
 
-    if (updated == null) {
+    if (alternatives.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(l10n.nutritionSwapMealEmpty)),
       );
       return;
     }
 
-    ref.invalidate(todayMealsProvider);
+    final picked = await showModalBottomSheet<Recipe>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => _SwapMealSheet(
+        alternatives: alternatives,
+        l10n: l10n,
+        locale: Localizations.localeOf(context).languageCode,
+      ),
+    );
+    if (picked == null || !context.mounted) return;
+
+    ref.read(demoMealOverridesProvider.notifier).update(
+          (state) => {...state, entry.mealType: picked},
+        );
     onSwapped?.call();
   }
 
@@ -103,6 +132,52 @@ class MealCard extends ConsumerWidget {
       case MealType.snack:
         return Icons.cookie_outlined;
     }
+  }
+}
+
+class _SwapMealSheet extends StatelessWidget {
+  const _SwapMealSheet({
+    required this.alternatives,
+    required this.l10n,
+    required this.locale,
+  });
+
+  final List<Recipe> alternatives;
+  final AppLocalizations l10n;
+  final String locale;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              l10n.nutritionSwapMeal,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              l10n.nutritionSwapMealSubtitle,
+              style: TextStyle(color: context.vireoColors.textMute),
+            ),
+            const SizedBox(height: 16),
+            ...alternatives.map(
+              (recipe) => ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.restaurant_outlined),
+                title: Text(recipe.localizedTitle(locale)),
+                subtitle: Text(l10n.nutritionPrepMinutes(recipe.prepTimeMinutes)),
+                onTap: () => Navigator.of(context).pop(recipe),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

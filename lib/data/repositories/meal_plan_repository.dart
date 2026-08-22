@@ -4,6 +4,7 @@ import 'package:vireo/core/services/analytics_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/core/utils/date_utils.dart';
 import 'package:vireo/core/utils/meal_diversity.dart';
+import 'package:vireo/data/demo/nutrition_demo_catalog.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/models/recipe.dart';
 
@@ -148,15 +149,26 @@ class MealPlanRepository {
   List<MealPlanEntry> _demoTodayMeals(int dayIndex) {
     final week = DateUtilsVireo.isoWeekNumber(DateTime.now());
     return [
-      _demoEntry('demo-b', MealType.breakfast, week, dayIndex,
-          'Protein Oats Bowl', 'شوفان بالزبادي والموز', 10, 'high_protein'),
-      _demoEntry('demo-l', MealType.lunch, week, dayIndex,
-          'Grilled Chicken Plate', 'طبق دجاج مشوي', 25, 'high_protein'),
-      _demoEntry('demo-d', MealType.dinner, week, dayIndex,
-          'Chickpea Salad', 'سلطة حمص', 15, 'quick_easy'),
-      _demoEntry('demo-s', MealType.snack, week, dayIndex,
-          'Greek Yogurt & Fruit', 'زبادي وفاكهة', 5, 'quick_easy'),
+      for (final type in MealType.values)
+        _demoEntry(
+          'demo-${type.value[0]}',
+          type,
+          week,
+          dayIndex,
+          NutritionDemoCatalog.primaryFor(type),
+        ),
     ];
+  }
+
+  /// Demo swap alternatives when offline or server has no matches.
+  List<Recipe> demoAlternativesFor(
+    MealType type, {
+    required String excludeRecipeId,
+  }) {
+    return NutritionDemoCatalog.alternativesFor(
+      type,
+      excludeRecipeId: excludeRecipeId,
+    );
   }
 
   MealPlanEntry _demoEntry(
@@ -164,24 +176,14 @@ class MealPlanRepository {
     MealType type,
     int week,
     int day,
-    String titleEn,
-    String titleAr,
-    int prep,
-    String goalTag,
+    Recipe recipe,
   ) {
     return MealPlanEntry(
       id: id,
       mealType: type,
       dayIndex: day,
       weekNumber: week,
-      recipe: Recipe(
-        id: 'recipe-$id',
-        titleEn: titleEn,
-        titleAr: titleAr,
-        prepTimeMinutes: prep,
-        goalTag: RecipeGoalTag.fromValue(goalTag),
-        mealType: type,
-      ),
+      recipe: recipe,
     );
   }
 }

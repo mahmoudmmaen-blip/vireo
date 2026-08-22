@@ -1256,6 +1256,18 @@ abstract class AppLocalizations {
   /// **'No alternative meals available right now.'**
   String get nutritionSwapMealEmpty;
 
+  /// No description provided for @nutritionDemoQuickMeals.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick healthy demo meals'**
+  String get nutritionDemoQuickMeals;
+
+  /// No description provided for @nutritionTryDemoScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Try demo scan'**
+  String get nutritionTryDemoScan;
+
   /// No description provided for @homeWelcomeSubtitle.
   ///
   /// In en, this message translates to:

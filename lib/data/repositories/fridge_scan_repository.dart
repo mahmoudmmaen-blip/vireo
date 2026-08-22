@@ -1,5 +1,6 @@
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/supabase_service.dart';
+import 'package:vireo/data/demo/nutrition_demo_catalog.dart';
 
 /// Client for the fridge vision Edge Function (Section 4 prompt).
 class FridgeScanRepository {
@@ -13,7 +14,11 @@ class FridgeScanRepository {
     String? imageUrl,
   }) async {
     if (!SupabaseService.isInitialized) {
-      throw const FridgeScanException('Supabase is not configured.');
+      return FridgeScanResult(
+        scanId: NutritionDemoCatalog.demoScanId,
+        ingredients: NutritionDemoCatalog.demoFridgeIngredients,
+        remainingScans: basicMonthlyLimit - 1,
+      );
     }
 
     try {
