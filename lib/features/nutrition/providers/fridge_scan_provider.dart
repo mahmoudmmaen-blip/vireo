@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/data/repositories/fridge_scan_repository.dart';
 import 'package:vireo/data/repositories/nutrition_repository.dart';
+import 'package:vireo/core/services/analytics_service.dart';
+import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 
 class FridgeScanFlowState {
   const FridgeScanFlowState({
@@ -79,6 +81,15 @@ class FridgeScanFlowNotifier extends Notifier<FridgeScanFlowState> {
         remainingScans: result.remainingScans,
       );
       ref.invalidate(remainingFridgeScansProvider);
+
+      final isPremium = ref.read(subscriptionProvider).valueOrNull?.hasPremiumAccess ?? false;
+      await AnalyticsService.fridgeScanUsed(
+        itemsDetectedCount: result.ingredients.length,
+        scanId: result.scanId,
+        remainingScans: result.remainingScans,
+        isPremium: isPremium,
+      );
+
       return true;
     } on FridgeScanLimitException {
       state = state.copyWith(
