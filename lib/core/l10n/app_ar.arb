@@ -197,7 +197,7 @@
       "minutes": {"type": "int"}
     }
   },
-  "nutritionTagHighProtein": "بروtein عالي",
+  "nutritionTagHighProtein": "بروتين عالي",
   "nutritionTagQuickEasy": "سريع وسهل",
   "nutritionTagLightEnergy": "طاقة خفيفة",
   "nutritionScanFridge": "امسح التلاجة",

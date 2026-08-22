@@ -4,7 +4,6 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/models/recipe.dart';
-import 'package:vireo/data/models/recipe.dart';
 import 'package:vireo/data/repositories/meal_plan_repository.dart';
 
 class MealCard extends ConsumerWidget {

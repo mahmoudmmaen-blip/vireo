@@ -551,7 +551,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get nutritionTagHighProtein => 'بروtein عالي';
+  String get nutritionTagHighProtein => 'بروتين عالي';
 
   @override
   String get nutritionTagQuickEasy => 'سريع وسهل';

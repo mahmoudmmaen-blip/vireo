@@ -94,7 +94,7 @@ class NutritionRepository {
       Recipe(
         id: 'demo-r2',
         titleEn: 'High-Protein Chicken Bowl',
-        titleAr: 'طبق دجاج عالي البروtein',
+        titleAr: 'طبق دجاج بالأرز والخضار',
         prepTimeMinutes: 20,
         goalTag: RecipeGoalTag.highProtein,
         mealType: MealType.dinner,

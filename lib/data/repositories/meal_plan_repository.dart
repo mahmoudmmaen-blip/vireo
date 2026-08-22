@@ -149,7 +149,7 @@ class MealPlanRepository {
     final week = DateUtilsVireo.isoWeekNumber(DateTime.now());
     return [
       _demoEntry('demo-b', MealType.breakfast, week, dayIndex,
-          'Protein Oats Bowl', 'شوفان بالبروtein', 10, 'high_protein'),
+          'Protein Oats Bowl', 'شوفان بالزبادي والموز', 10, 'high_protein'),
       _demoEntry('demo-l', MealType.lunch, week, dayIndex,
           'Grilled Chicken Plate', 'طبق دجاج مشوي', 25, 'high_protein'),
       _demoEntry('demo-d', MealType.dinner, week, dayIndex,
