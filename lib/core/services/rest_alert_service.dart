@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/services.dart';
 
-/// Haptic and audio cues for the rest timer.
+/// Haptic and system-sound cues for the rest timer (§2.4).
 abstract final class RestAlertService {
-  static final AudioPlayer _player = AudioPlayer();
   static bool _fiveSecondAlertFired = false;
 
   static Future<void> resetAlerts() async {
@@ -30,16 +28,8 @@ abstract final class RestAlertService {
         await HapticFeedback.lightImpact();
       }
       await SystemSound.play(SystemSoundType.click);
-      await _player.play(AssetSource('sounds/rest_beep.mp3'), volume: 0.35);
     } catch (_) {
-      // Asset or platform may be unavailable — haptic still fired.
-      try {
-        await SystemSound.play(SystemSoundType.click);
-      } catch (_) {}
+      // Platform may not support haptics in tests or on web.
     }
-  }
-
-  static Future<void> dispose() async {
-    await _player.dispose();
   }
 }
