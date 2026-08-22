@@ -15,13 +15,22 @@ class ReassessmentRepository {
 
   Future<bool> isReassessmentDue() async {
     final last = await _lastReassessmentDate();
-    if (last == null) {
-      final onboarding = HiveService.settingsBox.get('onboarding_complete');
-      if (onboarding != true) return false;
-      return true;
-    }
-    final days = DateTime.now().difference(last).inDays;
-    return days >= minDaysBetween;
+    final onboarding = HiveService.settingsBox.get('onboarding_complete') == true;
+    return isReassessmentDueFor(
+      lastReassessment: last,
+      referenceNow: DateTime.now(),
+      onboardingComplete: onboarding,
+    );
+  }
+
+  /// Pure due-check used by [isReassessmentDue] and §2.7 tests.
+  static bool isReassessmentDueFor({
+    required DateTime? lastReassessment,
+    required DateTime referenceNow,
+    required bool onboardingComplete,
+  }) {
+    if (lastReassessment == null) return onboardingComplete;
+    return referenceNow.difference(lastReassessment).inDays >= minDaysBetween;
   }
 
   Future<DateTime?> _lastReassessmentDate() async {
