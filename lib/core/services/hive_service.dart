@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:vireo/core/boot/boot_log.dart';
 
 /// Local offline storage via Hive.
 abstract final class HiveService {
@@ -10,18 +13,55 @@ abstract final class HiveService {
   static bool get isInitialized => _initialized;
 
   static Future<void> init() async {
-    if (_initialized) return;
+    if (_initialized) {
+      BootLog.step('HiveService.init skipped (already initialized)');
+      return;
+    }
+
+    BootLog.step('HiveService.init');
     try {
-      await Hive.initFlutter();
-      await Hive.openBox<dynamic>(settingsBoxName);
-      await Hive.openBox<dynamic>(cacheBoxName);
+      BootLog.step('Starting Hive.initFlutter...');
+      await Hive.initFlutter().timeout(
+        bootServiceTimeout,
+        onTimeout: () => throw TimeoutException('Hive.initFlutter'),
+      );
+      BootLog.ok('Hive.initFlutter');
+
+      BootLog.step('Starting Hive.openBox(settings)...');
+      await Hive.openBox<dynamic>(settingsBoxName).timeout(
+        bootServiceTimeout,
+        onTimeout: () => throw TimeoutException('Hive.openBox(settings)'),
+      );
+      BootLog.ok('Hive.openBox(settings)');
+
+      BootLog.step('Starting Hive.openBox(cache)...');
+      await Hive.openBox<dynamic>(cacheBoxName).timeout(
+        bootServiceTimeout,
+        onTimeout: () => throw TimeoutException('Hive.openBox(cache)'),
+      );
+      BootLog.ok('Hive.openBox(cache)');
+
       _initialized = true;
-    } catch (_) {
+      BootLog.ok('HiveService.init');
+    } catch (e) {
+      BootLog.warn('HiveService.init failed', e);
       rethrow;
     }
   }
 
-  static Box<dynamic> get settingsBox => Hive.box<dynamic>(settingsBoxName);
+  static Box<dynamic> get settingsBox {
+    _ensureInitialized();
+    return Hive.box<dynamic>(settingsBoxName);
+  }
 
-  static Box<dynamic> get cacheBox => Hive.box<dynamic>(cacheBoxName);
+  static Box<dynamic> get cacheBox {
+    _ensureInitialized();
+    return Hive.box<dynamic>(cacheBoxName);
+  }
+
+  static void _ensureInitialized() {
+    if (!_initialized) {
+      throw StateError('HiveService.init() must complete before accessing boxes.');
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/revenue_cat_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
@@ -10,23 +11,37 @@ enum AppInitStatus { loading, ready, error }
 class AppInitNotifier extends AsyncNotifier<AppInitStatus> {
   @override
   Future<AppInitStatus> build() async {
-    return _initialize();
+    BootLog.step('AppInitNotifier.build');
+    final status = await _initialize();
+    BootLog.ok('AppInitNotifier.build → $status');
+    return status;
   }
 
   Future<AppInitStatus> _initialize() async {
     try {
       if (!HiveService.isInitialized) {
-        await HiveService.init();
+        try {
+          await HiveService.init();
+        } catch (e) {
+          BootLog.warn('AppInitNotifier Hive unavailable — continuing degraded', e);
+        }
+      } else {
+        BootLog.step('AppInitNotifier: Hive already initialized');
       }
+
       await SupabaseService.init();
       await RevenueCatService.init();
+
+      BootLog.ok('AppInitNotifier services');
       return AppInitStatus.ready;
-    } catch (_) {
+    } catch (e) {
+      BootLog.warn('AppInitNotifier failed', e);
       return AppInitStatus.error;
     }
   }
 
   Future<void> retry() async {
+    BootLog.step('AppInitNotifier.retry');
     state = const AsyncLoading();
     state = await AsyncValue.guard(_initialize);
   }

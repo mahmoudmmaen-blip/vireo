@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/data/models/subscription_state.dart';
 
@@ -23,24 +24,55 @@ abstract final class RevenueCatService {
   }
 
   static Future<void> init() async {
-    if (_initialized) return;
-    if (!isConfigured) return;
+    if (_initialized) {
+      BootLog.step('RevenueCatService.init skipped (already initialized)');
+      return;
+    }
 
+    if (!isConfigured) {
+      BootLog.step('RevenueCatService.init skipped (not configured)');
+      return;
+    }
+
+    final apiKey = _platformApiKey();
+    if (apiKey == null || apiKey.isEmpty) {
+      BootLog.step('RevenueCatService.init skipped (no API key for this platform)');
+      return;
+    }
+
+    BootLog.step('RevenueCatService.init');
     try {
-      await Purchases.setLogLevel(kDebugMode ? LogLevel.debug : LogLevel.info);
-
-      final apiKey = _platformApiKey();
-      if (apiKey == null || apiKey.isEmpty) return;
+      BootLog.step('Starting Purchases.setLogLevel...');
+      await Purchases.setLogLevel(
+        kDebugMode ? LogLevel.debug : LogLevel.info,
+      );
+      BootLog.ok('Purchases.setLogLevel');
 
       final configuration = PurchasesConfiguration(apiKey);
-      await Purchases.configure(configuration);
+      BootLog.step('Starting Purchases.configure...');
+      await Purchases.configure(configuration).timeout(
+        bootServiceTimeout,
+        onTimeout: () => throw TimeoutException('Purchases.configure'),
+      );
+      BootLog.ok('Purchases.configure');
 
       Purchases.addCustomerInfoUpdateListener(_emitCustomerInfo);
       _initialized = true;
-      final info = await Purchases.getCustomerInfo();
+
+      BootLog.step('Starting Purchases.getCustomerInfo...');
+      final info = await Purchases.getCustomerInfo().timeout(
+        bootServiceTimeout,
+        onTimeout: () => throw TimeoutException('Purchases.getCustomerInfo'),
+      );
       _emitCustomerInfo(info);
-    } catch (_) {
-      rethrow;
+
+      BootLog.ok('RevenueCatService.init');
+    } on TimeoutException catch (e) {
+      BootLog.warn('RevenueCatService.init timed out — demo subscription mode', e);
+      _initialized = false;
+    } catch (e) {
+      BootLog.warn('RevenueCatService.init failed — demo subscription mode', e);
+      _initialized = false;
     }
   }
 
@@ -57,7 +89,7 @@ abstract final class RevenueCatService {
 
   static Future<CustomerInfo> getCustomerInfo() async {
     try {
-      return await Purchases.getCustomerInfo();
+      return await Purchases.getCustomerInfo().timeout(bootServiceTimeout);
     } catch (_) {
       rethrow;
     }
@@ -65,7 +97,7 @@ abstract final class RevenueCatService {
 
   static Future<Offerings?> getOfferings() async {
     try {
-      return await Purchases.getOfferings();
+      return await Purchases.getOfferings().timeout(bootServiceTimeout);
     } catch (_) {
       rethrow;
     }
@@ -90,7 +122,7 @@ abstract final class RevenueCatService {
   static Future<void> logIn(String appUserId) async {
     if (!_initialized) return;
     try {
-      await Purchases.logIn(appUserId);
+      await Purchases.logIn(appUserId).timeout(bootServiceTimeout);
     } catch (_) {
       rethrow;
     }
@@ -99,7 +131,7 @@ abstract final class RevenueCatService {
   static Future<void> logOut() async {
     if (!_initialized) return;
     try {
-      await Purchases.logOut();
+      await Purchases.logOut().timeout(bootServiceTimeout);
     } catch (_) {
       rethrow;
     }

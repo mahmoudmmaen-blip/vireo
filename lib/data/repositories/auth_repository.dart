@@ -15,8 +15,10 @@ class AuthRepository {
 
   static const _guestModeKey = 'guest_mode';
 
-  bool get isGuestMode =>
-      HiveService.settingsBox.get(_guestModeKey, defaultValue: false) as bool;
+  bool get isGuestMode {
+    if (!HiveService.isInitialized) return false;
+    return HiveService.settingsBox.get(_guestModeKey, defaultValue: false) as bool;
+  }
 
   Stream<AuthState> authStateChanges() {
     if (!SupabaseService.isInitialized) {

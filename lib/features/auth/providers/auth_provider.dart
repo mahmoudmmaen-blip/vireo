@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:vireo/core/boot/boot_log.dart';
+import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/repositories/auth_repository.dart';
 
@@ -11,16 +14,66 @@ final authRepositoryProvider = Provider<AuthRepository>(
 
 class AuthNotifier extends AsyncNotifier<AppAuthState> {
   StreamSubscription<AuthState>? _subscription;
+  var _listenerActive = false;
 
   @override
   Future<AppAuthState> build() async {
+    BootLog.step('AuthNotifier.build');
     final repo = ref.read(authRepositoryProvider);
-    _subscription?.cancel();
-    _subscription = repo.authStateChanges().listen((_) {
-      ref.invalidateSelf();
+    final resolved = _resolveState(repo);
+
+    ref.onDispose(() {
+      BootLog.step('AuthNotifier.dispose');
+      _listenerActive = false;
+      unawaited(_subscription?.cancel());
+      _subscription = null;
     });
-    ref.onDispose(() => _subscription?.cancel());
-    return _resolveState(repo);
+
+    _listenerActive = true;
+    Future.microtask(_attachAuthListener);
+
+    BootLog.ok('AuthNotifier.build → ${resolved.runtimeType}');
+    return resolved;
+  }
+
+  void _attachAuthListener() {
+    if (!_listenerActive) return;
+
+    if (!SupabaseService.isInitialized) {
+      BootLog.step('AuthNotifier skipping auth listener (Supabase offline)');
+      return;
+    }
+
+    final repo = ref.read(authRepositoryProvider);
+    unawaited(_subscription?.cancel());
+    _subscription = repo.authStateChanges().listen(
+      (_) => _refreshIfChanged(repo),
+      onError: (Object error, StackTrace stackTrace) {
+        BootLog.warn('AuthNotifier auth stream error', error);
+      },
+    );
+    BootLog.ok('AuthNotifier auth listener attached');
+  }
+
+  void _refreshIfChanged(AuthRepository repo) {
+    if (!_listenerActive) return;
+
+    final next = _resolveState(repo);
+    final current = state.asData?.value;
+    if (current != null && _sameAuthState(current, next)) {
+      return;
+    }
+
+    BootLog.step('AuthNotifier auth state changed — refreshing');
+    ref.invalidateSelf();
+  }
+
+  bool _sameAuthState(AppAuthState current, AppAuthState next) {
+    if (current.runtimeType != next.runtimeType) return false;
+    if (current is AppAuthAuthenticated && next is AppAuthAuthenticated) {
+      return current.user.id == next.user.id;
+    }
+    return true;
   }
 
   AppAuthState _resolveState(AuthRepository repo) {
@@ -117,6 +170,9 @@ final isGuestProvider = Provider<bool>((ref) {
   final auth = ref.watch(authProvider);
   return auth.maybeWhen(
     data: (s) => s.isGuest,
-    orElse: () => ref.read(authRepositoryProvider).isGuestMode,
+    orElse: () {
+      if (!HiveService.isInitialized) return false;
+      return ref.read(authRepositoryProvider).isGuestMode;
+    },
   );
 });

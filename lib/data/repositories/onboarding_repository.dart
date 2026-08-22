@@ -9,9 +9,11 @@ class OnboardingRepository {
   static const onboardingCompleteKey = 'onboarding_complete';
   static const notificationPrefsKey = 'notification_preferences';
 
-  bool get isOnboardingComplete =>
-      HiveService.settingsBox.get(onboardingCompleteKey, defaultValue: false)
-          as bool;
+  bool get isOnboardingComplete {
+    if (!HiveService.isInitialized) return false;
+    return HiveService.settingsBox.get(onboardingCompleteKey, defaultValue: false)
+        as bool;
+  }
 
   Future<void> markOnboardingComplete() async {
     await HiveService.settingsBox.put(onboardingCompleteKey, true);
