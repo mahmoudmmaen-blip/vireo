@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/models/subscription_state.dart';
@@ -137,6 +138,7 @@ class _GuestProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final colors = context.vireoColors;
 
     return Padding(
       padding: const EdgeInsets.all(24),
@@ -147,11 +149,71 @@ class _GuestProfileBody extends StatelessWidget {
           const SizedBox(height: 8),
           Text(l10n.guestModeSubtitle),
           const SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(
+                child: _GuestStatCard(
+                  icon: Icons.fitness_center_outlined,
+                  label: l10n.profileStatWorkoutsLabel,
+                  colors: colors,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _GuestStatCard(
+                  icon: Icons.local_fire_department_outlined,
+                  label: l10n.profileStatStreakLabel,
+                  colors: colors,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
           ElevatedButton(
             onPressed: onSaveProgress,
             child: Text(l10n.saveProgressToCloud),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _GuestStatCard extends StatelessWidget {
+  const _GuestStatCard({
+    required this.icon,
+    required this.label,
+    required this.colors,
+  });
+
+  final IconData icon;
+  final String label;
+  final VireoColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+        child: Column(
+          children: [
+            Icon(icon, color: colors.ember, size: 28),
+            const SizedBox(height: 10),
+            Text(
+              '0',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: colors.textMute, fontSize: 13),
+            ),
+          ],
+        ),
       ),
     );
   }

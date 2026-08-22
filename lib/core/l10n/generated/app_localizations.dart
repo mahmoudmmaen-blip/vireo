@@ -650,6 +650,18 @@ abstract class AppLocalizations {
   /// **'Your progress is saved on this device only. Create an account to sync and subscribe.'**
   String get guestModeSubtitle;
 
+  /// No description provided for @profileStatWorkoutsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Workouts completed'**
+  String get profileStatWorkoutsLabel;
+
+  /// No description provided for @profileStatStreakLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Day streak'**
+  String get profileStatStreakLabel;
+
   /// No description provided for @saveProgressToCloud.
   ///
   /// In en, this message translates to:

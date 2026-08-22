@@ -98,6 +98,8 @@
   "settingsTitle": "Settings",
   "guestModeTitle": "Guest mode",
   "guestModeSubtitle": "Your progress is saved on this device only. Create an account to sync and subscribe.",
+  "profileStatWorkoutsLabel": "Workouts completed",
+  "profileStatStreakLabel": "Day streak",
   "saveProgressToCloud": "Save progress to cloud",
   "profileCloudSynced": "Progress synced to your account",
   "authGateTitle": "Create an account",

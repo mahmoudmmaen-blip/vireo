@@ -92,6 +92,8 @@
   "settingsTitle": "الإعدادات",
   "guestModeTitle": "وضع الضيف",
   "guestModeSubtitle": "تقدّمك محفوظ على الجهاز ده بس. أنشئ حساب للمزامنة والاشتراك.",
+  "profileStatWorkoutsLabel": "تمارين مكتملة",
+  "profileStatStreakLabel": "سلسلة أيام",
   "saveProgressToCloud": "حفظ التقدّم على السحابة",
   "profileCloudSynced": "التقدّم متزامن مع حسابك",
   "authGateTitle": "إنشاء حساب",

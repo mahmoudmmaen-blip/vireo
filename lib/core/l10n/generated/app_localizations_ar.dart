@@ -293,6 +293,12 @@ class AppLocalizationsAr extends AppLocalizations {
       'تقدّمك محفوظ على الجهاز ده بس. أنشئ حساب للمزامنة والاشتراك.';
 
   @override
+  String get profileStatWorkoutsLabel => 'تمارين مكتملة';
+
+  @override
+  String get profileStatStreakLabel => 'سلسلة أيام';
+
+  @override
   String get saveProgressToCloud => 'حفظ التقدّم على السحابة';
 
   @override

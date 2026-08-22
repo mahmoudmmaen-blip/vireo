@@ -297,6 +297,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your progress is saved on this device only. Create an account to sync and subscribe.';
 
   @override
+  String get profileStatWorkoutsLabel => 'Workouts completed';
+
+  @override
+  String get profileStatStreakLabel => 'Day streak';
+
+  @override
   String get saveProgressToCloud => 'Save progress to cloud';
 
   @override
