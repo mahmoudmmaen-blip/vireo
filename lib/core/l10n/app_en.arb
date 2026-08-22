@@ -234,6 +234,15 @@
   "nutritionSwapMealEmpty": "No alternative meals available right now.",
   "homeWelcomeSubtitle": "Your personalized fitness hub.",
   "homeWalkingCardSubtitle": "Track daily steps from Apple Health or Health Connect.",
+  "homeDailyProgramTitle": "Daily program",
+  "homeTodayWorkout": "Today's workout",
+  "homeNextMeal": "Next meal",
+  "homeWorkoutExerciseCount": "{count} exercises",
+  "@homeWorkoutExerciseCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "progressTabWeight": "Weight",
   "progressTabAdherence": "Adherence",
   "progressTabEnergy": "Energy",

@@ -638,6 +638,20 @@ class AppLocalizationsAr extends AppLocalizations {
       'تتبع خطواتك اليومية من Apple Health أو Health Connect.';
 
   @override
+  String get homeDailyProgramTitle => 'البرنامج اليومي';
+
+  @override
+  String get homeTodayWorkout => 'تمرين النهارده';
+
+  @override
+  String get homeNextMeal => 'الوجبة الجاية';
+
+  @override
+  String homeWorkoutExerciseCount(int count) {
+    return '$count تمارين';
+  }
+
+  @override
   String get progressTabWeight => 'الوزن';
 
   @override

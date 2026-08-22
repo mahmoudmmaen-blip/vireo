@@ -1256,6 +1256,30 @@ abstract class AppLocalizations {
   /// **'Track daily steps from Apple Health or Health Connect.'**
   String get homeWalkingCardSubtitle;
 
+  /// No description provided for @homeDailyProgramTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily program'**
+  String get homeDailyProgramTitle;
+
+  /// No description provided for @homeTodayWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s workout'**
+  String get homeTodayWorkout;
+
+  /// No description provided for @homeNextMeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Next meal'**
+  String get homeNextMeal;
+
+  /// No description provided for @homeWorkoutExerciseCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} exercises'**
+  String homeWorkoutExerciseCount(int count);
+
   /// No description provided for @progressTabWeight.
   ///
   /// In en, this message translates to:

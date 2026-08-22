@@ -228,6 +228,15 @@
   "nutritionSwapMealEmpty": "مفيش وجبات بديلة متاحة دلوقتي.",
   "homeWelcomeSubtitle": "مركز لياقتك الشخصي.",
   "homeWalkingCardSubtitle": "تتبع خطواتك اليومية من Apple Health أو Health Connect.",
+  "homeDailyProgramTitle": "البرنامج اليومي",
+  "homeTodayWorkout": "تمرين النهارده",
+  "homeNextMeal": "الوجبة الجاية",
+  "homeWorkoutExerciseCount": "{count} تمارين",
+  "@homeWorkoutExerciseCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "progressTabWeight": "الوزن",
   "progressTabAdherence": "الالتزام",
   "progressTabEnergy": "الطاقة",

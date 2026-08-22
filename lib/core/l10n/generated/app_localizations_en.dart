@@ -647,6 +647,20 @@ class AppLocalizationsEn extends AppLocalizations {
       'Track daily steps from Apple Health or Health Connect.';
 
   @override
+  String get homeDailyProgramTitle => 'Daily program';
+
+  @override
+  String get homeTodayWorkout => 'Today\'s workout';
+
+  @override
+  String get homeNextMeal => 'Next meal';
+
+  @override
+  String homeWorkoutExerciseCount(int count) {
+    return '$count exercises';
+  }
+
+  @override
   String get progressTabWeight => 'Weight';
 
   @override
