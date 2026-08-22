@@ -1,7 +1,14 @@
 # Vireo — Frequently Asked Questions (FAQ)
 
-Friendly, direct answers for in-app Help or website.  
+**Section 13 · In-app Help & website**  
+Friendly, direct answers for support and onboarding.  
 **Languages:** English + Egyptian Arabic
+
+## Table of contents
+
+1. Subscriptions · 2. Cancel · 3. Restore purchase · 4. AI coach · 5. Medical disclaimer  
+6. Workout banner · 7. Data collected · 8. Delete account · 9. Fridge scan · 10. Scan limits  
+11. Guest mode · 12. Units · 13. Steps · 14. Surprise Me · 15. Support · 16. Swap meal
 
 ---
 
@@ -129,7 +136,7 @@ Deleting the app **does not** cancel billing. You keep access until the current 
 **EN — A:** Go to **Profile → Settings → Units** and pick **Metric (kg/cm)** or **Imperial (lb/in)**. Weight logs and charts display in your chosen unit. We store weight internally in kg for consistency — the app converts for display.
 
 **AR — Q:** إزاي أحوّل بين كيلو و باوند؟  
-**AR — A:** من **الملف الشخصي → الإعدادات → الوحدات** واختار **متري (كجم/سم)** أو **إمبراطوري (lb/in)**. سجل الوزن والرسوم هتظهر بالوحدة اللي اخترتها. بنخزّن الوزن داخليًا بالكilo للت consistency — التطبيق بيحوّل للعرض.
+**AR — A:** من **الملف الشخصي → الإعدادات → الوحدات** واختار **متري (كجم/سم)** أو **إمبراطوري (lb/in)**. سجل الوزن والرسوم هتظهر بالوحدة اللي اخترتها. بنخزّن الوزن داخليًا بالكيلو — التطبيق بيحوّل للعرض.
 
 ---
 
@@ -160,3 +167,13 @@ Deleting the app **does not** cancel billing. You keep access until the current 
 
 **AR — Q:** أتواصل للدعم إزاي؟  
 **AR — A:** ابعت على **[SUPPORT EMAIL]** مع نوع الموبايل، إصدار التطبيق، ووصف مختصر. لو المشكلة في الدفع، قول اشتركت من Apple ولا Google — هنوجّهك للمكان الصح.
+
+---
+
+## 16. How do I swap a planned meal?
+
+**EN — Q:** Can I change a meal I don't want today?  
+**EN — A:** Yes — tap **Swap meal** on any planned meal card. Vireo picks an alternative recipe for the same meal type that **hasn't been served in the last 14 days** (and respects your dietary restrictions). If no alternative is available, you'll see a friendly empty message.
+
+**AR — Q:** أقدر أغيّر وجبة مش عايزها النهارده؟  
+**AR — A:** أيوه — اضغط **بدّل الوجبة** على بطاقة الوجبة. Vireo يختار وصفة بديلة لنفس نوع الوجبة **من غير ما تتكرر خلال 14 يوم** (مع احترام قيودك الغذائية). لو مفيش بديل متاح، هتظهر رسالة واضحة.

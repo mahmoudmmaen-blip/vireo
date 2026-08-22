@@ -1,7 +1,7 @@
 # Vireo — Terms of Service
 
-**Last updated:** [DATE]  
-**Effective date:** [DATE]
+**Last updated:** August 22, 2026  
+**Effective date:** August 22, 2026
 
 These Terms of Service (“**Terms**”) govern your access to and use of the Vireo mobile application and related services (collectively, the “**Service**”), operated by **[COMPANY LEGAL NAME]** (“**Vireo**,” “**we**,” “**us**,” or “**our**”).
 

@@ -1,7 +1,7 @@
 # Vireo — Privacy Policy
 
-**Last updated:** [DATE]  
-**Effective date:** [DATE]
+**Last updated:** August 22, 2026  
+**Effective date:** August 22, 2026
 
 This Privacy Policy explains how **[COMPANY LEGAL NAME]** (“**Vireo**,” “**we**,” “**us**,” or “**our**”) collects, uses, shares, and protects information when you use the Vireo mobile application and related services (the “**Service**”).
 
