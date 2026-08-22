@@ -629,6 +629,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Type what you have on hand — we\'ll suggest recipes that match your goal and dietary preferences.';
 
   @override
+  String get nutritionSwapMeal => 'Swap meal';
+
+  @override
+  String get nutritionSwapMealSubtitle =>
+      'Pick a different recipe — no repeats within 14 days.';
+
+  @override
+  String get nutritionSwapMealEmpty =>
+      'No alternative meals available right now.';
+
+  @override
   String get homeWelcomeSubtitle => 'Your personalized fitness hub.';
 
   @override

@@ -115,7 +115,7 @@ class _MealTab extends ConsumerWidget {
             }
             return ListView(
               padding: const EdgeInsets.all(16),
-              children: [MealCard(recipe: entry.recipe, mealType: mealType)],
+              children: [MealCard(entry: entry)],
             );
           },
         );

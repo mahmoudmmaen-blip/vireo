@@ -621,6 +621,16 @@ class AppLocalizationsAr extends AppLocalizations {
       'اكتب اللي عندك — هنقترح وصفات تناسب هدفك وقيودك الغذائية.';
 
   @override
+  String get nutritionSwapMeal => 'بدّل الوجبة';
+
+  @override
+  String get nutritionSwapMealSubtitle =>
+      'اختار وصفة مختلفة — بدون تكرار خلال 14 يوم.';
+
+  @override
+  String get nutritionSwapMealEmpty => 'مفيش وجبات بديلة متاحة دلوقتي.';
+
+  @override
   String get homeWelcomeSubtitle => 'مركز لياقتك الشخصي.';
 
   @override

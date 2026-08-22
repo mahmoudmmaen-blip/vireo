@@ -1226,6 +1226,24 @@ abstract class AppLocalizations {
   /// **'Type what you have on hand — we\'ll suggest recipes that match your goal and dietary preferences.'**
   String get nutritionManualEntryHint;
 
+  /// No description provided for @nutritionSwapMeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Swap meal'**
+  String get nutritionSwapMeal;
+
+  /// No description provided for @nutritionSwapMealSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a different recipe — no repeats within 14 days.'**
+  String get nutritionSwapMealSubtitle;
+
+  /// No description provided for @nutritionSwapMealEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No alternative meals available right now.'**
+  String get nutritionSwapMealEmpty;
+
   /// No description provided for @homeWelcomeSubtitle.
   ///
   /// In en, this message translates to:

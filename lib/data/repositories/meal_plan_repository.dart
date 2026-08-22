@@ -1,7 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/config/app_config.dart';
+import 'package:vireo/core/services/analytics_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/core/utils/date_utils.dart';
+import 'package:vireo/core/utils/meal_diversity.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/models/recipe.dart';
 
@@ -47,6 +49,89 @@ class MealPlanRepository {
     }
 
     return _demoTodayMeals(dayIndex);
+  }
+
+  /// Swaps a planned meal for an alternative respecting 14-day diversity (§8).
+  Future<MealPlanEntry?> swapMeal(MealPlanEntry current) async {
+    try {
+      if (!SupabaseService.isInitialized) return null;
+      final userId = SupabaseService.auth.currentUser?.id;
+      if (userId == null) return null;
+
+      final historyRows = await SupabaseService.client
+          .from('user_recipe_history')
+          .select('recipe_id, served_at')
+          .eq('user_id', userId)
+          .gte(
+            'served_at',
+            DateTime.now()
+                .subtract(const Duration(days: MealDiversity.defaultHistoryDays))
+                .toUtc()
+                .toIso8601String(),
+          );
+
+      final history = (historyRows as List).map((row) {
+        final map = Map<String, dynamic>.from(row);
+        return (
+          recipeId: map['recipe_id'] as String,
+          servedAt: DateTime.parse(map['served_at'] as String),
+        );
+      });
+
+      final blocked = MealDiversity.recentRecipeIds(
+        history: history,
+        reference: DateTime.now(),
+        withinDays: MealDiversity.defaultHistoryDays,
+      )..add(current.recipe.id);
+
+      final recipeRows = await SupabaseService.client
+          .from('recipes')
+          .select()
+          .eq('meal_type', current.mealType.value);
+
+      final candidates = (recipeRows as List)
+          .map((r) => Recipe.fromJson(Map<String, dynamic>.from(r)))
+          .toList();
+
+      final picked = MealDiversity.pickAlternative(
+        candidates: candidates.map((r) => r.id).toList(),
+        blockedIds: blocked,
+      );
+      if (picked == null) return null;
+
+      final replacement = candidates.firstWhere((r) => r.id == picked);
+
+      await SupabaseService.client
+          .from('meal_plans')
+          .update({'recipe_id': replacement.id})
+          .eq('id', current.id);
+
+      await SupabaseService.client.from('user_recipe_history').insert({
+        'user_id': userId,
+        'recipe_id': replacement.id,
+        'meal_plan_id': current.id,
+        'served_at': DateTime.now().toUtc().toIso8601String(),
+      });
+
+      await AnalyticsService.mealSwapped(
+        fromRecipeId: current.recipe.id,
+        toRecipeId: replacement.id,
+        mealType: current.mealType.value,
+        dayIndex: current.dayIndex,
+        cuisineFrom: current.recipe.cuisineTag,
+        cuisineTo: replacement.cuisineTag,
+      );
+
+      return MealPlanEntry(
+        id: current.id,
+        mealType: current.mealType,
+        dayIndex: current.dayIndex,
+        weekNumber: current.weekNumber,
+        recipe: replacement,
+      );
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<void> _generateWeekIfMissing(int weekNumber) async {
