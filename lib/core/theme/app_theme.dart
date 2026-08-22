@@ -34,7 +34,11 @@ abstract final class AppTheme {
       cardTheme: CardThemeData(
         color: colors.surfaceRaised,
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14),
+          side: BorderSide(color: colors.line.withValues(alpha: 0.75)),
+        ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: colors.ember,

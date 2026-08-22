@@ -8,15 +8,15 @@ void main() {
     const colors = VireoColors.dark;
 
     test('background', () {
-      expect(colors.background, const Color(0xFF12151A));
+      expect(colors.background, const Color(0xFF0A0C10));
     });
 
     test('surface', () {
-      expect(colors.surface, const Color(0xFF1A1F26));
+      expect(colors.surface, const Color(0xFF12161D));
     });
 
     test('surfaceRaised', () {
-      expect(colors.surfaceRaised, const Color(0xFF212832));
+      expect(colors.surfaceRaised, const Color(0xFF1C222C));
     });
 
     test('ember primary', () {
@@ -36,11 +36,11 @@ void main() {
     });
 
     test('text', () {
-      expect(colors.text, const Color(0xFFEEF0F3));
+      expect(colors.text, const Color(0xFFF2F4F7));
     });
 
     test('textMute', () {
-      expect(colors.textMute, const Color(0xFF8B94A0));
+      expect(colors.textMute, const Color(0xFF9BA3AF));
     });
   });
 
