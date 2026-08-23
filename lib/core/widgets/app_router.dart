@@ -18,36 +18,67 @@ class AppRouter extends ConsumerWidget {
     final init = ref.watch(appInitProvider);
     final onboardingComplete = ref.watch(onboardingCompleteProvider);
 
-    return init.when(
-      loading: () => const AppLoading(),
-      error: (_, _) => _InitError(onRetry: () {
-        ref.read(appInitProvider.notifier).retry();
-      }),
-      data: (status) {
-        if (status == AppInitStatus.error) {
-          return _InitError(onRetry: () {
-            ref.read(appInitProvider.notifier).retry();
-          });
-        }
+    return _MinSplash(
+      child: init.when(
+        loading: () => const AppLoading(),
+        error: (_, _) => _InitError(onRetry: () {
+          ref.read(appInitProvider.notifier).retry();
+        }),
+        data: (status) {
+          if (status == AppInitStatus.error) {
+            return _InitError(onRetry: () {
+              ref.read(appInitProvider.notifier).retry();
+            });
+          }
 
-        // Watch auth only after services (including Supabase) are ready.
-        final auth = ref.watch(authProvider);
+          final auth = ref.watch(authProvider);
 
-        return auth.when(
-          loading: () => const AppLoading(),
-          error: (_, __) => const AuthScreen(),
-          data: (authState) {
-            if (authState is AppAuthUnauthenticated) {
-              return const AuthScreen();
-            }
-            if (!onboardingComplete) {
-              return const OnboardingScreen();
-            }
-            return const MainShell();
-          },
-        );
-      },
+          return auth.when(
+            loading: () => const AppLoading(),
+            error: (_, __) => const AuthScreen(),
+            data: (authState) {
+              if (authState is AppAuthUnauthenticated) {
+                return const AuthScreen();
+              }
+              if (!onboardingComplete) {
+                return const OnboardingScreen();
+              }
+              return const MainShell();
+            },
+          );
+        },
+      ),
     );
+  }
+}
+
+/// Keeps branded splash visible for at least 1.5s on cold start.
+class _MinSplash extends StatefulWidget {
+  const _MinSplash({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_MinSplash> createState() => _MinSplashState();
+}
+
+class _MinSplashState extends State<_MinSplash> {
+  bool _minElapsed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future<void>.delayed(const Duration(milliseconds: 1500), () {
+      if (mounted) setState(() => _minElapsed = true);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_minElapsed) {
+      return const AppLoading();
+    }
+    return widget.child;
   }
 }
 
@@ -62,10 +93,13 @@ class _InitError extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             const Text('Failed to initialize app services.'),
             const SizedBox(height: 16),
-            ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
+            ElevatedButton(
+              onPressed: onRetry,
+              child: const Text('Retry'),
+            ),
           ],
         ),
       ),
