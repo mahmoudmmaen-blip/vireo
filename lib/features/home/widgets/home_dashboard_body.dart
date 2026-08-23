@@ -37,7 +37,9 @@ class HomeDashboardBody extends ConsumerWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          l10n.homeDayPhase(dash.programDay, homePhaseName(l10n, dash, locale)),
+          dash.hasProgram
+              ? l10n.homeProgramDay(dash.programDay, dash.programTotalDays)
+              : l10n.homeDayPhase(dash.programDay, homePhaseName(l10n, dash, locale)),
           style: TextStyle(color: colors.textMute),
         ),
         const SizedBox(height: 16),
@@ -57,6 +59,16 @@ class HomeDashboardBody extends ConsumerWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, __) => const SizedBox.shrink(),
           data: (session) {
+            if (!dash.hasProgram) {
+              return _StartProgramCard(
+                onStart: () {
+                  // Navigate to onboarding or workout tab — user completes onboarding first.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.homeStartProgram)),
+                  );
+                },
+              );
+            }
             if (session.exercises.isEmpty) {
               return _RestDayCard();
             }
@@ -200,6 +212,35 @@ class _StreakCard extends StatelessWidget {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StartProgramCard extends StatelessWidget {
+  const _StartProgramCard({required this.onStart});
+
+  final VoidCallback onStart;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final colors = context.vireoColors;
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: VireoDecorations.premiumCard(colors),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            l10n.homeStartProgram,
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          ElevatedButton(onPressed: onStart, child: Text(l10n.homeStartProgram)),
         ],
       ),
     );
