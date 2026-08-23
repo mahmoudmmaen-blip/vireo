@@ -5,12 +5,14 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 class FeatureScaffold extends StatelessWidget {
   const FeatureScaffold({
     super.key,
-    required this.title,
+    this.title,
+    this.titleWidget,
     required this.body,
     this.actions,
-  });
+  }) : assert(title != null || titleWidget != null, 'Provide title or titleWidget');
 
-  final String title;
+  final String? title;
+  final Widget? titleWidget;
   final Widget body;
   final List<Widget>? actions;
 
@@ -20,7 +22,7 @@ class FeatureScaffold extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: titleWidget ?? Text(title!),
         actions: actions,
       ),
       body: DecoratedBox(
