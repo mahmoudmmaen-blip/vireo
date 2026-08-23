@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/boot/boot_log.dart';
+import 'package:vireo/core/services/catalog_seed_service.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/revenue_cat_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
@@ -30,6 +31,7 @@ class AppInitNotifier extends AsyncNotifier<AppInitStatus> {
       }
 
       await SupabaseService.init();
+      await CatalogSeedService.seedIfNeeded();
       await RevenueCatService.init();
 
       BootLog.ok('AppInitNotifier services');
