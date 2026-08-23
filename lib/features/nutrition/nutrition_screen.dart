@@ -8,6 +8,7 @@ import 'package:vireo/data/repositories/nutrition_repository.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 import 'package:vireo/features/nutrition/screens/fridge_scan_screen.dart';
 import 'package:vireo/features/nutrition/screens/manual_food_entry_screen.dart';
+import 'package:vireo/features/nutrition/widgets/daily_calorie_goal_card.dart';
 import 'package:vireo/features/nutrition/widgets/fridge_scan_banner.dart';
 import 'package:vireo/features/nutrition/widgets/meal_card.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
@@ -45,6 +46,7 @@ class NutritionScreen extends ConsumerWidget {
               remaining: remaining,
               onScan: () => _openFridgeScan(context, ref, remaining),
             ),
+            const DailyCalorieGoalCard(),
             TabBar(
               isScrollable: true,
               tabs: [

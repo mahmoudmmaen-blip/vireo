@@ -1861,6 +1861,137 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Warm-up done — ready!'**
   String get workoutWarmUpComplete;
+
+  /// No description provided for @homeProgramDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} of {total}'**
+  String homeProgramDay(int day, int total);
+
+  /// No description provided for @homeStartProgram.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your program'**
+  String get homeStartProgram;
+
+  /// No description provided for @nutritionDailyCalorieGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Your daily calorie target'**
+  String get nutritionDailyCalorieGoal;
+
+  /// No description provided for @nutritionCalorieTargetSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Target: {calories} cal — {protein}g protein, {carbs}g carbs, {fat}g fat'**
+  String nutritionCalorieTargetSummary(
+    int calories,
+    int protein,
+    int carbs,
+    int fat,
+  );
+
+  /// No description provided for @nutritionCalorieProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{consumed} / {target} cal today'**
+  String nutritionCalorieProgress(int consumed, int target);
+
+  /// No description provided for @nutritionEditCalorieGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit calorie target'**
+  String get nutritionEditCalorieGoal;
+
+  /// No description provided for @nutritionCalorieHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily calories'**
+  String get nutritionCalorieHint;
+
+  /// No description provided for @settingsThemeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsThemeTitle;
+
+  /// No description provided for @settingsThemeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark mode'**
+  String get settingsThemeDark;
+
+  /// No description provided for @settingsThemeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light mode'**
+  String get settingsThemeLight;
+
+  /// No description provided for @progressAxisDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get progressAxisDate;
+
+  /// No description provided for @progressAxisWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight (kg)'**
+  String get progressAxisWeight;
+
+  /// No description provided for @progressAxisEnergy.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy (1–10)'**
+  String get progressAxisEnergy;
+
+  /// No description provided for @progressAllChartsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress overview'**
+  String get progressAllChartsTitle;
+
+  /// No description provided for @profileGuestAvatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get profileGuestAvatar;
+
+  /// No description provided for @profileStatProgramDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Program days'**
+  String get profileStatProgramDays;
+
+  /// No description provided for @profileStatsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Your stats'**
+  String get profileStatsSection;
+
+  /// No description provided for @profileGoalWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal weight'**
+  String get profileGoalWeight;
+
+  /// No description provided for @profileCurrentBmi.
+  ///
+  /// In en, this message translates to:
+  /// **'Current BMI'**
+  String get profileCurrentBmi;
+
+  /// No description provided for @profileActivityLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity level'**
+  String get profileActivityLevel;
+
+  /// No description provided for @profileEditProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get profileEditProfile;
 }
 
 class _AppLocalizationsDelegate

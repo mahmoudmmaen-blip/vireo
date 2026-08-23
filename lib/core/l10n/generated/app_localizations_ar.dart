@@ -984,4 +984,78 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get workoutWarmUpComplete => 'تم الإحماء — جاهز!';
+
+  @override
+  String homeProgramDay(int day, int total) {
+    return 'اليوم $day من $total';
+  }
+
+  @override
+  String get homeStartProgram => 'ابدأ برنامجك';
+
+  @override
+  String get nutritionDailyCalorieGoal => 'هدفك اليومي من السعرات';
+
+  @override
+  String nutritionCalorieTargetSummary(
+    int calories,
+    int protein,
+    int carbs,
+    int fat,
+  ) {
+    return 'هدفك: $calories سعرة — ${protein}g بروتين، ${carbs}g كارب، ${fat}g دهون';
+  }
+
+  @override
+  String nutritionCalorieProgress(int consumed, int target) {
+    return '$consumed / $target سعرة اليوم';
+  }
+
+  @override
+  String get nutritionEditCalorieGoal => 'تعديل هدف السعرات';
+
+  @override
+  String get nutritionCalorieHint => 'السعرات اليومية';
+
+  @override
+  String get settingsThemeTitle => 'المظهر';
+
+  @override
+  String get settingsThemeDark => 'الوضع الداكن';
+
+  @override
+  String get settingsThemeLight => 'الوضع الفاتح';
+
+  @override
+  String get progressAxisDate => 'التاريخ';
+
+  @override
+  String get progressAxisWeight => 'الوزن (كجم)';
+
+  @override
+  String get progressAxisEnergy => 'الطاقة (1–10)';
+
+  @override
+  String get progressAllChartsTitle => 'نظرة عامة على تقدمك';
+
+  @override
+  String get profileGuestAvatar => 'ضيف';
+
+  @override
+  String get profileStatProgramDays => 'أيام في البرنامج';
+
+  @override
+  String get profileStatsSection => 'إحصائياتك';
+
+  @override
+  String get profileGoalWeight => 'وزن الهدف';
+
+  @override
+  String get profileCurrentBmi => 'BMI الحالي';
+
+  @override
+  String get profileActivityLevel => 'مستوى النشاط';
+
+  @override
+  String get profileEditProfile => 'تعديل الملف';
 }

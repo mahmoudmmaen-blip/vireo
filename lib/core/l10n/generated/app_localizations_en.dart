@@ -999,4 +999,78 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get workoutWarmUpComplete => 'Warm-up done — ready!';
+
+  @override
+  String homeProgramDay(int day, int total) {
+    return 'Day $day of $total';
+  }
+
+  @override
+  String get homeStartProgram => 'Start your program';
+
+  @override
+  String get nutritionDailyCalorieGoal => 'Your daily calorie target';
+
+  @override
+  String nutritionCalorieTargetSummary(
+    int calories,
+    int protein,
+    int carbs,
+    int fat,
+  ) {
+    return 'Target: $calories cal — ${protein}g protein, ${carbs}g carbs, ${fat}g fat';
+  }
+
+  @override
+  String nutritionCalorieProgress(int consumed, int target) {
+    return '$consumed / $target cal today';
+  }
+
+  @override
+  String get nutritionEditCalorieGoal => 'Edit calorie target';
+
+  @override
+  String get nutritionCalorieHint => 'Daily calories';
+
+  @override
+  String get settingsThemeTitle => 'Appearance';
+
+  @override
+  String get settingsThemeDark => 'Dark mode';
+
+  @override
+  String get settingsThemeLight => 'Light mode';
+
+  @override
+  String get progressAxisDate => 'Date';
+
+  @override
+  String get progressAxisWeight => 'Weight (kg)';
+
+  @override
+  String get progressAxisEnergy => 'Energy (1–10)';
+
+  @override
+  String get progressAllChartsTitle => 'Your progress overview';
+
+  @override
+  String get profileGuestAvatar => 'Guest';
+
+  @override
+  String get profileStatProgramDays => 'Program days';
+
+  @override
+  String get profileStatsSection => 'Your stats';
+
+  @override
+  String get profileGoalWeight => 'Goal weight';
+
+  @override
+  String get profileCurrentBmi => 'Current BMI';
+
+  @override
+  String get profileActivityLevel => 'Activity level';
+
+  @override
+  String get profileEditProfile => 'Edit profile';
 }
