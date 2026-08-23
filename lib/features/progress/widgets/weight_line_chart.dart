@@ -13,11 +13,15 @@ class WeightLineChart extends StatelessWidget {
     required this.logs,
     required this.goalKg,
     required this.unit,
+    this.dateAxisLabel,
+    this.weightAxisLabel,
   });
 
   final List<WeightLogEntry> logs;
   final double? goalKg;
   final UnitPreference unit;
+  final String? dateAxisLabel;
+  final String? weightAxisLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,16 @@ class WeightLineChart extends StatelessWidget {
     return SizedBox(
       height: 220,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (weightAxisLabel != null)
+            Padding(
+              padding: const EdgeInsets.only(left: 4, bottom: 4),
+              child: Text(
+                weightAxisLabel!,
+                style: TextStyle(color: colors.textMute, fontSize: 10),
+              ),
+            ),
           Expanded(
             child: CustomPaint(
               painter: _WeightLinePainter(
@@ -47,12 +60,18 @@ class WeightLineChart extends StatelessWidget {
             ),
           ),
           if (logs.isNotEmpty)
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                DateFormat.MMMd().format(logs.last.loggedAt),
-                style: TextStyle(color: colors.textMute, fontSize: 10),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  dateAxisLabel ?? '',
+                  style: TextStyle(color: colors.textMute, fontSize: 10),
+                ),
+                Text(
+                  DateFormat.MMMd().format(logs.last.loggedAt),
+                  style: TextStyle(color: colors.textMute, fontSize: 10),
+                ),
+              ],
             ),
         ],
       ),
@@ -106,6 +125,11 @@ class _WeightLinePainter extends CustomPainter {
     canvas.drawLine(
       Offset(padLeft, padTop + chartH),
       Offset(padLeft + chartW, padTop + chartH),
+      gridPaint,
+    );
+    canvas.drawLine(
+      Offset(padLeft, padTop),
+      Offset(padLeft, padTop + chartH),
       gridPaint,
     );
 

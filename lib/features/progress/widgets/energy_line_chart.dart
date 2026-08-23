@@ -5,9 +5,14 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/progress_models.dart';
 
 class EnergyLineChart extends StatelessWidget {
-  const EnergyLineChart({super.key, required this.checkIns});
+  const EnergyLineChart({
+    super.key,
+    required this.checkIns,
+    this.energyAxisLabel,
+  });
 
   final List<EnergyCheckIn> checkIns;
+  final String? energyAxisLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,16 @@ class EnergyLineChart extends StatelessWidget {
     return SizedBox(
       height: 220,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (energyAxisLabel != null)
+            Padding(
+              padding: const EdgeInsets.only(left: 4, bottom: 4),
+              child: Text(
+                energyAxisLabel!,
+                style: TextStyle(color: colors.textMute, fontSize: 10),
+              ),
+            ),
           Expanded(
             child: CustomPaint(
               painter: _EnergyLinePainter(
@@ -79,6 +93,11 @@ class _EnergyLinePainter extends CustomPainter {
     canvas.drawLine(
       Offset(padLeft, padTop + chartH),
       Offset(padLeft + chartW, padTop + chartH),
+      gridPaint,
+    );
+    canvas.drawLine(
+      Offset(padLeft, padTop),
+      Offset(padLeft, padTop + chartH),
       gridPaint,
     );
 

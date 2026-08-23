@@ -4,8 +4,6 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/utils/unit_converter.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
-import 'package:vireo/data/models/progress_models.dart';
-import 'package:vireo/data/models/unit_preference.dart';
 import 'package:vireo/features/progress/providers/progress_provider.dart';
 import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
 import 'package:vireo/features/progress/widgets/energy_line_chart.dart';
@@ -18,8 +16,11 @@ class ProgressScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final tab = ref.watch(progressTabProvider);
     final unit = ref.watch(unitPreferenceProvider);
+    final logsAsync = ref.watch(weightLogsProvider);
+    final goalAsync = ref.watch(weightGoalProvider);
+    final weeksAsync = ref.watch(adherenceWeeksProvider);
+    final energyAsync = ref.watch(energyCheckInsProvider);
 
     return FeatureScaffold(
       title: l10n.progressTitle,
@@ -36,103 +37,72 @@ class ProgressScreen extends ConsumerWidget {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 88),
               children: [
-                SegmentedButton<ProgressTab>(
-                  segments: [
-                    ButtonSegment(
-                      value: ProgressTab.weight,
-                      label: Text(l10n.progressTabWeight),
-                      icon: const Icon(Icons.monitor_weight_outlined),
-                    ),
-                    ButtonSegment(
-                      value: ProgressTab.adherence,
-                      label: Text(l10n.progressTabAdherence),
-                      icon: const Icon(Icons.check_circle_outline),
-                    ),
-                    ButtonSegment(
-                      value: ProgressTab.energy,
-                      label: Text(l10n.progressTabEnergy),
-                      icon: const Icon(Icons.bolt_outlined),
-                    ),
-                  ],
-                  selected: {tab},
-                  onSelectionChanged: (selected) {
-                    ref.read(progressTabProvider.notifier).state = selected.first;
+                Text(
+                  l10n.progressAllChartsTitle,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 16),
+                logsAsync.when(
+                  loading: () => const _ChartLoading(),
+                  error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
+                  data: (logs) {
+                    final goalKg = goalAsync.valueOrNull;
+                    return _ChartCard(
+                      title: l10n.progressWeightChartTitle,
+                      subtitle: goalKg != null
+                          ? l10n.progressWeightGoalLine(
+                              UnitConverter.displayWeight(goalKg, unit)
+                                  .toStringAsFixed(1),
+                              UnitConverter.weightLabel(unit),
+                            )
+                          : null,
+                      child: WeightLineChart(
+                        logs: logs,
+                        goalKg: goalKg,
+                        unit: unit,
+                        dateAxisLabel: l10n.progressAxisDate,
+                        weightAxisLabel: l10n.progressAxisWeight,
+                      ),
+                    );
                   },
                 ),
-                const SizedBox(height: 20),
-                _TabContent(tab: tab, unit: unit),
+                const SizedBox(height: 16),
+                weeksAsync.when(
+                  loading: () => const _ChartLoading(),
+                  error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
+                  data: (weeks) => _ChartCard(
+                    title: l10n.progressAdherenceChartTitle,
+                    subtitle: l10n.progressAdherenceSubtitle,
+                    child: AdherenceBarChart(weeks: weeks),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                energyAsync.when(
+                  loading: () => const _ChartLoading(),
+                  error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
+                  data: (checkIns) => _ChartCard(
+                    title: l10n.progressEnergyChartTitle,
+                    subtitle: l10n.progressEnergySubtitle,
+                    child: EnergyLineChart(
+                      checkIns: checkIns,
+                      energyAxisLabel: l10n.progressAxisEnergy,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          if (tab == ProgressTab.weight)
-            Positioned(
-              right: 16,
-              bottom: 16,
-              child: FloatingActionButton(
-                onPressed: () => showWeightLogSheet(context, ref),
-                child: const Icon(Icons.add),
-              ),
+          Positioned(
+            right: 16,
+            bottom: 16,
+            child: FloatingActionButton(
+              onPressed: () => showWeightLogSheet(context, ref),
+              child: const Icon(Icons.add),
             ),
+          ),
         ],
       ),
     );
-  }
-}
-
-class _TabContent extends ConsumerWidget {
-  const _TabContent({required this.tab, required this.unit});
-
-  final ProgressTab tab;
-  final UnitPreference unit;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-
-    switch (tab) {
-      case ProgressTab.weight:
-        final logsAsync = ref.watch(weightLogsProvider);
-        final goalAsync = ref.watch(weightGoalProvider);
-        return logsAsync.when(
-          loading: () => const _ChartLoading(),
-          error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
-          data: (logs) {
-            final goalKg = goalAsync.valueOrNull;
-            return _ChartCard(
-              title: l10n.progressWeightChartTitle,
-              subtitle: goalKg != null
-                  ? l10n.progressWeightGoalLine(
-                      UnitConverter.displayWeight(goalKg, unit).toStringAsFixed(1),
-                      UnitConverter.weightLabel(unit),
-                    )
-                  : null,
-              child: WeightLineChart(logs: logs, goalKg: goalKg, unit: unit),
-            );
-          },
-        );
-      case ProgressTab.adherence:
-        final weeksAsync = ref.watch(adherenceWeeksProvider);
-        return weeksAsync.when(
-          loading: () => const _ChartLoading(),
-          error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
-          data: (weeks) => _ChartCard(
-            title: l10n.progressAdherenceChartTitle,
-            subtitle: l10n.progressAdherenceSubtitle,
-            child: AdherenceBarChart(weeks: weeks),
-          ),
-        );
-      case ProgressTab.energy:
-        final energyAsync = ref.watch(energyCheckInsProvider);
-        return energyAsync.when(
-          loading: () => const _ChartLoading(),
-          error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
-          data: (checkIns) => _ChartCard(
-            title: l10n.progressEnergyChartTitle,
-            subtitle: l10n.progressEnergySubtitle,
-            child: EnergyLineChart(checkIns: checkIns),
-          ),
-        );
-    }
   }
 }
 
