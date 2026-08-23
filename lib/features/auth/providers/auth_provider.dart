@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vireo/core/boot/boot_log.dart';
+import 'package:vireo/core/services/app_init_provider.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
@@ -19,6 +20,9 @@ class AuthNotifier extends AsyncNotifier<AppAuthState> {
   @override
   Future<AppAuthState> build() async {
     BootLog.step('AuthNotifier.build');
+    // Ensure bootstrap finished so Supabase client is available when configured.
+    await ref.watch(appInitProvider.future);
+
     final repo = ref.read(authRepositoryProvider);
     final resolved = _resolveState(repo);
 

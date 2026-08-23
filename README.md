@@ -55,10 +55,13 @@ Text direction is resolved from locale via `Directionality` in `lib/app.dart` â€
 flutter pub get
 flutter gen-l10n
 flutter run \
-  --dart-define=SUPABASE_URL=your_url \
-  --dart-define=SUPABASE_ANON_KEY=your_anon_key \
+  --dart-define=SUPABASE_URL=https://jzizpqriifrcgiksnddq.supabase.co \
+  --dart-define=SUPABASE_ANON_KEY=your_publishable_or_anon_key \
   --dart-define=REVENUECAT_APPLE_API_KEY=your_apple_key \
   --dart-define=REVENUECAT_GOOGLE_API_KEY=your_google_key
+
+> Defaults for the Vireo Supabase project are baked into `lib/core/config/app_config.dart`.
+> Override with `--dart-define` only when pointing at another environment.
 ```
 
 ### Tests

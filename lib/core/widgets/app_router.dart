@@ -16,7 +16,6 @@ class AppRouter extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final init = ref.watch(appInitProvider);
-    final auth = ref.watch(authProvider);
     final onboardingComplete = ref.watch(onboardingCompleteProvider);
 
     return init.when(
@@ -30,6 +29,9 @@ class AppRouter extends ConsumerWidget {
             ref.read(appInitProvider.notifier).retry();
           });
         }
+
+        // Watch auth only after services (including Supabase) are ready.
+        final auth = ref.watch(authProvider);
 
         return auth.when(
           loading: () => const AppLoading(),

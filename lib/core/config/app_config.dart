@@ -1,13 +1,14 @@
-/// Runtime configuration loaded via `--dart-define` at build time.
+/// Runtime configuration. Prefer `--dart-define` overrides for CI/release builds.
 abstract final class AppConfig {
   static const supabaseUrl = String.fromEnvironment(
     'SUPABASE_URL',
-    defaultValue: '',
+    defaultValue: 'https://jzizpqriifrcgiksnddq.supabase.co',
   );
 
+  /// Publishable (anon) key for the Vireo Supabase project.
   static const supabaseAnonKey = String.fromEnvironment(
     'SUPABASE_ANON_KEY',
-    defaultValue: '',
+    defaultValue: 'sb_publishable_gM6GHFO0UFZDoa5fsMykuQ_gNcOAMJq',
   );
 
   static const revenueCatAppleApiKey = String.fromEnvironment(
