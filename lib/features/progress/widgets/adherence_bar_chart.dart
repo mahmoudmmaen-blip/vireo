@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
@@ -14,54 +15,95 @@ class AdherenceBarChart extends StatelessWidget {
 
     if (weeks.isEmpty) {
       return SizedBox(
-        height: 200,
-        child: Center(child: Text('—', style: TextStyle(color: colors.textMute))),
+        height: 240,
+        child: Center(
+          child: Text('—', style: TextStyle(color: colors.textMute)),
+        ),
       );
     }
 
     return SizedBox(
-      height: 200,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: weeks.map((week) {
-          final fraction = (week.completionPct / 100).clamp(0.0, 1.0);
-          final hitTarget = week.completionPct >= 70;
-          return Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    '${week.completionPct}%',
-                    style: TextStyle(fontSize: 9, color: colors.textMute),
-                  ),
-                  const SizedBox(height: 4),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: FractionallySizedBox(
-                        heightFactor: fraction < 0.05 ? 0.05 : fraction,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: hitTarget ? colors.success : colors.ember,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                        ),
-                      ),
+      height: 260,
+      child: BarChart(
+        BarChartData(
+          maxY: 100,
+          minY: 0,
+          alignment: BarChartAlignment.spaceAround,
+          gridData: FlGridData(
+            show: true,
+            drawVerticalLine: false,
+            horizontalInterval: 25,
+            getDrawingHorizontalLine: (value) => FlLine(
+              color: colors.line.withValues(alpha: 0.6),
+              strokeWidth: 1,
+            ),
+          ),
+          borderData: FlBorderData(show: false),
+          titlesData: FlTitlesData(
+            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            leftTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 34,
+                interval: 25,
+                getTitlesWidget: (value, meta) => Text(
+                  '${value.toInt()}%',
+                  style: TextStyle(color: colors.textMute, fontSize: 10),
+                ),
+              ),
+            ),
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 28,
+                getTitlesWidget: (value, meta) {
+                  final index = value.toInt();
+                  if (index < 0 || index >= weeks.length) {
+                    return const SizedBox.shrink();
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      DateFormat.MMMd().format(weeks[index].weekStart),
+                      style: TextStyle(color: colors.textMute, fontSize: 9),
                     ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    DateFormat('MMM d').format(week.weekStart),
-                    style: TextStyle(fontSize: 9, color: colors.textMute),
-                    overflow: TextOverflow.ellipsis,
+                  );
+                },
+              ),
+            ),
+          ),
+          barTouchData: BarTouchData(
+            enabled: true,
+            touchTooltipData: BarTouchTooltipData(
+              getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                final week = weeks[group.x.toInt()];
+                return BarTooltipItem(
+                  '${week.completionPct}%\n${DateFormat.yMMMd().format(week.weekStart)}',
+                  TextStyle(color: colors.text, fontWeight: FontWeight.w600),
+                );
+              },
+            ),
+          ),
+          barGroups: [
+            for (var i = 0; i < weeks.length; i++)
+              BarChartGroupData(
+                x: i,
+                barRods: [
+                  BarChartRodData(
+                    toY: weeks[i].completionPct.toDouble().clamp(0, 100),
+                    width: 18,
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
+                    color: weeks[i].completionPct >= 70
+                        ? colors.ember
+                        : weeks[i].completionPct == 0
+                            ? colors.line
+                            : colors.textMute.withValues(alpha: 0.55),
                   ),
                 ],
               ),
-            ),
-          );
-        }).toList(),
+          ],
+        ),
       ),
     );
   }

@@ -1042,6 +1042,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsThemeLight => 'Light mode';
 
   @override
+  String get settingsThemeSystem => 'System default';
+
+  @override
   String get progressAxisDate => 'Date';
 
   @override
@@ -1073,4 +1076,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileEditProfile => 'Edit profile';
+
+  @override
+  String get profileBmiUnderweight => 'Underweight';
+
+  @override
+  String get profileBmiHealthy => 'Healthy weight';
+
+  @override
+  String get profileBmiOverweight => 'Overweight';
+
+  @override
+  String get profileBmiObese => 'Obese';
+
+  @override
+  String get profileBmiTooltip =>
+      'BMI (Body Mass Index) estimates body fat from height and weight. It is a general guide — not a diagnosis.';
+
+  @override
+  String get workoutSplitChestTriceps => 'Chest & Triceps';
+
+  @override
+  String get workoutSplitBackBiceps => 'Back & Biceps';
+
+  @override
+  String get workoutSplitLegs => 'Legs';
+
+  @override
+  String get workoutSplitCardio => 'Cardio';
+
+  @override
+  String get workoutSplitShoulders => 'Shoulders';
+
+  @override
+  String get workoutSplitFullBody => 'Full Body';
+
+  @override
+  String get workoutSplitRest => 'Rest day';
+
+  @override
+  String get habitsTitle => 'Daily habits';
+
+  @override
+  String get habitsEmpty => 'No habits yet — tap + to add your first one';
+
+  @override
+  String get habitsAddTitle => 'New habit';
+
+  @override
+  String get habitsAddHint => 'Habit name';
+
+  @override
+  String get habitsAddConfirm => 'Add';
+
+  @override
+  String habitsStreak(int days) {
+    return '$days day streak';
+  }
+
+  @override
+  String get habitsRetry => 'Retry';
+
+  @override
+  String get habitsErrorTitle => 'Could not load habits';
 }

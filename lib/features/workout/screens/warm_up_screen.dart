@@ -28,6 +28,7 @@ class _WarmUpScreenState extends State<WarmUpScreen>
   int _secondsLeft = 30;
   Timer? _timer;
   late final AnimationController _pulse;
+  bool _timerStarted = false;
 
   @override
   void initState() {
@@ -38,7 +39,15 @@ class _WarmUpScreenState extends State<WarmUpScreen>
       lowerBound: 0.92,
       upperBound: 1.08,
     )..repeat(reverse: true);
-    _startTimer();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_timerStarted) {
+      _timerStarted = true;
+      _startTimer();
+    }
   }
 
   @override
@@ -99,9 +108,15 @@ class _WarmUpScreenState extends State<WarmUpScreen>
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                Text(l10n.workoutWarmUpTitle, style: Theme.of(context).textTheme.headlineSmall),
+                Text(
+                  l10n.workoutWarmUpTitle,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
                 const SizedBox(height: 4),
-                Text(l10n.workoutWarmUpSubtitle, style: TextStyle(color: colors.textMute)),
+                Text(
+                  l10n.workoutWarmUpSubtitle,
+                  style: TextStyle(color: colors.textMute),
+                ),
                 const SizedBox(height: 24),
                 ScaleTransition(
                   scale: _pulse,
@@ -117,8 +132,11 @@ class _WarmUpScreenState extends State<WarmUpScreen>
                   ),
                 ),
                 const SizedBox(height: 24),
-                Text(step.label, textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge),
+                Text(
+                  step.label,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 const SizedBox(height: 12),
                 Text(
                   '$_secondsLeft',
@@ -142,7 +160,7 @@ class _WarmUpScreenState extends State<WarmUpScreen>
                   return ListTile(
                     dense: true,
                     leading: Icon(
-                      done ? Icons.check_circle : step.icon,
+                      done ? Icons.check_circle : steps[i].icon,
                       color: done
                           ? colors.success
                           : active
@@ -178,7 +196,10 @@ class _WarmUpScreenState extends State<WarmUpScreen>
                   child: Text(l10n.continueButton),
                 ),
               const SizedBox(height: 8),
-              TextButton(onPressed: widget.onSkip, child: Text(l10n.workoutSkipWarmUp)),
+              TextButton(
+                onPressed: widget.onSkip,
+                child: Text(l10n.workoutSkipWarmUp),
+              ),
             ],
           ),
         ),

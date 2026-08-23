@@ -75,7 +75,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingStep3Title => 'بتتمرّن فين؟';
 
   @override
-  String get onboardingStep3Subtitle => 'هنعرض بس تمارين تناسب setup بتاعك.';
+  String get onboardingStep3Subtitle => 'هنعرض بس تمارين تناسب بيئة تمرينك.';
 
   @override
   String get onboardingStep4Title => 'هدفك';
@@ -133,19 +133,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dietVegetarian => 'نباتي';
 
   @override
-  String get dietVegan => 'vegan';
+  String get dietVegan => 'نباتي صرف';
 
   @override
-  String get dietGlutenFree => 'خالي من الجلuten';
+  String get dietGlutenFree => 'خالي من الجلوتين';
 
   @override
-  String get dietDairyFree => 'خالي من الألبان';
+  String get dietDairyFree => 'خالي من اللاكتوز';
 
   @override
   String get dietLowSodium => 'قليل الملح';
 
   @override
-  String get dietLowCarb => 'قليل الكarb';
+  String get dietLowCarb => 'قليل الكارب';
 
   @override
   String get dietDiabeticFriendly => 'مناسب للسكري';
@@ -173,7 +173,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get envHomeNoEquipment => 'البيت — بدون معدات';
 
   @override
-  String get envHomeNoEquipmentDesc => 'تمارين bodyweight بس';
+  String get envHomeNoEquipmentDesc => 'تمارين وزن الجسم فقط';
 
   @override
   String get envHomeLightEquipment => 'البيت — معدات خفيفة';
@@ -1027,6 +1027,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsThemeLight => 'الوضع الفاتح';
 
   @override
+  String get settingsThemeSystem => 'حسب النظام';
+
+  @override
   String get progressAxisDate => 'التاريخ';
 
   @override
@@ -1058,4 +1061,67 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profileEditProfile => 'تعديل الملف';
+
+  @override
+  String get profileBmiUnderweight => 'نقص وزن';
+
+  @override
+  String get profileBmiHealthy => 'وزن صحي';
+
+  @override
+  String get profileBmiOverweight => 'وزن زائد';
+
+  @override
+  String get profileBmiObese => 'سمنة';
+
+  @override
+  String get profileBmiTooltip =>
+      'مؤشر كتلة الجسم (BMI) يقدّر نسبة الدهون من الطول والوزن — دليل عام وليس تشخيصاً طبياً.';
+
+  @override
+  String get workoutSplitChestTriceps => 'صدر وترايسبس';
+
+  @override
+  String get workoutSplitBackBiceps => 'ظهر وبايسبس';
+
+  @override
+  String get workoutSplitLegs => 'أرجل';
+
+  @override
+  String get workoutSplitCardio => 'كارديو';
+
+  @override
+  String get workoutSplitShoulders => 'أكتاف';
+
+  @override
+  String get workoutSplitFullBody => 'جسم كامل';
+
+  @override
+  String get workoutSplitRest => 'يوم راحة';
+
+  @override
+  String get habitsTitle => 'العادات اليومية';
+
+  @override
+  String get habitsEmpty => 'لا توجد عادات بعد — اضغط + لإضافة أول عادة';
+
+  @override
+  String get habitsAddTitle => 'عادة جديدة';
+
+  @override
+  String get habitsAddHint => 'اسم العادة';
+
+  @override
+  String get habitsAddConfirm => 'إضافة';
+
+  @override
+  String habitsStreak(int days) {
+    return 'سلسلة $days أيام';
+  }
+
+  @override
+  String get habitsRetry => 'إعادة المحاولة';
+
+  @override
+  String get habitsErrorTitle => 'تعذّر تحميل العادات';
 }

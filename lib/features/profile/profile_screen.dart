@@ -4,6 +4,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/utils/bmi_calculator.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/models/subscription_state.dart';
@@ -107,7 +108,8 @@ class _GuestProfileBody extends StatelessWidget {
     final activity = ActivityLevel.fromValue(
       map['activity_level'] as String? ?? ActivityLevel.moderatelyActive.value,
     );
-    final bmi = height > 0 ? weight / ((height / 100) * (height / 100)) : 0.0;
+    final bmi = BmiCalculator.compute(weightKg: weight, heightCm: height);
+    final bmiCategory = BmiCalculator.categoryFor(bmi);
     final goalWeight = (weight - 5).clamp(50.0, 200.0);
 
     return ListView(
@@ -163,7 +165,11 @@ class _GuestProfileBody extends StatelessWidget {
         Text(l10n.profileStatsSection, style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
         _StatRow(label: l10n.profileGoalWeight, value: '${goalWeight.toStringAsFixed(1)} kg'),
-        _StatRow(label: l10n.profileCurrentBmi, value: bmi.toStringAsFixed(1)),
+        _BmiStatRow(
+          label: l10n.profileCurrentBmi,
+          bmi: bmi,
+          category: bmiCategory,
+        ),
         _StatRow(label: l10n.profileActivityLevel, value: _activityLabel(l10n, activity)),
         const SizedBox(height: 24),
         ElevatedButton(onPressed: onSaveProgress, child: Text(l10n.saveProgressToCloud)),
@@ -223,6 +229,79 @@ class _RegisteredProfileBody extends StatelessWidget {
           label: Text(l10n.profileEditProfile),
         ),
       ],
+    );
+  }
+}
+
+class _BmiStatRow extends StatelessWidget {
+  const _BmiStatRow({
+    required this.label,
+    required this.bmi,
+    required this.category,
+  });
+
+  final String label;
+  final double bmi;
+  final BmiCategory category;
+
+  String _categoryLabel(AppLocalizations l10n) {
+    return switch (category) {
+      BmiCategory.underweight => l10n.profileBmiUnderweight,
+      BmiCategory.healthy => l10n.profileBmiHealthy,
+      BmiCategory.overweight => l10n.profileBmiOverweight,
+      BmiCategory.obese => l10n.profileBmiObese,
+    };
+  }
+
+  Color _categoryColor(VireoColors colors) {
+    return switch (category) {
+      BmiCategory.underweight => colors.recovery,
+      BmiCategory.healthy => colors.success,
+      BmiCategory.overweight => colors.gold,
+      BmiCategory.obese => colors.danger,
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final colors = context.vireoColors;
+    final tagColor = _categoryColor(colors);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: [
+          Expanded(child: Text(label)),
+          Tooltip(
+            message: l10n.profileBmiTooltip,
+            preferBelow: false,
+            child: Icon(Icons.info_outline, size: 18, color: colors.textMute),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            bmi.toStringAsFixed(1),
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: tagColor.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: tagColor.withValues(alpha: 0.5)),
+            ),
+            child: Text(
+              _categoryLabel(l10n),
+              style: TextStyle(
+                color: tagColor,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

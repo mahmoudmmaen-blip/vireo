@@ -1927,6 +1927,12 @@ abstract class AppLocalizations {
   /// **'Light mode'**
   String get settingsThemeLight;
 
+  /// No description provided for @settingsThemeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get settingsThemeSystem;
+
   /// No description provided for @progressAxisDate.
   ///
   /// In en, this message translates to:
@@ -1992,6 +1998,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit profile'**
   String get profileEditProfile;
+
+  /// No description provided for @profileBmiUnderweight.
+  ///
+  /// In en, this message translates to:
+  /// **'Underweight'**
+  String get profileBmiUnderweight;
+
+  /// No description provided for @profileBmiHealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy weight'**
+  String get profileBmiHealthy;
+
+  /// No description provided for @profileBmiOverweight.
+  ///
+  /// In en, this message translates to:
+  /// **'Overweight'**
+  String get profileBmiOverweight;
+
+  /// No description provided for @profileBmiObese.
+  ///
+  /// In en, this message translates to:
+  /// **'Obese'**
+  String get profileBmiObese;
+
+  /// No description provided for @profileBmiTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'BMI (Body Mass Index) estimates body fat from height and weight. It is a general guide — not a diagnosis.'**
+  String get profileBmiTooltip;
+
+  /// No description provided for @workoutSplitChestTriceps.
+  ///
+  /// In en, this message translates to:
+  /// **'Chest & Triceps'**
+  String get workoutSplitChestTriceps;
+
+  /// No description provided for @workoutSplitBackBiceps.
+  ///
+  /// In en, this message translates to:
+  /// **'Back & Biceps'**
+  String get workoutSplitBackBiceps;
+
+  /// No description provided for @workoutSplitLegs.
+  ///
+  /// In en, this message translates to:
+  /// **'Legs'**
+  String get workoutSplitLegs;
+
+  /// No description provided for @workoutSplitCardio.
+  ///
+  /// In en, this message translates to:
+  /// **'Cardio'**
+  String get workoutSplitCardio;
+
+  /// No description provided for @workoutSplitShoulders.
+  ///
+  /// In en, this message translates to:
+  /// **'Shoulders'**
+  String get workoutSplitShoulders;
+
+  /// No description provided for @workoutSplitFullBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Body'**
+  String get workoutSplitFullBody;
+
+  /// No description provided for @workoutSplitRest.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest day'**
+  String get workoutSplitRest;
+
+  /// No description provided for @habitsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily habits'**
+  String get habitsTitle;
+
+  /// No description provided for @habitsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No habits yet — tap + to add your first one'**
+  String get habitsEmpty;
+
+  /// No description provided for @habitsAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New habit'**
+  String get habitsAddTitle;
+
+  /// No description provided for @habitsAddHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Habit name'**
+  String get habitsAddHint;
+
+  /// No description provided for @habitsAddConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get habitsAddConfirm;
+
+  /// No description provided for @habitsStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} day streak'**
+  String habitsStreak(int days);
+
+  /// No description provided for @habitsRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get habitsRetry;
+
+  /// No description provided for @habitsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load habits'**
+  String get habitsErrorTitle;
 }
 
 class _AppLocalizationsDelegate
