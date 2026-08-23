@@ -1,12 +1,12 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 
 class ScanningOverlay extends StatefulWidget {
-  const ScanningOverlay({super.key, this.imageFile});
+  const ScanningOverlay({super.key, this.imageBytes});
 
-  final File? imageFile;
+  final Uint8List? imageBytes;
 
   @override
   State<ScanningOverlay> createState() => _ScanningOverlayState();
@@ -38,8 +38,8 @@ class _ScanningOverlayState extends State<ScanningOverlay>
     return Stack(
       fit: StackFit.expand,
       children: [
-        if (widget.imageFile != null)
-          Image.file(widget.imageFile!, fit: BoxFit.cover)
+        if (widget.imageBytes != null)
+          Image.memory(widget.imageBytes!, fit: BoxFit.cover)
         else
           ColoredBox(color: colors.surfaceRaised),
         Container(color: colors.background.withValues(alpha: 0.35)),

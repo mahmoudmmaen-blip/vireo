@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/utils/platform_utils.dart';
 import 'package:vireo/core/widgets/language_selector.dart';
 import 'package:vireo/core/widgets/vireo_logo.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
@@ -79,7 +78,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   padding: const EdgeInsets.only(bottom: 16),
                   child: Text(_error!, style: TextStyle(color: colors.danger)),
                 ),
-              if (Platform.isIOS || Platform.isMacOS)
+              if (PlatformUtils.isApplePlatform)
                 _SocialButton(
                   label: l10n.signInWithApple,
                   icon: Icons.apple,
@@ -89,7 +88,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                             () => ref.read(authProvider.notifier).signInWithApple(),
                           ),
                 ),
-              if (Platform.isIOS || Platform.isMacOS) const SizedBox(height: 12),
+              if (PlatformUtils.isApplePlatform) const SizedBox(height: 12),
               _SocialButton(
                 label: l10n.signInWithGoogle,
                 icon: Icons.g_mobiledata,

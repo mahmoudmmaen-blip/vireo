@@ -12,6 +12,9 @@ import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/auth/widgets/guest_auth_gate.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/profile/settings_screen.dart';
+import 'package:vireo/features/profile/widgets/bmi_spectrum_bar.dart';
+import 'package:vireo/features/progress/providers/weekly_checkin_provider.dart';
+import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/subscription/widgets/subscription_status_banner.dart';
@@ -24,6 +27,7 @@ class ProfileScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final auth = ref.watch(authProvider);
     final sub = ref.watch(subscriptionProvider);
+    final weeklyDue = ref.watch(weeklyCheckInDueProvider);
 
     return FeatureScaffold(
       title: l10n.profileTitle,
@@ -37,6 +41,19 @@ class ProfileScreen extends ConsumerWidget {
       ],
       body: Column(
         children: [
+          if (weeklyDue)
+            Material(
+              color: context.vireoColors.ember.withValues(alpha: 0.12),
+              child: ListTile(
+                leading: Icon(Icons.assessment_outlined, color: context.vireoColors.ember),
+                title: Text(l10n.weeklyCheckInTitle),
+                subtitle: Text(l10n.weeklyCheckInBanner),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const WeeklyCheckInScreen()),
+                ),
+              ),
+            ),
           sub.when(
             loading: () => const SizedBox.shrink(),
             error: (_, __) => const SizedBox.shrink(),
@@ -170,7 +187,18 @@ class _GuestProfileBody extends StatelessWidget {
           bmi: bmi,
           category: bmiCategory,
         ),
+        const SizedBox(height: 12),
+        BmiSpectrumBar(bmi: bmi, category: bmiCategory),
+        const SizedBox(height: 8),
         _StatRow(label: l10n.profileActivityLevel, value: _activityLabel(l10n, activity)),
+        const SizedBox(height: 16),
+        OutlinedButton.icon(
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const WeeklyCheckInScreen()),
+          ),
+          icon: const Icon(Icons.assessment_outlined),
+          label: Text(l10n.weeklyCheckInTitle),
+        ),
         const SizedBox(height: 24),
         ElevatedButton(onPressed: onSaveProgress, child: Text(l10n.saveProgressToCloud)),
       ],
@@ -227,6 +255,16 @@ class _RegisteredProfileBody extends StatelessWidget {
           },
           icon: const Icon(Icons.edit_outlined),
           label: Text(l10n.profileEditProfile),
+        ),
+        const SizedBox(height: 12),
+        OutlinedButton.icon(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const WeeklyCheckInScreen()),
+            );
+          },
+          icon: const Icon(Icons.assessment_outlined),
+          label: Text(l10n.weeklyCheckInTitle),
         ),
       ],
     );

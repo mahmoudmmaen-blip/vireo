@@ -2118,6 +2118,300 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not load habits'**
   String get habitsErrorTitle;
+
+  /// No description provided for @homeRecoveryExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'A recovery score of {score}% blends sleep quality, rest days, and muscle fatigue. Higher means your body is ready to train hard.'**
+  String homeRecoveryExplain(int score);
+
+  /// No description provided for @homeRecoveryFactorSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep quality'**
+  String get homeRecoveryFactorSleep;
+
+  /// No description provided for @homeRecoveryFactorRest.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest days'**
+  String get homeRecoveryFactorRest;
+
+  /// No description provided for @homeRecoveryFactorMuscle.
+  ///
+  /// In en, this message translates to:
+  /// **'Muscle fatigue'**
+  String get homeRecoveryFactorMuscle;
+
+  /// No description provided for @homeRecoveryTipSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Aim for 7–9 hours tonight'**
+  String get homeRecoveryTipSleep;
+
+  /// No description provided for @homeRecoveryTipRest.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep at least one full rest day weekly'**
+  String get homeRecoveryTipRest;
+
+  /// No description provided for @homeRecoveryTipMuscle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ease intensity if soreness is high'**
+  String get homeRecoveryTipMuscle;
+
+  /// No description provided for @homeRecoveryImproveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tips to improve'**
+  String get homeRecoveryImproveTitle;
+
+  /// No description provided for @homeRecoveryImproveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Prioritize sleep, hydrate, and swap a hard session for mobility when fatigue spikes.'**
+  String get homeRecoveryImproveBody;
+
+  /// No description provided for @walkingMetricsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s walking metrics'**
+  String get walkingMetricsTitle;
+
+  /// No description provided for @walkingDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance'**
+  String get walkingDistance;
+
+  /// No description provided for @walkingSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed'**
+  String get walkingSpeed;
+
+  /// No description provided for @walkingPace.
+  ///
+  /// In en, this message translates to:
+  /// **'Pace'**
+  String get walkingPace;
+
+  /// No description provided for @walkingCalories.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories burned'**
+  String get walkingCalories;
+
+  /// No description provided for @walkingWeightLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'Est. fat burn ≈ {kg} kg'**
+  String walkingWeightLoss(String kg);
+
+  /// No description provided for @walkingCadence.
+  ///
+  /// In en, this message translates to:
+  /// **'Cadence ≈ {spm} steps/min'**
+  String walkingCadence(int spm);
+
+  /// No description provided for @walkingMetricsEstimatedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Connect unavailable — showing estimated metrics from step count.'**
+  String get walkingMetricsEstimatedNote;
+
+  /// No description provided for @mealBuilderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize ingredients'**
+  String get mealBuilderTitle;
+
+  /// No description provided for @mealBuilderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust eggs, cooking fat, and add-ons — macros update live.'**
+  String get mealBuilderSubtitle;
+
+  /// No description provided for @mealBuilderEggs.
+  ///
+  /// In en, this message translates to:
+  /// **'Eggs'**
+  String get mealBuilderEggs;
+
+  /// No description provided for @mealBuilderEggCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} eggs'**
+  String mealBuilderEggCount(int count);
+
+  /// No description provided for @mealBuilderFatSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Fat source'**
+  String get mealBuilderFatSource;
+
+  /// No description provided for @mealBuilderFatButter.
+  ///
+  /// In en, this message translates to:
+  /// **'Butter'**
+  String get mealBuilderFatButter;
+
+  /// No description provided for @mealBuilderFatGhee.
+  ///
+  /// In en, this message translates to:
+  /// **'Ghee'**
+  String get mealBuilderFatGhee;
+
+  /// No description provided for @mealBuilderFatOliveOil.
+  ///
+  /// In en, this message translates to:
+  /// **'Olive oil'**
+  String get mealBuilderFatOliveOil;
+
+  /// No description provided for @mealBuilderFatSpray.
+  ///
+  /// In en, this message translates to:
+  /// **'Oil spray'**
+  String get mealBuilderFatSpray;
+
+  /// No description provided for @mealBuilderAddOns.
+  ///
+  /// In en, this message translates to:
+  /// **'Add-ons'**
+  String get mealBuilderAddOns;
+
+  /// No description provided for @mealBuilderAddonCheese.
+  ///
+  /// In en, this message translates to:
+  /// **'Cheese'**
+  String get mealBuilderAddonCheese;
+
+  /// No description provided for @mealBuilderAddonVeggies.
+  ///
+  /// In en, this message translates to:
+  /// **'Vegetables'**
+  String get mealBuilderAddonVeggies;
+
+  /// No description provided for @mealBuilderAddonBread.
+  ///
+  /// In en, this message translates to:
+  /// **'Whole grain bread'**
+  String get mealBuilderAddonBread;
+
+  /// No description provided for @mealBuilderLiveMacros.
+  ///
+  /// In en, this message translates to:
+  /// **'Live macros'**
+  String get mealBuilderLiveMacros;
+
+  /// No description provided for @weeklyCheckInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly check-in'**
+  String get weeklyCheckInTitle;
+
+  /// No description provided for @weeklyCheckInBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Time for your weekly assessment — update weight & energy'**
+  String get weeklyCheckInBanner;
+
+  /// No description provided for @weeklyCheckInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll recalculate your BMR/TDEE and macros for next week.'**
+  String get weeklyCheckInSubtitle;
+
+  /// No description provided for @weeklyCheckInWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Current weight'**
+  String get weeklyCheckInWeight;
+
+  /// No description provided for @weeklyCheckInWaist.
+  ///
+  /// In en, this message translates to:
+  /// **'Waist measurement'**
+  String get weeklyCheckInWaist;
+
+  /// No description provided for @weeklyCheckInEnergy.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy level (1–5)'**
+  String get weeklyCheckInEnergy;
+
+  /// No description provided for @weeklyCheckInAdherence.
+  ///
+  /// In en, this message translates to:
+  /// **'Training adherence: {pct}%'**
+  String weeklyCheckInAdherence(int pct);
+
+  /// No description provided for @weeklyCheckInSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Update my targets'**
+  String get weeklyCheckInSubmit;
+
+  /// No description provided for @weeklyCheckInDoneTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Targets updated'**
+  String get weeklyCheckInDoneTitle;
+
+  /// No description provided for @weeklyCheckInDoneBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories {prev} → {next} kcal. Macros: {protein}g protein, {carbs}g carbs, {fat}g fat.'**
+  String weeklyCheckInDoneBody(
+    int prev,
+    int next,
+    int protein,
+    int carbs,
+    int fat,
+  );
+
+  /// No description provided for @settingsAccentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent color'**
+  String get settingsAccentTitle;
+
+  /// No description provided for @settingsAccentOrange.
+  ///
+  /// In en, this message translates to:
+  /// **'Orange'**
+  String get settingsAccentOrange;
+
+  /// No description provided for @settingsAccentEmerald.
+  ///
+  /// In en, this message translates to:
+  /// **'Emerald'**
+  String get settingsAccentEmerald;
+
+  /// No description provided for @settingsAccentBlue.
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean'**
+  String get settingsAccentBlue;
+
+  /// No description provided for @settingsAccentViolet.
+  ///
+  /// In en, this message translates to:
+  /// **'Violet'**
+  String get settingsAccentViolet;
+
+  /// No description provided for @profileBmiExplainShort.
+  ///
+  /// In en, this message translates to:
+  /// **'BMI assesses weight relative to height.'**
+  String get profileBmiExplainShort;
+
+  /// No description provided for @profileBmiExplainFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Body Mass Index (BMI) is a measure to assess weight relative to height. It is a general screening tool — not a medical diagnosis.'**
+  String get profileBmiExplainFull;
 }
 
 class _AppLocalizationsDelegate

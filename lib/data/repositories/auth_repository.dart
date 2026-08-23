@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
@@ -9,6 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
+import 'package:vireo/core/utils/platform_utils.dart';
 
 class AuthRepository {
   const AuthRepository();
@@ -149,7 +149,7 @@ class AuthRepository {
       if (!silent) {
         await _clearGuestMode();
       }
-      if (!Platform.isIOS && !Platform.isAndroid) return;
+      if (!PlatformUtils.isMobileNative) return;
       try {
         await GoogleSignIn().signOut();
       } catch (_) {

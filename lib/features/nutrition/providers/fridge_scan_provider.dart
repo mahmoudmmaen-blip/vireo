@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/data/demo/nutrition_demo_catalog.dart';
@@ -74,10 +73,9 @@ class FridgeScanFlowNotifier extends Notifier<FridgeScanFlowState> {
     );
   }
 
-  Future<bool> scanFile(File file) async {
+  Future<bool> scanBytes(List<int> bytes) async {
     state = state.copyWith(isScanning: true, errorMessage: null);
     try {
-      final bytes = await file.readAsBytes();
       final base64 = base64Encode(bytes);
       final result = await ref.read(fridgeScanRepositoryProvider).scanImage(
             imageBase64: base64,

@@ -65,6 +65,9 @@ class VireoColors extends ThemeExtension<VireoColors> {
     line: Color(0xFFE5E7EB),
   );
 
+  /// Returns a copy with a custom primary accent (ember).
+  VireoColors withAccent(Color accent) => copyWith(ember: accent);
+
   @override
   VireoColors copyWith({
     Color? background,

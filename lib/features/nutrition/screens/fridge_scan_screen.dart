@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,7 +25,7 @@ class FridgeScanScreen extends ConsumerStatefulWidget {
 }
 
 class _FridgeScanScreenState extends ConsumerState<FridgeScanScreen> {
-  File? _preview;
+  Uint8List? _previewBytes;
   final _picker = ImagePicker();
 
   Future<void> _pick(ImageSource source) async {
@@ -50,10 +50,11 @@ class _FridgeScanScreenState extends ConsumerState<FridgeScanScreen> {
     final picked = await _picker.pickImage(source: source, imageQuality: 85);
     if (picked == null) return;
 
-    setState(() => _preview = File(picked.path));
+    final bytes = await picked.readAsBytes();
+    setState(() => _previewBytes = bytes);
     ref.read(fridgeScanFlowProvider.notifier).reset();
 
-    final ok = await ref.read(fridgeScanFlowProvider.notifier).scanFile(_preview!);
+    final ok = await ref.read(fridgeScanFlowProvider.notifier).scanBytes(bytes);
     if (!mounted) return;
 
     if (ok) {
@@ -118,8 +119,8 @@ class _FridgeScanScreenState extends ConsumerState<FridgeScanScreen> {
       body: Column(
         children: [
           Expanded(
-            child: scanning || _preview != null
-                ? ScanningOverlay(imageFile: _preview)
+            child: scanning || _previewBytes != null
+                ? ScanningOverlay(imageBytes: _previewBytes)
                 : ListView(
                     padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
                     children: [

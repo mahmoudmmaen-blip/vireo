@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/accent_palette_provider.dart';
 import 'package:vireo/core/services/theme_mode_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
@@ -18,6 +19,7 @@ class SettingsScreen extends ConsumerWidget {
     final auth = ref.watch(authProvider);
     final colors = context.vireoColors;
     final mode = ref.watch(themeModeProvider);
+    final accent = ref.watch(accentPaletteProvider);
 
     return Scaffold(
       backgroundColor: colors.background,
@@ -53,6 +55,57 @@ class SettingsScreen extends ConsumerWidget {
                   value: ThemeMode.light,
                 ),
               ],
+            ),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              l10n.settingsAccentTitle,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: AccentPalette.values.map((palette) {
+                final selected = accent == palette;
+                return InkWell(
+                  onTap: () =>
+                      ref.read(accentPaletteProvider.notifier).setPalette(palette),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    width: 72,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: selected ? palette.color : colors.line,
+                        width: selected ? 2.5 : 1,
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 16,
+                          backgroundColor: palette.color,
+                          child: selected
+                              ? const Icon(Icons.check, size: 16, color: Colors.white)
+                              : null,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          _accentLabel(l10n, palette),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ),
           const Divider(),
@@ -122,5 +175,14 @@ class SettingsScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  String _accentLabel(AppLocalizations l10n, AccentPalette palette) {
+    return switch (palette) {
+      AccentPalette.vireoOrange => l10n.settingsAccentOrange,
+      AccentPalette.emeraldHealth => l10n.settingsAccentEmerald,
+      AccentPalette.oceanicBlue => l10n.settingsAccentBlue,
+      AccentPalette.deepViolet => l10n.settingsAccentViolet,
+    };
   }
 }

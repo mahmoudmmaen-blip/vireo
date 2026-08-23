@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:app_settings/app_settings.dart';
 import 'package:health/health.dart';
+import 'package:vireo/core/utils/platform_utils.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
 
 /// Reads step counts from HealthKit (iOS) and Health Connect (Android).
@@ -11,8 +10,7 @@ abstract final class HealthStepsService {
   static const _permissions = [HealthDataAccess.READ];
   static bool _configured = false;
 
-  static bool get isSupported =>
-      !Platform.isWindows && !Platform.isLinux && !Platform.isMacOS;
+  static bool get isSupported => PlatformUtils.isHealthStepsSupported;
 
   static Future<void> _ensureConfigured() async {
     if (_configured) return;

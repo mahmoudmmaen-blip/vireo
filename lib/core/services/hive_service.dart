@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vireo/core/boot/boot_log.dart';
 
 /// Local offline storage via Hive.
+/// On web, [Hive.initFlutter] uses IndexedDB — no filesystem paths required.
 abstract final class HiveService {
   static const settingsBoxName = 'settings';
   static const cacheBoxName = 'cache';
@@ -21,6 +22,7 @@ abstract final class HiveService {
     BootLog.step('HiveService.init');
     try {
       BootLog.step('Starting Hive.initFlutter...');
+      // Web uses IndexedDB; native uses the app documents directory.
       await Hive.initFlutter().timeout(
         bootServiceTimeout,
         onTimeout: () => throw TimeoutException('Hive.initFlutter'),

@@ -1139,4 +1139,173 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get habitsErrorTitle => 'Could not load habits';
+
+  @override
+  String homeRecoveryExplain(int score) {
+    return 'A recovery score of $score% blends sleep quality, rest days, and muscle fatigue. Higher means your body is ready to train hard.';
+  }
+
+  @override
+  String get homeRecoveryFactorSleep => 'Sleep quality';
+
+  @override
+  String get homeRecoveryFactorRest => 'Rest days';
+
+  @override
+  String get homeRecoveryFactorMuscle => 'Muscle fatigue';
+
+  @override
+  String get homeRecoveryTipSleep => 'Aim for 7–9 hours tonight';
+
+  @override
+  String get homeRecoveryTipRest => 'Keep at least one full rest day weekly';
+
+  @override
+  String get homeRecoveryTipMuscle => 'Ease intensity if soreness is high';
+
+  @override
+  String get homeRecoveryImproveTitle => 'Tips to improve';
+
+  @override
+  String get homeRecoveryImproveBody =>
+      'Prioritize sleep, hydrate, and swap a hard session for mobility when fatigue spikes.';
+
+  @override
+  String get walkingMetricsTitle => 'Today\'s walking metrics';
+
+  @override
+  String get walkingDistance => 'Distance';
+
+  @override
+  String get walkingSpeed => 'Speed';
+
+  @override
+  String get walkingPace => 'Pace';
+
+  @override
+  String get walkingCalories => 'Calories burned';
+
+  @override
+  String walkingWeightLoss(String kg) {
+    return 'Est. fat burn ≈ $kg kg';
+  }
+
+  @override
+  String walkingCadence(int spm) {
+    return 'Cadence ≈ $spm steps/min';
+  }
+
+  @override
+  String get walkingMetricsEstimatedNote =>
+      'Health Connect unavailable — showing estimated metrics from step count.';
+
+  @override
+  String get mealBuilderTitle => 'Customize ingredients';
+
+  @override
+  String get mealBuilderSubtitle =>
+      'Adjust eggs, cooking fat, and add-ons — macros update live.';
+
+  @override
+  String get mealBuilderEggs => 'Eggs';
+
+  @override
+  String mealBuilderEggCount(int count) {
+    return '$count eggs';
+  }
+
+  @override
+  String get mealBuilderFatSource => 'Fat source';
+
+  @override
+  String get mealBuilderFatButter => 'Butter';
+
+  @override
+  String get mealBuilderFatGhee => 'Ghee';
+
+  @override
+  String get mealBuilderFatOliveOil => 'Olive oil';
+
+  @override
+  String get mealBuilderFatSpray => 'Oil spray';
+
+  @override
+  String get mealBuilderAddOns => 'Add-ons';
+
+  @override
+  String get mealBuilderAddonCheese => 'Cheese';
+
+  @override
+  String get mealBuilderAddonVeggies => 'Vegetables';
+
+  @override
+  String get mealBuilderAddonBread => 'Whole grain bread';
+
+  @override
+  String get mealBuilderLiveMacros => 'Live macros';
+
+  @override
+  String get weeklyCheckInTitle => 'Weekly check-in';
+
+  @override
+  String get weeklyCheckInBanner =>
+      'Time for your weekly assessment — update weight & energy';
+
+  @override
+  String get weeklyCheckInSubtitle =>
+      'We\'ll recalculate your BMR/TDEE and macros for next week.';
+
+  @override
+  String get weeklyCheckInWeight => 'Current weight';
+
+  @override
+  String get weeklyCheckInWaist => 'Waist measurement';
+
+  @override
+  String get weeklyCheckInEnergy => 'Energy level (1–5)';
+
+  @override
+  String weeklyCheckInAdherence(int pct) {
+    return 'Training adherence: $pct%';
+  }
+
+  @override
+  String get weeklyCheckInSubmit => 'Update my targets';
+
+  @override
+  String get weeklyCheckInDoneTitle => 'Targets updated';
+
+  @override
+  String weeklyCheckInDoneBody(
+    int prev,
+    int next,
+    int protein,
+    int carbs,
+    int fat,
+  ) {
+    return 'Calories $prev → $next kcal. Macros: ${protein}g protein, ${carbs}g carbs, ${fat}g fat.';
+  }
+
+  @override
+  String get settingsAccentTitle => 'Accent color';
+
+  @override
+  String get settingsAccentOrange => 'Orange';
+
+  @override
+  String get settingsAccentEmerald => 'Emerald';
+
+  @override
+  String get settingsAccentBlue => 'Ocean';
+
+  @override
+  String get settingsAccentViolet => 'Violet';
+
+  @override
+  String get profileBmiExplainShort =>
+      'BMI assesses weight relative to height.';
+
+  @override
+  String get profileBmiExplainFull =>
+      'Body Mass Index (BMI) is a measure to assess weight relative to height. It is a general screening tool — not a medical diagnosis.';
 }

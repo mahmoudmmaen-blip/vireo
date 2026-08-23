@@ -1124,4 +1124,173 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get habitsErrorTitle => 'تعذّر تحميل العادات';
+
+  @override
+  String homeRecoveryExplain(int score) {
+    return 'نسبة التعافي $score% تجمع بين جودة النوم وأيام الراحة وإرهاق العضلات. الرقم الأعلى يعني جسمك جاهز للتدريب بقوة.';
+  }
+
+  @override
+  String get homeRecoveryFactorSleep => 'جودة النوم';
+
+  @override
+  String get homeRecoveryFactorRest => 'أيام الراحة';
+
+  @override
+  String get homeRecoveryFactorMuscle => 'إرهاق العضلات';
+
+  @override
+  String get homeRecoveryTipSleep => 'استهدف 7–9 ساعات نوم الليلة';
+
+  @override
+  String get homeRecoveryTipRest => 'حافظ على يوم راحة كامل أسبوعياً';
+
+  @override
+  String get homeRecoveryTipMuscle => 'خفّف الشدة لو الألم العضلي عالي';
+
+  @override
+  String get homeRecoveryImproveTitle => 'نصائح للتحسين';
+
+  @override
+  String get homeRecoveryImproveBody =>
+      'ركّز على النوم والترطيب، واستبدل جلسة قوية بتمارين مرونة عند ارتفاع الإرهاق.';
+
+  @override
+  String get walkingMetricsTitle => 'مقاييس المشي اليوم';
+
+  @override
+  String get walkingDistance => 'المسافة';
+
+  @override
+  String get walkingSpeed => 'السرعة';
+
+  @override
+  String get walkingPace => 'الإيقاع';
+
+  @override
+  String get walkingCalories => 'السعرات المحروقة';
+
+  @override
+  String walkingWeightLoss(String kg) {
+    return 'حرق دهون تقديري ≈ $kg كجم';
+  }
+
+  @override
+  String walkingCadence(int spm) {
+    return 'إيقاع الخطوات ≈ $spm خطوة/دقيقة';
+  }
+
+  @override
+  String get walkingMetricsEstimatedNote =>
+      'بيانات الصحة غير متاحة — عرض تقديرات من عدد الخطوات.';
+
+  @override
+  String get mealBuilderTitle => 'تخصيص المكونات';
+
+  @override
+  String get mealBuilderSubtitle =>
+      'عدّل البيض ودهن الطبخ والإضافات — الماكروز تتحدث فوراً.';
+
+  @override
+  String get mealBuilderEggs => 'البيض';
+
+  @override
+  String mealBuilderEggCount(int count) {
+    return '$count بيضات';
+  }
+
+  @override
+  String get mealBuilderFatSource => 'مصدر الدهون';
+
+  @override
+  String get mealBuilderFatButter => 'زبدة';
+
+  @override
+  String get mealBuilderFatGhee => 'سمنة';
+
+  @override
+  String get mealBuilderFatOliveOil => 'زيت زيتون';
+
+  @override
+  String get mealBuilderFatSpray => 'زيت بخاخ';
+
+  @override
+  String get mealBuilderAddOns => 'إضافات';
+
+  @override
+  String get mealBuilderAddonCheese => 'جبن';
+
+  @override
+  String get mealBuilderAddonVeggies => 'خضروات';
+
+  @override
+  String get mealBuilderAddonBread => 'خبز حبوب كاملة';
+
+  @override
+  String get mealBuilderLiveMacros => 'الماكروز الحية';
+
+  @override
+  String get weeklyCheckInTitle => 'التقييم الأسبوعي';
+
+  @override
+  String get weeklyCheckInBanner =>
+      'حان وقت التقييم الأسبوعي — حدّث الوزن والطاقة';
+
+  @override
+  String get weeklyCheckInSubtitle =>
+      'هنحسب BMR/TDEE من جديد ونحدّث السعرات والماكروز للأسبوع الجاي.';
+
+  @override
+  String get weeklyCheckInWeight => 'الوزن الحالي';
+
+  @override
+  String get weeklyCheckInWaist => 'محيط الخصر';
+
+  @override
+  String get weeklyCheckInEnergy => 'مستوى الطاقة (1–5)';
+
+  @override
+  String weeklyCheckInAdherence(int pct) {
+    return 'الالتزام بالتدريب: $pct%';
+  }
+
+  @override
+  String get weeklyCheckInSubmit => 'حدّث أهدافي';
+
+  @override
+  String get weeklyCheckInDoneTitle => 'تم تحديث الأهداف';
+
+  @override
+  String weeklyCheckInDoneBody(
+    int prev,
+    int next,
+    int protein,
+    int carbs,
+    int fat,
+  ) {
+    return 'السعرات $prev ← $next سعرة. الماكروز: ${protein}g بروتين، ${carbs}g كارب، ${fat}g دهون.';
+  }
+
+  @override
+  String get settingsAccentTitle => 'لون التمييز';
+
+  @override
+  String get settingsAccentOrange => 'برتقالي';
+
+  @override
+  String get settingsAccentEmerald => 'أخضر';
+
+  @override
+  String get settingsAccentBlue => 'أزرق';
+
+  @override
+  String get settingsAccentViolet => 'بنفسجي';
+
+  @override
+  String get profileBmiExplainShort =>
+      'مؤشر كتلة الجسم يقيم الوزن بالنسبة للطول.';
+
+  @override
+  String get profileBmiExplainFull =>
+      'مؤشر كتلة الجسم (BMI) هو مقياس لتقييم الوزن بالنسبة للطول. أداة فحص عامة — وليس تشخيصاً طبياً.';
 }

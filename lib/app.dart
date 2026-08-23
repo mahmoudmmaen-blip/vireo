@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/accent_palette_provider.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/services/theme_mode_provider.dart';
 import 'package:vireo/core/theme/app_theme.dart';
@@ -15,12 +16,13 @@ class VireoApp extends ConsumerWidget {
     final locale = ref.watch(localeProvider);
     final textDirection = ref.watch(textDirectionProvider);
     final themeMode = ref.watch(themeModeProvider);
+    final accent = ref.watch(accentPaletteProvider);
 
     return MaterialApp(
       title: 'Vireo',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
+      theme: AppTheme.lightWithAccent(accent),
+      darkTheme: AppTheme.darkWithAccent(accent),
       themeMode: themeMode,
       locale: locale,
       supportedLocales: const [

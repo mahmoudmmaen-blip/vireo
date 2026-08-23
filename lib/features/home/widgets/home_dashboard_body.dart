@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
@@ -8,8 +9,12 @@ import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/auth/widgets/guest_auth_gate.dart';
 import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
+import 'package:vireo/features/home/widgets/recovery_breakdown_sheet.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
+import 'package:vireo/features/progress/providers/weekly_checkin_provider.dart';
+import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
+import 'package:vireo/features/walking/walking_tracker_screen.dart';
 import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
 
@@ -27,6 +32,7 @@ class HomeDashboardBody extends ConsumerWidget {
     final workoutAsync = ref.watch(todayWorkoutProvider);
     final mealsAsync = ref.watch(effectiveTodayMealsProvider);
     final confirmed = ref.watch(confirmedMealsProvider);
+    final weeklyDue = ref.watch(weeklyCheckInDueProvider);
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
@@ -99,17 +105,40 @@ class HomeDashboardBody extends ConsumerWidget {
               mealConfirmed: confirmed.contains(MealType.breakfast),
               stepsCurrent: dash.stepsToday,
               stepsGoal: dash.stepsGoal,
+              onBreakfastTap: () {
+                ref.read(shellTabIndexProvider.notifier).goNutrition(
+                      mealTab: MealType.breakfast,
+                    );
+              },
+              onWalkingTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const WalkingTrackerScreen(),
+                  ),
+                );
+              },
             );
           },
         ),
         const SizedBox(height: 12),
         _WeeklyProgressRow(completedDays: dash.weeklyCompletedDays),
-        if (dash.showCheckIn) ...[
+        if (dash.showCheckIn || weeklyDue) ...[
           const SizedBox(height: 12),
-          _CheckInBanner(),
+          _CheckInBanner(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const WeeklyCheckInScreen(),
+                ),
+              );
+            },
+          ),
         ],
         const SizedBox(height: 12),
-        _RecoveryScoreCard(score: dash.recoveryScore),
+        _RecoveryScoreCard(
+          score: dash.recoveryScore,
+          onInfo: () => showRecoveryBreakdownSheet(context, dash.recoveryScore),
+        ),
         if (isGuest) ...[
           const SizedBox(height: 16),
           ElevatedButton(
@@ -332,12 +361,16 @@ class _QuickStatsRow extends StatelessWidget {
     required this.mealConfirmed,
     required this.stepsCurrent,
     required this.stepsGoal,
+    required this.onBreakfastTap,
+    required this.onWalkingTap,
   });
 
   final String mealTitle;
   final bool mealConfirmed;
   final int stepsCurrent;
   final int stepsGoal;
+  final VoidCallback onBreakfastTap;
+  final VoidCallback onWalkingTap;
 
   @override
   Widget build(BuildContext context) {
@@ -354,6 +387,7 @@ class _QuickStatsRow extends StatelessWidget {
             subtitle: mealTitle,
             badge: mealConfirmed ? l10n.homeMealConfirmed : l10n.homeMealPending,
             badgeColor: mealConfirmed ? colors.success : colors.gold,
+            onTap: onBreakfastTap,
           ),
         ),
         const SizedBox(width: 10),
@@ -364,6 +398,7 @@ class _QuickStatsRow extends StatelessWidget {
             subtitle: l10n.homeWalkingSteps(stepsCurrent, stepsGoal),
             badge: '${(stepRatio * 100).round()}%',
             badgeColor: colors.recovery,
+            onTap: onWalkingTap,
           ),
         ),
       ],
@@ -378,6 +413,7 @@ class _MiniStatCard extends StatelessWidget {
     required this.subtitle,
     required this.badge,
     required this.badgeColor,
+    this.onTap,
   });
 
   final IconData icon;
@@ -385,26 +421,48 @@ class _MiniStatCard extends StatelessWidget {
   final String subtitle;
   final String badge;
   final Color badgeColor;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
 
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: VireoDecorations.premiumCard(colors),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: colors.ember, size: 22),
-          const SizedBox(height: 8),
-          Text(title, style: Theme.of(context).textTheme.labelLarge),
-          const SizedBox(height: 4),
-          Text(subtitle, maxLines: 2, overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: colors.textMute, fontSize: 12)),
-          const SizedBox(height: 6),
-          Text(badge, style: TextStyle(color: badgeColor, fontWeight: FontWeight.w700)),
-        ],
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
+        child: Ink(
+          padding: const EdgeInsets.all(14),
+          decoration: VireoDecorations.premiumCard(colors),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(icon, color: colors.ember, size: 22),
+                  const Spacer(),
+                  if (onTap != null)
+                    Icon(Icons.chevron_right, size: 18, color: colors.textMute),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(title, style: Theme.of(context).textTheme.labelLarge),
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: colors.textMute, fontSize: 12),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                badge,
+                style: TextStyle(color: badgeColor, fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -479,66 +537,107 @@ class _WeeklyProgressRow extends StatelessWidget {
 }
 
 class _CheckInBanner extends StatelessWidget {
+  const _CheckInBanner({required this.onTap});
+
+  final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
 
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: colors.ember.withValues(alpha: 0.15),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
-        border: Border.all(color: colors.ember.withValues(alpha: 0.35)),
+        child: Ink(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: colors.ember.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
+            border: Border.all(color: colors.ember.withValues(alpha: 0.35)),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.weeklyCheckInBanner,
+                  style: TextStyle(color: colors.ember, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Icon(Icons.chevron_right, color: colors.ember),
+            ],
+          ),
+        ),
       ),
-      child: Text(l10n.homeCheckInBanner, style: TextStyle(color: colors.ember)),
     );
   }
 }
 
 class _RecoveryScoreCard extends StatelessWidget {
-  const _RecoveryScoreCard({required this.score});
+  const _RecoveryScoreCard({required this.score, required this.onInfo});
 
   final int score;
+  final VoidCallback onInfo;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
 
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colors.recovery.withValues(alpha: 0.35),
-            colors.success.withValues(alpha: 0.2),
-          ],
-        ),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onInfo,
         borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
-        border: Border.all(color: colors.recovery.withValues(alpha: 0.45)),
-        boxShadow: VireoDecorations.cardShadow(),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(l10n.homeRecoveryScore, style: Theme.of(context).textTheme.titleMedium),
-                const SizedBox(height: 4),
-                Text(l10n.homeRecoveryReady, style: TextStyle(color: colors.textMute)),
+        child: Ink(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                colors.recovery.withValues(alpha: 0.35),
+                colors.success.withValues(alpha: 0.2),
               ],
             ),
+            borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
+            border: Border.all(color: colors.recovery.withValues(alpha: 0.45)),
+            boxShadow: VireoDecorations.cardShadow(),
           ),
-          Text(
-            '$score%',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: colors.success,
-                  fontWeight: FontWeight.w900,
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          l10n.homeRecoveryScore,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(width: 6),
+                        Icon(Icons.info_outline, size: 18, color: colors.textMute),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.homeRecoveryReady,
+                      style: TextStyle(color: colors.textMute),
+                    ),
+                  ],
                 ),
+              ),
+              Text(
+                '$score%',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: colors.success,
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

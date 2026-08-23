@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/features/home/home_screen.dart';
 import 'package:vireo/features/nutrition/nutrition_screen.dart';
 import 'package:vireo/features/profile/profile_screen.dart';
@@ -9,16 +10,8 @@ import 'package:vireo/features/progress/widgets/reassessment_gate.dart';
 import 'package:vireo/features/subscription/widgets/subscription_shell_gate.dart';
 import 'package:vireo/features/workout/workout_screen.dart';
 
-class MainShell extends ConsumerStatefulWidget {
+class MainShell extends ConsumerWidget {
   const MainShell({super.key});
-
-  @override
-  ConsumerState<MainShell> createState() => _MainShellState();
-}
-
-class _MainShellState extends ConsumerState<MainShell> {
-  /// Home is always the default tab (index 0).
-  int _index = 0;
 
   static const _screens = <Widget>[
     HomeScreen(),
@@ -29,19 +22,21 @@ class _MainShellState extends ConsumerState<MainShell> {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final index = ref.watch(shellTabIndexProvider);
 
     return Scaffold(
       body: SubscriptionShellGate(
         child: ReassessmentGate(
-          child: IndexedStack(index: _index, children: _screens),
+          child: IndexedStack(index: index, children: _screens),
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _index,
+        selectedIndex: index,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-        onDestinationSelected: (value) => setState(() => _index = value),
+        onDestinationSelected: (value) =>
+            ref.read(shellTabIndexProvider.notifier).goTo(value),
         destinations: [
           NavigationDestination(
             icon: const Icon(Icons.home_outlined),

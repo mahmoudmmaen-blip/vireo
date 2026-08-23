@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
+import 'package:vireo/core/utils/platform_utils.dart';
 import 'package:vireo/data/models/subscription_state.dart';
 
 /// RevenueCat subscription management.
@@ -82,8 +82,8 @@ abstract final class RevenueCatService {
 
   static String? _platformApiKey() {
     if (kIsWeb) return null;
-    if (Platform.isIOS) return AppConfig.revenueCatAppleApiKey;
-    if (Platform.isAndroid) return AppConfig.revenueCatGoogleApiKey;
+    if (PlatformUtils.isIOS) return AppConfig.revenueCatAppleApiKey;
+    if (PlatformUtils.isAndroid) return AppConfig.revenueCatGoogleApiKey;
     return null;
   }
 

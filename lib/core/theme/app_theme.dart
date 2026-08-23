@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vireo/core/services/accent_palette_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 
 /// Dark and light theme configuration for Vireo.
 abstract final class AppTheme {
-  static ThemeData get dark => _build(VireoColors.dark, Brightness.dark);
+  static ThemeData get dark => darkWithAccent();
+  static ThemeData get light => lightWithAccent();
 
-  static ThemeData get light => _build(VireoColors.light, Brightness.light);
+  static ThemeData darkWithAccent([
+    AccentPalette accent = AccentPalette.vireoOrange,
+  ]) =>
+      _build(VireoColors.dark.withAccent(accent.color), Brightness.dark);
+
+  static ThemeData lightWithAccent([
+    AccentPalette accent = AccentPalette.vireoOrange,
+  ]) =>
+      _build(VireoColors.light.withAccent(accent.color), Brightness.light);
 
   static ThemeData _build(VireoColors colors, Brightness brightness) {
-
     final cairo = GoogleFonts.cairoTextTheme();
     final tajawal = GoogleFonts.tajawalTextTheme();
 
@@ -120,7 +129,7 @@ abstract final class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: colors.ember,
-          foregroundColor: colors.text,
+          foregroundColor: brightness == Brightness.dark ? colors.text : Colors.white,
           minimumSize: const Size(48, 48),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(VireoDecorations.buttonRadius),
