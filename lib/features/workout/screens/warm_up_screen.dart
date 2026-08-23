@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
+import 'package:vireo/data/repositories/workout_repository.dart';
 import 'package:vireo/features/workout/widgets/medical_banner.dart';
 
-class WarmUpScreen extends StatefulWidget {
+class WarmUpScreen extends ConsumerStatefulWidget {
   const WarmUpScreen({
     super.key,
     required this.showMedicalBanner,
@@ -19,16 +22,17 @@ class WarmUpScreen extends StatefulWidget {
   final VoidCallback onComplete;
 
   @override
-  State<WarmUpScreen> createState() => _WarmUpScreenState();
+  ConsumerState<WarmUpScreen> createState() => _WarmUpScreenState();
 }
 
-class _WarmUpScreenState extends State<WarmUpScreen>
+class _WarmUpScreenState extends ConsumerState<WarmUpScreen>
     with SingleTickerProviderStateMixin {
   int _stepIndex = 0;
   int _secondsLeft = 30;
   Timer? _timer;
   late final AnimationController _pulse;
   bool _timerStarted = false;
+  final Map<int, String> _overrides = {};
 
   @override
   void initState() {
@@ -57,11 +61,23 @@ class _WarmUpScreenState extends State<WarmUpScreen>
     super.dispose();
   }
 
-  List<_WarmUpStep> _steps(AppLocalizations l10n) => [
+  List<_WarmUpStep> _baseSteps(AppLocalizations l10n) => [
         _WarmUpStep(l10n.workoutWarmUpStep1, 30, Icons.accessibility_new),
         _WarmUpStep(l10n.workoutWarmUpStep2, 60, Icons.directions_walk),
         _WarmUpStep(l10n.workoutWarmUpStep3, 10, Icons.fitness_center),
       ];
+
+  List<_WarmUpStep> _steps(AppLocalizations l10n) {
+    final base = _baseSteps(l10n);
+    return [
+      for (var i = 0; i < base.length; i++)
+        _WarmUpStep(
+          _overrides[i] ?? base[i].label,
+          base[i].durationSeconds,
+          base[i].icon,
+        ),
+    ];
+  }
 
   void _startTimer() {
     _timer?.cancel();
@@ -89,6 +105,69 @@ class _WarmUpScreenState extends State<WarmUpScreen>
     }
     setState(() => _stepIndex++);
     _startTimer();
+  }
+
+  Future<void> _swapCurrentStep() async {
+    final l10n = AppLocalizations.of(context);
+    final colors = context.vireoColors;
+    final locale = ref.read(localeProvider).languageCode;
+    final env = ref.read(workoutProfileProvider).env;
+    final alts = await ref.read(exerciseRepositoryProvider).fetchWarmUpAlternatives(
+          environment: env,
+          excludeId: 'warmup-$_stepIndex',
+        );
+    if (!mounted) return;
+
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: colors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (ctx) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(l10n.workoutSwapWarmUpTitle, style: Theme.of(ctx).textTheme.titleLarge),
+                const SizedBox(height: 8),
+                Text(l10n.workoutSwapWarmUpSubtitle, style: TextStyle(color: colors.textMute)),
+                const SizedBox(height: 12),
+                if (alts.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Text(l10n.workoutSwapEmpty, textAlign: TextAlign.center),
+                  )
+                else
+                  Flexible(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: alts.length,
+                      separatorBuilder: (_, __) => const Divider(height: 1),
+                      itemBuilder: (_, i) {
+                        final alt = alts[i];
+                        return ListTile(
+                          title: Text(alt.localizedName(locale)),
+                          subtitle: Text(alt.localizedTargetMuscle(locale)),
+                          onTap: () {
+                            setState(() {
+                              _overrides[_stepIndex] = alt.localizedName(locale);
+                            });
+                            Navigator.pop(ctx);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -145,7 +224,13 @@ class _WarmUpScreenState extends State<WarmUpScreen>
                         fontWeight: FontWeight.w900,
                       ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
+                OutlinedButton.icon(
+                  onPressed: _swapCurrentStep,
+                  icon: const Icon(Icons.swap_horiz, size: 18),
+                  label: Text(l10n.workoutSwapWarmUp),
+                ),
+                const SizedBox(height: 12),
                 LinearProgressIndicator(
                   value: progress,
                   backgroundColor: colors.line,
@@ -154,28 +239,32 @@ class _WarmUpScreenState extends State<WarmUpScreen>
                   borderRadius: BorderRadius.circular(6),
                 ),
                 const SizedBox(height: 16),
-                ...List.generate(steps.length, (i) {
-                  final active = i == _stepIndex;
-                  final done = i < _stepIndex;
-                  return ListTile(
-                    dense: true,
-                    leading: Icon(
-                      done ? Icons.check_circle : steps[i].icon,
-                      color: done
-                          ? colors.success
-                          : active
-                              ? colors.ember
-                              : colors.textMute,
-                    ),
-                    title: Text(
-                      steps[i].label,
-                      style: TextStyle(
-                        fontWeight: active ? FontWeight.w700 : FontWeight.w400,
-                        color: active ? colors.text : colors.textMute,
-                      ),
-                    ),
-                  );
-                }),
+                Expanded(
+                  child: ListView(
+                    children: List.generate(steps.length, (i) {
+                      final active = i == _stepIndex;
+                      final done = i < _stepIndex;
+                      return ListTile(
+                        dense: true,
+                        leading: Icon(
+                          done ? Icons.check_circle : steps[i].icon,
+                          color: done
+                              ? colors.success
+                              : active
+                                  ? colors.ember
+                                  : colors.textMute,
+                        ),
+                        title: Text(
+                          steps[i].label,
+                          style: TextStyle(
+                            fontWeight: active ? FontWeight.w700 : FontWeight.w400,
+                            color: active ? colors.text : colors.textMute,
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
               ],
             ),
           ),

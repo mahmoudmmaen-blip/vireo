@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vireo/core/services/accent_palette_provider.dart';
+import 'package:vireo/core/services/app_skin_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 
@@ -11,8 +12,15 @@ abstract final class AppTheme {
 
   static ThemeData darkWithAccent([
     AccentPalette accent = AccentPalette.vireoOrange,
-  ]) =>
-      _build(VireoColors.dark.withAccent(accent.color), Brightness.dark);
+    AppSkin skin = AppSkin.standard,
+  ]) {
+    final base = switch (skin) {
+      AppSkin.standard => VireoColors.dark.withAccent(accent.color),
+      AppSkin.amoled => VireoColors.amoled,
+      AppSkin.navy => VireoColors.navy,
+    };
+    return _build(base, Brightness.dark);
+  }
 
   static ThemeData lightWithAccent([
     AccentPalette accent = AccentPalette.vireoOrange,

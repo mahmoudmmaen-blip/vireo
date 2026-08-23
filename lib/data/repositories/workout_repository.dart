@@ -92,10 +92,30 @@ class ExerciseRepository {
     return ExerciseDemoCatalog.asExercises()
         .where(
           (e) =>
-              e.targetMuscle == targetMuscle &&
               e.id != excludeId &&
-              e.matchesEnvironment(environment),
+              e.matchesEnvironment(environment) &&
+              (e.targetMuscle == targetMuscle ||
+                  e.type == ExerciseType.mobility ||
+                  e.type == ExerciseType.cardio),
         )
+        .take(12)
+        .toList();
+  }
+
+  /// Alternatives for warm-up / mobility phase.
+  Future<List<Exercise>> fetchWarmUpAlternatives({
+    required TrainingEnvironment environment,
+    required String excludeId,
+  }) async {
+    final all = await fetchAllExercises();
+    return all
+        .where(
+          (e) =>
+              e.id != excludeId &&
+              e.matchesEnvironment(environment) &&
+              (e.type == ExerciseType.mobility || e.type == ExerciseType.cardio),
+        )
+        .take(10)
         .toList();
   }
 }

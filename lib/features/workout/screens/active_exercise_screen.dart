@@ -26,6 +26,9 @@ class ActiveExerciseScreen extends ConsumerWidget {
     final colors = context.vireoColors;
     final notifier = ref.read(workoutFlowProvider.notifier);
     final profile = ref.watch(userProfileProvider).valueOrNull;
+    final workoutProfile = ref.watch(workoutProfileProvider);
+    final environment =
+        profile?.trainingEnvironment ?? workoutProfile.env;
     final completedSets = flow.setsForCurrentExercise();
 
     return Column(
@@ -79,14 +82,12 @@ class ActiveExerciseScreen extends ConsumerWidget {
                 }),
                 const SizedBox(height: 8),
                 OutlinedButton.icon(
-                  onPressed: profile == null
-                      ? null
-                      : () => showSwapExerciseSheet(
-                            context,
-                            ref,
-                            current: exercise,
-                            environment: profile.trainingEnvironment,
-                          ),
+                  onPressed: () => showSwapExerciseSheet(
+                    context,
+                    ref,
+                    current: exercise,
+                    environment: environment,
+                  ),
                   icon: const Icon(Icons.swap_horiz),
                   label: Text(l10n.workoutSwapExercise),
                 ),

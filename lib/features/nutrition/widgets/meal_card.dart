@@ -9,6 +9,7 @@ import 'package:vireo/data/models/recipe.dart';
 import 'package:vireo/data/repositories/meal_plan_repository.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
+import 'package:vireo/features/nutrition/widgets/meal_builder_panel.dart';
 import 'package:vireo/features/nutrition/widgets/meal_swap_sheet.dart';
 
 class MealCard extends ConsumerWidget {
@@ -28,6 +29,9 @@ class MealCard extends ConsumerWidget {
     final locale = Localizations.localeOf(context).languageCode;
     final recipe = entry.recipe;
     final confirmed = ref.watch(confirmedMealsProvider).contains(entry.mealType);
+    final builder = ref.watch(mealBuilderProvider(entry.mealType));
+    final macros = builder.macros;
+    final showBuilderMacros = macros.calories > 0;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
@@ -90,7 +94,7 @@ class MealCard extends ConsumerWidget {
                 ),
               ],
             ),
-            if (recipe.calories > 0) ...[
+            if (showBuilderMacros || recipe.calories > 0) ...[
               const SizedBox(height: 12),
               Text(
                 l10n.nutritionMacroBar,
@@ -99,10 +103,22 @@ class MealCard extends ConsumerWidget {
               const SizedBox(height: 6),
               Row(
                 children: [
-                  _MacroChip(label: '${recipe.calories}', colors: colors),
-                  _MacroChip(label: '${recipe.proteinG}g', colors: colors),
-                  _MacroChip(label: '${recipe.carbsG}g', colors: colors),
-                  _MacroChip(label: '${recipe.fatG}g', colors: colors),
+                  _MacroChip(
+                    label: '${showBuilderMacros ? macros.calories : recipe.calories}',
+                    colors: colors,
+                  ),
+                  _MacroChip(
+                    label: '${showBuilderMacros ? macros.proteinG : recipe.proteinG}g',
+                    colors: colors,
+                  ),
+                  _MacroChip(
+                    label: '${showBuilderMacros ? macros.carbsG : recipe.carbsG}g',
+                    colors: colors,
+                  ),
+                  _MacroChip(
+                    label: '${showBuilderMacros ? macros.fatG : recipe.fatG}g',
+                    colors: colors,
+                  ),
                 ],
               ),
             ],

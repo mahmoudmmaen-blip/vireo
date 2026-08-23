@@ -8,7 +8,7 @@ import 'package:vireo/features/nutrition/models/meal_builder_state.dart';
 
 final mealBuilderProvider =
     StateProvider.family<MealBuilderState, MealType>((ref, type) {
-  return const MealBuilderState();
+  return MealBuilderState.defaultsFor(type);
 });
 
 class MealBuilderPanel extends ConsumerWidget {
@@ -32,7 +32,7 @@ class MealBuilderPanel extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            l10n.mealBuilderTitle,
+            l10n.mealBuilderTitleFor(_mealTitle(l10n)),
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 4),
@@ -41,18 +41,21 @@ class MealBuilderPanel extends ConsumerWidget {
             style: TextStyle(color: colors.textMute, fontSize: 12),
           ),
           const SizedBox(height: 16),
-          Text(l10n.mealBuilderEggs, style: Theme.of(context).textTheme.labelLarge),
+          Text(
+            _proteinLabel(l10n),
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
-            children: [2, 3, 4].map((count) {
-              final selected = state.eggCount == count;
+            children: state.proteinOptions.map((count) {
+              final selected = state.proteinCount == count;
               return ChoiceChip(
-                label: Text(l10n.mealBuilderEggCount(count)),
+                label: Text(_proteinCountLabel(l10n, count)),
                 selected: selected,
                 onSelected: (_) {
                   ref.read(notifier.notifier).state =
-                      state.copyWith(eggCount: count);
+                      state.copyWith(proteinCount: count);
                 },
               );
             }).toList(),
@@ -78,7 +81,7 @@ class MealBuilderPanel extends ConsumerWidget {
           const SizedBox(height: 16),
           Text(l10n.mealBuilderAddOns, style: Theme.of(context).textTheme.labelLarge),
           const SizedBox(height: 8),
-          ...MealAddOn.values.map((addon) {
+          ...state.availableAddOns.map((addon) {
             final on = state.addOns.contains(addon);
             return SwitchListTile(
               contentPadding: EdgeInsets.zero,
@@ -116,6 +119,26 @@ class MealBuilderPanel extends ConsumerWidget {
     );
   }
 
+  String _mealTitle(AppLocalizations l10n) => switch (mealType) {
+        MealType.breakfast => l10n.nutritionTabBreakfast,
+        MealType.lunch => l10n.nutritionTabLunch,
+        MealType.dinner => l10n.nutritionTabDinner,
+        MealType.snack => l10n.nutritionTabSnack,
+      };
+
+  String _proteinLabel(AppLocalizations l10n) => switch (mealType) {
+        MealType.breakfast => l10n.mealBuilderEggs,
+        MealType.lunch => l10n.mealBuilderProteinLunch,
+        MealType.dinner => l10n.mealBuilderProteinDinner,
+        MealType.snack => l10n.mealBuilderProteinSnack,
+      };
+
+  String _proteinCountLabel(AppLocalizations l10n, int count) =>
+      switch (mealType) {
+        MealType.breakfast => l10n.mealBuilderEggCount(count),
+        _ => l10n.mealBuilderPortionCount(count),
+      };
+
   String _fatLabel(AppLocalizations l10n, FatSource fat) => switch (fat) {
         FatSource.butter => l10n.mealBuilderFatButter,
         FatSource.ghee => l10n.mealBuilderFatGhee,
@@ -127,6 +150,8 @@ class MealBuilderPanel extends ConsumerWidget {
         MealAddOn.cheese => l10n.mealBuilderAddonCheese,
         MealAddOn.vegetables => l10n.mealBuilderAddonVeggies,
         MealAddOn.wholeGrainBread => l10n.mealBuilderAddonBread,
+        MealAddOn.rice => l10n.mealBuilderAddonRice,
+        MealAddOn.yogurt => l10n.mealBuilderAddonYogurt,
       };
 }
 

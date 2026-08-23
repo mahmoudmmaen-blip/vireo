@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/accent_palette_provider.dart';
+import 'package:vireo/core/services/app_skin_provider.dart';
 import 'package:vireo/core/services/theme_mode_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
@@ -20,6 +21,7 @@ class SettingsScreen extends ConsumerWidget {
     final colors = context.vireoColors;
     final mode = ref.watch(themeModeProvider);
     final accent = ref.watch(accentPaletteProvider);
+    final skin = ref.watch(appSkinProvider);
 
     return Scaffold(
       backgroundColor: colors.background,
@@ -34,9 +36,10 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           RadioGroup<ThemeMode>(
-            groupValue: mode,
+            groupValue: skin.isSpecialDark ? ThemeMode.dark : mode,
             onChanged: (value) {
               if (value != null) {
+                ref.read(appSkinProvider.notifier).setSkin(AppSkin.standard);
                 ref.read(themeModeProvider.notifier).setThemeMode(value);
               }
             },
@@ -61,53 +64,105 @@ class SettingsScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: Text(
+              l10n.settingsSkinTitle,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          RadioGroup<AppSkin>(
+            groupValue: skin,
+            onChanged: (value) {
+              if (value != null) {
+                ref.read(appSkinProvider.notifier).setSkin(value);
+                if (value.isSpecialDark) {
+                  ref.read(themeModeProvider.notifier).setThemeMode(ThemeMode.dark);
+                }
+              }
+            },
+            child: Column(
+              children: [
+                RadioListTile<AppSkin>(
+                  title: Text(l10n.settingsSkinStandard),
+                  subtitle: Text(l10n.settingsSkinStandardDesc),
+                  value: AppSkin.standard,
+                ),
+                RadioListTile<AppSkin>(
+                  title: Text(l10n.settingsSkinAmoled),
+                  subtitle: Text(l10n.settingsSkinAmoledDesc),
+                  value: AppSkin.amoled,
+                ),
+                RadioListTile<AppSkin>(
+                  title: Text(l10n.settingsSkinNavy),
+                  subtitle: Text(l10n.settingsSkinNavyDesc),
+                  value: AppSkin.navy,
+                ),
+              ],
+            ),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
               l10n.settingsAccentTitle,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: AccentPalette.values.map((palette) {
-                final selected = accent == palette;
-                return InkWell(
-                  onTap: () =>
-                      ref.read(accentPaletteProvider.notifier).setPalette(palette),
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    width: 72,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: selected ? palette.color : colors.line,
-                        width: selected ? 2.5 : 1,
+            child: Opacity(
+              opacity: skin.isSpecialDark ? 0.45 : 1,
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: AccentPalette.values.map((palette) {
+                  final selected = accent == palette && !skin.isSpecialDark;
+                  return InkWell(
+                    onTap: skin.isSpecialDark
+                        ? null
+                        : () => ref
+                            .read(accentPaletteProvider.notifier)
+                            .setPalette(palette),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      width: 72,
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: selected ? palette.color : colors.line,
+                          width: selected ? 2.5 : 1,
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 16,
+                            backgroundColor: palette.color,
+                            child: selected
+                                ? const Icon(Icons.check, size: 16, color: Colors.white)
+                                : null,
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            _accentLabel(l10n, palette),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 10),
+                          ),
+                        ],
                       ),
                     ),
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 16,
-                          backgroundColor: palette.color,
-                          child: selected
-                              ? const Icon(Icons.check, size: 16, color: Colors.white)
-                              : null,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          _accentLabel(l10n, palette),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 10),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }).toList(),
+                  );
+                }).toList(),
+              ),
             ),
           ),
+          if (skin.isSpecialDark)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                l10n.settingsAccentLockedHint,
+                style: TextStyle(color: colors.textMute, fontSize: 12),
+              ),
+            ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.workspace_premium_outlined),

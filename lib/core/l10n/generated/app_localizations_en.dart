@@ -1203,8 +1203,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mealBuilderTitle => 'Customize ingredients';
 
   @override
+  String mealBuilderTitleFor(String meal) {
+    return 'Customize $meal';
+  }
+
+  @override
   String get mealBuilderSubtitle =>
-      'Adjust eggs, cooking fat, and add-ons — macros update live.';
+      'Adjust protein, cooking fat, and add-ons — macros update live.';
 
   @override
   String get mealBuilderEggs => 'Eggs';
@@ -1213,6 +1218,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String mealBuilderEggCount(int count) {
     return '$count eggs';
   }
+
+  @override
+  String mealBuilderPortionCount(int count) {
+    return '$count portions';
+  }
+
+  @override
+  String get mealBuilderProteinLunch => 'Protein portions';
+
+  @override
+  String get mealBuilderProteinDinner => 'Dinner protein';
+
+  @override
+  String get mealBuilderProteinSnack => 'Snack protein';
 
   @override
   String get mealBuilderFatSource => 'Fat source';
@@ -1240,6 +1259,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mealBuilderAddonBread => 'Whole grain bread';
+
+  @override
+  String get mealBuilderAddonRice => 'Rice';
+
+  @override
+  String get mealBuilderAddonYogurt => 'Yogurt';
 
   @override
   String get mealBuilderLiveMacros => 'Live macros';
@@ -1300,6 +1325,41 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsAccentViolet => 'Violet';
+
+  @override
+  String get settingsSkinTitle => 'Color theme skins';
+
+  @override
+  String get settingsSkinStandard => 'Standard';
+
+  @override
+  String get settingsSkinStandardDesc => 'Classic Vireo dark / light';
+
+  @override
+  String get settingsSkinAmoled => 'AMOLED Pure Black';
+
+  @override
+  String get settingsSkinAmoledDesc => 'True black with gold & cyan accents';
+
+  @override
+  String get settingsSkinNavy => 'Deep Navy Blue';
+
+  @override
+  String get settingsSkinNavyDesc => 'Navy #0B192C with ice blue & teal';
+
+  @override
+  String get settingsAccentLockedHint =>
+      'Accent swatches are locked while AMOLED / Navy skin is active.';
+
+  @override
+  String get workoutSwapWarmUp => 'Swap warm-up move';
+
+  @override
+  String get workoutSwapWarmUpTitle => 'Choose a warm-up alternative';
+
+  @override
+  String get workoutSwapWarmUpSubtitle =>
+      'Mobility and low-impact options for your training environment.';
 
   @override
   String get profileBmiExplainShort =>

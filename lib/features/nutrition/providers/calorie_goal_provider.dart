@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/onboarding_calorie_sync.dart';
 import 'package:vireo/core/utils/calorie_calculator.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/fitness_goal.dart';
@@ -9,11 +10,9 @@ import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.
 const _manualCalorieKey = 'manual_calorie_goal';
 
 final calorieGoalProvider = Provider<CalorieTarget>((ref) {
-  final manual = HiveService.isInitialized
-      ? HiveService.settingsBox.get(_manualCalorieKey) as int?
+  final profile = HiveService.isInitialized
+      ? HiveService.cacheBox.get('guest_profile')
       : null;
-
-  final profile = HiveService.cacheBox.get('guest_profile');
   var weight = 75.0;
   var height = 170.0;
   var age = 30;
@@ -38,6 +37,16 @@ final calorieGoalProvider = Provider<CalorieTarget>((ref) {
     activityLevel: activity,
     goal: goal,
   );
+
+  // Prefer fully persisted onboarding macros when present.
+  final cached = OnboardingCalorieSync.readCached();
+  if (cached != null && cached.calories > 0) {
+    return cached;
+  }
+
+  final manual = HiveService.isInitialized
+      ? HiveService.settingsBox.get(_manualCalorieKey) as int?
+      : null;
 
   if (manual != null && manual > 0) {
     final ratio = manual / computed.calories;

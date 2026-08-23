@@ -160,8 +160,7 @@ class _MealTab extends ConsumerWidget {
           padding: const EdgeInsets.all(16),
           children: [
             MealCard(entry: meal),
-            if (mealType == MealType.breakfast)
-              MealBuilderPanel(mealType: mealType),
+            MealBuilderPanel(mealType: mealType),
           ],
         );
       },

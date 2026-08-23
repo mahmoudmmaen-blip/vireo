@@ -4,7 +4,7 @@ import 'package:vireo/data/demo/exercise_demo_catalog.dart';
 
 /// Seeds global catalog tables via Supabase client when empty (no CLI required).
 abstract final class CatalogSeedService {
-  static const _minExercises = 20;
+  static const _minExercises = 40;
 
   static Future<void> seedIfNeeded() async {
     if (!SupabaseService.isInitialized) {

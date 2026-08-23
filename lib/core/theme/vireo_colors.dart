@@ -65,6 +65,40 @@ class VireoColors extends ThemeExtension<VireoColors> {
     line: Color(0xFFE5E7EB),
   );
 
+  /// AMOLED pure black with high-contrast gold / cyan accents.
+  static const VireoColors amoled = VireoColors(
+    background: Color(0xFF000000),
+    surface: Color(0xFF0A0A0A),
+    surfaceRaised: Color(0xFF141414),
+    surfaceGradientStart: Color(0xFF141414),
+    surfaceGradientEnd: Color(0xFF000000),
+    ember: Color(0xFFFFD54F),
+    gold: Color(0xFFFFC107),
+    success: Color(0xFF00E5FF),
+    danger: Color(0xFFFF5252),
+    recovery: Color(0xFF00BCD4),
+    text: Color(0xFFFFFFFF),
+    textMute: Color(0xFFB0B0B0),
+    line: Color(0xFF2A2A2A),
+  );
+
+  /// Deep navy (#0B192C) with soft ice blue / electric teal accents.
+  static const VireoColors navy = VireoColors(
+    background: Color(0xFF0B192C),
+    surface: Color(0xFF112240),
+    surfaceRaised: Color(0xFF1A2F4A),
+    surfaceGradientStart: Color(0xFF1A2F4A),
+    surfaceGradientEnd: Color(0xFF0B192C),
+    ember: Color(0xFF26C6DA),
+    gold: Color(0xFF81D4FA),
+    success: Color(0xFF1DE9B6),
+    danger: Color(0xFFEF5350),
+    recovery: Color(0xFF4DD0E1),
+    text: Color(0xFFE8F4FC),
+    textMute: Color(0xFF8BA3B8),
+    line: Color(0xFF243B55),
+  );
+
   /// Returns a copy with a custom primary accent (ember).
   VireoColors withAccent(Color accent) => copyWith(ember: accent);
 

@@ -96,6 +96,15 @@ class WeeklyCheckInNotifier extends Notifier<DateTime?> {
 
     // Persist as manual override so calorieGoalProvider picks it up.
     await setManualCalorieGoal(target.calories);
+    await HiveService.cacheBox.put('calorie_target_macros', {
+      'calories': target.calories,
+      'protein_g': target.proteinG,
+      'carbs_g': target.carbsG,
+      'fat_g': target.fatG,
+      'goal': goal.value,
+      'activity_level': adjusted.value,
+      'updated_at': DateTime.now().toIso8601String(),
+    });
     await HiveService.settingsBox.put(_weeklyCheckInKey, DateTime.now().toIso8601String());
     await HiveService.settingsBox.put(_weeklyWaistKey, input.waistCm);
     await HiveService.settingsBox.put(_weeklyEnergyKey, input.energyLevel);

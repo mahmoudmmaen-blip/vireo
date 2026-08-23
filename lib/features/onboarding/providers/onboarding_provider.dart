@@ -1,8 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/locale_provider.dart';
+import 'package:vireo/core/services/onboarding_calorie_sync.dart';
 import 'package:vireo/data/models/onboarding_draft.dart';
 import 'package:vireo/data/models/unit_preference.dart';
 import 'package:vireo/data/repositories/onboarding_repository.dart';
+import 'package:vireo/data/repositories/workout_repository.dart';
+import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
+import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 
 class OnboardingUiState {
   const OnboardingUiState({
@@ -65,6 +69,11 @@ class OnboardingNotifier extends Notifier<OnboardingUiState> {
 
   void updateDraft(OnboardingDraft draft) {
     state = state.copyWith(draft: draft, errorMessage: null);
+    if (draft.isStep1Valid) {
+      OnboardingCalorieSync.syncFromDraft(draft).then((_) {
+        ref.invalidate(calorieGoalProvider);
+      });
+    }
   }
 
   void nextStep() {
@@ -85,7 +94,12 @@ class OnboardingNotifier extends Notifier<OnboardingUiState> {
     try {
       final repo = ref.read(onboardingRepositoryProvider);
       await repo.completeOnboarding(userId: userId, draft: state.draft);
+      await OnboardingCalorieSync.syncFromDraft(state.draft);
       ref.invalidate(onboardingCompleteProvider);
+      ref.invalidate(calorieGoalProvider);
+      ref.invalidate(todayWorkoutProvider);
+      ref.invalidate(allExercisesProvider);
+      ref.invalidate(effectiveTodayMealsProvider);
       state = state.copyWith(isSubmitting: false);
       return true;
     } catch (e) {

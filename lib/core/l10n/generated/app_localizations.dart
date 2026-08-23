@@ -2227,10 +2227,16 @@ abstract class AppLocalizations {
   /// **'Customize ingredients'**
   String get mealBuilderTitle;
 
+  /// No description provided for @mealBuilderTitleFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize {meal}'**
+  String mealBuilderTitleFor(String meal);
+
   /// No description provided for @mealBuilderSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Adjust eggs, cooking fat, and add-ons — macros update live.'**
+  /// **'Adjust protein, cooking fat, and add-ons — macros update live.'**
   String get mealBuilderSubtitle;
 
   /// No description provided for @mealBuilderEggs.
@@ -2244,6 +2250,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} eggs'**
   String mealBuilderEggCount(int count);
+
+  /// No description provided for @mealBuilderPortionCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} portions'**
+  String mealBuilderPortionCount(int count);
+
+  /// No description provided for @mealBuilderProteinLunch.
+  ///
+  /// In en, this message translates to:
+  /// **'Protein portions'**
+  String get mealBuilderProteinLunch;
+
+  /// No description provided for @mealBuilderProteinDinner.
+  ///
+  /// In en, this message translates to:
+  /// **'Dinner protein'**
+  String get mealBuilderProteinDinner;
+
+  /// No description provided for @mealBuilderProteinSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Snack protein'**
+  String get mealBuilderProteinSnack;
 
   /// No description provided for @mealBuilderFatSource.
   ///
@@ -2298,6 +2328,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Whole grain bread'**
   String get mealBuilderAddonBread;
+
+  /// No description provided for @mealBuilderAddonRice.
+  ///
+  /// In en, this message translates to:
+  /// **'Rice'**
+  String get mealBuilderAddonRice;
+
+  /// No description provided for @mealBuilderAddonYogurt.
+  ///
+  /// In en, this message translates to:
+  /// **'Yogurt'**
+  String get mealBuilderAddonYogurt;
 
   /// No description provided for @mealBuilderLiveMacros.
   ///
@@ -2400,6 +2442,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Violet'**
   String get settingsAccentViolet;
+
+  /// No description provided for @settingsSkinTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Color theme skins'**
+  String get settingsSkinTitle;
+
+  /// No description provided for @settingsSkinStandard.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard'**
+  String get settingsSkinStandard;
+
+  /// No description provided for @settingsSkinStandardDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Classic Vireo dark / light'**
+  String get settingsSkinStandardDesc;
+
+  /// No description provided for @settingsSkinAmoled.
+  ///
+  /// In en, this message translates to:
+  /// **'AMOLED Pure Black'**
+  String get settingsSkinAmoled;
+
+  /// No description provided for @settingsSkinAmoledDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'True black with gold & cyan accents'**
+  String get settingsSkinAmoledDesc;
+
+  /// No description provided for @settingsSkinNavy.
+  ///
+  /// In en, this message translates to:
+  /// **'Deep Navy Blue'**
+  String get settingsSkinNavy;
+
+  /// No description provided for @settingsSkinNavyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Navy #0B192C with ice blue & teal'**
+  String get settingsSkinNavyDesc;
+
+  /// No description provided for @settingsAccentLockedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent swatches are locked while AMOLED / Navy skin is active.'**
+  String get settingsAccentLockedHint;
+
+  /// No description provided for @workoutSwapWarmUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Swap warm-up move'**
+  String get workoutSwapWarmUp;
+
+  /// No description provided for @workoutSwapWarmUpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a warm-up alternative'**
+  String get workoutSwapWarmUpTitle;
+
+  /// No description provided for @workoutSwapWarmUpSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobility and low-impact options for your training environment.'**
+  String get workoutSwapWarmUpSubtitle;
 
   /// No description provided for @profileBmiExplainShort.
   ///

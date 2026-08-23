@@ -1188,8 +1188,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get mealBuilderTitle => 'تخصيص المكونات';
 
   @override
+  String mealBuilderTitleFor(String meal) {
+    return 'تخصيص $meal';
+  }
+
+  @override
   String get mealBuilderSubtitle =>
-      'عدّل البيض ودهن الطبخ والإضافات — الماكروز تتحدث فوراً.';
+      'عدّل البروتين ودهن الطبخ والإضافات — الماكروز تتحدث فوراً.';
 
   @override
   String get mealBuilderEggs => 'البيض';
@@ -1198,6 +1203,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String mealBuilderEggCount(int count) {
     return '$count بيضات';
   }
+
+  @override
+  String mealBuilderPortionCount(int count) {
+    return '$count حصص';
+  }
+
+  @override
+  String get mealBuilderProteinLunch => 'حصص البروتين';
+
+  @override
+  String get mealBuilderProteinDinner => 'بروتين العشاء';
+
+  @override
+  String get mealBuilderProteinSnack => 'بروتين السناك';
 
   @override
   String get mealBuilderFatSource => 'مصدر الدهون';
@@ -1225,6 +1244,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mealBuilderAddonBread => 'خبز حبوب كاملة';
+
+  @override
+  String get mealBuilderAddonRice => 'أرز';
+
+  @override
+  String get mealBuilderAddonYogurt => 'زبادي';
 
   @override
   String get mealBuilderLiveMacros => 'الماكروز الحية';
@@ -1285,6 +1310,41 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsAccentViolet => 'بنفسجي';
+
+  @override
+  String get settingsSkinTitle => 'سمات الألوان';
+
+  @override
+  String get settingsSkinStandard => 'قياسي';
+
+  @override
+  String get settingsSkinStandardDesc => 'الوضع الداكن / الفاتح الكلاسيكي';
+
+  @override
+  String get settingsSkinAmoled => 'أسود داكن (AMOLED)';
+
+  @override
+  String get settingsSkinAmoledDesc => 'أسود نقي مع ذهبي وسماوي';
+
+  @override
+  String get settingsSkinNavy => 'كحلي عميق';
+
+  @override
+  String get settingsSkinNavyDesc => 'كحلي #0B192C مع أزرق ثلجي وتيل';
+
+  @override
+  String get settingsAccentLockedHint =>
+      'ألوان التمييز مقفلة أثناء سمة AMOLED أو الكحلي.';
+
+  @override
+  String get workoutSwapWarmUp => 'تبديل تمرين الإحماء';
+
+  @override
+  String get workoutSwapWarmUpTitle => 'اختر بديلاً للإحماء';
+
+  @override
+  String get workoutSwapWarmUpSubtitle =>
+      'خيارات مرونة وتأثير منخفض تناسب بيئة تمرينك.';
 
   @override
   String get profileBmiExplainShort =>
