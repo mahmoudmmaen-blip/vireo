@@ -49,6 +49,22 @@ class VireoColors extends ThemeExtension<VireoColors> {
     line: Color(0xFF2A323D),
   );
 
+  static const VireoColors light = VireoColors(
+    background: Color(0xFFF5F5F5),
+    surface: Color(0xFFFFFFFF),
+    surfaceRaised: Color(0xFFFFFFFF),
+    surfaceGradientStart: Color(0xFFFFFFFF),
+    surfaceGradientEnd: Color(0xFFF0F0F0),
+    ember: Color(0xFFE8763C),
+    gold: Color(0xFFC9A24B),
+    success: Color(0xFF5FAE7A),
+    danger: Color(0xFFE85C5C),
+    recovery: Color(0xFF4DA3B8),
+    text: Color(0xFF1A1A1A),
+    textMute: Color(0xFF6B7280),
+    line: Color(0xFFE5E7EB),
+  );
+
   @override
   VireoColors copyWith({
     Color? background,

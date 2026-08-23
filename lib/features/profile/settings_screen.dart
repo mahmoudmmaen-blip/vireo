@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/theme_mode_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/features/auth/auth_screen.dart';
@@ -22,6 +23,39 @@ class SettingsScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
         children: [
+          ListTile(
+            title: Text(l10n.settingsThemeTitle),
+          ),
+          Consumer(
+            builder: (context, ref, _) {
+              final mode = ref.watch(themeModeProvider);
+              return Column(
+                children: [
+                  RadioListTile<ThemeMode>(
+                    title: Text(l10n.settingsThemeDark),
+                    value: ThemeMode.dark,
+                    groupValue: mode,
+                    onChanged: (v) {
+                      if (v != null) {
+                        ref.read(themeModeProvider.notifier).setThemeMode(v);
+                      }
+                    },
+                  ),
+                  RadioListTile<ThemeMode>(
+                    title: Text(l10n.settingsThemeLight),
+                    value: ThemeMode.light,
+                    groupValue: mode,
+                    onChanged: (v) {
+                      if (v != null) {
+                        ref.read(themeModeProvider.notifier).setThemeMode(v);
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.workspace_premium_outlined),
             title: Text(l10n.paywallTitle),

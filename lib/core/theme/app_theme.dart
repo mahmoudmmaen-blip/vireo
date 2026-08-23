@@ -3,10 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 
-/// Dark-only theme configuration for Vireo.
+/// Dark and light theme configuration for Vireo.
 abstract final class AppTheme {
-  static ThemeData get dark {
-    const colors = VireoColors.dark;
+  static ThemeData get dark => _build(VireoColors.dark, Brightness.dark);
+
+  static ThemeData get light => _build(VireoColors.light, Brightness.light);
+
+  static ThemeData _build(VireoColors colors, Brightness brightness) {
 
     final cairo = GoogleFonts.cairoTextTheme();
     final tajawal = GoogleFonts.tajawalTextTheme();
@@ -40,25 +43,38 @@ abstract final class AppTheme {
       labelSmall: body(tajawal.labelSmall?.copyWith(color: colors.textMute)),
     );
 
-    final colorScheme = ColorScheme.dark(
-      surface: colors.surface,
-      primary: colors.ember,
-      secondary: colors.gold,
-      error: colors.danger,
-      onSurface: colors.text,
-      onPrimary: colors.text,
-      onSecondary: colors.background,
-      onError: colors.text,
-      surfaceContainerHighest: colors.surfaceRaised,
-      outline: colors.line,
-    );
+    final colorScheme = brightness == Brightness.dark
+        ? ColorScheme.dark(
+            surface: colors.surface,
+            primary: colors.ember,
+            secondary: colors.gold,
+            error: colors.danger,
+            onSurface: colors.text,
+            onPrimary: colors.text,
+            onSecondary: colors.background,
+            onError: colors.text,
+            surfaceContainerHighest: colors.surfaceRaised,
+            outline: colors.line,
+          )
+        : ColorScheme.light(
+            surface: colors.surface,
+            primary: colors.ember,
+            secondary: colors.gold,
+            error: colors.danger,
+            onSurface: colors.text,
+            onPrimary: Colors.white,
+            onSecondary: colors.text,
+            onError: Colors.white,
+            surfaceContainerHighest: colors.surfaceRaised,
+            outline: colors.line,
+          );
 
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.dark,
+      brightness: brightness,
       scaffoldBackgroundColor: colors.background,
       colorScheme: colorScheme,
-      extensions: const [VireoColors.dark],
+      extensions: [colors],
       appBarTheme: AppBarTheme(
         backgroundColor: colors.surface,
         foregroundColor: colors.text,
