@@ -2,6 +2,7 @@ import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/data/models/onboarding_draft.dart';
+import 'package:vireo/data/repositories/workout_repository.dart';
 
 class OnboardingRepository {
   const OnboardingRepository();
@@ -125,6 +126,7 @@ class OnboardingRepository {
         await HiveService.cacheBox.put('guest_profile', draft.toUserRow(effectiveUserId));
       }
 
+      await WorkoutRepository.saveProgramStart(DateTime.now());
       await markOnboardingComplete();
     } catch (_) {
       rethrow;
