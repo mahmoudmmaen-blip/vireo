@@ -40,7 +40,10 @@ final homeDashboardProvider = Provider<HomeDashboardSnapshot>((ref) {
   final auth = ref.watch(authProvider).valueOrNull;
   final isGuest = auth is AppAuthGuest;
   final onboardingComplete = ref.watch(onboardingCompleteProvider);
-  final start = WorkoutRepository.programStartFromHive();
+  var start = WorkoutRepository.programStartFromHive();
+  if (onboardingComplete && start == null) {
+    start = DateTime.now().subtract(const Duration(days: 6));
+  }
   final programDay = onboardingComplete
       ? ProgramGenerator.programDayFromStart(start)
       : 0;
