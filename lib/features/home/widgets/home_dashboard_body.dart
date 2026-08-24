@@ -4,6 +4,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
+import 'package:vireo/core/theme/vireo_scroll_behavior.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
@@ -34,9 +35,11 @@ class HomeDashboardBody extends ConsumerWidget {
     final confirmed = ref.watch(confirmedMealsProvider);
     final weeklyDue = ref.watch(weeklyCheckInDueProvider);
 
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-      children: [
+    return NoScrollbarScrollConfiguration(
+      child: ListView(
+        primary: false,
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        children: [
         Text(
           l10n.homeGreeting(homeDisplayName(l10n, dash, isGuest)),
           style: Theme.of(context).textTheme.headlineSmall,
@@ -151,6 +154,7 @@ class HomeDashboardBody extends ConsumerWidget {
           ),
         ],
       ],
+      ),
     );
   }
 }

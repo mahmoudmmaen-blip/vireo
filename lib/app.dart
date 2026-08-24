@@ -7,6 +7,7 @@ import 'package:vireo/core/services/app_skin_provider.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/services/theme_mode_provider.dart';
 import 'package:vireo/core/theme/app_theme.dart';
+import 'package:vireo/core/theme/vireo_scroll_behavior.dart';
 import 'package:vireo/core/widgets/app_router.dart';
 
 class VireoApp extends ConsumerWidget {
@@ -26,6 +27,7 @@ class VireoApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Vireo',
       debugShowCheckedModeBanner: false,
+      scrollBehavior: const VireoScrollBehavior(),
       theme: AppTheme.lightWithAccent(accent),
       darkTheme: AppTheme.darkWithAccent(accent, skin),
       themeMode: effectiveMode,

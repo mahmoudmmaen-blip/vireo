@@ -5,6 +5,7 @@ import 'package:vireo/core/services/accent_palette_provider.dart';
 import 'package:vireo/core/services/app_skin_provider.dart';
 import 'package:vireo/core/services/theme_mode_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/theme/vireo_scroll_behavior.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/features/auth/auth_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
@@ -26,8 +27,10 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: colors.background,
       appBar: AppBar(title: Text(l10n.settingsTitle)),
-      body: ListView(
-        children: [
+      body: NoScrollbarScrollConfiguration(
+        child: ListView(
+          primary: false,
+          children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: Text(
@@ -228,6 +231,7 @@ class SettingsScreen extends ConsumerWidget {
             },
           ),
         ],
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/theme/vireo_scroll_behavior.dart';
 
 class OnboardingStepShell extends StatelessWidget {
   const OnboardingStepShell({
@@ -54,17 +55,20 @@ class OnboardingStepShell extends StatelessWidget {
             minHeight: 3,
           ),
           Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(title, style: Theme.of(context).textTheme.headlineSmall),
-                  const SizedBox(height: 8),
-                  Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
-                  const SizedBox(height: 24),
-                  child,
-                ],
+            child: NoScrollbarScrollConfiguration(
+              child: SingleChildScrollView(
+                primary: false,
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(title, style: Theme.of(context).textTheme.headlineSmall),
+                    const SizedBox(height: 8),
+                    Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                    const SizedBox(height: 24),
+                    child,
+                  ],
+                ),
               ),
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
+import 'package:vireo/core/theme/vireo_scroll_behavior.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
 
@@ -30,21 +31,8 @@ class Step5Consent extends ConsumerWidget {
           Container(
             constraints: const BoxConstraints(maxHeight: 340),
             decoration: VireoDecorations.premiumCard(colors),
-            child: Scrollbar(
-              thumbVisibility: true,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _DisclaimerSection(icon: '⚠️', text: l10n.legalDisclaimerSection1),
-                    _DisclaimerSection(icon: '🏥', text: l10n.legalDisclaimerSection2),
-                    _DisclaimerSection(icon: '💊', text: l10n.legalDisclaimerSection3),
-                    _DisclaimerSection(icon: '🧬', text: l10n.legalDisclaimerSection4),
-                    _DisclaimerSection(icon: '⚖️', text: l10n.legalDisclaimerSection5),
-                  ],
-                ),
-              ),
+            child: const NoScrollbarScrollConfiguration(
+              child: _DisclaimerScrollBox(),
             ),
           ),
           const SizedBox(height: 16),
@@ -63,6 +51,50 @@ class Step5Consent extends ConsumerWidget {
                   );
             },
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DisclaimerScrollBox extends StatefulWidget {
+  const _DisclaimerScrollBox();
+
+  @override
+  State<_DisclaimerScrollBox> createState() => _DisclaimerScrollBoxState();
+}
+
+class _DisclaimerScrollBoxState extends State<_DisclaimerScrollBox> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return SingleChildScrollView(
+      controller: _scrollController,
+      primary: false,
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _DisclaimerSection(icon: '⚠️', text: l10n.legalDisclaimerSection1),
+          _DisclaimerSection(icon: '🏥', text: l10n.legalDisclaimerSection2),
+          _DisclaimerSection(icon: '💊', text: l10n.legalDisclaimerSection3),
+          _DisclaimerSection(icon: '🧬', text: l10n.legalDisclaimerSection4),
+          _DisclaimerSection(icon: '⚖️', text: l10n.legalDisclaimerSection5),
         ],
       ),
     );
