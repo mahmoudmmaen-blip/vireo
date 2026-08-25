@@ -1353,4 +1353,145 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get profileBmiExplainFull =>
       'مؤشر كتلة الجسم (BMI) هو مقياس لتقييم الوزن بالنسبة للطول. أداة فحص عامة — وليس تشخيصاً طبياً.';
+
+  @override
+  String get mealBuilderCheeseTitle => 'الجبن';
+
+  @override
+  String get mealBuilderCheeseNone => 'بدون جبن';
+
+  @override
+  String get mealBuilderCheeseCottage => 'جبن قريش';
+
+  @override
+  String get mealBuilderCheeseCheddar => 'شيدر';
+
+  @override
+  String get mealBuilderCheeseMozzarella => 'موزاريلا';
+
+  @override
+  String get mealBuilderCheeseFeta => 'فيتا';
+
+  @override
+  String mealBuilderCheeseGrams(int grams) {
+    return 'الكمية: ${grams}g';
+  }
+
+  @override
+  String get homeRecoveryFormulaExplain =>
+      'التعافي = أيام الراحة (40%) + هدف الخطوات (30%) + التزام الوجبات/التمارين (30%).';
+
+  @override
+  String get homeRecoveryFactorRestDays => 'أيام الراحة';
+
+  @override
+  String get homeRecoveryFactorSteps => 'هدف الخطوات';
+
+  @override
+  String get homeRecoveryFactorConsistency => 'التزام الوجبات والتمارين';
+
+  @override
+  String homeRecoveryRestDetail(int days) {
+    return '$days يوم راحة هذا الأسبوع';
+  }
+
+  @override
+  String homeRecoveryStepsDetail(int current, int goal) {
+    return '$current / $goal خطوة اليوم';
+  }
+
+  @override
+  String homeRecoveryConsistencyDetail(
+    int mealsDone,
+    int mealsTotal,
+    int wDone,
+    int wTotal,
+  ) {
+    return 'وجبات $mealsDone/$mealsTotal · تمارين $wDone/$wTotal';
+  }
+
+  @override
+  String get homeRecoveryTipSteps => 'حقّق هدف خطواتك اليومي لرفع هذا المحور';
+
+  @override
+  String get homeRecoveryTipConsistency =>
+      'أكّد الوجبات وأكمِل التمارين المخططة';
+
+  @override
+  String homeRecoveryMathLine(int rest, int steps, int consistency, int total) {
+    return '$rest + $steps + $consistency = $total%';
+  }
+
+  @override
+  String get cardioTitle => 'كارديو والنشاط اليومي';
+
+  @override
+  String get cardioSubtitle =>
+      'سجّل مشي سريع أو جري وغيرها — السعرات = MET × الوزن × الوقت.';
+
+  @override
+  String get cardioSelectActivity => 'النشاط';
+
+  @override
+  String cardioDuration(int minutes) {
+    return 'المدة: $minutes دقيقة';
+  }
+
+  @override
+  String cardioEstimatedBurn(int kcal) {
+    return 'حرق تقديري: $kcal سعرة';
+  }
+
+  @override
+  String cardioMetHint(String met) {
+    return 'MET $met · المعادلة: MET × كجم × ساعات';
+  }
+
+  @override
+  String get cardioLogButton => 'تسجيل النشاط';
+
+  @override
+  String get cardioLoggedSnack => 'تم تسجيل جلسة الكارديو';
+
+  @override
+  String cardioTodayTotal(int kcal) {
+    return 'محروق اليوم: $kcal سعرة';
+  }
+
+  @override
+  String get cardioEmpty => 'لا يوجد كارديو بعد — سجّل أول جلسة أعلاه.';
+
+  @override
+  String cardioLogSubtitle(int minutes, int kcal) {
+    return '$minutes دقيقة · $kcal سعرة';
+  }
+
+  @override
+  String get cardioLogCta => 'تسجيل كارديو';
+
+  @override
+  String get cardioBriskWalking => 'مشي سريع';
+
+  @override
+  String get cardioRunning => 'جري';
+
+  @override
+  String get cardioCycling => 'دراجة';
+
+  @override
+  String get cardioSwimming => 'سباحة';
+
+  @override
+  String get cardioJumpRope => 'نط الحبل';
+
+  @override
+  String get cardioHiit => 'HIIT';
+
+  @override
+  String get cardioElliptical => 'إلپتيكال';
+
+  @override
+  String workoutGoalPlanLabel(String goal) {
+    return 'الخطة لـ: $goal';
+  }
 }

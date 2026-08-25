@@ -2520,6 +2520,233 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Body Mass Index (BMI) is a measure to assess weight relative to height. It is a general screening tool — not a medical diagnosis.'**
   String get profileBmiExplainFull;
+
+  /// No description provided for @mealBuilderCheeseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cheese'**
+  String get mealBuilderCheeseTitle;
+
+  /// No description provided for @mealBuilderCheeseNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No cheese'**
+  String get mealBuilderCheeseNone;
+
+  /// No description provided for @mealBuilderCheeseCottage.
+  ///
+  /// In en, this message translates to:
+  /// **'Cottage cheese'**
+  String get mealBuilderCheeseCottage;
+
+  /// No description provided for @mealBuilderCheeseCheddar.
+  ///
+  /// In en, this message translates to:
+  /// **'Cheddar'**
+  String get mealBuilderCheeseCheddar;
+
+  /// No description provided for @mealBuilderCheeseMozzarella.
+  ///
+  /// In en, this message translates to:
+  /// **'Mozzarella'**
+  String get mealBuilderCheeseMozzarella;
+
+  /// No description provided for @mealBuilderCheeseFeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Feta'**
+  String get mealBuilderCheeseFeta;
+
+  /// No description provided for @mealBuilderCheeseGrams.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity: {grams}g'**
+  String mealBuilderCheeseGrams(int grams);
+
+  /// No description provided for @homeRecoveryFormulaExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery = Rest days (40%) + Step target (30%) + Meal/workout consistency (30%).'**
+  String get homeRecoveryFormulaExplain;
+
+  /// No description provided for @homeRecoveryFactorRestDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest days'**
+  String get homeRecoveryFactorRestDays;
+
+  /// No description provided for @homeRecoveryFactorSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Step count target'**
+  String get homeRecoveryFactorSteps;
+
+  /// No description provided for @homeRecoveryFactorConsistency.
+  ///
+  /// In en, this message translates to:
+  /// **'Meal & workout consistency'**
+  String get homeRecoveryFactorConsistency;
+
+  /// No description provided for @homeRecoveryRestDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} rest day(s) this week'**
+  String homeRecoveryRestDetail(int days);
+
+  /// No description provided for @homeRecoveryStepsDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {goal} steps today'**
+  String homeRecoveryStepsDetail(int current, int goal);
+
+  /// No description provided for @homeRecoveryConsistencyDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Meals {mealsDone}/{mealsTotal} · Workouts {wDone}/{wTotal}'**
+  String homeRecoveryConsistencyDetail(
+    int mealsDone,
+    int mealsTotal,
+    int wDone,
+    int wTotal,
+  );
+
+  /// No description provided for @homeRecoveryTipSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Hit your daily step goal to lift this pillar'**
+  String get homeRecoveryTipSteps;
+
+  /// No description provided for @homeRecoveryTipConsistency.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm meals and finish planned workouts'**
+  String get homeRecoveryTipConsistency;
+
+  /// No description provided for @homeRecoveryMathLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{rest} + {steps} + {consistency} = {total}%'**
+  String homeRecoveryMathLine(int rest, int steps, int consistency, int total);
+
+  /// No description provided for @cardioTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cardio & daily activity'**
+  String get cardioTitle;
+
+  /// No description provided for @cardioSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log brisk walks, runs, and more — calories use MET × weight × time.'**
+  String get cardioSubtitle;
+
+  /// No description provided for @cardioSelectActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get cardioSelectActivity;
+
+  /// No description provided for @cardioDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration: {minutes} min'**
+  String cardioDuration(int minutes);
+
+  /// No description provided for @cardioEstimatedBurn.
+  ///
+  /// In en, this message translates to:
+  /// **'Est. burn: {kcal} kcal'**
+  String cardioEstimatedBurn(int kcal);
+
+  /// No description provided for @cardioMetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'MET {met} · formula: MET × kg × hours'**
+  String cardioMetHint(String met);
+
+  /// No description provided for @cardioLogButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Log activity'**
+  String get cardioLogButton;
+
+  /// No description provided for @cardioLoggedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Cardio session logged'**
+  String get cardioLoggedSnack;
+
+  /// No description provided for @cardioTodayTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Burned today: {kcal} kcal'**
+  String cardioTodayTotal(int kcal);
+
+  /// No description provided for @cardioEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No cardio logged yet — add your first session above.'**
+  String get cardioEmpty;
+
+  /// No description provided for @cardioLogSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min · {kcal} kcal'**
+  String cardioLogSubtitle(int minutes, int kcal);
+
+  /// No description provided for @cardioLogCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Log cardio activity'**
+  String get cardioLogCta;
+
+  /// No description provided for @cardioBriskWalking.
+  ///
+  /// In en, this message translates to:
+  /// **'Brisk walking'**
+  String get cardioBriskWalking;
+
+  /// No description provided for @cardioRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Running'**
+  String get cardioRunning;
+
+  /// No description provided for @cardioCycling.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycling'**
+  String get cardioCycling;
+
+  /// No description provided for @cardioSwimming.
+  ///
+  /// In en, this message translates to:
+  /// **'Swimming'**
+  String get cardioSwimming;
+
+  /// No description provided for @cardioJumpRope.
+  ///
+  /// In en, this message translates to:
+  /// **'Jump rope'**
+  String get cardioJumpRope;
+
+  /// No description provided for @cardioHiit.
+  ///
+  /// In en, this message translates to:
+  /// **'HIIT'**
+  String get cardioHiit;
+
+  /// No description provided for @cardioElliptical.
+  ///
+  /// In en, this message translates to:
+  /// **'Elliptical'**
+  String get cardioElliptical;
+
+  /// No description provided for @workoutGoalPlanLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan for: {goal}'**
+  String workoutGoalPlanLabel(String goal);
 }
 
 class _AppLocalizationsDelegate

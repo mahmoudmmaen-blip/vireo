@@ -78,6 +78,54 @@ class MealBuilderPanel extends ConsumerWidget {
               );
             }).toList(),
           ),
+          if (state.supportsCheese) ...[
+            const SizedBox(height: 16),
+            Text(l10n.mealBuilderCheeseTitle, style: Theme.of(context).textTheme.labelLarge),
+            const SizedBox(height: 8),
+            DropdownButtonFormField<CheeseType>(
+              key: ValueKey('${mealType.name}_${state.cheeseType.name}'),
+              initialValue: state.cheeseType,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: colors.surface,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: colors.line),
+                ),
+              ),
+              items: CheeseType.values
+                  .map(
+                    (c) => DropdownMenuItem(
+                      value: c,
+                      child: Text(_cheeseLabel(l10n, c)),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (value) {
+                if (value == null) return;
+                ref.read(notifier.notifier).state =
+                    state.copyWith(cheeseType: value);
+              },
+            ),
+            if (state.cheeseType != CheeseType.none) ...[
+              const SizedBox(height: 12),
+              Text(
+                l10n.mealBuilderCheeseGrams(state.cheeseGrams),
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
+              Slider(
+                value: state.cheeseGrams.toDouble().clamp(10, 150),
+                min: 10,
+                max: 150,
+                divisions: 28,
+                label: '${state.cheeseGrams}g',
+                onChanged: (v) {
+                  ref.read(notifier.notifier).state =
+                      state.copyWith(cheeseGrams: v.round());
+                },
+              ),
+            ],
+          ],
           const SizedBox(height: 16),
           Text(l10n.mealBuilderAddOns, style: Theme.of(context).textTheme.labelLarge),
           const SizedBox(height: 8),
@@ -147,11 +195,18 @@ class MealBuilderPanel extends ConsumerWidget {
       };
 
   String _addonLabel(AppLocalizations l10n, MealAddOn addon) => switch (addon) {
-        MealAddOn.cheese => l10n.mealBuilderAddonCheese,
         MealAddOn.vegetables => l10n.mealBuilderAddonVeggies,
         MealAddOn.wholeGrainBread => l10n.mealBuilderAddonBread,
         MealAddOn.rice => l10n.mealBuilderAddonRice,
         MealAddOn.yogurt => l10n.mealBuilderAddonYogurt,
+      };
+
+  String _cheeseLabel(AppLocalizations l10n, CheeseType type) => switch (type) {
+        CheeseType.none => l10n.mealBuilderCheeseNone,
+        CheeseType.cottage => l10n.mealBuilderCheeseCottage,
+        CheeseType.cheddar => l10n.mealBuilderCheeseCheddar,
+        CheeseType.mozzarella => l10n.mealBuilderCheeseMozzarella,
+        CheeseType.feta => l10n.mealBuilderCheeseFeta,
       };
 }
 

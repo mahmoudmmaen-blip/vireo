@@ -9,6 +9,8 @@ import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/auth/widgets/guest_auth_gate.dart';
+import 'package:vireo/features/cardio/providers/cardio_log_provider.dart';
+import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
 import 'package:vireo/features/home/widgets/recovery_breakdown_sheet.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
@@ -34,6 +36,7 @@ class HomeDashboardBody extends ConsumerWidget {
     final mealsAsync = ref.watch(effectiveTodayMealsProvider);
     final confirmed = ref.watch(confirmedMealsProvider);
     final weeklyDue = ref.watch(weeklyCheckInDueProvider);
+    final cardioToday = ref.watch(todayCardioCaloriesProvider);
 
     return NoScrollbarScrollConfiguration(
       child: ListView(
@@ -66,7 +69,7 @@ class HomeDashboardBody extends ConsumerWidget {
         const SizedBox(height: 12),
         workoutAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => const SizedBox.shrink(),
+          error: (_, _) => const SizedBox.shrink(),
           data: (session) {
             if (!dash.hasProgram) {
               return _StartProgramCard(
@@ -98,7 +101,7 @@ class HomeDashboardBody extends ConsumerWidget {
         const SizedBox(height: 12),
         mealsAsync.when(
           loading: () => const SizedBox.shrink(),
-          error: (_, __) => const SizedBox.shrink(),
+          error: (_, _) => const SizedBox.shrink(),
           data: (meals) {
             final breakfast = meals
                 .where((m) => m.mealType == MealType.breakfast)
@@ -140,7 +143,48 @@ class HomeDashboardBody extends ConsumerWidget {
         const SizedBox(height: 12),
         _RecoveryScoreCard(
           score: dash.recoveryScore,
-          onInfo: () => showRecoveryBreakdownSheet(context, dash.recoveryScore),
+          onInfo: () => showRecoveryBreakdownSheet(context, dash.recovery),
+        ),
+        const SizedBox(height: 12),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const CardioActivityScreen(),
+                ),
+              );
+            },
+            borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
+            child: Ink(
+              padding: const EdgeInsets.all(14),
+              decoration: VireoDecorations.premiumCard(colors),
+              child: Row(
+                children: [
+                  Icon(Icons.directions_run, color: colors.ember),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.cardioTitle,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          l10n.cardioTodayTotal(cardioToday),
+                          style: TextStyle(color: colors.textMute, fontSize: 13),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.chevron_right, color: colors.textMute),
+                ],
+              ),
+            ),
+          ),
         ),
         if (isGuest) ...[
           const SizedBox(height: 16),

@@ -2,21 +2,62 @@ import 'package:vireo/data/models/exercise.dart';
 import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/data/models/training_environment.dart';
 
-/// Weekly split + goal-aware exercise selection.
+/// Weekly split templates keyed by [FitnessGoal], plus goal-aware selection.
 abstract final class ProgramGenerator {
   static const programLengthDays = 84;
 
-  /// Sun: Chest/Triceps · Mon: Back/Biceps · Tue: Legs · Wed: Cardio
-  /// Thu: Shoulders · Fri: Full Body · Sat: Rest
-  static const _splitMuscles = <int, List<String>>{
+  /// Default / all-of-above: push–pull–legs + cardio + shoulders + full body.
+  static const _splitAll = <int, List<String>>{
     DateTime.sunday: ['chest', 'triceps'],
     DateTime.monday: ['back', 'biceps'],
     DateTime.tuesday: ['legs', 'posterior_chain'],
     DateTime.wednesday: ['cardio'],
     DateTime.thursday: ['shoulders'],
     DateTime.friday: ['full_body', 'core'],
-    DateTime.saturday: [], // rest
+    DateTime.saturday: [],
   };
+
+  /// Muscle building: higher volume strength days, lighter cardio midweek.
+  static const _splitMuscle = <int, List<String>>{
+    DateTime.sunday: ['chest', 'triceps'],
+    DateTime.monday: ['back', 'biceps'],
+    DateTime.tuesday: ['legs', 'posterior_chain'],
+    DateTime.wednesday: ['shoulders', 'core'],
+    DateTime.thursday: ['chest', 'back'],
+    DateTime.friday: ['legs', 'full_body'],
+    DateTime.saturday: [],
+  };
+
+  /// Weight loss: more cardio/HIIT days interleaved with full-body strength.
+  static const _splitWeightLoss = <int, List<String>>{
+    DateTime.sunday: ['full_body', 'core'],
+    DateTime.monday: ['cardio'],
+    DateTime.tuesday: ['legs', 'posterior_chain'],
+    DateTime.wednesday: ['cardio'],
+    DateTime.thursday: ['chest', 'back'],
+    DateTime.friday: ['cardio', 'full_body'],
+    DateTime.saturday: [],
+  };
+
+  /// General vitality: balanced mobility-friendly mix.
+  static const _splitVitality = <int, List<String>>{
+    DateTime.sunday: ['full_body'],
+    DateTime.monday: ['cardio'],
+    DateTime.tuesday: ['legs', 'core'],
+    DateTime.wednesday: [],
+    DateTime.thursday: ['back', 'shoulders'],
+    DateTime.friday: ['cardio', 'core'],
+    DateTime.saturday: [],
+  };
+
+  static Map<int, List<String>> splitForGoal(FitnessGoal goal) {
+    return switch (goal) {
+      FitnessGoal.weightLoss => _splitWeightLoss,
+      FitnessGoal.muscleGain => _splitMuscle,
+      FitnessGoal.generalVitality => _splitVitality,
+      FitnessGoal.allOfAbove => _splitAll,
+    };
+  }
 
   static List<Exercise> buildTodayExercises({
     required FitnessGoal goal,
@@ -27,7 +68,7 @@ abstract final class ProgramGenerator {
     if (pool.isEmpty) return const [];
 
     final weekday = DateTime.now().weekday;
-    final splitMuscles = _splitMuscles[weekday] ?? const [];
+    final splitMuscles = splitForGoal(goal)[weekday] ?? const [];
 
     if (splitMuscles.isEmpty) {
       return const [];
@@ -44,7 +85,7 @@ abstract final class ProgramGenerator {
     }
 
     final sorted = _sortForGoal(eligible, goal, dayIndex);
-    final count = _exerciseCountForGoal(goal, weekday);
+    final count = _exerciseCountForGoal(goal, weekday, splitMuscles);
 
     return sorted.take(count).map((e) => _tuneForGoal(e, goal, weekday)).toList();
   }
@@ -69,7 +110,10 @@ abstract final class ProgramGenerator {
           .where((e) => e.matchesEnvironment(environment))
           .where((e) => e.type == ExerciseType.cardio)
           .toList();
-      return cardio.take(3).map((e) => _tuneForGoal(e, goal, DateTime.now().weekday)).toList();
+      return cardio
+          .take(3)
+          .map((e) => _tuneForGoal(e, goal, DateTime.now().weekday))
+          .toList();
     }
     return pool
         .where((e) => e.matchesEnvironment(environment))
@@ -91,23 +135,22 @@ abstract final class ProgramGenerator {
     };
   }
 
-  static int _exerciseCountForGoal(FitnessGoal goal, int weekday) {
-    if (weekday == DateTime.wednesday) {
+  static int _exerciseCountForGoal(
+    FitnessGoal goal,
+    int weekday,
+    List<String> muscles,
+  ) {
+    final isCardioDay = muscles.length == 1 && muscles.contains('cardio');
+    if (isCardioDay) {
       return switch (goal) {
         FitnessGoal.weightLoss => 4,
+        FitnessGoal.allOfAbove => 3,
         _ => 2,
-      };
-    }
-    if (weekday == DateTime.friday) {
-      return switch (goal) {
-        FitnessGoal.muscleGain => 5,
-        FitnessGoal.allOfAbove => 4,
-        _ => 3,
       };
     }
     return switch (goal) {
       FitnessGoal.weightLoss => 3,
-      FitnessGoal.muscleGain => 4,
+      FitnessGoal.muscleGain => 5,
       FitnessGoal.generalVitality => 3,
       FitnessGoal.allOfAbove => 4,
     };
@@ -170,7 +213,8 @@ abstract final class ProgramGenerator {
         ),
     };
 
-    if (weekday == DateTime.wednesday && goal == FitnessGoal.weightLoss) {
+    final muscles = splitForGoal(goal)[weekday] ?? const [];
+    if (muscles.contains('cardio') && goal == FitnessGoal.weightLoss) {
       return base.copyWith(
         reps: (base.reps * 1.1).round(),
         restSeconds: (base.restSeconds * 0.85).round().clamp(15, 45),
@@ -179,17 +223,23 @@ abstract final class ProgramGenerator {
     return base;
   }
 
-  static String splitLabelKeyForToday() {
-    return switch (DateTime.now().weekday) {
-      DateTime.sunday => 'workoutSplitChestTriceps',
-      DateTime.monday => 'workoutSplitBackBiceps',
-      DateTime.tuesday => 'workoutSplitLegs',
-      DateTime.wednesday => 'workoutSplitCardio',
-      DateTime.thursday => 'workoutSplitShoulders',
-      DateTime.friday => 'workoutSplitFullBody',
-      DateTime.saturday => 'workoutSplitRest',
-      _ => 'workoutSplitFullBody',
-    };
+  static String splitLabelKeyForToday({FitnessGoal? goal}) {
+    final g = goal ?? FitnessGoal.allOfAbove;
+    final muscles = splitForGoal(g)[DateTime.now().weekday] ?? const [];
+    if (muscles.isEmpty) return 'workoutSplitRest';
+    if (muscles.contains('cardio') && muscles.length == 1) {
+      return 'workoutSplitCardio';
+    }
+    if (muscles.contains('chest') && muscles.contains('triceps')) {
+      return 'workoutSplitChestTriceps';
+    }
+    if (muscles.contains('back') && muscles.contains('biceps')) {
+      return 'workoutSplitBackBiceps';
+    }
+    if (muscles.contains('legs')) return 'workoutSplitLegs';
+    if (muscles.contains('shoulders')) return 'workoutSplitShoulders';
+    if (muscles.contains('full_body')) return 'workoutSplitFullBody';
+    return 'workoutSplitFullBody';
   }
 
   static int programDayFromStart(DateTime? startDate) {

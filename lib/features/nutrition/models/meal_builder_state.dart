@@ -3,7 +3,23 @@ import 'package:vireo/data/models/meal_type.dart';
 
 enum FatSource { butter, ghee, oliveOil, oilSpray }
 
-enum MealAddOn { cheese, vegetables, wholeGrainBread, rice, yogurt }
+enum MealAddOn { vegetables, wholeGrainBread, rice, yogurt }
+
+/// Cheese varieties with macros per 100g.
+enum CheeseType {
+  none(0, 0, 0, 0),
+  cottage(98, 11, 3, 4),
+  cheddar(403, 25, 1, 33),
+  mozzarella(280, 28, 3, 17),
+  feta(264, 14, 4, 21);
+
+  const CheeseType(this.kcalPer100g, this.proteinPer100g, this.carbsPer100g, this.fatPer100g);
+
+  final int kcalPer100g;
+  final int proteinPer100g;
+  final int carbsPer100g;
+  final int fatPer100g;
+}
 
 /// Per-meal ingredient builder with live macro recalculation.
 class MealBuilderState {
@@ -12,12 +28,16 @@ class MealBuilderState {
     this.proteinCount = 2,
     this.fatSource = FatSource.oliveOil,
     this.addOns = const {},
+    this.cheeseType = CheeseType.none,
+    this.cheeseGrams = 30,
   });
 
   final MealType mealType;
   final int proteinCount;
   final FatSource fatSource;
   final Set<MealAddOn> addOns;
+  final CheeseType cheeseType;
+  final int cheeseGrams;
 
   factory MealBuilderState.defaultsFor(MealType type) {
     return switch (type) {
@@ -52,12 +72,16 @@ class MealBuilderState {
     int? proteinCount,
     FatSource? fatSource,
     Set<MealAddOn>? addOns,
+    CheeseType? cheeseType,
+    int? cheeseGrams,
   }) {
     return MealBuilderState(
       mealType: mealType,
       proteinCount: proteinCount ?? this.proteinCount,
       fatSource: fatSource ?? this.fatSource,
       addOns: addOns ?? this.addOns,
+      cheeseType: cheeseType ?? this.cheeseType,
+      cheeseGrams: cheeseGrams ?? this.cheeseGrams,
     );
   }
 
@@ -69,14 +93,12 @@ class MealBuilderState {
 
   List<MealAddOn> get availableAddOns => switch (mealType) {
         MealType.breakfast => const [
-            MealAddOn.cheese,
             MealAddOn.vegetables,
             MealAddOn.wholeGrainBread,
           ],
         MealType.lunch => const [
             MealAddOn.rice,
             MealAddOn.vegetables,
-            MealAddOn.cheese,
           ],
         MealType.dinner => const [
             MealAddOn.rice,
@@ -85,9 +107,13 @@ class MealBuilderState {
           ],
         MealType.snack => const [
             MealAddOn.yogurt,
-            MealAddOn.cheese,
             MealAddOn.wholeGrainBread,
           ],
+      };
+
+  bool get supportsCheese => switch (mealType) {
+        MealType.breakfast || MealType.lunch || MealType.snack => true,
+        MealType.dinner => false,
       };
 
   CalorieTarget get macros {
@@ -98,23 +124,19 @@ class MealBuilderState {
 
     switch (mealType) {
       case MealType.breakfast:
-        // Eggs
         cal += proteinCount * 70;
         protein += proteinCount * 6;
         carbs += 1;
         fat += proteinCount * 5;
       case MealType.lunch:
-        // Chicken / lean protein portion (~150g each)
         cal += proteinCount * 250;
         protein += proteinCount * 35;
         fat += proteinCount * 8;
       case MealType.dinner:
-        // Fish / lean dinner portion
         cal += proteinCount * 220;
         protein += proteinCount * 32;
         fat += proteinCount * 7;
       case MealType.snack:
-        // Protein snack base
         cal += proteinCount * 100;
         protein += proteinCount * 12;
         carbs += proteinCount * 4;
@@ -136,11 +158,6 @@ class MealBuilderState {
         fat += 1;
     }
 
-    if (addOns.contains(MealAddOn.cheese)) {
-      cal += 80;
-      protein += 5;
-      fat += 6;
-    }
     if (addOns.contains(MealAddOn.vegetables)) {
       cal += 40;
       carbs += 8;
@@ -162,6 +179,14 @@ class MealBuilderState {
       protein += 10;
       carbs += 12;
       fat += 3;
+    }
+
+    if (supportsCheese && cheeseType != CheeseType.none && cheeseGrams > 0) {
+      final factor = cheeseGrams / 100.0;
+      cal += (cheeseType.kcalPer100g * factor).round();
+      protein += (cheeseType.proteinPer100g * factor).round();
+      carbs += (cheeseType.carbsPer100g * factor).round();
+      fat += (cheeseType.fatPer100g * factor).round();
     }
 
     return CalorieTarget(

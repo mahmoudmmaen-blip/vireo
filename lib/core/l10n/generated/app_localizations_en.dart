@@ -1368,4 +1368,147 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get profileBmiExplainFull =>
       'Body Mass Index (BMI) is a measure to assess weight relative to height. It is a general screening tool — not a medical diagnosis.';
+
+  @override
+  String get mealBuilderCheeseTitle => 'Cheese';
+
+  @override
+  String get mealBuilderCheeseNone => 'No cheese';
+
+  @override
+  String get mealBuilderCheeseCottage => 'Cottage cheese';
+
+  @override
+  String get mealBuilderCheeseCheddar => 'Cheddar';
+
+  @override
+  String get mealBuilderCheeseMozzarella => 'Mozzarella';
+
+  @override
+  String get mealBuilderCheeseFeta => 'Feta';
+
+  @override
+  String mealBuilderCheeseGrams(int grams) {
+    return 'Quantity: ${grams}g';
+  }
+
+  @override
+  String get homeRecoveryFormulaExplain =>
+      'Recovery = Rest days (40%) + Step target (30%) + Meal/workout consistency (30%).';
+
+  @override
+  String get homeRecoveryFactorRestDays => 'Rest days';
+
+  @override
+  String get homeRecoveryFactorSteps => 'Step count target';
+
+  @override
+  String get homeRecoveryFactorConsistency => 'Meal & workout consistency';
+
+  @override
+  String homeRecoveryRestDetail(int days) {
+    return '$days rest day(s) this week';
+  }
+
+  @override
+  String homeRecoveryStepsDetail(int current, int goal) {
+    return '$current / $goal steps today';
+  }
+
+  @override
+  String homeRecoveryConsistencyDetail(
+    int mealsDone,
+    int mealsTotal,
+    int wDone,
+    int wTotal,
+  ) {
+    return 'Meals $mealsDone/$mealsTotal · Workouts $wDone/$wTotal';
+  }
+
+  @override
+  String get homeRecoveryTipSteps =>
+      'Hit your daily step goal to lift this pillar';
+
+  @override
+  String get homeRecoveryTipConsistency =>
+      'Confirm meals and finish planned workouts';
+
+  @override
+  String homeRecoveryMathLine(int rest, int steps, int consistency, int total) {
+    return '$rest + $steps + $consistency = $total%';
+  }
+
+  @override
+  String get cardioTitle => 'Cardio & daily activity';
+
+  @override
+  String get cardioSubtitle =>
+      'Log brisk walks, runs, and more — calories use MET × weight × time.';
+
+  @override
+  String get cardioSelectActivity => 'Activity';
+
+  @override
+  String cardioDuration(int minutes) {
+    return 'Duration: $minutes min';
+  }
+
+  @override
+  String cardioEstimatedBurn(int kcal) {
+    return 'Est. burn: $kcal kcal';
+  }
+
+  @override
+  String cardioMetHint(String met) {
+    return 'MET $met · formula: MET × kg × hours';
+  }
+
+  @override
+  String get cardioLogButton => 'Log activity';
+
+  @override
+  String get cardioLoggedSnack => 'Cardio session logged';
+
+  @override
+  String cardioTodayTotal(int kcal) {
+    return 'Burned today: $kcal kcal';
+  }
+
+  @override
+  String get cardioEmpty =>
+      'No cardio logged yet — add your first session above.';
+
+  @override
+  String cardioLogSubtitle(int minutes, int kcal) {
+    return '$minutes min · $kcal kcal';
+  }
+
+  @override
+  String get cardioLogCta => 'Log cardio activity';
+
+  @override
+  String get cardioBriskWalking => 'Brisk walking';
+
+  @override
+  String get cardioRunning => 'Running';
+
+  @override
+  String get cardioCycling => 'Cycling';
+
+  @override
+  String get cardioSwimming => 'Swimming';
+
+  @override
+  String get cardioJumpRope => 'Jump rope';
+
+  @override
+  String get cardioHiit => 'HIIT';
+
+  @override
+  String get cardioElliptical => 'Elliptical';
+
+  @override
+  String workoutGoalPlanLabel(String goal) {
+    return 'Plan for: $goal';
+  }
 }

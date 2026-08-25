@@ -72,6 +72,8 @@ class OnboardingNotifier extends Notifier<OnboardingUiState> {
     if (draft.isStep1Valid) {
       OnboardingCalorieSync.syncFromDraft(draft).then((_) {
         ref.invalidate(calorieGoalProvider);
+        ref.invalidate(todayWorkoutProvider);
+        ref.invalidate(workoutProfileProvider);
       });
     }
   }
@@ -98,6 +100,7 @@ class OnboardingNotifier extends Notifier<OnboardingUiState> {
       ref.invalidate(onboardingCompleteProvider);
       ref.invalidate(calorieGoalProvider);
       ref.invalidate(todayWorkoutProvider);
+      ref.invalidate(workoutProfileProvider);
       ref.invalidate(allExercisesProvider);
       ref.invalidate(effectiveTodayMealsProvider);
       state = state.copyWith(isSubmitting: false);
