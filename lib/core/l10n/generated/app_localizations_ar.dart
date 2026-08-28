@@ -1494,4 +1494,71 @@ class AppLocalizationsAr extends AppLocalizations {
   String workoutGoalPlanLabel(String goal) {
     return 'الخطة لـ: $goal';
   }
+
+  @override
+  String get aiScanTitle => 'مسح الوجبة بالذكاء الاصطناعي';
+
+  @override
+  String get aiScanPrompt =>
+      'صوّر وجبتك — الذكاء الاصطناعي يقدّر السعرات والماكروز من حجم الحصة.';
+
+  @override
+  String get aiScanCamera => 'الكاميرا';
+
+  @override
+  String get aiScanGallery => 'المعرض';
+
+  @override
+  String get aiScanAnalyzing => 'جاري تحليل الوجبة…';
+
+  @override
+  String get aiScanOffline =>
+      'لا يوجد اتصال بالإنترنت. تحقق من الشبكة وحاول مجدداً.';
+
+  @override
+  String get aiScanFailed => 'فشل المسح. حاول مرة أخرى.';
+
+  @override
+  String get aiScanParseError =>
+      'تعذّر قراءة التحليل. جرّب صورة أخرى أو أدخل يدوياً.';
+
+  @override
+  String get aiScanConfigError =>
+      'الماسح غير مهيّأ. أضف GEMINI_API_KEY للتفعيل.';
+
+  @override
+  String get aiScanTryAgain => 'إعادة المحاولة';
+
+  @override
+  String get aiScanManualEntry => 'إدخال يدوي';
+
+  @override
+  String get aiScanCardTitle => 'امسح وجبتك بالذكاء الاصطناعي';
+
+  @override
+  String get aiScanCardSubtitle =>
+      'صوّر الوجبة — احصل على السعرات والماكروز وبدائل ذكية فوراً.';
+
+  @override
+  String get aiScanSaveToLog => 'حفظ في السجل';
+
+  @override
+  String get aiScanSavedSnack => 'تم حفظ الوجبة في سجل اليوم';
+
+  @override
+  String get aiScanMacroProtein => 'بروتين';
+
+  @override
+  String get aiScanMacroCarbs => 'كربوهيدرات';
+
+  @override
+  String get aiScanMacroFats => 'دهون';
+
+  @override
+  String get aiScanSmartSwaps => 'بدائل ذكية';
+
+  @override
+  String aiScanCaloriesChip(int calories) {
+    return '$calories سعرة';
+  }
 }

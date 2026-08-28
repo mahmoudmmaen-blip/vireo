@@ -2747,6 +2747,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Plan for: {goal}'**
   String workoutGoalPlanLabel(String goal);
+
+  /// No description provided for @aiScanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Meal Scanner'**
+  String get aiScanTitle;
+
+  /// No description provided for @aiScanPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Photograph your meal — AI estimates calories and macros from the portion size.'**
+  String get aiScanPrompt;
+
+  /// No description provided for @aiScanCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get aiScanCamera;
+
+  /// No description provided for @aiScanGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get aiScanGallery;
+
+  /// No description provided for @aiScanAnalyzing.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing meal…'**
+  String get aiScanAnalyzing;
+
+  /// No description provided for @aiScanOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection. Check your network and try again.'**
+  String get aiScanOffline;
+
+  /// No description provided for @aiScanFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan failed. Please try again.'**
+  String get aiScanFailed;
+
+  /// No description provided for @aiScanParseError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not read the analysis. Try another photo or enter manually.'**
+  String get aiScanParseError;
+
+  /// No description provided for @aiScanConfigError.
+  ///
+  /// In en, this message translates to:
+  /// **'AI scanner is not configured. Add GEMINI_API_KEY to enable.'**
+  String get aiScanConfigError;
+
+  /// No description provided for @aiScanTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get aiScanTryAgain;
+
+  /// No description provided for @aiScanManualEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual entry'**
+  String get aiScanManualEntry;
+
+  /// No description provided for @aiScanCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan your meal with AI'**
+  String get aiScanCardTitle;
+
+  /// No description provided for @aiScanCardSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Snap a photo — get calories, macros, and smart swaps instantly.'**
+  String get aiScanCardSubtitle;
+
+  /// No description provided for @aiScanSaveToLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to log'**
+  String get aiScanSaveToLog;
+
+  /// No description provided for @aiScanSavedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Meal saved to today\'s log'**
+  String get aiScanSavedSnack;
+
+  /// No description provided for @aiScanMacroProtein.
+  ///
+  /// In en, this message translates to:
+  /// **'Protein'**
+  String get aiScanMacroProtein;
+
+  /// No description provided for @aiScanMacroCarbs.
+  ///
+  /// In en, this message translates to:
+  /// **'Carbs'**
+  String get aiScanMacroCarbs;
+
+  /// No description provided for @aiScanMacroFats.
+  ///
+  /// In en, this message translates to:
+  /// **'Fats'**
+  String get aiScanMacroFats;
+
+  /// No description provided for @aiScanSmartSwaps.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart swaps'**
+  String get aiScanSmartSwaps;
+
+  /// No description provided for @aiScanCaloriesChip.
+  ///
+  /// In en, this message translates to:
+  /// **'{calories} kcal'**
+  String aiScanCaloriesChip(int calories);
 }
 
 class _AppLocalizationsDelegate

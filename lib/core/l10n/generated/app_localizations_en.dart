@@ -1511,4 +1511,71 @@ class AppLocalizationsEn extends AppLocalizations {
   String workoutGoalPlanLabel(String goal) {
     return 'Plan for: $goal';
   }
+
+  @override
+  String get aiScanTitle => 'AI Meal Scanner';
+
+  @override
+  String get aiScanPrompt =>
+      'Photograph your meal — AI estimates calories and macros from the portion size.';
+
+  @override
+  String get aiScanCamera => 'Camera';
+
+  @override
+  String get aiScanGallery => 'Gallery';
+
+  @override
+  String get aiScanAnalyzing => 'Analyzing meal…';
+
+  @override
+  String get aiScanOffline =>
+      'No internet connection. Check your network and try again.';
+
+  @override
+  String get aiScanFailed => 'Scan failed. Please try again.';
+
+  @override
+  String get aiScanParseError =>
+      'Could not read the analysis. Try another photo or enter manually.';
+
+  @override
+  String get aiScanConfigError =>
+      'AI scanner is not configured. Add GEMINI_API_KEY to enable.';
+
+  @override
+  String get aiScanTryAgain => 'Try again';
+
+  @override
+  String get aiScanManualEntry => 'Manual entry';
+
+  @override
+  String get aiScanCardTitle => 'Scan your meal with AI';
+
+  @override
+  String get aiScanCardSubtitle =>
+      'Snap a photo — get calories, macros, and smart swaps instantly.';
+
+  @override
+  String get aiScanSaveToLog => 'Save to log';
+
+  @override
+  String get aiScanSavedSnack => 'Meal saved to today\'s log';
+
+  @override
+  String get aiScanMacroProtein => 'Protein';
+
+  @override
+  String get aiScanMacroCarbs => 'Carbs';
+
+  @override
+  String get aiScanMacroFats => 'Fats';
+
+  @override
+  String get aiScanSmartSwaps => 'Smart swaps';
+
+  @override
+  String aiScanCaloriesChip(int calories) {
+    return '$calories kcal';
+  }
 }

@@ -26,6 +26,8 @@ dependencies:
   video_player: ^2.9.5
   health: ^13.2.0
   image_picker: ^1.1.2
+  google_generative_ai: ^0.4.6
+  image: ^4.5.4
   app_settings: ^6.1.1
   google_fonts: ^8.2.1
   freezed_annotation: ^2.4.4

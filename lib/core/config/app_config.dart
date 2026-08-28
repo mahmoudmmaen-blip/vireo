@@ -46,4 +46,12 @@ abstract final class AppConfig {
   static const generateMealPlanFunctionName = 'generate-meal-plan';
 
   static const generateProgramFunctionName = 'generate-program';
+
+  /// Gemini API key for on-device meal vision (via `google_generative_ai`).
+  static const geminiApiKey = String.fromEnvironment(
+    'GEMINI_API_KEY',
+    defaultValue: '',
+  );
+
+  static bool get isGeminiConfigured => geminiApiKey.isNotEmpty;
 }

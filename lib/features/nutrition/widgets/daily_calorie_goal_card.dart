@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 
 class DailyCalorieGoalCard extends ConsumerWidget {
@@ -12,7 +13,8 @@ class DailyCalorieGoalCard extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final target = ref.watch(calorieGoalProvider);
-    final consumed = ref.watch(dailyCaloriesConsumedProvider);
+    final consumed = ref.watch(dailyCaloriesConsumedProvider) +
+        ref.watch(dailyAiMealCaloriesProvider);
     final progress = target.calories > 0
         ? (consumed / target.calories).clamp(0.0, 1.0)
         : 0.0;
@@ -61,7 +63,7 @@ class DailyCalorieGoalCard extends ConsumerWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              l10n.nutritionCalorieProgress(consumed, target.calories),
+              l10n.nutritionCalorieProgress(consumed.toInt(), target.calories),
               style: TextStyle(color: colors.textMute, fontSize: 12),
             ),
           ],

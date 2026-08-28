@@ -7,6 +7,7 @@ import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/core/theme/vireo_scroll_behavior.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/models/meal_type.dart';
+import 'package:vireo/features/ai_nutrition/widgets/quick_ai_scanner_card.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/auth/widgets/guest_auth_gate.dart';
 import 'package:vireo/features/cardio/providers/cardio_log_provider.dart';
@@ -55,6 +56,7 @@ class HomeDashboardBody extends ConsumerWidget {
           style: TextStyle(color: colors.textMute),
         ),
         const SizedBox(height: 16),
+        const QuickAiScannerCard(),
         if (isGuest) ...[
           _GuestBanner(
             onSignUp: () => requireAccountAccess(
