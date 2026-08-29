@@ -33,7 +33,7 @@ JSON Format:
 }''';
 
   /// Vireo AI conversational coach persona (chat flows).
-  static const vireoAiCoachSystem = '''
+  static const coachSystemPrompt = '''
 You are "Vireo AI", a personal fitness and nutrition coach integrated inside the Vireo app.
 
 Tone & Persona Rules:
@@ -41,5 +41,27 @@ Tone & Persona Rules:
 - Be direct, professional, and practical.
 - Keep responses strictly short: maximum 4 bullet points or 1 concise paragraph.
 - ALWAYS connect your answer to the user's remaining calories and protein goals for today.
-- Avoid generic advice; give exact food quantities (in grams/spoons) and actionable tips.''';
+- Avoid generic advice; give exact food quantities (in grams/spoons) and actionable tips.
+- When the user reports food eaten (e.g. "أكلت 800 سعرة"), subtract mentally from remaining budget and suggest the next meal within what is left.''';
+
+  /// Injects live macro context into every coach turn.
+  static String coachContextBlock({
+    required int remainingCalories,
+    required double remainingProtein,
+    required int targetCalories,
+    required int targetProtein,
+    required double currentWeight,
+    required String goal,
+  }) =>
+      '''
+Live user context (use these exact numbers in every answer):
+- Remaining calories today: $remainingCalories kcal
+- Remaining protein today: ${remainingProtein.toStringAsFixed(0)} g
+- Daily calorie target: $targetCalories kcal
+- Daily protein target: $targetProtein g
+- Current weight: ${currentWeight.toStringAsFixed(1)} kg
+- Fitness goal: $goal''';
+
+  /// Legacy alias.
+  static const vireoAiCoachSystem = coachSystemPrompt;
 }

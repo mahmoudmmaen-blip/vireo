@@ -1561,4 +1561,54 @@ class AppLocalizationsAr extends AppLocalizations {
   String aiScanCaloriesChip(int calories) {
     return '$calories سعرة';
   }
+
+  @override
+  String get aiCoachTitle => 'Vireo AI';
+
+  @override
+  String get aiCoachFabLabel => 'Vireo AI';
+
+  @override
+  String get aiCoachInputHint => 'اسأل عن الوجبات أو الماكروز أو التمرين…';
+
+  @override
+  String get aiCoachOfflineBanner => 'أنت غير متصل — يتم عرض الرسائل المحفوظة.';
+
+  @override
+  String get aiCoachChipDinner => 'اقترح وجبة عشاء';
+
+  @override
+  String get aiCoachChipProtein => 'كيف أزيد بروتيني؟';
+
+  @override
+  String get aiCoachChipDessert => 'بديل صحي للحلويات';
+
+  @override
+  String get waterTrackerTitle => 'شرب الماء';
+
+  @override
+  String waterTrackerSummary(double current, double goal, int percent) {
+    return '${current}L / ${goal}L — $percent% مكتمل';
+  }
+
+  @override
+  String get weeklyDeficitChartTitle => 'رصيد السعرات الأسبوعي';
+
+  @override
+  String get weeklyDeficitSubtitle =>
+      'TDEE − الوجبات + حرق الكارديو (آخر 7 أيام)';
+
+  @override
+  String weeklyDeficitTotal(int kcal) {
+    return 'إجمالي العجز الأسبوعي: $kcal kcal';
+  }
+
+  @override
+  String get weeklyDeficitEmpty =>
+      'سجّل وجبات أو كارديو لعرض رصيد السعرات الأسبوعي.';
+
+  @override
+  String weeklyDeficitTooltip(int net, int consumed, int burned) {
+    return '$net kcal\nداخل: $consumed · خارج: $burned';
+  }
 }

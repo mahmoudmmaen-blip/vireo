@@ -4,9 +4,11 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/utils/unit_converter.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
+import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
 import 'package:vireo/features/progress/providers/progress_provider.dart';
 import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
 import 'package:vireo/features/progress/widgets/energy_line_chart.dart';
+import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
 import 'package:vireo/features/progress/widgets/weight_line_chart.dart';
 import 'package:vireo/features/progress/widgets/weight_log_sheet.dart';
 
@@ -21,6 +23,7 @@ class ProgressScreen extends ConsumerWidget {
     final goalAsync = ref.watch(weightGoalProvider);
     final weeksAsync = ref.watch(adherenceWeeksProvider);
     final energyAsync = ref.watch(energyCheckInsProvider);
+    final deficit = ref.watch(weeklyDeficitProvider);
 
     return FeatureScaffold(
       title: l10n.progressTitle,
@@ -32,6 +35,7 @@ class ProgressScreen extends ConsumerWidget {
               ref.invalidate(weightGoalProvider);
               ref.invalidate(adherenceWeeksProvider);
               ref.invalidate(energyCheckInsProvider);
+              ref.invalidate(weeklyDeficitProvider);
               await Future<void>.delayed(const Duration(milliseconds: 400));
             },
             child: ListView(
@@ -42,9 +46,15 @@ class ProgressScreen extends ConsumerWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 16),
+                _ChartCard(
+                  title: l10n.weeklyDeficitChartTitle,
+                  subtitle: l10n.weeklyDeficitSubtitle,
+                  child: WeeklyDeficitChart(summary: deficit),
+                ),
+                const SizedBox(height: 16),
                 logsAsync.when(
                   loading: () => const _ChartLoading(),
-                  error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
+                  error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
                   data: (logs) {
                     final goalKg = goalAsync.valueOrNull;
                     return _ChartCard(
@@ -69,7 +79,7 @@ class ProgressScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 weeksAsync.when(
                   loading: () => const _ChartLoading(),
-                  error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
+                  error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
                   data: (weeks) => _ChartCard(
                     title: l10n.progressAdherenceChartTitle,
                     subtitle: l10n.progressAdherenceSubtitle,
@@ -79,7 +89,7 @@ class ProgressScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 energyAsync.when(
                   loading: () => const _ChartLoading(),
-                  error: (_, __) => _ChartError(message: l10n.authErrorGeneric),
+                  error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
                   data: (checkIns) => _ChartCard(
                     title: l10n.progressEnergyChartTitle,
                     subtitle: l10n.progressEnergySubtitle,

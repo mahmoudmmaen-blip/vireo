@@ -19,6 +19,7 @@ import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.
 import 'package:vireo/features/progress/providers/weekly_checkin_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/walking/walking_tracker_screen.dart';
+import 'package:vireo/features/water/widgets/water_tracker_card.dart';
 import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
 
@@ -68,6 +69,8 @@ class HomeDashboardBody extends ConsumerWidget {
           const SizedBox(height: 12),
         ],
         _StreakCard(streakDays: dash.streakDays),
+        const SizedBox(height: 12),
+        const WaterTrackerCard(),
         const SizedBox(height: 12),
         workoutAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),

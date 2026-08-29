@@ -561,5 +561,34 @@
   "aiScanMacroFats": "Fats",
   "aiScanSmartSwaps": "Smart swaps",
   "aiScanCaloriesChip": "{calories} kcal",
-  "@aiScanCaloriesChip": {"placeholders": {"calories": {"type": "int"}}}
+  "@aiScanCaloriesChip": {"placeholders": {"calories": {"type": "int"}}},
+  "aiCoachTitle": "Vireo AI",
+  "aiCoachFabLabel": "Vireo AI",
+  "aiCoachInputHint": "Ask about meals, macros, or training…",
+  "aiCoachOfflineBanner": "You are offline — showing cached messages.",
+  "aiCoachChipDinner": "Suggest a dinner meal",
+  "aiCoachChipProtein": "How do I boost protein?",
+  "aiCoachChipDessert": "Healthy dessert swap",
+  "waterTrackerTitle": "Water intake",
+  "waterTrackerSummary": "{current}L / {goal}L — {percent}% completed",
+  "@waterTrackerSummary": {
+    "placeholders": {
+      "current": {"type": "double"},
+      "goal": {"type": "double"},
+      "percent": {"type": "int"}
+    }
+  },
+  "weeklyDeficitChartTitle": "Weekly calorie balance",
+  "weeklyDeficitSubtitle": "TDEE − meals + cardio burn (last 7 days)",
+  "weeklyDeficitTotal": "Weekly net balance: {kcal} kcal",
+  "@weeklyDeficitTotal": {"placeholders": {"kcal": {"type": "int"}}},
+  "weeklyDeficitEmpty": "Log meals or cardio to see your weekly calorie balance.",
+  "weeklyDeficitTooltip": "{net} kcal\nIn: {consumed} · Out: {burned}",
+  "@weeklyDeficitTooltip": {
+    "placeholders": {
+      "net": {"type": "int"},
+      "consumed": {"type": "int"},
+      "burned": {"type": "int"}
+    }
+  }
 }

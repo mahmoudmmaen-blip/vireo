@@ -555,5 +555,34 @@
   "aiScanMacroFats": "دهون",
   "aiScanSmartSwaps": "بدائل ذكية",
   "aiScanCaloriesChip": "{calories} سعرة",
-  "@aiScanCaloriesChip": {"placeholders": {"calories": {"type": "int"}}}
+  "@aiScanCaloriesChip": {"placeholders": {"calories": {"type": "int"}}},
+  "aiCoachTitle": "Vireo AI",
+  "aiCoachFabLabel": "Vireo AI",
+  "aiCoachInputHint": "اسأل عن الوجبات أو الماكروز أو التمرين…",
+  "aiCoachOfflineBanner": "أنت غير متصل — يتم عرض الرسائل المحفوظة.",
+  "aiCoachChipDinner": "اقترح وجبة عشاء",
+  "aiCoachChipProtein": "كيف أزيد بروتيني؟",
+  "aiCoachChipDessert": "بديل صحي للحلويات",
+  "waterTrackerTitle": "شرب الماء",
+  "waterTrackerSummary": "{current}L / {goal}L — {percent}% مكتمل",
+  "@waterTrackerSummary": {
+    "placeholders": {
+      "current": {"type": "double"},
+      "goal": {"type": "double"},
+      "percent": {"type": "int"}
+    }
+  },
+  "weeklyDeficitChartTitle": "رصيد السعرات الأسبوعي",
+  "weeklyDeficitSubtitle": "TDEE − الوجبات + حرق الكارديو (آخر 7 أيام)",
+  "weeklyDeficitTotal": "إجمالي العجز الأسبوعي: {kcal} kcal",
+  "@weeklyDeficitTotal": {"placeholders": {"kcal": {"type": "int"}}},
+  "weeklyDeficitEmpty": "سجّل وجبات أو كارديو لعرض رصيد السعرات الأسبوعي.",
+  "weeklyDeficitTooltip": "{net} kcal\nداخل: {consumed} · خارج: {burned}",
+  "@weeklyDeficitTooltip": {
+    "placeholders": {
+      "net": {"type": "int"},
+      "consumed": {"type": "int"},
+      "burned": {"type": "int"}
+    }
+  }
 }

@@ -1578,4 +1578,55 @@ class AppLocalizationsEn extends AppLocalizations {
   String aiScanCaloriesChip(int calories) {
     return '$calories kcal';
   }
+
+  @override
+  String get aiCoachTitle => 'Vireo AI';
+
+  @override
+  String get aiCoachFabLabel => 'Vireo AI';
+
+  @override
+  String get aiCoachInputHint => 'Ask about meals, macros, or training…';
+
+  @override
+  String get aiCoachOfflineBanner =>
+      'You are offline — showing cached messages.';
+
+  @override
+  String get aiCoachChipDinner => 'Suggest a dinner meal';
+
+  @override
+  String get aiCoachChipProtein => 'How do I boost protein?';
+
+  @override
+  String get aiCoachChipDessert => 'Healthy dessert swap';
+
+  @override
+  String get waterTrackerTitle => 'Water intake';
+
+  @override
+  String waterTrackerSummary(double current, double goal, int percent) {
+    return '${current}L / ${goal}L — $percent% completed';
+  }
+
+  @override
+  String get weeklyDeficitChartTitle => 'Weekly calorie balance';
+
+  @override
+  String get weeklyDeficitSubtitle =>
+      'TDEE − meals + cardio burn (last 7 days)';
+
+  @override
+  String weeklyDeficitTotal(int kcal) {
+    return 'Weekly net balance: $kcal kcal';
+  }
+
+  @override
+  String get weeklyDeficitEmpty =>
+      'Log meals or cardio to see your weekly calorie balance.';
+
+  @override
+  String weeklyDeficitTooltip(int net, int consumed, int burned) {
+    return '$net kcal\nIn: $consumed · Out: $burned';
+  }
 }

@@ -2867,6 +2867,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{calories} kcal'**
   String aiScanCaloriesChip(int calories);
+
+  /// No description provided for @aiCoachTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo AI'**
+  String get aiCoachTitle;
+
+  /// No description provided for @aiCoachFabLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo AI'**
+  String get aiCoachFabLabel;
+
+  /// No description provided for @aiCoachInputHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about meals, macros, or training…'**
+  String get aiCoachInputHint;
+
+  /// No description provided for @aiCoachOfflineBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You are offline — showing cached messages.'**
+  String get aiCoachOfflineBanner;
+
+  /// No description provided for @aiCoachChipDinner.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggest a dinner meal'**
+  String get aiCoachChipDinner;
+
+  /// No description provided for @aiCoachChipProtein.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I boost protein?'**
+  String get aiCoachChipProtein;
+
+  /// No description provided for @aiCoachChipDessert.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy dessert swap'**
+  String get aiCoachChipDessert;
+
+  /// No description provided for @waterTrackerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Water intake'**
+  String get waterTrackerTitle;
+
+  /// No description provided for @waterTrackerSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{current}L / {goal}L — {percent}% completed'**
+  String waterTrackerSummary(double current, double goal, int percent);
+
+  /// No description provided for @weeklyDeficitChartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly calorie balance'**
+  String get weeklyDeficitChartTitle;
+
+  /// No description provided for @weeklyDeficitSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'TDEE − meals + cardio burn (last 7 days)'**
+  String get weeklyDeficitSubtitle;
+
+  /// No description provided for @weeklyDeficitTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly net balance: {kcal} kcal'**
+  String weeklyDeficitTotal(int kcal);
+
+  /// No description provided for @weeklyDeficitEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Log meals or cardio to see your weekly calorie balance.'**
+  String get weeklyDeficitEmpty;
+
+  /// No description provided for @weeklyDeficitTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'{net} kcal\nIn: {consumed} · Out: {burned}'**
+  String weeklyDeficitTooltip(int net, int consumed, int burned);
 }
 
 class _AppLocalizationsDelegate
