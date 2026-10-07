@@ -548,14 +548,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get walkingHealthSourceNote =>
-      'Step counts are read from Apple Health or Health Connect — Vireo does not use a built-in pedometer.';
+      'Steps are counted on this device. If Health Connect / Apple Health is also available, Vireo shows the higher count.';
 
   @override
   String get walkingPermissionTitle => 'Steps access needed';
 
   @override
   String get walkingPermissionBody =>
-      'Vireo reads your steps from Apple Health (iOS) or Health Connect (Android) for accurate tracking. Allow access in Settings, then return here.';
+      'Vireo counts steps with your phone’s motion sensors. Allow activity access so walking goals and calories stay accurate.';
 
   @override
   String get walkingOpenSettings => 'Open Settings';
@@ -568,7 +568,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get walkingUnavailableBody =>
-      'Step tracking requires a physical iOS or Android device with Apple Health or Health Connect.';
+      'Step tracking works best on a physical iOS or Android phone with a step counter sensor.';
+
+  @override
+  String get walkingEnableTitle => 'Count steps on this phone';
+
+  @override
+  String get walkingEnableBody =>
+      'Vireo uses your phone’s step sensor to track walking live — distance, calories, and your daily goal. We’ll ask for activity permission next.';
+
+  @override
+  String get walkingEnableCta => 'Enable step counting';
+
+  @override
+  String get walkingActiveMinutes => 'Active time';
 
   @override
   String get nutritionTabBreakfast => 'Breakfast';
@@ -2367,8 +2380,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get walkingHealthBanner =>
-      'Connect Apple Health / Health Connect for automatic steps';
+  String get walkingHealthBanner => 'Live steps from this phone’s pedometer';
 
   @override
   String get walkingManualStepsLabel => 'Steps today';

@@ -1,10 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/utils/walking_metrics_calculator.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
+import 'package:vireo/features/walking/data/body_metrics.dart';
+import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 
 /// A single item in today's food log (plan meal or AI-scanned meal).
 class TodayLogItem {
@@ -115,10 +118,19 @@ final todayNutritionProvider = Provider.family<TodayNutrition, String>((
     return a.mealType!.index.compareTo(b.mealType!.index);
   });
 
+  // Steps kcal are kept separate from cardio logs to avoid double counting.
+  final stepsToday = ref.watch(todayStepsProvider);
+  final body = readBodyMetrics();
+  final stepsKcal = WalkingMetricsCalculator.compute(
+    steps: stepsToday,
+    weightKg: body.weightKg,
+    heightCm: body.heightCm,
+  ).caloriesBurned;
+
   return TodayNutrition(
     goalKcal: target.calories,
     eatenKcal: totals.calories,
-    burnedKcal: totals.burnedKcal,
+    burnedKcal: totals.burnedKcal + stepsKcal,
     proteinG: totals.protein,
     carbsG: totals.carbs,
     fatG: totals.fat,

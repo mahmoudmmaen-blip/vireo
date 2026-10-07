@@ -66,6 +66,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMotionUsageDescription</key>
+	<string>Vireo uses motion data to count your steps on this device for walking goals and calories. / يستخدم Vireo بيانات الحركة لعدّ خطواتك على الجهاز لتتبع أهداف المشي والسعرات.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Vireo reads your step count from Apple Health to track daily walking progress.</string>
 	<key>NSHealthUpdateUsageDescription</key>

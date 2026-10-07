@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vireo/core/services/health_steps_service.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/core/utils/walking_goal_calculator.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
+import 'package:vireo/features/walking/data/step_counter_service.dart';
+import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 
 class WalkingContext {
   const WalkingContext({
@@ -16,28 +17,33 @@ class WalkingContext {
   final ActivityLevel activityLevel;
   final DateTime goalStartDate;
 
-  int get dailyGoal => WalkingGoalCalculator.dailyGoal(
-        activityLevel: activityLevel,
-        goalStartDate: goalStartDate,
-      );
+  int get dailyGoal {
+    final goal = WalkingGoalCalculator.dailyGoal(
+      activityLevel: activityLevel,
+      goalStartDate: goalStartDate,
+    );
+    return goal > 0 ? goal : 6000;
+  }
 }
 
 class WalkingTrackerState {
   const WalkingTrackerState({
-    required this.status,
     this.todaySteps = 0,
-    this.dailyGoal = 7500,
+    this.dailyGoal = 6000,
     this.last7Days = const [],
     this.isRefreshing = false,
     this.manualEntryActive = false,
+    this.permissionGranted = false,
+    this.sensorAvailable = false,
   });
 
-  final HealthStepsStatus status;
   final int todaySteps;
   final int dailyGoal;
   final List<DailyStepCount> last7Days;
   final bool isRefreshing;
   final bool manualEntryActive;
+  final bool permissionGranted;
+  final bool sensorAvailable;
 
   double get progress =>
       dailyGoal <= 0 ? 0 : (todaySteps / dailyGoal).clamp(0.0, 1.0);
@@ -46,20 +52,22 @@ class WalkingTrackerState {
       todaySteps <= 0 ? 0 : (todaySteps / 100).ceil();
 
   WalkingTrackerState copyWith({
-    HealthStepsStatus? status,
     int? todaySteps,
     int? dailyGoal,
     List<DailyStepCount>? last7Days,
     bool? isRefreshing,
     bool? manualEntryActive,
+    bool? permissionGranted,
+    bool? sensorAvailable,
   }) {
     return WalkingTrackerState(
-      status: status ?? this.status,
       todaySteps: todaySteps ?? this.todaySteps,
       dailyGoal: dailyGoal ?? this.dailyGoal,
       last7Days: last7Days ?? this.last7Days,
       isRefreshing: isRefreshing ?? this.isRefreshing,
       manualEntryActive: manualEntryActive ?? this.manualEntryActive,
+      permissionGranted: permissionGranted ?? this.permissionGranted,
+      sensorAvailable: sensorAvailable ?? this.sensorAvailable,
     );
   }
 }
@@ -70,30 +78,51 @@ class WalkingTrackerNotifier extends AsyncNotifier<WalkingTrackerState> {
 
   @override
   Future<WalkingTrackerState> build() async {
+    ref.watch(stepCounterBootstrapProvider);
+    ref.listen<AsyncValue<LiveStepsSnapshot>>(liveStepsProvider, (_, next) {
+      final snap = next.valueOrNull;
+      if (snap == null) return;
+      final current = state.valueOrNull;
+      if (current == null) return;
+      if (current.manualEntryActive && _readManualStepsForToday() != null) {
+        return;
+      }
+      state = AsyncData(
+        current.copyWith(
+          todaySteps: snap.todaySteps,
+          last7Days: snap.last7Days,
+          permissionGranted: snap.permissionGranted,
+          sensorAvailable: snap.sensorAvailable,
+          isRefreshing: false,
+        ),
+      );
+    });
     return _load();
   }
 
   Future<WalkingTrackerState> _load() async {
     final context = await ref.read(walkingContextProvider.future);
-    final snapshot = await HealthStepsService.fetchSnapshot();
+    final snap = ref.read(liveStepsProvider).valueOrNull ??
+        StepCounterService.latest;
     final manual = _readManualStepsForToday();
-    final manualActive = kIsWeb ||
-        snapshot.status == HealthStepsStatus.unavailable ||
-        snapshot.status == HealthStepsStatus.denied;
+    final manualActive = kIsWeb || !snap.sensorAvailable;
 
-    var steps = snapshot.todaySteps;
+    var steps = snap.todaySteps;
     if (manualActive && manual != null) {
       steps = manual;
-    } else if (manualActive && steps <= 0) {
-      steps = manual ?? 0;
     }
 
+    final last7 = snap.last7Days.isNotEmpty
+        ? snap.last7Days
+        : StepCounterService.last7DaysFromHistory(todaySteps: steps);
+
     return WalkingTrackerState(
-      status: snapshot.status,
       todaySteps: steps,
       dailyGoal: context.dailyGoal,
-      last7Days: snapshot.last7Days,
+      last7Days: last7,
       manualEntryActive: manualActive,
+      permissionGranted: snap.permissionGranted,
+      sensorAvailable: snap.sensorAvailable,
     );
   }
 
@@ -112,20 +141,24 @@ class WalkingTrackerNotifier extends AsyncNotifier<WalkingTrackerState> {
   Future<void> setManualSteps(int steps) async {
     final clamped = steps.clamp(0, 100000);
     if (HiveService.isInitialized) {
-      try {
-        await HiveService.settingsBox.put(_manualStepsKey, clamped);
-        await HiveService.settingsBox.put(
-          _manualStepsDateKey,
-          DateTime.now().toIso8601String().substring(0, 10),
-        );
-      } catch (_) {
-        rethrow;
-      }
+      await HiveService.settingsBox.put(_manualStepsKey, clamped);
+      await HiveService.settingsBox.put(
+        _manualStepsDateKey,
+        DateTime.now().toIso8601String().substring(0, 10),
+      );
     }
+    await StepCounterService.saveTodayToHistory(clamped);
 
     final current = state.valueOrNull;
     if (current != null) {
-      state = AsyncData(current.copyWith(todaySteps: clamped));
+      state = AsyncData(
+        current.copyWith(
+          todaySteps: clamped,
+          last7Days: StepCounterService.last7DaysFromHistory(
+            todaySteps: clamped,
+          ),
+        ),
+      );
     } else {
       await refresh();
     }
@@ -136,16 +169,8 @@ class WalkingTrackerNotifier extends AsyncNotifier<WalkingTrackerState> {
     if (current != null) {
       state = AsyncData(current.copyWith(isRefreshing: true));
     }
+    await StepCounterService.refresh();
     state = await AsyncValue.guard(_load);
-  }
-
-  Future<void> requestPermission() async {
-    await HealthStepsService.requestPermission();
-    await refresh();
-  }
-
-  Future<void> openSettings() async {
-    await HealthStepsService.openSystemSettings();
   }
 }
 

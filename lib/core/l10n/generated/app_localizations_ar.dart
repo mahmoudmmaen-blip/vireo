@@ -541,14 +541,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get walkingHealthSourceNote =>
-      'عدد الخطوات بيتقرأ من Apple Health أو Health Connect — Vireo مبيستخدمش pedometer داخلي.';
+      'الخطوات بتتعد على الجهاز. لو Health Connect / Apple Health متاحين كمان، Vireo بيعرض العدد الأعلى.';
 
   @override
   String get walkingPermissionTitle => 'محتاجين إذن الخطوات';
 
   @override
   String get walkingPermissionBody =>
-      'Vireo بيقرأ خطواتك من Apple Health (iOS) أو Health Connect (Android) للدقة. اسمح بالوصول من الإعدادات ورجع تاني.';
+      'Vireo بيعدّ الخطوات بحساسات الحركة في الموبايل. اسمح بإذن النشاط عشان أهداف المشي والسعرات تبقى دقيقة.';
 
   @override
   String get walkingOpenSettings => 'فتح الإعدادات';
@@ -561,7 +561,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get walkingUnavailableBody =>
-      'تتبع الخطوات محتاج جهاز iOS أو Android مع Apple Health أو Health Connect.';
+      'تتبع الخطوات بيشتغل أحسن على موبايل iOS أو Android فيه حساس عدّاد الخطوات.';
+
+  @override
+  String get walkingEnableTitle => 'عدّ الخطوات على الموبايل';
+
+  @override
+  String get walkingEnableBody =>
+      'Vireo بيستخدم حساس الخطوات في موبايلك عشان يتتبع المشي لايف — المسافة والسعرات وهدف اليوم. هنطلب إذن النشاط بعد كده.';
+
+  @override
+  String get walkingEnableCta => 'تفعيل عدّ الخطوات';
+
+  @override
+  String get walkingActiveMinutes => 'وقت النشاط';
 
   @override
   String get nutritionTabBreakfast => 'فطار';
@@ -2349,8 +2362,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get walkingHealthBanner =>
-      'Connect Apple Health / Health Connect for automatic steps';
+  String get walkingHealthBanner => 'خطوات لايف من عدّاد الموبايل';
 
   @override
   String get walkingManualStepsLabel => 'Steps today';

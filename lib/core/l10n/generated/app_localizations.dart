@@ -1079,7 +1079,7 @@ abstract class AppLocalizations {
   /// No description provided for @walkingHealthSourceNote.
   ///
   /// In en, this message translates to:
-  /// **'Step counts are read from Apple Health or Health Connect — Vireo does not use a built-in pedometer.'**
+  /// **'Steps are counted on this device. If Health Connect / Apple Health is also available, Vireo shows the higher count.'**
   String get walkingHealthSourceNote;
 
   /// No description provided for @walkingPermissionTitle.
@@ -1091,7 +1091,7 @@ abstract class AppLocalizations {
   /// No description provided for @walkingPermissionBody.
   ///
   /// In en, this message translates to:
-  /// **'Vireo reads your steps from Apple Health (iOS) or Health Connect (Android) for accurate tracking. Allow access in Settings, then return here.'**
+  /// **'Vireo counts steps with your phone’s motion sensors. Allow activity access so walking goals and calories stay accurate.'**
   String get walkingPermissionBody;
 
   /// No description provided for @walkingOpenSettings.
@@ -1115,8 +1115,32 @@ abstract class AppLocalizations {
   /// No description provided for @walkingUnavailableBody.
   ///
   /// In en, this message translates to:
-  /// **'Step tracking requires a physical iOS or Android device with Apple Health or Health Connect.'**
+  /// **'Step tracking works best on a physical iOS or Android phone with a step counter sensor.'**
   String get walkingUnavailableBody;
+
+  /// No description provided for @walkingEnableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Count steps on this phone'**
+  String get walkingEnableTitle;
+
+  /// No description provided for @walkingEnableBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo uses your phone’s step sensor to track walking live — distance, calories, and your daily goal. We’ll ask for activity permission next.'**
+  String get walkingEnableBody;
+
+  /// No description provided for @walkingEnableCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable step counting'**
+  String get walkingEnableCta;
+
+  /// No description provided for @walkingActiveMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Active time'**
+  String get walkingActiveMinutes;
 
   /// No description provided for @nutritionTabBreakfast.
   ///
@@ -4286,7 +4310,7 @@ abstract class AppLocalizations {
   /// No description provided for @walkingHealthBanner.
   ///
   /// In en, this message translates to:
-  /// **'Connect Apple Health / Health Connect for automatic steps'**
+  /// **'Live steps from this phone’s pedometer'**
   String get walkingHealthBanner;
 
   /// No description provided for @walkingManualStepsLabel.

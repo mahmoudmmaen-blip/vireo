@@ -3,10 +3,9 @@ import 'package:vireo/data/models/daily_step_count.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
 
 void main() {
-  group('WalkingTrackerState §2.5 progress ring data', () {
+  group('WalkingTrackerState progress', () {
     test('progress clamps steps to daily goal ratio', () {
       const state = WalkingTrackerState(
-        status: HealthStepsStatus.granted,
         todaySteps: 3750,
         dailyGoal: 7500,
       );
@@ -15,7 +14,6 @@ void main() {
 
     test('progress caps at 1.0 when steps exceed goal', () {
       const state = WalkingTrackerState(
-        status: HealthStepsStatus.granted,
         todaySteps: 12000,
         dailyGoal: 7500,
       );
@@ -31,23 +29,10 @@ void main() {
         ),
       );
 
-      const state = WalkingTrackerState(
-        status: HealthStepsStatus.granted,
-        last7Days: [],
-      );
+      const state = WalkingTrackerState(last7Days: []);
 
       expect(days.length, 7);
       expect(state.copyWith(last7Days: days).last7Days.length, 7);
-    });
-  });
-
-  group('HealthStepsStatus §2.5 HealthKit / Health Connect states', () {
-    test('covers granted, denied, and unavailable flows', () {
-      expect(HealthStepsStatus.values, containsAll([
-        HealthStepsStatus.granted,
-        HealthStepsStatus.denied,
-        HealthStepsStatus.unavailable,
-      ]));
     });
   });
 }

@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
-import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
+import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/core/utils/walking_metrics_calculator.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
+import 'package:vireo/features/walking/data/body_metrics.dart';
+import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
-import 'package:vireo/features/walking/widgets/health_permission_denied_view.dart';
-import 'package:vireo/features/walking/widgets/step_ring_indicator.dart';
+import 'package:vireo/features/walking/widgets/step_permission_gate.dart';
 import 'package:vireo/features/walking/widgets/weekly_steps_chart.dart';
 
 class WalkingTrackerScreen extends ConsumerWidget {
@@ -27,23 +28,27 @@ class WalkingTrackerScreen extends ConsumerWidget {
       actions: [
         IconButton(
           icon: const Icon(Icons.refresh),
-          onPressed: notifier.refresh,
+          onPressed: () async {
+            await notifier.refresh();
+            ref.invalidate(stepCounterBootstrapProvider);
+          },
         ),
       ],
-      body: state.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, st) => HealthPermissionDeniedView(
-          onOpenSettings: notifier.openSettings,
-          onRetry: notifier.requestPermission,
-        ),
-        data: (data) {
-          return _WalkingTrackerBody(
+      body: StepPermissionGate(
+        child: state.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, st) => Center(
+            child: TextButton(
+              onPressed: notifier.refresh,
+              child: Text(l10n.walkingTryAgain),
+            ),
+          ),
+          data: (data) => _WalkingTrackerBody(
             data: data,
             onRefresh: notifier.refresh,
             onManualSteps: notifier.setManualSteps,
-            allowUnavailableNote: data.manualEntryActive,
-          );
-        },
+          ),
+        ),
       ),
     );
   }
@@ -54,13 +59,11 @@ class _WalkingTrackerBody extends ConsumerStatefulWidget {
     required this.data,
     required this.onRefresh,
     this.onManualSteps,
-    this.allowUnavailableNote = false,
   });
 
   final WalkingTrackerState data;
   final Future<void> Function() onRefresh;
   final Future<void> Function(int steps)? onManualSteps;
-  final bool allowUnavailableNote;
 
   @override
   ConsumerState<_WalkingTrackerBody> createState() => _WalkingTrackerBodyState();
@@ -92,16 +95,6 @@ class _WalkingTrackerBodyState extends ConsumerState<_WalkingTrackerBody> {
     super.dispose();
   }
 
-  double get _weightKg {
-    final profile = HiveService.isInitialized
-        ? HiveService.cacheBox.get('guest_profile')
-        : null;
-    if (profile is Map) {
-      return (profile['weight_kg'] as num?)?.toDouble() ?? 75.0;
-    }
-    return 75.0;
-  }
-
   Future<void> _submitManualSteps() async {
     final steps = int.tryParse(_stepsCtrl.text.trim());
     if (steps == null || widget.onManualSteps == null) return;
@@ -113,10 +106,20 @@ class _WalkingTrackerBodyState extends ConsumerState<_WalkingTrackerBody> {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final data = widget.data;
+    final live = ref.watch(liveStepsProvider).valueOrNull;
+    final steps = live?.todaySteps ?? data.todaySteps;
+    final last7 = live?.last7Days.isNotEmpty == true
+        ? live!.last7Days
+        : data.last7Days;
+    final body = readBodyMetrics();
     final metrics = WalkingMetricsCalculator.compute(
-      steps: data.todaySteps,
-      weightKg: _weightKg,
+      steps: steps,
+      weightKg: body.weightKg,
+      heightCm: body.heightCm,
     );
+    final progress = data.dailyGoal <= 0
+        ? 0.0
+        : (steps / data.dailyGoal).clamp(0.0, 1.0);
     final showManual = data.manualEntryActive || kIsWeb;
 
     return RefreshIndicator(
@@ -124,70 +127,88 @@ class _WalkingTrackerBodyState extends ConsumerState<_WalkingTrackerBody> {
       onRefresh: widget.onRefresh,
       child: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(VSpace.lg),
         children: [
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: VireoDecorations.premiumCard(colors),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(Icons.info_outline, color: colors.ember, size: 20),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        l10n.walkingHealthBanner,
-                        style: TextStyle(color: colors.textMute, height: 1.35),
-                      ),
-                    ),
-                  ],
-                ),
-                if (kIsWeb) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    l10n.walkingWebManualBanner,
-                    style: TextStyle(
-                      color: colors.gold,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-          Center(
-            child: StepRingIndicator(
-              steps: data.todaySteps,
-              goal: data.dailyGoal,
-              stepsLabel: l10n.walkingStepsToday,
-              goalLabel: l10n.walkingDailyGoal(data.dailyGoal),
-            ),
-          ),
-          const SizedBox(height: 8),
-          if (data.todaySteps > 0)
-            Center(
-              child: Text(
-                l10n.walkingEstimatedMinutes(data.estimatedWalkingMinutes),
-                style: TextStyle(
-                  color: colors.ember,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          const SizedBox(height: 12),
           Center(
             child: Text(
-              l10n.walkingGoalProgress((data.progress * 100).round()),
+              '$steps',
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 64,
+                    height: 1,
+                    color: colors.ember,
+                  ),
+            ),
+          ),
+          const SizedBox(height: VSpace.xs),
+          Center(
+            child: Text(
+              l10n.walkingStepsToday,
+              style: TextStyle(
+                color: colors.textMute,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const SizedBox(height: VSpace.md),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 12,
+              backgroundColor: colors.line.withValues(alpha: 0.55),
+              color: colors.ember,
+            ),
+          ),
+          const SizedBox(height: VSpace.sm),
+          Center(
+            child: Text(
+              l10n.walkingDailyGoal(data.dailyGoal),
               style: TextStyle(color: colors.textMute),
             ),
           ),
+          Center(
+            child: Text(
+              l10n.walkingGoalProgress((progress * 100).round()),
+              style: TextStyle(
+                color: colors.ember,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          const SizedBox(height: VSpace.xl),
+          Row(
+            children: [
+              Expanded(
+                child: _MetricTile(
+                  icon: Icons.straighten,
+                  label: l10n.walkingDistance,
+                  value: '${metrics.distanceKm.toStringAsFixed(2)} km',
+                  colors: colors,
+                ),
+              ),
+              const SizedBox(width: VSpace.sm),
+              Expanded(
+                child: _MetricTile(
+                  icon: Icons.local_fire_department_outlined,
+                  label: l10n.walkingCalories,
+                  value: '${metrics.caloriesBurned} kcal',
+                  colors: colors,
+                ),
+              ),
+              const SizedBox(width: VSpace.sm),
+              Expanded(
+                child: _MetricTile(
+                  icon: Icons.timer_outlined,
+                  label: l10n.walkingActiveMinutes,
+                  value: '${metrics.activeMinutes.round()} min',
+                  colors: colors,
+                ),
+              ),
+            ],
+          ),
           if (showManual && widget.onManualSteps != null) ...[
-            const SizedBox(height: 20),
+            const SizedBox(height: VSpace.xl),
             TextField(
               controller: _stepsCtrl,
               keyboardType: TextInputType.number,
@@ -197,89 +218,22 @@ class _WalkingTrackerBodyState extends ConsumerState<_WalkingTrackerBody> {
                 border: const OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: VSpace.sm),
             FilledButton(
               onPressed: _submitManualSteps,
               child: Text(l10n.walkingUpdateSteps),
             ),
           ],
-          const SizedBox(height: 20),
-          Text(
-            l10n.walkingMetricsTitle,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 10),
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            childAspectRatio: 1.55,
-            children: [
-              _MetricTile(
-                icon: Icons.straighten,
-                label: l10n.walkingDistance,
-                value: '${metrics.distanceKm.toStringAsFixed(2)} km',
-                colors: colors,
-              ),
-              _MetricTile(
-                icon: Icons.speed,
-                label: l10n.walkingSpeed,
-                value: '${metrics.speedKmh.toStringAsFixed(1)} km/h',
-                colors: colors,
-              ),
-              _MetricTile(
-                icon: Icons.timer_outlined,
-                label: l10n.walkingPace,
-                value: metrics.paceMinPerKm > 0
-                    ? '${metrics.paceMinPerKm.toStringAsFixed(1)} min/km'
-                    : '—',
-                colors: colors,
-              ),
-              _MetricTile(
-                icon: Icons.local_fire_department_outlined,
-                label: l10n.walkingCalories,
-                value: '${metrics.caloriesBurned} kcal',
-                colors: colors,
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: VireoDecorations.premiumCard(colors),
-            child: Row(
-              children: [
-                Icon(Icons.monitor_weight_outlined, color: colors.ember),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    l10n.walkingWeightLoss(
-                      metrics.estimatedWeightLossKg.toStringAsFixed(3),
-                    ),
-                    style: TextStyle(color: colors.textMute),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            l10n.walkingCadence(metrics.cadenceSpm.round()),
-            textAlign: TextAlign.center,
-            style: TextStyle(color: colors.textMute, fontSize: 12),
-          ),
-          const SizedBox(height: 28),
+          const SizedBox(height: VSpace.xl),
           WeeklyStepsChart(
-            days: data.last7Days,
+            days: last7,
             title: l10n.walkingWeeklyChartTitle,
             goal: data.dailyGoal,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: VSpace.md),
           Text(
-            widget.allowUnavailableNote
-                ? l10n.walkingMetricsEstimatedNote
+            kIsWeb
+                ? l10n.walkingWebManualBanner
                 : l10n.walkingHealthSourceNote,
             style: TextStyle(color: colors.textMute, fontSize: 12),
             textAlign: TextAlign.center,
@@ -306,13 +260,13 @@ class _MetricTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(VSpace.sm + 2),
       decoration: VireoDecorations.premiumCard(colors),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, size: 20, color: colors.ember),
-          const Spacer(),
+          const SizedBox(height: VSpace.sm),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w800)),
           Text(label, style: TextStyle(fontSize: 11, color: colors.textMute)),
         ],
