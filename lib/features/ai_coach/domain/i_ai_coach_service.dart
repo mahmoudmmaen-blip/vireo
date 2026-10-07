@@ -25,6 +25,7 @@ abstract class IAiCoachService {
   Future<String> sendMessage(
     List<ChatMessage> history,
     String userMessage,
-    UserContext context,
-  );
+    UserContext context, {
+    String languageCode = 'ar',
+  });
 }

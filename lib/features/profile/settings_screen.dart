@@ -176,7 +176,7 @@ class SettingsScreen extends ConsumerWidget {
           const Divider(),
           auth.when(
             loading: () => const LinearProgressIndicator(),
-            error: (_, __) => ListTile(title: Text(l10n.authErrorGeneric)),
+            error: (error, stackTrace) => ListTile(title: Text(l10n.authErrorGeneric)),
             data: (state) {
               if (state is AppAuthGuest) {
                 return ListTile(

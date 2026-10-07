@@ -18,8 +18,12 @@
   "onboardingStepProgress": "Step {current} of {total}",
   "@onboardingStepProgress": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "onboardingStep1Title": "About you",
@@ -138,13 +142,17 @@
   "workoutTodaySubtitle": "{count, plural, =1{1 main exercise} other{{count} main exercises}}",
   "@workoutTodaySubtitle": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "workoutPhaseCount": "{count, plural, =1{1 exercise} other{{count} exercises}}",
   "@workoutPhaseCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "workoutExerciseProgress": "Exercise",
@@ -155,7 +163,9 @@
   "workoutSetNumber": "Set {number}",
   "@workoutSetNumber": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "workoutPrevious": "Previous",
@@ -184,13 +194,17 @@
   "walkingDailyGoal": "Goal: {steps} steps",
   "@walkingDailyGoal": {
     "placeholders": {
-      "steps": {"type": "int"}
+      "steps": {
+        "type": "int"
+      }
     }
   },
   "walkingGoalProgress": "{percent}% of today's goal",
   "@walkingGoalProgress": {
     "placeholders": {
-      "percent": {"type": "int"}
+      "percent": {
+        "type": "int"
+      }
     }
   },
   "walkingWeeklyChartTitle": "Last 7 days",
@@ -209,7 +223,9 @@
   "nutritionPrepMinutes": "{minutes} min",
   "@nutritionPrepMinutes": {
     "placeholders": {
-      "minutes": {"type": "int"}
+      "minutes": {
+        "type": "int"
+      }
     }
   },
   "nutritionTagHighProtein": "High protein",
@@ -219,7 +235,9 @@
   "nutritionScansRemaining": "{count} fridge scans left this month",
   "@nutritionScansRemaining": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "nutritionScanPrompt": "Take a photo of your fridge or pantry to detect ingredients.",
@@ -251,7 +269,9 @@
   "homeWorkoutExerciseCount": "{count} exercises",
   "@homeWorkoutExerciseCount": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "progressTabWeight": "Weight",
@@ -261,8 +281,12 @@
   "progressWeightGoalLine": "Goal: {value} {unit}",
   "@progressWeightGoalLine": {
     "placeholders": {
-      "value": {"type": "String"},
-      "unit": {"type": "String"}
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
     }
   },
   "progressAdherenceChartTitle": "Weekly adherence",
@@ -273,7 +297,9 @@
   "progressWeightLabel": "Weight ({unit})",
   "@progressWeightLabel": {
     "placeholders": {
-      "unit": {"type": "String"}
+      "unit": {
+        "type": "String"
+      }
     }
   },
   "progressLogDate": "Date",
@@ -287,7 +313,9 @@
   "reassessmentPhaseUpdated": "Program phase updated to phase {phase}",
   "@reassessmentPhaseUpdated": {
     "placeholders": {
-      "phase": {"type": "int"}
+      "phase": {
+        "type": "int"
+      }
     }
   },
   "reassessmentNoPhaseChange": "No program changes needed — keep going!",
@@ -317,7 +345,9 @@
   "subscriptionTrialDaysRemaining": "{days, plural, =1{1 day left in your free trial} other{{days} days left in your free trial}}",
   "@subscriptionTrialDaysRemaining": {
     "placeholders": {
-      "days": {"type": "int"}
+      "days": {
+        "type": "int"
+      }
     }
   },
   "subscriptionExpiredBanner": "Subscription expired — tap to renew premium access",
@@ -328,19 +358,42 @@
   "workoutPhaseLockedTitle": "Phase {phase} locked",
   "@workoutPhaseLockedTitle": {
     "placeholders": {
-      "phase": {"type": "int"}
+      "phase": {
+        "type": "int"
+      }
     }
   },
   "workoutPhaseLockedBody": "Resubscribe to continue your full training program. Basic tracking remains available on the free plan.",
   "homeGreeting": "Hello {name} 👋",
-  "@homeGreeting": {"placeholders": {"name": {"type": "String"}}},
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "homeDayPhase": "Day {day} · {phase} phase",
-  "@homeDayPhase": {"placeholders": {"day": {"type": "int"}, "phase": {"type": "String"}}},
+  "@homeDayPhase": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "phase": {
+        "type": "String"
+      }
+    }
+  },
   "homeGuestBanner": "You're in guest mode — sign up to save your progress",
   "homeGuestSignUp": "Sign up",
   "homeGuestCta": "Sign up now — free for 7 days",
   "homeStreakDays": "{days} day streak",
-  "@homeStreakDays": {"placeholders": {"days": {"type": "int"}}},
+  "@homeStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "homeStartStreak": "Start your streak today",
   "homeTodayWorkoutTitle": "Today's workout",
   "homeStartWorkout": "Start workout",
@@ -349,9 +402,24 @@
   "homeMealConfirmed": "Confirmed ✓",
   "homeMealPending": "Pending",
   "homeWalkingSteps": "{current} / {goal} steps",
-  "@homeWalkingSteps": {"placeholders": {"current": {"type": "int"}, "goal": {"type": "int"}}},
+  "@homeWalkingSteps": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
   "homeWeeklyProgress": "{completed} / 7 days complete",
-  "@homeWeeklyProgress": {"placeholders": {"completed": {"type": "int"}}},
+  "@homeWeeklyProgress": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      }
+    }
+  },
   "homeCheckInBanner": "⏱️ Weekly check-in ready — just one minute",
   "homeRecoveryScore": "Recovery score",
   "homeRecoveryReady": "Your body is ready to train",
@@ -361,11 +429,26 @@
   "nutritionFilterQuick": "Quick",
   "nutritionFilterLowCalorie": "Low calorie",
   "nutritionMacroSummary": "{calories} cal · {protein}g protein",
-  "@nutritionMacroSummary": {"placeholders": {"calories": {"type": "int"}, "protein": {"type": "int"}}},
+  "@nutritionMacroSummary": {
+    "placeholders": {
+      "calories": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      }
+    }
+  },
   "nutritionMacroBar": "Cal | Protein | Carbs | Fat",
   "nutritionMealConfirmed": "Confirmed ✓",
   "nutritionFridgeBanner": "📷 Scan your fridge — {remaining} scans left this month",
-  "@nutritionFridgeBanner": {"placeholders": {"remaining": {"type": "int"}}},
+  "@nutritionFridgeBanner": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
   "nutritionFridgeScanCta": "Scan",
   "workoutWarmUpStep1": "Shoulder circles — 30 seconds",
   "workoutWarmUpStep2": "March in place — 60 seconds",
@@ -374,13 +457,46 @@
   "workoutStartMainWorkout": "Start main workout",
   "workoutWarmUpComplete": "Warm-up done — ready!",
   "homeProgramDay": "Day {day} of {total}",
-  "@homeProgramDay": {"placeholders": {"day": {"type": "int"}, "total": {"type": "int"}}},
+  "@homeProgramDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "homeStartProgram": "Start your program",
   "nutritionDailyCalorieGoal": "Your daily calorie target",
   "nutritionCalorieTargetSummary": "Target: {calories} cal — {protein}g protein, {carbs}g carbs, {fat}g fat",
-  "@nutritionCalorieTargetSummary": {"placeholders": {"calories": {"type": "int"}, "protein": {"type": "int"}, "carbs": {"type": "int"}, "fat": {"type": "int"}}},
+  "@nutritionCalorieTargetSummary": {
+    "placeholders": {
+      "calories": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      },
+      "carbs": {
+        "type": "int"
+      },
+      "fat": {
+        "type": "int"
+      }
+    }
+  },
   "nutritionCalorieProgress": "{consumed} / {target} cal today",
-  "@nutritionCalorieProgress": {"placeholders": {"consumed": {"type": "int"}, "target": {"type": "int"}}},
+  "@nutritionCalorieProgress": {
+    "placeholders": {
+      "consumed": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
   "nutritionEditCalorieGoal": "Edit calorie target",
   "nutritionCalorieHint": "Daily calories",
   "settingsThemeTitle": "Appearance",
@@ -416,11 +532,23 @@
   "habitsAddHint": "Habit name",
   "habitsAddConfirm": "Add",
   "habitsStreak": "{days} day streak",
-  "@habitsStreak": {"placeholders": {"days": {"type": "int"}}},
+  "@habitsStreak": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "habitsRetry": "Retry",
   "habitsErrorTitle": "Could not load habits",
   "homeRecoveryExplain": "A recovery score of {score}% blends sleep quality, rest days, and muscle fatigue. Higher means your body is ready to train hard.",
-  "@homeRecoveryExplain": {"placeholders": {"score": {"type": "int"}}},
+  "@homeRecoveryExplain": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryFactorSleep": "Sleep quality",
   "homeRecoveryFactorRest": "Rest days",
   "homeRecoveryFactorMuscle": "Muscle fatigue",
@@ -435,19 +563,49 @@
   "walkingPace": "Pace",
   "walkingCalories": "Calories burned",
   "walkingWeightLoss": "Est. fat burn ≈ {kg} kg",
-  "@walkingWeightLoss": {"placeholders": {"kg": {"type": "String"}}},
+  "@walkingWeightLoss": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      }
+    }
+  },
   "walkingCadence": "Cadence ≈ {spm} steps/min",
-  "@walkingCadence": {"placeholders": {"spm": {"type": "int"}}},
+  "@walkingCadence": {
+    "placeholders": {
+      "spm": {
+        "type": "int"
+      }
+    }
+  },
   "walkingMetricsEstimatedNote": "Health Connect unavailable — showing estimated metrics from step count.",
   "mealBuilderTitle": "Customize ingredients",
   "mealBuilderTitleFor": "Customize {meal}",
-  "@mealBuilderTitleFor": {"placeholders": {"meal": {"type": "String"}}},
+  "@mealBuilderTitleFor": {
+    "placeholders": {
+      "meal": {
+        "type": "String"
+      }
+    }
+  },
   "mealBuilderSubtitle": "Adjust protein, cooking fat, and add-ons — macros update live.",
   "mealBuilderEggs": "Eggs",
   "mealBuilderEggCount": "{count} eggs",
-  "@mealBuilderEggCount": {"placeholders": {"count": {"type": "int"}}},
+  "@mealBuilderEggCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "mealBuilderPortionCount": "{count} portions",
-  "@mealBuilderPortionCount": {"placeholders": {"count": {"type": "int"}}},
+  "@mealBuilderPortionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "mealBuilderProteinLunch": "Protein portions",
   "mealBuilderProteinDinner": "Dinner protein",
   "mealBuilderProteinSnack": "Snack protein",
@@ -470,11 +628,35 @@
   "weeklyCheckInWaist": "Waist measurement",
   "weeklyCheckInEnergy": "Energy level (1–5)",
   "weeklyCheckInAdherence": "Training adherence: {pct}%",
-  "@weeklyCheckInAdherence": {"placeholders": {"pct": {"type": "int"}}},
+  "@weeklyCheckInAdherence": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
   "weeklyCheckInSubmit": "Update my targets",
   "weeklyCheckInDoneTitle": "Targets updated",
   "weeklyCheckInDoneBody": "Calories {prev} → {next} kcal. Macros: {protein}g protein, {carbs}g carbs, {fat}g fat.",
-  "@weeklyCheckInDoneBody": {"placeholders": {"prev": {"type": "int"}, "next": {"type": "int"}, "protein": {"type": "int"}, "carbs": {"type": "int"}, "fat": {"type": "int"}}},
+  "@weeklyCheckInDoneBody": {
+    "placeholders": {
+      "prev": {
+        "type": "int"
+      },
+      "next": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      },
+      "carbs": {
+        "type": "int"
+      },
+      "fat": {
+        "type": "int"
+      }
+    }
+  },
   "settingsAccentTitle": "Accent color",
   "settingsAccentOrange": "Orange",
   "settingsAccentEmerald": "Emerald",
@@ -500,37 +682,121 @@
   "mealBuilderCheeseMozzarella": "Mozzarella",
   "mealBuilderCheeseFeta": "Feta",
   "mealBuilderCheeseGrams": "Quantity: {grams}g",
-  "@mealBuilderCheeseGrams": {"placeholders": {"grams": {"type": "int"}}},
+  "@mealBuilderCheeseGrams": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryFormulaExplain": "Recovery = Rest days (40%) + Step target (30%) + Meal/workout consistency (30%).",
   "homeRecoveryFactorRestDays": "Rest days",
   "homeRecoveryFactorSteps": "Step count target",
   "homeRecoveryFactorConsistency": "Meal & workout consistency",
   "homeRecoveryRestDetail": "{days} rest day(s) this week",
-  "@homeRecoveryRestDetail": {"placeholders": {"days": {"type": "int"}}},
+  "@homeRecoveryRestDetail": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryStepsDetail": "{current} / {goal} steps today",
-  "@homeRecoveryStepsDetail": {"placeholders": {"current": {"type": "int"}, "goal": {"type": "int"}}},
+  "@homeRecoveryStepsDetail": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryConsistencyDetail": "Meals {mealsDone}/{mealsTotal} · Workouts {wDone}/{wTotal}",
-  "@homeRecoveryConsistencyDetail": {"placeholders": {"mealsDone": {"type": "int"}, "mealsTotal": {"type": "int"}, "wDone": {"type": "int"}, "wTotal": {"type": "int"}}},
+  "@homeRecoveryConsistencyDetail": {
+    "placeholders": {
+      "mealsDone": {
+        "type": "int"
+      },
+      "mealsTotal": {
+        "type": "int"
+      },
+      "wDone": {
+        "type": "int"
+      },
+      "wTotal": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryTipSteps": "Hit your daily step goal to lift this pillar",
   "homeRecoveryTipConsistency": "Confirm meals and finish planned workouts",
   "homeRecoveryMathLine": "{rest} + {steps} + {consistency} = {total}%",
-  "@homeRecoveryMathLine": {"placeholders": {"rest": {"type": "int"}, "steps": {"type": "int"}, "consistency": {"type": "int"}, "total": {"type": "int"}}},
+  "@homeRecoveryMathLine": {
+    "placeholders": {
+      "rest": {
+        "type": "int"
+      },
+      "steps": {
+        "type": "int"
+      },
+      "consistency": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "cardioTitle": "Cardio & daily activity",
   "cardioSubtitle": "Log brisk walks, runs, and more — calories use MET × weight × time.",
   "cardioSelectActivity": "Activity",
   "cardioDuration": "Duration: {minutes} min",
-  "@cardioDuration": {"placeholders": {"minutes": {"type": "int"}}},
+  "@cardioDuration": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "cardioEstimatedBurn": "Est. burn: {kcal} kcal",
-  "@cardioEstimatedBurn": {"placeholders": {"kcal": {"type": "int"}}},
+  "@cardioEstimatedBurn": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
   "cardioMetHint": "MET {met} · formula: MET × kg × hours",
-  "@cardioMetHint": {"placeholders": {"met": {"type": "String"}}},
+  "@cardioMetHint": {
+    "placeholders": {
+      "met": {
+        "type": "String"
+      }
+    }
+  },
   "cardioLogButton": "Log activity",
   "cardioLoggedSnack": "Cardio session logged",
   "cardioTodayTotal": "Burned today: {kcal} kcal",
-  "@cardioTodayTotal": {"placeholders": {"kcal": {"type": "int"}}},
+  "@cardioTodayTotal": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
   "cardioEmpty": "No cardio logged yet — add your first session above.",
   "cardioLogSubtitle": "{minutes} min · {kcal} kcal",
-  "@cardioLogSubtitle": {"placeholders": {"minutes": {"type": "int"}, "kcal": {"type": "int"}}},
+  "@cardioLogSubtitle": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
   "cardioLogCta": "Log cardio activity",
   "cardioBriskWalking": "Brisk walking",
   "cardioRunning": "Running",
@@ -540,7 +806,13 @@
   "cardioHiit": "HIIT",
   "cardioElliptical": "Elliptical",
   "workoutGoalPlanLabel": "Plan for: {goal}",
-  "@workoutGoalPlanLabel": {"placeholders": {"goal": {"type": "String"}}},
+  "@workoutGoalPlanLabel": {
+    "placeholders": {
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
   "aiScanTitle": "AI Meal Scanner",
   "aiScanPrompt": "Photograph your meal — AI estimates calories and macros from the portion size.",
   "aiScanCamera": "Camera",
@@ -561,7 +833,13 @@
   "aiScanMacroFats": "Fats",
   "aiScanSmartSwaps": "Smart swaps",
   "aiScanCaloriesChip": "{calories} kcal",
-  "@aiScanCaloriesChip": {"placeholders": {"calories": {"type": "int"}}},
+  "@aiScanCaloriesChip": {
+    "placeholders": {
+      "calories": {
+        "type": "int"
+      }
+    }
+  },
   "aiCoachTitle": "Vireo AI",
   "aiCoachFabLabel": "Vireo AI",
   "aiCoachInputHint": "Ask about meals, macros, or training…",
@@ -573,22 +851,483 @@
   "waterTrackerSummary": "{current}L / {goal}L — {percent}% completed",
   "@waterTrackerSummary": {
     "placeholders": {
-      "current": {"type": "double"},
-      "goal": {"type": "double"},
-      "percent": {"type": "int"}
+      "current": {
+        "type": "double"
+      },
+      "goal": {
+        "type": "double"
+      },
+      "percent": {
+        "type": "int"
+      }
     }
   },
   "weeklyDeficitChartTitle": "Weekly calorie balance",
   "weeklyDeficitSubtitle": "TDEE − meals + cardio burn (last 7 days)",
   "weeklyDeficitTotal": "Weekly net balance: {kcal} kcal",
-  "@weeklyDeficitTotal": {"placeholders": {"kcal": {"type": "int"}}},
+  "@weeklyDeficitTotal": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
   "weeklyDeficitEmpty": "Log meals or cardio to see your weekly calorie balance.",
   "weeklyDeficitTooltip": "{net} kcal\nIn: {consumed} · Out: {burned}",
   "@weeklyDeficitTooltip": {
     "placeholders": {
-      "net": {"type": "int"},
-      "consumed": {"type": "int"},
-      "burned": {"type": "int"}
+      "net": {
+        "type": "int"
+      },
+      "consumed": {
+        "type": "int"
+      },
+      "burned": {
+        "type": "int"
+      }
     }
-  }
+  },
+  "uxGoodMorning": "Good morning, {name}",
+  "@uxGoodMorning": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "uxGoodAfternoon": "Good afternoon, {name}",
+  "@uxGoodAfternoon": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "uxGoodEvening": "Good evening, {name}",
+  "@uxGoodEvening": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "uxTodayOverline": "TODAY",
+  "uxCaloriesLeft": "kcal left",
+  "uxCaloriesOver": "kcal over",
+  "uxGoal": "Goal",
+  "uxEaten": "Eaten",
+  "uxBurned": "Burned",
+  "uxActionScan": "Scan meal",
+  "uxActionTrain": "Train",
+  "uxActionCoach": "AI Coach",
+  "uxSectionTraining": "Today's training",
+  "uxSectionThisWeek": "This week",
+  "uxSectionTodayLog": "Today's log",
+  "uxAddMeal": "+ Add meal",
+  "uxAiScanned": "AI scan",
+  "uxMealRemoved": "Meal removed",
+  "uxLogEmptyTitle": "Nothing logged yet",
+  "uxLogEmptyBody": "Snap a photo of your meal — AI counts the calories and macros in seconds.",
+  "uxRestDayHint": "Recovery is training too. Walk, stretch and hit your protein.",
+  "uxWorkoutMinutes": "~{minutes} min",
+  "@uxWorkoutMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "uxWater": "Water",
+  "uxGlassSize": "250 ml",
+  "uxWaterAdded": "+250 ml · {liters} L today",
+  "@uxWaterAdded": {
+    "placeholders": {
+      "liters": {
+        "type": "String"
+      }
+    }
+  },
+  "uxWaterGoalDone": "Water goal reached 💧 great job!",
+  "uxUndo": "Undo",
+  "uxCopied": "Copied",
+  "uxSend": "Send",
+  "uxQuickLogTitle": "Quick log",
+  "uxQuickLogSubtitle": "Log anything in one tap.",
+  "uxQuickScanTitle": "Scan a meal with AI",
+  "uxQuickScanSub": "Calories & macros in seconds",
+  "uxQuickWater": "Water",
+  "uxQuickWaterSub": "+1 glass · 250 ml",
+  "uxQuickWeight": "Weight",
+  "uxQuickWeightSub": "Log today's weigh-in",
+  "uxQuickCardio": "Cardio",
+  "uxQuickCardioSub": "Walk, run, bike…",
+  "uxQuickCoach": "Ask coach",
+  "uxQuickCoachSub": "Personal AI advice",
+  "uxCoachOnline": "Online · knows your macros",
+  "uxCoachTyping": "Typing…",
+  "uxCoachNewChat": "New chat",
+  "uxCoachClearConfirm": "Start a new conversation? Current messages will be cleared.",
+  "uxCoachHeroTitle": "Your personal AI coach",
+  "uxCoachHeroBody": "Ask about meals, protein, cravings or training. Every answer is based on your numbers today.",
+  "uxCoachKcalLeft": "{kcal} kcal left",
+  "@uxCoachKcalLeft": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
+  "uxCoachProteinLeft": "{grams}g protein left",
+  "@uxCoachProteinLeft": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "uxCoachChipWorkout": "What should I eat before training?",
+  "uxProtein": "Protein",
+  "uxCarbs": "Carbs",
+  "uxFat": "Fat",
+  "aiScanAnalysisTitle": "AI analysis",
+  "diaryAddMeal": "Add Meal",
+  "diaryAddWorkout": "Add Workout",
+  "diaryCaloriesIn": "Calories In",
+  "diaryCaloriesOut": "Calories Out",
+  "@diaryKcal": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryKcal": "{kcal} kcal",
+  "@diaryLastUpdated": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "diaryLastUpdated": "Last updated {count}",
+  "@diaryMealCalories": {
+    "placeholders": {
+      "calories": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryMealCalories": "{calories} kcal",
+  "diaryNetBalance": "Net Balance",
+  "diaryNoEntries": "No entries for this day",
+  "diaryProtein": "Protein",
+  "@diaryProteinProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryProteinProgress": "{current} / {goal} g",
+  "diarySetGoalsCta": "Set goals",
+  "diarySetGoalsFirst": "Set your goals first",
+  "diaryTimeline": "Timeline",
+  "diaryTitle": "My Diary",
+  "diaryToday": "Today",
+  "diaryWater": "Water",
+  "@diaryWaterAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryWaterAmount": "{amount} ml",
+  "@diaryWaterProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryWaterProgress": "{current} / {goal} ml",
+  "@diaryWorkoutSubtitle": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "calories": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryWorkoutSubtitle": "{minutes} min · {calories} kcal",
+  "exerciseAdvanced": "Advanced",
+  "exerciseBeginner": "Beginner",
+  "exerciseComplete": "Complete Set",
+  "exerciseDifficulty": "Difficulty",
+  "exerciseEquipment": "Equipment",
+  "exerciseIntermediate": "Intermediate",
+  "exerciseLoadingDemo": "Loading exercise demo...",
+  "exerciseMistakes": "Common Mistakes",
+  "exerciseReps": "Reps",
+  "exerciseRest": "Rest",
+  "exerciseSets": "Sets",
+  "exerciseSteps": "Steps",
+  "exerciseTips": "Pro Tips",
+  "exerciseViewBack": "Back",
+  "exerciseViewFront": "Front",
+  "measurements30Days": "30 days",
+  "measurements3Months": "3 months",
+  "measurements7Days": "7 days",
+  "measurementsAdd": "Add measurement",
+  "measurementsAddFirst": "Log your first measurement",
+  "measurementsAll": "All",
+  "measurementsArms": "Arms",
+  "measurementsBodyFat": "Body fat %",
+  "measurementsChest": "Chest",
+  "measurementsDate": "Date",
+  "measurementsDelete": "Delete",
+  "measurementsDeleteConfirm": "Delete this measurement?",
+  "measurementsHistory": "History",
+  "@measurementsLastUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "measurementsLastUpdated": "Updated {date}",
+  "measurementsNeedMoreData": "Log more entries to see trends",
+  "measurementsNoData": "No measurements yet",
+  "measurementsNotes": "Notes",
+  "measurementsSave": "Save",
+  "measurementsThighs": "Thighs",
+  "measurementsTitle": "Measurements",
+  "measurementsTrendDeclining": "Needs attention",
+  "measurementsTrendImproving": "Improving",
+  "measurementsTrendStable": "Stable",
+  "measurementsWaist": "Waist",
+  "measurementsWeight": "Weight",
+  "measurementsWeightInvalid": "Enter a valid weight",
+  "muscleBack": "Back",
+  "muscleBiceps": "Biceps",
+  "muscleCalves": "Calves",
+  "muscleChest": "Chest",
+  "muscleCore": "Core",
+  "muscleForearms": "Forearms",
+  "muscleGlutes": "Glutes",
+  "muscleHamstrings": "Hamstrings",
+  "muscleHipFlexors": "Hip Flexors",
+  "muscleQuads": "Quads",
+  "muscleShoulders": "Shoulders",
+  "muscleTriceps": "Triceps",
+  "notificationsBreakfast": "Breakfast reminder",
+  "notificationsDinner": "Dinner reminder",
+  "notificationsLunch": "Lunch reminder",
+  "notificationsOpenSettings": "Open settings",
+  "notificationsPermissionBanner": "Enable notifications to stay on track",
+  "notificationsPreWorkout": "Pre-workout reminder",
+  "notificationsPreWorkoutSubtitle": "Get ready to train",
+  "notificationsSleep": "Sleep reminder",
+  "notificationsSleepSubtitle": "Wind down for better recovery",
+  "notificationsTest": "Send test notification",
+  "notificationsTestBody": "Vireo reminders are working",
+  "notificationsTitle": "Notifications",
+  "notificationsWater": "Water reminder",
+  "notificationsWaterSubtitle": "Stay hydrated through the day",
+  "notificationsWeeklyReport": "Weekly report",
+  "notificationsWeeklyReportSubtitle": "See how your week went",
+  "vitality12WeekProgram": "12-Week Program",
+  "@vitalityArticleCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityArticleCount": "{count} articles",
+  "vitalityArticleDisclaimer": "For education only. Consult a professional for personal advice.",
+  "vitalityArticlesSection": "Articles",
+  "vitalityBadgesTitle": "Badges",
+  "@vitalityBreathingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityBreathingCount": "{count} sessions",
+  "vitalityBreathingLog": "Breathing",
+  "vitalityCategoryAdvanced": "Advanced",
+  "vitalityCategoryEnvironmental": "Environment",
+  "vitalityCategoryLifestyle": "Lifestyle",
+  "vitalityCategoryNutrition": "Nutrition",
+  "vitalityCategoryTraining": "Training",
+  "vitalityCheckProtein": "Hit protein",
+  "vitalityCheckSleep": "Quality sleep",
+  "vitalityCheckSunlight": "Morning light",
+  "vitalityCheckWorkout": "Move / train",
+  "vitalityCheckZincVitD": "Zinc / Vit D",
+  "@vitalityDailyChecklistProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityDailyChecklistProgress": "{done}/{total} done",
+  "vitalityDailyChecklistTitle": "Today's checklist",
+  "vitalityDailyTipLabel": "Daily tip",
+  "vitalityHubSubtitle": "Science-backed habits for energy and recovery",
+  "vitalityHubTitle": "Vitality Hub",
+  "vitalityLegendBadge": "Legend",
+  "vitalityLinkCopied": "Link copied",
+  "vitalityLogSection": "Log",
+  "vitalityMarkRead": "Mark as read",
+  "vitalityMarkReadDone": "Read",
+  "vitalityMarkReadSuccess": "Marked as read",
+  "vitalityMedicalDisclaimer": "Educational content only — not medical advice.",
+  "vitalityMetricsEmpty": "No metrics yet",
+  "vitalityMetricsLast7Days": "Last 7 days",
+  "@vitalityMetricsLastEntry": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityMetricsLastEntry": "Last entry · energy {score}/10",
+  "vitalityMetricsSave": "Save metrics",
+  "vitalityMetricsSaved": "Saved",
+  "vitalityMetricsTapToLog": "Tap to log",
+  "vitalityMetricsTitle": "Daily metrics",
+  "vitalityMorningEnergy": "Morning energy",
+  "vitalityMyProgram": "My Program",
+  "vitalityNotLogged": "Not logged",
+  "vitalityPhaseFoundation": "Foundation",
+  "vitalityPhaseOptimization": "Optimization",
+  "vitalityPhasePeak": "Peak",
+  "vitalityProgramAllWeeks": "All weeks",
+  "vitalityProgramComplete": "Program complete",
+  "vitalityProgramContinue": "Continue",
+  "vitalityProgramDisclaimer": "Educational program — not a medical treatment.",
+  "vitalityProgramDone": "Completed",
+  "vitalityProgramOverallProgress": "Overall progress",
+  "vitalityProgramStartCta": "Start program",
+  "vitalityProgramSubtitle": "12 weeks to better energy, sleep and recovery",
+  "vitalityProgramTitle": "Vitality Transformation",
+  "vitalityProtocolBadgeEarned": "Badge unlocked!",
+  "vitalityProtocolCompleteDay": "Complete day",
+  "@vitalityProtocolStreak": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityProtocolStreak": "{days}-day streak",
+  "vitalityProtocolTitle": "Protocols",
+  "@vitalityReadingTime": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityReadingTime": "{minutes} min read",
+  "vitalityReportCompletion": "Completion",
+  "vitalityReportImproving": "You're improving — keep the streak going.",
+  "vitalityReportKeepGoing": "Small steps still count. Finish a couple tasks today.",
+  "vitalityScientificSources": "Sources",
+  "@vitalityScoreBreakdown": {
+    "placeholders": {
+      "sleep": {
+        "type": "int"
+      },
+      "workout": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      },
+      "stress": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityScoreBreakdown": "Sleep {sleep} · Train {workout} · Protein {protein} · Stress {stress}",
+  "vitalityScoreLabel": "Vitality",
+  "vitalitySleepHint": "How did you sleep?",
+  "@vitalitySleepHours": {
+    "placeholders": {
+      "hours": {
+        "type": "num"
+      }
+    }
+  },
+  "vitalitySleepHours": "{hours} h",
+  "vitalitySleepLog": "Sleep",
+  "vitalitySleepQuality": "Quality",
+  "@vitalityStreak": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityStreak": "{days}-day streak",
+  "vitalityStressLevel": "Stress",
+  "vitalityUnlockNextWeek": "Unlock next week",
+  "@vitalityWeekProgress": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityWeekProgress": "{percent}%",
+  "vitalityWeekReport": "Week report",
+  "@vitalityWeekX": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityWeekX": "Week {week}",
+  "@vitalityWeekXOf12": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityWeekXOf12": "Week {week} of 12",
+  "vitalityWorkoutDone": "Trained",
+  "vitalityWorkoutLog": "Workout",
+  "vitalityWorkoutPending": "Rest / not yet",
+  "vitalityWorkoutPerformance": "Performance",
+  "@walkingEstimatedMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "walkingEstimatedMinutes": "~{minutes} min",
+  "walkingHealthBanner": "Connect Apple Health / Health Connect for automatic steps",
+  "walkingManualStepsLabel": "Steps today",
+  "walkingUpdateSteps": "Update steps",
+  "walkingWebManualBanner": "On web, enter steps manually",
+  "vitalityKeyTakeaway": "Key takeaway"
 }

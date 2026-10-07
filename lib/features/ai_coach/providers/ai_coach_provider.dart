@@ -37,6 +37,13 @@ class AiCoachNotifier extends AsyncNotifier<AiCoachState> {
     await _completeSend(withUser, trimmed);
   }
 
+  /// Starts a fresh conversation (keeps nothing in local history).
+  Future<void> clearHistory() async {
+    if (state.valueOrNull?.isLoading == true) return;
+    state = const AsyncValue.data(AiCoachState());
+    await AiCoachHistoryStore.save(const <ChatMessage>[]);
+  }
+
   Future<void> retryLast() async {
     final current = state.valueOrNull;
     if (current == null) return;

@@ -8,12 +8,16 @@ class AiCoachState {
     this.status = AiCoachStatus.idle,
     this.isOffline = false,
     this.pendingUserText,
+    this.failedMessageId,
+    this.errorMessage,
   });
 
   final List<ChatMessage> messages;
   final AiCoachStatus status;
   final bool isOffline;
   final String? pendingUserText;
+  final String? failedMessageId;
+  final String? errorMessage;
 
   bool get isLoading => status == AiCoachStatus.loading;
   bool get hasError => status == AiCoachStatus.error;
@@ -23,7 +27,10 @@ class AiCoachState {
     AiCoachStatus? status,
     bool? isOffline,
     String? pendingUserText,
+    String? failedMessageId,
+    String? errorMessage,
     bool clearPending = false,
+    bool clearError = false,
   }) {
     return AiCoachState(
       messages: messages ?? this.messages,
@@ -31,6 +38,9 @@ class AiCoachState {
       isOffline: isOffline ?? this.isOffline,
       pendingUserText:
           clearPending ? null : (pendingUserText ?? this.pendingUserText),
+      failedMessageId:
+          clearError ? null : (failedMessageId ?? this.failedMessageId),
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

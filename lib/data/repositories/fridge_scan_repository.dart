@@ -25,7 +25,7 @@ class FridgeScanRepository {
       final response = await SupabaseService.client.functions.invoke(
         AppConfig.scanFridgeVisionFunctionName,
         body: {
-          if (imageUrl != null) 'image_url': imageUrl,
+          'image_url': ?imageUrl,
           if (imageUrl == null) 'image_base64': imageBase64,
           'mime_type': mimeType,
         },

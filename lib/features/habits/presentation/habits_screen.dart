@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
+import 'package:vireo/core/widgets/vireo_fab.dart';
 import 'package:vireo/features/habits/application/habit_controller.dart';
 import 'package:vireo/features/habits/presentation/widgets/habit_tile.dart';
 import 'package:vireo/features/habits/presentation/widgets/habits_error_view.dart';
@@ -23,7 +24,7 @@ class HabitsScreen extends ConsumerWidget {
         children: [
           habitsAsync.when(
             loading: () => const HabitsLoadingView(),
-            error: (_, __) => HabitsErrorView(
+            error: (error, stackTrace) => HabitsErrorView(
               onRetry: () => ref.invalidate(habitControllerProvider),
             ),
             data: (habits) {
@@ -58,7 +59,7 @@ class HabitsScreen extends ConsumerWidget {
           Positioned(
             right: 16,
             bottom: 16,
-            child: FloatingActionButton(
+            child: VireoFab(
               onPressed: () => _showAddHabitDialog(context, ref),
               backgroundColor: colors.ember,
               foregroundColor: colors.text,

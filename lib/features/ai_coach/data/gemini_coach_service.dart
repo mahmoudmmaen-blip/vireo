@@ -12,12 +12,18 @@ class GeminiCoachService implements IAiCoachService {
 
   static const _modelName = 'gemini-1.5-flash';
 
+  static const emptyResponseFallbackEn =
+      'Sorry, connection error. Please try again.';
+  static const emptyResponseFallbackAr =
+      'عذراً، حدث خطأ في الاتصال. جرب مرة أخرى.';
+
   @override
   Future<String> sendMessage(
     List<ChatMessage> history,
     String userMessage,
-    UserContext context,
-  ) async {
+    UserContext context, {
+    String languageCode = 'ar',
+  }) async {
     if (_apiKey.isEmpty) {
       throw const AiCoachConfigException();
     }
@@ -49,7 +55,7 @@ ${VireoAiPrompts.coachContextBlock(
       final response = await chat.sendMessage(Content.text(userMessage));
       final text = response.text?.trim();
       if (text == null || text.isEmpty) {
-        throw const AiCoachApiException('EMPTY_RESPONSE');
+        return languageCode == 'ar' ? emptyResponseFallbackAr : emptyResponseFallbackEn;
       }
       return text;
     } on AiCoachException {

@@ -137,13 +137,38 @@ class _ReassessmentFlowScreenState extends ConsumerState<ReassessmentFlowScreen>
           const SizedBox(height: 24),
           Text(l10n.onboardingActivityLevel, style: Theme.of(context).textTheme.titleMedium),
           ...ActivityLevel.values.map((level) {
-            return RadioListTile<ActivityLevel>(
-              value: level,
-              groupValue: _activity,
-              title: Text(_activityLabel(l10n, level)),
-              onChanged: (v) {
-                if (v != null) setState(() => _activity = v);
-              },
+            final selected = _activity == level;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: InkWell(
+                onTap: () => setState(() => _activity = level),
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: selected ? colors.ember : colors.line,
+                      width: selected ? 2 : 1,
+                    ),
+                    color: selected
+                        ? colors.ember.withValues(alpha: 0.08)
+                        : colors.surfaceRaised,
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        selected
+                            ? Icons.radio_button_checked
+                            : Icons.radio_button_off,
+                        color: selected ? colors.ember : colors.textMute,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(child: Text(_activityLabel(l10n, level))),
+                    ],
+                  ),
+                ),
+              ),
             );
           }),
           const SizedBox(height: 16),

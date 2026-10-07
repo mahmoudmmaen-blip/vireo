@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/core/services/hive_service.dart';
@@ -10,6 +11,8 @@ import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/models/subscription_state.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/auth/widgets/guest_auth_gate.dart';
+import 'package:vireo/features/measurements/widgets/measurement_summary_card.dart';
+import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/profile/settings_screen.dart';
 import 'package:vireo/features/profile/widgets/bmi_spectrum_bar.dart';
@@ -18,6 +21,9 @@ import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/subscription/widgets/subscription_status_banner.dart';
+import 'package:vireo/features/vitality/presentation/widgets/vitality_score_ring.dart';
+import 'package:vireo/features/vitality/widgets/vitality_badges_grid.dart';
+import 'package:vireo/features/vitality_program/screens/vitality_program_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -31,6 +37,11 @@ class ProfileScreen extends ConsumerWidget {
 
     return FeatureScaffold(
       title: l10n.profileTitle,
+      leading: IconButton(
+        tooltip: l10n.homeTitle,
+        icon: const BackButtonIcon(),
+        onPressed: () => ref.read(shellTabIndexProvider.notifier).goHome(),
+      ),
       actions: [
         IconButton(
           icon: const Icon(Icons.settings_outlined),
@@ -56,7 +67,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
           sub.when(
             loading: () => const SizedBox.shrink(),
-            error: (_, __) => const SizedBox.shrink(),
+            error: (error, stackTrace) => const SizedBox.shrink(),
             data: (snapshot) {
               if (snapshot.accessLevel == SubscriptionAccessLevel.trialActive &&
                   snapshot.trialDaysRemaining != null) {
@@ -74,7 +85,7 @@ class ProfileScreen extends ConsumerWidget {
           Expanded(
             child: auth.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (_, __) => Center(child: Text(l10n.authErrorGeneric)),
+              error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
               data: (state) {
                 if (state is AppAuthGuest) {
                   return _GuestProfileBody(
@@ -149,6 +160,24 @@ class _GuestProfileBody extends StatelessWidget {
         const SizedBox(height: 8),
         Text(l10n.guestModeSubtitle, textAlign: TextAlign.center),
         const SizedBox(height: 24),
+        const VitalityScoreSection(),
+        const SizedBox(height: 16),
+        const VitalityBadgesGrid(),
+        const SizedBox(height: 16),
+        ListTile(
+          leading: Icon(Icons.emoji_events_outlined, color: colors.gold),
+          title: Text(l10n.vitalityMyProgram),
+          subtitle: Text(l10n.vitalityProgramSubtitle),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const VitalityProgramScreen(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        const MeasurementSummaryCard(),
+        const SizedBox(height: 24),
         Row(
           children: [
             Expanded(
@@ -191,7 +220,18 @@ class _GuestProfileBody extends StatelessWidget {
         BmiSpectrumBar(bmi: bmi, category: bmiCategory),
         const SizedBox(height: 8),
         _StatRow(label: l10n.profileActivityLevel, value: _activityLabel(l10n, activity)),
-        const SizedBox(height: 16),
+        const SizedBox(height: 24),
+        ListTile(
+          leading: Icon(Icons.notifications_outlined, color: colors.ember),
+          title: Text(l10n.notificationsTitle),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const NotificationSettingsScreen(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
         OutlinedButton.icon(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const WeeklyCheckInScreen()),
@@ -246,6 +286,24 @@ class _RegisteredProfileBody extends StatelessWidget {
         const SizedBox(height: 12),
         Text(displayName, style: Theme.of(context).textTheme.titleLarge, textAlign: TextAlign.center),
         Text(email, style: TextStyle(color: colors.textMute), textAlign: TextAlign.center),
+        const SizedBox(height: 24),
+        const VitalityScoreSection(),
+        const SizedBox(height: 16),
+        const VitalityBadgesGrid(),
+        const SizedBox(height: 16),
+        ListTile(
+          leading: Icon(Icons.emoji_events_outlined, color: colors.gold),
+          title: Text(l10n.vitalityMyProgram),
+          subtitle: Text(l10n.vitalityProgramSubtitle),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const VitalityProgramScreen(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        const MeasurementSummaryCard(),
         const SizedBox(height: 16),
         OutlinedButton.icon(
           onPressed: () {
@@ -255,6 +313,17 @@ class _RegisteredProfileBody extends StatelessWidget {
           },
           icon: const Icon(Icons.edit_outlined),
           label: Text(l10n.profileEditProfile),
+        ),
+        const SizedBox(height: 16),
+        ListTile(
+          leading: Icon(Icons.notifications_outlined, color: colors.ember),
+          title: Text(l10n.notificationsTitle),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const NotificationSettingsScreen(),
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         OutlinedButton.icon(

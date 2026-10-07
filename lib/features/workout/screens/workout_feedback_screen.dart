@@ -4,6 +4,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/workout_session.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
+import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/workout/providers/workout_flow_provider.dart';
 
 class WorkoutFeedbackScreen extends ConsumerStatefulWidget {
@@ -26,6 +27,7 @@ class _WorkoutFeedbackScreenState extends ConsumerState<WorkoutFeedbackScreen> {
             feedback: feedback,
           );
       ref.read(workoutFlowProvider.notifier).completeWorkout();
+      await ref.read(vitalityDailyLogProvider.notifier).markWorkoutCompleted();
       ref.read(workoutFlowProvider.notifier).clearSession();
       if (mounted) Navigator.of(context).pop();
     } catch (_) {

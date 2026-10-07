@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/health_steps_service.dart';
 import 'package:vireo/core/services/hive_service.dart';
@@ -28,6 +29,7 @@ class WalkingTrackerState {
     this.dailyGoal = 7500,
     this.last7Days = const [],
     this.isRefreshing = false,
+    this.manualEntryActive = false,
   });
 
   final HealthStepsStatus status;
@@ -35,9 +37,13 @@ class WalkingTrackerState {
   final int dailyGoal;
   final List<DailyStepCount> last7Days;
   final bool isRefreshing;
+  final bool manualEntryActive;
 
   double get progress =>
       dailyGoal <= 0 ? 0 : (todaySteps / dailyGoal).clamp(0.0, 1.0);
+
+  int get estimatedWalkingMinutes =>
+      todaySteps <= 0 ? 0 : (todaySteps / 100).ceil();
 
   WalkingTrackerState copyWith({
     HealthStepsStatus? status,
@@ -45,6 +51,7 @@ class WalkingTrackerState {
     int? dailyGoal,
     List<DailyStepCount>? last7Days,
     bool? isRefreshing,
+    bool? manualEntryActive,
   }) {
     return WalkingTrackerState(
       status: status ?? this.status,
@@ -52,11 +59,15 @@ class WalkingTrackerState {
       dailyGoal: dailyGoal ?? this.dailyGoal,
       last7Days: last7Days ?? this.last7Days,
       isRefreshing: isRefreshing ?? this.isRefreshing,
+      manualEntryActive: manualEntryActive ?? this.manualEntryActive,
     );
   }
 }
 
 class WalkingTrackerNotifier extends AsyncNotifier<WalkingTrackerState> {
+  static const _manualStepsKey = 'walking_manual_steps';
+  static const _manualStepsDateKey = 'walking_manual_steps_date';
+
   @override
   Future<WalkingTrackerState> build() async {
     return _load();
@@ -65,13 +76,59 @@ class WalkingTrackerNotifier extends AsyncNotifier<WalkingTrackerState> {
   Future<WalkingTrackerState> _load() async {
     final context = await ref.read(walkingContextProvider.future);
     final snapshot = await HealthStepsService.fetchSnapshot();
+    final manual = _readManualStepsForToday();
+    final manualActive = kIsWeb ||
+        snapshot.status == HealthStepsStatus.unavailable ||
+        snapshot.status == HealthStepsStatus.denied;
+
+    var steps = snapshot.todaySteps;
+    if (manualActive && manual != null) {
+      steps = manual;
+    } else if (manualActive && steps <= 0) {
+      steps = manual ?? 0;
+    }
 
     return WalkingTrackerState(
       status: snapshot.status,
-      todaySteps: snapshot.todaySteps,
+      todaySteps: steps,
       dailyGoal: context.dailyGoal,
       last7Days: snapshot.last7Days,
+      manualEntryActive: manualActive,
     );
+  }
+
+  int? _readManualStepsForToday() {
+    if (!HiveService.isInitialized) return null;
+    try {
+      final date = HiveService.settingsBox.get(_manualStepsDateKey) as String?;
+      final today = DateTime.now().toIso8601String().substring(0, 10);
+      if (date != today) return null;
+      return HiveService.settingsBox.get(_manualStepsKey) as int?;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<void> setManualSteps(int steps) async {
+    final clamped = steps.clamp(0, 100000);
+    if (HiveService.isInitialized) {
+      try {
+        await HiveService.settingsBox.put(_manualStepsKey, clamped);
+        await HiveService.settingsBox.put(
+          _manualStepsDateKey,
+          DateTime.now().toIso8601String().substring(0, 10),
+        );
+      } catch (_) {
+        rethrow;
+      }
+    }
+
+    final current = state.valueOrNull;
+    if (current != null) {
+      state = AsyncData(current.copyWith(todaySteps: clamped));
+    } else {
+      await refresh();
+    }
   }
 
   Future<void> refresh() async {

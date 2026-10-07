@@ -22,6 +22,7 @@ class _Step1BodyMetricsState extends ConsumerState<Step1BodyMetrics> {
   late final TextEditingController _ageCtrl;
   late final TextEditingController _heightCtrl;
   late final TextEditingController _weightCtrl;
+  bool _controllersHydrated = false;
 
   @override
   void initState() {
@@ -29,15 +30,21 @@ class _Step1BodyMetricsState extends ConsumerState<Step1BodyMetrics> {
     _ageCtrl = TextEditingController();
     _heightCtrl = TextEditingController();
     _weightCtrl = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _hydrateControllersOnce());
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void _hydrateControllersOnce() {
+    if (!mounted || _controllersHydrated) return;
+    _controllersHydrated = true;
+
     final draft = ref.read(onboardingProvider).draft;
-    if (_ageCtrl.text.isEmpty && draft.age != null) {
+    if (draft.age != null) {
       _ageCtrl.text = draft.age.toString();
+    }
+    if (draft.heightCm != null) {
       _heightCtrl.text = _formatHeight(draft);
+    }
+    if (draft.weightKg != null) {
       _weightCtrl.text = _formatWeight(draft);
     }
   }
@@ -68,22 +75,75 @@ class _Step1BodyMetricsState extends ConsumerState<Step1BodyMetrics> {
     return v.toStringAsFixed(1);
   }
 
-  void _syncDraft(OnboardingDraft draft) {
-    final age = int.tryParse(_ageCtrl.text.trim());
-    final heightInput = double.tryParse(_heightCtrl.text.trim());
-    final weightInput = double.tryParse(_weightCtrl.text.trim());
+  void _syncDraft() {
+    final draft = ref.read(onboardingProvider).draft;
+    final ageText = _ageCtrl.text.trim();
+    final heightText = _heightCtrl.text.trim();
+    final weightText = _weightCtrl.text.trim();
 
-    ref.read(onboardingProvider.notifier).updateDraft(
-          draft.copyWith(
-            age: age,
-            heightCm: heightInput != null
-                ? UnitConverter.inputHeightToCm(heightInput, draft.unitPreference)
-                : null,
-            weightKg: weightInput != null
-                ? UnitConverter.inputWeightToKg(weightInput, draft.unitPreference)
-                : null,
-          ),
+    var next = draft;
+
+    if (ageText.isEmpty) {
+      next = next.copyWith(clearAge: true);
+    } else {
+      final age = int.tryParse(ageText);
+      if (age != null) next = next.copyWith(age: age);
+    }
+
+    if (heightText.isEmpty) {
+      next = next.copyWith(clearHeightCm: true);
+    } else {
+      final heightInput = double.tryParse(heightText.replaceAll(',', '.'));
+      if (heightInput != null) {
+        next = next.copyWith(
+          heightCm: UnitConverter.inputHeightToCm(heightInput, draft.unitPreference),
         );
+      }
+    }
+
+    if (weightText.isEmpty) {
+      next = next.copyWith(clearWeightKg: true);
+    } else {
+      final weightInput = double.tryParse(weightText.replaceAll(',', '.'));
+      if (weightInput != null) {
+        next = next.copyWith(
+          weightKg: UnitConverter.inputWeightToKg(weightInput, draft.unitPreference),
+        );
+      }
+    }
+
+    ref.read(onboardingProvider.notifier).updateDraft(next);
+  }
+
+  InputDecoration _metricDecoration({
+    required String label,
+    required String unit,
+  }) {
+    return InputDecoration(
+      labelText: '$label ($unit)',
+    );
+  }
+
+  Widget _numericField({
+    required Key key,
+    required TextEditingController controller,
+    required String label,
+    required String unit,
+    required void Function(String) onChanged,
+  }) {
+    return TextField(
+      key: key,
+      controller: controller,
+      enabled: true,
+      readOnly: false,
+      enableInteractiveSelection: true,
+      mouseCursor: SystemMouseCursors.text,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      textDirection: TextDirection.ltr,
+      textAlign: TextAlign.start,
+      decoration: _metricDecoration(label: label, unit: unit),
+      onChanged: onChanged,
+    );
   }
 
   @override
@@ -128,45 +188,74 @@ class _Step1BodyMetricsState extends ConsumerState<Step1BodyMetrics> {
           ),
           const SizedBox(height: 20),
           TextField(
+            key: const ValueKey('onboarding_age_field'),
             controller: _ageCtrl,
+            enabled: true,
+            readOnly: false,
+            enableInteractiveSelection: true,
+            mouseCursor: SystemMouseCursors.text,
             keyboardType: TextInputType.number,
+            textDirection: TextDirection.ltr,
+            textAlign: TextAlign.start,
             decoration: InputDecoration(labelText: l10n.onboardingAge),
-            onChanged: (_) => _syncDraft(draft),
+            onChanged: (_) => _syncDraft(),
           ),
           const SizedBox(height: 12),
-          TextField(
+          _numericField(
+            key: const ValueKey('onboarding_height_field'),
             controller: _heightCtrl,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: InputDecoration(
-              labelText: l10n.onboardingHeight,
-              suffixText: isMetric ? 'cm' : 'in',
-            ),
-            onChanged: (_) => _syncDraft(draft),
+            label: l10n.onboardingHeight,
+            unit: isMetric ? 'cm' : 'in',
+            onChanged: (_) => _syncDraft(),
           ),
           const SizedBox(height: 12),
-          TextField(
+          _numericField(
+            key: const ValueKey('onboarding_weight_field'),
             controller: _weightCtrl,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: InputDecoration(
-              labelText: l10n.onboardingWeight,
-              suffixText: isMetric ? 'kg' : 'lb',
-            ),
-            onChanged: (_) => _syncDraft(draft),
+            label: l10n.onboardingWeight,
+            unit: isMetric ? 'kg' : 'lb',
+            onChanged: (_) => _syncDraft(),
           ),
           const SizedBox(height: 24),
           Text(l10n.onboardingActivityLevel, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 12),
           ...ActivityLevel.values.map((level) {
-            return RadioListTile<ActivityLevel>(
-              value: level,
-              groupValue: draft.activityLevel,
-              title: Text(_activityLabel(l10n, level)),
-              onChanged: (v) {
-                if (v == null) return;
-                ref.read(onboardingProvider.notifier).updateDraft(
-                      draft.copyWith(activityLevel: v),
-                    );
-              },
+            final selected = draft.activityLevel == level;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: InkWell(
+                onTap: () {
+                  ref.read(onboardingProvider.notifier).updateDraft(
+                        draft.copyWith(activityLevel: level),
+                      );
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: selected ? colors.ember : colors.line,
+                      width: selected ? 2 : 1,
+                    ),
+                    color: selected
+                        ? colors.ember.withValues(alpha: 0.08)
+                        : colors.surfaceRaised,
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        selected
+                            ? Icons.radio_button_checked
+                            : Icons.radio_button_off,
+                        color: selected ? colors.ember : colors.textMute,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(child: Text(_activityLabel(l10n, level))),
+                    ],
+                  ),
+                ),
+              ),
             );
           }),
           const SizedBox(height: 16),

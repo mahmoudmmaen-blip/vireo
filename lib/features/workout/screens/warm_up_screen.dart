@@ -146,7 +146,7 @@ class _WarmUpScreenState extends ConsumerState<WarmUpScreen>
                     child: ListView.separated(
                       shrinkWrap: true,
                       itemCount: alts.length,
-                      separatorBuilder: (_, __) => const Divider(height: 1),
+                      separatorBuilder: (context, index) => const Divider(height: 1),
                       itemBuilder: (_, i) {
                         final alt = alts[i];
                         return ListTile(

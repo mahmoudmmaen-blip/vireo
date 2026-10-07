@@ -35,7 +35,7 @@ class AppRouter extends ConsumerWidget {
 
           return auth.when(
             loading: () => const AppLoading(),
-            error: (_, __) => const AuthScreen(),
+            error: (error, stackTrace) => const AuthScreen(),
             data: (authState) {
               if (authState is AppAuthUnauthenticated) {
                 return const AuthScreen();

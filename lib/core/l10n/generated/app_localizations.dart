@@ -2951,6 +2951,1367 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{net} kcal\nIn: {consumed} · Out: {burned}'**
   String weeklyDeficitTooltip(int net, int consumed, int burned);
+
+  /// No description provided for @uxGoodMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning, {name}'**
+  String uxGoodMorning(String name);
+
+  /// No description provided for @uxGoodAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon, {name}'**
+  String uxGoodAfternoon(String name);
+
+  /// No description provided for @uxGoodEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening, {name}'**
+  String uxGoodEvening(String name);
+
+  /// No description provided for @uxTodayOverline.
+  ///
+  /// In en, this message translates to:
+  /// **'TODAY'**
+  String get uxTodayOverline;
+
+  /// No description provided for @uxCaloriesLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'kcal left'**
+  String get uxCaloriesLeft;
+
+  /// No description provided for @uxCaloriesOver.
+  ///
+  /// In en, this message translates to:
+  /// **'kcal over'**
+  String get uxCaloriesOver;
+
+  /// No description provided for @uxGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal'**
+  String get uxGoal;
+
+  /// No description provided for @uxEaten.
+  ///
+  /// In en, this message translates to:
+  /// **'Eaten'**
+  String get uxEaten;
+
+  /// No description provided for @uxBurned.
+  ///
+  /// In en, this message translates to:
+  /// **'Burned'**
+  String get uxBurned;
+
+  /// No description provided for @uxActionScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan meal'**
+  String get uxActionScan;
+
+  /// No description provided for @uxActionTrain.
+  ///
+  /// In en, this message translates to:
+  /// **'Train'**
+  String get uxActionTrain;
+
+  /// No description provided for @uxActionCoach.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Coach'**
+  String get uxActionCoach;
+
+  /// No description provided for @uxSectionTraining.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s training'**
+  String get uxSectionTraining;
+
+  /// No description provided for @uxSectionThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get uxSectionThisWeek;
+
+  /// No description provided for @uxSectionTodayLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s log'**
+  String get uxSectionTodayLog;
+
+  /// No description provided for @uxAddMeal.
+  ///
+  /// In en, this message translates to:
+  /// **'+ Add meal'**
+  String get uxAddMeal;
+
+  /// No description provided for @uxAiScanned.
+  ///
+  /// In en, this message translates to:
+  /// **'AI scan'**
+  String get uxAiScanned;
+
+  /// No description provided for @uxMealRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'Meal removed'**
+  String get uxMealRemoved;
+
+  /// No description provided for @uxLogEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing logged yet'**
+  String get uxLogEmptyTitle;
+
+  /// No description provided for @uxLogEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Snap a photo of your meal — AI counts the calories and macros in seconds.'**
+  String get uxLogEmptyBody;
+
+  /// No description provided for @uxRestDayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery is training too. Walk, stretch and hit your protein.'**
+  String get uxRestDayHint;
+
+  /// No description provided for @uxWorkoutMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'~{minutes} min'**
+  String uxWorkoutMinutes(int minutes);
+
+  /// No description provided for @uxWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get uxWater;
+
+  /// No description provided for @uxGlassSize.
+  ///
+  /// In en, this message translates to:
+  /// **'250 ml'**
+  String get uxGlassSize;
+
+  /// No description provided for @uxWaterAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'+250 ml · {liters} L today'**
+  String uxWaterAdded(String liters);
+
+  /// No description provided for @uxWaterGoalDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Water goal reached 💧 great job!'**
+  String get uxWaterGoalDone;
+
+  /// No description provided for @uxUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get uxUndo;
+
+  /// No description provided for @uxCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get uxCopied;
+
+  /// No description provided for @uxSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get uxSend;
+
+  /// No description provided for @uxQuickLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick log'**
+  String get uxQuickLogTitle;
+
+  /// No description provided for @uxQuickLogSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log anything in one tap.'**
+  String get uxQuickLogSubtitle;
+
+  /// No description provided for @uxQuickScanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a meal with AI'**
+  String get uxQuickScanTitle;
+
+  /// No description provided for @uxQuickScanSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories & macros in seconds'**
+  String get uxQuickScanSub;
+
+  /// No description provided for @uxQuickWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get uxQuickWater;
+
+  /// No description provided for @uxQuickWaterSub.
+  ///
+  /// In en, this message translates to:
+  /// **'+1 glass · 250 ml'**
+  String get uxQuickWaterSub;
+
+  /// No description provided for @uxQuickWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get uxQuickWeight;
+
+  /// No description provided for @uxQuickWeightSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Log today\'s weigh-in'**
+  String get uxQuickWeightSub;
+
+  /// No description provided for @uxQuickCardio.
+  ///
+  /// In en, this message translates to:
+  /// **'Cardio'**
+  String get uxQuickCardio;
+
+  /// No description provided for @uxQuickCardioSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Walk, run, bike…'**
+  String get uxQuickCardioSub;
+
+  /// No description provided for @uxQuickCoach.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask coach'**
+  String get uxQuickCoach;
+
+  /// No description provided for @uxQuickCoachSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal AI advice'**
+  String get uxQuickCoachSub;
+
+  /// No description provided for @uxCoachOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online · knows your macros'**
+  String get uxCoachOnline;
+
+  /// No description provided for @uxCoachTyping.
+  ///
+  /// In en, this message translates to:
+  /// **'Typing…'**
+  String get uxCoachTyping;
+
+  /// No description provided for @uxCoachNewChat.
+  ///
+  /// In en, this message translates to:
+  /// **'New chat'**
+  String get uxCoachNewChat;
+
+  /// No description provided for @uxCoachClearConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a new conversation? Current messages will be cleared.'**
+  String get uxCoachClearConfirm;
+
+  /// No description provided for @uxCoachHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your personal AI coach'**
+  String get uxCoachHeroTitle;
+
+  /// No description provided for @uxCoachHeroBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about meals, protein, cravings or training. Every answer is based on your numbers today.'**
+  String get uxCoachHeroBody;
+
+  /// No description provided for @uxCoachKcalLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal left'**
+  String uxCoachKcalLeft(int kcal);
+
+  /// No description provided for @uxCoachProteinLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{grams}g protein left'**
+  String uxCoachProteinLeft(int grams);
+
+  /// No description provided for @uxCoachChipWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'What should I eat before training?'**
+  String get uxCoachChipWorkout;
+
+  /// No description provided for @uxProtein.
+  ///
+  /// In en, this message translates to:
+  /// **'Protein'**
+  String get uxProtein;
+
+  /// No description provided for @uxCarbs.
+  ///
+  /// In en, this message translates to:
+  /// **'Carbs'**
+  String get uxCarbs;
+
+  /// No description provided for @uxFat.
+  ///
+  /// In en, this message translates to:
+  /// **'Fat'**
+  String get uxFat;
+
+  /// No description provided for @aiScanAnalysisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI analysis'**
+  String get aiScanAnalysisTitle;
+
+  /// No description provided for @diaryAddMeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Meal'**
+  String get diaryAddMeal;
+
+  /// No description provided for @diaryAddWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Workout'**
+  String get diaryAddWorkout;
+
+  /// No description provided for @diaryCaloriesIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories In'**
+  String get diaryCaloriesIn;
+
+  /// No description provided for @diaryCaloriesOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories Out'**
+  String get diaryCaloriesOut;
+
+  /// No description provided for @diaryKcal.
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal'**
+  String diaryKcal(int kcal);
+
+  /// No description provided for @diaryLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated {count}'**
+  String diaryLastUpdated(String count);
+
+  /// No description provided for @diaryMealCalories.
+  ///
+  /// In en, this message translates to:
+  /// **'{calories} kcal'**
+  String diaryMealCalories(int calories);
+
+  /// No description provided for @diaryNetBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Net Balance'**
+  String get diaryNetBalance;
+
+  /// No description provided for @diaryNoEntries.
+  ///
+  /// In en, this message translates to:
+  /// **'No entries for this day'**
+  String get diaryNoEntries;
+
+  /// No description provided for @diaryProtein.
+  ///
+  /// In en, this message translates to:
+  /// **'Protein'**
+  String get diaryProtein;
+
+  /// No description provided for @diaryProteinProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {goal} g'**
+  String diaryProteinProgress(int current, int goal);
+
+  /// No description provided for @diarySetGoalsCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Set goals'**
+  String get diarySetGoalsCta;
+
+  /// No description provided for @diarySetGoalsFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Set your goals first'**
+  String get diarySetGoalsFirst;
+
+  /// No description provided for @diaryTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get diaryTimeline;
+
+  /// No description provided for @diaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Diary'**
+  String get diaryTitle;
+
+  /// No description provided for @diaryToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get diaryToday;
+
+  /// No description provided for @diaryWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get diaryWater;
+
+  /// No description provided for @diaryWaterAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} ml'**
+  String diaryWaterAmount(int amount);
+
+  /// No description provided for @diaryWaterProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {goal} ml'**
+  String diaryWaterProgress(int current, int goal);
+
+  /// No description provided for @diaryWorkoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min · {calories} kcal'**
+  String diaryWorkoutSubtitle(int minutes, int calories);
+
+  /// No description provided for @exerciseAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get exerciseAdvanced;
+
+  /// No description provided for @exerciseBeginner.
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get exerciseBeginner;
+
+  /// No description provided for @exerciseComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete Set'**
+  String get exerciseComplete;
+
+  /// No description provided for @exerciseDifficulty.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficulty'**
+  String get exerciseDifficulty;
+
+  /// No description provided for @exerciseEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Equipment'**
+  String get exerciseEquipment;
+
+  /// No description provided for @exerciseIntermediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Intermediate'**
+  String get exerciseIntermediate;
+
+  /// No description provided for @exerciseLoadingDemo.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading exercise demo...'**
+  String get exerciseLoadingDemo;
+
+  /// No description provided for @exerciseMistakes.
+  ///
+  /// In en, this message translates to:
+  /// **'Common Mistakes'**
+  String get exerciseMistakes;
+
+  /// No description provided for @exerciseReps.
+  ///
+  /// In en, this message translates to:
+  /// **'Reps'**
+  String get exerciseReps;
+
+  /// No description provided for @exerciseRest.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest'**
+  String get exerciseRest;
+
+  /// No description provided for @exerciseSets.
+  ///
+  /// In en, this message translates to:
+  /// **'Sets'**
+  String get exerciseSets;
+
+  /// No description provided for @exerciseSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps'**
+  String get exerciseSteps;
+
+  /// No description provided for @exerciseTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro Tips'**
+  String get exerciseTips;
+
+  /// No description provided for @exerciseViewBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get exerciseViewBack;
+
+  /// No description provided for @exerciseViewFront.
+  ///
+  /// In en, this message translates to:
+  /// **'Front'**
+  String get exerciseViewFront;
+
+  /// No description provided for @measurements30Days.
+  ///
+  /// In en, this message translates to:
+  /// **'30 days'**
+  String get measurements30Days;
+
+  /// No description provided for @measurements3Months.
+  ///
+  /// In en, this message translates to:
+  /// **'3 months'**
+  String get measurements3Months;
+
+  /// No description provided for @measurements7Days.
+  ///
+  /// In en, this message translates to:
+  /// **'7 days'**
+  String get measurements7Days;
+
+  /// No description provided for @measurementsAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add measurement'**
+  String get measurementsAdd;
+
+  /// No description provided for @measurementsAddFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Log your first measurement'**
+  String get measurementsAddFirst;
+
+  /// No description provided for @measurementsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get measurementsAll;
+
+  /// No description provided for @measurementsArms.
+  ///
+  /// In en, this message translates to:
+  /// **'Arms'**
+  String get measurementsArms;
+
+  /// No description provided for @measurementsBodyFat.
+  ///
+  /// In en, this message translates to:
+  /// **'Body fat %'**
+  String get measurementsBodyFat;
+
+  /// No description provided for @measurementsChest.
+  ///
+  /// In en, this message translates to:
+  /// **'Chest'**
+  String get measurementsChest;
+
+  /// No description provided for @measurementsDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get measurementsDate;
+
+  /// No description provided for @measurementsDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get measurementsDelete;
+
+  /// No description provided for @measurementsDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this measurement?'**
+  String get measurementsDeleteConfirm;
+
+  /// No description provided for @measurementsHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get measurementsHistory;
+
+  /// No description provided for @measurementsLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {date}'**
+  String measurementsLastUpdated(String date);
+
+  /// No description provided for @measurementsNeedMoreData.
+  ///
+  /// In en, this message translates to:
+  /// **'Log more entries to see trends'**
+  String get measurementsNeedMoreData;
+
+  /// No description provided for @measurementsNoData.
+  ///
+  /// In en, this message translates to:
+  /// **'No measurements yet'**
+  String get measurementsNoData;
+
+  /// No description provided for @measurementsNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get measurementsNotes;
+
+  /// No description provided for @measurementsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get measurementsSave;
+
+  /// No description provided for @measurementsThighs.
+  ///
+  /// In en, this message translates to:
+  /// **'Thighs'**
+  String get measurementsThighs;
+
+  /// No description provided for @measurementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Measurements'**
+  String get measurementsTitle;
+
+  /// No description provided for @measurementsTrendDeclining.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs attention'**
+  String get measurementsTrendDeclining;
+
+  /// No description provided for @measurementsTrendImproving.
+  ///
+  /// In en, this message translates to:
+  /// **'Improving'**
+  String get measurementsTrendImproving;
+
+  /// No description provided for @measurementsTrendStable.
+  ///
+  /// In en, this message translates to:
+  /// **'Stable'**
+  String get measurementsTrendStable;
+
+  /// No description provided for @measurementsWaist.
+  ///
+  /// In en, this message translates to:
+  /// **'Waist'**
+  String get measurementsWaist;
+
+  /// No description provided for @measurementsWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get measurementsWeight;
+
+  /// No description provided for @measurementsWeightInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid weight'**
+  String get measurementsWeightInvalid;
+
+  /// No description provided for @muscleBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get muscleBack;
+
+  /// No description provided for @muscleBiceps.
+  ///
+  /// In en, this message translates to:
+  /// **'Biceps'**
+  String get muscleBiceps;
+
+  /// No description provided for @muscleCalves.
+  ///
+  /// In en, this message translates to:
+  /// **'Calves'**
+  String get muscleCalves;
+
+  /// No description provided for @muscleChest.
+  ///
+  /// In en, this message translates to:
+  /// **'Chest'**
+  String get muscleChest;
+
+  /// No description provided for @muscleCore.
+  ///
+  /// In en, this message translates to:
+  /// **'Core'**
+  String get muscleCore;
+
+  /// No description provided for @muscleForearms.
+  ///
+  /// In en, this message translates to:
+  /// **'Forearms'**
+  String get muscleForearms;
+
+  /// No description provided for @muscleGlutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Glutes'**
+  String get muscleGlutes;
+
+  /// No description provided for @muscleHamstrings.
+  ///
+  /// In en, this message translates to:
+  /// **'Hamstrings'**
+  String get muscleHamstrings;
+
+  /// No description provided for @muscleHipFlexors.
+  ///
+  /// In en, this message translates to:
+  /// **'Hip Flexors'**
+  String get muscleHipFlexors;
+
+  /// No description provided for @muscleQuads.
+  ///
+  /// In en, this message translates to:
+  /// **'Quads'**
+  String get muscleQuads;
+
+  /// No description provided for @muscleShoulders.
+  ///
+  /// In en, this message translates to:
+  /// **'Shoulders'**
+  String get muscleShoulders;
+
+  /// No description provided for @muscleTriceps.
+  ///
+  /// In en, this message translates to:
+  /// **'Triceps'**
+  String get muscleTriceps;
+
+  /// No description provided for @notificationsBreakfast.
+  ///
+  /// In en, this message translates to:
+  /// **'Breakfast reminder'**
+  String get notificationsBreakfast;
+
+  /// No description provided for @notificationsDinner.
+  ///
+  /// In en, this message translates to:
+  /// **'Dinner reminder'**
+  String get notificationsDinner;
+
+  /// No description provided for @notificationsLunch.
+  ///
+  /// In en, this message translates to:
+  /// **'Lunch reminder'**
+  String get notificationsLunch;
+
+  /// No description provided for @notificationsOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get notificationsOpenSettings;
+
+  /// No description provided for @notificationsPermissionBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable notifications to stay on track'**
+  String get notificationsPermissionBanner;
+
+  /// No description provided for @notificationsPreWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Pre-workout reminder'**
+  String get notificationsPreWorkout;
+
+  /// No description provided for @notificationsPreWorkoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get ready to train'**
+  String get notificationsPreWorkoutSubtitle;
+
+  /// No description provided for @notificationsSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep reminder'**
+  String get notificationsSleep;
+
+  /// No description provided for @notificationsSleepSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind down for better recovery'**
+  String get notificationsSleepSubtitle;
+
+  /// No description provided for @notificationsTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Send test notification'**
+  String get notificationsTest;
+
+  /// No description provided for @notificationsTestBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo reminders are working'**
+  String get notificationsTestBody;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationsWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water reminder'**
+  String get notificationsWater;
+
+  /// No description provided for @notificationsWaterSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay hydrated through the day'**
+  String get notificationsWaterSubtitle;
+
+  /// No description provided for @notificationsWeeklyReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly report'**
+  String get notificationsWeeklyReport;
+
+  /// No description provided for @notificationsWeeklyReportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'See how your week went'**
+  String get notificationsWeeklyReportSubtitle;
+
+  /// No description provided for @vitality12WeekProgram.
+  ///
+  /// In en, this message translates to:
+  /// **'12-Week Program'**
+  String get vitality12WeekProgram;
+
+  /// No description provided for @vitalityArticleCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} articles'**
+  String vitalityArticleCount(int count);
+
+  /// No description provided for @vitalityArticleDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'For education only. Consult a professional for personal advice.'**
+  String get vitalityArticleDisclaimer;
+
+  /// No description provided for @vitalityArticlesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Articles'**
+  String get vitalityArticlesSection;
+
+  /// No description provided for @vitalityBadgesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Badges'**
+  String get vitalityBadgesTitle;
+
+  /// No description provided for @vitalityBreathingCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sessions'**
+  String vitalityBreathingCount(int count);
+
+  /// No description provided for @vitalityBreathingLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing'**
+  String get vitalityBreathingLog;
+
+  /// No description provided for @vitalityCategoryAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get vitalityCategoryAdvanced;
+
+  /// No description provided for @vitalityCategoryEnvironmental.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get vitalityCategoryEnvironmental;
+
+  /// No description provided for @vitalityCategoryLifestyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lifestyle'**
+  String get vitalityCategoryLifestyle;
+
+  /// No description provided for @vitalityCategoryNutrition.
+  ///
+  /// In en, this message translates to:
+  /// **'Nutrition'**
+  String get vitalityCategoryNutrition;
+
+  /// No description provided for @vitalityCategoryTraining.
+  ///
+  /// In en, this message translates to:
+  /// **'Training'**
+  String get vitalityCategoryTraining;
+
+  /// No description provided for @vitalityCheckProtein.
+  ///
+  /// In en, this message translates to:
+  /// **'Hit protein'**
+  String get vitalityCheckProtein;
+
+  /// No description provided for @vitalityCheckSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality sleep'**
+  String get vitalityCheckSleep;
+
+  /// No description provided for @vitalityCheckSunlight.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning light'**
+  String get vitalityCheckSunlight;
+
+  /// No description provided for @vitalityCheckWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Move / train'**
+  String get vitalityCheckWorkout;
+
+  /// No description provided for @vitalityCheckZincVitD.
+  ///
+  /// In en, this message translates to:
+  /// **'Zinc / Vit D'**
+  String get vitalityCheckZincVitD;
+
+  /// No description provided for @vitalityDailyChecklistProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{done}/{total} done'**
+  String vitalityDailyChecklistProgress(int done, int total);
+
+  /// No description provided for @vitalityDailyChecklistTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s checklist'**
+  String get vitalityDailyChecklistTitle;
+
+  /// No description provided for @vitalityDailyTipLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily tip'**
+  String get vitalityDailyTipLabel;
+
+  /// No description provided for @vitalityHubSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Science-backed habits for energy and recovery'**
+  String get vitalityHubSubtitle;
+
+  /// No description provided for @vitalityHubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vitality Hub'**
+  String get vitalityHubTitle;
+
+  /// No description provided for @vitalityLegendBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Legend'**
+  String get vitalityLegendBadge;
+
+  /// No description provided for @vitalityLinkCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Link copied'**
+  String get vitalityLinkCopied;
+
+  /// No description provided for @vitalityLogSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Log'**
+  String get vitalityLogSection;
+
+  /// No description provided for @vitalityMarkRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as read'**
+  String get vitalityMarkRead;
+
+  /// No description provided for @vitalityMarkReadDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get vitalityMarkReadDone;
+
+  /// No description provided for @vitalityMarkReadSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked as read'**
+  String get vitalityMarkReadSuccess;
+
+  /// No description provided for @vitalityMedicalDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Educational content only — not medical advice.'**
+  String get vitalityMedicalDisclaimer;
+
+  /// No description provided for @vitalityMetricsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No metrics yet'**
+  String get vitalityMetricsEmpty;
+
+  /// No description provided for @vitalityMetricsLast7Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days'**
+  String get vitalityMetricsLast7Days;
+
+  /// No description provided for @vitalityMetricsLastEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Last entry · energy {score}/10'**
+  String vitalityMetricsLastEntry(int score);
+
+  /// No description provided for @vitalityMetricsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save metrics'**
+  String get vitalityMetricsSave;
+
+  /// No description provided for @vitalityMetricsSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get vitalityMetricsSaved;
+
+  /// No description provided for @vitalityMetricsTapToLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to log'**
+  String get vitalityMetricsTapToLog;
+
+  /// No description provided for @vitalityMetricsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily metrics'**
+  String get vitalityMetricsTitle;
+
+  /// No description provided for @vitalityMorningEnergy.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning energy'**
+  String get vitalityMorningEnergy;
+
+  /// No description provided for @vitalityMyProgram.
+  ///
+  /// In en, this message translates to:
+  /// **'My Program'**
+  String get vitalityMyProgram;
+
+  /// No description provided for @vitalityNotLogged.
+  ///
+  /// In en, this message translates to:
+  /// **'Not logged'**
+  String get vitalityNotLogged;
+
+  /// No description provided for @vitalityPhaseFoundation.
+  ///
+  /// In en, this message translates to:
+  /// **'Foundation'**
+  String get vitalityPhaseFoundation;
+
+  /// No description provided for @vitalityPhaseOptimization.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimization'**
+  String get vitalityPhaseOptimization;
+
+  /// No description provided for @vitalityPhasePeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Peak'**
+  String get vitalityPhasePeak;
+
+  /// No description provided for @vitalityProgramAllWeeks.
+  ///
+  /// In en, this message translates to:
+  /// **'All weeks'**
+  String get vitalityProgramAllWeeks;
+
+  /// No description provided for @vitalityProgramComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Program complete'**
+  String get vitalityProgramComplete;
+
+  /// No description provided for @vitalityProgramContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get vitalityProgramContinue;
+
+  /// No description provided for @vitalityProgramDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Educational program — not a medical treatment.'**
+  String get vitalityProgramDisclaimer;
+
+  /// No description provided for @vitalityProgramDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get vitalityProgramDone;
+
+  /// No description provided for @vitalityProgramOverallProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Overall progress'**
+  String get vitalityProgramOverallProgress;
+
+  /// No description provided for @vitalityProgramStartCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Start program'**
+  String get vitalityProgramStartCta;
+
+  /// No description provided for @vitalityProgramSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'12 weeks to better energy, sleep and recovery'**
+  String get vitalityProgramSubtitle;
+
+  /// No description provided for @vitalityProgramTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vitality Transformation'**
+  String get vitalityProgramTitle;
+
+  /// No description provided for @vitalityProtocolBadgeEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'Badge unlocked!'**
+  String get vitalityProtocolBadgeEarned;
+
+  /// No description provided for @vitalityProtocolCompleteDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete day'**
+  String get vitalityProtocolCompleteDay;
+
+  /// No description provided for @vitalityProtocolStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'{days}-day streak'**
+  String vitalityProtocolStreak(int days);
+
+  /// No description provided for @vitalityProtocolTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Protocols'**
+  String get vitalityProtocolTitle;
+
+  /// No description provided for @vitalityReadingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min read'**
+  String vitalityReadingTime(int minutes);
+
+  /// No description provided for @vitalityReportCompletion.
+  ///
+  /// In en, this message translates to:
+  /// **'Completion'**
+  String get vitalityReportCompletion;
+
+  /// No description provided for @vitalityReportImproving.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re improving — keep the streak going.'**
+  String get vitalityReportImproving;
+
+  /// No description provided for @vitalityReportKeepGoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Small steps still count. Finish a couple tasks today.'**
+  String get vitalityReportKeepGoing;
+
+  /// No description provided for @vitalityScientificSources.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources'**
+  String get vitalityScientificSources;
+
+  /// No description provided for @vitalityScoreBreakdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep {sleep} · Train {workout} · Protein {protein} · Stress {stress}'**
+  String vitalityScoreBreakdown(
+    int sleep,
+    int workout,
+    int protein,
+    int stress,
+  );
+
+  /// No description provided for @vitalityScoreLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Vitality'**
+  String get vitalityScoreLabel;
+
+  /// No description provided for @vitalitySleepHint.
+  ///
+  /// In en, this message translates to:
+  /// **'How did you sleep?'**
+  String get vitalitySleepHint;
+
+  /// No description provided for @vitalitySleepHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} h'**
+  String vitalitySleepHours(num hours);
+
+  /// No description provided for @vitalitySleepLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get vitalitySleepLog;
+
+  /// No description provided for @vitalitySleepQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality'**
+  String get vitalitySleepQuality;
+
+  /// No description provided for @vitalityStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'{days}-day streak'**
+  String vitalityStreak(int days);
+
+  /// No description provided for @vitalityStressLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Stress'**
+  String get vitalityStressLevel;
+
+  /// No description provided for @vitalityUnlockNextWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock next week'**
+  String get vitalityUnlockNextWeek;
+
+  /// No description provided for @vitalityWeekProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String vitalityWeekProgress(int percent);
+
+  /// No description provided for @vitalityWeekReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Week report'**
+  String get vitalityWeekReport;
+
+  /// No description provided for @vitalityWeekX.
+  ///
+  /// In en, this message translates to:
+  /// **'Week {week}'**
+  String vitalityWeekX(int week);
+
+  /// No description provided for @vitalityWeekXOf12.
+  ///
+  /// In en, this message translates to:
+  /// **'Week {week} of 12'**
+  String vitalityWeekXOf12(int week);
+
+  /// No description provided for @vitalityWorkoutDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Trained'**
+  String get vitalityWorkoutDone;
+
+  /// No description provided for @vitalityWorkoutLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Workout'**
+  String get vitalityWorkoutLog;
+
+  /// No description provided for @vitalityWorkoutPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest / not yet'**
+  String get vitalityWorkoutPending;
+
+  /// No description provided for @vitalityWorkoutPerformance.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get vitalityWorkoutPerformance;
+
+  /// No description provided for @walkingEstimatedMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'~{minutes} min'**
+  String walkingEstimatedMinutes(int minutes);
+
+  /// No description provided for @walkingHealthBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Apple Health / Health Connect for automatic steps'**
+  String get walkingHealthBanner;
+
+  /// No description provided for @walkingManualStepsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps today'**
+  String get walkingManualStepsLabel;
+
+  /// No description provided for @walkingUpdateSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Update steps'**
+  String get walkingUpdateSteps;
+
+  /// No description provided for @walkingWebManualBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'On web, enter steps manually'**
+  String get walkingWebManualBanner;
+
+  /// No description provided for @vitalityKeyTakeaway.
+  ///
+  /// In en, this message translates to:
+  /// **'Key takeaway'**
+  String get vitalityKeyTakeaway;
 }
 
 class _AppLocalizationsDelegate

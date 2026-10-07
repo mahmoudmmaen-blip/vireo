@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vireo/data/models/meal_type.dart';
-import 'package:vireo/data/models/recipe.dart';
 import 'package:vireo/data/repositories/meal_plan_repository.dart';
 import 'package:vireo/data/repositories/nutrition_repository.dart';
 

@@ -45,6 +45,14 @@ class _AiAnalysisSheetBody extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(
+              l10n.aiScanAnalysisTitle,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: colors.textMute,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+            const SizedBox(height: 8),
             Row(
               children: [
                 Expanded(

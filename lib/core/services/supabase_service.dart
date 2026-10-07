@@ -43,8 +43,7 @@ abstract final class SupabaseService {
       BootLog.step('Starting Supabase.initialize...');
       await Supabase.initialize(
         url: AppConfig.supabaseUrl,
-        // New Supabase publishable keys are passed via anonKey for SDK compat.
-        anonKey: AppConfig.supabaseAnonKey,
+        publishableKey: AppConfig.supabaseAnonKey,
       ).timeout(
         bootServiceTimeout,
         onTimeout: () => throw TimeoutException('Supabase.initialize'),

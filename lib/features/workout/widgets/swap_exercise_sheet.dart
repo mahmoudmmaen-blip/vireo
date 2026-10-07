@@ -64,7 +64,7 @@ Future<void> showSwapExerciseSheet(
                   child: ListView.separated(
                     shrinkWrap: true,
                     itemCount: alternatives.length,
-                    separatorBuilder: (_, __) => const Divider(height: 1),
+                    separatorBuilder: (context, index) => const Divider(height: 1),
                     itemBuilder: (_, index) {
                       final alt = alternatives[index];
                       return ListTile(

@@ -132,13 +132,17 @@
   "workoutTodaySubtitle": "{count, plural, =1{تمرين واحد} other{{count} تمارين}}",
   "@workoutTodaySubtitle": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "workoutPhaseCount": "{count, plural, =1{تمرين واحد} other{{count} تمارين}}",
   "@workoutPhaseCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "workoutExerciseProgress": "تمرين",
@@ -149,7 +153,9 @@
   "workoutSetNumber": "مجموعة {number}",
   "@workoutSetNumber": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "workoutPrevious": "السابق",
@@ -178,13 +184,17 @@
   "walkingDailyGoal": "الهدف: {steps} خطوة",
   "@walkingDailyGoal": {
     "placeholders": {
-      "steps": {"type": "int"}
+      "steps": {
+        "type": "int"
+      }
     }
   },
   "walkingGoalProgress": "{percent}% من هدف النهاردة",
   "@walkingGoalProgress": {
     "placeholders": {
-      "percent": {"type": "int"}
+      "percent": {
+        "type": "int"
+      }
     }
   },
   "walkingWeeklyChartTitle": "آخر 7 أيام",
@@ -203,7 +213,9 @@
   "nutritionPrepMinutes": "{minutes} د",
   "@nutritionPrepMinutes": {
     "placeholders": {
-      "minutes": {"type": "int"}
+      "minutes": {
+        "type": "int"
+      }
     }
   },
   "nutritionTagHighProtein": "بروتين عالي",
@@ -213,7 +225,9 @@
   "nutritionScansRemaining": "فاضل {count} مسح للتلاجة الشهر ده",
   "@nutritionScansRemaining": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "nutritionScanPrompt": "صوّر التلاجة أو المخزن عشان نكتشف المكونات.",
@@ -245,7 +259,9 @@
   "homeWorkoutExerciseCount": "{count} تمارين",
   "@homeWorkoutExerciseCount": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "progressTabWeight": "الوزن",
@@ -255,8 +271,12 @@
   "progressWeightGoalLine": "الهدف: {value} {unit}",
   "@progressWeightGoalLine": {
     "placeholders": {
-      "value": {"type": "String"},
-      "unit": {"type": "String"}
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
     }
   },
   "progressAdherenceChartTitle": "الالتزام الأسبوعي",
@@ -267,7 +287,9 @@
   "progressWeightLabel": "الوزن ({unit})",
   "@progressWeightLabel": {
     "placeholders": {
-      "unit": {"type": "String"}
+      "unit": {
+        "type": "String"
+      }
     }
   },
   "progressLogDate": "التاريخ",
@@ -281,7 +303,9 @@
   "reassessmentPhaseUpdated": "تم تحديث مرحلة البرنامج للمرحلة {phase}",
   "@reassessmentPhaseUpdated": {
     "placeholders": {
-      "phase": {"type": "int"}
+      "phase": {
+        "type": "int"
+      }
     }
   },
   "reassessmentNoPhaseChange": "مفيش تغيير في البرنامج — كمّل!",
@@ -311,7 +335,9 @@
   "subscriptionTrialDaysRemaining": "{days, plural, =1{يوم واحد متبقٍ في تجربتك المجانية} other{{days} أيام متبقية في تجربتك المجانية}}",
   "@subscriptionTrialDaysRemaining": {
     "placeholders": {
-      "days": {"type": "int"}
+      "days": {
+        "type": "int"
+      }
     }
   },
   "subscriptionExpiredBanner": "انتهى الاشتراك — اضغط للتجديد",
@@ -322,19 +348,42 @@
   "workoutPhaseLockedTitle": "المرحلة {phase} مقفلة",
   "@workoutPhaseLockedTitle": {
     "placeholders": {
-      "phase": {"type": "int"}
+      "phase": {
+        "type": "int"
+      }
     }
   },
   "workoutPhaseLockedBody": "أعد الاشتراك لمتابعة برنامجك الكامل. التتبع الأساسي يبقى متاحاً في الخطة المجانية.",
   "homeGreeting": "أهلاً {name} 👋",
-  "@homeGreeting": {"placeholders": {"name": {"type": "String"}}},
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "homeDayPhase": "اليوم {day} · مرحلة {phase}",
-  "@homeDayPhase": {"placeholders": {"day": {"type": "int"}, "phase": {"type": "String"}}},
+  "@homeDayPhase": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "phase": {
+        "type": "String"
+      }
+    }
+  },
   "homeGuestBanner": "أنت في وضع الضيف — سجّل الآن عشان تحفظ تقدمك",
   "homeGuestSignUp": "سجّل",
   "homeGuestCta": "سجّل الآن — مجاناً لـ 7 أيام",
   "homeStreakDays": "{days} أيام متتالية",
-  "@homeStreakDays": {"placeholders": {"days": {"type": "int"}}},
+  "@homeStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "homeStartStreak": "ابدأ سلسلتك اليوم",
   "homeTodayWorkoutTitle": "تمرين اليوم",
   "homeStartWorkout": "ابدأ التمرين",
@@ -343,9 +392,24 @@
   "homeMealConfirmed": "مؤكد ✓",
   "homeMealPending": "لسه",
   "homeWalkingSteps": "{current} / {goal} خطوة",
-  "@homeWalkingSteps": {"placeholders": {"current": {"type": "int"}, "goal": {"type": "int"}}},
+  "@homeWalkingSteps": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
   "homeWeeklyProgress": "{completed} / ٧ أيام مكتملة",
-  "@homeWeeklyProgress": {"placeholders": {"completed": {"type": "int"}}},
+  "@homeWeeklyProgress": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      }
+    }
+  },
   "homeCheckInBanner": "⏱️ Check-in الأسبوعي جاهز — دقيقة واحدة بس",
   "homeRecoveryScore": "نسبة التعافي",
   "homeRecoveryReady": "جسمك جاهز للتمرين",
@@ -355,11 +419,26 @@
   "nutritionFilterQuick": "سريع",
   "nutritionFilterLowCalorie": "سعرات منخفضة",
   "nutritionMacroSummary": "{calories} سعرة · {protein}g بروتين",
-  "@nutritionMacroSummary": {"placeholders": {"calories": {"type": "int"}, "protein": {"type": "int"}}},
+  "@nutritionMacroSummary": {
+    "placeholders": {
+      "calories": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      }
+    }
+  },
   "nutritionMacroBar": "سعرات | بروتين | كارب | دهون",
   "nutritionMealConfirmed": "مؤكد ✓",
   "nutritionFridgeBanner": "📷 صوّر تلاجتك — باقي {remaining} مسحات هذا الشهر",
-  "@nutritionFridgeBanner": {"placeholders": {"remaining": {"type": "int"}}},
+  "@nutritionFridgeBanner": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
   "nutritionFridgeScanCta": "صوّر",
   "workoutWarmUpStep1": "دوران الكتفين — 30 ثانية",
   "workoutWarmUpStep2": "مشي في المكان — 60 ثانية",
@@ -368,13 +447,46 @@
   "workoutStartMainWorkout": "ابدأ التمرين الرئيسي",
   "workoutWarmUpComplete": "تم الإحماء — جاهز!",
   "homeProgramDay": "اليوم {day} من {total}",
-  "@homeProgramDay": {"placeholders": {"day": {"type": "int"}, "total": {"type": "int"}}},
+  "@homeProgramDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "homeStartProgram": "ابدأ برنامجك",
   "nutritionDailyCalorieGoal": "هدفك اليومي من السعرات",
   "nutritionCalorieTargetSummary": "هدفك: {calories} سعرة — {protein}g بروتين، {carbs}g كارب، {fat}g دهون",
-  "@nutritionCalorieTargetSummary": {"placeholders": {"calories": {"type": "int"}, "protein": {"type": "int"}, "carbs": {"type": "int"}, "fat": {"type": "int"}}},
+  "@nutritionCalorieTargetSummary": {
+    "placeholders": {
+      "calories": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      },
+      "carbs": {
+        "type": "int"
+      },
+      "fat": {
+        "type": "int"
+      }
+    }
+  },
   "nutritionCalorieProgress": "{consumed} / {target} سعرة اليوم",
-  "@nutritionCalorieProgress": {"placeholders": {"consumed": {"type": "int"}, "target": {"type": "int"}}},
+  "@nutritionCalorieProgress": {
+    "placeholders": {
+      "consumed": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
   "nutritionEditCalorieGoal": "تعديل هدف السعرات",
   "nutritionCalorieHint": "السعرات اليومية",
   "settingsThemeTitle": "المظهر",
@@ -410,11 +522,23 @@
   "habitsAddHint": "اسم العادة",
   "habitsAddConfirm": "إضافة",
   "habitsStreak": "سلسلة {days} أيام",
-  "@habitsStreak": {"placeholders": {"days": {"type": "int"}}},
+  "@habitsStreak": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "habitsRetry": "إعادة المحاولة",
   "habitsErrorTitle": "تعذّر تحميل العادات",
   "homeRecoveryExplain": "نسبة التعافي {score}% تجمع بين جودة النوم وأيام الراحة وإرهاق العضلات. الرقم الأعلى يعني جسمك جاهز للتدريب بقوة.",
-  "@homeRecoveryExplain": {"placeholders": {"score": {"type": "int"}}},
+  "@homeRecoveryExplain": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryFactorSleep": "جودة النوم",
   "homeRecoveryFactorRest": "أيام الراحة",
   "homeRecoveryFactorMuscle": "إرهاق العضلات",
@@ -429,19 +553,49 @@
   "walkingPace": "الإيقاع",
   "walkingCalories": "السعرات المحروقة",
   "walkingWeightLoss": "حرق دهون تقديري ≈ {kg} كجم",
-  "@walkingWeightLoss": {"placeholders": {"kg": {"type": "String"}}},
+  "@walkingWeightLoss": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      }
+    }
+  },
   "walkingCadence": "إيقاع الخطوات ≈ {spm} خطوة/دقيقة",
-  "@walkingCadence": {"placeholders": {"spm": {"type": "int"}}},
+  "@walkingCadence": {
+    "placeholders": {
+      "spm": {
+        "type": "int"
+      }
+    }
+  },
   "walkingMetricsEstimatedNote": "بيانات الصحة غير متاحة — عرض تقديرات من عدد الخطوات.",
   "mealBuilderTitle": "تخصيص المكونات",
   "mealBuilderTitleFor": "تخصيص {meal}",
-  "@mealBuilderTitleFor": {"placeholders": {"meal": {"type": "String"}}},
+  "@mealBuilderTitleFor": {
+    "placeholders": {
+      "meal": {
+        "type": "String"
+      }
+    }
+  },
   "mealBuilderSubtitle": "عدّل البروتين ودهن الطبخ والإضافات — الماكروز تتحدث فوراً.",
   "mealBuilderEggs": "البيض",
   "mealBuilderEggCount": "{count} بيضات",
-  "@mealBuilderEggCount": {"placeholders": {"count": {"type": "int"}}},
+  "@mealBuilderEggCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "mealBuilderPortionCount": "{count} حصص",
-  "@mealBuilderPortionCount": {"placeholders": {"count": {"type": "int"}}},
+  "@mealBuilderPortionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "mealBuilderProteinLunch": "حصص البروتين",
   "mealBuilderProteinDinner": "بروتين العشاء",
   "mealBuilderProteinSnack": "بروتين السناك",
@@ -464,11 +618,35 @@
   "weeklyCheckInWaist": "محيط الخصر",
   "weeklyCheckInEnergy": "مستوى الطاقة (1–5)",
   "weeklyCheckInAdherence": "الالتزام بالتدريب: {pct}%",
-  "@weeklyCheckInAdherence": {"placeholders": {"pct": {"type": "int"}}},
+  "@weeklyCheckInAdherence": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
   "weeklyCheckInSubmit": "حدّث أهدافي",
   "weeklyCheckInDoneTitle": "تم تحديث الأهداف",
   "weeklyCheckInDoneBody": "السعرات {prev} ← {next} سعرة. الماكروز: {protein}g بروتين، {carbs}g كارب، {fat}g دهون.",
-  "@weeklyCheckInDoneBody": {"placeholders": {"prev": {"type": "int"}, "next": {"type": "int"}, "protein": {"type": "int"}, "carbs": {"type": "int"}, "fat": {"type": "int"}}},
+  "@weeklyCheckInDoneBody": {
+    "placeholders": {
+      "prev": {
+        "type": "int"
+      },
+      "next": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      },
+      "carbs": {
+        "type": "int"
+      },
+      "fat": {
+        "type": "int"
+      }
+    }
+  },
   "settingsAccentTitle": "لون التمييز",
   "settingsAccentOrange": "برتقالي",
   "settingsAccentEmerald": "أخضر",
@@ -494,37 +672,121 @@
   "mealBuilderCheeseMozzarella": "موزاريلا",
   "mealBuilderCheeseFeta": "فيتا",
   "mealBuilderCheeseGrams": "الكمية: {grams}g",
-  "@mealBuilderCheeseGrams": {"placeholders": {"grams": {"type": "int"}}},
+  "@mealBuilderCheeseGrams": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryFormulaExplain": "التعافي = أيام الراحة (40%) + هدف الخطوات (30%) + التزام الوجبات/التمارين (30%).",
   "homeRecoveryFactorRestDays": "أيام الراحة",
   "homeRecoveryFactorSteps": "هدف الخطوات",
   "homeRecoveryFactorConsistency": "التزام الوجبات والتمارين",
   "homeRecoveryRestDetail": "{days} يوم راحة هذا الأسبوع",
-  "@homeRecoveryRestDetail": {"placeholders": {"days": {"type": "int"}}},
+  "@homeRecoveryRestDetail": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryStepsDetail": "{current} / {goal} خطوة اليوم",
-  "@homeRecoveryStepsDetail": {"placeholders": {"current": {"type": "int"}, "goal": {"type": "int"}}},
+  "@homeRecoveryStepsDetail": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryConsistencyDetail": "وجبات {mealsDone}/{mealsTotal} · تمارين {wDone}/{wTotal}",
-  "@homeRecoveryConsistencyDetail": {"placeholders": {"mealsDone": {"type": "int"}, "mealsTotal": {"type": "int"}, "wDone": {"type": "int"}, "wTotal": {"type": "int"}}},
+  "@homeRecoveryConsistencyDetail": {
+    "placeholders": {
+      "mealsDone": {
+        "type": "int"
+      },
+      "mealsTotal": {
+        "type": "int"
+      },
+      "wDone": {
+        "type": "int"
+      },
+      "wTotal": {
+        "type": "int"
+      }
+    }
+  },
   "homeRecoveryTipSteps": "حقّق هدف خطواتك اليومي لرفع هذا المحور",
   "homeRecoveryTipConsistency": "أكّد الوجبات وأكمِل التمارين المخططة",
   "homeRecoveryMathLine": "{rest} + {steps} + {consistency} = {total}%",
-  "@homeRecoveryMathLine": {"placeholders": {"rest": {"type": "int"}, "steps": {"type": "int"}, "consistency": {"type": "int"}, "total": {"type": "int"}}},
+  "@homeRecoveryMathLine": {
+    "placeholders": {
+      "rest": {
+        "type": "int"
+      },
+      "steps": {
+        "type": "int"
+      },
+      "consistency": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "cardioTitle": "كارديو والنشاط اليومي",
   "cardioSubtitle": "سجّل مشي سريع أو جري وغيرها — السعرات = MET × الوزن × الوقت.",
   "cardioSelectActivity": "النشاط",
   "cardioDuration": "المدة: {minutes} دقيقة",
-  "@cardioDuration": {"placeholders": {"minutes": {"type": "int"}}},
+  "@cardioDuration": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "cardioEstimatedBurn": "حرق تقديري: {kcal} سعرة",
-  "@cardioEstimatedBurn": {"placeholders": {"kcal": {"type": "int"}}},
+  "@cardioEstimatedBurn": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
   "cardioMetHint": "MET {met} · المعادلة: MET × كجم × ساعات",
-  "@cardioMetHint": {"placeholders": {"met": {"type": "String"}}},
+  "@cardioMetHint": {
+    "placeholders": {
+      "met": {
+        "type": "String"
+      }
+    }
+  },
   "cardioLogButton": "تسجيل النشاط",
   "cardioLoggedSnack": "تم تسجيل جلسة الكارديو",
   "cardioTodayTotal": "محروق اليوم: {kcal} سعرة",
-  "@cardioTodayTotal": {"placeholders": {"kcal": {"type": "int"}}},
+  "@cardioTodayTotal": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
   "cardioEmpty": "لا يوجد كارديو بعد — سجّل أول جلسة أعلاه.",
   "cardioLogSubtitle": "{minutes} دقيقة · {kcal} سعرة",
-  "@cardioLogSubtitle": {"placeholders": {"minutes": {"type": "int"}, "kcal": {"type": "int"}}},
+  "@cardioLogSubtitle": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
   "cardioLogCta": "تسجيل كارديو",
   "cardioBriskWalking": "مشي سريع",
   "cardioRunning": "جري",
@@ -534,7 +796,13 @@
   "cardioHiit": "HIIT",
   "cardioElliptical": "إلپتيكال",
   "workoutGoalPlanLabel": "الخطة لـ: {goal}",
-  "@workoutGoalPlanLabel": {"placeholders": {"goal": {"type": "String"}}},
+  "@workoutGoalPlanLabel": {
+    "placeholders": {
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
   "aiScanTitle": "مسح الوجبة بالذكاء الاصطناعي",
   "aiScanPrompt": "صوّر وجبتك — الذكاء الاصطناعي يقدّر السعرات والماكروز من حجم الحصة.",
   "aiScanCamera": "الكاميرا",
@@ -555,7 +823,13 @@
   "aiScanMacroFats": "دهون",
   "aiScanSmartSwaps": "بدائل ذكية",
   "aiScanCaloriesChip": "{calories} سعرة",
-  "@aiScanCaloriesChip": {"placeholders": {"calories": {"type": "int"}}},
+  "@aiScanCaloriesChip": {
+    "placeholders": {
+      "calories": {
+        "type": "int"
+      }
+    }
+  },
   "aiCoachTitle": "Vireo AI",
   "aiCoachFabLabel": "Vireo AI",
   "aiCoachInputHint": "اسأل عن الوجبات أو الماكروز أو التمرين…",
@@ -567,22 +841,434 @@
   "waterTrackerSummary": "{current}L / {goal}L — {percent}% مكتمل",
   "@waterTrackerSummary": {
     "placeholders": {
-      "current": {"type": "double"},
-      "goal": {"type": "double"},
-      "percent": {"type": "int"}
+      "current": {
+        "type": "double"
+      },
+      "goal": {
+        "type": "double"
+      },
+      "percent": {
+        "type": "int"
+      }
     }
   },
   "weeklyDeficitChartTitle": "رصيد السعرات الأسبوعي",
   "weeklyDeficitSubtitle": "TDEE − الوجبات + حرق الكارديو (آخر 7 أيام)",
   "weeklyDeficitTotal": "إجمالي العجز الأسبوعي: {kcal} kcal",
-  "@weeklyDeficitTotal": {"placeholders": {"kcal": {"type": "int"}}},
+  "@weeklyDeficitTotal": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
   "weeklyDeficitEmpty": "سجّل وجبات أو كارديو لعرض رصيد السعرات الأسبوعي.",
   "weeklyDeficitTooltip": "{net} kcal\nداخل: {consumed} · خارج: {burned}",
   "@weeklyDeficitTooltip": {
     "placeholders": {
-      "net": {"type": "int"},
-      "consumed": {"type": "int"},
-      "burned": {"type": "int"}
+      "net": {
+        "type": "int"
+      },
+      "consumed": {
+        "type": "int"
+      },
+      "burned": {
+        "type": "int"
+      }
     }
-  }
+  },
+  "uxGoodMorning": "صباح الخير يا {name}",
+  "uxGoodAfternoon": "نهارك سعيد يا {name}",
+  "uxGoodEvening": "مساء الخير يا {name}",
+  "uxTodayOverline": "اليوم",
+  "uxCaloriesLeft": "سعرة متبقية",
+  "uxCaloriesOver": "سعرة زيادة",
+  "uxGoal": "الهدف",
+  "uxEaten": "أكلت",
+  "uxBurned": "حرقت",
+  "uxActionScan": "صوّر وجبة",
+  "uxActionTrain": "تمرين",
+  "uxActionCoach": "المدرب",
+  "uxSectionTraining": "تمرين النهارده",
+  "uxSectionThisWeek": "الأسبوع ده",
+  "uxSectionTodayLog": "سجل النهارده",
+  "uxAddMeal": "+ أضف وجبة",
+  "uxAiScanned": "تحليل AI",
+  "uxMealRemoved": "تم حذف الوجبة",
+  "uxLogEmptyTitle": "لسه ما سجلتش أكل النهارده",
+  "uxLogEmptyBody": "صوّر وجبتك والذكاء الاصطناعي يحسب السعرات والماكروز في ثواني.",
+  "uxRestDayHint": "الراحة جزء من التمرين. امشِ شوية، اعمل إطالة، وكمّل البروتين.",
+  "uxWorkoutMinutes": "~{minutes} دقيقة",
+  "uxWater": "المياه",
+  "uxGlassSize": "250 مل",
+  "uxWaterAdded": "+250 مل · {liters} لتر النهارده",
+  "uxWaterGoalDone": "وصلت لهدف المياه 💧 عاش!",
+  "uxUndo": "تراجع",
+  "uxCopied": "تم النسخ",
+  "uxSend": "إرسال",
+  "uxQuickLogTitle": "تسجيل سريع",
+  "uxQuickLogSubtitle": "سجّل أي حاجة بضغطة واحدة.",
+  "uxQuickScanTitle": "صوّر وجبتك بالذكاء الاصطناعي",
+  "uxQuickScanSub": "السعرات والماكروز في ثواني",
+  "uxQuickWater": "مياه",
+  "uxQuickWaterSub": "+كوباية · 250 مل",
+  "uxQuickWeight": "الوزن",
+  "uxQuickWeightSub": "سجّل وزن النهارده",
+  "uxQuickCardio": "كارديو",
+  "uxQuickCardioSub": "مشي، جري، عجلة…",
+  "uxQuickCoach": "اسأل المدرب",
+  "uxQuickCoachSub": "نصيحة ذكية ليك",
+  "uxCoachOnline": "متصل · عارف أرقامك",
+  "uxCoachTyping": "بيكتب…",
+  "uxCoachNewChat": "محادثة جديدة",
+  "uxCoachClearConfirm": "تبدأ محادثة جديدة؟ الرسائل الحالية هتتمسح.",
+  "uxCoachHeroTitle": "مدربك الشخصي الذكي",
+  "uxCoachHeroBody": "اسأل عن الأكل، البروتين، الحلويات أو التمرين. كل إجابة مبنية على أرقامك النهارده.",
+  "uxCoachKcalLeft": "باقي {kcal} سعرة",
+  "uxCoachProteinLeft": "باقي {grams}g بروتين",
+  "uxCoachChipWorkout": "آكل إيه قبل التمرين؟",
+  "uxProtein": "بروتين",
+  "uxCarbs": "كارب",
+  "uxFat": "دهون",
+  "aiScanAnalysisTitle": "تحليل الذكاء الاصطناعي",
+  "diaryAddMeal": "إضافة وجبة",
+  "diaryAddWorkout": "إضافة تمرين",
+  "diaryCaloriesIn": "السعرات الداخلة",
+  "diaryCaloriesOut": "السعرات المحروقة",
+  "@diaryKcal": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryKcal": "{kcal} سعرة",
+  "@diaryLastUpdated": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "diaryLastUpdated": "آخر تحديث {count}",
+  "@diaryMealCalories": {
+    "placeholders": {
+      "calories": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryMealCalories": "{calories} kcal",
+  "diaryNetBalance": "العجز اليومي",
+  "diaryNoEntries": "لا توجد سجلات لهذا اليوم",
+  "diaryProtein": "البروتين",
+  "@diaryProteinProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryProteinProgress": "{current} / {goal} g",
+  "diarySetGoalsCta": "تحديد الأهداف",
+  "diarySetGoalsFirst": "حدد أهدافك أولاً",
+  "diaryTimeline": "الخط الزمني",
+  "diaryTitle": "يومياتي",
+  "diaryToday": "اليوم",
+  "diaryWater": "المياه",
+  "@diaryWaterAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryWaterAmount": "{amount} ml",
+  "@diaryWaterProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryWaterProgress": "{current} / {goal} ml",
+  "@diaryWorkoutSubtitle": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "calories": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryWorkoutSubtitle": "{minutes} min · {calories} kcal",
+  "exerciseAdvanced": "متقدم",
+  "exerciseBeginner": "مبتدئ",
+  "exerciseComplete": "تم المجموعة",
+  "exerciseDifficulty": "مستوى الصعوبة",
+  "exerciseEquipment": "المعدات",
+  "exerciseIntermediate": "متوسط",
+  "exerciseLoadingDemo": "جاري تحميل التمرين...",
+  "exerciseMistakes": "أخطاء شائعة",
+  "exerciseReps": "تكرارات",
+  "exerciseRest": "راحة",
+  "exerciseSets": "مجموعات",
+  "exerciseSteps": "الخطوات",
+  "exerciseTips": "نصائح احترافية",
+  "exerciseViewBack": "خلفي",
+  "exerciseViewFront": "أمامي",
+  "measurements30Days": "30 days",
+  "measurements3Months": "3 months",
+  "measurements7Days": "7 days",
+  "measurementsAdd": "إضافة قياس",
+  "measurementsAddFirst": "Log your first measurement",
+  "measurementsAll": "All",
+  "measurementsArms": "الذراعين",
+  "measurementsBodyFat": "نسبة الدهون",
+  "measurementsChest": "الصدر",
+  "measurementsDate": "Date",
+  "measurementsDelete": "حذف",
+  "measurementsDeleteConfirm": "Delete this measurement?",
+  "measurementsHistory": "السجل",
+  "@measurementsLastUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "measurementsLastUpdated": "Updated {date}",
+  "measurementsNeedMoreData": "Log more entries to see trends",
+  "measurementsNoData": "No measurements yet",
+  "measurementsNotes": "ملاحظات",
+  "measurementsSave": "حفظ",
+  "measurementsThighs": "الفخذين",
+  "measurementsTitle": "القياسات",
+  "measurementsTrendDeclining": "Needs attention",
+  "measurementsTrendImproving": "Improving",
+  "measurementsTrendStable": "Stable",
+  "measurementsWaist": "الخصر",
+  "measurementsWeight": "الوزن",
+  "measurementsWeightInvalid": "Enter a valid weight",
+  "muscleBack": "الظهر",
+  "muscleBiceps": "البايسبس",
+  "muscleCalves": "السمانة",
+  "muscleChest": "الصدر",
+  "muscleCore": "البطن",
+  "muscleForearms": "الساعد",
+  "muscleGlutes": "الأرداف",
+  "muscleHamstrings": "الفخذ الخلفي",
+  "muscleHipFlexors": "مثني الورك",
+  "muscleQuads": "الفخذ الأمامي",
+  "muscleShoulders": "الكتف",
+  "muscleTriceps": "الترايسبس",
+  "notificationsBreakfast": "Breakfast reminder",
+  "notificationsDinner": "Dinner reminder",
+  "notificationsLunch": "Lunch reminder",
+  "notificationsOpenSettings": "Open settings",
+  "notificationsPermissionBanner": "Enable notifications to stay on track",
+  "notificationsPreWorkout": "Pre-workout reminder",
+  "notificationsPreWorkoutSubtitle": "Get ready to train",
+  "notificationsSleep": "Sleep reminder",
+  "notificationsSleepSubtitle": "Wind down for better recovery",
+  "notificationsTest": "Send test notification",
+  "notificationsTestBody": "Vireo reminders are working",
+  "notificationsTitle": "الإشعارات",
+  "notificationsWater": "Water reminder",
+  "notificationsWaterSubtitle": "Stay hydrated through the day",
+  "notificationsWeeklyReport": "Weekly report",
+  "notificationsWeeklyReportSubtitle": "See how your week went",
+  "vitality12WeekProgram": "12-Week Program",
+  "@vitalityArticleCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityArticleCount": "{count} articles",
+  "vitalityArticleDisclaimer": "For education only. Consult a professional for personal advice.",
+  "vitalityArticlesSection": "Articles",
+  "vitalityBadgesTitle": "Badges",
+  "@vitalityBreathingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityBreathingCount": "{count} جلسات",
+  "vitalityBreathingLog": "Breathing",
+  "vitalityCategoryAdvanced": "Advanced",
+  "vitalityCategoryEnvironmental": "Environment",
+  "vitalityCategoryLifestyle": "Lifestyle",
+  "vitalityCategoryNutrition": "Nutrition",
+  "vitalityCategoryTraining": "Training",
+  "vitalityCheckProtein": "Hit protein",
+  "vitalityCheckSleep": "Quality sleep",
+  "vitalityCheckSunlight": "Morning light",
+  "vitalityCheckWorkout": "Move / train",
+  "vitalityCheckZincVitD": "Zinc / Vit D",
+  "@vitalityDailyChecklistProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityDailyChecklistProgress": "{done}/{total} done",
+  "vitalityDailyChecklistTitle": "Today's checklist",
+  "vitalityDailyTipLabel": "Daily tip",
+  "vitalityHubSubtitle": "Science-backed habits for energy and recovery",
+  "vitalityHubTitle": "مركز الحيوية",
+  "vitalityLegendBadge": "Legend",
+  "vitalityLinkCopied": "Link copied",
+  "vitalityLogSection": "Log",
+  "vitalityMarkRead": "Mark as read",
+  "vitalityMarkReadDone": "Read",
+  "vitalityMarkReadSuccess": "Marked as read",
+  "vitalityMedicalDisclaimer": "Educational content only — not medical advice.",
+  "vitalityMetricsEmpty": "No metrics yet",
+  "vitalityMetricsLast7Days": "Last 7 days",
+  "@vitalityMetricsLastEntry": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityMetricsLastEntry": "آخر تسجيل · طاقة {score}/10",
+  "vitalityMetricsSave": "Save metrics",
+  "vitalityMetricsSaved": "Saved",
+  "vitalityMetricsTapToLog": "Tap to log",
+  "vitalityMetricsTitle": "Daily metrics",
+  "vitalityMorningEnergy": "Morning energy",
+  "vitalityMyProgram": "برنامجي",
+  "vitalityNotLogged": "Not logged",
+  "vitalityPhaseFoundation": "Foundation",
+  "vitalityPhaseOptimization": "Optimization",
+  "vitalityPhasePeak": "Peak",
+  "vitalityProgramAllWeeks": "All weeks",
+  "vitalityProgramComplete": "Program complete",
+  "vitalityProgramContinue": "Continue",
+  "vitalityProgramDisclaimer": "Educational program — not a medical treatment.",
+  "vitalityProgramDone": "Completed",
+  "vitalityProgramOverallProgress": "Overall progress",
+  "vitalityProgramStartCta": "Start program",
+  "vitalityProgramSubtitle": "12 weeks to better energy, sleep and recovery",
+  "vitalityProgramTitle": "تحول الحيوية",
+  "vitalityProtocolBadgeEarned": "Badge unlocked!",
+  "vitalityProtocolCompleteDay": "Complete day",
+  "@vitalityProtocolStreak": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityProtocolStreak": "{days}-day streak",
+  "vitalityProtocolTitle": "Protocols",
+  "@vitalityReadingTime": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityReadingTime": "{minutes} min read",
+  "vitalityReportCompletion": "الإنجاز",
+  "vitalityReportImproving": "You're improving — keep the streak going.",
+  "vitalityReportKeepGoing": "Small steps still count. Finish a couple tasks today.",
+  "vitalityScientificSources": "Sources",
+  "@vitalityScoreBreakdown": {
+    "placeholders": {
+      "sleep": {
+        "type": "int"
+      },
+      "workout": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      },
+      "stress": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityScoreBreakdown": "Sleep {sleep} · Train {workout} · Protein {protein} · Stress {stress}",
+  "vitalityScoreLabel": "الحيوية",
+  "vitalitySleepHint": "How did you sleep?",
+  "@vitalitySleepHours": {
+    "placeholders": {
+      "hours": {
+        "type": "num"
+      }
+    }
+  },
+  "vitalitySleepHours": "{hours} ساعة",
+  "vitalitySleepLog": "Sleep",
+  "vitalitySleepQuality": "Quality",
+  "@vitalityStreak": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityStreak": "{days}-day streak",
+  "vitalityStressLevel": "Stress",
+  "vitalityUnlockNextWeek": "Unlock next week",
+  "@vitalityWeekProgress": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityWeekProgress": "{percent}%",
+  "vitalityWeekReport": "Week report",
+  "@vitalityWeekX": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityWeekX": "Week {week}",
+  "@vitalityWeekXOf12": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      }
+    }
+  },
+  "vitalityWeekXOf12": "Week {week} of 12",
+  "vitalityWorkoutDone": "Trained",
+  "vitalityWorkoutLog": "Workout",
+  "vitalityWorkoutPending": "Rest / not yet",
+  "vitalityWorkoutPerformance": "Performance",
+  "@walkingEstimatedMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "walkingEstimatedMinutes": "~{minutes} min",
+  "walkingHealthBanner": "Connect Apple Health / Health Connect for automatic steps",
+  "walkingManualStepsLabel": "Steps today",
+  "walkingUpdateSteps": "Update steps",
+  "walkingWebManualBanner": "On web, enter steps manually",
+  "vitalityKeyTakeaway": "الخلاصة"
 }

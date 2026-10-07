@@ -223,9 +223,9 @@ abstract final class RevenueCatService {
     }
 
     return [
-      if (monthly != null) monthly,
-      if (annual != null) annual,
-      if (lifetime != null) lifetime,
+      ?monthly,
+      ?annual,
+      ?lifetime,
     ];
   }
 

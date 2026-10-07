@@ -55,6 +55,21 @@ class WaterTrackerNotifier extends StateNotifier<int> {
     await _persistAsync(state);
   }
 
+  /// Adds one glass (250 ml). Returns false when the daily goal is already met.
+  Future<bool> addGlass() async {
+    if (state >= waterDailyGoalMl) return false;
+    state = (state + waterGlassMl).clamp(0, waterDailyGoalMl);
+    await _persistAsync(state);
+    return true;
+  }
+
+  /// Removes one glass (250 ml), never below zero.
+  Future<void> removeGlass() async {
+    if (state <= 0) return;
+    state = (state - waterGlassMl).clamp(0, waterDailyGoalMl);
+    await _persistAsync(state);
+  }
+
   Future<void> _persistAsync(int ml) async {
     if (!HiveService.isInitialized) return;
     try {

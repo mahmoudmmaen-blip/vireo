@@ -67,6 +67,9 @@ class OnboardingDraft {
     int? age,
     double? heightCm,
     double? weightKg,
+    bool clearAge = false,
+    bool clearHeightCm = false,
+    bool clearWeightKg = false,
     UnitPreference? unitPreference,
     ActivityLevel? activityLevel,
     List<String>? dietaryRestrictions,
@@ -84,9 +87,9 @@ class OnboardingDraft {
     bool? weeklyCheckInReminderEnabled,
   }) {
     return OnboardingDraft(
-      age: age ?? this.age,
-      heightCm: heightCm ?? this.heightCm,
-      weightKg: weightKg ?? this.weightKg,
+      age: clearAge ? null : (age ?? this.age),
+      heightCm: clearHeightCm ? null : (heightCm ?? this.heightCm),
+      weightKg: clearWeightKg ? null : (weightKg ?? this.weightKg),
       unitPreference: unitPreference ?? this.unitPreference,
       activityLevel: activityLevel ?? this.activityLevel,
       dietaryRestrictions: dietaryRestrictions ?? this.dietaryRestrictions,

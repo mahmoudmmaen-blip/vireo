@@ -58,7 +58,8 @@ class OnboardingUiState {
 class OnboardingNotifier extends Notifier<OnboardingUiState> {
   @override
   OnboardingUiState build() {
-    final locale = ref.watch(localeProvider);
+    // Read locale once at init — do not watch, or every locale change wipes draft.
+    final locale = ref.read(localeProvider);
     return OnboardingUiState(
       step: 0,
       draft: OnboardingDraft(

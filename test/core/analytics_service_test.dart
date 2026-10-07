@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vireo/core/analytics/analytics_events.dart';
 import 'package:vireo/core/services/analytics_service.dart';
 
 void main() {

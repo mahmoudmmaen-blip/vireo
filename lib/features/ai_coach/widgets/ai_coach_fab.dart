@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:vireo/core/animations/vireo_animations.dart';
+import 'package:vireo/core/navigation/vireo_page_routes.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/widgets/vireo_fab.dart';
 import 'package:vireo/features/ai_coach/screens/ai_coach_screen.dart';
 
 class AiCoachFab extends StatelessWidget {
@@ -11,15 +14,8 @@ class AiCoachFab extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
 
-    return FloatingActionButton.extended(
-      onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute<void>(builder: (_) => const AiCoachScreen()),
-        );
-      },
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      label: Ink(
+    return BounceLoop(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -36,22 +32,16 @@ class AiCoachFab extends StatelessWidget {
             ),
           ],
         ),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.auto_awesome, color: Colors.white, size: 20),
-              const SizedBox(width: 8),
-              Text(
-                l10n.aiCoachFabLabel,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
+        child: VireoExtendedFab(
+          onPressed: () {
+            Navigator.of(context).push(
+              SlideUpRoute<void>(page: const AiCoachScreen()),
+            );
+          },
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.white,
+          icon: const Icon(Icons.support_agent_outlined),
+          label: Text(l10n.aiCoachFabLabel),
         ),
       ),
     );

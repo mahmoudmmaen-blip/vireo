@@ -45,10 +45,10 @@ class AiMealLogNotifier extends Notifier<List<AiMealLogEntry>> {
       ..sort((a, b) => b.loggedAt.compareTo(a.loggedAt));
   }
 
-  Future<void> save(FoodAnalysisResult result) async {
+  Future<void> save(FoodAnalysisResult result, {DateTime? loggedAt}) async {
     final entry = AiMealLogEntry(
       id: 'ai_meal_${DateTime.now().millisecondsSinceEpoch}',
-      loggedAt: DateTime.now(),
+      loggedAt: loggedAt ?? DateTime.now(),
       result: result,
     );
     final next = [entry, ...state];

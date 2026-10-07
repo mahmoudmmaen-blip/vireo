@@ -29,8 +29,8 @@ abstract final class AnalyticsService {
           'to_recipe_id': toRecipeId,
           'meal_type': mealType,
           'day_index': dayIndex,
-          if (cuisineFrom != null) 'cuisine_from': cuisineFrom,
-          if (cuisineTo != null) 'cuisine_to': cuisineTo,
+          'cuisine_from': ?cuisineFrom,
+          'cuisine_to': ?cuisineTo,
         },
       );
 
@@ -44,8 +44,8 @@ abstract final class AnalyticsService {
         AnalyticsEvents.fridgeScanUsed,
         properties: {
           'items_detected_count': itemsDetectedCount,
-          if (scanId != null) 'scan_id': scanId,
-          if (remainingScans != null) 'remaining_scans': remainingScans,
+          'scan_id': ?scanId,
+          'remaining_scans': ?remainingScans,
           'is_premium': isPremium,
         },
       );

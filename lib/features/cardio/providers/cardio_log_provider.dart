@@ -21,17 +21,20 @@ class CardioLogNotifier extends Notifier<List<CardioLogEntry>> {
     required CardioActivityType activity,
     required int durationMinutes,
     required double weightKg,
+    DateTime? loggedAt,
+    int? caloriesOverride,
   }) async {
     final entry = CardioLogEntry(
       id: 'cardio_${DateTime.now().millisecondsSinceEpoch}',
       activity: activity,
       durationMinutes: durationMinutes.clamp(1, 300),
-      caloriesBurned: CardioCalorieCalculator.burn(
-        activity: activity,
-        durationMinutes: durationMinutes,
-        weightKg: weightKg,
-      ),
-      loggedAt: DateTime.now(),
+      caloriesBurned: caloriesOverride ??
+          CardioCalorieCalculator.burn(
+            activity: activity,
+            durationMinutes: durationMinutes,
+            weightKg: weightKg,
+          ),
+      loggedAt: loggedAt ?? DateTime.now(),
     );
     final next = [entry, ...state];
     state = next;

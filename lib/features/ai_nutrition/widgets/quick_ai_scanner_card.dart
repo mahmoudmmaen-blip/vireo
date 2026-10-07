@@ -32,7 +32,7 @@ class QuickAiScannerCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.auto_awesome, color: colors.ember),
+              Icon(Icons.camera_alt_outlined, color: colors.ember),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -53,7 +53,7 @@ class QuickAiScannerCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: OutlinedButton.icon(
+                child: FilledButton.icon(
                   onPressed: () => AiScanScreen.open(context, fromCamera: true),
                   icon: const Icon(Icons.camera_alt_outlined, size: 20),
                   label: Text(l10n.aiScanCamera),
@@ -61,7 +61,7 @@ class QuickAiScannerCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: FilledButton.icon(
+                child: OutlinedButton.icon(
                   onPressed: () => AiScanScreen.open(context, fromCamera: false),
                   icon: const Icon(Icons.photo_library_outlined, size: 20),
                   label: Text(l10n.aiScanGallery),

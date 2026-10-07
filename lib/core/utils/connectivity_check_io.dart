@@ -1,0 +1,11 @@
+import 'dart:io';
+
+Future<bool> checkNetworkConnection() async {
+  try {
+    final result = await InternetAddress.lookup('google.com')
+        .timeout(const Duration(seconds: 4));
+    return result.isNotEmpty && result.first.rawAddress.isNotEmpty;
+  } catch (_) {
+    return false;
+  }
+}

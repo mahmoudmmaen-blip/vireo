@@ -39,8 +39,8 @@ class _HabitsLoadingViewState extends State<HabitsLoadingView>
       child: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: 5,
-        separatorBuilder: (_, __) => const SizedBox(height: 10),
-        itemBuilder: (_, __) => _ShimmerRow(colors: colors),
+        separatorBuilder: (context, index) => const SizedBox(height: 10),
+        itemBuilder: (context, index) => _ShimmerRow(colors: colors),
       ),
     );
   }

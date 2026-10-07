@@ -155,7 +155,7 @@ class _MealTab extends ConsumerWidget {
 
     return mealsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => Center(child: Text(l10n.authErrorGeneric)),
+      error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
       data: (meals) {
         final meal = meals.where((m) => m.mealType == mealType).firstOrNull;
         if (meal == null) {

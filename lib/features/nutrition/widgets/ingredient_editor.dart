@@ -88,7 +88,7 @@ class _IngredientEditorState extends ConsumerState<IngredientEditor> {
             padding: EdgeInsets.only(top: 8),
             child: LinearProgressIndicator(),
           ),
-          error: (_, __) => const SizedBox.shrink(),
+          error: (error, stackTrace) => const SizedBox.shrink(),
           data: (items) {
             if (items.isEmpty || query.length < 2) return const SizedBox.shrink();
             return Card(

@@ -4,7 +4,11 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
+import 'package:vireo/core/navigation/vireo_page_routes.dart';
+import 'package:vireo/features/workout/providers/exercise_detail_provider.dart';
 import 'package:vireo/features/workout/providers/workout_flow_provider.dart';
+import 'package:vireo/features/workout/screens/exercise_detail_screen.dart';
+import 'package:vireo/features/workout/widgets/exercise_media_player.dart';
 import 'package:vireo/features/workout/widgets/exercise_video_player.dart';
 import 'package:vireo/features/workout/widgets/medical_banner.dart';
 import 'package:vireo/features/workout/widgets/swap_exercise_sheet.dart';
@@ -30,6 +34,29 @@ class ActiveExerciseScreen extends ConsumerWidget {
     final environment =
         profile?.trainingEnvironment ?? workoutProfile.env;
     final completedSets = flow.setsForCurrentExercise();
+    final detailAsync = ref.watch(exerciseDetailProvider(exercise.id));
+    final heroTag = 'exercise_media_${exercise.id}';
+    final completedCount = completedSets.where((d) => d).length;
+
+    void openExerciseDetail() {
+      Navigator.of(context).push(
+        SlideUpRoute<void>(
+          page: ExerciseDetailScreen(
+            exerciseId: exercise.id,
+            heroTag: heroTag,
+            initialSets: exercise.sets,
+            initialReps: exercise.reps,
+            initialRestSeconds: exercise.restSeconds,
+            targetSets: exercise.sets,
+            completedSets: completedCount,
+            onCompleteSet: () {
+              final setIndex = completedSets.indexWhere((d) => !d);
+              if (setIndex >= 0) notifier.completeSet(setIndex);
+            },
+          ),
+        ),
+      );
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,14 +73,31 @@ class ActiveExerciseScreen extends ConsumerWidget {
                   style: TextStyle(color: colors.textMute),
                 ),
                 const SizedBox(height: 12),
-                ExerciseVideoPlayer(
-                  videoUrl: exercise.videoUrl,
-                  aspectRatio: exercise.videoAspectRatio,
+                GestureDetector(
+                  onTap: openExerciseDetail,
+                  child: detailAsync.when(
+                    loading: () => ExerciseVideoPlayer(
+                      videoUrl: exercise.videoUrl,
+                      aspectRatio: exercise.videoAspectRatio,
+                    ),
+                    error: (error, stackTrace) => ExerciseVideoPlayer(
+                      videoUrl: exercise.videoUrl,
+                      aspectRatio: exercise.videoAspectRatio,
+                    ),
+                    data: (detail) => ExerciseMediaPlayer(
+                      detail: detail,
+                      heroTag: heroTag,
+                      heightFactor: 0.28,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  exercise.localizedName(locale),
-                  style: Theme.of(context).textTheme.headlineSmall,
+                GestureDetector(
+                  onTap: openExerciseDetail,
+                  child: Text(
+                    exercise.localizedName(locale),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(

@@ -9,6 +9,7 @@ import 'package:vireo/features/workout/screens/active_exercise_screen.dart';
 import 'package:vireo/features/workout/screens/mobility_phase_screen.dart';
 import 'package:vireo/features/workout/screens/warm_up_screen.dart';
 import 'package:vireo/features/workout/screens/workout_feedback_screen.dart';
+import 'package:vireo/features/workout/widgets/exercise_media_overlay.dart';
 import 'package:vireo/features/workout/widgets/pause_overlay.dart';
 import 'package:vireo/features/workout/widgets/rest_timer_overlay.dart';
 
@@ -66,6 +67,7 @@ class WorkoutFlowScreen extends ConsumerWidget {
           fit: StackFit.expand,
           children: [
             _PhaseBody(flow: flow, showMedical: showMedical),
+            const ExerciseMediaOverlay(),
             const RestTimerOverlay(),
             const PauseOverlay(),
           ],

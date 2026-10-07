@@ -30,7 +30,7 @@ class RecipeSuggestionsScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.nutritionRecipeSuggestions)),
       body: recipesAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => Center(child: Text(l10n.authErrorGeneric)),
+        error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
         data: (recipes) {
           if (recipes.isEmpty) {
             return Center(child: Text(l10n.nutritionNoRecipesFound));

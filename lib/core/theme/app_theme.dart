@@ -30,6 +30,7 @@ abstract final class AppTheme {
   static ThemeData _build(VireoColors colors, Brightness brightness) {
     final cairo = GoogleFonts.cairoTextTheme();
     final tajawal = GoogleFonts.tajawalTextTheme();
+    final notoAr = GoogleFonts.notoSansArabicTextTheme();
 
     TextStyle heading(TextStyle? base) => (base ?? const TextStyle()).copyWith(
           fontFamily: GoogleFonts.cairo().fontFamily,
@@ -38,7 +39,7 @@ abstract final class AppTheme {
         );
 
     TextStyle body(TextStyle? base) => (base ?? const TextStyle()).copyWith(
-          fontFamily: GoogleFonts.tajawal().fontFamily,
+          fontFamily: GoogleFonts.notoSansArabic().fontFamily,
           color: colors.text,
         );
 
@@ -50,14 +51,14 @@ abstract final class AppTheme {
       headlineMedium: heading(cairo.headlineMedium),
       headlineSmall: heading(cairo.headlineSmall),
       titleLarge: heading(cairo.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
-      titleMedium: body(tajawal.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
-      titleSmall: body(tajawal.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
-      bodyLarge: body(tajawal.bodyLarge),
-      bodyMedium: body(tajawal.bodyMedium),
-      bodySmall: body(tajawal.bodySmall?.copyWith(color: colors.textMute)),
+      titleMedium: body(notoAr.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+      titleSmall: body(notoAr.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+      bodyLarge: body(notoAr.bodyLarge),
+      bodyMedium: body(notoAr.bodyMedium),
+      bodySmall: body(notoAr.bodySmall?.copyWith(color: colors.textMute)),
       labelLarge: body(tajawal.labelLarge?.copyWith(fontWeight: FontWeight.w700)),
-      labelMedium: body(tajawal.labelMedium?.copyWith(color: colors.textMute)),
-      labelSmall: body(tajawal.labelSmall?.copyWith(color: colors.textMute)),
+      labelMedium: body(notoAr.labelMedium?.copyWith(color: colors.textMute)),
+      labelSmall: body(notoAr.labelSmall?.copyWith(color: colors.textMute)),
     );
 
     final colorScheme = brightness == Brightness.dark
@@ -166,6 +167,45 @@ abstract final class AppTheme {
         backgroundColor: colors.surfaceRaised,
         contentTextStyle: body(tajawal.bodyMedium),
         behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14),
+          side: BorderSide(color: colors.line),
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: colors.ember,
+          foregroundColor: Colors.white,
+          minimumSize: const Size(48, 48),
+          textStyle: body(tajawal.labelLarge).copyWith(fontWeight: FontWeight.w800),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(VireoDecorations.buttonRadius),
+          ),
+        ),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: colors.surface,
+        surfaceTintColor: Colors.transparent,
+        showDragHandle: true,
+        dragHandleColor: colors.textMute.withValues(alpha: 0.4),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: colors.surfaceRaised,
+        side: BorderSide(color: colors.line),
+        labelStyle: body(tajawal.labelLarge).copyWith(fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(VireoDecorations.chipRadius),
+        ),
+      ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: <TargetPlatform, PageTransitionsBuilder>{
+          TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+        },
       ),
     );
   }

@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/utils/unit_converter.dart';
+import 'package:vireo/core/widgets/animated_backgrounds.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
+import 'package:vireo/core/widgets/vireo_fab.dart';
 import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
 import 'package:vireo/features/progress/providers/progress_provider.dart';
 import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
@@ -25,9 +27,11 @@ class ProgressScreen extends ConsumerWidget {
     final energyAsync = ref.watch(energyCheckInsProvider);
     final deficit = ref.watch(weeklyDeficitProvider);
 
-    return FeatureScaffold(
-      title: l10n.progressTitle,
-      body: Stack(
+    return GradientMeshBackground(
+      child: FeatureScaffold(
+        title: l10n.progressTitle,
+        transparentBackground: true,
+        body: Stack(
         children: [
           RefreshIndicator(
             onRefresh: () async {
@@ -105,12 +109,13 @@ class ProgressScreen extends ConsumerWidget {
           Positioned(
             right: 16,
             bottom: 16,
-            child: FloatingActionButton(
+            child: VireoFab(
               onPressed: () => showWeightLogSheet(context, ref),
               child: const Icon(Icons.add),
             ),
           ),
         ],
+        ),
       ),
     );
   }

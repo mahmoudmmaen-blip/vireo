@@ -8,6 +8,7 @@ import 'package:vireo/core/boot/boot_log.dart';
 abstract final class HiveService {
   static const settingsBoxName = 'settings';
   static const cacheBoxName = 'cache';
+  static const bodyMeasurementsBoxName = 'body_measurements';
 
   static bool _initialized = false;
 
@@ -43,6 +44,13 @@ abstract final class HiveService {
       );
       BootLog.ok('Hive.openBox(cache)');
 
+      BootLog.step('Starting Hive.openBox(body_measurements)...');
+      await Hive.openBox<dynamic>(bodyMeasurementsBoxName).timeout(
+        bootServiceTimeout,
+        onTimeout: () => throw TimeoutException('Hive.openBox(body_measurements)'),
+      );
+      BootLog.ok('Hive.openBox(body_measurements)');
+
       _initialized = true;
       BootLog.ok('HiveService.init');
     } catch (e) {
@@ -59,6 +67,11 @@ abstract final class HiveService {
   static Box<dynamic> get cacheBox {
     _ensureInitialized();
     return Hive.box<dynamic>(cacheBoxName);
+  }
+
+  static Box<dynamic> get bodyMeasurementsBox {
+    _ensureInitialized();
+    return Hive.box<dynamic>(bodyMeasurementsBoxName);
   }
 
   static void _ensureInitialized() {

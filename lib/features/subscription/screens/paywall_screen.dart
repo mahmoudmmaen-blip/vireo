@@ -61,6 +61,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       if (!mounted) return;
       if (info != null) {
         await ref.read(subscriptionProvider.notifier).refresh();
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.paywallPurchaseSuccess)),
         );
@@ -86,6 +87,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       if (info == null) return;
 
       await ref.read(subscriptionProvider.notifier).refresh();
+      if (!mounted) return;
       final snapshot = ref.read(subscriptionProvider).valueOrNull;
       if (snapshot?.hasPremiumAccess == true) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -124,7 +126,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       ),
       body: subAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => Center(child: Text(l10n.authErrorGeneric)),
+        error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
         data: (snapshot) {
           final plans = snapshot.plans.isNotEmpty
               ? snapshot.plans

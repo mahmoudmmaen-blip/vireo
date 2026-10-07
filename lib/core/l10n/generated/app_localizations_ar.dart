@@ -1611,4 +1611,756 @@ class AppLocalizationsAr extends AppLocalizations {
   String weeklyDeficitTooltip(int net, int consumed, int burned) {
     return '$net kcal\nداخل: $consumed · خارج: $burned';
   }
+
+  @override
+  String uxGoodMorning(String name) {
+    return 'صباح الخير يا $name';
+  }
+
+  @override
+  String uxGoodAfternoon(String name) {
+    return 'نهارك سعيد يا $name';
+  }
+
+  @override
+  String uxGoodEvening(String name) {
+    return 'مساء الخير يا $name';
+  }
+
+  @override
+  String get uxTodayOverline => 'اليوم';
+
+  @override
+  String get uxCaloriesLeft => 'سعرة متبقية';
+
+  @override
+  String get uxCaloriesOver => 'سعرة زيادة';
+
+  @override
+  String get uxGoal => 'الهدف';
+
+  @override
+  String get uxEaten => 'أكلت';
+
+  @override
+  String get uxBurned => 'حرقت';
+
+  @override
+  String get uxActionScan => 'صوّر وجبة';
+
+  @override
+  String get uxActionTrain => 'تمرين';
+
+  @override
+  String get uxActionCoach => 'المدرب';
+
+  @override
+  String get uxSectionTraining => 'تمرين النهارده';
+
+  @override
+  String get uxSectionThisWeek => 'الأسبوع ده';
+
+  @override
+  String get uxSectionTodayLog => 'سجل النهارده';
+
+  @override
+  String get uxAddMeal => '+ أضف وجبة';
+
+  @override
+  String get uxAiScanned => 'تحليل AI';
+
+  @override
+  String get uxMealRemoved => 'تم حذف الوجبة';
+
+  @override
+  String get uxLogEmptyTitle => 'لسه ما سجلتش أكل النهارده';
+
+  @override
+  String get uxLogEmptyBody =>
+      'صوّر وجبتك والذكاء الاصطناعي يحسب السعرات والماكروز في ثواني.';
+
+  @override
+  String get uxRestDayHint =>
+      'الراحة جزء من التمرين. امشِ شوية، اعمل إطالة، وكمّل البروتين.';
+
+  @override
+  String uxWorkoutMinutes(int minutes) {
+    return '~$minutes دقيقة';
+  }
+
+  @override
+  String get uxWater => 'المياه';
+
+  @override
+  String get uxGlassSize => '250 مل';
+
+  @override
+  String uxWaterAdded(String liters) {
+    return '+250 مل · $liters لتر النهارده';
+  }
+
+  @override
+  String get uxWaterGoalDone => 'وصلت لهدف المياه 💧 عاش!';
+
+  @override
+  String get uxUndo => 'تراجع';
+
+  @override
+  String get uxCopied => 'تم النسخ';
+
+  @override
+  String get uxSend => 'إرسال';
+
+  @override
+  String get uxQuickLogTitle => 'تسجيل سريع';
+
+  @override
+  String get uxQuickLogSubtitle => 'سجّل أي حاجة بضغطة واحدة.';
+
+  @override
+  String get uxQuickScanTitle => 'صوّر وجبتك بالذكاء الاصطناعي';
+
+  @override
+  String get uxQuickScanSub => 'السعرات والماكروز في ثواني';
+
+  @override
+  String get uxQuickWater => 'مياه';
+
+  @override
+  String get uxQuickWaterSub => '+كوباية · 250 مل';
+
+  @override
+  String get uxQuickWeight => 'الوزن';
+
+  @override
+  String get uxQuickWeightSub => 'سجّل وزن النهارده';
+
+  @override
+  String get uxQuickCardio => 'كارديو';
+
+  @override
+  String get uxQuickCardioSub => 'مشي، جري، عجلة…';
+
+  @override
+  String get uxQuickCoach => 'اسأل المدرب';
+
+  @override
+  String get uxQuickCoachSub => 'نصيحة ذكية ليك';
+
+  @override
+  String get uxCoachOnline => 'متصل · عارف أرقامك';
+
+  @override
+  String get uxCoachTyping => 'بيكتب…';
+
+  @override
+  String get uxCoachNewChat => 'محادثة جديدة';
+
+  @override
+  String get uxCoachClearConfirm =>
+      'تبدأ محادثة جديدة؟ الرسائل الحالية هتتمسح.';
+
+  @override
+  String get uxCoachHeroTitle => 'مدربك الشخصي الذكي';
+
+  @override
+  String get uxCoachHeroBody =>
+      'اسأل عن الأكل، البروتين، الحلويات أو التمرين. كل إجابة مبنية على أرقامك النهارده.';
+
+  @override
+  String uxCoachKcalLeft(int kcal) {
+    return 'باقي $kcal سعرة';
+  }
+
+  @override
+  String uxCoachProteinLeft(int grams) {
+    return 'باقي ${grams}g بروتين';
+  }
+
+  @override
+  String get uxCoachChipWorkout => 'آكل إيه قبل التمرين؟';
+
+  @override
+  String get uxProtein => 'بروتين';
+
+  @override
+  String get uxCarbs => 'كارب';
+
+  @override
+  String get uxFat => 'دهون';
+
+  @override
+  String get aiScanAnalysisTitle => 'تحليل الذكاء الاصطناعي';
+
+  @override
+  String get diaryAddMeal => 'إضافة وجبة';
+
+  @override
+  String get diaryAddWorkout => 'إضافة تمرين';
+
+  @override
+  String get diaryCaloriesIn => 'السعرات الداخلة';
+
+  @override
+  String get diaryCaloriesOut => 'السعرات المحروقة';
+
+  @override
+  String diaryKcal(int kcal) {
+    return '$kcal سعرة';
+  }
+
+  @override
+  String diaryLastUpdated(String count) {
+    return 'آخر تحديث $count';
+  }
+
+  @override
+  String diaryMealCalories(int calories) {
+    return '$calories kcal';
+  }
+
+  @override
+  String get diaryNetBalance => 'العجز اليومي';
+
+  @override
+  String get diaryNoEntries => 'لا توجد سجلات لهذا اليوم';
+
+  @override
+  String get diaryProtein => 'البروتين';
+
+  @override
+  String diaryProteinProgress(int current, int goal) {
+    return '$current / $goal g';
+  }
+
+  @override
+  String get diarySetGoalsCta => 'تحديد الأهداف';
+
+  @override
+  String get diarySetGoalsFirst => 'حدد أهدافك أولاً';
+
+  @override
+  String get diaryTimeline => 'الخط الزمني';
+
+  @override
+  String get diaryTitle => 'يومياتي';
+
+  @override
+  String get diaryToday => 'اليوم';
+
+  @override
+  String get diaryWater => 'المياه';
+
+  @override
+  String diaryWaterAmount(int amount) {
+    return '$amount ml';
+  }
+
+  @override
+  String diaryWaterProgress(int current, int goal) {
+    return '$current / $goal ml';
+  }
+
+  @override
+  String diaryWorkoutSubtitle(int minutes, int calories) {
+    return '$minutes min · $calories kcal';
+  }
+
+  @override
+  String get exerciseAdvanced => 'متقدم';
+
+  @override
+  String get exerciseBeginner => 'مبتدئ';
+
+  @override
+  String get exerciseComplete => 'تم المجموعة';
+
+  @override
+  String get exerciseDifficulty => 'مستوى الصعوبة';
+
+  @override
+  String get exerciseEquipment => 'المعدات';
+
+  @override
+  String get exerciseIntermediate => 'متوسط';
+
+  @override
+  String get exerciseLoadingDemo => 'جاري تحميل التمرين...';
+
+  @override
+  String get exerciseMistakes => 'أخطاء شائعة';
+
+  @override
+  String get exerciseReps => 'تكرارات';
+
+  @override
+  String get exerciseRest => 'راحة';
+
+  @override
+  String get exerciseSets => 'مجموعات';
+
+  @override
+  String get exerciseSteps => 'الخطوات';
+
+  @override
+  String get exerciseTips => 'نصائح احترافية';
+
+  @override
+  String get exerciseViewBack => 'خلفي';
+
+  @override
+  String get exerciseViewFront => 'أمامي';
+
+  @override
+  String get measurements30Days => '30 days';
+
+  @override
+  String get measurements3Months => '3 months';
+
+  @override
+  String get measurements7Days => '7 days';
+
+  @override
+  String get measurementsAdd => 'إضافة قياس';
+
+  @override
+  String get measurementsAddFirst => 'Log your first measurement';
+
+  @override
+  String get measurementsAll => 'All';
+
+  @override
+  String get measurementsArms => 'الذراعين';
+
+  @override
+  String get measurementsBodyFat => 'نسبة الدهون';
+
+  @override
+  String get measurementsChest => 'الصدر';
+
+  @override
+  String get measurementsDate => 'Date';
+
+  @override
+  String get measurementsDelete => 'حذف';
+
+  @override
+  String get measurementsDeleteConfirm => 'Delete this measurement?';
+
+  @override
+  String get measurementsHistory => 'السجل';
+
+  @override
+  String measurementsLastUpdated(String date) {
+    return 'Updated $date';
+  }
+
+  @override
+  String get measurementsNeedMoreData => 'Log more entries to see trends';
+
+  @override
+  String get measurementsNoData => 'No measurements yet';
+
+  @override
+  String get measurementsNotes => 'ملاحظات';
+
+  @override
+  String get measurementsSave => 'حفظ';
+
+  @override
+  String get measurementsThighs => 'الفخذين';
+
+  @override
+  String get measurementsTitle => 'القياسات';
+
+  @override
+  String get measurementsTrendDeclining => 'Needs attention';
+
+  @override
+  String get measurementsTrendImproving => 'Improving';
+
+  @override
+  String get measurementsTrendStable => 'Stable';
+
+  @override
+  String get measurementsWaist => 'الخصر';
+
+  @override
+  String get measurementsWeight => 'الوزن';
+
+  @override
+  String get measurementsWeightInvalid => 'Enter a valid weight';
+
+  @override
+  String get muscleBack => 'الظهر';
+
+  @override
+  String get muscleBiceps => 'البايسبس';
+
+  @override
+  String get muscleCalves => 'السمانة';
+
+  @override
+  String get muscleChest => 'الصدر';
+
+  @override
+  String get muscleCore => 'البطن';
+
+  @override
+  String get muscleForearms => 'الساعد';
+
+  @override
+  String get muscleGlutes => 'الأرداف';
+
+  @override
+  String get muscleHamstrings => 'الفخذ الخلفي';
+
+  @override
+  String get muscleHipFlexors => 'مثني الورك';
+
+  @override
+  String get muscleQuads => 'الفخذ الأمامي';
+
+  @override
+  String get muscleShoulders => 'الكتف';
+
+  @override
+  String get muscleTriceps => 'الترايسبس';
+
+  @override
+  String get notificationsBreakfast => 'Breakfast reminder';
+
+  @override
+  String get notificationsDinner => 'Dinner reminder';
+
+  @override
+  String get notificationsLunch => 'Lunch reminder';
+
+  @override
+  String get notificationsOpenSettings => 'Open settings';
+
+  @override
+  String get notificationsPermissionBanner =>
+      'Enable notifications to stay on track';
+
+  @override
+  String get notificationsPreWorkout => 'Pre-workout reminder';
+
+  @override
+  String get notificationsPreWorkoutSubtitle => 'Get ready to train';
+
+  @override
+  String get notificationsSleep => 'Sleep reminder';
+
+  @override
+  String get notificationsSleepSubtitle => 'Wind down for better recovery';
+
+  @override
+  String get notificationsTest => 'Send test notification';
+
+  @override
+  String get notificationsTestBody => 'Vireo reminders are working';
+
+  @override
+  String get notificationsTitle => 'الإشعارات';
+
+  @override
+  String get notificationsWater => 'Water reminder';
+
+  @override
+  String get notificationsWaterSubtitle => 'Stay hydrated through the day';
+
+  @override
+  String get notificationsWeeklyReport => 'Weekly report';
+
+  @override
+  String get notificationsWeeklyReportSubtitle => 'See how your week went';
+
+  @override
+  String get vitality12WeekProgram => '12-Week Program';
+
+  @override
+  String vitalityArticleCount(int count) {
+    return '$count articles';
+  }
+
+  @override
+  String get vitalityArticleDisclaimer =>
+      'For education only. Consult a professional for personal advice.';
+
+  @override
+  String get vitalityArticlesSection => 'Articles';
+
+  @override
+  String get vitalityBadgesTitle => 'Badges';
+
+  @override
+  String vitalityBreathingCount(int count) {
+    return '$count جلسات';
+  }
+
+  @override
+  String get vitalityBreathingLog => 'Breathing';
+
+  @override
+  String get vitalityCategoryAdvanced => 'Advanced';
+
+  @override
+  String get vitalityCategoryEnvironmental => 'Environment';
+
+  @override
+  String get vitalityCategoryLifestyle => 'Lifestyle';
+
+  @override
+  String get vitalityCategoryNutrition => 'Nutrition';
+
+  @override
+  String get vitalityCategoryTraining => 'Training';
+
+  @override
+  String get vitalityCheckProtein => 'Hit protein';
+
+  @override
+  String get vitalityCheckSleep => 'Quality sleep';
+
+  @override
+  String get vitalityCheckSunlight => 'Morning light';
+
+  @override
+  String get vitalityCheckWorkout => 'Move / train';
+
+  @override
+  String get vitalityCheckZincVitD => 'Zinc / Vit D';
+
+  @override
+  String vitalityDailyChecklistProgress(int done, int total) {
+    return '$done/$total done';
+  }
+
+  @override
+  String get vitalityDailyChecklistTitle => 'Today\'s checklist';
+
+  @override
+  String get vitalityDailyTipLabel => 'Daily tip';
+
+  @override
+  String get vitalityHubSubtitle =>
+      'Science-backed habits for energy and recovery';
+
+  @override
+  String get vitalityHubTitle => 'مركز الحيوية';
+
+  @override
+  String get vitalityLegendBadge => 'Legend';
+
+  @override
+  String get vitalityLinkCopied => 'Link copied';
+
+  @override
+  String get vitalityLogSection => 'Log';
+
+  @override
+  String get vitalityMarkRead => 'Mark as read';
+
+  @override
+  String get vitalityMarkReadDone => 'Read';
+
+  @override
+  String get vitalityMarkReadSuccess => 'Marked as read';
+
+  @override
+  String get vitalityMedicalDisclaimer =>
+      'Educational content only — not medical advice.';
+
+  @override
+  String get vitalityMetricsEmpty => 'No metrics yet';
+
+  @override
+  String get vitalityMetricsLast7Days => 'Last 7 days';
+
+  @override
+  String vitalityMetricsLastEntry(int score) {
+    return 'آخر تسجيل · طاقة $score/10';
+  }
+
+  @override
+  String get vitalityMetricsSave => 'Save metrics';
+
+  @override
+  String get vitalityMetricsSaved => 'Saved';
+
+  @override
+  String get vitalityMetricsTapToLog => 'Tap to log';
+
+  @override
+  String get vitalityMetricsTitle => 'Daily metrics';
+
+  @override
+  String get vitalityMorningEnergy => 'Morning energy';
+
+  @override
+  String get vitalityMyProgram => 'برنامجي';
+
+  @override
+  String get vitalityNotLogged => 'Not logged';
+
+  @override
+  String get vitalityPhaseFoundation => 'Foundation';
+
+  @override
+  String get vitalityPhaseOptimization => 'Optimization';
+
+  @override
+  String get vitalityPhasePeak => 'Peak';
+
+  @override
+  String get vitalityProgramAllWeeks => 'All weeks';
+
+  @override
+  String get vitalityProgramComplete => 'Program complete';
+
+  @override
+  String get vitalityProgramContinue => 'Continue';
+
+  @override
+  String get vitalityProgramDisclaimer =>
+      'Educational program — not a medical treatment.';
+
+  @override
+  String get vitalityProgramDone => 'Completed';
+
+  @override
+  String get vitalityProgramOverallProgress => 'Overall progress';
+
+  @override
+  String get vitalityProgramStartCta => 'Start program';
+
+  @override
+  String get vitalityProgramSubtitle =>
+      '12 weeks to better energy, sleep and recovery';
+
+  @override
+  String get vitalityProgramTitle => 'تحول الحيوية';
+
+  @override
+  String get vitalityProtocolBadgeEarned => 'Badge unlocked!';
+
+  @override
+  String get vitalityProtocolCompleteDay => 'Complete day';
+
+  @override
+  String vitalityProtocolStreak(int days) {
+    return '$days-day streak';
+  }
+
+  @override
+  String get vitalityProtocolTitle => 'Protocols';
+
+  @override
+  String vitalityReadingTime(int minutes) {
+    return '$minutes min read';
+  }
+
+  @override
+  String get vitalityReportCompletion => 'الإنجاز';
+
+  @override
+  String get vitalityReportImproving =>
+      'You\'re improving — keep the streak going.';
+
+  @override
+  String get vitalityReportKeepGoing =>
+      'Small steps still count. Finish a couple tasks today.';
+
+  @override
+  String get vitalityScientificSources => 'Sources';
+
+  @override
+  String vitalityScoreBreakdown(
+    int sleep,
+    int workout,
+    int protein,
+    int stress,
+  ) {
+    return 'Sleep $sleep · Train $workout · Protein $protein · Stress $stress';
+  }
+
+  @override
+  String get vitalityScoreLabel => 'الحيوية';
+
+  @override
+  String get vitalitySleepHint => 'How did you sleep?';
+
+  @override
+  String vitalitySleepHours(num hours) {
+    return '$hours ساعة';
+  }
+
+  @override
+  String get vitalitySleepLog => 'Sleep';
+
+  @override
+  String get vitalitySleepQuality => 'Quality';
+
+  @override
+  String vitalityStreak(int days) {
+    return '$days-day streak';
+  }
+
+  @override
+  String get vitalityStressLevel => 'Stress';
+
+  @override
+  String get vitalityUnlockNextWeek => 'Unlock next week';
+
+  @override
+  String vitalityWeekProgress(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get vitalityWeekReport => 'Week report';
+
+  @override
+  String vitalityWeekX(int week) {
+    return 'Week $week';
+  }
+
+  @override
+  String vitalityWeekXOf12(int week) {
+    return 'Week $week of 12';
+  }
+
+  @override
+  String get vitalityWorkoutDone => 'Trained';
+
+  @override
+  String get vitalityWorkoutLog => 'Workout';
+
+  @override
+  String get vitalityWorkoutPending => 'Rest / not yet';
+
+  @override
+  String get vitalityWorkoutPerformance => 'Performance';
+
+  @override
+  String walkingEstimatedMinutes(int minutes) {
+    return '~$minutes min';
+  }
+
+  @override
+  String get walkingHealthBanner =>
+      'Connect Apple Health / Health Connect for automatic steps';
+
+  @override
+  String get walkingManualStepsLabel => 'Steps today';
+
+  @override
+  String get walkingUpdateSteps => 'Update steps';
+
+  @override
+  String get walkingWebManualBanner => 'On web, enter steps manually';
+
+  @override
+  String get vitalityKeyTakeaway => 'الخلاصة';
 }

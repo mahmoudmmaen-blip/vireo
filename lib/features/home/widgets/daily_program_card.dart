@@ -41,7 +41,7 @@ class DailyProgramCard extends ConsumerWidget {
             const SizedBox(height: 16),
             workoutAsync.when(
               loading: () => _RowSkeleton(label: l10n.homeTodayWorkout),
-              error: (_, __) => _ProgramRow(
+              error: (error, stackTrace) => _ProgramRow(
                 icon: Icons.fitness_center_outlined,
                 label: l10n.homeTodayWorkout,
                 value: l10n.authErrorGeneric,
@@ -68,7 +68,7 @@ class DailyProgramCard extends ConsumerWidget {
             const SizedBox(height: 14),
             mealsAsync.when(
               loading: () => _RowSkeleton(label: l10n.homeNextMeal),
-              error: (_, __) => _ProgramRow(
+              error: (error, stackTrace) => _ProgramRow(
                 icon: Icons.restaurant_outlined,
                 label: l10n.homeNextMeal,
                 value: l10n.authErrorGeneric,

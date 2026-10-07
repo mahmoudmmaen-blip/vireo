@@ -63,7 +63,7 @@ class NutritionRepository {
         AppConfig.suggestRecipesFunctionName,
         body: {
           'ingredients': ingredients,
-          if (scanId != null) 'scan_id': scanId,
+          'scan_id': ?scanId,
         },
       );
 
