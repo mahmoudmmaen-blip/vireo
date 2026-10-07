@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
-import 'package:vireo/features/cardio/providers/cardio_log_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
+import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 
 /// A single item in today's food log (plan meal or AI-scanned meal).
@@ -70,25 +70,17 @@ final todayNutritionProvider = Provider.family<TodayNutrition, String>((
   languageCode,
 ) {
   final target = ref.watch(calorieGoalProvider);
+  final totals = ref.watch(dailyNutritionTotalsProvider);
   final meals = ref.watch(effectiveTodayMealsProvider).valueOrNull ?? const [];
   final confirmed = ref.watch(confirmedMealsProvider);
   ref.watch(aiMealLogProvider);
   final aiToday = ref.read(aiMealLogProvider.notifier).todayEntries;
-  final burned = ref.watch(todayCardioCaloriesProvider);
 
-  var kcal = 0;
-  var p = 0.0;
-  var c = 0.0;
-  var f = 0.0;
   final items = <TodayLogItem>[];
 
   for (final meal in meals) {
     if (!confirmed.contains(meal.mealType)) continue;
     final r = meal.recipe;
-    kcal += r.calories;
-    p += r.proteinG;
-    c += r.carbsG;
-    f += r.fatG;
     items.add(
       TodayLogItem(
         id: 'plan_${meal.mealType.value}',
@@ -103,10 +95,6 @@ final todayNutritionProvider = Provider.family<TodayNutrition, String>((
 
   for (final e in aiToday) {
     final r = e.result;
-    kcal += r.calories;
-    p += r.protein;
-    c += r.carbs;
-    f += r.fats;
     items.add(
       TodayLogItem(
         id: e.id,
@@ -129,11 +117,11 @@ final todayNutritionProvider = Provider.family<TodayNutrition, String>((
 
   return TodayNutrition(
     goalKcal: target.calories,
-    eatenKcal: kcal,
-    burnedKcal: burned,
-    proteinG: p,
-    carbsG: c,
-    fatG: f,
+    eatenKcal: totals.calories,
+    burnedKcal: totals.burnedKcal,
+    proteinG: totals.protein,
+    carbsG: totals.carbs,
+    fatG: totals.fat,
     proteinTarget: target.proteinG,
     carbsTarget: target.carbsG,
     fatTarget: target.fatG,

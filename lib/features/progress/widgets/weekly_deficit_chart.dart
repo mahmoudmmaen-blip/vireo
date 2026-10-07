@@ -36,8 +36,13 @@ class WeeklyDeficitChart extends StatelessWidget {
     }
 
     final days = summary.days;
-    final values = days.map((d) => d.netBalance.toDouble()).toList();
-    final maxAbs = values.map((v) => v.abs()).fold<double>(0, (a, b) => a > b ? a : b);
+    final loggedValues = days
+        .where((d) => d.hasFoodLogged)
+        .map((d) => d.netBalance.toDouble())
+        .toList();
+    final maxAbs = loggedValues.isEmpty
+        ? 200.0
+        : loggedValues.map((v) => v.abs()).fold<double>(0, (a, b) => a > b ? a : b);
     final chartMax = (maxAbs * 1.25).clamp(200, 4000).toDouble();
 
     return Column(
@@ -119,6 +124,7 @@ class WeeklyDeficitChart extends StatelessWidget {
                 touchTooltipData: BarTouchTooltipData(
                   getTooltipItem: (group, groupIndex, rod, rodIndex) {
                     final day = days[group.x.toInt()];
+                    if (!day.hasFoodLogged) return null;
                     return BarTooltipItem(
                       l10n.weeklyDeficitTooltip(
                         day.netBalance,
@@ -132,7 +138,12 @@ class WeeklyDeficitChart extends StatelessWidget {
               ),
               barGroups: [
                 for (var i = 0; i < days.length; i++)
-                  _barGroup(i, days[i].netBalance.toDouble()),
+                  _barGroup(
+                    i,
+                    days[i],
+                    placeholderColor: colors.line.withValues(alpha: 0.55),
+                    chartMax: chartMax,
+                  ),
               ],
             ),
           ),
@@ -141,7 +152,30 @@ class WeeklyDeficitChart extends StatelessWidget {
     );
   }
 
-  BarChartGroupData _barGroup(int index, double value) {
+  BarChartGroupData _barGroup(
+    int index,
+    DailyDeficitEntry day, {
+    required Color placeholderColor,
+    required double chartMax,
+  }) {
+    if (!day.hasFoodLogged) {
+      // Empty / grey placeholder — day with no food logged.
+      final stub = chartMax * 0.04;
+      return BarChartGroupData(
+        x: index,
+        barRods: [
+          BarChartRodData(
+            fromY: 0,
+            toY: stub,
+            width: 16,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+            color: placeholderColor,
+          ),
+        ],
+      );
+    }
+
+    final value = day.netBalance.toDouble();
     final color = value >= 0 ? _deficitGreen : _surplusAmber;
     final fromY = value >= 0 ? 0.0 : value;
     final toY = value >= 0 ? value : 0.0;

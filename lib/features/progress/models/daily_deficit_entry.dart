@@ -14,10 +14,14 @@ class DailyDeficitEntry {
   final int consumed;
   final int burned;
 
+  /// True when at least one meal was logged that day.
+  bool get hasFoodLogged => consumed > 0;
+
   /// Positive = calorie deficit, negative = surplus.
+  /// Only meaningful when [hasFoodLogged] is true.
   int get netBalance => tdee - consumed + burned;
 
-  bool get hasActivity => consumed > 0 || burned > 0;
+  bool get hasActivity => hasFoodLogged || burned > 0;
 }
 
 @immutable
@@ -29,6 +33,10 @@ class WeeklyDeficitSummary {
   });
 
   final List<DailyDeficitEntry> days;
+
+  /// Sum of deficits for days with food logged only.
   final int totalNetKcal;
+
+  /// True when at least one day in the window has food logged.
   final bool hasData;
 }

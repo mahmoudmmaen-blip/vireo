@@ -5,14 +5,12 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/utils/unit_converter.dart';
 import 'package:vireo/core/widgets/animated_backgrounds.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
-import 'package:vireo/core/widgets/vireo_fab.dart';
 import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
 import 'package:vireo/features/progress/providers/progress_provider.dart';
 import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
 import 'package:vireo/features/progress/widgets/energy_line_chart.dart';
 import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
 import 'package:vireo/features/progress/widgets/weight_line_chart.dart';
-import 'package:vireo/features/progress/widgets/weight_log_sheet.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -31,9 +29,7 @@ class ProgressScreen extends ConsumerWidget {
       child: FeatureScaffold(
         title: l10n.progressTitle,
         transparentBackground: true,
-        body: Stack(
-        children: [
-          RefreshIndicator(
+        body: RefreshIndicator(
             onRefresh: () async {
               ref.invalidate(weightLogsProvider);
               ref.invalidate(weightGoalProvider);
@@ -43,7 +39,7 @@ class ProgressScreen extends ConsumerWidget {
               await Future<void>.delayed(const Duration(milliseconds: 400));
             },
             child: ListView(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 88),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
               children: [
                 Text(
                   l10n.progressAllChartsTitle,
@@ -106,16 +102,6 @@ class ProgressScreen extends ConsumerWidget {
               ],
             ),
           ),
-          Positioned(
-            right: 16,
-            bottom: 16,
-            child: VireoFab(
-              onPressed: () => showWeightLogSheet(context, ref),
-              child: const Icon(Icons.add),
-            ),
-          ),
-        ],
-        ),
       ),
     );
   }

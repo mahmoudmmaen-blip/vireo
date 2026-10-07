@@ -58,8 +58,9 @@ final weeklyDeficitProvider = Provider<WeeklyDeficitSummary>((ref) {
     );
   }
 
-  final hasData = days.any((d) => d.hasActivity);
-  final total = days.fold<int>(0, (sum, d) => sum + d.netBalance);
+  final loggedDays = days.where((d) => d.hasFoodLogged).toList();
+  final hasData = loggedDays.isNotEmpty;
+  final total = loggedDays.fold<int>(0, (sum, d) => sum + d.netBalance);
 
   return WeeklyDeficitSummary(
     days: days,

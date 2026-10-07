@@ -4,8 +4,7 @@ import 'package:vireo/core/services/onboarding_calorie_sync.dart';
 import 'package:vireo/core/utils/calorie_calculator.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/fitness_goal.dart';
-import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
-import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
+import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
 
 const _manualCalorieKey = 'manual_calorie_goal';
 
@@ -60,16 +59,9 @@ final calorieGoalProvider = Provider<CalorieTarget>((ref) {
   return computed;
 });
 
+/// Today's eaten calories from all food sources (plan + AI / diary).
 final dailyCaloriesConsumedProvider = Provider<int>((ref) {
-  final meals = ref.watch(effectiveTodayMealsProvider).valueOrNull ?? [];
-  final confirmed = ref.watch(confirmedMealsProvider);
-  var total = 0;
-  for (final meal in meals) {
-    if (confirmed.contains(meal.mealType)) {
-      total += meal.recipe.calories;
-    }
-  }
-  return total;
+  return ref.watch(dailyNutritionTotalsProvider).calories;
 });
 
 Future<void> setManualCalorieGoal(int? calories) async {
