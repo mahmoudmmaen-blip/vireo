@@ -4336,6 +4336,282 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Key takeaway'**
   String get vitalityKeyTakeaway;
+
+  /// No description provided for @dietMyPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'My diet plan'**
+  String get dietMyPlan;
+
+  /// No description provided for @dietProgramsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Diet programs'**
+  String get dietProgramsTitle;
+
+  /// No description provided for @dietQuizTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Diet plan quiz'**
+  String get dietQuizTitle;
+
+  /// No description provided for @dietQuizContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'I understand — continue'**
+  String get dietQuizContinue;
+
+  /// No description provided for @dietQuizYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get dietQuizYes;
+
+  /// No description provided for @dietQuizNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get dietQuizNo;
+
+  /// No description provided for @dietQuizHealthStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Health {current} of {total}'**
+  String dietQuizHealthStep(int current, int total);
+
+  /// No description provided for @dietQuizPrefStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences {current} of {total}'**
+  String dietQuizPrefStep(int current, int total);
+
+  /// No description provided for @dietPrefBreadRice.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you love bread and rice?'**
+  String get dietPrefBreadRice;
+
+  /// No description provided for @dietPrefSkipBreakfast.
+  ///
+  /// In en, this message translates to:
+  /// **'Can you comfortably skip breakfast?'**
+  String get dietPrefSkipBreakfast;
+
+  /// No description provided for @dietPrefSimpleRules.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you prefer simple food rules?'**
+  String get dietPrefSimpleRules;
+
+  /// No description provided for @dietPrefEatsOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you eat out often?'**
+  String get dietPrefEatsOut;
+
+  /// No description provided for @dietPrefWeights.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you train with weights regularly?'**
+  String get dietPrefWeights;
+
+  /// No description provided for @dietRecommendedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended for you'**
+  String get dietRecommendedBadge;
+
+  /// No description provided for @dietActiveBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get dietActiveBadge;
+
+  /// No description provided for @dietNeedsDoctor.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs doctor approval'**
+  String get dietNeedsDoctor;
+
+  /// No description provided for @dietReadWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Read warning'**
+  String get dietReadWarning;
+
+  /// No description provided for @dietCardMacros.
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal · {protein}g protein'**
+  String dietCardMacros(int kcal, int protein);
+
+  /// No description provided for @dietHowItWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'How it works'**
+  String get dietHowItWorks;
+
+  /// No description provided for @dietYourTargets.
+  ///
+  /// In en, this message translates to:
+  /// **'Your targets'**
+  String get dietYourTargets;
+
+  /// No description provided for @dietBestFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Best for'**
+  String get dietBestFor;
+
+  /// No description provided for @dietNotIdealFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Not ideal for'**
+  String get dietNotIdealFor;
+
+  /// No description provided for @dietRules.
+  ///
+  /// In en, this message translates to:
+  /// **'Rules'**
+  String get dietRules;
+
+  /// No description provided for @dietAllowedFoods.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed foods'**
+  String get dietAllowedFoods;
+
+  /// No description provided for @dietLimitFoods.
+  ///
+  /// In en, this message translates to:
+  /// **'Limit these'**
+  String get dietLimitFoods;
+
+  /// No description provided for @dietSampleDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample day'**
+  String get dietSampleDay;
+
+  /// No description provided for @dietSideEffects.
+  ///
+  /// In en, this message translates to:
+  /// **'Side effects'**
+  String get dietSideEffects;
+
+  /// No description provided for @dietTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Tips'**
+  String get dietTips;
+
+  /// No description provided for @dietEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence'**
+  String get dietEvidence;
+
+  /// No description provided for @dietStopSigns.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop signs'**
+  String get dietStopSigns;
+
+  /// No description provided for @dietDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Disclaimer'**
+  String get dietDisclaimer;
+
+  /// No description provided for @dietStartProgram.
+  ///
+  /// In en, this message translates to:
+  /// **'Start this program'**
+  String get dietStartProgram;
+
+  /// No description provided for @dietDoctorGateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor approval needed'**
+  String get dietDoctorGateTitle;
+
+  /// No description provided for @dietAckWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'I read the warning'**
+  String get dietAckWarning;
+
+  /// No description provided for @dietMustAckWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm you read the warning first'**
+  String get dietMustAckWarning;
+
+  /// No description provided for @dietStartedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Diet program started'**
+  String get dietStartedToast;
+
+  /// No description provided for @dietClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get dietClose;
+
+  /// No description provided for @dietCarbsMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Carbs cap: {grams} g'**
+  String dietCarbsMax(int grams);
+
+  /// No description provided for @dietWeeklyLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'Est. weekly loss ≈ {kg} kg'**
+  String dietWeeklyLoss(String kg);
+
+  /// No description provided for @dietChoosePlanCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your diet plan'**
+  String get dietChoosePlanCard;
+
+  /// No description provided for @dietFastingLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Fasting — {time} left'**
+  String dietFastingLeft(String time);
+
+  /// No description provided for @dietEatingWindowLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Eating window — closes in {time}'**
+  String dietEatingWindowLeft(String time);
+
+  /// No description provided for @dietWindowStartsAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Eating window starts at {hour}:00'**
+  String dietWindowStartsAt(int hour);
+
+  /// No description provided for @dietEditWindow.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit start hour'**
+  String get dietEditWindow;
+
+  /// No description provided for @dietCarbsLimitLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Carbs limit'**
+  String get dietCarbsLimitLabel;
+
+  /// No description provided for @dietCarbsLimitProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {max} g carbs'**
+  String dietCarbsLimitProgress(int current, int max);
 }
 
 class _AppLocalizationsDelegate

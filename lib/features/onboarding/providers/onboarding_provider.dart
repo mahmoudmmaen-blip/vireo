@@ -1,10 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/services/onboarding_calorie_sync.dart';
+import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/data/models/onboarding_draft.dart';
 import 'package:vireo/data/models/unit_preference.dart';
 import 'package:vireo/data/repositories/onboarding_repository.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
+import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 
@@ -98,6 +100,9 @@ class OnboardingNotifier extends Notifier<OnboardingUiState> {
       final repo = ref.read(onboardingRepositoryProvider);
       await repo.completeOnboarding(userId: userId, draft: state.draft);
       await OnboardingCalorieSync.syncFromDraft(state.draft);
+      if (state.draft.goal == FitnessGoal.weightLoss) {
+        await DietPlanStorage.setPendingQuiz(true);
+      }
       ref.invalidate(onboardingCompleteProvider);
       ref.invalidate(calorieGoalProvider);
       ref.invalidate(todayWorkoutProvider);

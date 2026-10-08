@@ -1333,5 +1333,100 @@
   "walkingManualStepsLabel": "Steps today",
   "walkingUpdateSteps": "Update steps",
   "walkingWebManualBanner": "On web, enter steps manually",
-  "vitalityKeyTakeaway": "Key takeaway"
+  "vitalityKeyTakeaway": "Key takeaway",
+  "dietMyPlan": "My diet plan",
+  "dietProgramsTitle": "Diet programs",
+  "dietQuizTitle": "Diet plan quiz",
+  "dietQuizContinue": "I understand — continue",
+  "dietQuizYes": "Yes",
+  "dietQuizNo": "No",
+  "dietQuizHealthStep": "Health {current} of {total}",
+  "@dietQuizHealthStep": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dietQuizPrefStep": "Preferences {current} of {total}",
+  "@dietQuizPrefStep": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dietPrefBreadRice": "Do you love bread and rice?",
+  "dietPrefSkipBreakfast": "Can you comfortably skip breakfast?",
+  "dietPrefSimpleRules": "Do you prefer simple food rules?",
+  "dietPrefEatsOut": "Do you eat out often?",
+  "dietPrefWeights": "Do you train with weights regularly?",
+  "dietRecommendedBadge": "Recommended for you",
+  "dietActiveBadge": "Active",
+  "dietNeedsDoctor": "Needs doctor approval",
+  "dietReadWarning": "Read warning",
+  "dietCardMacros": "{kcal} kcal · {protein}g protein",
+  "@dietCardMacros": {
+    "placeholders": {
+      "kcal": {"type": "int"},
+      "protein": {"type": "int"}
+    }
+  },
+  "dietHowItWorks": "How it works",
+  "dietYourTargets": "Your targets",
+  "dietBestFor": "Best for",
+  "dietNotIdealFor": "Not ideal for",
+  "dietRules": "Rules",
+  "dietAllowedFoods": "Allowed foods",
+  "dietLimitFoods": "Limit these",
+  "dietSampleDay": "Sample day",
+  "dietSideEffects": "Side effects",
+  "dietTips": "Tips",
+  "dietEvidence": "Evidence",
+  "dietStopSigns": "Stop signs",
+  "dietDisclaimer": "Disclaimer",
+  "dietStartProgram": "Start this program",
+  "dietDoctorGateTitle": "Doctor approval needed",
+  "dietAckWarning": "I read the warning",
+  "dietMustAckWarning": "Please confirm you read the warning first",
+  "dietStartedToast": "Diet program started",
+  "dietClose": "Close",
+  "dietCarbsMax": "Carbs cap: {grams} g",
+  "@dietCarbsMax": {
+    "placeholders": {
+      "grams": {"type": "int"}
+    }
+  },
+  "dietWeeklyLoss": "Est. weekly loss ≈ {kg} kg",
+  "@dietWeeklyLoss": {
+    "placeholders": {
+      "kg": {"type": "String"}
+    }
+  },
+  "dietChoosePlanCard": "Choose your diet plan",
+  "dietFastingLeft": "Fasting — {time} left",
+  "@dietFastingLeft": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "dietEatingWindowLeft": "Eating window — closes in {time}",
+  "@dietEatingWindowLeft": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "dietWindowStartsAt": "Eating window starts at {hour}:00",
+  "@dietWindowStartsAt": {
+    "placeholders": {
+      "hour": {"type": "int"}
+    }
+  },
+  "dietEditWindow": "Edit start hour",
+  "dietCarbsLimitLabel": "Carbs limit",
+  "dietCarbsLimitProgress": "{current} / {max} g carbs",
+  "@dietCarbsLimitProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "max": {"type": "int"}
+    }
+  }
 }

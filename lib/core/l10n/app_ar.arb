@@ -1274,5 +1274,100 @@
   "walkingManualStepsLabel": "Steps today",
   "walkingUpdateSteps": "Update steps",
   "walkingWebManualBanner": "On web, enter steps manually",
-  "vitalityKeyTakeaway": "الخلاصة"
+  "vitalityKeyTakeaway": "الخلاصة",
+  "dietMyPlan": "خطتي الغذائية",
+  "dietProgramsTitle": "برامج الدايت",
+  "dietQuizTitle": "اختبار الخطة الغذائية",
+  "dietQuizContinue": "فاهم — كمّل",
+  "dietQuizYes": "أيوه",
+  "dietQuizNo": "لا",
+  "dietQuizHealthStep": "الصحة {current} من {total}",
+  "@dietQuizHealthStep": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dietQuizPrefStep": "التفضيلات {current} من {total}",
+  "@dietQuizPrefStep": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dietPrefBreadRice": "بتحب العيش والرز؟",
+  "dietPrefSkipBreakfast": "تقدر تتخطى الفطار براحة؟",
+  "dietPrefSimpleRules": "بتحب قواعد أكل بسيطة؟",
+  "dietPrefEatsOut": "بتاكل برا البيت كتير؟",
+  "dietPrefWeights": "بتمرّن حديد بانتظام؟",
+  "dietRecommendedBadge": "موصى بيه ليك",
+  "dietActiveBadge": "نشط",
+  "dietNeedsDoctor": "محتاج موافقة دكتور",
+  "dietReadWarning": "اقرأ التحذير",
+  "dietCardMacros": "{kcal} سعرة · {protein}جم بروتين",
+  "@dietCardMacros": {
+    "placeholders": {
+      "kcal": {"type": "int"},
+      "protein": {"type": "int"}
+    }
+  },
+  "dietHowItWorks": "إزاي بيشتغل",
+  "dietYourTargets": "أهدافك",
+  "dietBestFor": "مناسب لـ",
+  "dietNotIdealFor": "مش مثالي لـ",
+  "dietRules": "القواعد",
+  "dietAllowedFoods": "أكل مسموح",
+  "dietLimitFoods": "قلّل دول",
+  "dietSampleDay": "يوم نموذجي",
+  "dietSideEffects": "أعراض جانبية",
+  "dietTips": "نصايح",
+  "dietEvidence": "الأدلة",
+  "dietStopSigns": "علامات التوقف",
+  "dietDisclaimer": "إخلاء مسؤولية",
+  "dietStartProgram": "ابدأ البرنامج ده",
+  "dietDoctorGateTitle": "محتاج موافقة دكتور",
+  "dietAckWarning": "قرأت التحذير",
+  "dietMustAckWarning": "أكّد إنك قرأت التحذير الأول",
+  "dietStartedToast": "بدأنا برنامج الدايت",
+  "dietClose": "إغلاق",
+  "dietCarbsMax": "حد الكارب: {grams} جم",
+  "@dietCarbsMax": {
+    "placeholders": {
+      "grams": {"type": "int"}
+    }
+  },
+  "dietWeeklyLoss": "خسارة أسبوعية متوقعة ≈ {kg} كجم",
+  "@dietWeeklyLoss": {
+    "placeholders": {
+      "kg": {"type": "String"}
+    }
+  },
+  "dietChoosePlanCard": "اختار خطتك الغذائية",
+  "dietFastingLeft": "صيام — باقي {time}",
+  "@dietFastingLeft": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "dietEatingWindowLeft": "وقت الأكل — يقفل بعد {time}",
+  "@dietEatingWindowLeft": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "dietWindowStartsAt": "وقت الأكل يبدأ الساعة {hour}:00",
+  "@dietWindowStartsAt": {
+    "placeholders": {
+      "hour": {"type": "int"}
+    }
+  },
+  "dietEditWindow": "عدّل ساعة البداية",
+  "dietCarbsLimitLabel": "حد الكارب",
+  "dietCarbsLimitProgress": "{current} / {max} جم كارب",
+  "@dietCarbsLimitProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "max": {"type": "int"}
+    }
+  }
 }

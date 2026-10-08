@@ -2393,4 +2393,160 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vitalityKeyTakeaway => 'Key takeaway';
+
+  @override
+  String get dietMyPlan => 'My diet plan';
+
+  @override
+  String get dietProgramsTitle => 'Diet programs';
+
+  @override
+  String get dietQuizTitle => 'Diet plan quiz';
+
+  @override
+  String get dietQuizContinue => 'I understand — continue';
+
+  @override
+  String get dietQuizYes => 'Yes';
+
+  @override
+  String get dietQuizNo => 'No';
+
+  @override
+  String dietQuizHealthStep(int current, int total) {
+    return 'Health $current of $total';
+  }
+
+  @override
+  String dietQuizPrefStep(int current, int total) {
+    return 'Preferences $current of $total';
+  }
+
+  @override
+  String get dietPrefBreadRice => 'Do you love bread and rice?';
+
+  @override
+  String get dietPrefSkipBreakfast => 'Can you comfortably skip breakfast?';
+
+  @override
+  String get dietPrefSimpleRules => 'Do you prefer simple food rules?';
+
+  @override
+  String get dietPrefEatsOut => 'Do you eat out often?';
+
+  @override
+  String get dietPrefWeights => 'Do you train with weights regularly?';
+
+  @override
+  String get dietRecommendedBadge => 'Recommended for you';
+
+  @override
+  String get dietActiveBadge => 'Active';
+
+  @override
+  String get dietNeedsDoctor => 'Needs doctor approval';
+
+  @override
+  String get dietReadWarning => 'Read warning';
+
+  @override
+  String dietCardMacros(int kcal, int protein) {
+    return '$kcal kcal · ${protein}g protein';
+  }
+
+  @override
+  String get dietHowItWorks => 'How it works';
+
+  @override
+  String get dietYourTargets => 'Your targets';
+
+  @override
+  String get dietBestFor => 'Best for';
+
+  @override
+  String get dietNotIdealFor => 'Not ideal for';
+
+  @override
+  String get dietRules => 'Rules';
+
+  @override
+  String get dietAllowedFoods => 'Allowed foods';
+
+  @override
+  String get dietLimitFoods => 'Limit these';
+
+  @override
+  String get dietSampleDay => 'Sample day';
+
+  @override
+  String get dietSideEffects => 'Side effects';
+
+  @override
+  String get dietTips => 'Tips';
+
+  @override
+  String get dietEvidence => 'Evidence';
+
+  @override
+  String get dietStopSigns => 'Stop signs';
+
+  @override
+  String get dietDisclaimer => 'Disclaimer';
+
+  @override
+  String get dietStartProgram => 'Start this program';
+
+  @override
+  String get dietDoctorGateTitle => 'Doctor approval needed';
+
+  @override
+  String get dietAckWarning => 'I read the warning';
+
+  @override
+  String get dietMustAckWarning => 'Please confirm you read the warning first';
+
+  @override
+  String get dietStartedToast => 'Diet program started';
+
+  @override
+  String get dietClose => 'Close';
+
+  @override
+  String dietCarbsMax(int grams) {
+    return 'Carbs cap: $grams g';
+  }
+
+  @override
+  String dietWeeklyLoss(String kg) {
+    return 'Est. weekly loss ≈ $kg kg';
+  }
+
+  @override
+  String get dietChoosePlanCard => 'Choose your diet plan';
+
+  @override
+  String dietFastingLeft(String time) {
+    return 'Fasting — $time left';
+  }
+
+  @override
+  String dietEatingWindowLeft(String time) {
+    return 'Eating window — closes in $time';
+  }
+
+  @override
+  String dietWindowStartsAt(int hour) {
+    return 'Eating window starts at $hour:00';
+  }
+
+  @override
+  String get dietEditWindow => 'Edit start hour';
+
+  @override
+  String get dietCarbsLimitLabel => 'Carbs limit';
+
+  @override
+  String dietCarbsLimitProgress(int current, int max) {
+    return '$current / $max g carbs';
+  }
 }

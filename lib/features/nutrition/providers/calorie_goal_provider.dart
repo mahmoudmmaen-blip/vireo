@@ -4,11 +4,15 @@ import 'package:vireo/core/services/onboarding_calorie_sync.dart';
 import 'package:vireo/core/utils/calorie_calculator.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/fitness_goal.dart';
+import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
 
 const _manualCalorieKey = 'manual_calorie_goal';
+const _manualCalorieUserSetKey = 'manual_calorie_goal_user_set';
 
 final calorieGoalProvider = Provider<CalorieTarget>((ref) {
+  ref.watch(dietPlanRevisionProvider);
+
   final profile = HiveService.isInitialized
       ? HiveService.cacheBox.get('guest_profile')
       : null;
@@ -37,15 +41,40 @@ final calorieGoalProvider = Provider<CalorieTarget>((ref) {
     goal: goal,
   );
 
+  final manual = HiveService.isInitialized
+      ? HiveService.settingsBox.get(_manualCalorieKey) as int?
+      : null;
+  final userSet = HiveService.isInitialized &&
+      HiveService.settingsBox.get(_manualCalorieUserSetKey, defaultValue: false) ==
+          true;
+
+  // Explicit user override (Nutrition edit) always wins.
+  if (userSet && manual != null && manual > 0) {
+    final ratio = manual / computed.calories;
+    return CalorieTarget(
+      calories: manual,
+      proteinG: (computed.proteinG * ratio).round(),
+      carbsG: (computed.carbsG * ratio).round(),
+      fatG: (computed.fatG * ratio).round(),
+    );
+  }
+
+  // Active diet program targets drive Home / Nutrition / AI.
+  final dietTargets = ref.watch(activeDietTargetsProvider);
+  if (dietTargets != null) {
+    return CalorieTarget(
+      calories: dietTargets.calories,
+      proteinG: dietTargets.proteinG,
+      carbsG: dietTargets.carbsG,
+      fatG: dietTargets.fatG,
+    );
+  }
+
   // Prefer fully persisted onboarding macros when present.
   final cached = OnboardingCalorieSync.readCached();
   if (cached != null && cached.calories > 0) {
     return cached;
   }
-
-  final manual = HiveService.isInitialized
-      ? HiveService.settingsBox.get(_manualCalorieKey) as int?
-      : null;
 
   if (manual != null && manual > 0) {
     final ratio = manual / computed.calories;
@@ -67,7 +96,9 @@ final dailyCaloriesConsumedProvider = Provider<int>((ref) {
 Future<void> setManualCalorieGoal(int? calories) async {
   if (calories == null || calories <= 0) {
     await HiveService.settingsBox.delete(_manualCalorieKey);
+    await HiveService.settingsBox.delete(_manualCalorieUserSetKey);
   } else {
     await HiveService.settingsBox.put(_manualCalorieKey, calories);
+    await HiveService.settingsBox.put(_manualCalorieUserSetKey, true);
   }
 }

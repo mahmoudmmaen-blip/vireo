@@ -22,6 +22,12 @@ import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/auth/widgets/guest_auth_gate.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
+import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
+import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
+import 'package:vireo/features/diet_programs/screens/diet_programs_screen.dart';
+import 'package:vireo/features/diet_programs/screens/diet_quiz_screen.dart';
+import 'package:vireo/features/diet_programs/widgets/fasting_window_card.dart';
 import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/home/widgets/recovery_breakdown_sheet.dart';
@@ -46,6 +52,8 @@ class HomeDashboardBody extends ConsumerWidget {
     final workoutAsync = ref.watch(todayWorkoutProvider);
     final nutrition = ref.watch(todayNutritionProvider(locale));
     final weeklyDue = ref.watch(weeklyCheckInDueProvider);
+    final activeDiet = ref.watch(activeDietProgramProvider);
+    final fasting = ref.watch(fastingWindowStatusProvider);
 
     void push(Widget screen) => Navigator.of(context).push(
           MaterialPageRoute<void>(builder: (_) => screen),
@@ -72,6 +80,21 @@ class HomeDashboardBody extends ConsumerWidget {
         onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
         onBurnedTap: () => push(const CardioActivityScreen()),
       ),
+      if (activeDiet == null)
+        ChooseDietPlanCard(
+          onTap: () {
+            final screened = HiveService.isInitialized &&
+                HiveService.settingsBox.containsKey(
+                  DietPlanStorage.preferencesKey,
+                );
+            push(
+              screened
+                  ? const DietProgramsScreen()
+                  : const DietQuizScreen(),
+            );
+          },
+        ),
+      if (fasting != null) const FastingWindowCard(),
       _QuickActions(
         onScan: () => AiScanScreen.open(context, fromCamera: true),
         onWater: () => _addWater(context, ref),

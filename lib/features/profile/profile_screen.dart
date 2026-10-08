@@ -21,6 +21,7 @@ import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/subscription/widgets/subscription_status_banner.dart';
+import 'package:vireo/features/diet_programs/screens/diet_programs_screen.dart';
 import 'package:vireo/features/vitality/presentation/widgets/vitality_score_ring.dart';
 import 'package:vireo/features/vitality/widgets/vitality_badges_grid.dart';
 import 'package:vireo/features/vitality_program/screens/vitality_program_screen.dart';
@@ -175,6 +176,16 @@ class _GuestProfileBody extends StatelessWidget {
             ),
           ),
         ),
+        ListTile(
+          leading: Icon(Icons.restaurant_menu_rounded, color: colors.ember),
+          title: Text(l10n.dietMyPlan),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const DietProgramsScreen(),
+            ),
+          ),
+        ),
         const SizedBox(height: 16),
         const MeasurementSummaryCard(),
         const SizedBox(height: 24),
@@ -299,6 +310,16 @@ class _RegisteredProfileBody extends StatelessWidget {
           onTap: () => Navigator.of(context).push(
             MaterialPageRoute<void>(
               builder: (_) => const VitalityProgramScreen(),
+            ),
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.restaurant_menu_rounded, color: colors.ember),
+          title: Text(l10n.dietMyPlan),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const DietProgramsScreen(),
             ),
           ),
         ),

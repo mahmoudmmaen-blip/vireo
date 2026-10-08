@@ -2375,4 +2375,160 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get vitalityKeyTakeaway => 'الخلاصة';
+
+  @override
+  String get dietMyPlan => 'خطتي الغذائية';
+
+  @override
+  String get dietProgramsTitle => 'برامج الدايت';
+
+  @override
+  String get dietQuizTitle => 'اختبار الخطة الغذائية';
+
+  @override
+  String get dietQuizContinue => 'فاهم — كمّل';
+
+  @override
+  String get dietQuizYes => 'أيوه';
+
+  @override
+  String get dietQuizNo => 'لا';
+
+  @override
+  String dietQuizHealthStep(int current, int total) {
+    return 'الصحة $current من $total';
+  }
+
+  @override
+  String dietQuizPrefStep(int current, int total) {
+    return 'التفضيلات $current من $total';
+  }
+
+  @override
+  String get dietPrefBreadRice => 'بتحب العيش والرز؟';
+
+  @override
+  String get dietPrefSkipBreakfast => 'تقدر تتخطى الفطار براحة؟';
+
+  @override
+  String get dietPrefSimpleRules => 'بتحب قواعد أكل بسيطة؟';
+
+  @override
+  String get dietPrefEatsOut => 'بتاكل برا البيت كتير؟';
+
+  @override
+  String get dietPrefWeights => 'بتمرّن حديد بانتظام؟';
+
+  @override
+  String get dietRecommendedBadge => 'موصى بيه ليك';
+
+  @override
+  String get dietActiveBadge => 'نشط';
+
+  @override
+  String get dietNeedsDoctor => 'محتاج موافقة دكتور';
+
+  @override
+  String get dietReadWarning => 'اقرأ التحذير';
+
+  @override
+  String dietCardMacros(int kcal, int protein) {
+    return '$kcal سعرة · $proteinجم بروتين';
+  }
+
+  @override
+  String get dietHowItWorks => 'إزاي بيشتغل';
+
+  @override
+  String get dietYourTargets => 'أهدافك';
+
+  @override
+  String get dietBestFor => 'مناسب لـ';
+
+  @override
+  String get dietNotIdealFor => 'مش مثالي لـ';
+
+  @override
+  String get dietRules => 'القواعد';
+
+  @override
+  String get dietAllowedFoods => 'أكل مسموح';
+
+  @override
+  String get dietLimitFoods => 'قلّل دول';
+
+  @override
+  String get dietSampleDay => 'يوم نموذجي';
+
+  @override
+  String get dietSideEffects => 'أعراض جانبية';
+
+  @override
+  String get dietTips => 'نصايح';
+
+  @override
+  String get dietEvidence => 'الأدلة';
+
+  @override
+  String get dietStopSigns => 'علامات التوقف';
+
+  @override
+  String get dietDisclaimer => 'إخلاء مسؤولية';
+
+  @override
+  String get dietStartProgram => 'ابدأ البرنامج ده';
+
+  @override
+  String get dietDoctorGateTitle => 'محتاج موافقة دكتور';
+
+  @override
+  String get dietAckWarning => 'قرأت التحذير';
+
+  @override
+  String get dietMustAckWarning => 'أكّد إنك قرأت التحذير الأول';
+
+  @override
+  String get dietStartedToast => 'بدأنا برنامج الدايت';
+
+  @override
+  String get dietClose => 'إغلاق';
+
+  @override
+  String dietCarbsMax(int grams) {
+    return 'حد الكارب: $grams جم';
+  }
+
+  @override
+  String dietWeeklyLoss(String kg) {
+    return 'خسارة أسبوعية متوقعة ≈ $kg كجم';
+  }
+
+  @override
+  String get dietChoosePlanCard => 'اختار خطتك الغذائية';
+
+  @override
+  String dietFastingLeft(String time) {
+    return 'صيام — باقي $time';
+  }
+
+  @override
+  String dietEatingWindowLeft(String time) {
+    return 'وقت الأكل — يقفل بعد $time';
+  }
+
+  @override
+  String dietWindowStartsAt(int hour) {
+    return 'وقت الأكل يبدأ الساعة $hour:00';
+  }
+
+  @override
+  String get dietEditWindow => 'عدّل ساعة البداية';
+
+  @override
+  String get dietCarbsLimitLabel => 'حد الكارب';
+
+  @override
+  String dietCarbsLimitProgress(int current, int max) {
+    return '$current / $max جم كارب';
+  }
 }

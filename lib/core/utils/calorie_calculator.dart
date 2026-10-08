@@ -17,6 +17,17 @@ class CalorieTarget {
 
 /// Mifflin-St Jeor TDEE with goal-specific calorie adjustment and macro splits.
 abstract final class CalorieCalculator {
+  /// Maintenance calories (TDEE) before any goal deficit/surplus.
+  static int maintenanceKcal({
+    required double weightKg,
+    required double heightCm,
+    required int age,
+    required ActivityLevel activityLevel,
+  }) {
+    final bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
+    return (bmr * _activityMultiplier(activityLevel)).round();
+  }
+
   static CalorieTarget compute({
     required double weightKg,
     required double heightCm,
@@ -24,8 +35,12 @@ abstract final class CalorieCalculator {
     required ActivityLevel activityLevel,
     required FitnessGoal goal,
   }) {
-    final bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
-    final tdee = (bmr * _activityMultiplier(activityLevel)).round();
+    final tdee = maintenanceKcal(
+      weightKg: weightKg,
+      heightCm: heightCm,
+      age: age,
+      activityLevel: activityLevel,
+    );
     final calories = _caloriesForGoal(tdee, goal);
 
     return switch (goal) {

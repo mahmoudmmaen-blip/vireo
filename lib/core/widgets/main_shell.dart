@@ -8,6 +8,8 @@ import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
 import 'package:vireo/features/diary/screens/diary_screen.dart';
+import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
+import 'package:vireo/features/diet_programs/screens/diet_quiz_screen.dart';
 import 'package:vireo/features/home/home_screen.dart';
 import 'package:vireo/features/notifications/providers/notification_settings_provider.dart';
 import 'package:vireo/features/nutrition/nutrition_screen.dart';
@@ -39,6 +41,24 @@ class _MainShellState extends ConsumerState<MainShell> {
     ProfileScreen(),
     DiaryScreen(),
   ];
+
+  bool _offeredDietQuiz = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_offeredDietQuiz) return;
+    _offeredDietQuiz = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) return;
+      if (!DietPlanStorage.readPendingQuiz()) return;
+      await DietPlanStorage.setPendingQuiz(false);
+      if (!mounted) return;
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const DietQuizScreen()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
