@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
@@ -30,11 +31,54 @@ class AuthRepository {
   User? get currentUser =>
       SupabaseService.isInitialized ? SupabaseService.auth.currentUser : null;
 
-  Future<void> continueAsGuest() async {
-    try {
+  bool get isAnonymousSession => currentUser?.isAnonymous == true;
+
+  /// First-launch / cold-start: ensure a JWT exists (anonymous) when possible.
+  Future<void> ensureAnonymousSession() async {
+    if (!SupabaseService.isInitialized) {
+      BootLog.step('AuthRepository.ensureAnonymousSession → offline guest');
+      if (HiveService.isInitialized) {
+        await HiveService.settingsBox.put(_guestModeKey, true);
+      }
+      return;
+    }
+
+    if (currentUser != null) {
       await _clearGuestMode();
-      await signOut(silent: true);
+      return;
+    }
+
+    try {
+      BootLog.step('AuthRepository.signInAnonymously');
+      await SupabaseService.auth.signInAnonymously();
+      await _clearGuestMode();
+      BootLog.ok('AuthRepository.signInAnonymously');
+    } catch (e) {
+      BootLog.warn('AuthRepository.signInAnonymously failed', e);
+      if (HiveService.isInitialized) {
+        await HiveService.settingsBox.put(_guestModeKey, true);
+      }
+    }
+  }
+
+  /// Same as anonymous sign-in (JWT guest). Offline → local guest flag.
+  Future<void> continueAsGuest() async {
+    if (!SupabaseService.isInitialized) {
       await HiveService.settingsBox.put(_guestModeKey, true);
+      return;
+    }
+
+    try {
+      final user = currentUser;
+      if (user != null && user.isAnonymous) {
+        await _clearGuestMode();
+        return;
+      }
+      if (user != null && !user.isAnonymous) {
+        await signOut(silent: true);
+      }
+      await SupabaseService.auth.signInAnonymously();
+      await _clearGuestMode();
     } catch (_) {
       rethrow;
     }
@@ -72,6 +116,50 @@ class AuthRepository {
     }
   }
 
+  /// Passwordless email: OTP for new/existing users, or email-change for anon.
+  Future<void> sendEmailCode(String email) async {
+    _ensureSupabase();
+    final trimmed = email.trim();
+    final user = currentUser;
+    try {
+      if (user != null && user.isAnonymous) {
+        await SupabaseService.auth.updateUser(
+          UserAttributes(email: trimmed),
+        );
+      } else {
+        await SupabaseService.auth.signInWithOtp(
+          email: trimmed,
+          shouldCreateUser: true,
+        );
+      }
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<void> verifyEmailCode({
+    required String email,
+    required String token,
+  }) async {
+    _ensureSupabase();
+    final trimmed = email.trim();
+    final code = token.trim();
+    final user = currentUser;
+    try {
+      final type = (user != null && user.isAnonymous)
+          ? OtpType.emailChange
+          : OtpType.email;
+      await SupabaseService.auth.verifyOTP(
+        email: trimmed,
+        token: code,
+        type: type,
+      );
+      await _clearGuestMode();
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   Future<void> signInWithGoogle() async {
     _ensureSupabase();
     try {
@@ -95,11 +183,20 @@ class AuthRepository {
         throw const AuthException('Missing Google ID token.');
       }
 
-      await SupabaseService.auth.signInWithIdToken(
-        provider: OAuthProvider.google,
-        idToken: idToken,
-        accessToken: googleAuth.accessToken,
-      );
+      final user = currentUser;
+      if (user != null && user.isAnonymous) {
+        await SupabaseService.auth.linkIdentityWithIdToken(
+          provider: OAuthProvider.google,
+          idToken: idToken,
+          accessToken: googleAuth.accessToken,
+        );
+      } else {
+        await SupabaseService.auth.signInWithIdToken(
+          provider: OAuthProvider.google,
+          idToken: idToken,
+          accessToken: googleAuth.accessToken,
+        );
+      }
       await _clearGuestMode();
     } catch (_) {
       rethrow;
@@ -125,11 +222,20 @@ class AuthRepository {
         throw const AuthException('Missing Apple identity token.');
       }
 
-      await SupabaseService.auth.signInWithIdToken(
-        provider: OAuthProvider.apple,
-        idToken: idToken,
-        nonce: rawNonce,
-      );
+      final user = currentUser;
+      if (user != null && user.isAnonymous) {
+        await SupabaseService.auth.linkIdentityWithIdToken(
+          provider: OAuthProvider.apple,
+          idToken: idToken,
+          nonce: rawNonce,
+        );
+      } else {
+        await SupabaseService.auth.signInWithIdToken(
+          provider: OAuthProvider.apple,
+          idToken: idToken,
+          nonce: rawNonce,
+        );
+      }
       await _clearGuestMode();
     } on SignInWithAppleAuthorizationException catch (e) {
       if (e.code == AuthorizationErrorCode.canceled) {
@@ -169,10 +275,7 @@ class AuthRepository {
       );
 
       if (response.status >= 400) {
-        final message = response.data is Map
-            ? (response.data as Map)['error']?.toString()
-            : null;
-        throw AuthException(message ?? 'Account deletion failed.');
+        throw const AuthException('Account deletion failed.');
       }
 
       await signOut(silent: true);
@@ -183,6 +286,7 @@ class AuthRepository {
   }
 
   Future<void> _clearGuestMode() async {
+    if (!HiveService.isInitialized) return;
     await HiveService.settingsBox.put(_guestModeKey, false);
   }
 

@@ -13,6 +13,7 @@ class AppAuthUnauthenticated extends AppAuthState {
   const AppAuthUnauthenticated();
 }
 
+/// Offline-only guest (no Supabase session). Prefer anonymous sessions.
 class AppAuthGuest extends AppAuthState {
   const AppAuthGuest();
 }
@@ -24,11 +25,22 @@ class AppAuthAuthenticated extends AppAuthState {
 }
 
 extension AppAuthStateX on AppAuthState {
-  bool get isGuest => this is AppAuthGuest;
+  /// Anonymous JWT sessions and legacy offline guests share the same UX.
+  bool get isGuest {
+    if (this is AppAuthGuest) return true;
+    if (this is AppAuthAuthenticated) {
+      return (this as AppAuthAuthenticated).user.isAnonymous;
+    }
+    return false;
+  }
 
   bool get isAuthenticated => this is AppAuthAuthenticated;
 
-  bool get hasAccountAccess => isAuthenticated;
+  /// Signed-in with a real identity (not anonymous) — cloud save / subscribe.
+  bool get hasAccountAccess {
+    if (this is! AppAuthAuthenticated) return false;
+    return !(this as AppAuthAuthenticated).user.isAnonymous;
+  }
 
   User? get user =>
       this is AppAuthAuthenticated ? (this as AppAuthAuthenticated).user : null;

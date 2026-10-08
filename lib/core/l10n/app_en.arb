@@ -93,9 +93,31 @@
   "notificationNotSet": "Not set",
   "authWelcomeTitle": "Welcome to Vireo",
   "authWelcomeSubtitle": "Sign in to sync progress across devices, or continue locally as a guest.",
+  "authSaveProgressTitle": "Save your progress",
+  "authSaveProgressSubtitle": "Link an account so your plan, scans, and chats sync across devices.",
   "signInWithApple": "Sign in with Apple",
   "signInWithGoogle": "Sign in with Google",
   "signInWithEmail": "Sign in with email",
+  "authContinueApple": "Continue with Apple",
+  "authContinueGoogle": "Continue with Google",
+  "authContinueEmail": "Continue with email",
+  "authSignInWithPassword": "Sign in with password",
+  "authSendCode": "Send code",
+  "authVerifyCode": "Verify code",
+  "authResendCode": "Resend code",
+  "authResendIn": "Resend in {seconds}s",
+  "@authResendIn": {
+    "placeholders": {
+      "seconds": {"type": "int"}
+    }
+  },
+  "authOtpSentTo": "We sent a 6-digit code to {email}",
+  "@authOtpSentTo": {
+    "placeholders": {
+      "email": {"type": "String"}
+    }
+  },
+  "authBack": "Back",
   "continueAsGuest": "Continue as Guest",
   "authEmail": "Email",
   "authPassword": "Password",
@@ -105,6 +127,11 @@
   "authNoAccount": "Don't have an account?",
   "authSignedIn": "Signed in",
   "authErrorGeneric": "Something went wrong. Please try again.",
+  "authErrorOffline": "No internet. Check your connection and try again.",
+  "authErrorWrongCode": "Wrong code. Check the digits and try again.",
+  "authErrorTooMany": "Too many attempts, try again in a minute.",
+  "authErrorInvalidEmail": "Enter a valid email address.",
+  "authErrorCancelled": "Sign-in was cancelled.",
   "signOut": "Sign out",
   "settingsTitle": "Settings",
   "guestModeTitle": "Guest mode",

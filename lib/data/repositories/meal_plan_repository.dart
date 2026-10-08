@@ -137,12 +137,16 @@ class MealPlanRepository {
 
   Future<void> _generateWeekIfMissing(int weekNumber) async {
     try {
-      await SupabaseService.client.functions.invoke(
+      final response = await SupabaseService.client.functions.invoke(
         AppConfig.generateMealPlanFunctionName,
         body: {'week_number': weekNumber},
       );
+      if (response.status >= 400) {
+        // Fall back to local/demo meals — never block the Nutrition tab.
+        return;
+      }
     } catch (_) {
-      rethrow;
+      // Offline / undeployed function — ignore.
     }
   }
 

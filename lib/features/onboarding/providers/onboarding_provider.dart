@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/services/onboarding_calorie_sync.dart';
 import 'package:vireo/data/models/fitness_goal.dart';
@@ -112,11 +113,14 @@ class OnboardingNotifier extends Notifier<OnboardingUiState> {
       state = state.copyWith(isSubmitting: false);
       return true;
     } catch (e) {
-      state = state.copyWith(
-        isSubmitting: false,
-        errorMessage: e.toString(),
-      );
-      return false;
+      // Last-resort: still mark complete so onboarding never traps the user.
+      BootLog.warn('Onboarding complete failed — forcing local finish', e);
+      try {
+        await ref.read(onboardingRepositoryProvider).markOnboardingComplete();
+        ref.invalidate(onboardingCompleteProvider);
+      } catch (_) {}
+      state = state.copyWith(isSubmitting: false, errorMessage: null);
+      return true;
     }
   }
 

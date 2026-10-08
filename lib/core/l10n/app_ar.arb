@@ -83,9 +83,31 @@
   "notificationNotSet": "غير محدد",
   "authWelcomeTitle": "مرحباً في Vireo",
   "authWelcomeSubtitle": "سجّل دخولك لمزامنة تقدّمك على كل الأجهزة، أو كمّل محلياً كضيف.",
+  "authSaveProgressTitle": "احفظ تقدّمك",
+  "authSaveProgressSubtitle": "اربط حساب عشان خطتك والمسح والمحادثات يتزامنوا بين الأجهزة.",
   "signInWithApple": "تسجيل الدخول بـ Apple",
   "signInWithGoogle": "تسجيل الدخول بـ Google",
   "signInWithEmail": "تسجيل الدخول بالبريد",
+  "authContinueApple": "كمّل بـ Apple",
+  "authContinueGoogle": "كمّل بـ Google",
+  "authContinueEmail": "كمّل بالبريد",
+  "authSignInWithPassword": "تسجيل الدخول بكلمة مرور",
+  "authSendCode": "ابعت الكود",
+  "authVerifyCode": "تأكيد الكود",
+  "authResendCode": "إعادة إرسال الكود",
+  "authResendIn": "إعادة الإرسال بعد {seconds} ث",
+  "@authResendIn": {
+    "placeholders": {
+      "seconds": {"type": "int"}
+    }
+  },
+  "authOtpSentTo": "بعتنا كود من 6 أرقام على {email}",
+  "@authOtpSentTo": {
+    "placeholders": {
+      "email": {"type": "String"}
+    }
+  },
+  "authBack": "رجوع",
   "continueAsGuest": "المتابعة كضيف",
   "authEmail": "البريد الإلكتروني",
   "authPassword": "كلمة المرور",
@@ -95,6 +117,11 @@
   "authNoAccount": "ما عندكش حساب؟",
   "authSignedIn": "مسجّل الدخول",
   "authErrorGeneric": "حصل خطأ. حاول تاني.",
+  "authErrorOffline": "مفيش نت. تأكد من الاتصال وحاول تاني.",
+  "authErrorWrongCode": "الكود غلط. راجع الأرقام وحاول تاني.",
+  "authErrorTooMany": "محاولات كتير، حاول تاني بعد دقيقة.",
+  "authErrorInvalidEmail": "اكتب إيميل صحيح.",
+  "authErrorCancelled": "اتلغى تسجيل الدخول.",
   "signOut": "تسجيل الخروج",
   "settingsTitle": "الإعدادات",
   "guestModeTitle": "وضع الضيف",

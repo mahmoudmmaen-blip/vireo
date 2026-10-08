@@ -88,7 +88,7 @@ class ProfileScreen extends ConsumerWidget {
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
               data: (state) {
-                if (state is AppAuthGuest) {
+                if (state.isGuest) {
                   return _GuestProfileBody(
                     onSaveProgress: () async {
                       await requireAccountAccess(
@@ -97,7 +97,9 @@ class ProfileScreen extends ConsumerWidget {
                         reason: AuthGateReason.saveProgress,
                       );
                       final userId = ref.read(authProvider).valueOrNull?.user?.id;
-                      if (userId != null) {
+                      if (userId != null &&
+                          ref.read(authProvider).valueOrNull?.hasAccountAccess ==
+                              true) {
                         await ref
                             .read(onboardingRepositoryProvider)
                             .syncGuestProfileToCloud(userId: userId);

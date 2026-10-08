@@ -103,10 +103,10 @@ class FridgeScanFlowNotifier extends Notifier<FridgeScanFlowState> {
         errorMessage: 'SCAN_LIMIT_REACHED',
       );
       return false;
-    } catch (e) {
+    } catch (_) {
       state = state.copyWith(
         isScanning: false,
-        errorMessage: e.toString(),
+        errorMessage: 'SCAN_FAILED',
       );
       return false;
     }

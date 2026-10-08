@@ -596,6 +596,18 @@ abstract class AppLocalizations {
   /// **'Sign in to sync progress across devices, or continue locally as a guest.'**
   String get authWelcomeSubtitle;
 
+  /// No description provided for @authSaveProgressTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your progress'**
+  String get authSaveProgressTitle;
+
+  /// No description provided for @authSaveProgressSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Link an account so your plan, scans, and chats sync across devices.'**
+  String get authSaveProgressSubtitle;
+
   /// No description provided for @signInWithApple.
   ///
   /// In en, this message translates to:
@@ -613,6 +625,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign in with email'**
   String get signInWithEmail;
+
+  /// No description provided for @authContinueApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get authContinueApple;
+
+  /// No description provided for @authContinueGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get authContinueGoogle;
+
+  /// No description provided for @authContinueEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with email'**
+  String get authContinueEmail;
+
+  /// No description provided for @authSignInWithPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with password'**
+  String get authSignInWithPassword;
+
+  /// No description provided for @authSendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get authSendCode;
+
+  /// No description provided for @authVerifyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify code'**
+  String get authVerifyCode;
+
+  /// No description provided for @authResendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get authResendCode;
+
+  /// No description provided for @authResendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend in {seconds}s'**
+  String authResendIn(int seconds);
+
+  /// No description provided for @authOtpSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 6-digit code to {email}'**
+  String authOtpSentTo(String email);
+
+  /// No description provided for @authBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get authBack;
 
   /// No description provided for @continueAsGuest.
   ///
@@ -667,6 +739,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get authErrorGeneric;
+
+  /// No description provided for @authErrorOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet. Check your connection and try again.'**
+  String get authErrorOffline;
+
+  /// No description provided for @authErrorWrongCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong code. Check the digits and try again.'**
+  String get authErrorWrongCode;
+
+  /// No description provided for @authErrorTooMany.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts, try again in a minute.'**
+  String get authErrorTooMany;
+
+  /// No description provided for @authErrorInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address.'**
+  String get authErrorInvalidEmail;
+
+  /// No description provided for @authErrorCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in was cancelled.'**
+  String get authErrorCancelled;
 
   /// No description provided for @signOut.
   ///

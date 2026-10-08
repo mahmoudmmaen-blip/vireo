@@ -7,7 +7,6 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/ai_nutrition/application/ai_scan_state.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_provider.dart';
-import 'package:vireo/features/ai_nutrition/utils/ai_auth_gate.dart';
 import 'package:vireo/features/ai_nutrition/utils/image_compressor.dart';
 import 'package:vireo/features/ai_nutrition/widgets/ai_analysis_bottom_sheet.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_scan_loading_overlay.dart';
@@ -25,10 +24,8 @@ class AiScanScreen extends ConsumerStatefulWidget {
     BuildContext context,
     WidgetRef ref, {
     required bool fromCamera,
-  }) async {
-    final ok = await ensureSignedInForAi(context, ref);
-    if (!ok || !context.mounted) return;
-    await Navigator.of(context).push(
+  }) {
+    return Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => AiScanScreen(
           initialSource: fromCamera ? ImageSource.camera : ImageSource.gallery,

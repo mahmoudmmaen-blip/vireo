@@ -56,3 +56,41 @@ Optional: redeploy fridge vision / other functions the same way if needed.
 `AppConfig.aiCoachChatFunctionName` → `ai-coach-chat`
 
 No `GEMINI_API_KEY` / `--dart-define` for Gemini on the client.
+
+## Auth setup
+
+Vireo uses **anonymous-first** auth. Guests get a real JWT via `signInAnonymously()`, so AI Edge Functions work immediately (with lower daily limits). Saving progress upgrades the same user (email OTP / Google / Apple) instead of creating a second account.
+
+### Supabase Dashboard
+
+1. **Authentication → Sign In / Providers**  
+   Enable **Allow anonymous sign-ins**.
+
+2. **Authentication → Emails → Magic Link template**  
+   Include `{{ .Token }}` in the email body so users receive the **6-digit code** (passwordless OTP). Example line:
+
+   ```
+   Your Vireo code is {{ .Token }}
+   ```
+
+3. **Authentication → URL Configuration**  
+   - **Site URL** = your Vercel production URL (e.g. `https://your-app.vercel.app`)  
+   - **Redirect URLs** include that origin and local overrides, e.g.  
+     `http://localhost:*`  
+     `http://127.0.0.1:*`
+
+4. Enable **Google** / **Apple** providers if you use those buttons (same screen as other providers).
+
+### Deploy remaining Edge Functions
+
+```bash
+npx supabase functions deploy analyze-meal --use-api
+npx supabase functions deploy ai-coach-chat --use-api
+npx supabase functions deploy generate-program --use-api
+npx supabase functions deploy generate-meal-plan --use-api
+npx supabase functions deploy suggest-recipes --use-api
+npx supabase functions deploy scan-fridge-vision --use-api
+npx supabase functions deploy delete-account --use-api
+```
+
+Anonymous daily AI limits (server-side in `_shared/ai-usage.ts`): **2 meal scans / day**, **10 coach messages / day**. Signed-in free: 3 / 20. Premium: 50 / 200.

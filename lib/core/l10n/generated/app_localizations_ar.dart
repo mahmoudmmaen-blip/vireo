@@ -271,6 +271,13 @@ class AppLocalizationsAr extends AppLocalizations {
       'سجّل دخولك لمزامنة تقدّمك على كل الأجهزة، أو كمّل محلياً كضيف.';
 
   @override
+  String get authSaveProgressTitle => 'احفظ تقدّمك';
+
+  @override
+  String get authSaveProgressSubtitle =>
+      'اربط حساب عشان خطتك والمسح والمحادثات يتزامنوا بين الأجهزة.';
+
+  @override
   String get signInWithApple => 'تسجيل الدخول بـ Apple';
 
   @override
@@ -278,6 +285,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signInWithEmail => 'تسجيل الدخول بالبريد';
+
+  @override
+  String get authContinueApple => 'كمّل بـ Apple';
+
+  @override
+  String get authContinueGoogle => 'كمّل بـ Google';
+
+  @override
+  String get authContinueEmail => 'كمّل بالبريد';
+
+  @override
+  String get authSignInWithPassword => 'تسجيل الدخول بكلمة مرور';
+
+  @override
+  String get authSendCode => 'ابعت الكود';
+
+  @override
+  String get authVerifyCode => 'تأكيد الكود';
+
+  @override
+  String get authResendCode => 'إعادة إرسال الكود';
+
+  @override
+  String authResendIn(int seconds) {
+    return 'إعادة الإرسال بعد $seconds ث';
+  }
+
+  @override
+  String authOtpSentTo(String email) {
+    return 'بعتنا كود من 6 أرقام على $email';
+  }
+
+  @override
+  String get authBack => 'رجوع';
 
   @override
   String get continueAsGuest => 'المتابعة كضيف';
@@ -305,6 +346,21 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get authErrorGeneric => 'حصل خطأ. حاول تاني.';
+
+  @override
+  String get authErrorOffline => 'مفيش نت. تأكد من الاتصال وحاول تاني.';
+
+  @override
+  String get authErrorWrongCode => 'الكود غلط. راجع الأرقام وحاول تاني.';
+
+  @override
+  String get authErrorTooMany => 'محاولات كتير، حاول تاني بعد دقيقة.';
+
+  @override
+  String get authErrorInvalidEmail => 'اكتب إيميل صحيح.';
+
+  @override
+  String get authErrorCancelled => 'اتلغى تسجيل الدخول.';
 
   @override
   String get signOut => 'تسجيل الخروج';

@@ -47,7 +47,7 @@ class HomeDashboardBody extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final locale = Localizations.localeOf(context).languageCode;
     final auth = ref.watch(authProvider).valueOrNull;
-    final isGuest = auth is AppAuthGuest;
+    final isGuest = auth?.isGuest == true;
     final dash = ref.watch(homeDashboardProvider);
     final workoutAsync = ref.watch(todayWorkoutProvider);
     final nutrition = ref.watch(todayNutritionProvider(locale));

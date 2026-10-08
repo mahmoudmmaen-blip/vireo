@@ -2,8 +2,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.1';
 import { generateContent, type GeminiContent } from '../_shared/gemini-client.ts';
 import { buildCoachSystemInstruction } from '../_shared/prompts/coach.ts';
 import {
-  COACH_CHAT_LIMIT_FREE,
-  COACH_CHAT_LIMIT_PREMIUM,
+  coachChatLimit,
   consumeDailyQuota,
   hasPremiumEntitlement,
 } from '../_shared/ai-usage.ts';
@@ -66,7 +65,8 @@ Deno.serve(async (req) => {
 
     const adminClient = createClient(supabaseUrl, serviceRoleKey);
     const premium = await hasPremiumEntitlement(adminClient, user.id);
-    const limit = premium ? COACH_CHAT_LIMIT_PREMIUM : COACH_CHAT_LIMIT_FREE;
+    const isAnonymous = user.is_anonymous === true;
+    const limit = coachChatLimit({ premium, isAnonymous });
     const allowed = await consumeDailyQuota(
       adminClient,
       user.id,

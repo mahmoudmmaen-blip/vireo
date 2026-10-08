@@ -1,3 +1,4 @@
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/onboarding_calorie_sync.dart';
@@ -42,17 +43,20 @@ class OnboardingRepository {
 
     try {
       await SupabaseService.client.from('users').upsert(draft.toUserRow(userId));
-    } catch (_) {
-      rethrow;
+    } catch (e) {
+      BootLog.warn('OnboardingRepository.saveProfileToSupabase failed', e);
+      await HiveService.cacheBox.put('pending_profile_$userId', draft.toUserRow(userId));
     }
   }
 
   /// Calls AI Coach edge function to generate week-1 program.
+  /// Never throws — returns empty map and relies on local [ProgramGenerator].
   Future<Map<String, dynamic>> generateWeekOneProgram({
     required String userId,
     required OnboardingDraft draft,
   }) async {
     if (!SupabaseService.isInitialized) {
+      BootLog.step('generate-program skipped (offline) — local ProgramGenerator');
       return {'offline': true};
     }
 
@@ -67,14 +71,39 @@ class OnboardingRepository {
       );
 
       if (response.status >= 400) {
-        final data = response.data;
-        final message = data is Map ? data['error']?.toString() : null;
-        throw OnboardingException(message ?? 'Program generation failed.');
+        BootLog.warn(
+          'generate-program HTTP ${response.status}',
+          response.data,
+        );
+        return {'fallback': true};
       }
 
-      return Map<String, dynamic>.from(response.data as Map);
-    } catch (_) {
-      rethrow;
+      if (response.data is Map) {
+        return Map<String, dynamic>.from(response.data as Map);
+      }
+      return {'ok': true};
+    } catch (e) {
+      BootLog.warn('generate-program failed — local ProgramGenerator', e);
+      return {'fallback': true};
+    }
+  }
+
+  /// Best-effort meal plan generation — never blocks onboarding.
+  Future<void> generateMealPlanQuietly({required int weekNumber}) async {
+    if (!SupabaseService.isInitialized) return;
+    try {
+      final response = await SupabaseService.client.functions.invoke(
+        AppConfig.generateMealPlanFunctionName,
+        body: {'week_number': weekNumber},
+      );
+      if (response.status >= 400) {
+        BootLog.warn(
+          'generate-meal-plan HTTP ${response.status}',
+          response.data,
+        );
+      }
+    } catch (e) {
+      BootLog.warn('generate-meal-plan failed', e);
     }
   }
 
@@ -114,25 +143,22 @@ class OnboardingRepository {
     required String? userId,
     required OnboardingDraft draft,
   }) async {
-    try {
-      await saveNotificationPreferences(draft);
+    await saveNotificationPreferences(draft);
 
-      final effectiveUserId =
-          userId ?? 'guest_${DateTime.now().millisecondsSinceEpoch}';
+    final effectiveUserId =
+        userId ?? 'guest_${DateTime.now().millisecondsSinceEpoch}';
 
-      if (userId != null) {
-        await saveProfileToSupabase(userId: userId, draft: draft);
-        await generateWeekOneProgram(userId: userId, draft: draft);
-      } else {
-        await HiveService.cacheBox.put('guest_profile', draft.toUserRow(effectiveUserId));
-      }
+    await HiveService.cacheBox.put('guest_profile', draft.toUserRow(effectiveUserId));
 
-      await OnboardingCalorieSync.syncFromDraft(draft);
-      await WorkoutRepository.saveProgramStart(DateTime.now());
-      await markOnboardingComplete();
-    } catch (_) {
-      rethrow;
+    if (userId != null) {
+      await saveProfileToSupabase(userId: userId, draft: draft);
+      await generateWeekOneProgram(userId: userId, draft: draft);
+      await generateMealPlanQuietly(weekNumber: 1);
     }
+
+    await OnboardingCalorieSync.syncFromDraft(draft);
+    await WorkoutRepository.saveProgramStart(DateTime.now());
+    await markOnboardingComplete();
   }
 }
 

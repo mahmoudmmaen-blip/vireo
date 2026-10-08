@@ -6,10 +6,9 @@ import {
 } from '../_shared/gemini-client.ts';
 import { mealVisionPrompt } from '../_shared/prompts/meal-vision.ts';
 import {
-  MEAL_SCAN_LIMIT_FREE,
-  MEAL_SCAN_LIMIT_PREMIUM,
   consumeDailyQuota,
   hasPremiumEntitlement,
+  mealScanLimit,
 } from '../_shared/ai-usage.ts';
 
 const corsHeaders = {
@@ -67,7 +66,8 @@ Deno.serve(async (req) => {
 
     const adminClient = createClient(supabaseUrl, serviceRoleKey);
     const premium = await hasPremiumEntitlement(adminClient, user.id);
-    const limit = premium ? MEAL_SCAN_LIMIT_PREMIUM : MEAL_SCAN_LIMIT_FREE;
+    const isAnonymous = user.is_anonymous === true;
+    const limit = mealScanLimit({ premium, isAnonymous });
     const allowed = await consumeDailyQuota(
       adminClient,
       user.id,

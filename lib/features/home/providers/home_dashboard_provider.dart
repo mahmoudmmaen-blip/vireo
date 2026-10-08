@@ -50,7 +50,7 @@ class HomeDashboardSnapshot {
 
 final homeDashboardProvider = Provider<HomeDashboardSnapshot>((ref) {
   final auth = ref.watch(authProvider).valueOrNull;
-  final isGuest = auth is AppAuthGuest;
+  final isGuest = auth?.isGuest == true;
   final onboardingComplete = ref.watch(onboardingCompleteProvider);
   final workoutProfile = ref.watch(workoutProfileProvider);
   final confirmed = ref.watch(confirmedMealsProvider);

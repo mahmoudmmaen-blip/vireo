@@ -48,7 +48,7 @@ class FridgeScanRepository {
       );
     } catch (e) {
       if (e is FridgeScanException) rethrow;
-      throw FridgeScanException(e.toString());
+      throw const FridgeScanException('Fridge scan failed.');
     }
   }
 

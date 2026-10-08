@@ -15,7 +15,8 @@ class Step6Notifications extends ConsumerWidget {
     final state = ref.watch(onboardingProvider);
     final draft = state.draft;
     final authState = ref.watch(authProvider).valueOrNull;
-    final userId = authState is AppAuthAuthenticated ? authState.user.id : null;
+    // Anonymous sessions have a real JWT/user id — use them for cloud upserts.
+    final userId = authState?.user?.id;
 
     Future<void> finish() async {
       final ok = await ref.read(onboardingProvider.notifier).complete(

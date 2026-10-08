@@ -275,6 +275,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Sign in to sync progress across devices, or continue locally as a guest.';
 
   @override
+  String get authSaveProgressTitle => 'Save your progress';
+
+  @override
+  String get authSaveProgressSubtitle =>
+      'Link an account so your plan, scans, and chats sync across devices.';
+
+  @override
   String get signInWithApple => 'Sign in with Apple';
 
   @override
@@ -282,6 +289,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signInWithEmail => 'Sign in with email';
+
+  @override
+  String get authContinueApple => 'Continue with Apple';
+
+  @override
+  String get authContinueGoogle => 'Continue with Google';
+
+  @override
+  String get authContinueEmail => 'Continue with email';
+
+  @override
+  String get authSignInWithPassword => 'Sign in with password';
+
+  @override
+  String get authSendCode => 'Send code';
+
+  @override
+  String get authVerifyCode => 'Verify code';
+
+  @override
+  String get authResendCode => 'Resend code';
+
+  @override
+  String authResendIn(int seconds) {
+    return 'Resend in ${seconds}s';
+  }
+
+  @override
+  String authOtpSentTo(String email) {
+    return 'We sent a 6-digit code to $email';
+  }
+
+  @override
+  String get authBack => 'Back';
 
   @override
   String get continueAsGuest => 'Continue as Guest';
@@ -309,6 +350,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authErrorGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String get authErrorOffline =>
+      'No internet. Check your connection and try again.';
+
+  @override
+  String get authErrorWrongCode =>
+      'Wrong code. Check the digits and try again.';
+
+  @override
+  String get authErrorTooMany => 'Too many attempts, try again in a minute.';
+
+  @override
+  String get authErrorInvalidEmail => 'Enter a valid email address.';
+
+  @override
+  String get authErrorCancelled => 'Sign-in was cancelled.';
 
   @override
   String get signOut => 'Sign out';

@@ -20,10 +20,10 @@ class AuthNotifier extends AsyncNotifier<AppAuthState> {
   @override
   Future<AppAuthState> build() async {
     BootLog.step('AuthNotifier.build');
-    // Ensure bootstrap finished so Supabase client is available when configured.
     await ref.watch(appInitProvider.future);
 
     final repo = ref.read(authRepositoryProvider);
+    await repo.ensureAnonymousSession();
     final resolved = _resolveState(repo);
 
     ref.onDispose(() {
@@ -75,15 +75,17 @@ class AuthNotifier extends AsyncNotifier<AppAuthState> {
   bool _sameAuthState(AppAuthState current, AppAuthState next) {
     if (current.runtimeType != next.runtimeType) return false;
     if (current is AppAuthAuthenticated && next is AppAuthAuthenticated) {
-      return current.user.id == next.user.id;
+      return current.user.id == next.user.id &&
+          current.user.isAnonymous == next.user.isAnonymous &&
+          current.user.email == next.user.email;
     }
     return true;
   }
 
   AppAuthState _resolveState(AuthRepository repo) {
-    if (repo.isGuestMode) return const AppAuthGuest();
     final user = repo.currentUser;
     if (user != null) return AppAuthAuthenticated(user);
+    if (repo.isGuestMode) return const AppAuthGuest();
     return const AppAuthUnauthenticated();
   }
 
@@ -91,7 +93,7 @@ class AuthNotifier extends AsyncNotifier<AppAuthState> {
     state = const AsyncLoading();
     try {
       await ref.read(authRepositoryProvider).continueAsGuest();
-      state = AsyncData(const AppAuthGuest());
+      state = AsyncData(_resolveState(ref.read(authRepositoryProvider)));
     } catch (e, st) {
       state = AsyncError(e, st);
     }
@@ -103,6 +105,20 @@ class AuthNotifier extends AsyncNotifier<AppAuthState> {
 
   Future<void> signInWithGoogle() => _authAction(
         () => ref.read(authRepositoryProvider).signInWithGoogle(),
+      );
+
+  Future<void> sendEmailCode(String email) =>
+      ref.read(authRepositoryProvider).sendEmailCode(email);
+
+  Future<void> verifyEmailCode({
+    required String email,
+    required String token,
+  }) =>
+      _authAction(
+        () => ref.read(authRepositoryProvider).verifyEmailCode(
+              email: email,
+              token: token,
+            ),
       );
 
   Future<void> signInWithEmail({
@@ -131,7 +147,9 @@ class AuthNotifier extends AsyncNotifier<AppAuthState> {
     state = const AsyncLoading();
     try {
       await ref.read(authRepositoryProvider).signOut();
-      state = const AsyncData(AppAuthUnauthenticated());
+      // Immediately restore anonymous so the app stays usable.
+      await ref.read(authRepositoryProvider).ensureAnonymousSession();
+      state = AsyncData(_resolveState(ref.read(authRepositoryProvider)));
     } catch (e, st) {
       state = AsyncError(e, st);
     }
@@ -140,7 +158,8 @@ class AuthNotifier extends AsyncNotifier<AppAuthState> {
   Future<void> deleteAccount() async {
     try {
       await ref.read(authRepositoryProvider).deleteAccount();
-      state = const AsyncData(AppAuthUnauthenticated());
+      await ref.read(authRepositoryProvider).ensureAnonymousSession();
+      state = AsyncData(_resolveState(ref.read(authRepositoryProvider)));
     } catch (_) {
       rethrow;
     }
