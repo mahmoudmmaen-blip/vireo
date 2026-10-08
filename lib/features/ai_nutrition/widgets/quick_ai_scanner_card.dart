@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 
-class QuickAiScannerCard extends StatelessWidget {
+class QuickAiScannerCard extends ConsumerWidget {
   const QuickAiScannerCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
 
@@ -54,7 +55,8 @@ class QuickAiScannerCard extends StatelessWidget {
             children: [
               Expanded(
                 child: FilledButton.icon(
-                  onPressed: () => AiScanScreen.open(context, fromCamera: true),
+                  onPressed: () =>
+                      AiScanScreen.open(context, ref, fromCamera: true),
                   icon: const Icon(Icons.camera_alt_outlined, size: 20),
                   label: Text(l10n.aiScanCamera),
                 ),
@@ -62,7 +64,8 @@ class QuickAiScannerCard extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => AiScanScreen.open(context, fromCamera: false),
+                  onPressed: () =>
+                      AiScanScreen.open(context, ref, fromCamera: false),
                   icon: const Icon(Icons.photo_library_outlined, size: 20),
                   label: Text(l10n.aiScanGallery),
                 ),

@@ -38,6 +38,10 @@ final class FoodVisionConfigException extends FoodVisionException {
   const FoodVisionConfigException() : super('CONFIG_ERROR');
 }
 
+final class FoodVisionDailyLimitException extends FoodVisionException {
+  const FoodVisionDailyLimitException() : super('DAILY_LIMIT');
+}
+
 /// File-based scan entry (native [File] or web [Uint8List]).
 Future<FoodAnalysisResult> analyzeImageFile(
   IFoodVisionService service,

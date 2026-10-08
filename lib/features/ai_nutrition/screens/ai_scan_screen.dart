@@ -7,10 +7,12 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/ai_nutrition/application/ai_scan_state.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_provider.dart';
+import 'package:vireo/features/ai_nutrition/utils/ai_auth_gate.dart';
 import 'package:vireo/features/ai_nutrition/utils/image_compressor.dart';
 import 'package:vireo/features/ai_nutrition/widgets/ai_analysis_bottom_sheet.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_scan_loading_overlay.dart';
 import 'package:vireo/features/nutrition/screens/manual_food_entry_screen.dart';
+import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/ai_nutrition/application/meal_scan_native_file.dart'
     if (dart.library.html) 'package:vireo/features/ai_nutrition/application/meal_scan_native_file_web.dart';
 
@@ -20,10 +22,13 @@ class AiScanScreen extends ConsumerStatefulWidget {
   final ImageSource? initialSource;
 
   static Future<void> open(
-    BuildContext context, {
+    BuildContext context,
+    WidgetRef ref, {
     required bool fromCamera,
-  }) {
-    return Navigator.of(context).push(
+  }) async {
+    final ok = await ensureSignedInForAi(context, ref);
+    if (!ok || !context.mounted) return;
+    await Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => AiScanScreen(
           initialSource: fromCamera ? ImageSource.camera : ImageSource.gallery,
@@ -94,6 +99,7 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
           AiScanErrorKind.offline => l10n.aiScanOffline,
           AiScanErrorKind.parse => l10n.aiScanParseError,
           AiScanErrorKind.config => l10n.aiScanConfigError,
+          AiScanErrorKind.dailyLimit => l10n.aiDailyLimitReached,
           AiScanErrorKind.api => l10n.aiScanFailed,
         };
 
@@ -101,11 +107,15 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
           SnackBar(
             content: Text(message),
             action: SnackBarAction(
-              label: kind == AiScanErrorKind.parse
-                  ? l10n.aiScanManualEntry
-                  : l10n.aiScanTryAgain,
+              label: kind == AiScanErrorKind.dailyLimit
+                  ? l10n.aiUpgradeCta
+                  : kind == AiScanErrorKind.parse
+                      ? l10n.aiScanManualEntry
+                      : l10n.aiScanTryAgain,
               onPressed: () {
-                if (kind == AiScanErrorKind.parse) {
+                if (kind == AiScanErrorKind.dailyLimit) {
+                  openPaywall(context);
+                } else if (kind == AiScanErrorKind.parse) {
                   _openManualEntry();
                 } else if (_previewBytes != null) {
                   ref.read(aiScanProvider.notifier).scanMeal(_previewBytes!);

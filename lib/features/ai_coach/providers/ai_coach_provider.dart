@@ -30,6 +30,7 @@ class AiCoachNotifier extends AsyncNotifier<AiCoachState> {
         messages: withUser,
         status: AiCoachStatus.loading,
         isOffline: false,
+        hitDailyLimit: false,
         pendingUserText: trimmed,
       ),
     );
@@ -101,6 +102,16 @@ class AiCoachNotifier extends AsyncNotifier<AiCoachState> {
           status: AiCoachStatus.error,
           isOffline: true,
           pendingUserText: userText,
+        ),
+      );
+      await AiCoachHistoryStore.save(history);
+    } on AiCoachDailyLimitException {
+      state = AsyncValue.data(
+        AiCoachState(
+          messages: history,
+          status: AiCoachStatus.error,
+          pendingUserText: userText,
+          hitDailyLimit: true,
         ),
       );
       await AiCoachHistoryStore.save(history);

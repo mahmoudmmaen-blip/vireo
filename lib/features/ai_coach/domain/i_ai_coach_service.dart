@@ -21,6 +21,10 @@ final class AiCoachConfigException extends AiCoachException {
   const AiCoachConfigException() : super('CONFIG_ERROR');
 }
 
+final class AiCoachDailyLimitException extends AiCoachException {
+  const AiCoachDailyLimitException() : super('DAILY_LIMIT');
+}
+
 abstract class IAiCoachService {
   Future<String> sendMessage(
     List<ChatMessage> history,

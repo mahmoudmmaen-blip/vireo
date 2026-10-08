@@ -10,6 +10,7 @@ class AiCoachState {
     this.pendingUserText,
     this.failedMessageId,
     this.errorMessage,
+    this.hitDailyLimit = false,
   });
 
   final List<ChatMessage> messages;
@@ -18,6 +19,7 @@ class AiCoachState {
   final String? pendingUserText;
   final String? failedMessageId;
   final String? errorMessage;
+  final bool hitDailyLimit;
 
   bool get isLoading => status == AiCoachStatus.loading;
   bool get hasError => status == AiCoachStatus.error;
@@ -29,6 +31,7 @@ class AiCoachState {
     String? pendingUserText,
     String? failedMessageId,
     String? errorMessage,
+    bool? hitDailyLimit,
     bool clearPending = false,
     bool clearError = false,
   }) {
@@ -41,6 +44,7 @@ class AiCoachState {
       failedMessageId:
           clearError ? null : (failedMessageId ?? this.failedMessageId),
       errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
+      hitDailyLimit: hitDailyLimit ?? this.hitDailyLimit,
     );
   }
 }
@@ -52,7 +56,11 @@ ChatMessage userMessage(String text) => ChatMessage(
       timestamp: DateTime.now(),
     );
 
-ChatMessage assistantMessage(String text, {ChatMessageType type = ChatMessageType.text, bool failed = false}) =>
+ChatMessage assistantMessage(
+  String text, {
+  ChatMessageType type = ChatMessageType.text,
+  bool failed = false,
+}) =>
     ChatMessage(
       id: 'assistant_${DateTime.now().microsecondsSinceEpoch}',
       role: ChatMessageRole.assistant,

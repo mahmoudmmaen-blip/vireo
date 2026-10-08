@@ -43,7 +43,9 @@ String _gateMessage(AppLocalizations l10n, AuthGateReason reason) {
       return l10n.authGateSaveProgress;
     case AuthGateReason.subscribe:
       return l10n.authGateSubscribe;
+    case AuthGateReason.aiFeatures:
+      return l10n.authGateAiFeatures;
   }
 }
 
-enum AuthGateReason { saveProgress, subscribe }
+enum AuthGateReason { saveProgress, subscribe, aiFeatures }

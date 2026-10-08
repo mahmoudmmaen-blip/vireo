@@ -734,6 +734,12 @@ abstract class AppLocalizations {
   /// **'Create an account before subscribing so your premium access is linked to you.'**
   String get authGateSubscribe;
 
+  /// No description provided for @authGateAiFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a free account to use AI meal scan and Vireo Coach. Your chats and scans sync securely to your account.'**
+  String get authGateAiFeatures;
+
   /// No description provided for @authGateSignUp.
   ///
   /// In en, this message translates to:
@@ -2823,8 +2829,20 @@ abstract class AppLocalizations {
   /// No description provided for @aiScanConfigError.
   ///
   /// In en, this message translates to:
-  /// **'AI scanner is not configured. Add GEMINI_API_KEY to enable.'**
+  /// **'AI scanner is not available right now. Please try again later.'**
   String get aiScanConfigError;
+
+  /// No description provided for @aiDailyLimitReached.
+  ///
+  /// In en, this message translates to:
+  /// **'You have reached today\'s AI limit. Upgrade for a higher daily allowance.'**
+  String get aiDailyLimitReached;
+
+  /// No description provided for @aiUpgradeCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade'**
+  String get aiUpgradeCta;
 
   /// No description provided for @aiScanTryAgain.
   ///

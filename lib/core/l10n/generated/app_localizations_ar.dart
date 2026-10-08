@@ -343,6 +343,10 @@ class AppLocalizationsAr extends AppLocalizations {
       'أنشئ حساب قبل الاشتراك عشان يتربط اشتراكك بحسابك.';
 
   @override
+  String get authGateAiFeatures =>
+      'أنشئ حساب مجاني عشان تستخدم مسح الوجبات بالـ AI وكوتش Vireo. المحادثات والمسح بيتزامنوا بأمان على حسابك.';
+
+  @override
   String get authGateSignUp => 'إنشاء حساب';
 
   @override
@@ -1537,7 +1541,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get aiScanConfigError =>
-      'الماسح غير مهيّأ. أضف GEMINI_API_KEY للتفعيل.';
+      'ماسح الـ AI مش متاح دلوقتي. حاول تاني بعد شوية.';
+
+  @override
+  String get aiDailyLimitReached =>
+      'وصلت لحد الـ AI النهاردة. رقّي اشتراكك لحد يومي أعلى.';
+
+  @override
+  String get aiUpgradeCta => 'ترقية';
 
   @override
   String get aiScanTryAgain => 'إعادة المحاولة';

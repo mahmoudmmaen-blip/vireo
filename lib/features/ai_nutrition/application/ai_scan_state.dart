@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 
-enum AiScanErrorKind { offline, api, parse, config }
+enum AiScanErrorKind { offline, api, parse, config, dailyLimit }
 
 /// Meal scan state machine: idle → scanning → success | error.
 sealed class AiScanState {

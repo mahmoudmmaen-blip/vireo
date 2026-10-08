@@ -49,6 +49,10 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.config, previewBytes: preview),
       );
+    } on FoodVisionDailyLimitException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.dailyLimit, previewBytes: preview),
+      );
     } on FoodVisionException {
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.api, previewBytes: preview),

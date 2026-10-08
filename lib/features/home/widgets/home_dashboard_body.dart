@@ -96,7 +96,7 @@ class HomeDashboardBody extends ConsumerWidget {
         ),
       if (fasting != null) const FastingWindowCard(),
       _QuickActions(
-        onScan: () => AiScanScreen.open(context, fromCamera: true),
+        onScan: () => AiScanScreen.open(context, ref, fromCamera: true),
         onWater: () => _addWater(context, ref),
         onWorkout: () => ref.read(shellTabIndexProvider.notifier).goWorkout(),
         onCoach: () => push(const AiCoachScreen()),
@@ -136,11 +136,11 @@ class HomeDashboardBody extends ConsumerWidget {
         title: l10n.uxSectionTodayLog,
         padding: _headerPad,
         actionLabel: l10n.uxAddMeal,
-        onAction: () => AiScanScreen.open(context, fromCamera: true),
+        onAction: () => AiScanScreen.open(context, ref, fromCamera: true),
       ),
       _TodayLog(
         items: nutrition.items,
-        onScan: () => AiScanScreen.open(context, fromCamera: true),
+        onScan: () => AiScanScreen.open(context, ref, fromCamera: true),
         onRemoveAi: (id) {
           ref.read(aiMealLogProvider.notifier).remove(id);
           ScaffoldMessenger.of(context)

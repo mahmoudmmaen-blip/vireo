@@ -28,7 +28,6 @@ dependencies:
   flutter_svg: ^2.0.10+1
   health: ^13.2.0
   image_picker: ^1.1.2
-  google_generative_ai: ^0.4.6
   image: ^4.5.4
   app_settings: ^6.1.1
   google_fonts: ^8.2.1

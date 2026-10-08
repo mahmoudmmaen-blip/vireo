@@ -347,6 +347,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Create an account before subscribing so your premium access is linked to you.';
 
   @override
+  String get authGateAiFeatures =>
+      'Create a free account to use AI meal scan and Vireo Coach. Your chats and scans sync securely to your account.';
+
+  @override
   String get authGateSignUp => 'Sign up';
 
   @override
@@ -1554,7 +1558,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiScanConfigError =>
-      'AI scanner is not configured. Add GEMINI_API_KEY to enable.';
+      'AI scanner is not available right now. Please try again later.';
+
+  @override
+  String get aiDailyLimitReached =>
+      'You have reached today\'s AI limit. Upgrade for a higher daily allowance.';
+
+  @override
+  String get aiUpgradeCta => 'Upgrade';
 
   @override
   String get aiScanTryAgain => 'Try again';

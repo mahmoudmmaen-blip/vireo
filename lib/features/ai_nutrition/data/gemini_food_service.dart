@@ -5,10 +5,6 @@ import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 import 'package:vireo/features/ai_nutrition/domain/i_food_vision_service.dart';
 
 class GeminiFoodService implements IFoodVisionService {
-  GeminiFoodService({this.apiKey});
-
-  final String? apiKey;
-
   @override
   Future<FoodAnalysisResult> analyzeImage(
     Uint8List imageBytes,
@@ -19,7 +15,6 @@ class GeminiFoodService implements IFoodVisionService {
       imageBytes,
       remainingCalories,
       remainingProtein,
-      apiKey: apiKey,
     );
   }
 }

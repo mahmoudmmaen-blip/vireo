@@ -11,6 +11,8 @@ import 'package:vireo/features/ai_coach/providers/ai_coach_provider.dart';
 import 'package:vireo/features/ai_coach/widgets/chat_message_bubble.dart';
 import 'package:vireo/features/ai_coach/widgets/typing_indicator.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
+import 'package:vireo/features/ai_nutrition/utils/ai_auth_gate.dart';
+import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
 class AiCoachScreen extends ConsumerStatefulWidget {
   const AiCoachScreen({super.key});
@@ -56,6 +58,8 @@ class _AiCoachScreenState extends ConsumerState<AiCoachScreen> {
   Future<void> _send([String? preset]) async {
     final text = preset ?? _controller.text;
     if (text.trim().isEmpty) return;
+    final ok = await ensureSignedInForAi(context, ref);
+    if (!ok || !mounted) return;
     HapticFeedback.lightImpact();
     _controller.clear();
     await ref.read(aiCoachProvider.notifier).send(text);
@@ -171,6 +175,17 @@ class _AiCoachScreenState extends ConsumerState<AiCoachScreen> {
                 TextButton(
                   onPressed: () => ref.read(aiCoachProvider.notifier).retryLast(),
                   child: Text(l10n.aiScanTryAgain),
+                ),
+              ],
+            ),
+          if (coach.hitDailyLimit)
+            MaterialBanner(
+              content: Text(l10n.aiDailyLimitReached),
+              backgroundColor: colors.ember.withValues(alpha: 0.12),
+              actions: [
+                TextButton(
+                  onPressed: () => openPaywall(context),
+                  child: Text(l10n.aiUpgradeCta),
                 ),
               ],
             ),
