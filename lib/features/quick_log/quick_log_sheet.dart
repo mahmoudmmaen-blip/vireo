@@ -9,6 +9,8 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_coach/screens/ai_coach_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/activity/screens/outdoor_pick_screen.dart';
+import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
+import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/features/progress/widgets/weight_log_sheet.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
@@ -35,6 +37,8 @@ Future<void> showQuickLogSheet(BuildContext hostContext, WidgetRef ref) {
 enum QuickLogAction {
   scanCamera,
   scanGallery,
+  mealText,
+  mealBarcode,
   water,
   weight,
   cardio,
@@ -60,6 +64,14 @@ Future<void> _run(
     case QuickLogAction.cardio:
       await Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (_) => const CardioActivityScreen()),
+      );
+    case QuickLogAction.mealText:
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const MealLogTextScreen()),
+      );
+    case QuickLogAction.mealBarcode:
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const MealBarcodeScreen()),
       );
     case QuickLogAction.outdoor:
       await Navigator.of(context).push(
@@ -115,6 +127,10 @@ class _QuickLogSheet extends StatelessWidget {
           l10n.uxQuickWaterSub, VMacro.water),
       _TileData(QuickLogAction.weight, Icons.monitor_weight_outlined,
           l10n.uxQuickWeight, l10n.uxQuickWeightSub, colors.gold),
+      _TileData(QuickLogAction.mealText, Icons.keyboard_alt_outlined,
+          l10n.uxQuickMealText, l10n.uxQuickMealTextSub, colors.ember),
+      _TileData(QuickLogAction.mealBarcode, Icons.qr_code_scanner,
+          l10n.uxQuickBarcode, l10n.uxQuickBarcodeSub, colors.ember),
       _TileData(QuickLogAction.cardio, Icons.directions_run_rounded,
           l10n.uxQuickCardio, l10n.uxQuickCardioSub, VMacro.steps),
       _TileData(QuickLogAction.outdoor, Icons.map_outlined, l10n.uxQuickOutdoor,

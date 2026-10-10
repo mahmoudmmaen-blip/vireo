@@ -2973,4 +2973,107 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get breathingRest => 'راحة';
+
+  @override
+  String get mealReviewTitle => 'مراجعة الوجبة';
+
+  @override
+  String get mealReviewAddItem => 'أضف صنفاً';
+
+  @override
+  String get mealReviewSlot => 'الوجبة';
+
+  @override
+  String mealReviewRemaining(int kcal) {
+    return 'المتبقي من الميزانية: $kcal سعرة';
+  }
+
+  @override
+  String get mealReviewEstimated => 'تقديري';
+
+  @override
+  String get mealReviewCheckAmount => 'راجع الكمية';
+
+  @override
+  String get mealReviewSearchFood => 'ابحث عن أكل…';
+
+  @override
+  String get mealReviewLogByText => 'سجّل بالنص بدل كده';
+
+  @override
+  String get mealLogTextTitle => 'تسجيل وجبة بالنص';
+
+  @override
+  String get mealLogTextHint => 'اكتب اللي أكلته — عربي أو إنجليزي.';
+
+  @override
+  String get mealLogTextPlaceholder => 'أكلت 2 بيض ورغيف بلدي وكوباية شاي بسكر';
+
+  @override
+  String get mealLogTextAnalyze => 'حلّل';
+
+  @override
+  String get mealVoiceStart => 'صوت';
+
+  @override
+  String get mealVoiceListening => 'بسمع…';
+
+  @override
+  String get mealVoiceUnavailable => 'التسجيل الصوتي غير متاح على الجهاز';
+
+  @override
+  String get mealBarcodeTitle => 'مسح باركود';
+
+  @override
+  String get mealBarcodeFailed =>
+      'مقدرناش نلاقي الباركود. جرّب تاني أو سجّل بالنص.';
+
+  @override
+  String get mealScanHeroTitle => 'امسح وجبتك';
+
+  @override
+  String get mealScanHeroSubtitle =>
+      'الذكاء يتعرف على الأكل — وأنت تؤكد الجرامات';
+
+  @override
+  String get mealScanTipAbove => 'صوّر من فوق';
+
+  @override
+  String get mealScanTipWholePlate => 'الطبق كله ظاهر';
+
+  @override
+  String get mealScanTipLight => 'إضاءة كويسة';
+
+  @override
+  String get mealScanFlashOn => 'الفلاش شغال';
+
+  @override
+  String get mealScanFlashOff => 'الفلاش مقفول';
+
+  @override
+  String get uxQuickMealText => 'وجبة بالنص';
+
+  @override
+  String get uxQuickMealTextSub => 'اكتب اللي أكلته';
+
+  @override
+  String get uxQuickBarcode => 'باركود';
+
+  @override
+  String get uxQuickBarcodeSub => 'من Open Food Facts';
+
+  @override
+  String get mealFavoriteSave => 'احفظ كمفضلة';
+
+  @override
+  String get mealFavoriteSaved => 'اتحفظت في المفضلة';
+
+  @override
+  String get mealFavoritesTitle => 'المفضلة';
+
+  @override
+  String get mealRecentTitle => 'وجبات أخيرة';
+
+  @override
+  String get mealRelog => 'سجّل تاني';
 }

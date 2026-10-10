@@ -49,6 +49,8 @@ abstract final class AppConfig {
 
   static const analyzeMealFunctionName = 'analyze-meal';
 
+  static const parseMealTextFunctionName = 'parse-meal-text';
+
   static const aiCoachChatFunctionName = 'ai-coach-chat';
 
   static const googleAuthEnabled = bool.fromEnvironment(

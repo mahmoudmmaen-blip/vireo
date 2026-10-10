@@ -15,6 +15,7 @@ const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers':
     'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
 const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
@@ -52,7 +53,7 @@ Deno.serve(async (req) => {
     } = await userClient.auth.getUser();
 
     if (userError || !user) {
-      return json({ error: 'Unauthorized' }, 401);
+      return json({ error: 'Unauthorized', detail: userError?.message }, 401);
     }
 
     const body = (await req.json()) as AnalyzeMealRequest;
@@ -103,7 +104,7 @@ Deno.serve(async (req) => {
       temperature: 0.2,
     });
 
-    const parsed = parseMealJson(raw);
+    const parsed = parseItemsJson(raw);
     if (!parsed) {
       return json({ error: 'VISION_PARSE_FAILED', raw }, 502);
     }
@@ -111,11 +112,20 @@ Deno.serve(async (req) => {
     return json(parsed);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
+    console.error('[analyze-meal]', message);
     if (message === 'GEMINI_NOT_CONFIGURED') {
       return json({ error: message }, 503);
     }
+    if (/abort/i.test(message)) {
+      return json({ error: 'GEMINI_API_ERROR:503:timeout' }, 503);
+    }
     if (message.startsWith('GEMINI_API_ERROR:')) {
-      return json({ error: message }, 502);
+      const status = message.includes(':503:')
+        ? 503
+        : message.includes(':429:')
+        ? 429
+        : 502;
+      return json({ error: message }, status);
     }
     if (message === 'GEMINI_EMPTY_RESPONSE') {
       return json({ error: message }, 502);
@@ -124,7 +134,7 @@ Deno.serve(async (req) => {
   }
 });
 
-function parseMealJson(raw: string): Record<string, unknown> | null {
+function parseItemsJson(raw: string): { items: unknown[] } | null {
   try {
     let text = raw.trim();
     const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
@@ -138,7 +148,31 @@ function parseMealJson(raw: string): Record<string, unknown> | null {
     if (!decoded || typeof decoded !== 'object' || Array.isArray(decoded)) {
       return null;
     }
-    return decoded as Record<string, unknown>;
+    const items = (decoded as { items?: unknown }).items;
+    if (!Array.isArray(items) || items.length === 0) {
+      // Backward-compat: wrap legacy single-food payloads so old clients don't brick.
+      const legacy = decoded as Record<string, unknown>;
+      if (legacy.food_name) {
+        return {
+          items: [
+            {
+              name_ar: legacy.food_name,
+              name_en: legacy.food_name,
+              food_id_guess: null,
+              estimated_grams: 200,
+              cooking_method: 'other',
+              confidence: 0.5,
+              _legacy_calories: legacy.calories,
+              _legacy_protein: legacy.protein,
+              _legacy_carbs: legacy.carbs,
+              _legacy_fats: legacy.fats,
+            },
+          ],
+        };
+      }
+      return null;
+    }
+    return { items };
   } catch {
     return null;
   }

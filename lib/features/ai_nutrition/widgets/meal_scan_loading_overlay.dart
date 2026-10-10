@@ -1,10 +1,11 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 
-/// Pulsing radar animation shown while Gemini analyzes a meal photo.
+/// Pulsing radar + cycling food labels while Gemini analyzes a meal photo.
 class MealScanLoadingOverlay extends StatefulWidget {
   const MealScanLoadingOverlay({super.key, this.imageBytes});
 
@@ -16,7 +17,19 @@ class MealScanLoadingOverlay extends StatefulWidget {
 
 class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
     with SingleTickerProviderStateMixin {
+  static const _cues = [
+    'أرز…',
+    'فراخ…',
+    'سلطة…',
+    'عيش…',
+    'rice…',
+    'chicken…',
+    'salad…',
+  ];
+
   late final AnimationController _controller;
+  int _cueIndex = 0;
+  Timer? _cueTimer;
 
   @override
   void initState() {
@@ -25,10 +38,15 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
       vsync: this,
       duration: const Duration(milliseconds: 2200),
     )..repeat();
+    _cueTimer = Timer.periodic(const Duration(milliseconds: 900), (_) {
+      if (!mounted) return;
+      setState(() => _cueIndex = (_cueIndex + 1) % _cues.length);
+    });
   }
 
   @override
   void dispose() {
+    _cueTimer?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -49,17 +67,34 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
           ColoredBox(color: colors.surfaceRaised),
         Container(color: colors.background.withValues(alpha: 0.45)),
         Center(
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, _) {
-              return CustomPaint(
-                size: const Size(180, 180),
-                painter: _RadarPainter(
-                  progress: _controller.value,
-                  color: colors.ember,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, _) {
+                  return CustomPaint(
+                    size: const Size(180, 180),
+                    painter: _RadarPainter(
+                      progress: _controller.value,
+                      color: colors.ember,
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 280),
+                child: Text(
+                  _cues[_cueIndex],
+                  key: ValueKey(_cueIndex),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
-              );
-            },
+              ),
+            ],
           ),
         ),
       ],

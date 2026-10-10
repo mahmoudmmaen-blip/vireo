@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 
 enum AiScanErrorKind { offline, api, parse, config, dailyLimit }
@@ -14,15 +15,18 @@ final class AiScanIdle extends AiScanState {
 }
 
 final class AiScanScanning extends AiScanState {
-  const AiScanScanning({this.previewBytes});
+  const AiScanScanning({this.previewBytes, this.hint});
 
   final Uint8List? previewBytes;
+  final String? hint;
 }
 
 final class AiScanSuccess extends AiScanState {
-  const AiScanSuccess(this.result);
+  const AiScanSuccess(this.draft);
 
-  final FoodAnalysisResult result;
+  final MealScanDraft draft;
+
+  FoodAnalysisResult get result => draft.toAnalysisResult();
 }
 
 final class AiScanError extends AiScanState {
@@ -40,6 +44,9 @@ extension AiScanStateX on AiScanState {
 
   FoodAnalysisResult? get resultOrNull =>
       this is AiScanSuccess ? (this as AiScanSuccess).result : null;
+
+  MealScanDraft? get draftOrNull =>
+      this is AiScanSuccess ? (this as AiScanSuccess).draft : null;
 
   AiScanErrorKind? get errorKindOrNull =>
       this is AiScanError ? (this as AiScanError).kind : null;

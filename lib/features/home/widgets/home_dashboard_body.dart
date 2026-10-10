@@ -19,6 +19,7 @@ import 'package:vireo/data/repositories/workout_repository.dart';
 import 'package:vireo/features/ai_coach/screens/ai_coach_screen.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
+import 'package:vireo/features/ai_nutrition/widgets/meal_quick_relog_row.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/core/services/hive_service.dart';
@@ -69,6 +70,46 @@ class HomeDashboardBody extends ConsumerWidget {
             : l10n.homeDayPhase(dash.programDay, homePhaseName(l10n, dash, locale)),
       ),
       const SaveProgressPromptHost(),
+      VireoCard(
+        onTap: () => AiScanScreen.open(context, ref, fromCamera: true),
+        padding: const EdgeInsets.symmetric(vertical: VSpace.md, horizontal: VSpace.md),
+        child: Row(
+          children: [
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(
+                color: context.vireoColors.ember.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(Icons.camera_alt_rounded, color: context.vireoColors.ember),
+            ),
+            const SizedBox(width: VSpace.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.mealScanHeroTitle,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w900,
+                        ),
+                  ),
+                  Text(
+                    l10n.mealScanHeroSubtitle,
+                    style: TextStyle(
+                      color: context.vireoColors.textMute,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right, color: context.vireoColors.textMute),
+          ],
+        ),
+      ),
+      const MealQuickRelogRow(),
       _TodayHeroCard(
         data: nutrition,
         onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),

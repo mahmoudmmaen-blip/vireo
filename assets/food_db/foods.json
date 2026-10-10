@@ -1,0 +1,6361 @@
+{
+  "version": 1,
+  "foods": [
+    {
+      "id": "baladi_bread",
+      "name_ar": "خبز بلدي",
+      "name_en": "baladi bread",
+      "aliases": [
+        "عيش بلدي",
+        "رغيف بلدي",
+        "رغيف",
+        "baladi loaf",
+        "eish baladi"
+      ],
+      "per_100g": {
+        "kcal": 266,
+        "protein": 8.9,
+        "carbs": 52.0,
+        "fat": 3.0,
+        "fiber": 4.5
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "رغيف",
+          "name_en": "1 loaf",
+          "grams": 90
+        },
+        {
+          "name_ar": "نصف رغيف",
+          "name_en": "1/2 loaf",
+          "grams": 45
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 790085
+      }
+    },
+    {
+      "id": "pita_bread",
+      "name_ar": "خبز شامي",
+      "name_en": "pita bread",
+      "aliases": [
+        "شامي",
+        "صامولي",
+        "pita"
+      ],
+      "per_100g": {
+        "kcal": 275,
+        "protein": 9.1,
+        "carbs": 55.7,
+        "fat": 1.2,
+        "fiber": 2.2
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "رغيف",
+          "name_en": "1 pita",
+          "grams": 60
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 790179
+      }
+    },
+    {
+      "id": "white_rice_cooked",
+      "name_ar": "أرز أبيض مطبوخ",
+      "name_en": "white rice cooked",
+      "aliases": [
+        "رز",
+        "أرز",
+        "rice"
+      ],
+      "per_100g": {
+        "kcal": 130,
+        "protein": 2.7,
+        "carbs": 28.2,
+        "fat": 0.3,
+        "fiber": 0.4
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 158
+        },
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 12
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "brown_rice_cooked",
+      "name_ar": "أرز بني مطبوخ",
+      "name_en": "brown rice cooked",
+      "aliases": [
+        "رز بني",
+        "brown rice"
+      ],
+      "per_100g": {
+        "kcal": 123,
+        "protein": 2.7,
+        "carbs": 25.6,
+        "fat": 1.0,
+        "fiber": 1.6
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 195
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168875
+      }
+    },
+    {
+      "id": "pasta_cooked",
+      "name_ar": "مكرونة مطبوخة",
+      "name_en": "pasta cooked",
+      "aliases": [
+        "مكرونة",
+        "سباجيتي",
+        "pasta",
+        "macaroni"
+      ],
+      "per_100g": {
+        "kcal": 158,
+        "protein": 5.8,
+        "carbs": 30.9,
+        "fat": 0.9,
+        "fiber": 1.8
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 140
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168928
+      }
+    },
+    {
+      "id": "bulgur_cooked",
+      "name_ar": "برغل مطبوخ",
+      "name_en": "bulgur cooked",
+      "aliases": [
+        "برغل",
+        "bulgur"
+      ],
+      "per_100g": {
+        "kcal": 83,
+        "protein": 3.1,
+        "carbs": 18.6,
+        "fat": 0.2,
+        "fiber": 4.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 182
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170288
+      }
+    },
+    {
+      "id": "couscous_cooked",
+      "name_ar": "كسكس مطبوخ",
+      "name_en": "couscous cooked",
+      "aliases": [
+        "كسكسي",
+        "couscous"
+      ],
+      "per_100g": {
+        "kcal": 112,
+        "protein": 3.8,
+        "carbs": 23.2,
+        "fat": 0.2,
+        "fiber": 1.4
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 157
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169700
+      }
+    },
+    {
+      "id": "oats_dry",
+      "name_ar": "شوفان جاف",
+      "name_en": "oats dry",
+      "aliases": [
+        "شوفان",
+        "oatmeal dry"
+      ],
+      "per_100g": {
+        "kcal": 389,
+        "protein": 16.9,
+        "carbs": 66.3,
+        "fat": 6.9,
+        "fiber": 10.6
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 81
+        },
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 6
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173904
+      }
+    },
+    {
+      "id": "cornflakes",
+      "name_ar": "كورن فليكس",
+      "name_en": "corn flakes",
+      "aliases": [
+        "كورن فليكس",
+        "cornflakes"
+      ],
+      "per_100g": {
+        "kcal": 357,
+        "protein": 7.5,
+        "carbs": 84.1,
+        "fat": 0.4,
+        "fiber": 3.3
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173900
+      }
+    },
+    {
+      "id": "foul_medames",
+      "name_ar": "فول مدمس",
+      "name_en": "fava beans cooked",
+      "aliases": [
+        "فول",
+        "foul",
+        "fuul",
+        "فول نابت"
+      ],
+      "per_100g": {
+        "kcal": 110,
+        "protein": 7.6,
+        "carbs": 19.7,
+        "fat": 0.4,
+        "fiber": 5.4
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 170
+        },
+        {
+          "name_ar": "طبق صغير",
+          "name_en": "small bowl",
+          "grams": 150
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173745
+      }
+    },
+    {
+      "id": "falafel",
+      "name_ar": "طعمية",
+      "name_en": "falafel",
+      "aliases": [
+        "فلافل",
+        "طعمية",
+        "taameya",
+        "taamiya"
+      ],
+      "per_100g": {
+        "kcal": 333,
+        "protein": 13.3,
+        "carbs": 31.8,
+        "fat": 17.8,
+        "fiber": 4.9
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 piece",
+          "grams": 17
+        },
+        {
+          "name_ar": "ساندوتش",
+          "name_en": "sandwich (4 pcs)",
+          "grams": 68
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174258
+      }
+    },
+    {
+      "id": "lentils_cooked",
+      "name_ar": "عدس مطبوخ",
+      "name_en": "lentils cooked",
+      "aliases": [
+        "عدس",
+        "shorbat ads",
+        "شوربة عدس"
+      ],
+      "per_100g": {
+        "kcal": 116,
+        "protein": 9.0,
+        "carbs": 20.1,
+        "fat": 0.4,
+        "fiber": 7.9
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 198
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172421
+      }
+    },
+    {
+      "id": "chickpeas_cooked",
+      "name_ar": "حمص مطبوخ",
+      "name_en": "chickpeas cooked",
+      "aliases": [
+        "حمص",
+        "hummus beans",
+        "كبسة حمص"
+      ],
+      "per_100g": {
+        "kcal": 164,
+        "protein": 8.9,
+        "carbs": 27.4,
+        "fat": 2.6,
+        "fiber": 7.6
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 164
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173757
+      }
+    },
+    {
+      "id": "hummus",
+      "name_ar": "حمص بالطحينة",
+      "name_en": "hummus",
+      "aliases": [
+        "حمص",
+        "hummus"
+      ],
+      "per_100g": {
+        "kcal": 166,
+        "protein": 7.9,
+        "carbs": 14.3,
+        "fat": 9.6,
+        "fiber": 6.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        },
+        {
+          "name_ar": "ربع كوب",
+          "name_en": "1/4 cup",
+          "grams": 60
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174289
+      }
+    },
+    {
+      "id": "white_beans_cooked",
+      "name_ar": "فاصوليا بيضاء مطبوخة",
+      "name_en": "white beans cooked",
+      "aliases": [
+        "فاصوليا بيضاء",
+        "white beans"
+      ],
+      "per_100g": {
+        "kcal": 139,
+        "protein": 9.7,
+        "carbs": 25.1,
+        "fat": 0.4,
+        "fiber": 6.3
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 179
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 175203
+      }
+    },
+    {
+      "id": "black_beans_cooked",
+      "name_ar": "فاصوليا سوداء مطبوخة",
+      "name_en": "black beans cooked",
+      "aliases": [
+        "فاصوليا سوداء"
+      ],
+      "per_100g": {
+        "kcal": 132,
+        "protein": 8.9,
+        "carbs": 23.7,
+        "fat": 0.5,
+        "fiber": 8.7
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 172
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 175185
+      }
+    },
+    {
+      "id": "egg_whole_raw",
+      "name_ar": "بيض نيء",
+      "name_en": "egg whole raw",
+      "aliases": [
+        "بيضة",
+        "بيض",
+        "egg"
+      ],
+      "per_100g": {
+        "kcal": 143,
+        "protein": 12.6,
+        "carbs": 0.7,
+        "fat": 9.5,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "بيضة كبيرة",
+          "name_en": "1 large egg",
+          "grams": 50
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171287
+      }
+    },
+    {
+      "id": "egg_boiled",
+      "name_ar": "بيض مسلوق",
+      "name_en": "egg boiled",
+      "aliases": [
+        "بيضة مسلوقة",
+        "hard boiled egg"
+      ],
+      "per_100g": {
+        "kcal": 155,
+        "protein": 12.6,
+        "carbs": 1.1,
+        "fat": 10.6,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "بيضة",
+          "name_en": "1 egg",
+          "grams": 50
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173424
+      }
+    },
+    {
+      "id": "egg_fried",
+      "name_ar": "بيض مقلي",
+      "name_en": "egg fried",
+      "aliases": [
+        "بيضة مقلية",
+        "fried egg"
+      ],
+      "per_100g": {
+        "kcal": 196,
+        "protein": 13.6,
+        "carbs": 0.8,
+        "fat": 14.8,
+        "fiber": 0.0
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "بيضة",
+          "name_en": "1 fried egg",
+          "grams": 46
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172186
+      }
+    },
+    {
+      "id": "egg_omelette",
+      "name_ar": "عجة بيض",
+      "name_en": "omelette",
+      "aliases": [
+        "عجة",
+        "أومليت",
+        "omelette"
+      ],
+      "per_100g": {
+        "kcal": 154,
+        "protein": 10.6,
+        "carbs": 0.7,
+        "fat": 11.7,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "عجة بيضتين",
+          "name_en": "2-egg omelette",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172187
+      }
+    },
+    {
+      "id": "chicken_breast_raw",
+      "name_ar": "صدر دجاج نيء",
+      "name_en": "chicken breast raw",
+      "aliases": [
+        "صدر فراخ",
+        "chicken breast"
+      ],
+      "per_100g": {
+        "kcal": 120,
+        "protein": 22.5,
+        "carbs": 0.0,
+        "fat": 2.6,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "قطعة 150 جم",
+          "name_en": "150 g piece",
+          "grams": 150
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171477
+      }
+    },
+    {
+      "id": "chicken_breast_grilled",
+      "name_ar": "صدر دجاج مشوي",
+      "name_en": "chicken breast grilled",
+      "aliases": [
+        "فراخ مشوية",
+        "grilled chicken"
+      ],
+      "per_100g": {
+        "kcal": 165,
+        "protein": 31.0,
+        "carbs": 0.0,
+        "fat": 3.6,
+        "fiber": 0.0
+      },
+      "state": "grilled",
+      "common_portions": [
+        {
+          "name_ar": "صدر",
+          "name_en": "1 breast",
+          "grams": 120
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171078
+      }
+    },
+    {
+      "id": "chicken_thigh_cooked",
+      "name_ar": "فخدة دجاج مطبوخة",
+      "name_en": "chicken thigh cooked",
+      "aliases": [
+        "ورك فراخ",
+        "chicken thigh"
+      ],
+      "per_100g": {
+        "kcal": 229,
+        "protein": 25.2,
+        "carbs": 0.0,
+        "fat": 13.5,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "فخدة",
+          "name_en": "1 thigh",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172372
+      }
+    },
+    {
+      "id": "chicken_fried",
+      "name_ar": "دجاج مقلي",
+      "name_en": "chicken fried",
+      "aliases": [
+        "فراخ مقلية",
+        "fried chicken"
+      ],
+      "per_100g": {
+        "kcal": 246,
+        "protein": 24.0,
+        "carbs": 8.0,
+        "fat": 13.2,
+        "fiber": 0.3
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 piece",
+          "grams": 85
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171078
+      }
+    },
+    {
+      "id": "whole_chicken_roasted",
+      "name_ar": "دجاجة مشوية",
+      "name_en": "chicken roasted",
+      "aliases": [
+        "دجاجة",
+        "روستو فراخ"
+      ],
+      "per_100g": {
+        "kcal": 239,
+        "protein": 27.3,
+        "carbs": 0.0,
+        "fat": 13.6,
+        "fiber": 0.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "فخذ",
+          "name_en": "thigh",
+          "grams": 100
+        },
+        {
+          "name_ar": "جناح",
+          "name_en": "wing",
+          "grams": 34
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171450
+      }
+    },
+    {
+      "id": "beef_lean_raw",
+      "name_ar": "لحم بقري قليل الدهن نيء",
+      "name_en": "beef lean raw",
+      "aliases": [
+        "لحمة",
+        "beef",
+        "لحم أحمر"
+      ],
+      "per_100g": {
+        "kcal": 158,
+        "protein": 21.4,
+        "carbs": 0.0,
+        "fat": 7.5,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "شرائح 100 جم",
+          "name_en": "100 g",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "beef_grilled",
+      "name_ar": "لحم بقري مشوي",
+      "name_en": "beef grilled",
+      "aliases": [
+        "ستيك",
+        "كباب",
+        "grilled beef"
+      ],
+      "per_100g": {
+        "kcal": 250,
+        "protein": 27.2,
+        "carbs": 0.0,
+        "fat": 15.0,
+        "fiber": 0.0
+      },
+      "state": "grilled",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 portion",
+          "grams": 120
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174033
+      }
+    },
+    {
+      "id": "kofta",
+      "name_ar": "كفتة",
+      "name_en": "kofta / meatballs",
+      "aliases": [
+        "كفتة",
+        "كفته",
+        "kofta",
+        "meatball"
+      ],
+      "per_100g": {
+        "kcal": 250,
+        "protein": 17.0,
+        "carbs": 5.0,
+        "fat": 18.0,
+        "fiber": 0.5
+      },
+      "state": "grilled",
+      "common_portions": [
+        {
+          "name_ar": "سيخ",
+          "name_en": "1 skewer",
+          "grams": 80
+        },
+        {
+          "name_ar": "كرة",
+          "name_en": "1 ball",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "lamb_cooked",
+      "name_ar": "لحم ضأن مطبوخ",
+      "name_en": "lamb cooked",
+      "aliases": [
+        "خروف",
+        "ضاني",
+        "lamb"
+      ],
+      "per_100g": {
+        "kcal": 294,
+        "protein": 24.5,
+        "carbs": 0.0,
+        "fat": 20.9,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 portion",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174370
+      }
+    },
+    {
+      "id": "liver_beef_cooked",
+      "name_ar": "كبدة بقري مطبوخة",
+      "name_en": "beef liver cooked",
+      "aliases": [
+        "كبدة",
+        "liver"
+      ],
+      "per_100g": {
+        "kcal": 191,
+        "protein": 29.1,
+        "carbs": 5.1,
+        "fat": 5.3,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "portion",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169451
+      }
+    },
+    {
+      "id": "fish_tilapia_cooked",
+      "name_ar": "بلطي مشوي",
+      "name_en": "tilapia cooked",
+      "aliases": [
+        "بلطي",
+        "tilapia"
+      ],
+      "per_100g": {
+        "kcal": 128,
+        "protein": 26.2,
+        "carbs": 0.0,
+        "fat": 2.7,
+        "fiber": 0.0
+      },
+      "state": "grilled",
+      "common_portions": [
+        {
+          "name_ar": "سمكة",
+          "name_en": "1 fish",
+          "grams": 150
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 175124
+      }
+    },
+    {
+      "id": "fish_salmon_cooked",
+      "name_ar": "سلمون مطبوخ",
+      "name_en": "salmon cooked",
+      "aliases": [
+        "سالمون",
+        "salmon"
+      ],
+      "per_100g": {
+        "kcal": 206,
+        "protein": 22.1,
+        "carbs": 0.0,
+        "fat": 12.4,
+        "fiber": 0.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "1 fillet",
+          "grams": 120
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 175167
+      }
+    },
+    {
+      "id": "fish_tuna_canned",
+      "name_ar": "تونة معلبة بالماء",
+      "name_en": "tuna canned in water",
+      "aliases": [
+        "تونة",
+        "tuna"
+      ],
+      "per_100g": {
+        "kcal": 116,
+        "protein": 25.5,
+        "carbs": 0.0,
+        "fat": 0.8,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "علبة",
+          "name_en": "1 can drained",
+          "grams": 165
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 175159
+      }
+    },
+    {
+      "id": "shrimp_cooked",
+      "name_ar": "جمبري مطبوخ",
+      "name_en": "shrimp cooked",
+      "aliases": [
+        "جمبري",
+        "قريدس",
+        "shrimp"
+      ],
+      "per_100g": {
+        "kcal": 99,
+        "protein": 24.0,
+        "carbs": 0.2,
+        "fat": 0.3,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 85
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 175180
+      }
+    },
+    {
+      "id": "turkey_breast",
+      "name_ar": "صدر رومي",
+      "name_en": "turkey breast",
+      "aliases": [
+        "رومي",
+        "turkey"
+      ],
+      "per_100g": {
+        "kcal": 135,
+        "protein": 30.1,
+        "carbs": 0.0,
+        "fat": 0.7,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171506
+      }
+    },
+    {
+      "id": "milk_whole",
+      "name_ar": "حليب كامل الدسم",
+      "name_en": "whole milk",
+      "aliases": [
+        "لبن",
+        "حليب",
+        "milk"
+      ],
+      "per_100g": {
+        "kcal": 61,
+        "protein": 3.2,
+        "carbs": 4.8,
+        "fat": 3.3,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 244
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173424
+      }
+    },
+    {
+      "id": "milk_skim",
+      "name_ar": "حليب خالي الدسم",
+      "name_en": "skim milk",
+      "aliases": [
+        "لبن خالي الدسم",
+        "skim"
+      ],
+      "per_100g": {
+        "kcal": 34,
+        "protein": 3.4,
+        "carbs": 5.0,
+        "fat": 0.1,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 245
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173441
+      }
+    },
+    {
+      "id": "yogurt_plain",
+      "name_ar": "زبادي سادة",
+      "name_en": "plain yogurt",
+      "aliases": [
+        "زبادي",
+        "روب",
+        "yogurt"
+      ],
+      "per_100g": {
+        "kcal": 61,
+        "protein": 3.5,
+        "carbs": 4.7,
+        "fat": 3.3,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "علبة",
+          "name_en": "1 cup",
+          "grams": 170
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170903
+      }
+    },
+    {
+      "id": "yogurt_greek",
+      "name_ar": "زبادي يوناني",
+      "name_en": "Greek yogurt",
+      "aliases": [
+        "زبادي يوناني",
+        "greek yogurt"
+      ],
+      "per_100g": {
+        "kcal": 97,
+        "protein": 9.0,
+        "carbs": 3.6,
+        "fat": 5.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "علبة",
+          "name_en": "1 cup",
+          "grams": 170
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170904
+      }
+    },
+    {
+      "id": "labneh",
+      "name_ar": "لبنة",
+      "name_en": "labneh",
+      "aliases": [
+        "لبنه",
+        "labneh"
+      ],
+      "per_100g": {
+        "kcal": 146,
+        "protein": 8.0,
+        "carbs": 4.0,
+        "fat": 10.5,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170903
+      }
+    },
+    {
+      "id": "cottage_cheese",
+      "name_ar": "جبنة قريش",
+      "name_en": "cottage cheese",
+      "aliases": [
+        "قريش",
+        "cottage"
+      ],
+      "per_100g": {
+        "kcal": 98,
+        "protein": 11.1,
+        "carbs": 3.4,
+        "fat": 4.3,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 226
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172179
+      }
+    },
+    {
+      "id": "feta_cheese",
+      "name_ar": "جبنة فيتا",
+      "name_en": "feta cheese",
+      "aliases": [
+        "فيتا",
+        "feta"
+      ],
+      "per_100g": {
+        "kcal": 264,
+        "protein": 14.2,
+        "carbs": 4.1,
+        "fat": 21.3,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "30 جم",
+          "name_en": "30 g",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173420
+      }
+    },
+    {
+      "id": "cheddar_cheese",
+      "name_ar": "جبنة شيدر",
+      "name_en": "cheddar cheese",
+      "aliases": [
+        "شيدر",
+        "جبنة صفراء"
+      ],
+      "per_100g": {
+        "kcal": 403,
+        "protein": 24.9,
+        "carbs": 1.3,
+        "fat": 33.1,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "1 slice",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173414
+      }
+    },
+    {
+      "id": "mozzarella",
+      "name_ar": "جبنة موزاريلا",
+      "name_en": "mozzarella",
+      "aliases": [
+        "موزاريلا"
+      ],
+      "per_100g": {
+        "kcal": 300,
+        "protein": 22.2,
+        "carbs": 2.2,
+        "fat": 22.4,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "1 slice",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173430
+      }
+    },
+    {
+      "id": "white_cheese_egyptian",
+      "name_ar": "جبنة بيضاء",
+      "name_en": "white cheese",
+      "aliases": [
+        "جبنة دمياطي",
+        "جبنة بيضاء",
+        "domiati"
+      ],
+      "per_100g": {
+        "kcal": 264,
+        "protein": 14.2,
+        "carbs": 4.1,
+        "fat": 21.3,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "1 slice",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173420
+      }
+    },
+    {
+      "id": "butter",
+      "name_ar": "زبدة",
+      "name_en": "butter",
+      "aliases": [
+        "زبدة",
+        "butter"
+      ],
+      "per_100g": {
+        "kcal": 717,
+        "protein": 0.9,
+        "carbs": 0.1,
+        "fat": 81.1,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173430
+      }
+    },
+    {
+      "id": "ghee",
+      "name_ar": "سمن بلدي",
+      "name_en": "ghee / clarified butter",
+      "aliases": [
+        "سمن",
+        "ghee"
+      ],
+      "per_100g": {
+        "kcal": 876,
+        "protein": 0.3,
+        "carbs": 0.0,
+        "fat": 99.5,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 13
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171328
+      }
+    },
+    {
+      "id": "olive_oil",
+      "name_ar": "زيت زيتون",
+      "name_en": "olive oil",
+      "aliases": [
+        "زيت زيتون",
+        "olive oil"
+      ],
+      "per_100g": {
+        "kcal": 884,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 13.5
+        },
+        {
+          "name_ar": "ملعقة صغيرة",
+          "name_en": "1 tsp",
+          "grams": 4.5
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171413
+      }
+    },
+    {
+      "id": "sunflower_oil",
+      "name_ar": "زيت عباد الشمس",
+      "name_en": "sunflower oil",
+      "aliases": [
+        "زيت",
+        "sunflower oil"
+      ],
+      "per_100g": {
+        "kcal": 884,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 13.5
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171034
+      }
+    },
+    {
+      "id": "corn_oil",
+      "name_ar": "زيت ذرة",
+      "name_en": "corn oil",
+      "aliases": [
+        "زيت ذرة"
+      ],
+      "per_100g": {
+        "kcal": 884,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 13.5
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171029
+      }
+    },
+    {
+      "id": "tahini",
+      "name_ar": "طحينة",
+      "name_en": "tahini",
+      "aliases": [
+        "طحينة",
+        "tahina"
+      ],
+      "per_100g": {
+        "kcal": 595,
+        "protein": 17.0,
+        "carbs": 21.2,
+        "fat": 53.8,
+        "fiber": 9.3
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170150
+      }
+    },
+    {
+      "id": "molokhia_cooked",
+      "name_ar": "ملوخية مطبوخة",
+      "name_en": "molokhia cooked",
+      "aliases": [
+        "ملوخية",
+        "molokhia",
+        "ملوخيه"
+      ],
+      "per_100g": {
+        "kcal": 37,
+        "protein": 3.7,
+        "carbs": 6.0,
+        "fat": 0.2,
+        "fiber": 2.4
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 180
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168463
+      }
+    },
+    {
+      "id": "okra_cooked",
+      "name_ar": "بامية مطبوخة",
+      "name_en": "okra cooked",
+      "aliases": [
+        "بامية",
+        "okra",
+        "باميه"
+      ],
+      "per_100g": {
+        "kcal": 27,
+        "protein": 1.9,
+        "carbs": 4.5,
+        "fat": 0.2,
+        "fiber": 2.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 160
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169260
+      }
+    },
+    {
+      "id": "tomato_raw",
+      "name_ar": "طماطم",
+      "name_en": "tomato raw",
+      "aliases": [
+        "طماطم",
+        "بندورة",
+        "tomato"
+      ],
+      "per_100g": {
+        "kcal": 21,
+        "protein": 0.9,
+        "carbs": 3.9,
+        "fat": 0.2,
+        "fiber": 1.2
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة متوسطة",
+          "name_en": "1 medium",
+          "grams": 123
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170050
+      }
+    },
+    {
+      "id": "cucumber",
+      "name_ar": "خيار",
+      "name_en": "cucumber",
+      "aliases": [
+        "خيار",
+        "cucumber"
+      ],
+      "per_100g": {
+        "kcal": 18,
+        "protein": 0.7,
+        "carbs": 3.6,
+        "fat": 0.1,
+        "fiber": 0.5
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 cucumber",
+          "grams": 300
+        },
+        {
+          "name_ar": "كوب شرائح",
+          "name_en": "1 cup sliced",
+          "grams": 104
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168409
+      }
+    },
+    {
+      "id": "onion_raw",
+      "name_ar": "بصل",
+      "name_en": "onion raw",
+      "aliases": [
+        "بصل",
+        "onion"
+      ],
+      "per_100g": {
+        "kcal": 40,
+        "protein": 1.1,
+        "carbs": 9.3,
+        "fat": 0.1,
+        "fiber": 1.7
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة متوسطة",
+          "name_en": "1 medium",
+          "grams": 110
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170000
+      }
+    },
+    {
+      "id": "garlic_raw",
+      "name_ar": "ثوم",
+      "name_en": "garlic raw",
+      "aliases": [
+        "ثوم",
+        "garlic"
+      ],
+      "per_100g": {
+        "kcal": 149,
+        "protein": 6.4,
+        "carbs": 33.1,
+        "fat": 0.5,
+        "fiber": 2.1
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "فص",
+          "name_en": "1 clove",
+          "grams": 3
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169230
+      }
+    },
+    {
+      "id": "potato_boiled",
+      "name_ar": "بطاطس مسلوقة",
+      "name_en": "potato boiled",
+      "aliases": [
+        "بطاطس",
+        "potato"
+      ],
+      "per_100g": {
+        "kcal": 87,
+        "protein": 1.9,
+        "carbs": 20.1,
+        "fat": 0.1,
+        "fiber": 1.8
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "حبة متوسطة",
+          "name_en": "1 medium",
+          "grams": 173
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170030
+      }
+    },
+    {
+      "id": "potato_fried",
+      "name_ar": "بطاطس مقلية",
+      "name_en": "french fries",
+      "aliases": [
+        "بطاطس محمرة",
+        "فries"
+      ],
+      "per_100g": {
+        "kcal": 312,
+        "protein": 3.4,
+        "carbs": 41.4,
+        "fat": 14.7,
+        "fiber": 3.8
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "حصة",
+          "name_en": "portion",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170033
+      }
+    },
+    {
+      "id": "eggplant_cooked",
+      "name_ar": "باذنجان مطبوخ",
+      "name_en": "eggplant cooked",
+      "aliases": [
+        "باذنجان",
+        "بتنجان",
+        "eggplant"
+      ],
+      "per_100g": {
+        "kcal": 35,
+        "protein": 0.8,
+        "carbs": 8.7,
+        "fat": 0.2,
+        "fiber": 2.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 99
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169228
+      }
+    },
+    {
+      "id": "zucchini_cooked",
+      "name_ar": "كوسة مطبوخة",
+      "name_en": "zucchini cooked",
+      "aliases": [
+        "كوسة",
+        "zucchini"
+      ],
+      "per_100g": {
+        "kcal": 19,
+        "protein": 1.1,
+        "carbs": 2.7,
+        "fat": 0.4,
+        "fiber": 1.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 180
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169291
+      }
+    },
+    {
+      "id": "spinach_cooked",
+      "name_ar": "سبانخ مطبوخة",
+      "name_en": "spinach cooked",
+      "aliases": [
+        "سبانخ",
+        "spinach"
+      ],
+      "per_100g": {
+        "kcal": 30,
+        "protein": 3.0,
+        "carbs": 3.8,
+        "fat": 0.3,
+        "fiber": 2.4
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 180
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168463
+      }
+    },
+    {
+      "id": "cabbage_raw",
+      "name_ar": "كرنب",
+      "name_en": "cabbage",
+      "aliases": [
+        "كرنب",
+        "ملفوف"
+      ],
+      "per_100g": {
+        "kcal": 29,
+        "protein": 1.3,
+        "carbs": 5.8,
+        "fat": 0.1,
+        "fiber": 2.5
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 89
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169975
+      }
+    },
+    {
+      "id": "carrot_raw",
+      "name_ar": "جزر",
+      "name_en": "carrot",
+      "aliases": [
+        "جزر",
+        "carrot"
+      ],
+      "per_100g": {
+        "kcal": 41,
+        "protein": 0.9,
+        "carbs": 9.6,
+        "fat": 0.2,
+        "fiber": 2.8
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 carrot",
+          "grams": 61
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170393
+      }
+    },
+    {
+      "id": "lettuce",
+      "name_ar": "خس",
+      "name_en": "lettuce",
+      "aliases": [
+        "خس",
+        "lettuce"
+      ],
+      "per_100g": {
+        "kcal": 19,
+        "protein": 1.4,
+        "carbs": 2.9,
+        "fat": 0.2,
+        "fiber": 1.3
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 36
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169249
+      }
+    },
+    {
+      "id": "pepper_green",
+      "name_ar": "فلفل أخضر",
+      "name_en": "green pepper",
+      "aliases": [
+        "فلفل رومي",
+        "bell pepper"
+      ],
+      "per_100g": {
+        "kcal": 24,
+        "protein": 0.9,
+        "carbs": 4.6,
+        "fat": 0.2,
+        "fiber": 1.7
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 pepper",
+          "grams": 119
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170427
+      }
+    },
+    {
+      "id": "peas_cooked",
+      "name_ar": "بسلة مطبوخة",
+      "name_en": "peas cooked",
+      "aliases": [
+        "بسلة",
+        "peas"
+      ],
+      "per_100g": {
+        "kcal": 84,
+        "protein": 5.4,
+        "carbs": 15.6,
+        "fat": 0.2,
+        "fiber": 5.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 160
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170420
+      }
+    },
+    {
+      "id": "corn_cooked",
+      "name_ar": "ذرة مطبوخة",
+      "name_en": "corn cooked",
+      "aliases": [
+        "ذرة",
+        "corn"
+      ],
+      "per_100g": {
+        "kcal": 111,
+        "protein": 3.4,
+        "carbs": 21.0,
+        "fat": 1.5,
+        "fiber": 2.4
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 149
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170288
+      }
+    },
+    {
+      "id": "mahshi_mix",
+      "name_ar": "محشي (أرز وخضار)",
+      "name_en": "stuffed vegetables (mahshi)",
+      "aliases": [
+        "محشي",
+        "mahshi",
+        "محاشي"
+      ],
+      "per_100g": {
+        "kcal": 120,
+        "protein": 2.5,
+        "carbs": 18.0,
+        "fat": 4.5,
+        "fiber": 2.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "حبة كوسة",
+          "name_en": "1 stuffed zucchini",
+          "grams": 120
+        },
+        {
+          "name_ar": "ورقة كرنب",
+          "name_en": "1 cabbage roll",
+          "grams": 80
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "date_medjool",
+      "name_ar": "تمر",
+      "name_en": "dates",
+      "aliases": [
+        "بلح",
+        "تمر",
+        "dates",
+        "khudri"
+      ],
+      "per_100g": {
+        "kcal": 277,
+        "protein": 1.8,
+        "carbs": 75.0,
+        "fat": 0.2,
+        "fiber": 6.7
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "تمرة",
+          "name_en": "1 date",
+          "grams": 24
+        },
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 147
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168191
+      }
+    },
+    {
+      "id": "banana",
+      "name_ar": "موز",
+      "name_en": "banana",
+      "aliases": [
+        "موز",
+        "banana"
+      ],
+      "per_100g": {
+        "kcal": 89,
+        "protein": 1.1,
+        "carbs": 22.8,
+        "fat": 0.3,
+        "fiber": 2.6
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة متوسطة",
+          "name_en": "1 medium",
+          "grams": 118
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173944
+      }
+    },
+    {
+      "id": "apple",
+      "name_ar": "تفاح",
+      "name_en": "apple",
+      "aliases": [
+        "تفاح",
+        "apple"
+      ],
+      "per_100g": {
+        "kcal": 52,
+        "protein": 0.3,
+        "carbs": 13.8,
+        "fat": 0.2,
+        "fiber": 2.4
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة متوسطة",
+          "name_en": "1 medium",
+          "grams": 182
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171688
+      }
+    },
+    {
+      "id": "orange",
+      "name_ar": "برتقال",
+      "name_en": "orange",
+      "aliases": [
+        "برتقال",
+        "orange"
+      ],
+      "per_100g": {
+        "kcal": 47,
+        "protein": 0.9,
+        "carbs": 11.8,
+        "fat": 0.1,
+        "fiber": 2.4
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 orange",
+          "grams": 131
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169097
+      }
+    },
+    {
+      "id": "mango",
+      "name_ar": "مانجو",
+      "name_en": "mango",
+      "aliases": [
+        "مانجا",
+        "mango"
+      ],
+      "per_100g": {
+        "kcal": 60,
+        "protein": 0.8,
+        "carbs": 15.0,
+        "fat": 0.4,
+        "fiber": 1.6
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 mango",
+          "grams": 336
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169910
+      }
+    },
+    {
+      "id": "watermelon",
+      "name_ar": "بطيخ",
+      "name_en": "watermelon",
+      "aliases": [
+        "بطيخ",
+        "حبحب",
+        "watermelon"
+      ],
+      "per_100g": {
+        "kcal": 35,
+        "protein": 0.6,
+        "carbs": 7.6,
+        "fat": 0.2,
+        "fiber": 0.4
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "wedge",
+          "grams": 286
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167765
+      }
+    },
+    {
+      "id": "grapes",
+      "name_ar": "عنب",
+      "name_en": "grapes",
+      "aliases": [
+        "عنب",
+        "grapes"
+      ],
+      "per_100g": {
+        "kcal": 69,
+        "protein": 0.7,
+        "carbs": 18.1,
+        "fat": 0.2,
+        "fiber": 0.9
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 151
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174683
+      }
+    },
+    {
+      "id": "strawberry",
+      "name_ar": "فراولة",
+      "name_en": "strawberry",
+      "aliases": [
+        "فراولة",
+        "strawberry"
+      ],
+      "per_100g": {
+        "kcal": 32,
+        "protein": 0.7,
+        "carbs": 7.7,
+        "fat": 0.3,
+        "fiber": 2.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 152
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167762
+      }
+    },
+    {
+      "id": "pomegranate",
+      "name_ar": "رمان",
+      "name_en": "pomegranate",
+      "aliases": [
+        "رمان",
+        "pomegranate"
+      ],
+      "per_100g": {
+        "kcal": 83,
+        "protein": 1.7,
+        "carbs": 18.7,
+        "fat": 1.2,
+        "fiber": 4.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب بذور",
+          "name_en": "1 cup arils",
+          "grams": 174
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169134
+      }
+    },
+    {
+      "id": "guava",
+      "name_ar": "جوافة",
+      "name_en": "guava",
+      "aliases": [
+        "جوافة",
+        "guava"
+      ],
+      "per_100g": {
+        "kcal": 68,
+        "protein": 2.6,
+        "carbs": 14.3,
+        "fat": 1.0,
+        "fiber": 5.4
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 fruit",
+          "grams": 55
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173044
+      }
+    },
+    {
+      "id": "fig_raw",
+      "name_ar": "تين",
+      "name_en": "fig",
+      "aliases": [
+        "تين",
+        "fig"
+      ],
+      "per_100g": {
+        "kcal": 74,
+        "protein": 0.8,
+        "carbs": 19.2,
+        "fat": 0.3,
+        "fiber": 2.9
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 fig",
+          "grams": 50
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173021
+      }
+    },
+    {
+      "id": "raisins",
+      "name_ar": "زبيب",
+      "name_en": "raisins",
+      "aliases": [
+        "زبيب",
+        "raisins"
+      ],
+      "per_100g": {
+        "kcal": 299,
+        "protein": 3.1,
+        "carbs": 79.2,
+        "fat": 0.5,
+        "fiber": 3.7
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 165
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168165
+      }
+    },
+    {
+      "id": "avocado",
+      "name_ar": "أفوكادو",
+      "name_en": "avocado",
+      "aliases": [
+        "أفوكادو",
+        "avocado"
+      ],
+      "per_100g": {
+        "kcal": 160,
+        "protein": 2.0,
+        "carbs": 8.5,
+        "fat": 14.7,
+        "fiber": 6.7
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "نصف حبة",
+          "name_en": "1/2 fruit",
+          "grams": 68
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171705
+      }
+    },
+    {
+      "id": "lemon",
+      "name_ar": "ليمون",
+      "name_en": "lemon",
+      "aliases": [
+        "ليمون",
+        "lemon"
+      ],
+      "per_100g": {
+        "kcal": 44,
+        "protein": 1.1,
+        "carbs": 9.3,
+        "fat": 0.3,
+        "fiber": 2.8
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 lemon",
+          "grams": 58
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167747
+      }
+    },
+    {
+      "id": "cantaloupe",
+      "name_ar": "شمام",
+      "name_en": "cantaloupe",
+      "aliases": [
+        "شمام",
+        "cantaloupe"
+      ],
+      "per_100g": {
+        "kcal": 34,
+        "protein": 0.8,
+        "carbs": 8.2,
+        "fat": 0.2,
+        "fiber": 0.9
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 177
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169092
+      }
+    },
+    {
+      "id": "almonds",
+      "name_ar": "لوز",
+      "name_en": "almonds",
+      "aliases": [
+        "لوز",
+        "almonds"
+      ],
+      "per_100g": {
+        "kcal": 579,
+        "protein": 21.2,
+        "carbs": 21.6,
+        "fat": 49.9,
+        "fiber": 12.5
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 almond",
+          "grams": 1.2
+        },
+        {
+          "name_ar": "حفنة",
+          "name_en": "handful",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170567
+      }
+    },
+    {
+      "id": "peanuts",
+      "name_ar": "فول سوداني",
+      "name_en": "peanuts",
+      "aliases": [
+        "سوداني",
+        "peanuts"
+      ],
+      "per_100g": {
+        "kcal": 567,
+        "protein": 25.8,
+        "carbs": 16.1,
+        "fat": 49.2,
+        "fiber": 8.5
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حفنة",
+          "name_en": "handful",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172430
+      }
+    },
+    {
+      "id": "walnuts",
+      "name_ar": "جوز",
+      "name_en": "walnuts",
+      "aliases": [
+        "عين الجمل",
+        "walnuts"
+      ],
+      "per_100g": {
+        "kcal": 654,
+        "protein": 15.2,
+        "carbs": 13.7,
+        "fat": 65.2,
+        "fiber": 6.7
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حفنة",
+          "name_en": "handful",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170187
+      }
+    },
+    {
+      "id": "cashews",
+      "name_ar": "كاجو",
+      "name_en": "cashews",
+      "aliases": [
+        "كاجو",
+        "cashews"
+      ],
+      "per_100g": {
+        "kcal": 553,
+        "protein": 18.2,
+        "carbs": 30.2,
+        "fat": 43.9,
+        "fiber": 3.3
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حفنة",
+          "name_en": "handful",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170162
+      }
+    },
+    {
+      "id": "pistachio",
+      "name_ar": "فستق",
+      "name_en": "pistachios",
+      "aliases": [
+        "فستق",
+        "pistachio"
+      ],
+      "per_100g": {
+        "kcal": 560,
+        "protein": 20.2,
+        "carbs": 27.2,
+        "fat": 45.3,
+        "fiber": 10.6
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حفنة",
+          "name_en": "handful",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170184
+      }
+    },
+    {
+      "id": "pumpkin_seeds",
+      "name_ar": "بذور يقطين",
+      "name_en": "pumpkin seeds",
+      "aliases": [
+        "لب أبيض",
+        "pumpkin seeds"
+      ],
+      "per_100g": {
+        "kcal": 559,
+        "protein": 30.2,
+        "carbs": 10.7,
+        "fat": 49.1,
+        "fiber": 6.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حفنة",
+          "name_en": "handful",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170188
+      }
+    },
+    {
+      "id": "sesame_seeds",
+      "name_ar": "سمسم",
+      "name_en": "sesame seeds",
+      "aliases": [
+        "سمسم",
+        "sesame"
+      ],
+      "per_100g": {
+        "kcal": 573,
+        "protein": 17.7,
+        "carbs": 23.5,
+        "fat": 49.7,
+        "fiber": 11.8
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 9
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170150
+      }
+    },
+    {
+      "id": "basbousa",
+      "name_ar": "بسبوسة",
+      "name_en": "basbousa",
+      "aliases": [
+        "بسبوسة",
+        "basbousa",
+        "هريسة"
+      ],
+      "per_100g": {
+        "kcal": 350,
+        "protein": 5.0,
+        "carbs": 55.0,
+        "fat": 12.0,
+        "fiber": 1.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 piece",
+          "grams": 80
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168859
+      }
+    },
+    {
+      "id": "kunafa",
+      "name_ar": "كنافة",
+      "name_en": "kunafa",
+      "aliases": [
+        "كنافة",
+        "kunafa",
+        "كنافه"
+      ],
+      "per_100g": {
+        "kcal": 340,
+        "protein": 6.0,
+        "carbs": 45.0,
+        "fat": 15.0,
+        "fiber": 1.2
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 piece",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168859
+      }
+    },
+    {
+      "id": "baklava",
+      "name_ar": "بقلاوة",
+      "name_en": "baklava",
+      "aliases": [
+        "بقلاوة",
+        "baklava"
+      ],
+      "per_100g": {
+        "kcal": 428,
+        "protein": 6.0,
+        "carbs": 42.0,
+        "fat": 27.0,
+        "fiber": 2.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 piece",
+          "grams": 50
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167946
+      }
+    },
+    {
+      "id": "om_ali",
+      "name_ar": "أم علي",
+      "name_en": "om ali",
+      "aliases": [
+        "ام علي",
+        "om ali"
+      ],
+      "per_100g": {
+        "kcal": 220,
+        "protein": 5.0,
+        "carbs": 28.0,
+        "fat": 10.0,
+        "fiber": 1.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "bowl",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168859
+      }
+    },
+    {
+      "id": "rice_pudding",
+      "name_ar": "أرز باللبن",
+      "name_en": "rice pudding",
+      "aliases": [
+        "ارز باللبن",
+        "rice pudding"
+      ],
+      "per_100g": {
+        "kcal": 133,
+        "protein": 3.4,
+        "carbs": 22.0,
+        "fat": 3.5,
+        "fiber": 0.2
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167922
+      }
+    },
+    {
+      "id": "ice_cream_vanilla",
+      "name_ar": "آيس كريم فانيليا",
+      "name_en": "vanilla ice cream",
+      "aliases": [
+        "آيس كريم",
+        "ice cream"
+      ],
+      "per_100g": {
+        "kcal": 207,
+        "protein": 3.5,
+        "carbs": 23.6,
+        "fat": 11.0,
+        "fiber": 0.7
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "سكوب",
+          "name_en": "1 scoop",
+          "grams": 66
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167722
+      }
+    },
+    {
+      "id": "chocolate_dark",
+      "name_ar": "شوكولاتة داكنة",
+      "name_en": "dark chocolate",
+      "aliases": [
+        "شوكولاتة",
+        "chocolate"
+      ],
+      "per_100g": {
+        "kcal": 546,
+        "protein": 4.9,
+        "carbs": 59.4,
+        "fat": 31.3,
+        "fiber": 7.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "مربع",
+          "name_en": "1 square",
+          "grams": 10
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170273
+      }
+    },
+    {
+      "id": "honey",
+      "name_ar": "عسل",
+      "name_en": "honey",
+      "aliases": [
+        "عسل",
+        "honey"
+      ],
+      "per_100g": {
+        "kcal": 304,
+        "protein": 0.3,
+        "carbs": 82.4,
+        "fat": 0.0,
+        "fiber": 0.2
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 21
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169640
+      }
+    },
+    {
+      "id": "sugar_white",
+      "name_ar": "سكر أبيض",
+      "name_en": "white sugar",
+      "aliases": [
+        "سكر",
+        "sugar"
+      ],
+      "per_100g": {
+        "kcal": 387,
+        "protein": 0.0,
+        "carbs": 100.0,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة صغيرة",
+          "name_en": "1 tsp",
+          "grams": 4
+        },
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 12.5
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169655
+      }
+    },
+    {
+      "id": "halawa",
+      "name_ar": "حلاوة طحينية",
+      "name_en": "halva",
+      "aliases": [
+        "حلاوة",
+        "halawa",
+        "halva"
+      ],
+      "per_100g": {
+        "kcal": 469,
+        "protein": 12.5,
+        "carbs": 47.0,
+        "fat": 26.0,
+        "fiber": 4.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170150
+      }
+    },
+    {
+      "id": "tea_black_brewed",
+      "name_ar": "شاي أسود",
+      "name_en": "black tea brewed",
+      "aliases": [
+        "شاي",
+        "tea",
+        "كوباية شاي"
+      ],
+      "per_100g": {
+        "kcal": 1,
+        "protein": 0.0,
+        "carbs": 0.3,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوباية",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174820
+      }
+    },
+    {
+      "id": "coffee_brewed",
+      "name_ar": "قهوة",
+      "name_en": "coffee brewed",
+      "aliases": [
+        "قهوة",
+        "coffee",
+        "نسكافيه"
+      ],
+      "per_100g": {
+        "kcal": 0,
+        "protein": 0.1,
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "فنجان",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171890
+      }
+    },
+    {
+      "id": "sugarcane_juice",
+      "name_ar": "عصير قصب",
+      "name_en": "sugarcane juice",
+      "aliases": [
+        "قصب",
+        "asab"
+      ],
+      "per_100g": {
+        "kcal": 61,
+        "protein": 0.0,
+        "carbs": 15.0,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169655
+      }
+    },
+    {
+      "id": "orange_juice",
+      "name_ar": "عصير برتقال",
+      "name_en": "orange juice",
+      "aliases": [
+        "عصير برتقال",
+        "OJ"
+      ],
+      "per_100g": {
+        "kcal": 45,
+        "protein": 0.7,
+        "carbs": 10.4,
+        "fat": 0.2,
+        "fiber": 0.2
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 248
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169098
+      }
+    },
+    {
+      "id": "cola",
+      "name_ar": "كولا",
+      "name_en": "cola soft drink",
+      "aliases": [
+        "كولا",
+        "بيبسي",
+        "coca cola"
+      ],
+      "per_100g": {
+        "kcal": 42,
+        "protein": 0.0,
+        "carbs": 10.6,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "علبة",
+          "name_en": "can 330ml",
+          "grams": 330
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174819
+      }
+    },
+    {
+      "id": "ayran",
+      "name_ar": "عيران",
+      "name_en": "ayran / salted yogurt drink",
+      "aliases": [
+        "عيران",
+        "لبن رايب"
+      ],
+      "per_100g": {
+        "kcal": 35,
+        "protein": 2.0,
+        "carbs": 3.0,
+        "fat": 1.5,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 250
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170903
+      }
+    },
+    {
+      "id": "karkade",
+      "name_ar": "كركديه",
+      "name_en": "hibiscus tea",
+      "aliases": [
+        "كركديه",
+        "karkade"
+      ],
+      "per_100g": {
+        "kcal": 0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174820
+      }
+    },
+    {
+      "id": "sahlab",
+      "name_ar": "سحلب",
+      "name_en": "sahlab drink",
+      "aliases": [
+        "سحلب",
+        "sahlab"
+      ],
+      "per_100g": {
+        "kcal": 90,
+        "protein": 2.5,
+        "carbs": 15.0,
+        "fat": 2.5,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167922
+      }
+    },
+    {
+      "id": "koshari",
+      "name_ar": "كشري",
+      "name_en": "koshari",
+      "aliases": [
+        "كشري",
+        "koshary",
+        "كشرى"
+      ],
+      "per_100g": {
+        "kcal": 150,
+        "protein": 5.0,
+        "carbs": 28.0,
+        "fat": 2.5,
+        "fiber": 4.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "plate",
+          "grams": 350
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "foul_sandwich",
+      "name_ar": "سندوتش فول",
+      "name_en": "foul sandwich",
+      "aliases": [
+        "سندوتش فول",
+        "foul sandwich"
+      ],
+      "per_100g": {
+        "kcal": 180,
+        "protein": 7.0,
+        "carbs": 28.0,
+        "fat": 5.0,
+        "fiber": 4.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "سندوتش",
+          "name_en": "1 sandwich",
+          "grams": 220
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173745
+      }
+    },
+    {
+      "id": "taameya_sandwich",
+      "name_ar": "سندوتش طعمية",
+      "name_en": "falafel sandwich",
+      "aliases": [
+        "سندوتش طعمية",
+        "falafel sandwich"
+      ],
+      "per_100g": {
+        "kcal": 280,
+        "protein": 10.0,
+        "carbs": 32.0,
+        "fat": 12.0,
+        "fiber": 4.0
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "سندوتش",
+          "name_en": "1 sandwich",
+          "grams": 250
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174258
+      }
+    },
+    {
+      "id": "shawarma_chicken",
+      "name_ar": "شاورما فراخ",
+      "name_en": "chicken shawarma",
+      "aliases": [
+        "شاورما",
+        "shawarma"
+      ],
+      "per_100g": {
+        "kcal": 220,
+        "protein": 18.0,
+        "carbs": 12.0,
+        "fat": 12.0,
+        "fiber": 1.0
+      },
+      "state": "grilled",
+      "common_portions": [
+        {
+          "name_ar": "سندوتش",
+          "name_en": "sandwich",
+          "grams": 250
+        },
+        {
+          "name_ar": "طبق",
+          "name_en": "plate",
+          "grams": 300
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171078
+      }
+    },
+    {
+      "id": "hawawshi",
+      "name_ar": "حواوشي",
+      "name_en": "hawawshi",
+      "aliases": [
+        "حواوشي",
+        "hawawshi"
+      ],
+      "per_100g": {
+        "kcal": 280,
+        "protein": 14.0,
+        "carbs": 22.0,
+        "fat": 15.0,
+        "fiber": 1.5
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "رغيف",
+          "name_en": "1 loaf",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "molokhia_with_rice",
+      "name_ar": "ملوخية بأرز",
+      "name_en": "molokhia with rice",
+      "aliases": [
+        "ملوخية ورز"
+      ],
+      "per_100g": {
+        "kcal": 95,
+        "protein": 3.0,
+        "carbs": 16.0,
+        "fat": 2.0,
+        "fiber": 1.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "plate",
+          "grams": 300
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "okara_stew",
+      "name_ar": "بامية بصلصة",
+      "name_en": "okra stew",
+      "aliases": [
+        "بامية باللحمة"
+      ],
+      "per_100g": {
+        "kcal": 70,
+        "protein": 4.0,
+        "carbs": 8.0,
+        "fat": 2.5,
+        "fiber": 2.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "bowl",
+          "grams": 250
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169260
+      }
+    },
+    {
+      "id": "macarona_beshamel",
+      "name_ar": "مكرونة بالبشاميل",
+      "name_en": "pasta bechamel",
+      "aliases": [
+        "مكرونة بشاميل",
+        "beshamel"
+      ],
+      "per_100g": {
+        "kcal": 180,
+        "protein": 8.0,
+        "carbs": 20.0,
+        "fat": 8.0,
+        "fiber": 1.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "plate",
+          "grams": 300
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168928
+      }
+    },
+    {
+      "id": "pizza_cheese",
+      "name_ar": "بيتزا جبنة",
+      "name_en": "cheese pizza",
+      "aliases": [
+        "بيتزا",
+        "pizza"
+      ],
+      "per_100g": {
+        "kcal": 266,
+        "protein": 11.4,
+        "carbs": 33.0,
+        "fat": 10.0,
+        "fiber": 2.3
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "1 slice",
+          "grams": 107
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172220
+      }
+    },
+    {
+      "id": "burger_beef",
+      "name_ar": "برجر لحم",
+      "name_en": "beef burger",
+      "aliases": [
+        "برجر",
+        "hamburger"
+      ],
+      "per_100g": {
+        "kcal": 295,
+        "protein": 17.0,
+        "carbs": 24.0,
+        "fat": 14.0,
+        "fiber": 1.0
+      },
+      "state": "grilled",
+      "common_portions": [
+        {
+          "name_ar": "ساندوتش",
+          "name_en": "1 burger",
+          "grams": 150
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "sardines_canned",
+      "name_ar": "سردين معلب",
+      "name_en": "sardines canned",
+      "aliases": [
+        "سردين",
+        "sardines"
+      ],
+      "per_100g": {
+        "kcal": 208,
+        "protein": 24.6,
+        "carbs": 0.0,
+        "fat": 11.5,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "علبة",
+          "name_en": "1 can",
+          "grams": 92
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 175139
+      }
+    },
+    {
+      "id": "mackerel_cooked",
+      "name_ar": "ماكريل مطبوخ",
+      "name_en": "mackerel cooked",
+      "aliases": [
+        "ماكريل"
+      ],
+      "per_100g": {
+        "kcal": 262,
+        "protein": 23.9,
+        "carbs": 0.0,
+        "fat": 17.8,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شرائح",
+          "name_en": "fillet",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 175120
+      }
+    },
+    {
+      "id": "duck_cooked",
+      "name_ar": "بط مطبوخ",
+      "name_en": "duck cooked",
+      "aliases": [
+        "بط",
+        "duck"
+      ],
+      "per_100g": {
+        "kcal": 337,
+        "protein": 19.0,
+        "carbs": 0.0,
+        "fat": 28.4,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "portion",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172409
+      }
+    },
+    {
+      "id": "rabbit_cooked",
+      "name_ar": "أرنب مطبوخ",
+      "name_en": "rabbit cooked",
+      "aliases": [
+        "أرنب",
+        "rabbit"
+      ],
+      "per_100g": {
+        "kcal": 173,
+        "protein": 33.0,
+        "carbs": 0.0,
+        "fat": 3.5,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "portion",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174348
+      }
+    },
+    {
+      "id": "tofu",
+      "name_ar": "توفو",
+      "name_en": "tofu",
+      "aliases": [
+        "توفو",
+        "tofu"
+      ],
+      "per_100g": {
+        "kcal": 76,
+        "protein": 8.1,
+        "carbs": 1.9,
+        "fat": 4.8,
+        "fiber": 0.3
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "100 جم",
+          "name_en": "100 g",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172476
+      }
+    },
+    {
+      "id": "tempeh",
+      "name_ar": "تمبيه",
+      "name_en": "tempeh",
+      "aliases": [
+        "tempeh"
+      ],
+      "per_100g": {
+        "kcal": 192,
+        "protein": 20.3,
+        "carbs": 7.6,
+        "fat": 10.8,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "100 جم",
+          "name_en": "100 g",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174272
+      }
+    },
+    {
+      "id": "cream_cheese",
+      "name_ar": "جبنة كريمي",
+      "name_en": "cream cheese",
+      "aliases": [
+        "كريم تشيز"
+      ],
+      "per_100g": {
+        "kcal": 342,
+        "protein": 5.9,
+        "carbs": 4.1,
+        "fat": 34.2,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 14.5
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173418
+      }
+    },
+    {
+      "id": "sour_cream",
+      "name_ar": "قشطة حامضة",
+      "name_en": "sour cream",
+      "aliases": [
+        "ساور كريم"
+      ],
+      "per_100g": {
+        "kcal": 193,
+        "protein": 2.4,
+        "carbs": 4.6,
+        "fat": 19.4,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 12
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170900
+      }
+    },
+    {
+      "id": "ricotta",
+      "name_ar": "ريكوتا",
+      "name_en": "ricotta",
+      "aliases": [
+        "ريكوتا"
+      ],
+      "per_100g": {
+        "kcal": 174,
+        "protein": 11.3,
+        "carbs": 3.0,
+        "fat": 13.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 246
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170890
+      }
+    },
+    {
+      "id": "parmesan",
+      "name_ar": "بارميزان",
+      "name_en": "parmesan",
+      "aliases": [
+        "بارميزان"
+      ],
+      "per_100g": {
+        "kcal": 392,
+        "protein": 35.8,
+        "carbs": 3.2,
+        "fat": 25.8,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp grated",
+          "grams": 5
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173431
+      }
+    },
+    {
+      "id": "sweet_potato_cooked",
+      "name_ar": "بطاطا حلوة مطبوخة",
+      "name_en": "sweet potato cooked",
+      "aliases": [
+        "بطاطا حلوة"
+      ],
+      "per_100g": {
+        "kcal": 90,
+        "protein": 2.0,
+        "carbs": 20.7,
+        "fat": 0.2,
+        "fiber": 3.3
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "حبة متوسطة",
+          "name_en": "1 medium",
+          "grams": 114
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168483
+      }
+    },
+    {
+      "id": "broccoli_cooked",
+      "name_ar": "بروكلي مطبوخ",
+      "name_en": "broccoli cooked",
+      "aliases": [
+        "بروكلي"
+      ],
+      "per_100g": {
+        "kcal": 42,
+        "protein": 2.4,
+        "carbs": 7.2,
+        "fat": 0.4,
+        "fiber": 3.3
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 156
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170379
+      }
+    },
+    {
+      "id": "cauliflower_cooked",
+      "name_ar": "قرنبيط مطبوخ",
+      "name_en": "cauliflower cooked",
+      "aliases": [
+        "قرنبيط"
+      ],
+      "per_100g": {
+        "kcal": 28,
+        "protein": 1.8,
+        "carbs": 4.1,
+        "fat": 0.5,
+        "fiber": 2.3
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 124
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169986
+      }
+    },
+    {
+      "id": "mushroom_raw",
+      "name_ar": "مشروم",
+      "name_en": "mushroom",
+      "aliases": [
+        "مشروم",
+        "فطر"
+      ],
+      "per_100g": {
+        "kcal": 28,
+        "protein": 3.1,
+        "carbs": 3.3,
+        "fat": 0.3,
+        "fiber": 1.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 70
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169251
+      }
+    },
+    {
+      "id": "green_beans_cooked",
+      "name_ar": "فاصوليا خضراء مطبوخة",
+      "name_en": "green beans cooked",
+      "aliases": [
+        "فاصوليا خضراء"
+      ],
+      "per_100g": {
+        "kcal": 42,
+        "protein": 1.9,
+        "carbs": 7.9,
+        "fat": 0.3,
+        "fiber": 3.2
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 125
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169963
+      }
+    },
+    {
+      "id": "beet_cooked",
+      "name_ar": "بنجر مطبوخ",
+      "name_en": "beet cooked",
+      "aliases": [
+        "بنجر",
+        "شمندر"
+      ],
+      "per_100g": {
+        "kcal": 44,
+        "protein": 1.7,
+        "carbs": 10.0,
+        "fat": 0.2,
+        "fiber": 2.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 170
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169146
+      }
+    },
+    {
+      "id": "turnip_cooked",
+      "name_ar": "لفت مطبوخ",
+      "name_en": "turnip cooked",
+      "aliases": [
+        "لفت"
+      ],
+      "per_100g": {
+        "kcal": 22,
+        "protein": 0.7,
+        "carbs": 5.1,
+        "fat": 0.1,
+        "fiber": 2.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 156
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170465
+      }
+    },
+    {
+      "id": "radish",
+      "name_ar": "فجل",
+      "name_en": "radish",
+      "aliases": [
+        "فجل"
+      ],
+      "per_100g": {
+        "kcal": 16,
+        "protein": 0.7,
+        "carbs": 3.4,
+        "fat": 0.1,
+        "fiber": 1.6
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 radish",
+          "grams": 4.5
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169249
+      }
+    },
+    {
+      "id": "parsley",
+      "name_ar": "بقدونس",
+      "name_en": "parsley",
+      "aliases": [
+        "بقدونس"
+      ],
+      "per_100g": {
+        "kcal": 44,
+        "protein": 3.0,
+        "carbs": 6.3,
+        "fat": 0.8,
+        "fiber": 3.3
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب مفروم",
+          "name_en": "1 cup chopped",
+          "grams": 60
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170416
+      }
+    },
+    {
+      "id": "cilantro",
+      "name_ar": "كزبرة خضراء",
+      "name_en": "cilantro",
+      "aliases": [
+        "كزبرة"
+      ],
+      "per_100g": {
+        "kcal": 28,
+        "protein": 2.1,
+        "carbs": 3.7,
+        "fat": 0.5,
+        "fiber": 2.8
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 16
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169997
+      }
+    },
+    {
+      "id": "mint",
+      "name_ar": "نعناع",
+      "name_en": "mint",
+      "aliases": [
+        "نعناع"
+      ],
+      "per_100g": {
+        "kcal": 53,
+        "protein": 3.3,
+        "carbs": 8.4,
+        "fat": 0.7,
+        "fiber": 6.8
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 13
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173433
+      }
+    },
+    {
+      "id": "ginger_raw",
+      "name_ar": "زنجبيل",
+      "name_en": "ginger",
+      "aliases": [
+        "جنزبيل",
+        "ginger"
+      ],
+      "per_100g": {
+        "kcal": 80,
+        "protein": 1.8,
+        "carbs": 17.8,
+        "fat": 0.8,
+        "fiber": 2.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة صغيرة",
+          "name_en": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169231
+      }
+    },
+    {
+      "id": "pancake",
+      "name_ar": "بان كيك",
+      "name_en": "pancake",
+      "aliases": [
+        "بانكيك",
+        "pancake"
+      ],
+      "per_100g": {
+        "kcal": 227,
+        "protein": 6.4,
+        "carbs": 28.3,
+        "fat": 9.7,
+        "fiber": 1.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "قرص",
+          "name_en": "1 pancake",
+          "grams": 38
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167961
+      }
+    },
+    {
+      "id": "toast_white",
+      "name_ar": "توست أبيض",
+      "name_en": "white toast",
+      "aliases": [
+        "توست",
+        "toast"
+      ],
+      "per_100g": {
+        "kcal": 265,
+        "protein": 9.0,
+        "carbs": 49.0,
+        "fat": 3.2,
+        "fiber": 2.7
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "1 slice",
+          "grams": 25
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174930
+      }
+    },
+    {
+      "id": "croissant",
+      "name_ar": "كرواسون",
+      "name_en": "croissant",
+      "aliases": [
+        "كرواسون",
+        "croissant"
+      ],
+      "per_100g": {
+        "kcal": 406,
+        "protein": 8.2,
+        "carbs": 45.8,
+        "fat": 21.0,
+        "fiber": 2.6
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 croissant",
+          "grams": 57
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172671
+      }
+    },
+    {
+      "id": "jam_strawberry",
+      "name_ar": "مربى فراولة",
+      "name_en": "strawberry jam",
+      "aliases": [
+        "مربى",
+        "jam"
+      ],
+      "per_100g": {
+        "kcal": 250,
+        "protein": 0.4,
+        "carbs": 65.0,
+        "fat": 0.1,
+        "fiber": 1.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 20
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168819
+      }
+    },
+    {
+      "id": "peanut_butter",
+      "name_ar": "زبدة فول سوداني",
+      "name_en": "peanut butter",
+      "aliases": [
+        "زبدة فول سوداني",
+        "peanut butter"
+      ],
+      "per_100g": {
+        "kcal": 588,
+        "protein": 25.1,
+        "carbs": 20.0,
+        "fat": 50.4,
+        "fiber": 6.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 16
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172470
+      }
+    },
+    {
+      "id": "nutella",
+      "name_ar": "نوتيلا",
+      "name_en": "chocolate hazelnut spread",
+      "aliases": [
+        "نوتيلا",
+        "nutella"
+      ],
+      "per_100g": {
+        "kcal": 539,
+        "protein": 6.3,
+        "carbs": 57.6,
+        "fat": 30.9,
+        "fiber": 5.4
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 19
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170273
+      }
+    },
+    {
+      "id": "mayo",
+      "name_ar": "مايونيز",
+      "name_en": "mayonnaise",
+      "aliases": [
+        "مايونيز",
+        "mayo"
+      ],
+      "per_100g": {
+        "kcal": 680,
+        "protein": 1.0,
+        "carbs": 0.6,
+        "fat": 75.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 13.8
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171009
+      }
+    },
+    {
+      "id": "ketchup",
+      "name_ar": "كاتشب",
+      "name_en": "ketchup",
+      "aliases": [
+        "كاتشب",
+        "ketchup"
+      ],
+      "per_100g": {
+        "kcal": 112,
+        "protein": 1.0,
+        "carbs": 27.0,
+        "fat": 0.1,
+        "fiber": 0.3
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 17
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168559
+      }
+    },
+    {
+      "id": "mustard",
+      "name_ar": "مستردة",
+      "name_en": "mustard",
+      "aliases": [
+        "مستردة",
+        "mustard"
+      ],
+      "per_100g": {
+        "kcal": 66,
+        "protein": 4.4,
+        "carbs": 5.8,
+        "fat": 3.3,
+        "fiber": 3.3
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة صغيرة",
+          "name_en": "1 tsp",
+          "grams": 5
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172234
+      }
+    },
+    {
+      "id": "soy_sauce",
+      "name_ar": "صلصة صويا",
+      "name_en": "soy sauce",
+      "aliases": [
+        "صويا",
+        "soy sauce"
+      ],
+      "per_100g": {
+        "kcal": 53,
+        "protein": 8.1,
+        "carbs": 4.9,
+        "fat": 0.0,
+        "fiber": 0.8
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 16
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174277
+      }
+    },
+    {
+      "id": "vinegar",
+      "name_ar": "خل",
+      "name_en": "vinegar",
+      "aliases": [
+        "خل",
+        "vinegar"
+      ],
+      "per_100g": {
+        "kcal": 0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173130
+      }
+    },
+    {
+      "id": "broth_chicken",
+      "name_ar": "مرق دجاج",
+      "name_en": "chicken broth",
+      "aliases": [
+        "مرق",
+        "شوربة"
+      ],
+      "per_100g": {
+        "kcal": 12,
+        "protein": 1.0,
+        "carbs": 1.0,
+        "fat": 0.5,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172885
+      }
+    },
+    {
+      "id": "machboos_rice",
+      "name_ar": "مجبوس / كبسة",
+      "name_en": "machboos / kabsa rice",
+      "aliases": [
+        "كبسة",
+        "مجبوس",
+        "machboos"
+      ],
+      "per_100g": {
+        "kcal": 160,
+        "protein": 6.0,
+        "carbs": 24.0,
+        "fat": 4.5,
+        "fiber": 1.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "plate",
+          "grams": 300
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "harees",
+      "name_ar": "هريس",
+      "name_en": "harees",
+      "aliases": [
+        "هريس",
+        "harees"
+      ],
+      "per_100g": {
+        "kcal": 120,
+        "protein": 6.0,
+        "carbs": 18.0,
+        "fat": 3.0,
+        "fiber": 2.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "bowl",
+          "grams": 250
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170288
+      }
+    },
+    {
+      "id": "thareed",
+      "name_ar": "ثريد",
+      "name_en": "thareed",
+      "aliases": [
+        "ثريد",
+        "thareed"
+      ],
+      "per_100g": {
+        "kcal": 140,
+        "protein": 7.0,
+        "carbs": 18.0,
+        "fat": 4.5,
+        "fiber": 2.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "bowl",
+          "grams": 300
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 790085
+      }
+    },
+    {
+      "id": "luqaimat",
+      "name_ar": "لقيمات",
+      "name_en": "luqaimat",
+      "aliases": [
+        "لقيمات",
+        "لقمة القاضي"
+      ],
+      "per_100g": {
+        "kcal": 380,
+        "protein": 5.0,
+        "carbs": 50.0,
+        "fat": 17.0,
+        "fiber": 1.0
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 piece",
+          "grams": 20
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167946
+      }
+    },
+    {
+      "id": "samosa",
+      "name_ar": "سمبوسة",
+      "name_en": "samosa",
+      "aliases": [
+        "سمبوسك",
+        "سمبوسة",
+        "samosa"
+      ],
+      "per_100g": {
+        "kcal": 308,
+        "protein": 6.0,
+        "carbs": 32.0,
+        "fat": 17.0,
+        "fiber": 2.0
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 piece",
+          "grams": 50
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174258
+      }
+    },
+    {
+      "id": "kibbeh",
+      "name_ar": "كبة",
+      "name_en": "kibbeh",
+      "aliases": [
+        "كبة",
+        "kibbeh"
+      ],
+      "per_100g": {
+        "kcal": 250,
+        "protein": 12.0,
+        "carbs": 20.0,
+        "fat": 14.0,
+        "fiber": 2.0
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 piece",
+          "grams": 60
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170288
+      }
+    },
+    {
+      "id": "tabbouleh",
+      "name_ar": "تبولة",
+      "name_en": "tabbouleh",
+      "aliases": [
+        "تبولة",
+        "tabbouleh"
+      ],
+      "per_100g": {
+        "kcal": 75,
+        "protein": 2.5,
+        "carbs": 10.0,
+        "fat": 3.0,
+        "fiber": 3.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 150
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170288
+      }
+    },
+    {
+      "id": "fattoush",
+      "name_ar": "فتوش",
+      "name_en": "fattoush",
+      "aliases": [
+        "فتوش",
+        "fattoush"
+      ],
+      "per_100g": {
+        "kcal": 90,
+        "protein": 2.0,
+        "carbs": 12.0,
+        "fat": 4.0,
+        "fiber": 2.5
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "bowl",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170050
+      }
+    },
+    {
+      "id": "baba_ganoush",
+      "name_ar": "بابا غنوج",
+      "name_en": "baba ganoush",
+      "aliases": [
+        "بابا غنوج",
+        "baba ganoush"
+      ],
+      "per_100g": {
+        "kcal": 100,
+        "protein": 2.5,
+        "carbs": 8.0,
+        "fat": 7.0,
+        "fiber": 3.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169228
+      }
+    },
+    {
+      "id": "mutabal",
+      "name_ar": "متبل",
+      "name_en": "mutabal",
+      "aliases": [
+        "متبل",
+        "mutabal"
+      ],
+      "per_100g": {
+        "kcal": 110,
+        "protein": 2.5,
+        "carbs": 7.0,
+        "fat": 8.0,
+        "fiber": 3.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169228
+      }
+    },
+    {
+      "id": "warak_enab",
+      "name_ar": "ورق عنب",
+      "name_en": "stuffed grape leaves",
+      "aliases": [
+        "محشي ورق عنب",
+        "dolma"
+      ],
+      "per_100g": {
+        "kcal": 140,
+        "protein": 3.0,
+        "carbs": 18.0,
+        "fat": 6.0,
+        "fiber": 3.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "ورقة",
+          "name_en": "1 leaf",
+          "grams": 20
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "ful_nabet",
+      "name_ar": "فول نابت",
+      "name_en": "sprouted fava",
+      "aliases": [
+        "فول نابت"
+      ],
+      "per_100g": {
+        "kcal": 100,
+        "protein": 8.0,
+        "carbs": 17.0,
+        "fat": 0.5,
+        "fiber": 5.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 150
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173745
+      }
+    },
+    {
+      "id": "besara",
+      "name_ar": "بصارة",
+      "name_en": "besara (fava puree)",
+      "aliases": [
+        "بصارة",
+        "besara"
+      ],
+      "per_100g": {
+        "kcal": 120,
+        "protein": 7.0,
+        "carbs": 16.0,
+        "fat": 4.0,
+        "fiber": 5.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "bowl",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173745
+      }
+    },
+    {
+      "id": "keshk",
+      "name_ar": "كشك",
+      "name_en": "keshk",
+      "aliases": [
+        "كشك"
+      ],
+      "per_100g": {
+        "kcal": 150,
+        "protein": 6.0,
+        "carbs": 20.0,
+        "fat": 5.0,
+        "fiber": 2.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "bowl",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170903
+      }
+    },
+    {
+      "id": "freekeh_cooked",
+      "name_ar": "فريكة مطبوخة",
+      "name_en": "freekeh cooked",
+      "aliases": [
+        "فريكة",
+        "freekeh"
+      ],
+      "per_100g": {
+        "kcal": 141,
+        "protein": 5.0,
+        "carbs": 28.0,
+        "fat": 1.0,
+        "fiber": 5.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 160
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170288
+      }
+    },
+    {
+      "id": "quinoa_cooked",
+      "name_ar": "كينوا مطبوخة",
+      "name_en": "quinoa cooked",
+      "aliases": [
+        "كينوا",
+        "quinoa"
+      ],
+      "per_100g": {
+        "kcal": 120,
+        "protein": 4.4,
+        "carbs": 21.3,
+        "fat": 1.9,
+        "fiber": 2.8
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 185
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168874
+      }
+    },
+    {
+      "id": "barley_cooked",
+      "name_ar": "شعير مطبوخ",
+      "name_en": "barley cooked",
+      "aliases": [
+        "شعير"
+      ],
+      "per_100g": {
+        "kcal": 123,
+        "protein": 2.3,
+        "carbs": 28.2,
+        "fat": 0.4,
+        "fiber": 3.8
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 157
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170283
+      }
+    },
+    {
+      "id": "popcorn",
+      "name_ar": "فشار",
+      "name_en": "popcorn",
+      "aliases": [
+        "فشار",
+        "popcorn"
+      ],
+      "per_100g": {
+        "kcal": 387,
+        "protein": 13.0,
+        "carbs": 78.0,
+        "fat": 4.5,
+        "fiber": 15.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 8
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 167959
+      }
+    },
+    {
+      "id": "chips_potato",
+      "name_ar": "شيبسي",
+      "name_en": "potato chips",
+      "aliases": [
+        "شيبسي",
+        "chips"
+      ],
+      "per_100g": {
+        "kcal": 536,
+        "protein": 7.0,
+        "carbs": 53.0,
+        "fat": 35.0,
+        "fiber": 4.8
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "كيس صغير",
+          "name_en": "small bag",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170033
+      }
+    },
+    {
+      "id": "biscuit_plain",
+      "name_ar": "بسكويت سادة",
+      "name_en": "plain biscuit",
+      "aliases": [
+        "بسكويت",
+        "biscuit"
+      ],
+      "per_100g": {
+        "kcal": 450,
+        "protein": 7.0,
+        "carbs": 70.0,
+        "fat": 15.0,
+        "fiber": 2.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 biscuit",
+          "grams": 12
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172671
+      }
+    },
+    {
+      "id": "cake_plain",
+      "name_ar": "كيك سادة",
+      "name_en": "plain cake",
+      "aliases": [
+        "كيك",
+        "cake"
+      ],
+      "per_100g": {
+        "kcal": 350,
+        "protein": 5.0,
+        "carbs": 55.0,
+        "fat": 12.0,
+        "fiber": 1.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 80
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168859
+      }
+    },
+    {
+      "id": "whey_protein",
+      "name_ar": "واي بروتين",
+      "name_en": "whey protein powder",
+      "aliases": [
+        "واي",
+        "protein powder"
+      ],
+      "per_100g": {
+        "kcal": 392,
+        "protein": 78.0,
+        "carbs": 8.0,
+        "fat": 5.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "سكوب",
+          "name_en": "1 scoop",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173424
+      }
+    },
+    {
+      "id": "protein_bar",
+      "name_ar": "بروتين بار",
+      "name_en": "protein bar",
+      "aliases": [
+        "بروتين بار"
+      ],
+      "per_100g": {
+        "kcal": 380,
+        "protein": 25.0,
+        "carbs": 40.0,
+        "fat": 12.0,
+        "fiber": 5.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "بار",
+          "name_en": "1 bar",
+          "grams": 60
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173424
+      }
+    },
+    {
+      "id": "skim_labneh",
+      "name_ar": "لبنة قليلة الدسم",
+      "name_en": "low-fat labneh",
+      "aliases": [
+        "لبنة لايت"
+      ],
+      "per_100g": {
+        "kcal": 90,
+        "protein": 9.0,
+        "carbs": 4.0,
+        "fat": 4.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170904
+      }
+    },
+    {
+      "id": "turkey_pastrami",
+      "name_ar": "بسطرمة رومي",
+      "name_en": "turkey pastrami",
+      "aliases": [
+        "لانشون رومي",
+        "turkey slices"
+      ],
+      "per_100g": {
+        "kcal": 120,
+        "protein": 18.0,
+        "carbs": 3.0,
+        "fat": 4.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 20
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171506
+      }
+    },
+    {
+      "id": "beef_pastrami",
+      "name_ar": "بسطرمة",
+      "name_en": "beef pastrami",
+      "aliases": [
+        "بسطرمة",
+        "pastrami"
+      ],
+      "per_100g": {
+        "kcal": 150,
+        "protein": 20.0,
+        "carbs": 2.0,
+        "fat": 7.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 20
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "mortadella",
+      "name_ar": "مرتديلا",
+      "name_en": "mortadella",
+      "aliases": [
+        "لانشون",
+        "mortadella"
+      ],
+      "per_100g": {
+        "kcal": 311,
+        "protein": 14.0,
+        "carbs": 3.0,
+        "fat": 27.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 20
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "hotdog",
+      "name_ar": "هوت دوج",
+      "name_en": "hot dog",
+      "aliases": [
+        "هوت دوج",
+        "hotdog"
+      ],
+      "per_100g": {
+        "kcal": 290,
+        "protein": 10.0,
+        "carbs": 4.0,
+        "fat": 26.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 frank",
+          "grams": 45
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "sausage",
+      "name_ar": "سجق",
+      "name_en": "sausage",
+      "aliases": [
+        "سجق",
+        "sausage"
+      ],
+      "per_100g": {
+        "kcal": 300,
+        "protein": 12.0,
+        "carbs": 2.0,
+        "fat": 27.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "سيخ",
+          "name_en": "1 link",
+          "grams": 50
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "liver_pate",
+      "name_ar": "باتيه كبدة",
+      "name_en": "liver pate",
+      "aliases": [
+        "كبدة اسكندراني"
+      ],
+      "per_100g": {
+        "kcal": 250,
+        "protein": 12.0,
+        "carbs": 5.0,
+        "fat": 20.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "ساندوتش",
+          "name_en": "sandwich filling",
+          "grams": 80
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169451
+      }
+    },
+    {
+      "id": "dumyati_cheese",
+      "name_ar": "جبنة دمياطي",
+      "name_en": "Domiati cheese",
+      "aliases": [
+        "دمياطي"
+      ],
+      "per_100g": {
+        "kcal": 250,
+        "protein": 15.0,
+        "carbs": 3.0,
+        "fat": 20.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173420
+      }
+    },
+    {
+      "id": "karish_cheese",
+      "name_ar": "جبنة قريش مصرية",
+      "name_en": "karish cheese",
+      "aliases": [
+        "قريش بلدي"
+      ],
+      "per_100g": {
+        "kcal": 100,
+        "protein": 14.0,
+        "carbs": 3.0,
+        "fat": 3.5,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172179
+      }
+    },
+    {
+      "id": "rumi_cheese",
+      "name_ar": "جبنة رومي",
+      "name_en": "Rumi cheese",
+      "aliases": [
+        "رومي",
+        "جبنة رومي"
+      ],
+      "per_100g": {
+        "kcal": 380,
+        "protein": 25.0,
+        "carbs": 2.0,
+        "fat": 30.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 25
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173414
+      }
+    },
+    {
+      "id": "zabadi_flavored",
+      "name_ar": "زبادي بالفواكه",
+      "name_en": "fruit yogurt",
+      "aliases": [
+        "زبادي بالفراولة"
+      ],
+      "per_100g": {
+        "kcal": 99,
+        "protein": 3.5,
+        "carbs": 15.0,
+        "fat": 2.5,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "علبة",
+          "name_en": "cup",
+          "grams": 150
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170903
+      }
+    },
+    {
+      "id": "cream_whipping",
+      "name_ar": "كريمة خفق",
+      "name_en": "whipping cream",
+      "aliases": [
+        "كريمة"
+      ],
+      "per_100g": {
+        "kcal": 340,
+        "protein": 2.0,
+        "carbs": 3.0,
+        "fat": 36.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170899
+      }
+    },
+    {
+      "id": "milk_powder",
+      "name_ar": "لبن بودرة",
+      "name_en": "milk powder",
+      "aliases": [
+        "لبن مجفف"
+      ],
+      "per_100g": {
+        "kcal": 496,
+        "protein": 26.0,
+        "carbs": 38.0,
+        "fat": 27.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 8
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173424
+      }
+    },
+    {
+      "id": "evaporated_milk",
+      "name_ar": "لبن مكثف",
+      "name_en": "evaporated milk",
+      "aliases": [
+        "لبن مكثف"
+      ],
+      "per_100g": {
+        "kcal": 134,
+        "protein": 6.8,
+        "carbs": 10.0,
+        "fat": 7.6,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173441
+      }
+    },
+    {
+      "id": "condensed_milk",
+      "name_ar": "لبن محلى مكثف",
+      "name_en": "sweetened condensed milk",
+      "aliases": [
+        "نسلة",
+        "condensed milk"
+      ],
+      "per_100g": {
+        "kcal": 321,
+        "protein": 7.9,
+        "carbs": 54.4,
+        "fat": 8.7,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 19
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173424
+      }
+    },
+    {
+      "id": "bread_whole_wheat",
+      "name_ar": "خبز قمح كامل",
+      "name_en": "whole wheat bread",
+      "aliases": [
+        "توست بني",
+        "brown bread"
+      ],
+      "per_100g": {
+        "kcal": 247,
+        "protein": 13.0,
+        "carbs": 41.0,
+        "fat": 3.4,
+        "fiber": 7.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174930
+      }
+    },
+    {
+      "id": "rice_cake",
+      "name_ar": "كعكة أرز",
+      "name_en": "rice cake",
+      "aliases": [
+        "رايس كيك"
+      ],
+      "per_100g": {
+        "kcal": 387,
+        "protein": 8.0,
+        "carbs": 81.0,
+        "fat": 2.8,
+        "fiber": 1.5
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "1 cake",
+          "grams": 9
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "tortilla_flour",
+      "name_ar": "تورتيلا دقيق",
+      "name_en": "flour tortilla",
+      "aliases": [
+        "تورتيلا"
+      ],
+      "per_100g": {
+        "kcal": 312,
+        "protein": 8.2,
+        "carbs": 51.0,
+        "fat": 8.0,
+        "fiber": 2.5
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "رغيف",
+          "name_en": "1 tortilla",
+          "grams": 49
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 790179
+      }
+    },
+    {
+      "id": "bagel",
+      "name_ar": "بيجل",
+      "name_en": "bagel",
+      "aliases": [
+        "بيجل",
+        "bagel"
+      ],
+      "per_100g": {
+        "kcal": 257,
+        "protein": 10.0,
+        "carbs": 50.0,
+        "fat": 1.5,
+        "fiber": 2.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 bagel",
+          "grams": 98
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174930
+      }
+    },
+    {
+      "id": "english_muffin",
+      "name_ar": "مافن إنجليزي",
+      "name_en": "English muffin",
+      "aliases": [
+        "مافن"
+      ],
+      "per_100g": {
+        "kcal": 227,
+        "protein": 8.7,
+        "carbs": 44.0,
+        "fat": 1.8,
+        "fiber": 3.5
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 muffin",
+          "grams": 57
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174930
+      }
+    },
+    {
+      "id": "hash_brown",
+      "name_ar": "هاش براون",
+      "name_en": "hash brown",
+      "aliases": [
+        "هاش براون"
+      ],
+      "per_100g": {
+        "kcal": 265,
+        "protein": 3.0,
+        "carbs": 35.0,
+        "fat": 12.5,
+        "fiber": 3.0
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "patty",
+          "grams": 70
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170033
+      }
+    },
+    {
+      "id": "bacon_cooked",
+      "name_ar": "بيكون مطبوخ",
+      "name_en": "bacon cooked",
+      "aliases": [
+        "بيكون",
+        "bacon"
+      ],
+      "per_100g": {
+        "kcal": 541,
+        "protein": 37.0,
+        "carbs": 1.4,
+        "fat": 42.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 8
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "ham",
+      "name_ar": "لحم خنزير مقدد",
+      "name_en": "ham",
+      "aliases": [
+        "هام"
+      ],
+      "per_100g": {
+        "kcal": 145,
+        "protein": 21.0,
+        "carbs": 1.5,
+        "fat": 5.5,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 28
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "salami",
+      "name_ar": "سلامي",
+      "name_en": "salami",
+      "aliases": [
+        "سلامي"
+      ],
+      "per_100g": {
+        "kcal": 378,
+        "protein": 22.0,
+        "carbs": 1.0,
+        "fat": 31.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 10
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174032
+      }
+    },
+    {
+      "id": "anchovy",
+      "name_ar": "أنشوجة",
+      "name_en": "anchovy",
+      "aliases": [
+        "أنشوجة"
+      ],
+      "per_100g": {
+        "kcal": 210,
+        "protein": 29.0,
+        "carbs": 0.0,
+        "fat": 9.7,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "fillet",
+          "grams": 4
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174182
+      }
+    },
+    {
+      "id": "clam_cooked",
+      "name_ar": "محار مطبوخ",
+      "name_en": "clam cooked",
+      "aliases": [
+        "محار"
+      ],
+      "per_100g": {
+        "kcal": 148,
+        "protein": 25.5,
+        "carbs": 5.1,
+        "fat": 2.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 85
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171975
+      }
+    },
+    {
+      "id": "crab_cooked",
+      "name_ar": "كابوريا مطبوخة",
+      "name_en": "crab cooked",
+      "aliases": [
+        "كابوريا"
+      ],
+      "per_100g": {
+        "kcal": 97,
+        "protein": 19.4,
+        "carbs": 0.0,
+        "fat": 1.5,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 118
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174202
+      }
+    },
+    {
+      "id": "lobster_cooked",
+      "name_ar": "إستاكوزا مطبوخة",
+      "name_en": "lobster cooked",
+      "aliases": [
+        "إستاكوزا"
+      ],
+      "per_100g": {
+        "kcal": 89,
+        "protein": 19.0,
+        "carbs": 0.0,
+        "fat": 0.9,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 145
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174204
+      }
+    },
+    {
+      "id": "squid_cooked",
+      "name_ar": "كلاماري مطبوخ",
+      "name_en": "squid cooked",
+      "aliases": [
+        "كلاماري",
+        "سيبيا"
+      ],
+      "per_100g": {
+        "kcal": 92,
+        "protein": 15.6,
+        "carbs": 3.1,
+        "fat": 1.4,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 85
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174220
+      }
+    },
+    {
+      "id": "octopus_cooked",
+      "name_ar": "أخطبوط مطبوخ",
+      "name_en": "octopus cooked",
+      "aliases": [
+        "أخطبوط"
+      ],
+      "per_100g": {
+        "kcal": 82,
+        "protein": 14.9,
+        "carbs": 2.2,
+        "fat": 1.0,
+        "fiber": 0.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 85
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174219
+      }
+    },
+    {
+      "id": "asparagus_cooked",
+      "name_ar": "هليون مطبوخ",
+      "name_en": "asparagus cooked",
+      "aliases": [
+        "هليون"
+      ],
+      "per_100g": {
+        "kcal": 28,
+        "protein": 2.4,
+        "carbs": 4.1,
+        "fat": 0.2,
+        "fiber": 2.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 180
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168389
+      }
+    },
+    {
+      "id": "artichoke_cooked",
+      "name_ar": "خرشوف مطبوخ",
+      "name_en": "artichoke cooked",
+      "aliases": [
+        "خرشوف"
+      ],
+      "per_100g": {
+        "kcal": 62,
+        "protein": 2.9,
+        "carbs": 12.0,
+        "fat": 0.3,
+        "fiber": 5.7
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "حبة",
+          "name_en": "1 artichoke",
+          "grams": 120
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169205
+      }
+    },
+    {
+      "id": "celery",
+      "name_ar": "كرفس",
+      "name_en": "celery",
+      "aliases": [
+        "كرفس"
+      ],
+      "per_100g": {
+        "kcal": 16,
+        "protein": 0.7,
+        "carbs": 3.0,
+        "fat": 0.2,
+        "fiber": 1.6
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "عود",
+          "name_en": "stalk",
+          "grams": 40
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169984
+      }
+    },
+    {
+      "id": "eggplant_fried",
+      "name_ar": "باذنجان مقلي",
+      "name_en": "eggplant fried",
+      "aliases": [
+        "باذنجان مقلي"
+      ],
+      "per_100g": {
+        "kcal": 180,
+        "protein": 1.5,
+        "carbs": 10.0,
+        "fat": 15.0,
+        "fiber": 3.0
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 40
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 169228
+      }
+    },
+    {
+      "id": "onion_fried",
+      "name_ar": "بصل مقلي",
+      "name_en": "fried onion",
+      "aliases": [
+        "بصل محمر"
+      ],
+      "per_100g": {
+        "kcal": 400,
+        "protein": 5.0,
+        "carbs": 35.0,
+        "fat": 28.0,
+        "fiber": 4.0
+      },
+      "state": "fried",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170000
+      }
+    },
+    {
+      "id": "garlic_bread",
+      "name_ar": "خبز بالثوم",
+      "name_en": "garlic bread",
+      "aliases": [
+        "ثوم توست"
+      ],
+      "per_100g": {
+        "kcal": 350,
+        "protein": 8.0,
+        "carbs": 40.0,
+        "fat": 17.0,
+        "fiber": 2.0
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "slice",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174930
+      }
+    },
+    {
+      "id": "lasagna",
+      "name_ar": "لازانيا",
+      "name_en": "lasagna",
+      "aliases": [
+        "لازانيا"
+      ],
+      "per_100g": {
+        "kcal": 160,
+        "protein": 9.0,
+        "carbs": 15.0,
+        "fat": 7.0,
+        "fiber": 1.5
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "قطعة",
+          "name_en": "slice",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168928
+      }
+    },
+    {
+      "id": "pasta_carbonara",
+      "name_ar": "مكرونة كاربونارا",
+      "name_en": "pasta carbonara",
+      "aliases": [
+        "كاربونارا"
+      ],
+      "per_100g": {
+        "kcal": 220,
+        "protein": 9.0,
+        "carbs": 25.0,
+        "fat": 10.0,
+        "fiber": 1.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "طبق",
+          "name_en": "plate",
+          "grams": 300
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168928
+      }
+    },
+    {
+      "id": "nasi_rice_spiced",
+      "name_ar": "أرز مبهر",
+      "name_en": "spiced rice",
+      "aliases": [
+        "أرز أصفر",
+        "أرز مبهر"
+      ],
+      "per_100g": {
+        "kcal": 145,
+        "protein": 3.0,
+        "carbs": 28.0,
+        "fat": 2.5,
+        "fiber": 0.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 160
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "vermicelli_rice",
+      "name_ar": "أرز بالشعرية",
+      "name_en": "rice with vermicelli",
+      "aliases": [
+        "أرز بالشعيرية"
+      ],
+      "per_100g": {
+        "kcal": 150,
+        "protein": 3.0,
+        "carbs": 28.0,
+        "fat": 3.0,
+        "fiber": 0.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 160
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168878
+      }
+    },
+    {
+      "id": "lentil_soup",
+      "name_ar": "شوربة عدس",
+      "name_en": "lentil soup",
+      "aliases": [
+        "شوربة عدس"
+      ],
+      "per_100g": {
+        "kcal": 80,
+        "protein": 5.0,
+        "carbs": 12.0,
+        "fat": 1.5,
+        "fiber": 4.0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172421
+      }
+    },
+    {
+      "id": "chicken_soup",
+      "name_ar": "شوربة فراخ",
+      "name_en": "chicken soup",
+      "aliases": [
+        "شوربة فراخ"
+      ],
+      "per_100g": {
+        "kcal": 40,
+        "protein": 4.0,
+        "carbs": 3.0,
+        "fat": 1.5,
+        "fiber": 0.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 172885
+      }
+    },
+    {
+      "id": "vegetable_soup",
+      "name_ar": "شوربة خضار",
+      "name_en": "vegetable soup",
+      "aliases": [
+        "شوربة خضار"
+      ],
+      "per_100g": {
+        "kcal": 35,
+        "protein": 1.5,
+        "carbs": 6.0,
+        "fat": 0.8,
+        "fiber": 1.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170050
+      }
+    },
+    {
+      "id": "molokhia_soup",
+      "name_ar": "شوربة ملوخية",
+      "name_en": "molokhia soup",
+      "aliases": [
+        "شوربة ملوخية"
+      ],
+      "per_100g": {
+        "kcal": 45,
+        "protein": 3.0,
+        "carbs": 5.0,
+        "fat": 1.5,
+        "fiber": 1.5
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 168463
+      }
+    },
+    {
+      "id": "smoothie_banana",
+      "name_ar": "سموذي موز",
+      "name_en": "banana smoothie",
+      "aliases": [
+        "سموذي"
+      ],
+      "per_100g": {
+        "kcal": 80,
+        "protein": 2.5,
+        "carbs": 15.0,
+        "fat": 1.5,
+        "fiber": 1.5
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 250
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173944
+      }
+    },
+    {
+      "id": "energy_drink",
+      "name_ar": "مشروب طاقة",
+      "name_en": "energy drink",
+      "aliases": [
+        "ريد بول",
+        "energy drink"
+      ],
+      "per_100g": {
+        "kcal": 45,
+        "protein": 0.0,
+        "carbs": 11.0,
+        "fat": 0.0,
+        "fiber": 0.0
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "علبة",
+          "name_en": "can 250ml",
+          "grams": 250
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174819
+      }
+    },
+    {
+      "id": "coconut_water",
+      "name_ar": "ماء جوز هند",
+      "name_en": "coconut water",
+      "aliases": [
+        "ماء جوز هند"
+      ],
+      "per_100g": {
+        "kcal": 19,
+        "protein": 0.7,
+        "carbs": 3.7,
+        "fat": 0.2,
+        "fiber": 1.1
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170174
+      }
+    },
+    {
+      "id": "almond_milk",
+      "name_ar": "حليب لوز",
+      "name_en": "almond milk",
+      "aliases": [
+        "حليب لوز"
+      ],
+      "per_100g": {
+        "kcal": 15,
+        "protein": 0.6,
+        "carbs": 0.3,
+        "fat": 1.1,
+        "fiber": 0.4
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170567
+      }
+    },
+    {
+      "id": "oat_milk",
+      "name_ar": "حليب شوفان",
+      "name_en": "oat milk",
+      "aliases": [
+        "حليب شوفان"
+      ],
+      "per_100g": {
+        "kcal": 43,
+        "protein": 1.0,
+        "carbs": 7.0,
+        "fat": 1.5,
+        "fiber": 0.8
+      },
+      "state": "raw",
+      "common_portions": [
+        {
+          "name_ar": "كوب",
+          "name_en": "1 cup",
+          "grams": 240
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173904
+      }
+    }
+  ]
+}

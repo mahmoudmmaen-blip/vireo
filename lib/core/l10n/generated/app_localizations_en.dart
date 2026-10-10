@@ -2998,4 +2998,106 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get breathingRest => 'Rest';
+
+  @override
+  String get mealReviewTitle => 'Review meal';
+
+  @override
+  String get mealReviewAddItem => 'Add item';
+
+  @override
+  String get mealReviewSlot => 'Meal';
+
+  @override
+  String mealReviewRemaining(int kcal) {
+    return 'Remaining budget: $kcal kcal';
+  }
+
+  @override
+  String get mealReviewEstimated => 'estimated';
+
+  @override
+  String get mealReviewCheckAmount => 'check the amount';
+
+  @override
+  String get mealReviewSearchFood => 'Search foods…';
+
+  @override
+  String get mealReviewLogByText => 'Log by text instead';
+
+  @override
+  String get mealLogTextTitle => 'Log meal by text';
+
+  @override
+  String get mealLogTextHint => 'Describe what you ate — Arabic or English.';
+
+  @override
+  String get mealLogTextPlaceholder => 'أكلت 2 بيض ورغيف بلدي وكوباية شاي بسكر';
+
+  @override
+  String get mealLogTextAnalyze => 'Analyze';
+
+  @override
+  String get mealVoiceStart => 'Voice';
+
+  @override
+  String get mealVoiceListening => 'Listening…';
+
+  @override
+  String get mealVoiceUnavailable => 'Voice input unavailable on this device';
+
+  @override
+  String get mealBarcodeTitle => 'Scan barcode';
+
+  @override
+  String get mealBarcodeFailed =>
+      'Could not look up that barcode. Try again or log by text.';
+
+  @override
+  String get mealScanHeroTitle => 'Scan your meal';
+
+  @override
+  String get mealScanHeroSubtitle => 'AI identifies foods — you confirm grams';
+
+  @override
+  String get mealScanTipAbove => 'Shoot from above';
+
+  @override
+  String get mealScanTipWholePlate => 'Whole plate visible';
+
+  @override
+  String get mealScanTipLight => 'Good light';
+
+  @override
+  String get mealScanFlashOn => 'Flash on';
+
+  @override
+  String get mealScanFlashOff => 'Flash off';
+
+  @override
+  String get uxQuickMealText => 'Text meal';
+
+  @override
+  String get uxQuickMealTextSub => 'Type what you ate';
+
+  @override
+  String get uxQuickBarcode => 'Barcode';
+
+  @override
+  String get uxQuickBarcodeSub => 'Open Food Facts lookup';
+
+  @override
+  String get mealFavoriteSave => 'Save favorite';
+
+  @override
+  String get mealFavoriteSaved => 'Saved to favorites';
+
+  @override
+  String get mealFavoritesTitle => 'Favorites';
+
+  @override
+  String get mealRecentTitle => 'Recent meals';
+
+  @override
+  String get mealRelog => 'Log again';
 }

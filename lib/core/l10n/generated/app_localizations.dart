@@ -5416,6 +5416,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rest'**
   String get breathingRest;
+
+  /// No description provided for @mealReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review meal'**
+  String get mealReviewTitle;
+
+  /// No description provided for @mealReviewAddItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Add item'**
+  String get mealReviewAddItem;
+
+  /// No description provided for @mealReviewSlot.
+  ///
+  /// In en, this message translates to:
+  /// **'Meal'**
+  String get mealReviewSlot;
+
+  /// No description provided for @mealReviewRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining budget: {kcal} kcal'**
+  String mealReviewRemaining(int kcal);
+
+  /// No description provided for @mealReviewEstimated.
+  ///
+  /// In en, this message translates to:
+  /// **'estimated'**
+  String get mealReviewEstimated;
+
+  /// No description provided for @mealReviewCheckAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'check the amount'**
+  String get mealReviewCheckAmount;
+
+  /// No description provided for @mealReviewSearchFood.
+  ///
+  /// In en, this message translates to:
+  /// **'Search foods…'**
+  String get mealReviewSearchFood;
+
+  /// No description provided for @mealReviewLogByText.
+  ///
+  /// In en, this message translates to:
+  /// **'Log by text instead'**
+  String get mealReviewLogByText;
+
+  /// No description provided for @mealLogTextTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log meal by text'**
+  String get mealLogTextTitle;
+
+  /// No description provided for @mealLogTextHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe what you ate — Arabic or English.'**
+  String get mealLogTextHint;
+
+  /// No description provided for @mealLogTextPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'أكلت 2 بيض ورغيف بلدي وكوباية شاي بسكر'**
+  String get mealLogTextPlaceholder;
+
+  /// No description provided for @mealLogTextAnalyze.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyze'**
+  String get mealLogTextAnalyze;
+
+  /// No description provided for @mealVoiceStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice'**
+  String get mealVoiceStart;
+
+  /// No description provided for @mealVoiceListening.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening…'**
+  String get mealVoiceListening;
+
+  /// No description provided for @mealVoiceUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice input unavailable on this device'**
+  String get mealVoiceUnavailable;
+
+  /// No description provided for @mealBarcodeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan barcode'**
+  String get mealBarcodeTitle;
+
+  /// No description provided for @mealBarcodeFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not look up that barcode. Try again or log by text.'**
+  String get mealBarcodeFailed;
+
+  /// No description provided for @mealScanHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan your meal'**
+  String get mealScanHeroTitle;
+
+  /// No description provided for @mealScanHeroSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI identifies foods — you confirm grams'**
+  String get mealScanHeroSubtitle;
+
+  /// No description provided for @mealScanTipAbove.
+  ///
+  /// In en, this message translates to:
+  /// **'Shoot from above'**
+  String get mealScanTipAbove;
+
+  /// No description provided for @mealScanTipWholePlate.
+  ///
+  /// In en, this message translates to:
+  /// **'Whole plate visible'**
+  String get mealScanTipWholePlate;
+
+  /// No description provided for @mealScanTipLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Good light'**
+  String get mealScanTipLight;
+
+  /// No description provided for @mealScanFlashOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Flash on'**
+  String get mealScanFlashOn;
+
+  /// No description provided for @mealScanFlashOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Flash off'**
+  String get mealScanFlashOff;
+
+  /// No description provided for @uxQuickMealText.
+  ///
+  /// In en, this message translates to:
+  /// **'Text meal'**
+  String get uxQuickMealText;
+
+  /// No description provided for @uxQuickMealTextSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Type what you ate'**
+  String get uxQuickMealTextSub;
+
+  /// No description provided for @uxQuickBarcode.
+  ///
+  /// In en, this message translates to:
+  /// **'Barcode'**
+  String get uxQuickBarcode;
+
+  /// No description provided for @uxQuickBarcodeSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Food Facts lookup'**
+  String get uxQuickBarcodeSub;
+
+  /// No description provided for @mealFavoriteSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save favorite'**
+  String get mealFavoriteSave;
+
+  /// No description provided for @mealFavoriteSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to favorites'**
+  String get mealFavoriteSaved;
+
+  /// No description provided for @mealFavoritesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get mealFavoritesTitle;
+
+  /// No description provided for @mealRecentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent meals'**
+  String get mealRecentTitle;
+
+  /// No description provided for @mealRelog.
+  ///
+  /// In en, this message translates to:
+  /// **'Log again'**
+  String get mealRelog;
 }
 
 class _AppLocalizationsDelegate

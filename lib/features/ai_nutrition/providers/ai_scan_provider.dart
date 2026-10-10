@@ -1,8 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/features/ai_nutrition/application/ai_scan_state.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service.dart';
+import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/domain/i_food_vision_service.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
 
@@ -18,8 +20,7 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
     state = const AsyncValue.data(AiScanIdle());
   }
 
-  /// Scan meal from native [File] or web [Uint8List] (via [analyzeImageFile]).
-  Future<void> scanMeal(Object image) async {
+  Future<void> scanMeal(Object image, {String language = 'ar'}) async {
     Uint8List? preview;
     try {
       preview = await mealImageToBytes(image);
@@ -27,16 +28,19 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
       preview = image is Uint8List ? image : null;
     }
 
-    state = AsyncValue.data(AiScanScanning(previewBytes: preview));
+    state = AsyncValue.data(
+      AiScanScanning(previewBytes: preview, hint: 'rice…'),
+    );
 
     try {
-      final result = await analyzeImageFile(
-        ref.read(foodVisionServiceProvider),
-        image,
+      final bytes = preview ?? await mealImageToBytes(image);
+      final draft = await GeminiFoodServiceCore.analyzeBytesToDraft(
+        bytes,
         ref.read(remainingCaloriesForAiScanProvider),
         ref.read(remainingProteinForAiScanProvider),
+        language: language,
       );
-      state = AsyncValue.data(AiScanSuccess(result));
+      state = AsyncValue.data(AiScanSuccess(draft));
     } on FoodVisionOfflineException {
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.offline, previewBytes: preview),
@@ -53,11 +57,13 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.dailyLimit, previewBytes: preview),
       );
-    } on FoodVisionException {
+    } on FoodVisionException catch (e) {
+      BootLog.warn('ai scan FoodVisionException', e);
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.api, previewBytes: preview),
       );
-    } catch (_) {
+    } catch (e) {
+      BootLog.warn('ai scan unexpected', e);
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.api, previewBytes: preview),
       );

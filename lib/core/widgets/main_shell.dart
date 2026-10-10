@@ -16,6 +16,7 @@ import 'package:vireo/features/nutrition/nutrition_screen.dart';
 import 'package:vireo/features/profile/profile_screen.dart';
 import 'package:vireo/features/progress/progress_screen.dart';
 import 'package:vireo/features/progress/widgets/reassessment_gate.dart';
+import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/quick_log/quick_log_sheet.dart';
 import 'package:vireo/features/subscription/widgets/subscription_shell_gate.dart';
 import 'package:vireo/features/workout/workout_screen.dart';
@@ -101,6 +102,7 @@ class _MainShellState extends ConsumerState<MainShell> {
             ref.read(shellTabIndexProvider.notifier).goTo(value);
           },
           onQuickLog: () => showQuickLogSheet(context, ref),
+          onQuickLogLongPress: () => AiScanScreen.open(context, ref, fromCamera: true),
         ),
       ),
     );
@@ -112,11 +114,13 @@ class _VireoBottomBar extends StatelessWidget {
     required this.index,
     required this.onSelect,
     required this.onQuickLog,
+    required this.onQuickLogLongPress,
   });
 
   final int index;
   final ValueChanged<int> onSelect;
   final VoidCallback onQuickLog;
+  final VoidCallback onQuickLogLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +153,14 @@ class _VireoBottomBar extends StatelessWidget {
               tab(0, Icons.home_outlined, Icons.home_rounded, l10n.homeTitle),
               tab(1, Icons.fitness_center_outlined, Icons.fitness_center_rounded,
                   l10n.workoutTitle),
-              Expanded(child: Center(child: _QuickLogButton(onTap: onQuickLog))),
+              Expanded(
+                child: Center(
+                  child: _QuickLogButton(
+                    onTap: onQuickLog,
+                    onLongPress: onQuickLogLongPress,
+                  ),
+                ),
+              ),
               tab(2, Icons.restaurant_outlined, Icons.restaurant_rounded,
                   l10n.nutritionTitle),
               tab(3, Icons.insights_outlined, Icons.insights_rounded,
@@ -233,9 +244,10 @@ class _NavItem extends StatelessWidget {
 }
 
 class _QuickLogButton extends StatelessWidget {
-  const _QuickLogButton({required this.onTap});
+  const _QuickLogButton({required this.onTap, required this.onLongPress});
 
   final VoidCallback onTap;
+  final VoidCallback onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -246,6 +258,7 @@ class _QuickLogButton extends StatelessWidget {
       message: l10n.uxQuickLogTitle,
       child: Pressable(
         onTap: onTap,
+        onLongPress: onLongPress,
         haptic: false,
         scale: 0.9,
         semanticLabel: l10n.uxQuickLogTitle,
