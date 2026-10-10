@@ -12,7 +12,7 @@ import 'package:vireo/features/diary/domain/diary_day.dart';
 import 'package:vireo/features/diary/domain/diary_entry.dart';
 import 'package:vireo/features/diary/providers/diary_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
-import 'package:vireo/features/water/providers/water_tracker_provider.dart';
+import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 
 class DiaryScreen extends ConsumerWidget {
   const DiaryScreen({super.key});
@@ -227,8 +227,9 @@ class _DiaryBody extends ConsumerWidget {
     final proteinProgress = day.proteinTarget > 0
         ? (day.proteinTotal / day.proteinTarget).clamp(0.0, 1.0)
         : 0.0;
-    final waterProgress = waterDailyGoalMl > 0
-        ? (day.waterIntake / waterDailyGoalMl).clamp(0.0, 1.0)
+    final waterGoalMl = ref.watch(waterDailyGoalMlProvider);
+    final waterProgress = waterGoalMl > 0
+        ? (day.waterIntake / waterGoalMl).clamp(0.0, 1.0)
         : 0.0;
 
     return ListView(
@@ -284,7 +285,7 @@ class _DiaryBody extends ConsumerWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                l10n.diaryWaterProgress(day.waterIntake, waterDailyGoalMl),
+                l10n.diaryWaterProgress(day.waterIntake, waterGoalMl),
                 style: TextStyle(color: colors.textMute, fontSize: 12),
               ),
             ],

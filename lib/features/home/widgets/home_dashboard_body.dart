@@ -20,7 +20,6 @@ import 'package:vireo/features/ai_coach/screens/ai_coach_screen.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
-import 'package:vireo/features/auth/widgets/guest_auth_gate.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
@@ -35,7 +34,9 @@ import 'package:vireo/features/progress/providers/weekly_checkin_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/walking/walking_tracker_screen.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
-import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
+import 'package:vireo/features/home/widgets/today_plan_section.dart';
+import 'package:vireo/features/auth/services/save_progress_prompt.dart';
+import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 
 const _headerPad = EdgeInsets.fromLTRB(4, VSpace.sm, 4, 0);
 
@@ -49,7 +50,6 @@ class HomeDashboardBody extends ConsumerWidget {
     final auth = ref.watch(authProvider).valueOrNull;
     final isGuest = auth?.isGuest == true;
     final dash = ref.watch(homeDashboardProvider);
-    final workoutAsync = ref.watch(todayWorkoutProvider);
     final nutrition = ref.watch(todayNutritionProvider(locale));
     final weeklyDue = ref.watch(weeklyCheckInDueProvider);
     final activeDiet = ref.watch(activeDietProgramProvider);
@@ -67,14 +67,7 @@ class HomeDashboardBody extends ConsumerWidget {
             ? l10n.homeProgramDay(dash.programDay, dash.programTotalDays)
             : l10n.homeDayPhase(dash.programDay, homePhaseName(l10n, dash, locale)),
       ),
-      if (isGuest)
-        _GuestBanner(
-          onSignUp: () => requireAccountAccess(
-            context,
-            ref,
-            reason: AuthGateReason.saveProgress,
-          ),
-        ),
+      const SaveProgressPromptHost(),
       _TodayHeroCard(
         data: nutrition,
         onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
@@ -101,24 +94,7 @@ class HomeDashboardBody extends ConsumerWidget {
         onWorkout: () => ref.read(shellTabIndexProvider.notifier).goWorkout(),
         onCoach: () => push(const AiCoachScreen()),
       ),
-      SectionHeader(title: l10n.uxSectionTraining, padding: _headerPad),
-      workoutAsync.when(
-        loading: () => const _SkeletonCard(height: 168),
-        error: (_, _) => const SizedBox.shrink(),
-        data: (session) {
-          if (!dash.hasProgram) {
-            return _StartProgramCard(
-              onStart: () => ref.read(shellTabIndexProvider.notifier).goWorkout(),
-            );
-          }
-          if (session.exercises.isEmpty) return const _RestDayCard();
-          return _WorkoutHeroCard(
-            session: session,
-            locale: locale,
-            onStart: () => push(const WorkoutFlowScreen()),
-          );
-        },
-      ),
+      const TodayPlanSection(),
       _ActivityRow(
         stepsCurrent: dash.stepsToday,
         stepsGoal: dash.stepsGoal,
@@ -973,7 +949,9 @@ class _ActivityRow extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final waterMl = ref.watch(waterTrackerProvider);
-    final waterRatio = waterDailyGoalMl > 0 ? waterMl / waterDailyGoalMl : 0.0;
+    final waterGoal = ref.watch(waterDailyGoalMlProvider);
+    final weightKg = ref.watch(waterProfileWeightKgProvider);
+    final waterRatio = waterGoal > 0 ? waterMl / waterGoal : 0.0;
     final stepRatio = stepsGoal > 0 ? stepsCurrent / stepsGoal : 0.0;
 
     return IntrinsicHeight(
@@ -1018,7 +996,11 @@ class _ActivityRow extends ConsumerWidget {
                     ),
                     title: l10n.uxWater,
                     value: (waterMl / 1000).toStringAsFixed(2),
-                    caption: '/ ${(waterDailyGoalMl / 1000).toStringAsFixed(1)} L',
+                    caption: '/ ${(waterGoal / 1000).toStringAsFixed(1)} L',
+                  ),
+                  Text(
+                    l10n.waterGoalBasedOnWeight(weightKg.round()),
+                    style: TextStyle(color: colors.textMute, fontSize: 10),
                   ),
                   const SizedBox(height: VSpace.xs),
                   Row(
@@ -1043,7 +1025,7 @@ class _ActivityRow extends ConsumerWidget {
                         icon: Icons.add_rounded,
                         tooltip: l10n.uxQuickWater,
                         filled: true,
-                        onTap: waterMl >= waterDailyGoalMl
+                        onTap: waterMl >= waterGoal
                             ? null
                             : () => ref.read(waterTrackerProvider.notifier).addGlass(),
                       ),

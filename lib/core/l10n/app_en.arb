@@ -1458,5 +1458,80 @@
       "current": {"type": "int"},
       "max": {"type": "int"}
     }
-  }
+  },
+  "todayPlanTitle": "TODAY PLAN",
+  "todayPlanProgressSummary": "You've completed {percent}% of your day · {done}/{total} items",
+  "@todayPlanProgressSummary": {
+    "placeholders": {
+      "percent": {"type": "int"},
+      "done": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "todayPlanNow": "Now",
+  "todayPlanPro": "PRO",
+  "todayPlanWaterReminder": "Water reminder {index} of {total}",
+  "@todayPlanWaterReminder": {
+    "placeholders": {
+      "index": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "todayPlanWaterGoalLine": "Daily goal {ml} ml",
+  "@todayPlanWaterGoalLine": {
+    "placeholders": {
+      "ml": {"type": "int"}
+    }
+  },
+  "todayPlanFastingOpen": "Eating window opens",
+  "todayPlanFastingOpenSubtitle": "{hours}h eating window begins",
+  "@todayPlanFastingOpenSubtitle": {
+    "placeholders": {"hours": {"type": "int"}}
+  },
+  "todayPlanFastingClose": "Eating window closes",
+  "todayPlanFastingCloseSubtitle": "{hours}h fast begins",
+  "@todayPlanFastingCloseSubtitle": {
+    "placeholders": {"hours": {"type": "int"}}
+  },
+  "todayPlanWorkout": "Today's workout",
+  "todayPlanSteps": "Steps goal",
+  "todayPlanStepsProgress": "{current} / {goal} steps",
+  "@todayPlanStepsProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "goal": {"type": "int"}
+    }
+  },
+  "todayPlanVitalitySleepSubtitle": "Log 7.5+ hours in Vitality",
+  "todayPlanVitalityProteinSubtitle": "Hit your protein target",
+  "todayPlanVitalitySunSubtitle": "Morning sunlight exposure",
+  "todayPlanVitalityStress": "Stress reset",
+  "todayPlanVitalityStressSubtitle": "Log a breathing session",
+  "todayPlanVitalityZincSubtitle": "Food-first zinc & vitamin D",
+  "todayPlanSleepTarget": "Sleep target",
+  "todayPlanSleepTargetSubtitle": "Wind down for quality sleep",
+  "todayPlanProtocolItem": "Vitality protocol",
+  "todayPlanAiSuggestion": "AI coach suggestion",
+  "todayPlanAiSuggestionSubtitle": "Personalized tip for today",
+  "waterGoalBasedOnWeight": "Based on your weight ({kg} kg)",
+  "@waterGoalBasedOnWeight": {
+    "placeholders": {"kg": {"type": "int"}}
+  },
+  "authErrorEmailRateLimit": "Too many emails, try again in an hour",
+  "profileMyBody": "My body",
+  "profileGuestProgressHint": "Guest — progress not saved",
+  "profilePlanPro": "Pro",
+  "profilePlanFree": "Free",
+  "profileMemberSince": "Member since {date}",
+  "@profileMemberSince": {
+    "placeholders": {"date": {"type": "String"}}
+  },
+  "profileSaveProgressCta": "Save your progress",
+  "profileMyPlanSection": "My plan",
+  "profileChangeDietPlan": "Change plan",
+  "profileBodyMetricsSaved": "Body metrics updated",
+  "profileSaveBodyMetrics": "Save",
+  "profileEditDisplayName": "Display name",
+  "profileDisplayNameHint": "Your name",
+  "profileFitnessGoal": "Goal"
 }

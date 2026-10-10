@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/supabase_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 import 'package:vireo/features/ai_nutrition/domain/i_food_vision_service.dart';
 import 'package:vireo/features/ai_nutrition/utils/image_compressor.dart';
@@ -51,6 +53,13 @@ abstract final class GeminiFoodServiceCore {
         throw const FoodVisionParseException();
       }
       return FoodAnalysisResult.fromJson(Map<String, dynamic>.from(data));
+    } on FunctionException catch (e) {
+      BootLog.warn(
+        'analyze-meal FunctionException status=${e.status} body=${e.details}',
+      );
+      if (e.status == 429) throw const FoodVisionDailyLimitException();
+      if (e.status == 401) throw const FoodVisionConfigException();
+      throw FoodVisionApiException(e.details?.toString() ?? 'API_ERROR');
     } on FoodVisionException {
       rethrow;
     } catch (e) {

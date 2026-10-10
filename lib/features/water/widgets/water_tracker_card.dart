@@ -6,6 +6,7 @@ import 'package:vireo/core/animations/vireo_animations.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
+import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 
 class WaterTrackerCard extends ConsumerWidget {
@@ -21,7 +22,10 @@ class WaterTrackerCard extends ConsumerWidget {
     final notifier = ref.read(waterTrackerProvider.notifier);
 
     final liters = ml / 1000.0;
-    final goalLiters = waterDailyGoalMl / 1000.0;
+    final goalMl = ref.watch(waterDailyGoalMlProvider);
+    final glassCount = ref.watch(waterGlassCountProvider);
+    final weightKg = ref.watch(waterProfileWeightKgProvider);
+    final goalLiters = goalMl / 1000.0;
     final pct = (progress * 100).round();
 
     return Container(
@@ -72,6 +76,11 @@ class WaterTrackerCard extends ConsumerWidget {
             style: TextStyle(color: colors.textMute, fontSize: 13),
           ),
           const SizedBox(height: 4),
+          Text(
+            l10n.waterGoalBasedOnWeight(weightKg.round()),
+            style: TextStyle(color: colors.textMute, fontSize: 12),
+          ),
+          const SizedBox(height: 4),
           CountUpNumber(
             value: pct,
             formatter: (v) => '${v.round()}%',
@@ -84,7 +93,7 @@ class WaterTrackerCard extends ConsumerWidget {
           const SizedBox(height: 14),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(waterGlassCount, (index) {
+            children: List.generate(glassCount, (index) {
               final isFilled = index < filled;
               return InkWell(
                 onTap: () => notifier.toggleGlass(index),

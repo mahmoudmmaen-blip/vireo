@@ -7,6 +7,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/utils/platform_utils.dart';
 import 'package:vireo/core/widgets/language_selector.dart';
 import 'package:vireo/core/widgets/vireo_logo.dart';
@@ -185,7 +186,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (PlatformUtils.isIOS || PlatformUtils.isWeb) ...[
+        if (AppConfig.appleAuthEnabled &&
+            (PlatformUtils.isIOS || PlatformUtils.isWeb)) ...[
           FilledButton.icon(
             onPressed: _loading
                 ? null
@@ -196,15 +198,17 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
           ),
           const SizedBox(height: VSpace.sm),
         ],
-        FilledButton.tonalIcon(
-          onPressed: _loading
-              ? null
-              : () => _run(() => ref.read(authProvider.notifier).signInWithGoogle()),
-          icon: const Icon(Icons.g_mobiledata, size: 28),
-          label: Text(l10n.authContinueGoogle),
-          style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(52)),
-        ),
-        const SizedBox(height: VSpace.sm),
+        if (AppConfig.googleAuthEnabled) ...[
+          FilledButton.tonalIcon(
+            onPressed: _loading
+                ? null
+                : () => _run(() => ref.read(authProvider.notifier).signInWithGoogle()),
+            icon: const Icon(Icons.g_mobiledata, size: 28),
+            label: Text(l10n.authContinueGoogle),
+            style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(52)),
+          ),
+          const SizedBox(height: VSpace.sm),
+        ],
         OutlinedButton.icon(
           onPressed: _loading
               ? null

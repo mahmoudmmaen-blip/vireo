@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/ui/pressable.dart';
+import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
-import 'package:vireo/core/services/hive_service.dart';
-import 'package:vireo/core/utils/bmi_calculator.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
+import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/data/models/subscription_state.dart';
+import 'package:vireo/features/auth/auth_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
-import 'package:vireo/features/auth/widgets/guest_auth_gate.dart';
-import 'package:vireo/features/measurements/widgets/measurement_summary_card.dart';
+import 'package:vireo/features/diet_programs/domain/diet_program.dart';
+import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
+import 'package:vireo/features/diet_programs/screens/diet_program_detail_screen.dart';
+import 'package:vireo/features/diet_programs/screens/diet_programs_screen.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
-import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/profile/settings_screen.dart';
-import 'package:vireo/features/profile/widgets/bmi_spectrum_bar.dart';
-import 'package:vireo/features/progress/providers/weekly_checkin_provider.dart';
-import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
+import 'package:vireo/features/profile/widgets/profile_body_metrics_sheet.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/subscription/widgets/subscription_status_banner.dart';
-import 'package:vireo/features/diet_programs/screens/diet_programs_screen.dart';
-import 'package:vireo/features/vitality/presentation/widgets/vitality_score_ring.dart';
-import 'package:vireo/features/vitality/widgets/vitality_badges_grid.dart';
-import 'package:vireo/features/vitality_program/screens/vitality_program_screen.dart';
+
+const _displayNameKey = 'profile_display_name';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -34,7 +35,7 @@ class ProfileScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final auth = ref.watch(authProvider);
     final sub = ref.watch(subscriptionProvider);
-    final weeklyDue = ref.watch(weeklyCheckInDueProvider);
+    final locale = Localizations.localeOf(context).languageCode;
 
     return FeatureScaffold(
       title: l10n.profileTitle,
@@ -43,392 +44,339 @@ class ProfileScreen extends ConsumerWidget {
         icon: const BackButtonIcon(),
         onPressed: () => ref.read(shellTabIndexProvider.notifier).goHome(),
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.settings_outlined),
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const SettingsScreen()),
-          ),
-        ),
-      ],
-      body: Column(
-        children: [
-          if (weeklyDue)
-            Material(
-              color: context.vireoColors.ember.withValues(alpha: 0.12),
-              child: ListTile(
-                leading: Icon(Icons.assessment_outlined, color: context.vireoColors.ember),
-                title: Text(l10n.weeklyCheckInTitle),
-                subtitle: Text(l10n.weeklyCheckInBanner),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const WeeklyCheckInScreen()),
-                ),
+      body: auth.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (_, __) => Center(child: Text(l10n.authErrorGeneric)),
+        data: (state) {
+          return ListView(
+            padding: const EdgeInsets.all(VSpace.md),
+            children: [
+              sub.when(
+                loading: () => const SizedBox.shrink(),
+                error: (_, __) => const SizedBox.shrink(),
+                data: (snapshot) {
+                  if (snapshot.accessLevel == SubscriptionAccessLevel.trialActive &&
+                      snapshot.trialDaysRemaining != null) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: VSpace.sm),
+                      child: SubscriptionStatusBanner(
+                        trialDaysRemaining: snapshot.trialDaysRemaining!,
+                        onUpgrade: () => openPaywall(context),
+                      ),
+                    );
+                  }
+                  if (snapshot.shouldShowExpiredGate) {
+                    return const Padding(
+                      padding: EdgeInsets.only(bottom: VSpace.sm),
+                      child: ExpiredSubscriptionBanner(),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
-            ),
-          sub.when(
-            loading: () => const SizedBox.shrink(),
-            error: (error, stackTrace) => const SizedBox.shrink(),
-            data: (snapshot) {
-              if (snapshot.accessLevel == SubscriptionAccessLevel.trialActive &&
-                  snapshot.trialDaysRemaining != null) {
-                return SubscriptionStatusBanner(
-                  trialDaysRemaining: snapshot.trialDaysRemaining!,
-                  onUpgrade: () => openPaywall(context),
-                );
-              }
-              if (snapshot.shouldShowExpiredGate) {
-                return const ExpiredSubscriptionBanner();
-              }
-              return const SizedBox.shrink();
-            },
-          ),
-          Expanded(
-            child: auth.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
-              data: (state) {
-                if (state.isGuest) {
-                  return _GuestProfileBody(
-                    onSaveProgress: () async {
-                      await requireAccountAccess(
-                        context,
-                        ref,
-                        reason: AuthGateReason.saveProgress,
-                      );
-                      final userId = ref.read(authProvider).valueOrNull?.user?.id;
-                      if (userId != null &&
-                          ref.read(authProvider).valueOrNull?.hasAccountAccess ==
-                              true) {
-                        await ref
-                            .read(onboardingRepositoryProvider)
-                            .syncGuestProfileToCloud(userId: userId);
-                      }
-                    },
-                  );
-                }
-                if (state is AppAuthAuthenticated) {
-                  return _RegisteredProfileBody(
-                    email: state.user.email ?? l10n.authSignedIn,
-                    displayName: state.user.email?.split('@').first ?? 'Vireo',
-                  );
-                }
-                return Center(child: Text(l10n.authTitle));
-              },
-            ),
-          ),
-        ],
+              _ProfileHeaderCard(authState: state),
+              if (state.isGuest) ...[
+                const SizedBox(height: VSpace.md),
+                FilledButton(
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(builder: (_) => const AuthScreen()),
+                  ),
+                  child: Text(l10n.profileSaveProgressCta),
+                ),
+              ],
+              const SizedBox(height: VSpace.lg),
+              Text(
+                l10n.profileMyBody,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+              ),
+              const SizedBox(height: VSpace.sm),
+              _MyBodyCard(
+                onEdit: () => showProfileBodyMetricsSheet(context, ref),
+              ),
+              const SizedBox(height: VSpace.lg),
+              Text(
+                l10n.profileMyPlanSection,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+              ),
+              const SizedBox(height: VSpace.sm),
+              _MyPlanCard(locale: locale),
+              const SizedBox(height: VSpace.lg),
+              _SettingsGroup(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.settings_outlined, color: context.vireoColors.ember),
+                    title: Text(l10n.settingsTitle),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.notifications_outlined, color: context.vireoColors.ember),
+                    title: Text(l10n.notificationsTitle),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const NotificationSettingsScreen(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              if (!state.isGuest && state is AppAuthAuthenticated) ...[
+                const SizedBox(height: VSpace.md),
+                OutlinedButton(
+                  onPressed: () => ref.read(authProvider.notifier).signOut(),
+                  child: Text(l10n.signOut),
+                ),
+              ],
+            ],
+          );
+        },
       ),
     );
   }
 }
 
-class _GuestProfileBody extends StatelessWidget {
-  const _GuestProfileBody({required this.onSaveProgress});
+class _ProfileHeaderCard extends ConsumerWidget {
+  const _ProfileHeaderCard({required this.authState});
 
-  final VoidCallback onSaveProgress;
+  final AppAuthState authState;
+
+  String _displayName() {
+    if (HiveService.isInitialized) {
+      final stored = HiveService.cacheBox.get(_displayNameKey) as String?;
+      if (stored != null && stored.trim().isNotEmpty) return stored.trim();
+    }
+    if (authState is AppAuthAuthenticated) {
+      final email = (authState as AppAuthAuthenticated).user.email;
+      if (email != null && email.contains('@')) return email.split('@').first;
+    }
+    return 'Vireo';
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final colors = context.vireoColors;
+    final sub = ref.watch(subscriptionProvider).valueOrNull;
+    final isPro = sub?.hasPremiumAccess == true;
+    final name = _displayName();
+    final initial = name.isNotEmpty ? name[0].toUpperCase() : '?';
+
+    String? emailLine;
+    String? memberSince;
+    if (authState is AppAuthAuthenticated) {
+      final user = (authState as AppAuthAuthenticated).user;
+      if (user.isAnonymous) {
+        emailLine = l10n.profileGuestProgressHint;
+      } else {
+        emailLine = user.email ?? l10n.authSignedIn;
+        final created = user.createdAt;
+        if (created.isNotEmpty) {
+          final dt = DateTime.tryParse(created);
+          if (dt != null) {
+            memberSince = l10n.profileMemberSince(
+              DateFormat.yMMMd().format(dt),
+            );
+          }
+        }
+      }
+    } else if (authState is AppAuthGuest) {
+      emailLine = l10n.profileGuestProgressHint;
+    }
+
+    return VireoCard(
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 36,
+            backgroundColor: colors.ember.withValues(alpha: 0.2),
+            child: Text(
+              initial,
+              style: TextStyle(
+                color: colors.ember,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(height: VSpace.sm),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                child: Text(
+                  name,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(Icons.edit_outlined, size: 18),
+                onPressed: () => _editName(context, name),
+              ),
+            ],
+          ),
+          if (emailLine != null)
+            Text(
+              emailLine,
+              style: TextStyle(color: colors.textMute),
+              textAlign: TextAlign.center,
+            ),
+          const SizedBox(height: VSpace.sm),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            decoration: BoxDecoration(
+              color: (isPro ? colors.gold : colors.line).withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(999),
+            ),
+            child: Text(
+              isPro ? l10n.profilePlanPro : l10n.profilePlanFree,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: isPro ? colors.gold : colors.textMute,
+              ),
+            ),
+          ),
+          if (memberSince != null) ...[
+            const SizedBox(height: 6),
+            Text(memberSince, style: TextStyle(color: colors.textMute, fontSize: 12)),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Future<void> _editName(BuildContext context, String current) async {
+    final l10n = AppLocalizations.of(context);
+    final ctrl = TextEditingController(text: current);
+    final next = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.profileEditDisplayName),
+        content: TextField(
+          controller: ctrl,
+          autofocus: true,
+          decoration: InputDecoration(hintText: l10n.profileDisplayNameHint),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(l10n.reassessmentLater)),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, ctrl.text.trim()),
+            child: Text(l10n.profileSaveBodyMetrics),
+          ),
+        ],
+      ),
+    );
+    if (next != null && next.isNotEmpty && HiveService.isInitialized) {
+      await HiveService.cacheBox.put(_displayNameKey, next);
+    }
+  }
+}
+
+class _MyBodyCard extends StatelessWidget {
+  const _MyBodyCard({required this.onEdit});
+
+  final VoidCallback onEdit;
+
+  Map<String, dynamic> _profile() {
+    if (!HiveService.isInitialized) return {};
+    final raw = HiveService.cacheBox.get('guest_profile');
+    if (raw is Map) return Map<String, dynamic>.from(raw);
+    return {};
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final colors = context.vireoColors;
-    final profile = HiveService.cacheBox.get('guest_profile');
-    final map = profile is Map ? Map<String, dynamic>.from(profile) : <String, dynamic>{};
-    final weight = (map['weight_kg'] as num?)?.toDouble() ?? 75.0;
-    final height = (map['height_cm'] as num?)?.toDouble() ?? 170.0;
+    final map = _profile();
+    final age = (map['age'] as num?)?.toInt() ?? 30;
+    final height = (map['height_cm'] as num?)?.toDouble() ?? 170;
+    final weight = (map['weight_kg'] as num?)?.toDouble() ?? 75;
     final activity = ActivityLevel.fromValue(
       map['activity_level'] as String? ?? ActivityLevel.moderatelyActive.value,
     );
-    final bmi = BmiCalculator.compute(weightKg: weight, heightCm: height);
-    final bmiCategory = BmiCalculator.categoryFor(bmi);
-    final goalWeight = (weight - 5).clamp(50.0, 200.0);
-
-    return ListView(
-      padding: const EdgeInsets.all(24),
-      children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundColor: colors.surfaceRaised,
-          child: Text(
-            l10n.profileGuestAvatar,
-            style: TextStyle(color: colors.ember, fontWeight: FontWeight.bold),
-          ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          l10n.guestModeTitle,
-          style: Theme.of(context).textTheme.titleLarge,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 8),
-        Text(l10n.guestModeSubtitle, textAlign: TextAlign.center),
-        const SizedBox(height: 24),
-        const VitalityScoreSection(),
-        const SizedBox(height: 16),
-        const VitalityBadgesGrid(),
-        const SizedBox(height: 16),
-        ListTile(
-          leading: Icon(Icons.emoji_events_outlined, color: colors.gold),
-          title: Text(l10n.vitalityMyProgram),
-          subtitle: Text(l10n.vitalityProgramSubtitle),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const VitalityProgramScreen(),
-            ),
-          ),
-        ),
-        ListTile(
-          leading: Icon(Icons.restaurant_menu_rounded, color: colors.ember),
-          title: Text(l10n.dietMyPlan),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const DietProgramsScreen(),
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        const MeasurementSummaryCard(),
-        const SizedBox(height: 24),
-        Row(
-          children: [
-            Expanded(
-              child: _GuestStatCard(
-                icon: Icons.fitness_center_outlined,
-                label: l10n.profileStatWorkoutsLabel,
-                value: '7',
-                colors: colors,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _GuestStatCard(
-                icon: Icons.local_fire_department_outlined,
-                label: l10n.profileStatStreakLabel,
-                value: '3',
-                colors: colors,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        _GuestStatCard(
-          icon: Icons.calendar_today_outlined,
-          label: l10n.profileStatProgramDays,
-          value: '14',
-          colors: colors,
-          fullWidth: true,
-        ),
-        const SizedBox(height: 24),
-        Text(l10n.profileStatsSection, style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 8),
-        _StatRow(label: l10n.profileGoalWeight, value: '${goalWeight.toStringAsFixed(1)} kg'),
-        _BmiStatRow(
-          label: l10n.profileCurrentBmi,
-          bmi: bmi,
-          category: bmiCategory,
-        ),
-        const SizedBox(height: 12),
-        BmiSpectrumBar(bmi: bmi, category: bmiCategory),
-        const SizedBox(height: 8),
-        _StatRow(label: l10n.profileActivityLevel, value: _activityLabel(l10n, activity)),
-        const SizedBox(height: 24),
-        ListTile(
-          leading: Icon(Icons.notifications_outlined, color: colors.ember),
-          title: Text(l10n.notificationsTitle),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const NotificationSettingsScreen(),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        OutlinedButton.icon(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const WeeklyCheckInScreen()),
-          ),
-          icon: const Icon(Icons.assessment_outlined),
-          label: Text(l10n.weeklyCheckInTitle),
-        ),
-        const SizedBox(height: 24),
-        ElevatedButton(onPressed: onSaveProgress, child: Text(l10n.saveProgressToCloud)),
-      ],
+    final goal = FitnessGoal.fromValue(
+      map['goal'] as String? ?? FitnessGoal.generalVitality.value,
     );
-  }
 
-  String _activityLabel(AppLocalizations l10n, ActivityLevel level) {
-    return switch (level) {
-      ActivityLevel.sedentary => l10n.activitySedentary,
-      ActivityLevel.moderatelyActive => l10n.activityModerate,
-      ActivityLevel.veryActive => l10n.activityVeryActive,
-    };
-  }
-}
-
-class _RegisteredProfileBody extends StatelessWidget {
-  const _RegisteredProfileBody({
-    required this.email,
-    required this.displayName,
-  });
-
-  final String email;
-  final String displayName;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final colors = context.vireoColors;
-
-    return ListView(
-      padding: const EdgeInsets.all(24),
-      children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundColor: colors.ember.withValues(alpha: 0.2),
-          child: Text(
-            displayName.isNotEmpty ? displayName[0].toUpperCase() : '?',
-            style: TextStyle(
-              color: colors.ember,
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        Text(displayName, style: Theme.of(context).textTheme.titleLarge, textAlign: TextAlign.center),
-        Text(email, style: TextStyle(color: colors.textMute), textAlign: TextAlign.center),
-        const SizedBox(height: 24),
-        const VitalityScoreSection(),
-        const SizedBox(height: 16),
-        const VitalityBadgesGrid(),
-        const SizedBox(height: 16),
-        ListTile(
-          leading: Icon(Icons.emoji_events_outlined, color: colors.gold),
-          title: Text(l10n.vitalityMyProgram),
-          subtitle: Text(l10n.vitalityProgramSubtitle),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const VitalityProgramScreen(),
-            ),
-          ),
-        ),
-        ListTile(
-          leading: Icon(Icons.restaurant_menu_rounded, color: colors.ember),
-          title: Text(l10n.dietMyPlan),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const DietProgramsScreen(),
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        const MeasurementSummaryCard(),
-        const SizedBox(height: 16),
-        OutlinedButton.icon(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const SettingsScreen()),
-            );
-          },
-          icon: const Icon(Icons.edit_outlined),
-          label: Text(l10n.profileEditProfile),
-        ),
-        const SizedBox(height: 16),
-        ListTile(
-          leading: Icon(Icons.notifications_outlined, color: colors.ember),
-          title: Text(l10n.notificationsTitle),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const NotificationSettingsScreen(),
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        OutlinedButton.icon(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const WeeklyCheckInScreen()),
-            );
-          },
-          icon: const Icon(Icons.assessment_outlined),
-          label: Text(l10n.weeklyCheckInTitle),
-        ),
-      ],
-    );
-  }
-}
-
-class _BmiStatRow extends StatelessWidget {
-  const _BmiStatRow({
-    required this.label,
-    required this.bmi,
-    required this.category,
-  });
-
-  final String label;
-  final double bmi;
-  final BmiCategory category;
-
-  String _categoryLabel(AppLocalizations l10n) {
-    return switch (category) {
-      BmiCategory.underweight => l10n.profileBmiUnderweight,
-      BmiCategory.healthy => l10n.profileBmiHealthy,
-      BmiCategory.overweight => l10n.profileBmiOverweight,
-      BmiCategory.obese => l10n.profileBmiObese,
-    };
-  }
-
-  Color _categoryColor(VireoColors colors) {
-    return switch (category) {
-      BmiCategory.underweight => colors.recovery,
-      BmiCategory.healthy => colors.success,
-      BmiCategory.overweight => colors.gold,
-      BmiCategory.obese => colors.danger,
-    };
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final colors = context.vireoColors;
-    final tagColor = _categoryColor(colors);
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
+    return VireoCard(
+      onTap: onEdit,
+      child: Column(
         children: [
-          Expanded(child: Text(label)),
-          Tooltip(
-            message: l10n.profileBmiTooltip,
-            preferBelow: false,
-            child: Icon(Icons.info_outline, size: 18, color: colors.textMute),
+          _BodyRow(label: l10n.onboardingAge, value: '$age'),
+          _BodyRow(label: l10n.onboardingHeight, value: '${height.round()} cm'),
+          _BodyRow(label: l10n.onboardingWeight, value: '${weight.toStringAsFixed(1)} kg'),
+          _BodyRow(label: l10n.profileFitnessGoal, value: _goal(l10n, goal)),
+          _BodyRow(label: l10n.profileActivityLevel, value: _activity(l10n, activity)),
+        ],
+      ),
+    );
+  }
+
+  String _goal(AppLocalizations l10n, FitnessGoal g) => switch (g) {
+        FitnessGoal.weightLoss => l10n.goalWeightLoss,
+        FitnessGoal.muscleGain => l10n.goalMuscleGain,
+        FitnessGoal.generalVitality => l10n.goalGeneralVitality,
+        FitnessGoal.allOfAbove => l10n.goalAllOfAbove,
+      };
+
+  String _activity(AppLocalizations l10n, ActivityLevel a) => switch (a) {
+        ActivityLevel.sedentary => l10n.activitySedentary,
+        ActivityLevel.moderatelyActive => l10n.activityModerate,
+        ActivityLevel.veryActive => l10n.activityVeryActive,
+      };
+}
+
+class _MyPlanCard extends ConsumerWidget {
+  const _MyPlanCard({required this.locale});
+
+  final String locale;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final program = ref.watch(activeDietProgramProvider);
+
+    return VireoCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(Icons.restaurant_menu_rounded, color: context.vireoColors.ember),
+            title: Text(program?.name.of(locale) ?? l10n.dietChoosePlanCard),
+            subtitle: Text(l10n.dietMyPlan),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () {
+              if (program != null) {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => DietProgramDetailScreen(programId: program.id),
+                  ),
+                );
+              } else {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const DietProgramsScreen(),
+                  ),
+                );
+              }
+            },
           ),
-          const SizedBox(width: 8),
-          Text(
-            bmi.toStringAsFixed(1),
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(width: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: tagColor.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: tagColor.withValues(alpha: 0.5)),
+          TextButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const DietProgramsScreen()),
             ),
-            child: Text(
-              _categoryLabel(l10n),
-              style: TextStyle(
-                color: tagColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            child: Text(l10n.profileChangeDietPlan),
           ),
         ],
       ),
@@ -436,8 +384,8 @@ class _BmiStatRow extends StatelessWidget {
   }
 }
 
-class _StatRow extends StatelessWidget {
-  const _StatRow({required this.label, required this.value});
+class _BodyRow extends StatelessWidget {
+  const _BodyRow({required this.label, required this.value});
 
   final String label;
   final String value;
@@ -457,46 +405,16 @@ class _StatRow extends StatelessWidget {
   }
 }
 
-class _GuestStatCard extends StatelessWidget {
-  const _GuestStatCard({
-    required this.icon,
-    required this.label,
-    required this.value,
-    required this.colors,
-    this.fullWidth = false,
-  });
+class _SettingsGroup extends StatelessWidget {
+  const _SettingsGroup({required this.children});
 
-  final IconData icon;
-  final String label;
-  final String value;
-  final VireoColors colors;
-  final bool fullWidth;
+  final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-        child: Column(
-          children: [
-            Icon(icon, color: colors.ember, size: 28),
-            const SizedBox(height: 10),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: colors.textMute, fontSize: 13),
-            ),
-          ],
-        ),
-      ),
+    return VireoCard(
+      padding: EdgeInsets.zero,
+      child: Column(children: children),
     );
   }
 }

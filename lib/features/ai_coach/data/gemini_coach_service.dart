@@ -1,5 +1,7 @@
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/supabase_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vireo/features/ai_coach/domain/chat_message.dart';
 import 'package:vireo/features/ai_coach/domain/i_ai_coach_service.dart';
 import 'package:vireo/features/ai_coach/domain/user_context.dart';
@@ -73,6 +75,13 @@ class GeminiCoachService implements IAiCoachService {
             : emptyResponseFallbackEn;
       }
       return reply;
+    } on FunctionException catch (e) {
+      BootLog.warn(
+        'ai-coach FunctionException status=${e.status} body=${e.details}',
+      );
+      if (e.status == 429) throw const AiCoachDailyLimitException();
+      if (e.status == 401) throw const AiCoachConfigException();
+      throw AiCoachApiException(e.details?.toString() ?? 'API_ERROR');
     } on AiCoachException {
       rethrow;
     } catch (e) {

@@ -2618,4 +2618,137 @@ class AppLocalizationsEn extends AppLocalizations {
   String dietCarbsLimitProgress(int current, int max) {
     return '$current / $max g carbs';
   }
+
+  @override
+  String get todayPlanTitle => 'TODAY PLAN';
+
+  @override
+  String todayPlanProgressSummary(int percent, int done, int total) {
+    return 'You\'ve completed $percent% of your day · $done/$total items';
+  }
+
+  @override
+  String get todayPlanNow => 'Now';
+
+  @override
+  String get todayPlanPro => 'PRO';
+
+  @override
+  String todayPlanWaterReminder(int index, int total) {
+    return 'Water reminder $index of $total';
+  }
+
+  @override
+  String todayPlanWaterGoalLine(int ml) {
+    return 'Daily goal $ml ml';
+  }
+
+  @override
+  String get todayPlanFastingOpen => 'Eating window opens';
+
+  @override
+  String todayPlanFastingOpenSubtitle(int hours) {
+    return '${hours}h eating window begins';
+  }
+
+  @override
+  String get todayPlanFastingClose => 'Eating window closes';
+
+  @override
+  String todayPlanFastingCloseSubtitle(int hours) {
+    return '${hours}h fast begins';
+  }
+
+  @override
+  String get todayPlanWorkout => 'Today\'s workout';
+
+  @override
+  String get todayPlanSteps => 'Steps goal';
+
+  @override
+  String todayPlanStepsProgress(int current, int goal) {
+    return '$current / $goal steps';
+  }
+
+  @override
+  String get todayPlanVitalitySleepSubtitle => 'Log 7.5+ hours in Vitality';
+
+  @override
+  String get todayPlanVitalityProteinSubtitle => 'Hit your protein target';
+
+  @override
+  String get todayPlanVitalitySunSubtitle => 'Morning sunlight exposure';
+
+  @override
+  String get todayPlanVitalityStress => 'Stress reset';
+
+  @override
+  String get todayPlanVitalityStressSubtitle => 'Log a breathing session';
+
+  @override
+  String get todayPlanVitalityZincSubtitle => 'Food-first zinc & vitamin D';
+
+  @override
+  String get todayPlanSleepTarget => 'Sleep target';
+
+  @override
+  String get todayPlanSleepTargetSubtitle => 'Wind down for quality sleep';
+
+  @override
+  String get todayPlanProtocolItem => 'Vitality protocol';
+
+  @override
+  String get todayPlanAiSuggestion => 'AI coach suggestion';
+
+  @override
+  String get todayPlanAiSuggestionSubtitle => 'Personalized tip for today';
+
+  @override
+  String waterGoalBasedOnWeight(int kg) {
+    return 'Based on your weight ($kg kg)';
+  }
+
+  @override
+  String get authErrorEmailRateLimit => 'Too many emails, try again in an hour';
+
+  @override
+  String get profileMyBody => 'My body';
+
+  @override
+  String get profileGuestProgressHint => 'Guest — progress not saved';
+
+  @override
+  String get profilePlanPro => 'Pro';
+
+  @override
+  String get profilePlanFree => 'Free';
+
+  @override
+  String profileMemberSince(String date) {
+    return 'Member since $date';
+  }
+
+  @override
+  String get profileSaveProgressCta => 'Save your progress';
+
+  @override
+  String get profileMyPlanSection => 'My plan';
+
+  @override
+  String get profileChangeDietPlan => 'Change plan';
+
+  @override
+  String get profileBodyMetricsSaved => 'Body metrics updated';
+
+  @override
+  String get profileSaveBodyMetrics => 'Save';
+
+  @override
+  String get profileEditDisplayName => 'Display name';
+
+  @override
+  String get profileDisplayNameHint => 'Your name';
+
+  @override
+  String get profileFitnessGoal => 'Goal';
 }

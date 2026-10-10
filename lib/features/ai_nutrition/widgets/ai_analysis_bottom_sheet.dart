@@ -4,6 +4,7 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
+import 'package:vireo/features/auth/services/save_progress_prompt.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -166,6 +167,7 @@ class _AiAnalysisSheetBody extends ConsumerWidget {
             FilledButton(
               onPressed: () async {
                 await ref.read(aiMealLogProvider.notifier).save(result);
+                await recordSuccessfulMealScan();
                 if (!context.mounted) return;
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(

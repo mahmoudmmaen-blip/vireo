@@ -1399,5 +1399,80 @@
       "current": {"type": "int"},
       "max": {"type": "int"}
     }
-  }
+  },
+  "todayPlanTitle": "خطة اليوم",
+  "todayPlanProgressSummary": "أنجزت {percent}% من يومك · {done}/{total}",
+  "@todayPlanProgressSummary": {
+    "placeholders": {
+      "percent": {"type": "int"},
+      "done": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "todayPlanNow": "الآن",
+  "todayPlanPro": "PRO",
+  "todayPlanWaterReminder": "تذكير ماء {index} من {total}",
+  "@todayPlanWaterReminder": {
+    "placeholders": {
+      "index": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "todayPlanWaterGoalLine": "الهدف اليومي {ml} مل",
+  "@todayPlanWaterGoalLine": {
+    "placeholders": {
+      "ml": {"type": "int"}
+    }
+  },
+  "todayPlanFastingOpen": "بداية نافذة الأكل",
+  "todayPlanFastingOpenSubtitle": "نافذة أكل {hours} ساعة",
+  "@todayPlanFastingOpenSubtitle": {
+    "placeholders": {"hours": {"type": "int"}}
+  },
+  "todayPlanFastingClose": "نهاية نافذة الأكل",
+  "todayPlanFastingCloseSubtitle": "صيام {hours} ساعة",
+  "@todayPlanFastingCloseSubtitle": {
+    "placeholders": {"hours": {"type": "int"}}
+  },
+  "todayPlanWorkout": "تمرين اليوم",
+  "todayPlanSteps": "هدف الخطوات",
+  "todayPlanStepsProgress": "{current} / {goal} خطوة",
+  "@todayPlanStepsProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "goal": {"type": "int"}
+    }
+  },
+  "todayPlanVitalitySleepSubtitle": "سجّل 7.5+ ساعات في Vitality",
+  "todayPlanVitalityProteinSubtitle": "حقّق هدف البروtein",
+  "todayPlanVitalitySunSubtitle": "ضوء الشمس الصباحي",
+  "todayPlanVitalityStress": "تخفيف التوتر",
+  "todayPlanVitalityStressSubtitle": "جلسة تنفس",
+  "todayPlanVitalityZincSubtitle": "زنك وفيتامين D من الغذاء",
+  "todayPlanSleepTarget": "هدف النوم",
+  "todayPlanSleepTargetSubtitle": "استعد للنوم",
+  "todayPlanProtocolItem": "بروتوكول Vitality",
+  "todayPlanAiSuggestion": "اقتراح المدرب",
+  "todayPlanAiSuggestionSubtitle": "نصيحة مخصصة لليوم",
+  "waterGoalBasedOnWeight": "حسب وزنك ({kg} كجم)",
+  "@waterGoalBasedOnWeight": {
+    "placeholders": {"kg": {"type": "int"}}
+  },
+  "authErrorEmailRateLimit": "رسائل كثيرة، جرّب بعد ساعة",
+  "profileMyBody": "جسمي",
+  "profileGuestProgressHint": "ضيف — التقدّم غير محفوظ",
+  "profilePlanPro": "Pro",
+  "profilePlanFree": "مجاني",
+  "profileMemberSince": "عضو منذ {date}",
+  "@profileMemberSince": {
+    "placeholders": {"date": {"type": "String"}}
+  },
+  "profileSaveProgressCta": "احفظ تقدّمك",
+  "profileMyPlanSection": "خطتي",
+  "profileChangeDietPlan": "غيّر الخطة",
+  "profileBodyMetricsSaved": "تم تحديث القياسات",
+  "profileSaveBodyMetrics": "حفظ",
+  "profileEditDisplayName": "الاسم المعروض",
+  "profileDisplayNameHint": "اسمك",
+  "profileFitnessGoal": "الهدف"
 }

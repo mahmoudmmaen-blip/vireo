@@ -1,10 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 
 const _waterTrackerKey = 'water_tracker';
-const waterDailyGoalMl = 2500;
-const waterGlassMl = 250;
-const waterGlassCount = 10;
 
 String _todayDateKey() {
   final now = DateTime.now();
@@ -13,18 +11,24 @@ String _todayDateKey() {
   return '${now.year}-$m-$d';
 }
 
-class WaterTrackerNotifier extends StateNotifier<int> {
-  WaterTrackerNotifier() : super(0) {
-    _loadForToday();
+class WaterTrackerNotifier extends Notifier<int> {
+  @override
+  int build() {
+    ref.watch(waterDailyGoalMlProvider);
+    return _loadForToday();
   }
 
-  int get filledGlasses => (state / waterGlassMl).floor().clamp(0, waterGlassCount);
+  int get goalMl => ref.read(waterDailyGoalMlProvider);
 
-  double get progress =>
-      waterDailyGoalMl > 0 ? (state / waterDailyGoalMl).clamp(0.0, 1.0) : 0;
+  int get glassCount => ref.read(waterGlassCountProvider);
 
-  void _loadForToday() {
-    if (!HiveService.isInitialized) return;
+  int get filledGlasses =>
+      (state / waterGlassMl).floor().clamp(0, glassCount);
+
+  double get progress => goalMl > 0 ? (state / goalMl).clamp(0.0, 1.0) : 0;
+
+  int _loadForToday() {
+    if (!HiveService.isInitialized) return 0;
     try {
       final raw = HiveService.cacheBox.get(_waterTrackerKey);
       if (raw is Map) {
@@ -32,41 +36,37 @@ class WaterTrackerNotifier extends StateNotifier<int> {
         final storedDate = map['date'] as String?;
         final ml = (map['ml'] as num?)?.toInt() ?? 0;
         if (storedDate == _todayDateKey()) {
-          state = ml.clamp(0, waterDailyGoalMl);
-          return;
+          return ml.clamp(0, goalMl);
         }
       }
-      state = 0;
       _persistAsync(0);
+      return 0;
     } catch (_) {
-      state = 0;
+      return 0;
     }
   }
 
-  /// Tap glass [index] (0–9): fill up to (index+1)×250 ml or empty back.
   Future<void> toggleGlass(int index) async {
-    if (index < 0 || index >= waterGlassCount) return;
+    if (index < 0 || index >= glassCount) return;
     final targetMl = (index + 1) * waterGlassMl;
     if (state >= targetMl) {
       state = index * waterGlassMl;
     } else {
-      state = targetMl.clamp(0, waterDailyGoalMl);
+      state = targetMl.clamp(0, goalMl);
     }
     await _persistAsync(state);
   }
 
-  /// Adds one glass (250 ml). Returns false when the daily goal is already met.
   Future<bool> addGlass() async {
-    if (state >= waterDailyGoalMl) return false;
-    state = (state + waterGlassMl).clamp(0, waterDailyGoalMl);
+    if (state >= goalMl) return false;
+    state = (state + waterGlassMl).clamp(0, goalMl);
     await _persistAsync(state);
     return true;
   }
 
-  /// Removes one glass (250 ml), never below zero.
   Future<void> removeGlass() async {
     if (state <= 0) return;
-    state = (state - waterGlassMl).clamp(0, waterDailyGoalMl);
+    state = (state - waterGlassMl).clamp(0, goalMl);
     await _persistAsync(state);
   }
 
@@ -77,16 +77,12 @@ class WaterTrackerNotifier extends StateNotifier<int> {
         'date': _todayDateKey(),
         'ml': ml,
       });
-    } catch (_) {
-      // Non-fatal — in-memory state still valid for the session.
-    }
+    } catch (_) {}
   }
 }
 
 final waterTrackerProvider =
-    StateNotifierProvider<WaterTrackerNotifier, int>(
-  (ref) => WaterTrackerNotifier(),
-);
+    NotifierProvider<WaterTrackerNotifier, int>(WaterTrackerNotifier.new);
 
 final waterTrackerFilledGlassesProvider = Provider<int>((ref) {
   ref.watch(waterTrackerProvider);

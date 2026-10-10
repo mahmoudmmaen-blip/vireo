@@ -2598,4 +2598,137 @@ class AppLocalizationsAr extends AppLocalizations {
   String dietCarbsLimitProgress(int current, int max) {
     return '$current / $max جم كارب';
   }
+
+  @override
+  String get todayPlanTitle => 'خطة اليوم';
+
+  @override
+  String todayPlanProgressSummary(int percent, int done, int total) {
+    return 'أنجزت $percent% من يومك · $done/$total';
+  }
+
+  @override
+  String get todayPlanNow => 'الآن';
+
+  @override
+  String get todayPlanPro => 'PRO';
+
+  @override
+  String todayPlanWaterReminder(int index, int total) {
+    return 'تذكير ماء $index من $total';
+  }
+
+  @override
+  String todayPlanWaterGoalLine(int ml) {
+    return 'الهدف اليومي $ml مل';
+  }
+
+  @override
+  String get todayPlanFastingOpen => 'بداية نافذة الأكل';
+
+  @override
+  String todayPlanFastingOpenSubtitle(int hours) {
+    return 'نافذة أكل $hours ساعة';
+  }
+
+  @override
+  String get todayPlanFastingClose => 'نهاية نافذة الأكل';
+
+  @override
+  String todayPlanFastingCloseSubtitle(int hours) {
+    return 'صيام $hours ساعة';
+  }
+
+  @override
+  String get todayPlanWorkout => 'تمرين اليوم';
+
+  @override
+  String get todayPlanSteps => 'هدف الخطوات';
+
+  @override
+  String todayPlanStepsProgress(int current, int goal) {
+    return '$current / $goal خطوة';
+  }
+
+  @override
+  String get todayPlanVitalitySleepSubtitle => 'سجّل 7.5+ ساعات في Vitality';
+
+  @override
+  String get todayPlanVitalityProteinSubtitle => 'حقّق هدف البروtein';
+
+  @override
+  String get todayPlanVitalitySunSubtitle => 'ضوء الشمس الصباحي';
+
+  @override
+  String get todayPlanVitalityStress => 'تخفيف التوتر';
+
+  @override
+  String get todayPlanVitalityStressSubtitle => 'جلسة تنفس';
+
+  @override
+  String get todayPlanVitalityZincSubtitle => 'زنك وفيتامين D من الغذاء';
+
+  @override
+  String get todayPlanSleepTarget => 'هدف النوم';
+
+  @override
+  String get todayPlanSleepTargetSubtitle => 'استعد للنوم';
+
+  @override
+  String get todayPlanProtocolItem => 'بروتوكول Vitality';
+
+  @override
+  String get todayPlanAiSuggestion => 'اقتراح المدرب';
+
+  @override
+  String get todayPlanAiSuggestionSubtitle => 'نصيحة مخصصة لليوم';
+
+  @override
+  String waterGoalBasedOnWeight(int kg) {
+    return 'حسب وزنك ($kg كجم)';
+  }
+
+  @override
+  String get authErrorEmailRateLimit => 'رسائل كثيرة، جرّب بعد ساعة';
+
+  @override
+  String get profileMyBody => 'جسمي';
+
+  @override
+  String get profileGuestProgressHint => 'ضيف — التقدّم غير محفوظ';
+
+  @override
+  String get profilePlanPro => 'Pro';
+
+  @override
+  String get profilePlanFree => 'مجاني';
+
+  @override
+  String profileMemberSince(String date) {
+    return 'عضو منذ $date';
+  }
+
+  @override
+  String get profileSaveProgressCta => 'احفظ تقدّمك';
+
+  @override
+  String get profileMyPlanSection => 'خطتي';
+
+  @override
+  String get profileChangeDietPlan => 'غيّر الخطة';
+
+  @override
+  String get profileBodyMetricsSaved => 'تم تحديث القياسات';
+
+  @override
+  String get profileSaveBodyMetrics => 'حفظ';
+
+  @override
+  String get profileEditDisplayName => 'الاسم المعروض';
+
+  @override
+  String get profileDisplayNameHint => 'اسمك';
+
+  @override
+  String get profileFitnessGoal => 'الهدف';
 }

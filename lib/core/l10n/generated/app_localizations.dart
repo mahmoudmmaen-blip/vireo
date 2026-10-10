@@ -4732,6 +4732,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{current} / {max} g carbs'**
   String dietCarbsLimitProgress(int current, int max);
+
+  /// No description provided for @todayPlanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'TODAY PLAN'**
+  String get todayPlanTitle;
+
+  /// No description provided for @todayPlanProgressSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve completed {percent}% of your day · {done}/{total} items'**
+  String todayPlanProgressSummary(int percent, int done, int total);
+
+  /// No description provided for @todayPlanNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Now'**
+  String get todayPlanNow;
+
+  /// No description provided for @todayPlanPro.
+  ///
+  /// In en, this message translates to:
+  /// **'PRO'**
+  String get todayPlanPro;
+
+  /// No description provided for @todayPlanWaterReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Water reminder {index} of {total}'**
+  String todayPlanWaterReminder(int index, int total);
+
+  /// No description provided for @todayPlanWaterGoalLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily goal {ml} ml'**
+  String todayPlanWaterGoalLine(int ml);
+
+  /// No description provided for @todayPlanFastingOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Eating window opens'**
+  String get todayPlanFastingOpen;
+
+  /// No description provided for @todayPlanFastingOpenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h eating window begins'**
+  String todayPlanFastingOpenSubtitle(int hours);
+
+  /// No description provided for @todayPlanFastingClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Eating window closes'**
+  String get todayPlanFastingClose;
+
+  /// No description provided for @todayPlanFastingCloseSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h fast begins'**
+  String todayPlanFastingCloseSubtitle(int hours);
+
+  /// No description provided for @todayPlanWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s workout'**
+  String get todayPlanWorkout;
+
+  /// No description provided for @todayPlanSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps goal'**
+  String get todayPlanSteps;
+
+  /// No description provided for @todayPlanStepsProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {goal} steps'**
+  String todayPlanStepsProgress(int current, int goal);
+
+  /// No description provided for @todayPlanVitalitySleepSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log 7.5+ hours in Vitality'**
+  String get todayPlanVitalitySleepSubtitle;
+
+  /// No description provided for @todayPlanVitalityProteinSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hit your protein target'**
+  String get todayPlanVitalityProteinSubtitle;
+
+  /// No description provided for @todayPlanVitalitySunSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning sunlight exposure'**
+  String get todayPlanVitalitySunSubtitle;
+
+  /// No description provided for @todayPlanVitalityStress.
+  ///
+  /// In en, this message translates to:
+  /// **'Stress reset'**
+  String get todayPlanVitalityStress;
+
+  /// No description provided for @todayPlanVitalityStressSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a breathing session'**
+  String get todayPlanVitalityStressSubtitle;
+
+  /// No description provided for @todayPlanVitalityZincSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Food-first zinc & vitamin D'**
+  String get todayPlanVitalityZincSubtitle;
+
+  /// No description provided for @todayPlanSleepTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep target'**
+  String get todayPlanSleepTarget;
+
+  /// No description provided for @todayPlanSleepTargetSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind down for quality sleep'**
+  String get todayPlanSleepTargetSubtitle;
+
+  /// No description provided for @todayPlanProtocolItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Vitality protocol'**
+  String get todayPlanProtocolItem;
+
+  /// No description provided for @todayPlanAiSuggestion.
+  ///
+  /// In en, this message translates to:
+  /// **'AI coach suggestion'**
+  String get todayPlanAiSuggestion;
+
+  /// No description provided for @todayPlanAiSuggestionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalized tip for today'**
+  String get todayPlanAiSuggestionSubtitle;
+
+  /// No description provided for @waterGoalBasedOnWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on your weight ({kg} kg)'**
+  String waterGoalBasedOnWeight(int kg);
+
+  /// No description provided for @authErrorEmailRateLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many emails, try again in an hour'**
+  String get authErrorEmailRateLimit;
+
+  /// No description provided for @profileMyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'My body'**
+  String get profileMyBody;
+
+  /// No description provided for @profileGuestProgressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest — progress not saved'**
+  String get profileGuestProgressHint;
+
+  /// No description provided for @profilePlanPro.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro'**
+  String get profilePlanPro;
+
+  /// No description provided for @profilePlanFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get profilePlanFree;
+
+  /// No description provided for @profileMemberSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Member since {date}'**
+  String profileMemberSince(String date);
+
+  /// No description provided for @profileSaveProgressCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your progress'**
+  String get profileSaveProgressCta;
+
+  /// No description provided for @profileMyPlanSection.
+  ///
+  /// In en, this message translates to:
+  /// **'My plan'**
+  String get profileMyPlanSection;
+
+  /// No description provided for @profileChangeDietPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Change plan'**
+  String get profileChangeDietPlan;
+
+  /// No description provided for @profileBodyMetricsSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Body metrics updated'**
+  String get profileBodyMetricsSaved;
+
+  /// No description provided for @profileSaveBodyMetrics.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get profileSaveBodyMetrics;
+
+  /// No description provided for @profileEditDisplayName.
+  ///
+  /// In en, this message translates to:
+  /// **'Display name'**
+  String get profileEditDisplayName;
+
+  /// No description provided for @profileDisplayNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get profileDisplayNameHint;
+
+  /// No description provided for @profileFitnessGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal'**
+  String get profileFitnessGoal;
 }
 
 class _AppLocalizationsDelegate

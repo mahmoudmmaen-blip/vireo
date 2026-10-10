@@ -1,8 +1,32 @@
+import 'package:vireo/core/boot/boot_log.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+
+void logAuthError(Object error) {
+  if (error is AuthException) {
+    BootLog.warn(
+      'Auth error code=${error.code ?? error.statusCode} message=${error.message}',
+    );
+    return;
+  }
+  BootLog.warn('Auth error', error);
+}
 
 /// Maps Auth/network exceptions to short friendly copy. Never returns raw text.
 String mapAuthError(Object error, AppLocalizations l10n) {
+  logAuthError(error);
+
+  if (error is AuthException) {
+    final code = '${error.code ?? ''} ${error.message}'.toLowerCase();
+    if (code.contains('over_email_send_rate_limit')) {
+      return l10n.authErrorEmailRateLimit;
+    }
+  }
+
   final msg = error.toString().toLowerCase();
+  if (msg.contains('over_email_send_rate_limit')) {
+    return l10n.authErrorEmailRateLimit;
+  }
   if (msg.contains('cancel') || msg.contains('canceled') || msg.contains('cancelled')) {
     return l10n.authErrorCancelled;
   }
