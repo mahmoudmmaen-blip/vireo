@@ -68,8 +68,12 @@
 	</array>
 	<key>NSMotionUsageDescription</key>
 	<string>Vireo uses motion data to count your steps on this device for walking goals and calories. / يستخدم Vireo بيانات الحركة لعدّ خطواتك على الجهاز لتتبع أهداف المشي والسعرات.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Vireo uses your location during outdoor GPS workouts to map your route and distance.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Vireo may keep location active in a workout session so tracking continues if you lock the screen.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Vireo reads your step count from Apple Health to track daily walking progress.</string>
+	<string>Vireo reads heart rate, sleep, steps, and other metrics from Apple Health when you connect a watch — never estimated from the phone.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Vireo does not write health data.</string>
 	<key>NSCameraUsageDescription</key>

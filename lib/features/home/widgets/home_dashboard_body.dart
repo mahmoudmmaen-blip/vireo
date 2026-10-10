@@ -34,6 +34,7 @@ import 'package:vireo/features/progress/providers/weekly_checkin_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/walking/walking_tracker_screen.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
+import 'package:vireo/features/activity/screens/health_hub_screen.dart';
 import 'package:vireo/features/home/widgets/today_plan_section.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
@@ -95,6 +96,37 @@ class HomeDashboardBody extends ConsumerWidget {
         onCoach: () => push(const AiCoachScreen()),
       ),
       const TodayPlanSection(),
+      VireoCard(
+        onTap: () => push(const HealthHubScreen()),
+        padding: const EdgeInsets.all(VSpace.sm + 2),
+        child: Row(
+          children: [
+            Icon(Icons.monitor_heart_outlined, color: context.vireoColors.ember),
+            const SizedBox(width: VSpace.sm),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.activityHealthHomeCardTitle,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                  Text(
+                    l10n.activityHealthHomeCardSubtitle,
+                    style: TextStyle(
+                      color: context.vireoColors.textMute,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right, color: context.vireoColors.textMute),
+          ],
+        ),
+      ),
       _ActivityRow(
         stepsCurrent: dash.stepsToday,
         stepsGoal: dash.stepsGoal,

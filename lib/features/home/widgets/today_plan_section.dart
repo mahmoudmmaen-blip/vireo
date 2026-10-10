@@ -17,7 +17,8 @@ import 'package:vireo/features/home/providers/today_plan_provider.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
-import 'package:vireo/features/walking/walking_tracker_screen.dart';
+import 'package:vireo/features/activity/screens/activity_hub_screen.dart';
+import 'package:vireo/features/breathing/screens/breathing_hub_screen.dart';
 import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
 
 class TodayPlanSection extends ConsumerStatefulWidget {
@@ -96,7 +97,7 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
         return;
       case TodayPlanKind.steps:
         await Navigator.of(context).push(
-          MaterialPageRoute<void>(builder: (_) => const WalkingTrackerScreen()),
+          MaterialPageRoute<void>(builder: (_) => const ActivityHubScreen()),
         );
         return;
       case TodayPlanKind.waterReminder:
@@ -106,7 +107,9 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
         await ref.read(vitalityDailyLogProvider.notifier).toggleSunlightDone(true);
         return;
       case TodayPlanKind.vitalityBreathing:
-        await ref.read(vitalityDailyLogProvider.notifier).logBreathingSession();
+        await Navigator.of(context).push(
+          MaterialPageRoute<void>(builder: (_) => const BreathingHubScreen()),
+        );
         return;
       case TodayPlanKind.vitalityZinc:
         await ref.read(vitalityDailyLogProvider.notifier).toggleZincVitDDone(true);

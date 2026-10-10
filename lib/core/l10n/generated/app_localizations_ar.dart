@@ -2731,4 +2731,246 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profileFitnessGoal => 'الهدف';
+
+  @override
+  String get activityHubTitle => 'النشاط والصحة';
+
+  @override
+  String get activityHubSubtitle => 'تمارين GPS، مقاييس الساعة، وتنفس موجّه.';
+
+  @override
+  String get activityHealthHomeCardTitle => 'النشاط والصحة';
+
+  @override
+  String get activityHealthHomeCardSubtitle =>
+      'اربط ساعتك أو ابدأ تمريناً خارجياً';
+
+  @override
+  String get outdoorWorkoutTitle => 'تمرين خارجي';
+
+  @override
+  String get outdoorWorkoutSubtitle => 'مشي، جري، أو دراجة مع GPS';
+
+  @override
+  String get outdoorPickTitle => 'اختر النشاط';
+
+  @override
+  String get outdoorPickSubtitle => 'تتبع GPS يعمل فقط أثناء الجلسة.';
+
+  @override
+  String get outdoorTypeWalk => 'مشي';
+
+  @override
+  String get outdoorTypeRun => 'جري';
+
+  @override
+  String get outdoorTypeCycle => 'دراجة';
+
+  @override
+  String get outdoorGo => 'انطلق!';
+
+  @override
+  String get outdoorLocationDenied => 'يلزم إذن الموقع لتمرين GPS.';
+
+  @override
+  String get outdoorDistance => 'المسافة';
+
+  @override
+  String get outdoorDuration => 'المدة';
+
+  @override
+  String get outdoorPace => 'الوتيرة';
+
+  @override
+  String get outdoorSpeed => 'السرعة';
+
+  @override
+  String outdoorPaceMinKm(int min, int sec) {
+    return '$min:$sec / كم';
+  }
+
+  @override
+  String outdoorSpeedKmh(String speed) {
+    return '$speed كم/س';
+  }
+
+  @override
+  String outdoorCalories(int kcal) {
+    return '$kcal سعرة محروقة';
+  }
+
+  @override
+  String get outdoorPause => 'إيقاف مؤقت';
+
+  @override
+  String get outdoorResume => 'استئناف';
+
+  @override
+  String get outdoorHoldToStop => 'اضغط مطولاً للإنهاء';
+
+  @override
+  String get outdoorStopTitle => 'إنهاء التمرين؟';
+
+  @override
+  String get outdoorStopBody => 'سيتم حفظ المسار والإحصائيات.';
+
+  @override
+  String get outdoorStopConfirm => 'إنهاء';
+
+  @override
+  String get outdoorPaused => 'متوقف مؤقتاً';
+
+  @override
+  String get outdoorAutoPause => 'إيقاف تلقائي عند التوقف';
+
+  @override
+  String get outdoorHistoryTitle => 'سجل التمارين';
+
+  @override
+  String get outdoorHistorySubtitle => 'جلسات GPS السابقة';
+
+  @override
+  String get outdoorHistoryEmpty => 'لا توجد تمارين خارجية بعد.';
+
+  @override
+  String get outdoorDetailTitle => 'تفاصيل التمرين';
+
+  @override
+  String get outdoorSplitsTitle => 'Splits لكل كيلومتر';
+
+  @override
+  String outdoorSplitKm(int km) {
+    return 'كم $km';
+  }
+
+  @override
+  String get uxQuickOutdoor => 'تمرين خارجي';
+
+  @override
+  String get uxQuickOutdoorSub => 'مشي، جري، أو دراجة GPS';
+
+  @override
+  String get healthHubTitle => 'الصحة';
+
+  @override
+  String get healthHubCardSubtitle => 'نبض، نوم، SpO₂ من ساعتك';
+
+  @override
+  String get healthHubProgressSubtitle => 'مقاييس الساعة ودرجة النوم';
+
+  @override
+  String get healthNotMedical =>
+      'ليس للاستخدام الطبي. البيانات من ساعتك عبر Health Connect / Apple Health.';
+
+  @override
+  String get healthFromWatch => 'من ساعتك';
+
+  @override
+  String get healthConnectWatchTitle => 'اربط ساعتك';
+
+  @override
+  String get healthConnectWatchBody =>
+      'اسمح بالوصول إلى Health Connect أو Apple Health. لا نقدّر العلامات الحيوية من الهاتف.';
+
+  @override
+  String get healthGrantPermission => 'منح صلاحية الصحة';
+
+  @override
+  String get healthMetricHeartRate => 'نبض القلب';
+
+  @override
+  String get healthMetricRestingHr => 'نبض الراحة';
+
+  @override
+  String get healthMetricHrv => 'HRV';
+
+  @override
+  String get healthMetricSpO2 => 'أكسجين الدم';
+
+  @override
+  String get healthMetricSleep => 'النوم';
+
+  @override
+  String get healthMetricWeight => 'الوزن';
+
+  @override
+  String get healthMetricWorkout => 'تمارين';
+
+  @override
+  String get healthMetricSteps => 'خطوات';
+
+  @override
+  String get healthManualSleepTitle => 'تسجيل نوم يدوي';
+
+  @override
+  String get healthManualSleepHint => 'لا بيانات نوم من الساعة — اضغط للتسجيل';
+
+  @override
+  String healthSleepScore(int score) {
+    return 'درجة النوم $score';
+  }
+
+  @override
+  String get healthBedtime => 'وقت النوم';
+
+  @override
+  String get healthWakeTime => 'وقت الاستيقاظ';
+
+  @override
+  String get healthSleepQuality => 'الجودة (1–5)';
+
+  @override
+  String get healthStressTitle => 'مستوى التوتر (HRV)';
+
+  @override
+  String get healthStressLow => 'منخفض';
+
+  @override
+  String get healthStressMedium => 'متوسط';
+
+  @override
+  String get healthStressHigh => 'مرتفع';
+
+  @override
+  String healthHrvDetail(int today, int baseline) {
+    return 'اليوم $today ms مقابل baseline $baseline ms';
+  }
+
+  @override
+  String get breathingHubTitle => 'التنفس';
+
+  @override
+  String get breathingHubSubtitle => 'جلسات موجّهة للاسترخاء';
+
+  @override
+  String get breathingBoxTitle => 'تنفس صندوقي 4-4-4-4';
+
+  @override
+  String get breathingBoxSubtitle => 'شهيق، حبس، زفير، حبس';
+
+  @override
+  String get breathing478Title => '4-7-8 للاسترخاء';
+
+  @override
+  String get breathing478Subtitle => 'نمط مهدئ قبل النوم';
+
+  @override
+  String breathingMinutes(int min) {
+    return '$min د';
+  }
+
+  @override
+  String get breathingSessionTitle => 'جلسة تنفس';
+
+  @override
+  String get breathingInhale => 'شهيق';
+
+  @override
+  String get breathingHold => 'حبس';
+
+  @override
+  String get breathingExhale => 'زفير';
+
+  @override
+  String get breathingRest => 'راحة';
 }

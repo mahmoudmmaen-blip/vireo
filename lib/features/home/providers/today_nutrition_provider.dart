@@ -6,6 +6,7 @@ import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
+import 'package:vireo/features/activity/data/outdoor_workout_repository.dart';
 import 'package:vireo/features/walking/data/body_metrics.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 
@@ -118,19 +119,40 @@ final todayNutritionProvider = Provider.family<TodayNutrition, String>((
     return a.mealType!.index.compareTo(b.mealType!.index);
   });
 
-  // Steps kcal are kept separate from cardio logs to avoid double counting.
+  final outdoorKcal = ref.watch(todayOutdoorWorkoutCaloriesProvider);
+  final outdoorToday = ref.watch(outdoorWorkoutSessionsProvider).where((s) {
+    final t = DateTime.now();
+    return s.startedAt.year == t.year &&
+        s.startedAt.month == t.month &&
+        s.startedAt.day == t.day;
+  });
+
+  // Steps kcal minus overlap during GPS outdoor sessions (same time window).
   final stepsToday = ref.watch(todayStepsProvider);
   final body = readBodyMetrics();
-  final stepsKcal = WalkingMetricsCalculator.compute(
+  var stepsKcal = WalkingMetricsCalculator.compute(
     steps: stepsToday,
     weightKg: body.weightKg,
     heightCm: body.heightCm,
   ).caloriesBurned;
 
+  for (final session in outdoorToday) {
+    final start = session.stepsAtStart;
+    final end = session.stepsAtEnd;
+    if (start != null && end != null && end > start) {
+      stepsKcal -= WalkingMetricsCalculator.compute(
+        steps: end - start,
+        weightKg: body.weightKg,
+        heightCm: body.heightCm,
+      ).caloriesBurned;
+    }
+  }
+  if (stepsKcal < 0) stepsKcal = 0;
+
   return TodayNutrition(
     goalKcal: target.calories,
     eatenKcal: totals.calories,
-    burnedKcal: totals.burnedKcal + stepsKcal,
+    burnedKcal: totals.burnedKcal + outdoorKcal + stepsKcal,
     proteinG: totals.protein,
     carbsG: totals.carbs,
     fatG: totals.fat,

@@ -4966,6 +4966,456 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Goal'**
   String get profileFitnessGoal;
+
+  /// No description provided for @activityHubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity & Health'**
+  String get activityHubTitle;
+
+  /// No description provided for @activityHubSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'GPS workouts, wearable metrics, and guided breathing — phone-first, watch-powered.'**
+  String get activityHubSubtitle;
+
+  /// No description provided for @activityHealthHomeCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity & Health'**
+  String get activityHealthHomeCardTitle;
+
+  /// No description provided for @activityHealthHomeCardSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your watch or start an outdoor workout'**
+  String get activityHealthHomeCardSubtitle;
+
+  /// No description provided for @outdoorWorkoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor workout'**
+  String get outdoorWorkoutTitle;
+
+  /// No description provided for @outdoorWorkoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Walk, run, or cycle with GPS maps and voice cues'**
+  String get outdoorWorkoutSubtitle;
+
+  /// No description provided for @outdoorPickTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose activity'**
+  String get outdoorPickTitle;
+
+  /// No description provided for @outdoorPickSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'GPS tracking runs only during your session.'**
+  String get outdoorPickSubtitle;
+
+  /// No description provided for @outdoorTypeWalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Walk'**
+  String get outdoorTypeWalk;
+
+  /// No description provided for @outdoorTypeRun.
+  ///
+  /// In en, this message translates to:
+  /// **'Run'**
+  String get outdoorTypeRun;
+
+  /// No description provided for @outdoorTypeCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle'**
+  String get outdoorTypeCycle;
+
+  /// No description provided for @outdoorGo.
+  ///
+  /// In en, this message translates to:
+  /// **'Go!'**
+  String get outdoorGo;
+
+  /// No description provided for @outdoorLocationDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required for GPS workouts.'**
+  String get outdoorLocationDenied;
+
+  /// No description provided for @outdoorDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance'**
+  String get outdoorDistance;
+
+  /// No description provided for @outdoorDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get outdoorDuration;
+
+  /// No description provided for @outdoorPace.
+  ///
+  /// In en, this message translates to:
+  /// **'Pace'**
+  String get outdoorPace;
+
+  /// No description provided for @outdoorSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed'**
+  String get outdoorSpeed;
+
+  /// No description provided for @outdoorPaceMinKm.
+  ///
+  /// In en, this message translates to:
+  /// **'{min}:{sec} / km'**
+  String outdoorPaceMinKm(int min, int sec);
+
+  /// No description provided for @outdoorSpeedKmh.
+  ///
+  /// In en, this message translates to:
+  /// **'{speed} km/h'**
+  String outdoorSpeedKmh(String speed);
+
+  /// No description provided for @outdoorCalories.
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal burned'**
+  String outdoorCalories(int kcal);
+
+  /// No description provided for @outdoorPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get outdoorPause;
+
+  /// No description provided for @outdoorResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get outdoorResume;
+
+  /// No description provided for @outdoorHoldToStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold to stop'**
+  String get outdoorHoldToStop;
+
+  /// No description provided for @outdoorStopTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'End workout?'**
+  String get outdoorStopTitle;
+
+  /// No description provided for @outdoorStopBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your route and stats will be saved.'**
+  String get outdoorStopBody;
+
+  /// No description provided for @outdoorStopConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'End'**
+  String get outdoorStopConfirm;
+
+  /// No description provided for @outdoorPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get outdoorPaused;
+
+  /// No description provided for @outdoorAutoPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-pause when idle'**
+  String get outdoorAutoPause;
+
+  /// No description provided for @outdoorHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Workout history'**
+  String get outdoorHistoryTitle;
+
+  /// No description provided for @outdoorHistorySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Past GPS sessions'**
+  String get outdoorHistorySubtitle;
+
+  /// No description provided for @outdoorHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No outdoor workouts yet.'**
+  String get outdoorHistoryEmpty;
+
+  /// No description provided for @outdoorDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Workout detail'**
+  String get outdoorDetailTitle;
+
+  /// No description provided for @outdoorSplitsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Kilometer splits'**
+  String get outdoorSplitsTitle;
+
+  /// No description provided for @outdoorSplitKm.
+  ///
+  /// In en, this message translates to:
+  /// **'Km {km}'**
+  String outdoorSplitKm(int km);
+
+  /// No description provided for @uxQuickOutdoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor workout'**
+  String get uxQuickOutdoor;
+
+  /// No description provided for @uxQuickOutdoorSub.
+  ///
+  /// In en, this message translates to:
+  /// **'GPS walk, run, or ride'**
+  String get uxQuickOutdoorSub;
+
+  /// No description provided for @healthHubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health'**
+  String get healthHubTitle;
+
+  /// No description provided for @healthHubCardSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Heart rate, sleep, SpO₂ from your watch'**
+  String get healthHubCardSubtitle;
+
+  /// No description provided for @healthHubProgressSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wearable metrics and sleep score'**
+  String get healthHubProgressSubtitle;
+
+  /// No description provided for @healthNotMedical.
+  ///
+  /// In en, this message translates to:
+  /// **'Not for medical use. Metrics come from your watch via Health Connect / Apple Health.'**
+  String get healthNotMedical;
+
+  /// No description provided for @healthFromWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'From your watch'**
+  String get healthFromWatch;
+
+  /// No description provided for @healthConnectWatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your watch'**
+  String get healthConnectWatchTitle;
+
+  /// No description provided for @healthConnectWatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant access to Health Connect or Apple Health so Vireo can show heart rate, sleep, steps, and more. We never estimate vitals from the phone.'**
+  String get healthConnectWatchBody;
+
+  /// No description provided for @healthGrantPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant health access'**
+  String get healthGrantPermission;
+
+  /// No description provided for @healthMetricHeartRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Heart rate'**
+  String get healthMetricHeartRate;
+
+  /// No description provided for @healthMetricRestingHr.
+  ///
+  /// In en, this message translates to:
+  /// **'Resting heart rate'**
+  String get healthMetricRestingHr;
+
+  /// No description provided for @healthMetricHrv.
+  ///
+  /// In en, this message translates to:
+  /// **'HRV (RMSSD)'**
+  String get healthMetricHrv;
+
+  /// No description provided for @healthMetricSpO2.
+  ///
+  /// In en, this message translates to:
+  /// **'Blood oxygen'**
+  String get healthMetricSpO2;
+
+  /// No description provided for @healthMetricSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get healthMetricSleep;
+
+  /// No description provided for @healthMetricWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get healthMetricWeight;
+
+  /// No description provided for @healthMetricWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Workouts'**
+  String get healthMetricWorkout;
+
+  /// No description provided for @healthMetricSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps'**
+  String get healthMetricSteps;
+
+  /// No description provided for @healthManualSleepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual sleep log'**
+  String get healthManualSleepTitle;
+
+  /// No description provided for @healthManualSleepHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No wearable sleep data — tap to log bedtime and quality'**
+  String get healthManualSleepHint;
+
+  /// No description provided for @healthSleepScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep score {score}'**
+  String healthSleepScore(int score);
+
+  /// No description provided for @healthBedtime.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedtime'**
+  String get healthBedtime;
+
+  /// No description provided for @healthWakeTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Wake time'**
+  String get healthWakeTime;
+
+  /// No description provided for @healthSleepQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality (1–5)'**
+  String get healthSleepQuality;
+
+  /// No description provided for @healthStressTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stress level (HRV)'**
+  String get healthStressTitle;
+
+  /// No description provided for @healthStressLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get healthStressLow;
+
+  /// No description provided for @healthStressMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get healthStressMedium;
+
+  /// No description provided for @healthStressHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get healthStressHigh;
+
+  /// No description provided for @healthHrvDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Today {today} ms vs 14-day baseline {baseline} ms'**
+  String healthHrvDetail(int today, int baseline);
+
+  /// No description provided for @breathingHubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing'**
+  String get breathingHubTitle;
+
+  /// No description provided for @breathingHubSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Guided sessions for stress recovery'**
+  String get breathingHubSubtitle;
+
+  /// No description provided for @breathingBoxTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Box breathing 4-4-4-4'**
+  String get breathingBoxTitle;
+
+  /// No description provided for @breathingBoxSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Equal inhale, hold, exhale, hold'**
+  String get breathingBoxSubtitle;
+
+  /// No description provided for @breathing478Title.
+  ///
+  /// In en, this message translates to:
+  /// **'4-7-8 relaxation'**
+  String get breathing478Title;
+
+  /// No description provided for @breathing478Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Calming pattern before sleep'**
+  String get breathing478Subtitle;
+
+  /// No description provided for @breathingMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{min} min'**
+  String breathingMinutes(int min);
+
+  /// No description provided for @breathingSessionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing session'**
+  String get breathingSessionTitle;
+
+  /// No description provided for @breathingInhale.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhale'**
+  String get breathingInhale;
+
+  /// No description provided for @breathingHold.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold'**
+  String get breathingHold;
+
+  /// No description provided for @breathingExhale.
+  ///
+  /// In en, this message translates to:
+  /// **'Exhale'**
+  String get breathingExhale;
+
+  /// No description provided for @breathingRest.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest'**
+  String get breathingRest;
 }
 
 class _AppLocalizationsDelegate

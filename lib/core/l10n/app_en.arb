@@ -1533,5 +1533,107 @@
   "profileSaveBodyMetrics": "Save",
   "profileEditDisplayName": "Display name",
   "profileDisplayNameHint": "Your name",
-  "profileFitnessGoal": "Goal"
+  "profileFitnessGoal": "Goal",
+  "activityHubTitle": "Activity & Health",
+  "activityHubSubtitle": "GPS workouts, wearable metrics, and guided breathing — phone-first, watch-powered.",
+  "activityHealthHomeCardTitle": "Activity & Health",
+  "activityHealthHomeCardSubtitle": "Connect your watch or start an outdoor workout",
+  "outdoorWorkoutTitle": "Outdoor workout",
+  "outdoorWorkoutSubtitle": "Walk, run, or cycle with GPS maps and voice cues",
+  "outdoorPickTitle": "Choose activity",
+  "outdoorPickSubtitle": "GPS tracking runs only during your session.",
+  "outdoorTypeWalk": "Walk",
+  "outdoorTypeRun": "Run",
+  "outdoorTypeCycle": "Cycle",
+  "outdoorGo": "Go!",
+  "outdoorLocationDenied": "Location permission is required for GPS workouts.",
+  "outdoorDistance": "Distance",
+  "outdoorDuration": "Duration",
+  "outdoorPace": "Pace",
+  "outdoorSpeed": "Speed",
+  "outdoorPaceMinKm": "{min}:{sec} / km",
+  "@outdoorPaceMinKm": {
+    "placeholders": {
+      "min": {"type": "int"},
+      "sec": {"type": "int"}
+    }
+  },
+  "outdoorSpeedKmh": "{speed} km/h",
+  "@outdoorSpeedKmh": {
+    "placeholders": {"speed": {"type": "String"}}
+  },
+  "outdoorCalories": "{kcal} kcal burned",
+  "@outdoorCalories": {
+    "placeholders": {"kcal": {"type": "int"}}
+  },
+  "outdoorPause": "Pause",
+  "outdoorResume": "Resume",
+  "outdoorHoldToStop": "Hold to stop",
+  "outdoorStopTitle": "End workout?",
+  "outdoorStopBody": "Your route and stats will be saved.",
+  "outdoorStopConfirm": "End",
+  "outdoorPaused": "Paused",
+  "outdoorAutoPause": "Auto-pause when idle",
+  "outdoorHistoryTitle": "Workout history",
+  "outdoorHistorySubtitle": "Past GPS sessions",
+  "outdoorHistoryEmpty": "No outdoor workouts yet.",
+  "outdoorDetailTitle": "Workout detail",
+  "outdoorSplitsTitle": "Kilometer splits",
+  "outdoorSplitKm": "Km {km}",
+  "@outdoorSplitKm": {
+    "placeholders": {"km": {"type": "int"}}
+  },
+  "uxQuickOutdoor": "Outdoor workout",
+  "uxQuickOutdoorSub": "GPS walk, run, or ride",
+  "healthHubTitle": "Health",
+  "healthHubCardSubtitle": "Heart rate, sleep, SpO₂ from your watch",
+  "healthHubProgressSubtitle": "Wearable metrics and sleep score",
+  "healthNotMedical": "Not for medical use. Metrics come from your watch via Health Connect / Apple Health.",
+  "healthFromWatch": "From your watch",
+  "healthConnectWatchTitle": "Connect your watch",
+  "healthConnectWatchBody": "Grant access to Health Connect or Apple Health so Vireo can show heart rate, sleep, steps, and more. We never estimate vitals from the phone.",
+  "healthGrantPermission": "Grant health access",
+  "healthMetricHeartRate": "Heart rate",
+  "healthMetricRestingHr": "Resting heart rate",
+  "healthMetricHrv": "HRV (RMSSD)",
+  "healthMetricSpO2": "Blood oxygen",
+  "healthMetricSleep": "Sleep",
+  "healthMetricWeight": "Weight",
+  "healthMetricWorkout": "Workouts",
+  "healthMetricSteps": "Steps",
+  "healthManualSleepTitle": "Manual sleep log",
+  "healthManualSleepHint": "No wearable sleep data — tap to log bedtime and quality",
+  "healthSleepScore": "Sleep score {score}",
+  "@healthSleepScore": {
+    "placeholders": {"score": {"type": "int"}}
+  },
+  "healthBedtime": "Bedtime",
+  "healthWakeTime": "Wake time",
+  "healthSleepQuality": "Quality (1–5)",
+  "healthStressTitle": "Stress level (HRV)",
+  "healthStressLow": "Low",
+  "healthStressMedium": "Medium",
+  "healthStressHigh": "High",
+  "healthHrvDetail": "Today {today} ms vs 14-day baseline {baseline} ms",
+  "@healthHrvDetail": {
+    "placeholders": {
+      "today": {"type": "int"},
+      "baseline": {"type": "int"}
+    }
+  },
+  "breathingHubTitle": "Breathing",
+  "breathingHubSubtitle": "Guided sessions for stress recovery",
+  "breathingBoxTitle": "Box breathing 4-4-4-4",
+  "breathingBoxSubtitle": "Equal inhale, hold, exhale, hold",
+  "breathing478Title": "4-7-8 relaxation",
+  "breathing478Subtitle": "Calming pattern before sleep",
+  "breathingMinutes": "{min} min",
+  "@breathingMinutes": {
+    "placeholders": {"min": {"type": "int"}}
+  },
+  "breathingSessionTitle": "Breathing session",
+  "breathingInhale": "Inhale",
+  "breathingHold": "Hold",
+  "breathingExhale": "Exhale",
+  "breathingRest": "Rest"
 }

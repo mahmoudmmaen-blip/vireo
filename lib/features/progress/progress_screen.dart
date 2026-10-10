@@ -10,7 +10,10 @@ import 'package:vireo/features/progress/providers/progress_provider.dart';
 import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
 import 'package:vireo/features/progress/widgets/energy_line_chart.dart';
 import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
+import 'package:vireo/features/activity/screens/health_hub_screen.dart';
 import 'package:vireo/features/progress/widgets/weight_line_chart.dart';
+import 'package:vireo/core/ui/pressable.dart';
+import 'package:vireo/core/ui/vireo_tokens.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -41,6 +44,39 @@ class ProgressScreen extends ConsumerWidget {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
               children: [
+                VireoCard(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(builder: (_) => const HealthHubScreen()),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.favorite_outline, color: context.vireoColors.ember),
+                      const SizedBox(width: VSpace.sm),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.healthHubTitle,
+                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                            ),
+                            Text(
+                              l10n.healthHubProgressSubtitle,
+                              style: TextStyle(
+                                color: context.vireoColors.textMute,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Icon(Icons.chevron_right, color: context.vireoColors.textMute),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
                 Text(
                   l10n.progressAllChartsTitle,
                   style: Theme.of(context).textTheme.titleMedium,

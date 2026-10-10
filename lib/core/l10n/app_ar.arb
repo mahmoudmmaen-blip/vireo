@@ -1474,5 +1474,107 @@
   "profileSaveBodyMetrics": "حفظ",
   "profileEditDisplayName": "الاسم المعروض",
   "profileDisplayNameHint": "اسمك",
-  "profileFitnessGoal": "الهدف"
+  "profileFitnessGoal": "الهدف",
+  "activityHubTitle": "النشاط والصحة",
+  "activityHubSubtitle": "تمارين GPS، مقاييس الساعة، وتنفس موجّه.",
+  "activityHealthHomeCardTitle": "النشاط والصحة",
+  "activityHealthHomeCardSubtitle": "اربط ساعتك أو ابدأ تمريناً خارجياً",
+  "outdoorWorkoutTitle": "تمرين خارجي",
+  "outdoorWorkoutSubtitle": "مشي، جري، أو دراجة مع GPS",
+  "outdoorPickTitle": "اختر النشاط",
+  "outdoorPickSubtitle": "تتبع GPS يعمل فقط أثناء الجلسة.",
+  "outdoorTypeWalk": "مشي",
+  "outdoorTypeRun": "جري",
+  "outdoorTypeCycle": "دراجة",
+  "outdoorGo": "انطلق!",
+  "outdoorLocationDenied": "يلزم إذن الموقع لتمرين GPS.",
+  "outdoorDistance": "المسافة",
+  "outdoorDuration": "المدة",
+  "outdoorPace": "الوتيرة",
+  "outdoorSpeed": "السرعة",
+  "outdoorPaceMinKm": "{min}:{sec} / كم",
+  "@outdoorPaceMinKm": {
+    "placeholders": {
+      "min": {"type": "int"},
+      "sec": {"type": "int"}
+    }
+  },
+  "outdoorSpeedKmh": "{speed} كم/س",
+  "@outdoorSpeedKmh": {
+    "placeholders": {"speed": {"type": "String"}}
+  },
+  "outdoorCalories": "{kcal} سعرة محروقة",
+  "@outdoorCalories": {
+    "placeholders": {"kcal": {"type": "int"}}
+  },
+  "outdoorPause": "إيقاف مؤقت",
+  "outdoorResume": "استئناف",
+  "outdoorHoldToStop": "اضغط مطولاً للإنهاء",
+  "outdoorStopTitle": "إنهاء التمرين؟",
+  "outdoorStopBody": "سيتم حفظ المسار والإحصائيات.",
+  "outdoorStopConfirm": "إنهاء",
+  "outdoorPaused": "متوقف مؤقتاً",
+  "outdoorAutoPause": "إيقاف تلقائي عند التوقف",
+  "outdoorHistoryTitle": "سجل التمارين",
+  "outdoorHistorySubtitle": "جلسات GPS السابقة",
+  "outdoorHistoryEmpty": "لا توجد تمارين خارجية بعد.",
+  "outdoorDetailTitle": "تفاصيل التمرين",
+  "outdoorSplitsTitle": "Splits لكل كيلومتر",
+  "outdoorSplitKm": "كم {km}",
+  "@outdoorSplitKm": {
+    "placeholders": {"km": {"type": "int"}}
+  },
+  "uxQuickOutdoor": "تمرين خارجي",
+  "uxQuickOutdoorSub": "مشي، جري، أو دراجة GPS",
+  "healthHubTitle": "الصحة",
+  "healthHubCardSubtitle": "نبض، نوم، SpO₂ من ساعتك",
+  "healthHubProgressSubtitle": "مقاييس الساعة ودرجة النوم",
+  "healthNotMedical": "ليس للاستخدام الطبي. البيانات من ساعتك عبر Health Connect / Apple Health.",
+  "healthFromWatch": "من ساعتك",
+  "healthConnectWatchTitle": "اربط ساعتك",
+  "healthConnectWatchBody": "اسمح بالوصول إلى Health Connect أو Apple Health. لا نقدّر العلامات الحيوية من الهاتف.",
+  "healthGrantPermission": "منح صلاحية الصحة",
+  "healthMetricHeartRate": "نبض القلب",
+  "healthMetricRestingHr": "نبض الراحة",
+  "healthMetricHrv": "HRV",
+  "healthMetricSpO2": "أكسجين الدم",
+  "healthMetricSleep": "النوم",
+  "healthMetricWeight": "الوزن",
+  "healthMetricWorkout": "تمارين",
+  "healthMetricSteps": "خطوات",
+  "healthManualSleepTitle": "تسجيل نوم يدوي",
+  "healthManualSleepHint": "لا بيانات نوم من الساعة — اضغط للتسجيل",
+  "healthSleepScore": "درجة النوم {score}",
+  "@healthSleepScore": {
+    "placeholders": {"score": {"type": "int"}}
+  },
+  "healthBedtime": "وقت النوم",
+  "healthWakeTime": "وقت الاستيقاظ",
+  "healthSleepQuality": "الجودة (1–5)",
+  "healthStressTitle": "مستوى التوتر (HRV)",
+  "healthStressLow": "منخفض",
+  "healthStressMedium": "متوسط",
+  "healthStressHigh": "مرتفع",
+  "healthHrvDetail": "اليوم {today} ms مقابل baseline {baseline} ms",
+  "@healthHrvDetail": {
+    "placeholders": {
+      "today": {"type": "int"},
+      "baseline": {"type": "int"}
+    }
+  },
+  "breathingHubTitle": "التنفس",
+  "breathingHubSubtitle": "جلسات موجّهة للاسترخاء",
+  "breathingBoxTitle": "تنفس صندوقي 4-4-4-4",
+  "breathingBoxSubtitle": "شهيق، حبس، زفير، حبس",
+  "breathing478Title": "4-7-8 للاسترخاء",
+  "breathing478Subtitle": "نمط مهدئ قبل النوم",
+  "breathingMinutes": "{min} د",
+  "@breathingMinutes": {
+    "placeholders": {"min": {"type": "int"}}
+  },
+  "breathingSessionTitle": "جلسة تنفس",
+  "breathingInhale": "شهيق",
+  "breathingHold": "حبس",
+  "breathingExhale": "زفير",
+  "breathingRest": "راحة"
 }

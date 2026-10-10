@@ -2751,4 +2751,251 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileFitnessGoal => 'Goal';
+
+  @override
+  String get activityHubTitle => 'Activity & Health';
+
+  @override
+  String get activityHubSubtitle =>
+      'GPS workouts, wearable metrics, and guided breathing — phone-first, watch-powered.';
+
+  @override
+  String get activityHealthHomeCardTitle => 'Activity & Health';
+
+  @override
+  String get activityHealthHomeCardSubtitle =>
+      'Connect your watch or start an outdoor workout';
+
+  @override
+  String get outdoorWorkoutTitle => 'Outdoor workout';
+
+  @override
+  String get outdoorWorkoutSubtitle =>
+      'Walk, run, or cycle with GPS maps and voice cues';
+
+  @override
+  String get outdoorPickTitle => 'Choose activity';
+
+  @override
+  String get outdoorPickSubtitle =>
+      'GPS tracking runs only during your session.';
+
+  @override
+  String get outdoorTypeWalk => 'Walk';
+
+  @override
+  String get outdoorTypeRun => 'Run';
+
+  @override
+  String get outdoorTypeCycle => 'Cycle';
+
+  @override
+  String get outdoorGo => 'Go!';
+
+  @override
+  String get outdoorLocationDenied =>
+      'Location permission is required for GPS workouts.';
+
+  @override
+  String get outdoorDistance => 'Distance';
+
+  @override
+  String get outdoorDuration => 'Duration';
+
+  @override
+  String get outdoorPace => 'Pace';
+
+  @override
+  String get outdoorSpeed => 'Speed';
+
+  @override
+  String outdoorPaceMinKm(int min, int sec) {
+    return '$min:$sec / km';
+  }
+
+  @override
+  String outdoorSpeedKmh(String speed) {
+    return '$speed km/h';
+  }
+
+  @override
+  String outdoorCalories(int kcal) {
+    return '$kcal kcal burned';
+  }
+
+  @override
+  String get outdoorPause => 'Pause';
+
+  @override
+  String get outdoorResume => 'Resume';
+
+  @override
+  String get outdoorHoldToStop => 'Hold to stop';
+
+  @override
+  String get outdoorStopTitle => 'End workout?';
+
+  @override
+  String get outdoorStopBody => 'Your route and stats will be saved.';
+
+  @override
+  String get outdoorStopConfirm => 'End';
+
+  @override
+  String get outdoorPaused => 'Paused';
+
+  @override
+  String get outdoorAutoPause => 'Auto-pause when idle';
+
+  @override
+  String get outdoorHistoryTitle => 'Workout history';
+
+  @override
+  String get outdoorHistorySubtitle => 'Past GPS sessions';
+
+  @override
+  String get outdoorHistoryEmpty => 'No outdoor workouts yet.';
+
+  @override
+  String get outdoorDetailTitle => 'Workout detail';
+
+  @override
+  String get outdoorSplitsTitle => 'Kilometer splits';
+
+  @override
+  String outdoorSplitKm(int km) {
+    return 'Km $km';
+  }
+
+  @override
+  String get uxQuickOutdoor => 'Outdoor workout';
+
+  @override
+  String get uxQuickOutdoorSub => 'GPS walk, run, or ride';
+
+  @override
+  String get healthHubTitle => 'Health';
+
+  @override
+  String get healthHubCardSubtitle => 'Heart rate, sleep, SpO₂ from your watch';
+
+  @override
+  String get healthHubProgressSubtitle => 'Wearable metrics and sleep score';
+
+  @override
+  String get healthNotMedical =>
+      'Not for medical use. Metrics come from your watch via Health Connect / Apple Health.';
+
+  @override
+  String get healthFromWatch => 'From your watch';
+
+  @override
+  String get healthConnectWatchTitle => 'Connect your watch';
+
+  @override
+  String get healthConnectWatchBody =>
+      'Grant access to Health Connect or Apple Health so Vireo can show heart rate, sleep, steps, and more. We never estimate vitals from the phone.';
+
+  @override
+  String get healthGrantPermission => 'Grant health access';
+
+  @override
+  String get healthMetricHeartRate => 'Heart rate';
+
+  @override
+  String get healthMetricRestingHr => 'Resting heart rate';
+
+  @override
+  String get healthMetricHrv => 'HRV (RMSSD)';
+
+  @override
+  String get healthMetricSpO2 => 'Blood oxygen';
+
+  @override
+  String get healthMetricSleep => 'Sleep';
+
+  @override
+  String get healthMetricWeight => 'Weight';
+
+  @override
+  String get healthMetricWorkout => 'Workouts';
+
+  @override
+  String get healthMetricSteps => 'Steps';
+
+  @override
+  String get healthManualSleepTitle => 'Manual sleep log';
+
+  @override
+  String get healthManualSleepHint =>
+      'No wearable sleep data — tap to log bedtime and quality';
+
+  @override
+  String healthSleepScore(int score) {
+    return 'Sleep score $score';
+  }
+
+  @override
+  String get healthBedtime => 'Bedtime';
+
+  @override
+  String get healthWakeTime => 'Wake time';
+
+  @override
+  String get healthSleepQuality => 'Quality (1–5)';
+
+  @override
+  String get healthStressTitle => 'Stress level (HRV)';
+
+  @override
+  String get healthStressLow => 'Low';
+
+  @override
+  String get healthStressMedium => 'Medium';
+
+  @override
+  String get healthStressHigh => 'High';
+
+  @override
+  String healthHrvDetail(int today, int baseline) {
+    return 'Today $today ms vs 14-day baseline $baseline ms';
+  }
+
+  @override
+  String get breathingHubTitle => 'Breathing';
+
+  @override
+  String get breathingHubSubtitle => 'Guided sessions for stress recovery';
+
+  @override
+  String get breathingBoxTitle => 'Box breathing 4-4-4-4';
+
+  @override
+  String get breathingBoxSubtitle => 'Equal inhale, hold, exhale, hold';
+
+  @override
+  String get breathing478Title => '4-7-8 relaxation';
+
+  @override
+  String get breathing478Subtitle => 'Calming pattern before sleep';
+
+  @override
+  String breathingMinutes(int min) {
+    return '$min min';
+  }
+
+  @override
+  String get breathingSessionTitle => 'Breathing session';
+
+  @override
+  String get breathingInhale => 'Inhale';
+
+  @override
+  String get breathingHold => 'Hold';
+
+  @override
+  String get breathingExhale => 'Exhale';
+
+  @override
+  String get breathingRest => 'Rest';
 }

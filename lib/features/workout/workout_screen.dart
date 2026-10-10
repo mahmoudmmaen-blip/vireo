@@ -8,6 +8,8 @@ import 'package:vireo/core/widgets/animated_backgrounds.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
+import 'package:vireo/features/activity/screens/activity_hub_screen.dart';
+import 'package:vireo/features/activity/screens/outdoor_pick_screen.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
@@ -151,6 +153,22 @@ class WorkoutScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  OutlinedButton.icon(
+                    onPressed: () => Navigator.of(context).push(
+                      SlideUpRoute(page: const OutdoorPickScreen()),
+                    ),
+                    icon: const Icon(Icons.map_outlined),
+                    label: Text(l10n.outdoorWorkoutTitle),
+                  ),
+                  const SizedBox(height: 8),
+                  OutlinedButton.icon(
+                    onPressed: () => Navigator.of(context).push(
+                      SlideUpRoute(page: const ActivityHubScreen()),
+                    ),
+                    icon: const Icon(Icons.monitor_heart_outlined),
+                    label: Text(l10n.activityHubTitle),
+                  ),
+                  const SizedBox(height: 8),
                   OutlinedButton.icon(
                     onPressed: () => Navigator.of(context).push(
                       SlideUpRoute(page: const CardioActivityScreen()),
