@@ -11,6 +11,21 @@ abstract final class AppConfig {
     defaultValue: 'sb_publishable_gM6GHFO0UFZDoa5fsMykuQ_gNcOAMJq',
   );
 
+  static const sentryDsn = String.fromEnvironment(
+    'SENTRY_DSN',
+    defaultValue: '',
+  );
+
+  static const appEnvironment = String.fromEnvironment(
+    'APP_ENVIRONMENT',
+    defaultValue: 'production',
+  );
+
+  static const appRelease = String.fromEnvironment(
+    'APP_RELEASE',
+    defaultValue: 'vireo@1.0.0+1',
+  );
+
   static const revenueCatAppleApiKey = String.fromEnvironment(
     'REVENUECAT_APPLE_API_KEY',
     defaultValue: '',

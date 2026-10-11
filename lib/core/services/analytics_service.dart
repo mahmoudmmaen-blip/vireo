@@ -3,7 +3,7 @@ import 'package:vireo/core/analytics/analytics_events.dart';
 
 export 'package:vireo/core/analytics/analytics_events.dart';
 
-/// Lightweight analytics facade (Section 14). Wire to PostHog/Firebase later.
+/// Lightweight analytics facade with strict privacy standards (no health/food values).
 abstract final class AnalyticsService {
   static Future<void> logEvent(
     String name, {
@@ -13,6 +13,9 @@ abstract final class AnalyticsService {
       debugPrint('[analytics] $name $properties');
     }
   }
+
+  static Future<void> appOpen({required String environment, required String locale}) =>
+      logEvent('app_open', properties: {'environment': environment, 'locale': locale});
 
   static Future<void> onboardingStepViewed({
     required int stepIndex,
@@ -39,6 +42,48 @@ abstract final class AnalyticsService {
           ...properties,
         },
       );
+
+  static Future<void> scanStarted({required String mode}) =>
+      logEvent('scan_started', properties: {'mode': mode});
+
+  static Future<void> scanSucceeded({required int itemsCount, int? durationMs}) =>
+      logEvent('scan_succeeded', properties: {
+        'items_count': itemsCount,
+        'duration_ms': ?durationMs,
+      });
+
+  static Future<void> scanFailed({required String errorType}) =>
+      logEvent('scan_failed', properties: {'error_type': errorType});
+
+  static Future<void> mealSaved({required String mealType, required bool hasPhoto}) =>
+      logEvent('meal_saved', properties: {'meal_type': mealType, 'has_photo': hasPhoto});
+
+  static Future<void> coachMessage({required int turnCount}) =>
+      logEvent('coach_message', properties: {'turn_count': turnCount});
+
+  static Future<void> workoutCompleted({required int exercisesCount, required int durationMin}) =>
+      logEvent(
+        AnalyticsEvents.workoutCompleted,
+        properties: {
+          'exercises_count': exercisesCount,
+          'duration_min': durationMin,
+        },
+      );
+
+  static Future<void> paywallViewed({required String source}) =>
+      logEvent(AnalyticsEvents.paywallViewed, properties: {'source': source});
+
+  static Future<void> purchaseStarted({required String planId}) =>
+      logEvent('purchase_started', properties: {'plan_id': planId});
+
+  static Future<void> purchaseCompleted({required String planId, required bool hasTrial}) =>
+      logEvent(
+        AnalyticsEvents.subscriptionStarted,
+        properties: {'plan_id': planId, 'has_trial': hasTrial},
+      );
+
+  static Future<void> reminderOpened({required String reminderType}) =>
+      logEvent('reminder_opened', properties: {'reminder_type': reminderType});
 
   static Future<void> mealSwapped({
     required String fromRecipeId,

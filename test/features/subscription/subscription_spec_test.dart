@@ -11,11 +11,11 @@ void main() {
       expect(SubscriptionPlanId.lifetime.packageId, 'lifetime');
     });
 
-    test('demo offering includes all three plans', () {
-      expect(SubscriptionSnapshot.demoFree.plans.length, 3);
+    test('demo offering includes monthly and annual plans', () {
+      expect(SubscriptionSnapshot.demoFree.plans.length, 2);
       expect(
         SubscriptionSnapshot.demoFree.plans.map((p) => p.id),
-        containsAll(SubscriptionPlanId.values),
+        containsAll([SubscriptionPlanId.monthly, SubscriptionPlanId.annual]),
       );
     });
   });
@@ -75,8 +75,8 @@ void main() {
   });
 
   group('RevenueCatService §2.8 config', () {
-    test('premium entitlement id is premium', () {
-      expect(RevenueCatService.premiumEntitlementId, 'premium');
+    test('premium entitlement id is pro', () {
+      expect(RevenueCatService.premiumEntitlementId, 'pro');
     });
   });
 }
