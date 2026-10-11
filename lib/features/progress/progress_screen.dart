@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
-import 'package:vireo/core/utils/unit_converter.dart';
 import 'package:vireo/core/widgets/animated_backgrounds.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
-import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
-import 'package:vireo/features/progress/providers/progress_provider.dart';
-import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
-import 'package:vireo/features/progress/widgets/energy_line_chart.dart';
-import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
 import 'package:vireo/features/activity/screens/health_hub_screen.dart';
 import 'package:vireo/features/measurements/screens/body_composition_screen.dart';
-import 'package:vireo/features/progress/widgets/weight_line_chart.dart';
+import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
+import 'package:vireo/features/progress/providers/progress_provider.dart';
+import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
+import 'package:vireo/features/progress/screens/weekly_progress_report_screen.dart';
+import 'package:vireo/features/progress/widgets/achievements_grid_card.dart';
+import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
+import 'package:vireo/features/progress/widgets/adaptive_calorie_suggestion_card.dart';
+import 'package:vireo/features/progress/widgets/body_measurements_section.dart';
+import 'package:vireo/features/progress/widgets/energy_line_chart.dart';
+import 'package:vireo/features/progress/widgets/progress_photos_section.dart';
+import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
+import 'package:vireo/features/progress/widgets/weight_trend_chart_card.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 
@@ -28,148 +33,195 @@ class ProgressScreen extends ConsumerWidget {
     final weeksAsync = ref.watch(adherenceWeeksProvider);
     final energyAsync = ref.watch(energyCheckInsProvider);
     final deficit = ref.watch(weeklyDeficitProvider);
+    final trendAnalysis = ref.watch(weightTrendAnalysisProvider);
+    final showAdaptive = ref.watch(showAdaptiveCalorieCardProvider);
 
     return GradientMeshBackground(
       child: FeatureScaffold(
         title: l10n.progressTitle,
         transparentBackground: true,
         body: RefreshIndicator(
-            onRefresh: () async {
-              ref.invalidate(weightLogsProvider);
-              ref.invalidate(weightGoalProvider);
-              ref.invalidate(adherenceWeeksProvider);
-              ref.invalidate(energyCheckInsProvider);
-              ref.invalidate(weeklyDeficitProvider);
-              await Future<void>.delayed(const Duration(milliseconds: 400));
-            },
-            child: ListView(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-              children: [
-                VireoCard(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(builder: (_) => const HealthHubScreen()),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.favorite_outline, color: context.vireoColors.ember),
-                      const SizedBox(width: VSpace.sm),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              l10n.healthHubTitle,
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                            Text(
-                              l10n.healthHubProgressSubtitle,
-                              style: TextStyle(
-                                color: context.vireoColors.textMute,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
+          onRefresh: () async {
+            ref.invalidate(weightLogsProvider);
+            ref.invalidate(weightGoalProvider);
+            ref.invalidate(adherenceWeeksProvider);
+            ref.invalidate(energyCheckInsProvider);
+            ref.invalidate(weeklyDeficitProvider);
+            ref.invalidate(weeklyProgressReportDataProvider);
+            await Future<void>.delayed(const Duration(milliseconds: 400));
+          },
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+            children: [
+              // ── Quick Links: Weekly Report, Health Hub, InBody ──
+              VireoCard(
+                onTap: () => WeeklyProgressReportScreen.open(context),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: context.vireoColors.ember.withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
                       ),
-                      Icon(Icons.chevron_right, color: context.vireoColors.textMute),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12),
-                VireoCard(
-                  onTap: () => BodyCompositionScreen.open(context),
-                  child: Row(
-                    children: [
-                      Icon(Icons.accessibility_new, color: context.vireoColors.ember),
-                      const SizedBox(width: VSpace.sm),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              l10n.inbodyBodyTitle,
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    fontWeight: FontWeight.w800,
-                                  ),
+                      child: Icon(Icons.assessment_outlined, color: context.vireoColors.ember),
+                    ),
+                    const SizedBox(width: VSpace.sm),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.weeklyReportTitle,
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                ),
+                          ),
+                          Text(
+                            l10n.weeklyReportSubtitle,
+                            style: TextStyle(
+                              color: context.vireoColors.textMute,
+                              fontSize: 12,
                             ),
-                            Text(
-                              l10n.inbodyAddResult,
-                              style: TextStyle(
-                                color: context.vireoColors.textMute,
-                                fontSize: 12,
-                              ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(Icons.chevron_right, color: context.vireoColors.textMute),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: VireoCard(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(builder: (_) => const HealthHubScreen()),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.favorite_outline, color: context.vireoColors.ember, size: 20),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  l10n.healthHubTitle,
+                                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                                ),
+                                Text(
+                                  'Metrics & sleep',
+                                  style: TextStyle(color: context.vireoColors.textMute, fontSize: 11),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Icon(Icons.chevron_right, color: context.vireoColors.textMute),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  l10n.progressAllChartsTitle,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 16),
-                _ChartCard(
-                  title: l10n.weeklyDeficitChartTitle,
-                  subtitle: l10n.weeklyDeficitSubtitle,
-                  child: WeeklyDeficitChart(summary: deficit),
-                ),
-                const SizedBox(height: 16),
-                logsAsync.when(
-                  loading: () => const _ChartLoading(),
-                  error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
-                  data: (logs) {
-                    final goalKg = goalAsync.valueOrNull;
-                    return _ChartCard(
-                      title: l10n.progressWeightChartTitle,
-                      subtitle: goalKg != null
-                          ? l10n.progressWeightGoalLine(
-                              UnitConverter.displayWeight(goalKg, unit)
-                                  .toStringAsFixed(1),
-                              UnitConverter.weightLabel(unit),
-                            )
-                          : null,
-                      child: WeightLineChart(
-                        logs: logs,
-                        goalKg: goalKg,
-                        unit: unit,
-                        dateAxisLabel: l10n.progressAxisDate,
-                        weightAxisLabel: l10n.progressAxisWeight,
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                weeksAsync.when(
-                  loading: () => const _ChartLoading(),
-                  error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
-                  data: (weeks) => _ChartCard(
-                    title: l10n.progressAdherenceChartTitle,
-                    subtitle: l10n.progressAdherenceSubtitle,
-                    child: AdherenceBarChart(weeks: weeks),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                energyAsync.when(
-                  loading: () => const _ChartLoading(),
-                  error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
-                  data: (checkIns) => _ChartCard(
-                    title: l10n.progressEnergyChartTitle,
-                    subtitle: l10n.progressEnergySubtitle,
-                    child: EnergyLineChart(
-                      checkIns: checkIns,
-                      energyAxisLabel: l10n.progressAxisEnergy,
                     ),
                   ),
-                ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: VireoCard(
+                      onTap: () => BodyCompositionScreen.open(context),
+                      child: Row(
+                        children: [
+                          Icon(Icons.accessibility_new, color: context.vireoColors.ember, size: 20),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  l10n.inbodyBodyTitle,
+                                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                                ),
+                                Text(
+                                  'InBody Scan',
+                                  style: TextStyle(color: context.vireoColors.textMute, fontSize: 11),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // ── 2. ADAPTIVE CALORIES (Card if suggestion eligible) ──
+              if (showAdaptive) ...[
+                const AdaptiveCalorieSuggestionCard(),
+                const SizedBox(height: 16),
               ],
-            ),
+
+              // ── 1. WEIGHT TREND (EMA 0.1, Raw dots, 7d/30d change headline) ──
+              logsAsync.when(
+                loading: () => const _ChartLoading(),
+                error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
+                data: (logs) {
+                  return WeightTrendChartCard(
+                    logs: logs,
+                    analysis: trendAnalysis,
+                    goalKg: goalAsync.valueOrNull,
+                    unit: unit,
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+
+              // ── 5. ACHIEVEMENTS & BADGES ──
+              const AchievementsGridCard(),
+              const SizedBox(height: 16),
+
+              // ── 4. BODY: Circumference Charts (waist, chest, arms, thighs) ──
+              const BodyMeasurementsSection(),
+              const SizedBox(height: 16),
+
+              // ── 4. BODY: Progress Photos (front/side/back, local-only, side-by-side) ──
+              const ProgressPhotosSection(),
+              const SizedBox(height: 16),
+
+              // ── Calorie Deficit Balance ──
+              _ChartCard(
+                title: l10n.weeklyDeficitChartTitle,
+                subtitle: l10n.weeklyDeficitSubtitle,
+                child: WeeklyDeficitChart(summary: deficit),
+              ),
+              const SizedBox(height: 16),
+
+              // ── Weekly Adherence ──
+              weeksAsync.when(
+                loading: () => const _ChartLoading(),
+                error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
+                data: (weeks) => _ChartCard(
+                  title: l10n.progressAdherenceChartTitle,
+                  subtitle: l10n.progressAdherenceSubtitle,
+                  child: AdherenceBarChart(weeks: weeks),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // ── Energy Levels ──
+              energyAsync.when(
+                loading: () => const _ChartLoading(),
+                error: (_, _) => _ChartError(message: l10n.authErrorGeneric),
+                data: (checkIns) => _ChartCard(
+                  title: l10n.progressEnergyChartTitle,
+                  subtitle: l10n.progressEnergySubtitle,
+                  child: EnergyLineChart(
+                    checkIns: checkIns,
+                    energyAxisLabel: l10n.progressAxisEnergy,
+                  ),
+                ),
+              ),
+            ],
           ),
+        ),
       ),
     );
   }

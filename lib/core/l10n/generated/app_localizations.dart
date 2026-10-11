@@ -3152,6 +3152,120 @@ abstract class AppLocalizations {
   /// **'Log 3 days to see your trend'**
   String get progressTrendEmpty;
 
+  /// No description provided for @adaptiveCalorieCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Adaptive Calorie Target'**
+  String get adaptiveCalorieCardTitle;
+
+  /// No description provided for @adaptiveCalorieExplainMath.
+  ///
+  /// In en, this message translates to:
+  /// **'Explain the math'**
+  String get adaptiveCalorieExplainMath;
+
+  /// No description provided for @adaptiveCalorieAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept Change'**
+  String get adaptiveCalorieAccept;
+
+  /// No description provided for @adaptiveCalorieDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Now'**
+  String get adaptiveCalorieDismiss;
+
+  /// No description provided for @weeklyReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Progress Report'**
+  String get weeklyReportTitle;
+
+  /// No description provided for @weeklyReportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday breakdown & weekly highlights'**
+  String get weeklyReportSubtitle;
+
+  /// No description provided for @weeklyReportShareCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Report'**
+  String get weeklyReportShareCta;
+
+  /// No description provided for @progressPhotosTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress Photos'**
+  String get progressPhotosTitle;
+
+  /// No description provided for @photosPrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your photos are stored locally on this phone only. They never leave your device unless you enable cloud backup.'**
+  String get photosPrivacyNote;
+
+  /// No description provided for @photosCompareSideBySide.
+  ///
+  /// In en, this message translates to:
+  /// **'Side-by-Side Compare'**
+  String get photosCompareSideBySide;
+
+  /// No description provided for @photosNeedTwoToCompare.
+  ///
+  /// In en, this message translates to:
+  /// **'Take at least 2 photos to compare before & after'**
+  String get photosNeedTwoToCompare;
+
+  /// No description provided for @photoBeforeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Before'**
+  String get photoBeforeLabel;
+
+  /// No description provided for @photoAfterLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'After'**
+  String get photoAfterLabel;
+
+  /// No description provided for @photoMissingFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Image file not found'**
+  String get photoMissingFile;
+
+  /// No description provided for @photoSourceCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take Photo'**
+  String get photoSourceCamera;
+
+  /// No description provided for @photoSourceGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from Gallery'**
+  String get photoSourceGallery;
+
+  /// No description provided for @bodyCircumferenceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Body Circumference'**
+  String get bodyCircumferenceTitle;
+
+  /// No description provided for @achievementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements & Badges'**
+  String get achievementsTitle;
+
+  /// No description provided for @achievementsUnlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocked'**
+  String get achievementsUnlocked;
+
   /// No description provided for @cookMethodRaw.
   ///
   /// In en, this message translates to:

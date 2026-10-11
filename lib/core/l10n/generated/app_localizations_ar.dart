@@ -1714,6 +1714,65 @@ class AppLocalizationsAr extends AppLocalizations {
   String get progressTrendEmpty => 'سجّل 3 أيام عشان تشوف الاتجاه';
 
   @override
+  String get adaptiveCalorieCardTitle => 'تعديل السعرات المتكيف';
+
+  @override
+  String get adaptiveCalorieExplainMath => 'شرح الحسبة';
+
+  @override
+  String get adaptiveCalorieAccept => 'قبول التغيير';
+
+  @override
+  String get adaptiveCalorieDismiss => 'ليس الآن';
+
+  @override
+  String get weeklyReportTitle => 'تقرير التقدم الأسبوعي';
+
+  @override
+  String get weeklyReportSubtitle => 'تحليل يوم الجمعة وأبرز محطات الأسبوع';
+
+  @override
+  String get weeklyReportShareCta => 'مشاركة التقرير';
+
+  @override
+  String get progressPhotosTitle => 'صور التقدم';
+
+  @override
+  String get photosPrivacyNote =>
+      'صورك محفوظة محلياً على هاتفك فقط، ولا تغادر جهازك أبداً إلا إذا فعّلت النسخ الاحتياطي السحابي.';
+
+  @override
+  String get photosCompareSideBySide => 'مقارنة جنباً إلى جنب';
+
+  @override
+  String get photosNeedTwoToCompare =>
+      'التقط صورتين على الأقل لمقارنة قبل وبعد';
+
+  @override
+  String get photoBeforeLabel => 'قبل';
+
+  @override
+  String get photoAfterLabel => 'بعد';
+
+  @override
+  String get photoMissingFile => 'ملف الصورة غير موجود';
+
+  @override
+  String get photoSourceCamera => 'التقاط صورة';
+
+  @override
+  String get photoSourceGallery => 'اختيار من المعرض';
+
+  @override
+  String get bodyCircumferenceTitle => 'قياسات محيط الجسم';
+
+  @override
+  String get achievementsTitle => 'الإنجازات والأوسمة';
+
+  @override
+  String get achievementsUnlocked => 'تم فتحها';
+
+  @override
   String get cookMethodRaw => 'نيء';
 
   @override

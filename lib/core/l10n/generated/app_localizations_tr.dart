@@ -1747,6 +1747,65 @@ class AppLocalizationsTr extends AppLocalizations {
   String get progressTrendEmpty => 'Eğiliminizi görmek için 3 gün kaydedin';
 
   @override
+  String get adaptiveCalorieCardTitle => 'Adaptive Calorie Target';
+
+  @override
+  String get adaptiveCalorieExplainMath => 'Explain the math';
+
+  @override
+  String get adaptiveCalorieAccept => 'Accept Change';
+
+  @override
+  String get adaptiveCalorieDismiss => 'Not Now';
+
+  @override
+  String get weeklyReportTitle => 'Weekly Progress Report';
+
+  @override
+  String get weeklyReportSubtitle => 'Friday breakdown & weekly highlights';
+
+  @override
+  String get weeklyReportShareCta => 'Share Report';
+
+  @override
+  String get progressPhotosTitle => 'Progress Photos';
+
+  @override
+  String get photosPrivacyNote =>
+      'Your photos are stored locally on this phone only. They never leave your device unless you enable cloud backup.';
+
+  @override
+  String get photosCompareSideBySide => 'Side-by-Side Compare';
+
+  @override
+  String get photosNeedTwoToCompare =>
+      'Take at least 2 photos to compare before & after';
+
+  @override
+  String get photoBeforeLabel => 'Before';
+
+  @override
+  String get photoAfterLabel => 'After';
+
+  @override
+  String get photoMissingFile => 'Image file not found';
+
+  @override
+  String get photoSourceCamera => 'Take Photo';
+
+  @override
+  String get photoSourceGallery => 'Choose from Gallery';
+
+  @override
+  String get bodyCircumferenceTitle => 'Body Circumference';
+
+  @override
+  String get achievementsTitle => 'Achievements & Badges';
+
+  @override
+  String get achievementsUnlocked => 'Unlocked';
+
+  @override
   String get cookMethodRaw => 'Çiğ';
 
   @override

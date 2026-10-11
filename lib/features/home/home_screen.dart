@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/home/widgets/home_dashboard_body.dart';
 
+import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
+import 'package:vireo/features/progress/widgets/adaptive_calorie_suggestion_card.dart';
+
 /// "Today" — the daily command centre.
 ///
 /// No AppBar: the dashboard renders its own header (greeting, streak,
@@ -14,10 +17,23 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.vireoColors;
+    final showAdaptive = ref.watch(showAdaptiveCalorieCardProvider);
 
     return Scaffold(
       backgroundColor: colors.background,
-      body: const SafeArea(bottom: false, child: HomeDashboardBody()),
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            if (showAdaptive)
+              const Padding(
+                padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                child: AdaptiveCalorieSuggestionCard(),
+              ),
+            const Expanded(child: HomeDashboardBody()),
+          ],
+        ),
+      ),
     );
   }
 }
