@@ -25,6 +25,7 @@ type CoachRequest = {
     targetProtein?: number;
     currentWeight?: number;
     goal?: string;
+    inbodySummary?: string;
   };
   language?: string;
 };
@@ -85,6 +86,8 @@ Deno.serve(async (req) => {
       targetProtein: Number(ctx.targetProtein ?? 0),
       currentWeight: Number(ctx.currentWeight ?? 0),
       goal: String(ctx.goal ?? ''),
+      inbodySummary:
+        typeof ctx.inbodySummary === 'string' ? ctx.inbodySummary : undefined,
       language: body.language,
     });
 

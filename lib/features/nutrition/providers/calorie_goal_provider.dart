@@ -5,6 +5,7 @@ import 'package:vireo/core/utils/calorie_calculator.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
+import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
 
 const _manualCalorieKey = 'manual_calorie_goal';
@@ -12,6 +13,7 @@ const _manualCalorieUserSetKey = 'manual_calorie_goal_user_set';
 
 final calorieGoalProvider = Provider<CalorieTarget>((ref) {
   ref.watch(dietPlanRevisionProvider);
+  final inbody = ref.watch(latestBodyCompositionProvider);
 
   final profile = HiveService.isInitialized
       ? HiveService.cacheBox.get('guest_profile')
@@ -33,13 +35,38 @@ final calorieGoalProvider = Provider<CalorieTarget>((ref) {
     goal = FitnessGoal.fromValue(map['goal'] as String? ?? goal.value);
   }
 
-  final computed = CalorieCalculator.compute(
+  if (inbody?.weightKg != null) {
+    weight = inbody!.weightKg!;
+  }
+
+  final lean = inbody?.leanMassKg;
+  final maintenance = CalorieCalculator.maintenanceKcal(
+    weightKg: weight,
+    heightCm: height,
+    age: age,
+    activityLevel: activity,
+    leanMassKg: lean,
+  );
+
+  var computed = CalorieCalculator.compute(
     weightKg: weight,
     heightCm: height,
     age: age,
     activityLevel: activity,
     goal: goal,
   );
+
+  // Rebuild macros on Katch-McArdle maintenance when lean mass is known.
+  if (lean != null && lean > 0) {
+    final protein = (lean * 2.2).round().clamp(80, 280);
+    final ratio = maintenance / computed.calories.clamp(1, 10000);
+    computed = CalorieTarget(
+      calories: (computed.calories * ratio).round().clamp(1200, 4500),
+      proteinG: protein,
+      carbsG: computed.carbsG,
+      fatG: computed.fatG,
+    );
+  }
 
   final manual = HiveService.isInitialized
       ? HiveService.settingsBox.get(_manualCalorieKey) as int?

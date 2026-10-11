@@ -1,6 +1,6 @@
 import type { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@2.49.1';
 
-export type AiUsageKind = 'meal_scan' | 'coach_chat';
+export type AiUsageKind = 'meal_scan' | 'coach_chat' | 'body_report';
 
 export const MEAL_SCAN_LIMIT_ANON = 2;
 export const MEAL_SCAN_LIMIT_FREE = 3;

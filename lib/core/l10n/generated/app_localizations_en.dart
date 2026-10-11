@@ -3122,6 +3122,106 @@ class AppLocalizationsEn extends AppLocalizations {
   String get plateSizeLarge => 'Large';
 
   @override
+  String get inbodyScanTitle => 'Scan InBody report';
+
+  @override
+  String get inbodyReviewTitle => 'Review InBody result';
+
+  @override
+  String get inbodyBodyTitle => 'Body composition';
+
+  @override
+  String get inbodyAddResult => 'Add InBody result';
+
+  @override
+  String get inbodyPickPdf => 'Choose PDF';
+
+  @override
+  String get inbodyFrameHint => 'Fit the full report sheet inside the frame';
+
+  @override
+  String get inbodyAnalyzing => 'Reading your report…';
+
+  @override
+  String get inbodyUnreadable =>
+      'Couldn’t read that sheet. Try a clearer photo.';
+
+  @override
+  String get inbodyScanFailed => 'InBody scan failed. Try again.';
+
+  @override
+  String get inbodySaved => 'InBody result saved';
+
+  @override
+  String get inbodyMedicalNote =>
+      'Not for medical use — for fitness tracking only.';
+
+  @override
+  String get inbodyTestDate => 'Test date';
+
+  @override
+  String get inbodyDevice => 'Device';
+
+  @override
+  String get inbodyWeight => 'Weight (kg)';
+
+  @override
+  String get inbodySmm => 'Skeletal muscle (kg)';
+
+  @override
+  String get inbodyFatMass => 'Fat mass (kg)';
+
+  @override
+  String get inbodyPbf => 'Body fat %';
+
+  @override
+  String get inbodyBmi => 'BMI';
+
+  @override
+  String get inbodyVisceral => 'Visceral fat level';
+
+  @override
+  String get inbodyBmr => 'BMR (kcal)';
+
+  @override
+  String get inbodyScore => 'InBody score';
+
+  @override
+  String get inbodySave => 'Save result';
+
+  @override
+  String get inbodyEmpty =>
+      'No body composition reports yet. Scan an InBody sheet to start.';
+
+  @override
+  String get inbodyLatestTitle => 'Latest report';
+
+  @override
+  String get inbodyCompareTitle => 'Compare two reports';
+
+  @override
+  String get inbodySyncHealth => 'Sync Health Connect';
+
+  @override
+  String get inbodySyncedLabel => 'Synced from Health Connect';
+
+  @override
+  String inbodySyncResult(int count) {
+    return 'Imported $count Health Connect reading(s)';
+  }
+
+  @override
+  String inbodyFromDateLabel(String date) {
+    return 'from your InBody on $date';
+  }
+
+  @override
+  String get uxQuickInbody => 'InBody report';
+
+  @override
+  String get uxQuickInbodySub => 'Scan a result sheet';
+
+  @override
   String get mealScanHeroTitle => 'Scan your meal';
 
   @override

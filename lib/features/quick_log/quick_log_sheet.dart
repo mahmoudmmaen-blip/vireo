@@ -12,6 +12,7 @@ import 'package:vireo/features/activity/screens/outdoor_pick_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
+import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
 import 'package:vireo/features/progress/widgets/weight_log_sheet.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
@@ -40,6 +41,7 @@ enum QuickLogAction {
   scanGallery,
   mealText,
   mealBarcode,
+  inbody,
   water,
   weight,
   cardio,
@@ -75,6 +77,8 @@ Future<void> _run(
       await Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (_) => const MealBarcodeScreen()),
       );
+    case QuickLogAction.inbody:
+      await InBodyScanScreen.open(context);
     case QuickLogAction.outdoor:
       await Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (_) => const OutdoorPickScreen()),
@@ -130,6 +134,8 @@ class _QuickLogSheet extends StatelessWidget {
           l10n.uxQuickMealText, l10n.uxQuickMealTextSub, colors.ember),
       _TileData(QuickLogAction.mealBarcode, Icons.qr_code_scanner,
           l10n.uxQuickBarcode, l10n.uxQuickBarcodeSub, colors.ember),
+      _TileData(QuickLogAction.inbody, Icons.accessibility_new,
+          l10n.uxQuickInbody, l10n.uxQuickInbodySub, colors.gold),
       _TileData(QuickLogAction.cardio, Icons.directions_run_rounded,
           l10n.uxQuickCardio, l10n.uxQuickCardioSub, VMacro.steps),
       _TileData(QuickLogAction.outdoor, Icons.map_outlined, l10n.uxQuickOutdoor,

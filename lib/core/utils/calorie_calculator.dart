@@ -18,15 +18,28 @@ class CalorieTarget {
 /// Mifflin-St Jeor TDEE with goal-specific calorie adjustment and macro splits.
 abstract final class CalorieCalculator {
   /// Maintenance calories (TDEE) before any goal deficit/surplus.
+  /// When [leanMassKg] is known (e.g. InBody), uses Katch-McArdle BMR.
   static int maintenanceKcal({
     required double weightKg,
     required double heightCm,
     required int age,
     required ActivityLevel activityLevel,
+    double? leanMassKg,
   }) {
+    final multiplier = _activityMultiplier(activityLevel);
+    if (leanMassKg != null && leanMassKg > 0) {
+      final bmr = 370 + 21.6 * leanMassKg;
+      return (bmr * multiplier).round();
+    }
     final bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
-    return (bmr * _activityMultiplier(activityLevel)).round();
+    return (bmr * multiplier).round();
   }
+
+  /// Exposed for tests / UI labels.
+  static double katchMcArdleBmr(double leanMassKg) => 370 + 21.6 * leanMassKg;
+
+  static double activityMultiplier(ActivityLevel level) =>
+      _activityMultiplier(level);
 
   static CalorieTarget compute({
     required double weightKg,

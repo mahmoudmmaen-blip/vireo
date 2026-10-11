@@ -5651,6 +5651,192 @@ abstract class AppLocalizations {
   /// **'Large'**
   String get plateSizeLarge;
 
+  /// No description provided for @inbodyScanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan InBody report'**
+  String get inbodyScanTitle;
+
+  /// No description provided for @inbodyReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review InBody result'**
+  String get inbodyReviewTitle;
+
+  /// No description provided for @inbodyBodyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Body composition'**
+  String get inbodyBodyTitle;
+
+  /// No description provided for @inbodyAddResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Add InBody result'**
+  String get inbodyAddResult;
+
+  /// No description provided for @inbodyPickPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose PDF'**
+  String get inbodyPickPdf;
+
+  /// No description provided for @inbodyFrameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Fit the full report sheet inside the frame'**
+  String get inbodyFrameHint;
+
+  /// No description provided for @inbodyAnalyzing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading your report…'**
+  String get inbodyAnalyzing;
+
+  /// No description provided for @inbodyUnreadable.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t read that sheet. Try a clearer photo.'**
+  String get inbodyUnreadable;
+
+  /// No description provided for @inbodyScanFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'InBody scan failed. Try again.'**
+  String get inbodyScanFailed;
+
+  /// No description provided for @inbodySaved.
+  ///
+  /// In en, this message translates to:
+  /// **'InBody result saved'**
+  String get inbodySaved;
+
+  /// No description provided for @inbodyMedicalNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Not for medical use — for fitness tracking only.'**
+  String get inbodyMedicalNote;
+
+  /// No description provided for @inbodyTestDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Test date'**
+  String get inbodyTestDate;
+
+  /// No description provided for @inbodyDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Device'**
+  String get inbodyDevice;
+
+  /// No description provided for @inbodyWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight (kg)'**
+  String get inbodyWeight;
+
+  /// No description provided for @inbodySmm.
+  ///
+  /// In en, this message translates to:
+  /// **'Skeletal muscle (kg)'**
+  String get inbodySmm;
+
+  /// No description provided for @inbodyFatMass.
+  ///
+  /// In en, this message translates to:
+  /// **'Fat mass (kg)'**
+  String get inbodyFatMass;
+
+  /// No description provided for @inbodyPbf.
+  ///
+  /// In en, this message translates to:
+  /// **'Body fat %'**
+  String get inbodyPbf;
+
+  /// No description provided for @inbodyBmi.
+  ///
+  /// In en, this message translates to:
+  /// **'BMI'**
+  String get inbodyBmi;
+
+  /// No description provided for @inbodyVisceral.
+  ///
+  /// In en, this message translates to:
+  /// **'Visceral fat level'**
+  String get inbodyVisceral;
+
+  /// No description provided for @inbodyBmr.
+  ///
+  /// In en, this message translates to:
+  /// **'BMR (kcal)'**
+  String get inbodyBmr;
+
+  /// No description provided for @inbodyScore.
+  ///
+  /// In en, this message translates to:
+  /// **'InBody score'**
+  String get inbodyScore;
+
+  /// No description provided for @inbodySave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save result'**
+  String get inbodySave;
+
+  /// No description provided for @inbodyEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No body composition reports yet. Scan an InBody sheet to start.'**
+  String get inbodyEmpty;
+
+  /// No description provided for @inbodyLatestTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest report'**
+  String get inbodyLatestTitle;
+
+  /// No description provided for @inbodyCompareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare two reports'**
+  String get inbodyCompareTitle;
+
+  /// No description provided for @inbodySyncHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync Health Connect'**
+  String get inbodySyncHealth;
+
+  /// No description provided for @inbodySyncedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Synced from Health Connect'**
+  String get inbodySyncedLabel;
+
+  /// No description provided for @inbodySyncResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Imported {count} Health Connect reading(s)'**
+  String inbodySyncResult(int count);
+
+  /// No description provided for @inbodyFromDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'from your InBody on {date}'**
+  String inbodyFromDateLabel(String date);
+
+  /// No description provided for @uxQuickInbody.
+  ///
+  /// In en, this message translates to:
+  /// **'InBody report'**
+  String get uxQuickInbody;
+
+  /// No description provided for @uxQuickInbodySub.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a result sheet'**
+  String get uxQuickInbodySub;
+
   /// No description provided for @mealScanHeroTitle.
   ///
   /// In en, this message translates to:

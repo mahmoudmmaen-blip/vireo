@@ -9,6 +9,8 @@ import 'package:vireo/features/measurements/domain/measurement_trend.dart';
 import 'package:vireo/features/measurements/providers/measurement_provider.dart';
 import 'package:vireo/features/measurements/widgets/add_measurement_sheet.dart';
 import 'package:vireo/core/widgets/vireo_fab.dart';
+import 'package:vireo/features/measurements/screens/body_composition_screen.dart';
+import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
 import 'package:vireo/features/measurements/widgets/measurement_weight_chart.dart';
 
 class MeasurementsScreen extends ConsumerWidget {
@@ -25,6 +27,15 @@ class MeasurementsScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.measurementsTitle),
         actions: [
+          TextButton(
+            onPressed: () => InBodyScanScreen.open(context),
+            child: Text(l10n.inbodyAddResult),
+          ),
+          IconButton(
+            tooltip: l10n.inbodyBodyTitle,
+            icon: const Icon(Icons.accessibility_new),
+            onPressed: () => BodyCompositionScreen.open(context),
+          ),
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () => showAddMeasurementSheet(context),

@@ -19,14 +19,18 @@ export function coachContextBlock(args: {
   targetProtein: number;
   currentWeight: number;
   goal: string;
+  inbodySummary?: string;
 }): string {
+  const inbody = args.inbodySummary?.trim()
+    ? `\n- Body composition: ${args.inbodySummary.trim()}`
+    : '';
   return `Live user context (use these exact numbers in every answer):
 - Remaining calories today: ${args.remainingCalories} kcal
 - Remaining protein today: ${Math.round(args.remainingProtein)} g
 - Daily calorie target: ${args.targetCalories} kcal
 - Daily protein target: ${args.targetProtein} g
 - Current weight: ${Number(args.currentWeight).toFixed(1)} kg
-- Fitness goal: ${args.goal}`;
+- Fitness goal: ${args.goal}${inbody}`;
 }
 
 export function buildCoachSystemInstruction(

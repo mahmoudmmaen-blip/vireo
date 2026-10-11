@@ -3097,6 +3097,103 @@ class AppLocalizationsAr extends AppLocalizations {
   String get plateSizeLarge => 'كبير';
 
   @override
+  String get inbodyScanTitle => 'مسح تقرير InBody';
+
+  @override
+  String get inbodyReviewTitle => 'مراجعة نتيجة InBody';
+
+  @override
+  String get inbodyBodyTitle => 'تركيب الجسم';
+
+  @override
+  String get inbodyAddResult => 'أضف نتيجة InBody';
+
+  @override
+  String get inbodyPickPdf => 'اختَر PDF';
+
+  @override
+  String get inbodyFrameHint => 'خلّي ورقة التقرير كاملة جوّه الإطار';
+
+  @override
+  String get inbodyAnalyzing => 'بنقرأ التقرير…';
+
+  @override
+  String get inbodyUnreadable => 'مقدرناش نقرأ الورقة. صوّر أوضح.';
+
+  @override
+  String get inbodyScanFailed => 'فشل مسح InBody. جرّب تاني.';
+
+  @override
+  String get inbodySaved => 'اتحفظت نتيجة InBody';
+
+  @override
+  String get inbodyMedicalNote => 'مش للاستخدام الطبي — للتتبع الرياضي فقط.';
+
+  @override
+  String get inbodyTestDate => 'تاريخ القياس';
+
+  @override
+  String get inbodyDevice => 'الجهاز';
+
+  @override
+  String get inbodyWeight => 'الوزن (كجم)';
+
+  @override
+  String get inbodySmm => 'العضلات الهيكلية (كجم)';
+
+  @override
+  String get inbodyFatMass => 'كتلة الدهون (كجم)';
+
+  @override
+  String get inbodyPbf => 'نسبة الدهون %';
+
+  @override
+  String get inbodyBmi => 'BMI';
+
+  @override
+  String get inbodyVisceral => 'دهون حشوية';
+
+  @override
+  String get inbodyBmr => 'BMR (سعرة)';
+
+  @override
+  String get inbodyScore => 'درجة InBody';
+
+  @override
+  String get inbodySave => 'احفظ النتيجة';
+
+  @override
+  String get inbodyEmpty => 'مفيش تقارير لسه. امسح ورقة InBody عشان تبدأ.';
+
+  @override
+  String get inbodyLatestTitle => 'آخر تقرير';
+
+  @override
+  String get inbodyCompareTitle => 'قارن تقريرين';
+
+  @override
+  String get inbodySyncHealth => 'مزامنة Health Connect';
+
+  @override
+  String get inbodySyncedLabel => 'متزامن من Health Connect';
+
+  @override
+  String inbodySyncResult(int count) {
+    return 'اتستورد $count قراءة من Health Connect';
+  }
+
+  @override
+  String inbodyFromDateLabel(String date) {
+    return 'من InBody بتاعك يوم $date';
+  }
+
+  @override
+  String get uxQuickInbody => 'تقرير InBody';
+
+  @override
+  String get uxQuickInbodySub => 'امسح ورقة النتيجة';
+
+  @override
   String get mealScanHeroTitle => 'امسح وجبتك';
 
   @override

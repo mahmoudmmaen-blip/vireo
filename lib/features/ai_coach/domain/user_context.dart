@@ -9,6 +9,7 @@ class UserContext {
     required this.targetProtein,
     required this.currentWeight,
     required this.goal,
+    this.inbodySummary,
   });
 
   final int remainingCalories;
@@ -17,6 +18,9 @@ class UserContext {
   final int targetProtein;
   final double currentWeight;
   final String goal;
+
+  /// Latest InBody / body-comp snapshot for the coach (optional).
+  final String? inbodySummary;
 
   static const demo = UserContext(
     remainingCalories: 1200,

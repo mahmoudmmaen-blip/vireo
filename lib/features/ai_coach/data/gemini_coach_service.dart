@@ -50,6 +50,8 @@ class GeminiCoachService implements IAiCoachService {
             'targetProtein': context.targetProtein,
             'currentWeight': context.currentWeight,
             'goal': context.goal,
+            if (context.inbodySummary != null)
+              'inbodySummary': context.inbodySummary,
           },
           'language': languageCode,
         },

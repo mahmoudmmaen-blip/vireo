@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
+import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
 
@@ -16,6 +18,7 @@ class DailyCalorieGoalCard extends ConsumerWidget {
     final colors = context.vireoColors;
     final target = ref.watch(calorieGoalProvider);
     final totals = ref.watch(dailyNutritionTotalsProvider);
+    final inbody = ref.watch(latestBodyCompositionProvider);
     final consumed = totals.calories;
     final progress = target.calories > 0
         ? (consumed / target.calories).clamp(0.0, 1.0)
@@ -54,6 +57,15 @@ class DailyCalorieGoalCard extends ConsumerWidget {
               ),
               style: TextStyle(color: colors.textMute, fontSize: 13),
             ),
+            if (inbody?.leanMassKg != null) ...[
+              const SizedBox(height: 4),
+              Text(
+                l10n.inbodyFromDateLabel(
+                  DateFormat.yMMMd().format(inbody!.testDate),
+                ),
+                style: TextStyle(color: colors.ember, fontSize: 12),
+              ),
+            ],
             const SizedBox(height: 12),
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
