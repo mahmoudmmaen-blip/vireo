@@ -158,7 +158,7 @@ class MealCard extends ConsumerWidget {
 
     if (alternatives.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.nutritionSwapMealEmpty)),
+        SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.nutritionSwapMealEmpty)),
       );
       return;
     }

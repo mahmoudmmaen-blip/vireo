@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/progress_models.dart';
 
@@ -17,10 +18,17 @@ class EnergyLineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
+    final l10n = AppLocalizations.of(context);
     if (checkIns.isEmpty) {
       return SizedBox(
         height: 220,
-        child: Center(child: Text('—', style: TextStyle(color: colors.textMute))),
+        child: Center(
+          child: Text(
+            l10n.progressTrendEmpty,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: colors.textMute),
+          ),
+        ),
       );
     }
 

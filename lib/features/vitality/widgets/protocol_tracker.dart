@@ -76,7 +76,7 @@ class ProtocolTracker extends ConsumerWidget {
                           0;
                   if (streak >= 7) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(l10n.vitalityProtocolBadgeEarned)),
+                      SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.vitalityProtocolBadgeEarned)),
                     );
                   }
                 },

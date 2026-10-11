@@ -127,7 +127,7 @@ class NotificationSettingsScreen extends ConsumerWidget {
                 final granted = await service.requestPermission();
                 if (!granted && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(l10n.notificationsPermissionBanner)),
+                    SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.notificationsPermissionBanner)),
                   );
                   return;
                 }

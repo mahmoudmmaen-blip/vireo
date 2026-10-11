@@ -34,7 +34,7 @@ class _DeleteAccountConfirmScreenState
       if (mounted) {
         Navigator.of(context).popUntil((route) => route.isFirst);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).deleteAccountSuccess)),
+          SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(AppLocalizations.of(context).deleteAccountSuccess)),
         );
       }
     } catch (e) {

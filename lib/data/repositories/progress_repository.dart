@@ -1,6 +1,5 @@
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
-import 'package:vireo/core/utils/date_utils.dart';
 import 'package:vireo/data/models/progress_models.dart';
 
 class ProgressRepository {
@@ -42,7 +41,7 @@ class ProgressRepository {
           .toList();
     }
 
-    return _demoWeightLogs();
+    return const [];
   }
 
   Future<double?> fetchWeightGoalKg() async {
@@ -144,7 +143,7 @@ class ProgressRepository {
           .toList();
     }
 
-    return _demoAdherenceWeeks(weeks);
+    return const [];
   }
 
   List<AdherenceWeek> _adherenceFromCheckins(List rows, int weeks) {
@@ -196,40 +195,6 @@ class ProgressRepository {
           .toList();
     }
 
-    return _demoEnergyCheckIns();
-  }
-
-  List<WeightLogEntry> _demoWeightLogs() {
-    final now = DateTime.now();
-    return List.generate(8, (i) {
-      final date = now.subtract(Duration(days: (7 - i) * 7));
-      return WeightLogEntry(
-        id: 'demo-$i',
-        weightKg: 82.0 - i * 0.4,
-        loggedAt: date,
-      );
-    });
-  }
-
-  List<AdherenceWeek> _demoAdherenceWeeks(int weeks) {
-    final now = DateTime.now();
-    return List.generate(weeks, (i) {
-      final pct = [55, 62, 70, 68, 75, 80, 72, 85][i % 8];
-      return AdherenceWeek(
-        weekStart: now.subtract(Duration(days: (weeks - 1 - i) * 7)),
-        completionPct: pct,
-      );
-    });
-  }
-
-  List<EnergyCheckIn> _demoEnergyCheckIns() {
-    final week = DateUtilsVireo.isoWeekNumber(DateTime.now());
-    return List.generate(6, (i) {
-      return EnergyCheckIn(
-        weekNumber: week - (5 - i),
-        energyScore: [4, 5, 6, 5, 7, 6][i],
-        loggedAt: DateTime.now().subtract(Duration(days: (5 - i) * 7)),
-      );
-    });
+    return const [];
   }
 }

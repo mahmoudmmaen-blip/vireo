@@ -124,7 +124,7 @@ class _DailyMetricsLoggerState extends ConsumerState<DailyMetricsLogger> {
               if (context.mounted) {
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(l10n.vitalityMetricsSaved)),
+                  SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.vitalityMetricsSaved)),
                 );
               }
             },

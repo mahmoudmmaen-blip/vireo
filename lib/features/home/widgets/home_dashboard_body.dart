@@ -109,12 +109,23 @@ class HomeDashboardBody extends ConsumerWidget {
           ],
         ),
       ),
-      const MealQuickRelogRow(),
       _TodayHeroCard(
         data: nutrition,
         onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
         onBurnedTap: () => push(const CardioActivityScreen()),
       ),
+      const TodayPlanSection(),
+      _QuickActions(
+        onWater: () => _addWater(context, ref),
+        onWorkout: () => ref.read(shellTabIndexProvider.notifier).goWorkout(),
+        onCoach: () => push(const AiCoachScreen()),
+      ),
+      _ActivityRow(
+        stepsCurrent: dash.stepsToday,
+        stepsGoal: dash.stepsGoal,
+        onStepsTap: () => push(const WalkingTrackerScreen()),
+      ),
+      const MealQuickRelogRow(),
       if (activeDiet == null)
         ChooseDietPlanCard(
           onTap: () {
@@ -130,13 +141,6 @@ class HomeDashboardBody extends ConsumerWidget {
           },
         ),
       if (fasting != null) const FastingWindowCard(),
-      _QuickActions(
-        onScan: () => AiScanScreen.open(context, ref, fromCamera: true),
-        onWater: () => _addWater(context, ref),
-        onWorkout: () => ref.read(shellTabIndexProvider.notifier).goWorkout(),
-        onCoach: () => push(const AiCoachScreen()),
-      ),
-      const TodayPlanSection(),
       VireoCard(
         onTap: () => push(const HealthHubScreen()),
         padding: const EdgeInsets.all(VSpace.sm + 2),
@@ -168,11 +172,6 @@ class HomeDashboardBody extends ConsumerWidget {
           ],
         ),
       ),
-      _ActivityRow(
-        stepsCurrent: dash.stepsToday,
-        stepsGoal: dash.stepsGoal,
-        onStepsTap: () => push(const WalkingTrackerScreen()),
-      ),
       if (dash.showCheckIn || weeklyDue)
         _CheckInBanner(onTap: () => push(const WeeklyCheckInScreen())),
       SectionHeader(title: l10n.uxSectionThisWeek, padding: _headerPad),
@@ -184,8 +183,6 @@ class HomeDashboardBody extends ConsumerWidget {
       SectionHeader(
         title: l10n.uxSectionTodayLog,
         padding: _headerPad,
-        actionLabel: l10n.uxAddMeal,
-        onAction: () => AiScanScreen.open(context, ref, fromCamera: true),
       ),
       _TodayLog(
         items: nutrition.items,
@@ -194,7 +191,13 @@ class HomeDashboardBody extends ConsumerWidget {
           ref.read(aiMealLogProvider.notifier).remove(id);
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(l10n.uxMealRemoved)));
+            ..showSnackBar(
+              SnackBar(
+                duration: const Duration(seconds: 3),
+                persist: false,
+                content: Text(l10n.uxMealRemoved),
+              ),
+            );
         },
       ),
     ];
@@ -239,22 +242,18 @@ Future<void> _addWater(BuildContext context, WidgetRef ref) async {
   final added = await ref.read(waterTrackerProvider.notifier).addGlass();
   if (!context.mounted) return;
   final ml = ref.read(waterTrackerProvider);
+  // Brief confirmation only — undo lives on the Water card.
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(
       SnackBar(
-        duration: const Duration(seconds: 2),
+        persist: false,
+        duration: const Duration(seconds: 3),
         content: Text(
           added
               ? l10n.uxWaterAdded((ml / 1000).toStringAsFixed(2))
               : l10n.uxWaterGoalDone,
         ),
-        action: added
-            ? SnackBarAction(
-                label: l10n.uxUndo,
-                onPressed: () => ref.read(waterTrackerProvider.notifier).removeGlass(),
-              )
-            : null,
       ),
     );
 }
@@ -339,24 +338,47 @@ class _HomeHeader extends ConsumerWidget {
             onTap: () => ref.read(shellTabIndexProvider.notifier).goProfile(),
             semanticLabel: l10n.profileTitle,
             child: Container(
-              width: 40,
-              height: 40,
-              alignment: Alignment.center,
+              width: 44,
+              height: 44,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [colors.ember, colors.gold],
-                ),
+                border: Border.all(color: colors.ember, width: 2),
               ),
-              child: Text(
-                initial,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 16,
-                ),
+              child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: 36,
+                    height: 36,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: colors.ember.withValues(alpha: 0.15),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Text(
+                      initial,
+                      style: TextStyle(
+                        color: colors.ember,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    right: -2,
+                    bottom: -2,
+                    child: Container(
+                      width: 14,
+                      height: 14,
+                      decoration: BoxDecoration(
+                        color: colors.ember,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: colors.background, width: 1.5),
+                      ),
+                      child: const Icon(Icons.person, size: 9, color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -582,13 +604,11 @@ class _HeroStat extends StatelessWidget {
 
 class _QuickActions extends ConsumerWidget {
   const _QuickActions({
-    required this.onScan,
     required this.onWater,
     required this.onWorkout,
     required this.onCoach,
   });
 
-  final VoidCallback onScan;
   final VoidCallback onWater;
   final VoidCallback onWorkout;
   final VoidCallback onCoach;
@@ -596,24 +616,17 @@ class _QuickActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final colors = context.vireoColors;
     final waterMl = ref.watch(waterTrackerProvider);
 
     return Row(
       children: [
-        _QuickAction(
-          icon: Icons.photo_camera_rounded,
-          label: l10n.uxActionScan,
-          color: colors.ember,
-          onTap: onScan,
-          highlighted: true,
-        ),
         _QuickAction(
           icon: Icons.water_drop_rounded,
           label: '${(waterMl / 1000).toStringAsFixed(1)}L',
           color: VMacro.water,
           onTap: onWater,
           badge: Icons.add_rounded,
+          highlighted: true,
         ),
         _QuickAction(
           icon: Icons.fitness_center_rounded,

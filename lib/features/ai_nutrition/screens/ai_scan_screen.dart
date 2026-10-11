@@ -40,6 +40,7 @@ class AiScanScreen extends ConsumerStatefulWidget {
 
 class _AiScanScreenState extends ConsumerState<AiScanScreen> {
   final _picker = ImagePicker();
+  final _hintCtrl = TextEditingController();
   Uint8List? _previewBytes;
   bool _launchedInitialPick = false;
   bool _flashOn = false;
@@ -74,7 +75,11 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
 
     final lang = Localizations.localeOf(context).languageCode;
     final scanInput = mealScanInputFromPicker(picked, compressed);
-    await ref.read(aiScanProvider.notifier).scanMeal(scanInput, language: lang);
+    await ref.read(aiScanProvider.notifier).scanMeal(
+          scanInput,
+          language: lang,
+          userHint: _hintCtrl.text.trim().isEmpty ? null : _hintCtrl.text.trim(),
+        );
     if (!mounted) return;
 
     final scan = ref.read(aiScanPhaseProvider);
@@ -110,7 +115,7 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
         };
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          SnackBar(duration: const Duration(seconds: 3), persist: false, 
             content: Text(message),
             action: SnackBarAction(
               label: kind == AiScanErrorKind.dailyLimit
@@ -155,6 +160,19 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
                     onGallery: () => _pick(ImageSource.gallery),
                   ),
           ),
+          if (!scanning && _previewBytes == null)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
+              child: TextField(
+                controller: _hintCtrl,
+                decoration: InputDecoration(
+                  labelText: l10n.mealScanHintLabel,
+                  hintText: l10n.mealScanHintPlaceholder,
+                  border: const OutlineInputBorder(),
+                  isDense: true,
+                ),
+              ),
+            ),
           if (scanning)
             Padding(
               padding: const EdgeInsets.all(24),
@@ -186,6 +204,12 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _hintCtrl.dispose();
+    super.dispose();
   }
 }
 

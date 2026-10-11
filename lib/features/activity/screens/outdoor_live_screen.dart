@@ -52,7 +52,7 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
     if (!mounted) return;
     if (!ok) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).outdoorLocationDenied)),
+        SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(AppLocalizations.of(context).outdoorLocationDenied)),
       );
       Navigator.of(context).pop();
       return;

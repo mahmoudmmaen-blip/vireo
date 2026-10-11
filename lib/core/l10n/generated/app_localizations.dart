@@ -3054,6 +3054,42 @@ abstract class AppLocalizations {
   /// **'Healthy dessert swap'**
   String get aiCoachChipDessert;
 
+  /// No description provided for @waterAddOneGlass.
+  ///
+  /// In en, this message translates to:
+  /// **'+1 glass ({ml} ml)'**
+  String waterAddOneGlass(int ml);
+
+  /// No description provided for @waterLongPressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Long-press for more amounts'**
+  String get waterLongPressHint;
+
+  /// No description provided for @waterQuickAmountsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick amounts'**
+  String get waterQuickAmountsTitle;
+
+  /// No description provided for @waterDefaultCupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Default cup size'**
+  String get waterDefaultCupTitle;
+
+  /// No description provided for @waterCustomMl.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom amount'**
+  String get waterCustomMl;
+
+  /// No description provided for @waterAddCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get waterAddCustom;
+
   /// No description provided for @waterTrackerTitle.
   ///
   /// In en, this message translates to:
@@ -3089,6 +3125,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log meals or cardio to see your weekly calorie balance.'**
   String get weeklyDeficitEmpty;
+
+  /// No description provided for @weeklyDeficitInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Today (in progress)'**
+  String get weeklyDeficitInProgress;
+
+  /// No description provided for @progressTrendEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Log 3 days to see your trend'**
+  String get progressTrendEmpty;
+
+  /// No description provided for @cookMethodRaw.
+  ///
+  /// In en, this message translates to:
+  /// **'Raw'**
+  String get cookMethodRaw;
+
+  /// No description provided for @cookMethodBoiled.
+  ///
+  /// In en, this message translates to:
+  /// **'Boiled'**
+  String get cookMethodBoiled;
+
+  /// No description provided for @cookMethodGrilled.
+  ///
+  /// In en, this message translates to:
+  /// **'Grilled'**
+  String get cookMethodGrilled;
+
+  /// No description provided for @cookMethodFried.
+  ///
+  /// In en, this message translates to:
+  /// **'Fried'**
+  String get cookMethodFried;
+
+  /// No description provided for @cookMethodBaked.
+  ///
+  /// In en, this message translates to:
+  /// **'Baked'**
+  String get cookMethodBaked;
+
+  /// No description provided for @cookMethodSteamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Steamed'**
+  String get cookMethodSteamed;
+
+  /// No description provided for @cookMethodOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get cookMethodOther;
 
   /// No description provided for @weeklyDeficitTooltip.
   ///
@@ -5518,6 +5608,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not look up that barcode. Try again or log by text.'**
   String get mealBarcodeFailed;
+
+  /// No description provided for @mealScanHintLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a few words (optional)'**
+  String get mealScanHintLabel;
+
+  /// No description provided for @mealScanHintPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Oil? Sauce? Bread type?'**
+  String get mealScanHintPlaceholder;
+
+  /// No description provided for @mealHowCalculated.
+  ///
+  /// In en, this message translates to:
+  /// **'How we calculated this'**
+  String get mealHowCalculated;
+
+  /// No description provided for @plateSizeAskTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What’s your usual plate size?'**
+  String get plateSizeAskTitle;
+
+  /// No description provided for @plateSizeSmall.
+  ///
+  /// In en, this message translates to:
+  /// **'Small'**
+  String get plateSizeSmall;
+
+  /// No description provided for @plateSizeMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get plateSizeMedium;
+
+  /// No description provided for @plateSizeLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Large'**
+  String get plateSizeLarge;
 
   /// No description provided for @mealScanHeroTitle.
   ///

@@ -13,6 +13,7 @@ import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/features/progress/widgets/weight_log_sheet.dart';
+import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 
 /// One-tap logging hub opened from the centre "+" of the bottom bar.
@@ -44,6 +45,7 @@ enum QuickLogAction {
   cardio,
   outdoor,
   coach,
+  profile,
 }
 
 Future<void> _run(
@@ -81,6 +83,8 @@ Future<void> _run(
       await Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (_) => const AiCoachScreen()),
       );
+    case QuickLogAction.profile:
+      ref.read(shellTabIndexProvider.notifier).goProfile();
   }
 }
 
@@ -96,18 +100,13 @@ Future<void> _logWater(
     ..hideCurrentSnackBar()
     ..showSnackBar(
       SnackBar(
+        duration: const Duration(seconds: 3),
+        persist: false,
         content: Text(
           added
               ? l10n.uxWaterAdded((ml / 1000).toStringAsFixed(2))
               : l10n.uxWaterGoalDone,
         ),
-        action: added
-            ? SnackBarAction(
-                label: l10n.uxUndo,
-                onPressed: () =>
-                    ref.read(waterTrackerProvider.notifier).removeGlass(),
-              )
-            : null,
       ),
     );
 }
@@ -137,6 +136,8 @@ class _QuickLogSheet extends StatelessWidget {
           l10n.uxQuickOutdoorSub, VMacro.steps),
       _TileData(QuickLogAction.coach, Icons.auto_awesome_rounded,
           l10n.uxQuickCoach, l10n.uxQuickCoachSub, VMacro.ai),
+      _TileData(QuickLogAction.profile, Icons.person_outline_rounded,
+          l10n.profileTitle, l10n.settingsTitle, colors.textMute),
     ];
 
     return SingleChildScrollView(

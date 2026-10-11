@@ -47,12 +47,12 @@ class _CardioActivityScreenState extends ConsumerState<CardioActivityScreen> {
           );
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).cardioLoggedSnack)),
+        SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(AppLocalizations.of(context).cardioLoggedSnack)),
       );
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).authErrorGeneric)),
+          SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(AppLocalizations.of(context).authErrorGeneric)),
         );
       }
     } finally {

@@ -33,7 +33,7 @@ class _IngredientsConfirmScreenState extends ConsumerState<IngredientsConfirmScr
   Future<void> _confirm() async {
     if (_ingredients.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).nutritionNoIngredients)),
+        SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(AppLocalizations.of(context).nutritionNoIngredients)),
       );
       return;
     }

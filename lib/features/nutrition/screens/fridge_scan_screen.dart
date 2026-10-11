@@ -74,7 +74,7 @@ class _FridgeScanScreenState extends ConsumerState<FridgeScanScreen> {
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          SnackBar(duration: const Duration(seconds: 3), persist: false, 
             content: Text(AppLocalizations.of(context).nutritionScanFailed),
             action: SnackBarAction(
               label: AppLocalizations.of(context).nutritionManualEntry,

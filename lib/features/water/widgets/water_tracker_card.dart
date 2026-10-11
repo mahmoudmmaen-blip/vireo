@@ -1,32 +1,142 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vireo/core/animations/vireo_animations.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
+import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/features/water/providers/water_cup_size_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 
-class WaterTrackerCard extends ConsumerWidget {
+class WaterTrackerCard extends ConsumerStatefulWidget {
   const WaterTrackerCard({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<WaterTrackerCard> createState() => _WaterTrackerCardState();
+}
+
+class _WaterTrackerCardState extends ConsumerState<WaterTrackerCard>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _fillCtrl;
+  bool _canUndo = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _fillCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 420),
+    );
+  }
+
+  @override
+  void dispose() {
+    _fillCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _add([int? ml]) async {
+    HapticFeedback.lightImpact();
+    final added = ml == null
+        ? await ref.read(waterTrackerProvider.notifier).addGlass()
+        : await ref.read(waterTrackerProvider.notifier).addMl(ml);
+    if (!added || !mounted) return;
+    setState(() => _canUndo = true);
+    _fillCtrl.forward(from: 0);
+  }
+
+  Future<void> _undo() async {
+    await ref.read(waterTrackerProvider.notifier).undoLastOrCup();
+    if (mounted) setState(() => _canUndo = false);
+  }
+
+  Future<void> _quickAmounts() async {
+    final l10n = AppLocalizations.of(context);
+    final cup = ref.read(waterCupSizeProvider);
+    final customCtrl = TextEditingController();
+    final picked = await showModalBottomSheet<int>(
+      context: context,
+      builder: (ctx) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(VSpace.md),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(l10n.waterQuickAmountsTitle,
+                    style: Theme.of(ctx).textTheme.titleMedium),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final ml in kQuickWaterAmounts)
+                      ActionChip(
+                        label: Text('$ml ml'),
+                        onPressed: () => Navigator.pop(ctx, ml),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Text(l10n.waterDefaultCupTitle,
+                    style: Theme.of(ctx).textTheme.titleSmall),
+                Wrap(
+                  spacing: 8,
+                  children: [
+                    for (final ml in kQuickWaterAmounts)
+                      ChoiceChip(
+                        label: Text('$ml'),
+                        selected: cup == ml,
+                        onSelected: (_) async {
+                          await ref
+                              .read(waterCupSizeProvider.notifier)
+                              .setCupMl(ml);
+                          if (ctx.mounted) Navigator.pop(ctx);
+                        },
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: customCtrl,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: l10n.waterCustomMl,
+                    suffixText: 'ml',
+                  ),
+                ),
+                const SizedBox(height: 8),
+                FilledButton(
+                  onPressed: () {
+                    final v = int.tryParse(customCtrl.text.trim());
+                    if (v != null && v > 0) Navigator.pop(ctx, v);
+                  },
+                  child: Text(l10n.waterAddCustom),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    customCtrl.dispose();
+    if (picked != null) await _add(picked);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final ml = ref.watch(waterTrackerProvider);
     final progress = ref.watch(waterTrackerProgressProvider);
-    final filled = ref.watch(waterTrackerFilledGlassesProvider);
-    final notifier = ref.read(waterTrackerProvider.notifier);
-
-    final liters = ml / 1000.0;
+    final cup = ref.watch(waterCupSizeProvider);
     final goalMl = ref.watch(waterDailyGoalMlProvider);
-    final glassCount = ref.watch(waterGlassCountProvider);
-    final weightKg = ref.watch(waterProfileWeightKgProvider);
+    final liters = ml / 1000.0;
     final goalLiters = goalMl / 1000.0;
-    final pct = (progress * 100).round();
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -44,66 +154,54 @@ class WaterTrackerCard extends ConsumerWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
+              if (_canUndo)
+                TextButton(onPressed: _undo, child: Text(l10n.uxUndo)),
             ],
           ),
           const SizedBox(height: 12),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: SizedBox(
-              height: 10,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  ColoredBox(color: colors.line),
-                  FractionallySizedBox(
-                    alignment: AlignmentDirectional.centerStart,
-                    widthFactor: progress.clamp(0.0, 1.0),
-                    child: const ColoredBox(color: Color(0xFF5BA4F5)),
-                  ),
-                  if (progress > 0.05)
-                    _WaveOverlay(progress: progress),
-                ],
-              ),
-            ),
+          AnimatedBuilder(
+            animation: _fillCtrl,
+            builder: (context, _) {
+              final boost = Curves.easeOut.transform(_fillCtrl.value) * 0.04;
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(
+                  value: (progress + boost).clamp(0.0, 1.0),
+                  minHeight: 12,
+                  backgroundColor: colors.line,
+                  color: const Color(0xFF5BA4F5),
+                ),
+              );
+            },
           ),
           const SizedBox(height: 10),
           Text(
             l10n.waterTrackerSummary(
               double.parse(liters.toStringAsFixed(1)),
               double.parse(goalLiters.toStringAsFixed(1)),
-              pct,
+              (progress * 100).round(),
             ),
             style: TextStyle(color: colors.textMute, fontSize: 13),
           ),
-          const SizedBox(height: 4),
-          Text(
-            l10n.waterGoalBasedOnWeight(weightKg.round()),
-            style: TextStyle(color: colors.textMute, fontSize: 12),
-          ),
-          const SizedBox(height: 4),
-          CountUpNumber(
-            value: pct,
-            formatter: (v) => '${v.round()}%',
-            style: TextStyle(
-              color: const Color(0xFF5BA4F5),
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
+          const SizedBox(height: 14),
+          SizedBox(
+            height: 56,
+            child: FilledButton.icon(
+              onPressed: () => _add(),
+              onLongPress: _quickAmounts,
+              icon: const Icon(Icons.add),
+              label: Text(l10n.waterAddOneGlass(cup)),
+              style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFF5BA4F5),
+                foregroundColor: Colors.white,
+              ),
             ),
           ),
-          const SizedBox(height: 14),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(glassCount, (index) {
-              final isFilled = index < filled;
-              return InkWell(
-                onTap: () => notifier.toggleGlass(index),
-                borderRadius: BorderRadius.circular(8),
-                child: Padding(
-                  padding: const EdgeInsets.all(2),
-                  child: _WaterGlassIcon(filled: isFilled),
-                ),
-              );
-            }),
+          const SizedBox(height: 6),
+          Text(
+            l10n.waterLongPressHint,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: colors.textMute, fontSize: 11),
           ),
         ],
       ),
@@ -111,150 +209,28 @@ class WaterTrackerCard extends ConsumerWidget {
   }
 }
 
-class _WaveOverlay extends StatelessWidget {
-  const _WaveOverlay({required this.progress});
-
+// Keep wave painter available for other screens if needed.
+class WaterWavePainter extends CustomPainter {
+  WaterWavePainter({required this.progress, required this.t});
   final double progress;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _WavePainter(progress: progress),
-      size: Size.infinite,
-    );
-  }
-}
-
-class _WavePainter extends CustomPainter {
-  _WavePainter({required this.progress});
-
-  final double progress;
+  final double t;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.22)
-      ..style = PaintingStyle.fill;
-
+    final paint = Paint()..color = const Color(0xFF5BA4F5).withValues(alpha: 0.35);
     final path = Path()..moveTo(0, size.height);
-    final fillWidth = size.width * progress.clamp(0.0, 1.0);
-    for (var x = 0.0; x <= fillWidth; x += 3) {
-      final y = size.height * 0.35 +
-          math.sin((x / size.width) * math.pi * 4) * 1.5;
-      path.lineTo(x, y);
-    }
-    path
-      ..lineTo(fillWidth, size.height)
-      ..lineTo(0, size.height)
-      ..close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _WavePainter oldDelegate) =>
-      oldDelegate.progress != progress;
-}
-
-class _WaterGlassIcon extends StatefulWidget {
-  const _WaterGlassIcon({required this.filled});
-
-  final bool filled;
-
-  @override
-  State<_WaterGlassIcon> createState() => _WaterGlassIconState();
-}
-
-class _WaterGlassIconState extends State<_WaterGlassIcon>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _wave;
-  bool _animationConfigured = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _wave = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 2200),
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_animationConfigured) return;
-    _animationConfigured = true;
-    if (widget.filled && vireoAnimationsEnabled(context)) {
-      _wave.repeat();
-    }
-  }
-
-  @override
-  void didUpdateWidget(_WaterGlassIcon oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.filled && !_wave.isAnimating) {
-      _wave.repeat();
-    } else if (!widget.filled) {
-      _wave.stop();
-    }
-  }
-
-  @override
-  void dispose() {
-    _wave.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    if (!widget.filled) {
-      return Icon(
-        Icons.local_drink_outlined,
-        size: 26,
-        color: colors.textMute.withValues(alpha: 0.45),
-      );
-    }
-
-    return SizedBox(
-      width: 26,
-      height: 26,
-      child: AnimatedBuilder(
-        animation: _wave,
-        builder: (context, _) {
-          return CustomPaint(
-            painter: _GlassWavePainter(phase: _wave.value),
-            child: const Icon(Icons.local_drink, size: 26, color: Color(0xFF5BA4F5)),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _GlassWavePainter extends CustomPainter {
-  _GlassWavePainter({required this.phase});
-
-  final double phase;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF5BA4F5).withValues(alpha: 0.35)
-      ..style = PaintingStyle.fill;
-    final path = Path()..moveTo(0, size.height);
-    for (var x = 0.0; x <= size.width; x += 2) {
-      final y = size.height * 0.55 +
-          math.sin((x / size.width + phase) * math.pi * 2) * 2;
+    for (var x = 0.0; x <= size.width; x += 4) {
+      final y = size.height * (1 - progress) +
+          math.sin((x / size.width * 4 * math.pi) + t * math.pi * 2) * 3;
       path.lineTo(x, y);
     }
     path
       ..lineTo(size.width, size.height)
-      ..lineTo(0, size.height)
       ..close();
     canvas.drawPath(path, paint);
   }
 
   @override
-  bool shouldRepaint(_GlassWavePainter oldDelegate) =>
-      oldDelegate.phase != phase;
+  bool shouldRepaint(covariant WaterWavePainter oldDelegate) =>
+      oldDelegate.progress != progress || oldDelegate.t != t;
 }

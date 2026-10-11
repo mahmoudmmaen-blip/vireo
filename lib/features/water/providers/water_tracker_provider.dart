@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/features/water/providers/water_cup_size_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 
 const _waterTrackerKey = 'water_tracker';
@@ -12,20 +13,27 @@ String _todayDateKey() {
 }
 
 class WaterTrackerNotifier extends Notifier<int> {
+  int? _lastAddedMl;
+
   @override
   int build() {
     ref.watch(waterDailyGoalMlProvider);
+    ref.watch(waterCupSizeProvider);
     return _loadForToday();
   }
 
   int get goalMl => ref.read(waterDailyGoalMlProvider);
 
+  int get cupMl => ref.read(waterCupSizeProvider);
+
   int get glassCount => ref.read(waterGlassCountProvider);
 
   int get filledGlasses =>
-      (state / waterGlassMl).floor().clamp(0, glassCount);
+      (state / cupMl).floor().clamp(0, glassCount);
 
   double get progress => goalMl > 0 ? (state / goalMl).clamp(0.0, 1.0) : 0;
+
+  int? get lastAddedMl => _lastAddedMl;
 
   int _loadForToday() {
     if (!HiveService.isInitialized) return 0;
@@ -48,25 +56,33 @@ class WaterTrackerNotifier extends Notifier<int> {
 
   Future<void> toggleGlass(int index) async {
     if (index < 0 || index >= glassCount) return;
-    final targetMl = (index + 1) * waterGlassMl;
+    final targetMl = (index + 1) * cupMl;
     if (state >= targetMl) {
-      state = index * waterGlassMl;
+      state = index * cupMl;
     } else {
       state = targetMl.clamp(0, goalMl);
     }
     await _persistAsync(state);
   }
 
-  Future<bool> addGlass() async {
-    if (state >= goalMl) return false;
-    state = (state + waterGlassMl).clamp(0, goalMl);
+  Future<bool> addGlass() => addMl(cupMl);
+
+  Future<bool> addMl(int ml) async {
+    if (state >= goalMl || ml <= 0) return false;
+    final before = state;
+    state = (state + ml).clamp(0, goalMl);
+    _lastAddedMl = state - before;
     await _persistAsync(state);
-    return true;
+    return _lastAddedMl! > 0;
   }
 
-  Future<void> removeGlass() async {
+  Future<void> removeGlass() => undoLastOrCup();
+
+  Future<void> undoLastOrCup() async {
     if (state <= 0) return;
-    state = (state - waterGlassMl).clamp(0, goalMl);
+    final remove = _lastAddedMl ?? cupMl;
+    state = (state - remove).clamp(0, goalMl);
+    _lastAddedMl = null;
     await _persistAsync(state);
   }
 

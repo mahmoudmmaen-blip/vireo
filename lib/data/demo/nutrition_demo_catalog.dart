@@ -109,6 +109,7 @@ abstract final class NutritionDemoCatalog {
   }) {
     return recipes
         .where((r) => r.mealType == type && r.id != excludeRecipeId)
+        .take(3)
         .toList();
   }
 

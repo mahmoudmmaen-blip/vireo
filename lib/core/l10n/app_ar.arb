@@ -871,6 +871,15 @@
   "aiCoachChipDinner": "اقترح وجبة عشاء",
   "aiCoachChipProtein": "كيف أزيد بروتيني؟",
   "aiCoachChipDessert": "بديل صحي للحلويات",
+  "waterAddOneGlass": "+1 كوباية ({ml} مل)",
+  "@waterAddOneGlass": {
+    "placeholders": {"ml": {"type": "int"}}
+  },
+  "waterLongPressHint": "اضغط مطوّل لكميات تانية",
+  "waterQuickAmountsTitle": "كميات سريعة",
+  "waterDefaultCupTitle": "حجم الكوباية الافتراضي",
+  "waterCustomMl": "كمية مخصّصة",
+  "waterAddCustom": "أضف",
   "waterTrackerTitle": "شرب الماء",
   "waterTrackerSummary": "{current}L / {goal}L — {percent}% مكتمل",
   "@waterTrackerSummary": {
@@ -897,6 +906,15 @@
     }
   },
   "weeklyDeficitEmpty": "سجّل وجبات أو كارديو لعرض رصيد السعرات الأسبوعي.",
+  "weeklyDeficitInProgress": "النهاردة (لسه شغّال)",
+  "progressTrendEmpty": "سجّل 3 أيام عشان تشوف الاتجاه",
+  "cookMethodRaw": "نيء",
+  "cookMethodBoiled": "مسلوق",
+  "cookMethodGrilled": "مشوي",
+  "cookMethodFried": "مقلي",
+  "cookMethodBaked": "في الفرن",
+  "cookMethodSteamed": "على البخار",
+  "cookMethodOther": "أخرى",
   "weeklyDeficitTooltip": "{net} kcal\nداخل: {consumed} · خارج: {burned}",
   "@weeklyDeficitTooltip": {
     "placeholders": {
@@ -1597,6 +1615,13 @@
   "mealVoiceUnavailable": "التسجيل الصوتي غير متاح على الجهاز",
   "mealBarcodeTitle": "مسح باركود",
   "mealBarcodeFailed": "مقدرناش نلاقي الباركود. جرّب تاني أو سجّل بالنص.",
+  "mealScanHintLabel": "زوّد بكلمتين (اختياري)",
+  "mealScanHintPlaceholder": "فيها زيت؟ صوص؟ نوع العيش؟",
+  "mealHowCalculated": "إزاي حسبناها",
+  "plateSizeAskTitle": "طبقك عادة قد إيه؟",
+  "plateSizeSmall": "صغير",
+  "plateSizeMedium": "وسط",
+  "plateSizeLarge": "كبير",
   "mealScanHeroTitle": "امسح وجبتك",
   "mealScanHeroSubtitle": "الذكاء يتعرف على الأكل — وأنت تؤكد الجرامات",
   "mealScanTipAbove": "صوّر من فوق",

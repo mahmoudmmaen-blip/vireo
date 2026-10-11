@@ -171,7 +171,7 @@ class _AiAnalysisSheetBody extends ConsumerWidget {
                 if (!context.mounted) return;
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(l10n.aiScanSavedSnack)),
+                  SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.aiScanSavedSnack)),
                 );
               },
               child: Text(l10n.aiScanSaveToLog),

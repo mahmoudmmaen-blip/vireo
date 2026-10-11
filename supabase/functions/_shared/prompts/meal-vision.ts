@@ -7,32 +7,39 @@ export function mealVisionPrompt(args: {
   remainingProtein: number;
   language?: string;
   foodCatalogHint?: string;
+  userHint?: string;
 }): string {
   const lang = args.language === 'en' ? 'en' : 'ar';
   const catalog = args.foodCatalogHint?.trim()
     ? `\nKnown food ids (prefer these for food_id_guess when confident):\n${args.foodCatalogHint.trim()}\n`
     : '';
+  const hint = args.userHint?.trim()
+    ? `\nUser note about this meal (trust this for oil/sauce/bread type):\n"${args.userHint.trim()}"\n`
+    : '';
 
   return `You are a computer-vision nutritionist for Egyptian and Gulf meals.
-Identify EVERY distinct food item visible on the plate/tray. Estimate grams and cooking method.
+Identify EVERY distinct food item VISIBLE on the plate/tray. Estimate grams and cooking method.
 
-User context (for your awareness only — do NOT compute calories):
+User context (awareness only — do NOT compute calories):
 - Remaining daily calories: ${args.remainingCalories} kcal
 - Remaining daily protein: ${Math.round(args.remainingProtein)} g
 - Preferred language for names: ${lang}
-${catalog}
+${catalog}${hint}
 Rules:
-1. Return ONLY a JSON object with an "items" array. No markdown, no commentary, no calorie fields.
-2. Each item:
-   - name_ar: Arabic name (Egyptian dialect OK)
-   - name_en: English name
-   - food_id_guess: string id if you recognize a catalog food, else null
+1. Return ONLY a JSON object with "items" and "items_unsure" arrays. No markdown, no commentary, no calorie fields.
+2. List EVERY visible food, including small sides and food partially covered (e.g. rice under chicken if you can see rice).
+3. NEVER invent hidden items you cannot see.
+4. Spices, sumac, dry herbs, garnishes, and decorative leaves are NOT foods — omit them.
+5. Prefer Egyptian/Gulf dish names (foul, ta'ameya, koshari, baladi bread, molokhia, etc.) when they fit.
+6. Each item:
+   - name_ar, name_en
+   - food_id_guess: catalog id or null
    - estimated_grams: number > 0
-   - cooking_method: one of boiled | grilled | fried | baked | raw | steamed | other
+   - cooking_method: boiled | grilled | fried | baked | raw | steamed | other
    - confidence: 0 to 1
-3. Split mixed dishes into components when possible (e.g. koshari → rice, pasta, lentils, chickpeas, fried onion, sauce).
-4. Prefer realistic Middle Eastern portion sizes.
-5. Never invent calories, protein, carbs, or fat.
+7. Put low-confidence or ambiguous items in items_unsure (same shape). High-confidence in items.
+8. Split mixed dishes into components when possible.
+9. Never invent calories, protein, carbs, or fat.
 
 JSON shape:
 {
@@ -40,12 +47,13 @@ JSON shape:
     {
       "name_ar": "أرز أبيض",
       "name_en": "white rice",
-      "food_id_guess": "rice_white_cooked",
+      "food_id_guess": "white_rice_cooked",
       "estimated_grams": 180,
       "cooking_method": "boiled",
       "confidence": 0.82
     }
-  ]
+  ],
+  "items_unsure": []
 }`;
 }
 
@@ -84,10 +92,12 @@ Return ONLY JSON:
       "cooking_method": "raw",
       "confidence": 0.0
     }
-  ]
+  ],
+  "items_unsure": []
 }
 Rules:
 - Expand portions like "2 eggs", "رغيف بلدي", "كوباية شاي بسكر" into grams.
 - Never return calories.
+- Prefer Egyptian/Gulf names.
 - cooking_method one of boiled|grilled|fried|baked|raw|steamed|other.`;
 }

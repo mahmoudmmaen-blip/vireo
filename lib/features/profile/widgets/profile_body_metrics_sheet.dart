@@ -92,7 +92,7 @@ class _ProfileBodyMetricsSheetState
     if (mounted) Navigator.of(context).pop();
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.profileBodyMetricsSaved)),
+        SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.profileBodyMetricsSaved)),
       );
     }
   }

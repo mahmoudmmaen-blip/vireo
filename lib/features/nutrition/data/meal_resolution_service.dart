@@ -6,6 +6,7 @@ import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';
 import 'package:vireo/features/nutrition/data/food_db_repository.dart';
+import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
 
 const _correctionsKey = 'food_gram_corrections';
 
@@ -20,6 +21,7 @@ class MealResolutionService {
   }) async {
     await _db.load();
     final oil = _db.byId('sunflower_oil') ?? _db.byId('olive_oil');
+    final plateScale = _plateScale();
     final unmatched = <ScannedFoodItem>[];
     final resolved = <ResolvedMealLine?>[];
 
@@ -34,7 +36,7 @@ class MealResolutionService {
         resolved.add(null);
         continue;
       }
-      var grams = item.estimatedGrams;
+      var grams = item.estimatedGrams * plateScale;
       final remembered = rememberedGrams(food.id);
       if (remembered != null) grams = remembered;
 
@@ -123,6 +125,13 @@ class MealResolutionService {
       BootLog.warn('unmatched macro estimate failed', e);
       return {};
     }
+  }
+
+  double _plateScale() {
+    if (!HiveService.isInitialized) return 1.0;
+    final raw = HiveService.settingsBox.get('usual_plate_size')?.toString();
+    final size = PlateSize.values.where((e) => e.name == raw).firstOrNull;
+    return size?.scale ?? 1.0;
   }
 
   double? rememberedGrams(String foodId) {

@@ -67,7 +67,7 @@ class _DietProgramDetailScreenState
     if (elig.status == EligibilityStatus.caution && !_cautionAck) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.dietMustAckWarning)),
+        SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.dietMustAckWarning)),
       );
       return;
     }
@@ -75,7 +75,7 @@ class _DietProgramDetailScreenState
     await ref.read(dietPlanActionsProvider).startProgram(ranked.program);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.dietStartedToast)),
+      SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.dietStartedToast)),
     );
     Navigator.of(context).pop();
   }

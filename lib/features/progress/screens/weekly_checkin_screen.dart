@@ -67,7 +67,7 @@ class _WeeklyCheckInScreenState extends ConsumerState<WeeklyCheckInScreen> {
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).authErrorGeneric)),
+          SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(AppLocalizations.of(context).authErrorGeneric)),
         );
       }
     } finally {

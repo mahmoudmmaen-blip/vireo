@@ -122,7 +122,7 @@ class ChatMessageBubble extends StatelessWidget {
                   Clipboard.setData(ClipboardData(text: message.content));
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
-                    ..showSnackBar(SnackBar(content: Text(l10n.uxCopied)));
+                    ..showSnackBar(SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.uxCopied)));
                 },
                 child: bubble,
               ),

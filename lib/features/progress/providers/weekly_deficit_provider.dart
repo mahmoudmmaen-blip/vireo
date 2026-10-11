@@ -4,7 +4,8 @@ import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart'
 import 'package:vireo/features/cardio/providers/cardio_log_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
-import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
+import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart'
+    show effectiveTodayMealsProvider;
 import 'package:vireo/features/progress/models/daily_deficit_entry.dart';
 
 DateTime _dateOnly(DateTime dt) => DateTime(dt.year, dt.month, dt.day);
@@ -54,13 +55,18 @@ final weeklyDeficitProvider = Provider<WeeklyDeficitSummary>((ref) {
         tdee: tdee,
         consumed: consumed,
         burned: burned,
+        isToday: _isSameDay(day, today),
       ),
     );
   }
 
-  final loggedDays = days.where((d) => d.hasFoodLogged).toList();
-  final hasData = loggedDays.isNotEmpty;
-  final total = loggedDays.fold<int>(0, (sum, d) => sum + d.netBalance);
+  // Exclude today's partial day from the weekly total.
+  final completedLogged = days
+      .where((d) => d.hasFoodLogged && !d.isInProgress)
+      .toList();
+  final hasData = completedLogged.isNotEmpty ||
+      days.any((d) => d.isInProgress && d.hasFoodLogged);
+  final total = completedLogged.fold<int>(0, (sum, d) => sum + d.netBalance);
 
   return WeeklyDeficitSummary(
     days: days,

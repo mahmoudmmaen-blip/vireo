@@ -40,5 +40,6 @@ final waterProfileWeightKgProvider = Provider<double>((ref) {
 
 final waterGlassCountProvider = Provider<int>((ref) {
   final goal = ref.watch(waterDailyGoalMlProvider);
+  // Prefer default cup when available; fall back to legacy 250 ml glass.
   return (goal / waterGlassMl).ceil().clamp(1, 20);
 });

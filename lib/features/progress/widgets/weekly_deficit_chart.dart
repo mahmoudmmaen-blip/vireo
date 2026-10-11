@@ -125,12 +125,15 @@ class WeeklyDeficitChart extends StatelessWidget {
                   getTooltipItem: (group, groupIndex, rod, rodIndex) {
                     final day = days[group.x.toInt()];
                     if (!day.hasFoodLogged) return null;
+                    final tip = l10n.weeklyDeficitTooltip(
+                      day.netBalance,
+                      day.consumed,
+                      day.burned,
+                    );
                     return BarTooltipItem(
-                      l10n.weeklyDeficitTooltip(
-                        day.netBalance,
-                        day.consumed,
-                        day.burned,
-                      ),
+                      day.isInProgress
+                          ? '${l10n.weeklyDeficitInProgress}\n$tip'
+                          : tip,
                       TextStyle(color: colors.text, fontWeight: FontWeight.w600),
                     );
                   },
@@ -159,7 +162,6 @@ class WeeklyDeficitChart extends StatelessWidget {
     required double chartMax,
   }) {
     if (!day.hasFoodLogged) {
-      // Empty / grey placeholder — day with no food logged.
       final stub = chartMax * 0.04;
       return BarChartGroupData(
         x: index,
@@ -176,7 +178,7 @@ class WeeklyDeficitChart extends StatelessWidget {
     }
 
     final value = day.netBalance.toDouble();
-    final color = value >= 0 ? _deficitGreen : _surplusAmber;
+    final base = value >= 0 ? _deficitGreen : _surplusAmber;
     final fromY = value >= 0 ? 0.0 : value;
     final toY = value >= 0 ? value : 0.0;
 
@@ -191,7 +193,10 @@ class WeeklyDeficitChart extends StatelessWidget {
             top: value >= 0 ? const Radius.circular(4) : Radius.zero,
             bottom: value < 0 ? const Radius.circular(4) : Radius.zero,
           ),
-          color: color,
+          color: day.isInProgress ? base.withValues(alpha: 0.45) : base,
+          borderSide: day.isInProgress
+              ? BorderSide(color: base, width: 1.5)
+              : BorderSide.none,
         ),
       ],
     );

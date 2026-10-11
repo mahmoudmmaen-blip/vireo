@@ -15,6 +15,7 @@ import 'package:vireo/features/nutrition/data/food_db_repository.dart';
 import 'package:vireo/features/nutrition/data/meal_resolution_service.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
+import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
 
 class MealReviewScreen extends ConsumerStatefulWidget {
   const MealReviewScreen({super.key, required this.draft});
@@ -41,6 +42,36 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     super.initState();
     _lines = List.of(widget.draft.lines);
     _slot = _mealSlotForNow();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _askPlateSizeOnce());
+  }
+
+  Future<void> _askPlateSizeOnce() async {
+    if (!mounted) return;
+    if (ref.read(plateSizeProvider) != null) return;
+    final l10n = AppLocalizations.of(context);
+    final picked = await showDialog<PlateSize>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        title: Text(l10n.plateSizeAskTitle),
+        children: [
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(ctx, PlateSize.small),
+            child: Text(l10n.plateSizeSmall),
+          ),
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(ctx, PlateSize.medium),
+            child: Text(l10n.plateSizeMedium),
+          ),
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(ctx, PlateSize.large),
+            child: Text(l10n.plateSizeLarge),
+          ),
+        ],
+      ),
+    );
+    if (picked != null) {
+      await ref.read(plateSizeProvider.notifier).setSize(picked);
+    }
   }
 
   MealType _mealSlotForNow() {
@@ -66,10 +97,16 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     await _resolver.rememberLines(_lines);
     await ref.read(mealRecentProvider.notifier).push(_lines);
     ref.read(confirmedMealsProvider.notifier).update((s) => {...s, _slot});
+    // Force dependent UIs (Home eaten, macros, Nutrition log) to rebuild.
+    ref.invalidate(todayNutritionProvider);
     if (!mounted) return;
     final l10n = AppLocalizations.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.aiScanSavedSnack)),
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        persist: false,
+        content: Text(l10n.aiScanSavedSnack),
+      ),
     );
     Navigator.of(context).pop(true);
   }
@@ -78,7 +115,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     await ref.read(mealFavoritesProvider.notifier).add(_lines);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context).mealFavoriteSaved)),
+      SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(AppLocalizations.of(context).mealFavoriteSaved)),
     );
   }
 
@@ -336,7 +373,7 @@ class _LineCard extends StatelessWidget {
                 CookingMethod.baked,
               ])
                 ChoiceChip(
-                  label: Text(m.name),
+                  label: Text(_cookLabel(l10n, m)),
                   selected: line.cookingMethod == m,
                   onSelected: (_) => onChanged(
                     recomputeWithMethod(line, m, oilFood: oil),
@@ -349,11 +386,51 @@ class _LineCard extends StatelessWidget {
             '${line.kcal.round()} kcal · P ${line.protein.round()} · C ${line.carbs.round()} · F ${line.fat.round()}',
             style: TextStyle(color: colors.textMute, fontSize: 12),
           ),
+          ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            title: Text(
+              l10n.mealHowCalculated,
+              style: TextStyle(fontSize: 12, color: colors.textMute),
+            ),
+            children: [
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(
+                  _howCalculated(line, locale),
+                  style: TextStyle(fontSize: 12, color: colors.textMute),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 }
+
+String _howCalculated(ResolvedMealLine line, String locale) {
+  final per100 = line.food?.per100g;
+  final name = locale == 'ar' ? line.nameAr : line.nameEn;
+  if (per100 == null) {
+    return '$name · ${line.grams.round()} g · ${line.kcal.round()} kcal (estimated)';
+  }
+  final source = line.food?.source;
+  final src = source == null
+      ? ''
+      : '\n${source.name} FDC ${source.fdcId}';
+  final scaled = (per100.kcal * line.grams / 100).round();
+  return '$name · ${line.grams.round()} g × ${per100.kcal.round()} kcal/100 g ≈ $scaled kcal$src';
+}
+
+String _cookLabel(AppLocalizations l10n, CookingMethod m) => switch (m) {
+      CookingMethod.raw => l10n.cookMethodRaw,
+      CookingMethod.boiled => l10n.cookMethodBoiled,
+      CookingMethod.grilled => l10n.cookMethodGrilled,
+      CookingMethod.fried => l10n.cookMethodFried,
+      CookingMethod.baked => l10n.cookMethodBaked,
+      CookingMethod.steamed => l10n.cookMethodSteamed,
+      CookingMethod.other => l10n.cookMethodOther,
+    };
 
 class _Badge extends StatelessWidget {
   const _Badge(this.text, this.color);

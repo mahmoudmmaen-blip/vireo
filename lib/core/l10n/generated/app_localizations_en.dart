@@ -1684,6 +1684,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aiCoachChipDessert => 'Healthy dessert swap';
 
   @override
+  String waterAddOneGlass(int ml) {
+    return '+1 glass ($ml ml)';
+  }
+
+  @override
+  String get waterLongPressHint => 'Long-press for more amounts';
+
+  @override
+  String get waterQuickAmountsTitle => 'Quick amounts';
+
+  @override
+  String get waterDefaultCupTitle => 'Default cup size';
+
+  @override
+  String get waterCustomMl => 'Custom amount';
+
+  @override
+  String get waterAddCustom => 'Add';
+
+  @override
   String get waterTrackerTitle => 'Water intake';
 
   @override
@@ -1706,6 +1726,33 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get weeklyDeficitEmpty =>
       'Log meals or cardio to see your weekly calorie balance.';
+
+  @override
+  String get weeklyDeficitInProgress => 'Today (in progress)';
+
+  @override
+  String get progressTrendEmpty => 'Log 3 days to see your trend';
+
+  @override
+  String get cookMethodRaw => 'Raw';
+
+  @override
+  String get cookMethodBoiled => 'Boiled';
+
+  @override
+  String get cookMethodGrilled => 'Grilled';
+
+  @override
+  String get cookMethodFried => 'Fried';
+
+  @override
+  String get cookMethodBaked => 'Baked';
+
+  @override
+  String get cookMethodSteamed => 'Steamed';
+
+  @override
+  String get cookMethodOther => 'Other';
 
   @override
   String weeklyDeficitTooltip(int net, int consumed, int burned) {
@@ -3052,6 +3099,27 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mealBarcodeFailed =>
       'Could not look up that barcode. Try again or log by text.';
+
+  @override
+  String get mealScanHintLabel => 'Add a few words (optional)';
+
+  @override
+  String get mealScanHintPlaceholder => 'Oil? Sauce? Bread type?';
+
+  @override
+  String get mealHowCalculated => 'How we calculated this';
+
+  @override
+  String get plateSizeAskTitle => 'What’s your usual plate size?';
+
+  @override
+  String get plateSizeSmall => 'Small';
+
+  @override
+  String get plateSizeMedium => 'Medium';
+
+  @override
+  String get plateSizeLarge => 'Large';
 
   @override
   String get mealScanHeroTitle => 'Scan your meal';

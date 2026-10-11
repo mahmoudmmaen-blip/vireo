@@ -124,7 +124,7 @@ class ArticleDetailScreen extends ConsumerWidget {
                                 .markArticleRead(article.id);
                             if (context.mounted && added) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                SnackBar(duration: const Duration(seconds: 3), persist: false, 
                                   content: Text(l10n.vitalityMarkReadSuccess),
                                 ),
                               );
@@ -310,7 +310,7 @@ class _SourcesSection extends StatelessWidget {
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: source.url));
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(l10n.vitalityLinkCopied)),
+                    SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.vitalityLinkCopied)),
                   );
                 },
               ),

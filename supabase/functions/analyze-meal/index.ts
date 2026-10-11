@@ -26,6 +26,7 @@ type AnalyzeMealRequest = {
   remaining_calories?: number;
   remaining_protein?: number;
   language?: string;
+  user_hint?: string;
 };
 
 Deno.serve(async (req) => {
@@ -88,6 +89,7 @@ Deno.serve(async (req) => {
       remainingCalories,
       remainingProtein,
       language: body.language,
+      userHint: body.user_hint,
     });
 
     const raw = await generateContent({
@@ -101,7 +103,7 @@ Deno.serve(async (req) => {
         },
       ],
       responseJson: true,
-      temperature: 0.2,
+      temperature: 0.1,
     });
 
     const parsed = parseItemsJson(raw);
@@ -134,7 +136,9 @@ Deno.serve(async (req) => {
   }
 });
 
-function parseItemsJson(raw: string): { items: unknown[] } | null {
+function parseItemsJson(
+  raw: string,
+): { items: unknown[]; items_unsure: unknown[] } | null {
   try {
     let text = raw.trim();
     const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
@@ -148,9 +152,13 @@ function parseItemsJson(raw: string): { items: unknown[] } | null {
     if (!decoded || typeof decoded !== 'object' || Array.isArray(decoded)) {
       return null;
     }
+    const unsure = Array.isArray(
+      (decoded as { items_unsure?: unknown }).items_unsure,
+    )
+      ? (decoded as { items_unsure: unknown[] }).items_unsure
+      : [];
     const items = (decoded as { items?: unknown }).items;
     if (!Array.isArray(items) || items.length === 0) {
-      // Backward-compat: wrap legacy single-food payloads so old clients don't brick.
       const legacy = decoded as Record<string, unknown>;
       if (legacy.food_name) {
         return {
@@ -168,11 +176,12 @@ function parseItemsJson(raw: string): { items: unknown[] } | null {
               _legacy_fats: legacy.fats,
             },
           ],
+          items_unsure: unsure,
         };
       }
       return null;
     }
-    return { items };
+    return { items, items_unsure: unsure };
   } catch {
     return null;
   }

@@ -20,7 +20,11 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
     state = const AsyncValue.data(AiScanIdle());
   }
 
-  Future<void> scanMeal(Object image, {String language = 'ar'}) async {
+  Future<void> scanMeal(
+    Object image, {
+    String language = 'ar',
+    String? userHint,
+  }) async {
     Uint8List? preview;
     try {
       preview = await mealImageToBytes(image);
@@ -39,6 +43,7 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
         ref.read(remainingCaloriesForAiScanProvider),
         ref.read(remainingProteinForAiScanProvider),
         language: language,
+        userHint: userHint,
       );
       state = AsyncValue.data(AiScanSuccess(draft));
     } on FoodVisionOfflineException {

@@ -881,6 +881,15 @@
   "aiCoachChipDinner": "Suggest a dinner meal",
   "aiCoachChipProtein": "How do I boost protein?",
   "aiCoachChipDessert": "Healthy dessert swap",
+  "waterAddOneGlass": "+1 glass ({ml} ml)",
+  "@waterAddOneGlass": {
+    "placeholders": {"ml": {"type": "int"}}
+  },
+  "waterLongPressHint": "Long-press for more amounts",
+  "waterQuickAmountsTitle": "Quick amounts",
+  "waterDefaultCupTitle": "Default cup size",
+  "waterCustomMl": "Custom amount",
+  "waterAddCustom": "Add",
   "waterTrackerTitle": "Water intake",
   "waterTrackerSummary": "{current}L / {goal}L — {percent}% completed",
   "@waterTrackerSummary": {
@@ -907,6 +916,15 @@
     }
   },
   "weeklyDeficitEmpty": "Log meals or cardio to see your weekly calorie balance.",
+  "weeklyDeficitInProgress": "Today (in progress)",
+  "progressTrendEmpty": "Log 3 days to see your trend",
+  "cookMethodRaw": "Raw",
+  "cookMethodBoiled": "Boiled",
+  "cookMethodGrilled": "Grilled",
+  "cookMethodFried": "Fried",
+  "cookMethodBaked": "Baked",
+  "cookMethodSteamed": "Steamed",
+  "cookMethodOther": "Other",
   "weeklyDeficitTooltip": "{net} kcal\nIn: {consumed} · Out: {burned}",
   "@weeklyDeficitTooltip": {
     "placeholders": {
@@ -1656,6 +1674,13 @@
   "mealVoiceUnavailable": "Voice input unavailable on this device",
   "mealBarcodeTitle": "Scan barcode",
   "mealBarcodeFailed": "Could not look up that barcode. Try again or log by text.",
+  "mealScanHintLabel": "Add a few words (optional)",
+  "mealScanHintPlaceholder": "Oil? Sauce? Bread type?",
+  "mealHowCalculated": "How we calculated this",
+  "plateSizeAskTitle": "What’s your usual plate size?",
+  "plateSizeSmall": "Small",
+  "plateSizeMedium": "Medium",
+  "plateSizeLarge": "Large",
   "mealScanHeroTitle": "Scan your meal",
   "mealScanHeroSubtitle": "AI identifies foods — you confirm grams",
   "mealScanTipAbove": "Shoot from above",

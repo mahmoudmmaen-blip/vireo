@@ -48,6 +48,7 @@ abstract final class GeminiFoodServiceCore {
     int remainingCalories,
     double remainingProtein, {
     String language = 'ar',
+    String? userHint,
   }) async {
     if (!SupabaseService.isInitialized) {
       throw const FoodVisionOfflineException();
@@ -63,6 +64,8 @@ abstract final class GeminiFoodServiceCore {
           'remaining_calories': remainingCalories,
           'remaining_protein': remainingProtein,
           'language': language,
+          if (userHint != null && userHint.trim().isNotEmpty)
+            'user_hint': userHint.trim(),
         },
       );
 

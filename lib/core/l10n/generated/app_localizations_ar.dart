@@ -1664,6 +1664,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aiCoachChipDessert => 'بديل صحي للحلويات';
 
   @override
+  String waterAddOneGlass(int ml) {
+    return '+1 كوباية ($ml مل)';
+  }
+
+  @override
+  String get waterLongPressHint => 'اضغط مطوّل لكميات تانية';
+
+  @override
+  String get waterQuickAmountsTitle => 'كميات سريعة';
+
+  @override
+  String get waterDefaultCupTitle => 'حجم الكوباية الافتراضي';
+
+  @override
+  String get waterCustomMl => 'كمية مخصّصة';
+
+  @override
+  String get waterAddCustom => 'أضف';
+
+  @override
   String get waterTrackerTitle => 'شرب الماء';
 
   @override
@@ -1686,6 +1706,33 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get weeklyDeficitEmpty =>
       'سجّل وجبات أو كارديو لعرض رصيد السعرات الأسبوعي.';
+
+  @override
+  String get weeklyDeficitInProgress => 'النهاردة (لسه شغّال)';
+
+  @override
+  String get progressTrendEmpty => 'سجّل 3 أيام عشان تشوف الاتجاه';
+
+  @override
+  String get cookMethodRaw => 'نيء';
+
+  @override
+  String get cookMethodBoiled => 'مسلوق';
+
+  @override
+  String get cookMethodGrilled => 'مشوي';
+
+  @override
+  String get cookMethodFried => 'مقلي';
+
+  @override
+  String get cookMethodBaked => 'في الفرن';
+
+  @override
+  String get cookMethodSteamed => 'على البخار';
+
+  @override
+  String get cookMethodOther => 'أخرى';
 
   @override
   String weeklyDeficitTooltip(int net, int consumed, int burned) {
@@ -3027,6 +3074,27 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get mealBarcodeFailed =>
       'مقدرناش نلاقي الباركود. جرّب تاني أو سجّل بالنص.';
+
+  @override
+  String get mealScanHintLabel => 'زوّد بكلمتين (اختياري)';
+
+  @override
+  String get mealScanHintPlaceholder => 'فيها زيت؟ صوص؟ نوع العيش؟';
+
+  @override
+  String get mealHowCalculated => 'إزاي حسبناها';
+
+  @override
+  String get plateSizeAskTitle => 'طبقك عادة قد إيه؟';
+
+  @override
+  String get plateSizeSmall => 'صغير';
+
+  @override
+  String get plateSizeMedium => 'وسط';
+
+  @override
+  String get plateSizeLarge => 'كبير';
 
   @override
   String get mealScanHeroTitle => 'امسح وجبتك';

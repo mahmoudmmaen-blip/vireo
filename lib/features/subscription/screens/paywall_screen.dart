@@ -38,7 +38,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     final sub = ref.read(subscriptionProvider).valueOrNull;
     if (sub == null || !sub.isConfigured) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.paywallNotConfigured)),
+        SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.paywallNotConfigured)),
       );
       return;
     }
@@ -50,7 +50,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     if (!mounted) return;
     if (package == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.authErrorGeneric)),
+        SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.authErrorGeneric)),
       );
       return;
     }
@@ -63,14 +63,14 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
         await ref.read(subscriptionProvider.notifier).refresh();
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.paywallPurchaseSuccess)),
+          SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.paywallPurchaseSuccess)),
         );
         Navigator.of(context).pop();
       }
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.paywallPurchaseError)),
+          SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.paywallPurchaseError)),
         );
       }
     } finally {
@@ -91,18 +91,18 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       final snapshot = ref.read(subscriptionProvider).valueOrNull;
       if (snapshot?.hasPremiumAccess == true) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.paywallRestoreSuccess)),
+          SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.paywallRestoreSuccess)),
         );
         Navigator.of(context).pop();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.paywallRestoreEmpty)),
+          SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.paywallRestoreEmpty)),
         );
       }
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.paywallRestoreError)),
+          SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.paywallRestoreError)),
         );
       }
     } finally {

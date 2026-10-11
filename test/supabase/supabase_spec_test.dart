@@ -103,7 +103,13 @@ void main() {
         ..sort();
 
       expect(files.length, greaterThanOrEqualTo(6));
-      expect(files.last, '20240822160000_vireo_complete_schema_rls.sql');
+      expect(files, contains('20240822160000_vireo_complete_schema_rls.sql'));
+      // Later incremental migrations (AI usage, seeds) may sort after the
+      // complete schema dump — the dump must still exist in the chain.
+      expect(
+        files.indexOf('20240822160000_vireo_complete_schema_rls.sql'),
+        greaterThan(files.indexOf('20240822110000_core_schema.sql')),
+      );
     });
   });
 
