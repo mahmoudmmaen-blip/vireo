@@ -14,6 +14,6 @@ A step is done when its commit appears in git log. Then Claude reviews and start
 | 5 | P12_subscriptions.md | feat(subscription) | done 22:53 |
 | 6 | P14_social.md | feat(social) | done 23:00 (4 tests) |
 | 7 | P15_sync.md | feat(sync) | done 23:06 (3 tests) |
-| 8 | P16_quality.md | chore(quality) | running (started 23:07) |
-| 9 | P17_store.md | chore(store) | queued |
+| 8 | P16_quality.md | chore(quality) | done 23:12 (all test suites green) |
+| 9 | P17_store.md | chore(store) | running (started 23:13) |
 | 10 | Phase 18 release | — | STOP: needs the owner (keystore, applicationId, push) |
