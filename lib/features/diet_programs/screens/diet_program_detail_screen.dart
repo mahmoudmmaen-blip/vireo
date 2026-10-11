@@ -13,6 +13,7 @@ import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
 import 'package:vireo/features/diet_programs/data/diet_programs_catalog.dart';
 import 'package:vireo/features/diet_programs/domain/diet_program.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
 class DietProgramDetailScreen extends ConsumerStatefulWidget {
   const DietProgramDetailScreen({super.key, required this.programId});
@@ -40,6 +41,12 @@ class _DietProgramDetailScreenState
 
   Future<void> _onStart(RankedProgram ranked) async {
     final l10n = AppLocalizations.of(context);
+    final isPro = ref.read(isProUserProvider);
+    if (!FeatureGates.isDietProgramUnlocked(ranked.program.id, isPro: isPro)) {
+      final allowed = FeatureGates.requirePro(context, ref, force: true);
+      if (!allowed) return;
+    }
+
     final elig = ranked.eligibility;
 
     if (elig.isMinor) {

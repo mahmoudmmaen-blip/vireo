@@ -20,6 +20,7 @@ import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
 import 'package:vireo/features/progress/widgets/weight_trend_chart_card.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -55,7 +56,10 @@ class ProgressScreen extends ConsumerWidget {
             children: [
               // ── Quick Links: Weekly Report, Health Hub, InBody ──
               VireoCard(
-                onTap: () => WeeklyProgressReportScreen.open(context),
+                onTap: () {
+                  if (!FeatureGates.requirePro(context, ref, force: true)) return;
+                  WeeklyProgressReportScreen.open(context);
+                },
                 child: Row(
                   children: [
                     Container(
@@ -71,11 +75,24 @@ class ProgressScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            l10n.weeklyReportTitle,
-                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  fontWeight: FontWeight.w800,
+                          Row(
+                            children: [
+                              Text(
+                                l10n.weeklyReportTitle,
+                                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                              ),
+                              if (!ref.watch(isProUserProvider)) ...[
+                                const SizedBox(width: 8),
+                                VireoPill(
+                                  label: 'PRO',
+                                  icon: Icons.lock_outline,
+                                  color: context.vireoColors.gold,
+                                  filled: true,
                                 ),
+                              ],
+                            ],
                           ),
                           Text(
                             l10n.weeklyReportSubtitle,

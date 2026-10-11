@@ -9,6 +9,7 @@ import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/features/activity/data/outdoor_workout_repository.dart';
 import 'package:vireo/features/activity/domain/outdoor_workout_models.dart';
 import 'package:vireo/features/activity/screens/outdoor_detail_screen.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
 class OutdoorHistoryScreen extends ConsumerWidget {
   const OutdoorHistoryScreen({super.key});
@@ -38,16 +39,33 @@ class OutdoorHistoryScreen extends ConsumerWidget {
               separatorBuilder: (_, __) => const SizedBox(height: 8),
               itemBuilder: (context, i) {
                 final s = sessions[i];
+                final isPro = ref.watch(isProUserProvider);
                 return VireoCard(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => OutdoorDetailScreen(sessionId: s.id),
-                    ),
-                  ),
+                  onTap: () {
+                    if (!FeatureGates.requirePro(context, ref, force: true)) return;
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => OutdoorDetailScreen(sessionId: s.id),
+                      ),
+                    );
+                  },
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: Icon(_icon(s.type), color: colors.ember),
-                    title: Text(_label(l10n, s.type)),
+                    title: Row(
+                      children: [
+                        Text(_label(l10n, s.type)),
+                        if (!isPro) ...[
+                          const SizedBox(width: 8),
+                          VireoPill(
+                            label: 'PRO',
+                            icon: Icons.lock_outline,
+                            color: colors.gold,
+                            filled: true,
+                          ),
+                        ],
+                      ],
+                    ),
                     subtitle: Text(
                       '${DateFormat.yMMMd().add_jm().format(s.startedAt)} · '
                       '${(s.distanceMeters / 1000).toStringAsFixed(2)} km · '

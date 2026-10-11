@@ -17,6 +17,23 @@ export async function hasPremiumEntitlement(
   admin: SupabaseClient,
   userId: string,
 ): Promise<boolean> {
+  // Check server-of-truth subscriptions table first
+  const { data: sub } = await admin
+    .from('subscriptions')
+    .select('entitlement, expires_at, status')
+    .eq('user_id', userId)
+    .maybeSingle();
+
+  if (sub) {
+    const isPro = sub.entitlement === 'pro' || sub.entitlement === 'premium';
+    const isStatusActive = sub.status === 'active';
+    const notExpired = !sub.expires_at || new Date(sub.expires_at).getTime() > Date.now();
+    if (isPro && (isStatusActive || (sub.status === 'cancelled' && notExpired))) {
+      return true;
+    }
+  }
+
+  // Fallback to users.subscription_tier
   const { data } = await admin
     .from('users')
     .select('subscription_tier')

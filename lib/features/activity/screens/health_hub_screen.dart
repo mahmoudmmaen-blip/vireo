@@ -10,6 +10,7 @@ import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/features/activity/providers/wearable_health_provider.dart';
 import 'package:vireo/features/activity/services/wearable_health_service.dart';
 import 'package:vireo/features/activity/widgets/manual_sleep_sheet.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
 class HealthHubScreen extends ConsumerWidget {
   const HealthHubScreen({super.key});
@@ -21,6 +22,8 @@ class HealthHubScreen extends ConsumerWidget {
     final stress = ref.watch(stressFromHrvProvider);
     final manualSleep = ref.watch(manualSleepTodayProvider);
     final colors = context.vireoColors;
+
+    final isPro = ref.watch(isProUserProvider);
 
     return FeatureScaffold(
       title: l10n.healthHubTitle,
@@ -72,7 +75,7 @@ class HealthHubScreen extends ConsumerWidget {
                   ),
                 for (final m in snap.metrics) ...[
                   const SizedBox(height: VSpace.sm),
-                  _MetricCard(metric: m, l10n: l10n),
+                  _MetricCard(metric: m, l10n: l10n, isPro: isPro),
                 ],
                 if (snap.metrics.every((m) => m.kind != HealthMetricKind.sleep)) ...[
                   const SizedBox(height: VSpace.sm),
@@ -92,33 +95,58 @@ class HealthHubScreen extends ConsumerWidget {
                     return Padding(
                       padding: const EdgeInsets.only(top: VSpace.md),
                       child: VireoCard(
+                        onTap: !isPro
+                            ? () => FeatureGates.requirePro(context, ref, force: true)
+                            : null,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              l10n.healthStressTitle,
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    fontWeight: FontWeight.w800,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    l10n.healthStressTitle,
+                                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                          fontWeight: FontWeight.w800,
+                                        ),
                                   ),
+                                ),
+                                if (!isPro)
+                                  VireoPill(
+                                    label: 'PRO',
+                                    icon: Icons.lock_outline,
+                                    color: colors.gold,
+                                    filled: true,
+                                  ),
+                              ],
                             ),
                             const SizedBox(height: 6),
                             Text(l10n.healthFromWatch),
                             const SizedBox(height: 8),
-                            Text(
-                              _stressLabel(l10n, s.level!),
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w900,
-                                color: colors.ember,
-                              ),
-                            ),
-                            if (s.todayHrvMs != null && s.baselineHrvMs != null)
+                            if (isPro) ...[
                               Text(
-                                l10n.healthHrvDetail(
-                                  s.todayHrvMs!.round(),
-                                  s.baselineHrvMs!.round(),
+                                _stressLabel(l10n, s.level!),
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w900,
+                                  color: colors.ember,
                                 ),
-                                style: TextStyle(color: colors.textMute, fontSize: 12),
+                              ),
+                              if (s.todayHrvMs != null && s.baselineHrvMs != null)
+                                Text(
+                                  l10n.healthHrvDetail(
+                                    s.todayHrvMs!.round(),
+                                    s.baselineHrvMs!.round(),
+                                  ),
+                                  style: TextStyle(color: colors.textMute, fontSize: 12),
+                                ),
+                            ] else
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                child: Text(
+                                  'Upgrade to Pro to view HRV stress analysis & wearable recovery trends.',
+                                  style: TextStyle(color: colors.textMute, fontSize: 13),
+                                ),
                               ),
                           ],
                         ),
@@ -142,10 +170,15 @@ class HealthHubScreen extends ConsumerWidget {
 }
 
 class _MetricCard extends StatelessWidget {
-  const _MetricCard({required this.metric, required this.l10n});
+  const _MetricCard({
+    required this.metric,
+    required this.l10n,
+    required this.isPro,
+  });
 
   final HealthMetricCardData metric;
   final AppLocalizations l10n;
+  final bool isPro;
 
   @override
   Widget build(BuildContext context) {
@@ -175,28 +208,29 @@ class _MetricCard extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: VSpace.sm),
-          SizedBox(
-            height: 72,
-            child: LineChart(
-              LineChartData(
-                gridData: const FlGridData(show: false),
-                titlesData: const FlTitlesData(show: false),
-                borderData: FlBorderData(show: false),
-                lineBarsData: [
-                  LineChartBarData(
-                    spots: [
-                      for (var i = 0; i < metric.last7Days.length; i++)
-                        FlSpot(i.toDouble(), metric.last7Days[i].value),
-                    ],
-                    isCurved: true,
-                    color: colors.recovery,
-                    barWidth: 2.5,
-                    dotData: const FlDotData(show: false),
-                  ),
-                ],
+          if (isPro)
+            SizedBox(
+              height: 72,
+              child: LineChart(
+                LineChartData(
+                  gridData: const FlGridData(show: false),
+                  titlesData: const FlTitlesData(show: false),
+                  borderData: FlBorderData(show: false),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: [
+                        for (var i = 0; i < metric.last7Days.length; i++)
+                          FlSpot(i.toDouble(), metric.last7Days[i].value),
+                      ],
+                      isCurved: true,
+                      color: colors.recovery,
+                      barWidth: 2.5,
+                      dotData: const FlDotData(show: false),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
         ],
       ),
     );

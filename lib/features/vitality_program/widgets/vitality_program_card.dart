@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/navigation/vireo_page_routes.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/vitality_program/providers/vitality_program_provider.dart';
 import 'package:vireo/features/vitality_program/screens/vitality_program_screen.dart';
 
@@ -16,12 +17,14 @@ class VitalityProgramCard extends ConsumerWidget {
     final program = ref.watch(vitalityProgramProvider);
     final started = program.progress.hasStarted;
     final progress = program.overallProgress / 100;
+    final isPro = ref.watch(isProUserProvider);
 
     return Material(
       color: colors.surfaceRaised,
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
         onTap: () {
+          if (!FeatureGates.requirePro(context, ref, force: true)) return;
           Navigator.of(context).push(
             SlideUpRoute<void>(page: const VitalityProgramScreen()),
           );
@@ -60,6 +63,24 @@ class VitalityProgramCard extends ConsumerWidget {
                           ),
                     ),
                   ),
+                  if (!isPro) ...[
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: colors.gold.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        'PRO',
+                        style: TextStyle(
+                          color: colors.gold,
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                  ],
                   Icon(Icons.chevron_right, color: colors.textMute),
                 ],
               ),

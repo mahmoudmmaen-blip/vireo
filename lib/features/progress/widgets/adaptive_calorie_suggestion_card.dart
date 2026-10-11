@@ -4,6 +4,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/progress/domain/adaptive_calorie_calculator.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
 class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
   const AdaptiveCalorieSuggestionCard({super.key});
@@ -149,6 +150,9 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () async {
+                    if (!FeatureGates.requirePro(context, ref, force: true)) {
+                      return;
+                    }
                     await ref
                         .read(adaptiveCalorieActionProvider.notifier)
                         .acceptSuggestion(suggestion.suggestedCalorieTarget, ref);

@@ -11,6 +11,7 @@ import 'package:vireo/features/diet_programs/application/diet_plan_engine.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/diet_programs/screens/diet_program_detail_screen.dart';
 import 'package:vireo/features/diet_programs/screens/diet_quiz_screen.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
 class DietProgramsScreen extends ConsumerWidget {
   const DietProgramsScreen({super.key});
@@ -22,6 +23,7 @@ class DietProgramsScreen extends ConsumerWidget {
     final colors = context.vireoColors;
     final ranked = ref.watch(rankedProgramsProvider);
     final active = ref.watch(activeDietProgramProvider);
+    final isPro = ref.watch(isProUserProvider);
 
     return FeatureScaffold(
       title: l10n.dietProgramsTitle,
@@ -41,17 +43,25 @@ class DietProgramsScreen extends ConsumerWidget {
           final item = ranked[i];
           final p = item.program;
           final isActive = active?.id == p.id;
+          final isUnlocked = FeatureGates.isDietProgramUnlocked(p.id, isPro: isPro);
+
           return FadeSlideIn(
             index: i,
             onceId: 'diet_$i',
             child: Padding(
               padding: const EdgeInsets.only(bottom: VSpace.sm),
               child: VireoCard(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => DietProgramDetailScreen(programId: p.id),
-                  ),
-                ),
+                onTap: () {
+                  if (!isUnlocked) {
+                    FeatureGates.requirePro(context, ref, force: true);
+                    return;
+                  }
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => DietProgramDetailScreen(programId: p.id),
+                    ),
+                  );
+                },
                 glow: item.isRecommended ? colors.ember : null,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,6 +96,13 @@ class DietProgramsScreen extends ConsumerWidget {
                           VireoPill(
                             label: l10n.dietActiveBadge,
                             color: colors.success,
+                            filled: true,
+                          )
+                        else if (!isUnlocked)
+                          VireoPill(
+                            label: 'PRO',
+                            icon: Icons.lock_outline,
+                            color: colors.gold,
                             filled: true,
                           ),
                       ],

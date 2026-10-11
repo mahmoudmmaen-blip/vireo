@@ -12,7 +12,7 @@ abstract final class RevenueCatService {
   static bool _initialized = false;
   static StreamController<CustomerInfo>? _customerInfoController;
 
-  static const premiumEntitlementId = 'premium';
+  static String get premiumEntitlementId => AppConfig.revenueCatEntitlementId;
 
   static bool get isInitialized => _initialized;
 
@@ -22,6 +22,7 @@ abstract final class RevenueCatService {
     _customerInfoController ??= StreamController<CustomerInfo>.broadcast();
     return _customerInfoController!.stream;
   }
+
 
   static Future<void> init() async {
     if (_initialized) {
@@ -199,33 +200,34 @@ abstract final class RevenueCatService {
 
     SubscriptionPlan? monthly;
     SubscriptionPlan? annual;
-    SubscriptionPlan? lifetime;
 
     for (final package in offering.availablePackages) {
+      final storeProduct = package.storeProduct;
+      final planId = _planIdFromPackage(package);
+      final isAnnual = planId == SubscriptionPlanId.annual;
+
       final plan = SubscriptionPlan(
-        id: _planIdFromPackage(package),
-        title: package.storeProduct.title,
-        priceString: package.storeProduct.priceString,
+        id: planId,
+        title: storeProduct.title,
+        priceString: storeProduct.priceString,
         packageIdentifier: package.identifier,
-        isBestValue: package.packageType == PackageType.annual,
+        rawPrice: storeProduct.price,
+        currencyCode: storeProduct.currencyCode,
+        isBestValue: isAnnual,
+        trialLabel: isAnnual ? '7-day free trial' : null,
+        trialPeriodDays: isAnnual ? 7 : 0,
       );
 
-      switch (package.packageType) {
-        case PackageType.monthly:
-          monthly = plan;
-        case PackageType.annual:
-          annual = plan.copyWith(isBestValue: true);
-        case PackageType.lifetime:
-          lifetime = plan;
-        default:
-          break;
+      if (planId == SubscriptionPlanId.monthly) {
+        monthly = plan;
+      } else if (planId == SubscriptionPlanId.annual) {
+        annual = plan;
       }
     }
 
     return [
-      ?monthly,
       ?annual,
-      ?lifetime,
+      ?monthly,
     ];
   }
 
@@ -238,23 +240,26 @@ abstract final class RevenueCatService {
   }
 
   static SubscriptionPlanId _planIdFromPackage(Package package) {
-    switch (package.packageType) {
-      case PackageType.annual:
-        return SubscriptionPlanId.annual;
-      case PackageType.lifetime:
-        return SubscriptionPlanId.lifetime;
-      default:
-        return SubscriptionPlanId.monthly;
+    if (package.storeProduct.identifier == AppConfig.revenueCatAnnualProductId ||
+        package.packageType == PackageType.annual ||
+        package.identifier.toLowerCase().contains('annual') ||
+        package.identifier.toLowerCase().contains('year')) {
+      return SubscriptionPlanId.annual;
     }
+    return SubscriptionPlanId.monthly;
   }
 
   static SubscriptionPlanId? _planFromProductId(String productId) {
     final lower = productId.toLowerCase();
-    if (lower.contains('lifetime')) return SubscriptionPlanId.lifetime;
-    if (lower.contains('annual') || lower.contains('year')) {
+    if (productId == AppConfig.revenueCatAnnualProductId ||
+        lower.contains('annual') ||
+        lower.contains('year')) {
       return SubscriptionPlanId.annual;
     }
-    if (lower.contains('month')) return SubscriptionPlanId.monthly;
+    if (productId == AppConfig.revenueCatMonthlyProductId ||
+        lower.contains('month')) {
+      return SubscriptionPlanId.monthly;
+    }
     return null;
   }
 
@@ -270,22 +275,3 @@ abstract final class RevenueCatService {
   }
 }
 
-extension on SubscriptionPlan {
-  SubscriptionPlan copyWith({
-    SubscriptionPlanId? id,
-    String? title,
-    String? priceString,
-    String? packageIdentifier,
-    bool? isBestValue,
-    String? trialLabel,
-  }) {
-    return SubscriptionPlan(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      priceString: priceString ?? this.priceString,
-      packageIdentifier: packageIdentifier ?? this.packageIdentifier,
-      isBestValue: isBestValue ?? this.isBestValue,
-      trialLabel: trialLabel ?? this.trialLabel,
-    );
-  }
-}

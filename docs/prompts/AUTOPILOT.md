@@ -9,9 +9,9 @@ A step is done when its commit appears in git log. Then Claude reviews and start
 | 1 | NEXT.md (10 languages) | feat(l10n) | done 19:46 (language_picker_test skipped: hangs) |
 | 2 | P10_reminders.md | feat(reminders) | done 20:30 (13 scheduler tests, 193 tests pass) |
 | 3 | P11_progress.md | feat(progress) | done 21:11 |
-| 4 | P13_onboarding.md | feat(onboarding) | running (started 21:12) |
-| 4b | P11b_fat_equivalent.md | feat(energy) | queued (owner request 21:32) |
-| 5 | P12_subscriptions.md | feat(subscription) | queued |
+| 4 | P13_onboarding.md | feat(onboarding) | done 21:38 |
+| 4b | P11b_fat_equivalent.md | feat(energy) | done 22:16 (10 tests) |
+| 5 | P12_subscriptions.md | feat(subscription) | running (started 22:23) |
 | 6 | P14_social.md | feat(social) | queued |
 | 7 | P15_sync.md | feat(sync) | queued |
 | 8 | P16_quality.md | chore(quality) | queued |

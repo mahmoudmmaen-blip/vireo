@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/screens/trial_ended_screen.dart';
 
@@ -26,6 +27,9 @@ class _SubscriptionShellGateState extends ConsumerState<SubscriptionShellGate> {
   Future<void> _maybeShowTrialEnded() async {
     if (_checked || !mounted) return;
     _checked = true;
+
+    // Day-5 trial reminder check
+    await FeatureGates.checkAndScheduleTrialReminder(ref);
 
     final snapshot = await ref.read(subscriptionProvider.future);
     if (!snapshot.shouldShowTrialEndedGate || !mounted) return;

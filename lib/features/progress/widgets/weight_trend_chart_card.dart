@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
@@ -7,8 +8,9 @@ import 'package:vireo/core/utils/unit_converter.dart';
 import 'package:vireo/data/models/progress_models.dart';
 import 'package:vireo/data/models/unit_preference.dart';
 import 'package:vireo/features/progress/domain/weight_trend_calculator.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
-class WeightTrendChartCard extends StatelessWidget {
+class WeightTrendChartCard extends ConsumerWidget {
   const WeightTrendChartCard({
     super.key,
     required this.logs,
@@ -23,7 +25,7 @@ class WeightTrendChartCard extends StatelessWidget {
   final UnitPreference unit;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.vireoColors;
     final l10n = AppLocalizations.of(context);
     final unitLabel = UnitConverter.weightLabel(unit);
@@ -111,12 +113,46 @@ class WeightTrendChartCard extends StatelessWidget {
                 ),
                 Container(height: 28, width: 1, color: colors.line),
                 Expanded(
-                  child: _TrendDeltaPill(
-                    title: '30-Day Trend',
-                    deltaStr: formatDelta(change30),
-                    isNegative: (change30 ?? 0) < 0,
-                    isPositive: (change30 ?? 0) > 0,
-                    colors: colors,
+                  child: InkWell(
+                    onTap: () {
+                      final isPro = ref.read(isProUserProvider);
+                      if (!isPro) {
+                        FeatureGates.requirePro(context, ref, force: true);
+                      }
+                    },
+                    borderRadius: BorderRadius.circular(8),
+                    child: ref.watch(isProUserProvider)
+                        ? _TrendDeltaPill(
+                            title: '30-Day Trend',
+                            deltaStr: formatDelta(change30),
+                            isNegative: (change30 ?? 0) < 0,
+                            isPositive: (change30 ?? 0) > 0,
+                            colors: colors,
+                          )
+                        : Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '30-Day Trend',
+                                    style: TextStyle(color: colors.textMute, fontSize: 11),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Icon(Icons.lock_outline, size: 12, color: colors.gold),
+                                ],
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'PRO',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 12,
+                                  color: colors.gold,
+                                ),
+                              ),
+                            ],
+                          ),
                   ),
                 ),
               ],

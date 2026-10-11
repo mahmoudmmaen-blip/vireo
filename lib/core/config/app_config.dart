@@ -21,6 +21,21 @@ abstract final class AppConfig {
     defaultValue: '',
   );
 
+  static const revenueCatEntitlementId = String.fromEnvironment(
+    'REVENUECAT_ENTITLEMENT_ID',
+    defaultValue: 'pro',
+  );
+
+  static const revenueCatMonthlyProductId = String.fromEnvironment(
+    'REVENUECAT_MONTHLY_PRODUCT_ID',
+    defaultValue: 'vireo_pro_monthly',
+  );
+
+  static const revenueCatAnnualProductId = String.fromEnvironment(
+    'REVENUECAT_ANNUAL_PRODUCT_ID',
+    defaultValue: 'vireo_pro_annual',
+  );
+
   static const googleWebClientId = String.fromEnvironment(
     'GOOGLE_WEB_CLIENT_ID',
     defaultValue: '',

@@ -32,16 +32,22 @@ class SubscriptionPlan {
     required this.title,
     required this.priceString,
     required this.packageIdentifier,
+    this.rawPrice = 0.0,
+    this.currencyCode = 'USD',
     this.isBestValue = false,
     this.trialLabel,
+    this.trialPeriodDays = 0,
   });
 
   final SubscriptionPlanId id;
   final String title;
   final String priceString;
   final String packageIdentifier;
+  final double rawPrice;
+  final String currencyCode;
   final bool isBestValue;
   final String? trialLabel;
+  final int trialPeriodDays;
 }
 
 class SubscriptionSnapshot {
@@ -103,19 +109,19 @@ class SubscriptionSnapshot {
         title: 'Monthly',
         priceString: '\$9.99/mo',
         packageIdentifier: 'monthly',
+        rawPrice: 9.99,
+        currencyCode: 'USD',
       ),
       SubscriptionPlan(
         id: SubscriptionPlanId.annual,
         title: 'Annual',
         priceString: '\$59.99/yr',
         packageIdentifier: 'annual',
+        rawPrice: 59.99,
+        currencyCode: 'USD',
         isBestValue: true,
-      ),
-      SubscriptionPlan(
-        id: SubscriptionPlanId.lifetime,
-        title: 'Lifetime',
-        priceString: '\$149.99',
-        packageIdentifier: 'lifetime',
+        trialLabel: '7-day free trial',
+        trialPeriodDays: 7,
       ),
     ],
   );

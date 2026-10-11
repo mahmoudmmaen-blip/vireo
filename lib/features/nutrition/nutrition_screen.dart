@@ -14,6 +14,7 @@ import 'package:vireo/features/nutrition/widgets/daily_calorie_goal_card.dart';
 import 'package:vireo/features/nutrition/widgets/fridge_scan_banner.dart';
 import 'package:vireo/features/nutrition/widgets/meal_builder_panel.dart';
 import 'package:vireo/features/nutrition/widgets/meal_card.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 
@@ -51,6 +52,7 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final isPro = ref.watch(isProUserProvider);
     final remainingAsync = ref.watch(remainingFridgeScansProvider);
     final remaining = remainingAsync.valueOrNull ?? NutritionRepository.basicMonthlyLimit;
 
@@ -94,10 +96,11 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: const QuickAiScannerCard(),
           ),
-          FridgeScanBanner(
-            remaining: remaining,
-            onScan: () => _openFridgeScan(context, remaining),
-          ),
+          if (FeatureGates.shouldShowUpsellBanners(isPro: isPro))
+            FridgeScanBanner(
+              remaining: remaining,
+              onScan: () => _openFridgeScan(context, remaining),
+            ),
           const DailyCalorieGoalCard(),
           TabBar(
             controller: _tabController,
