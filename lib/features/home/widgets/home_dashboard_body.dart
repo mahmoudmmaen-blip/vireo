@@ -112,7 +112,7 @@ class HomeDashboardBody extends ConsumerWidget {
           ],
         ),
       ),
-      _TodayHeroCard(
+      TodayHeroCard(
         data: nutrition,
         onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
         onBurnedTap: () => push(const CardioActivityScreen()),
@@ -430,8 +430,9 @@ class _CircleIconButton extends StatelessWidget {
 
 // ───────────────────────────── Today hero ─────────────────────────────
 
-class _TodayHeroCard extends StatelessWidget {
-  const _TodayHeroCard({
+class TodayHeroCard extends StatelessWidget {
+  const TodayHeroCard({
+    super.key,
     required this.data,
     required this.onTap,
     required this.onBurnedTap,

@@ -1,4 +1,5 @@
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/features/diet_programs/domain/diet_program.dart';
 
 /// Hive keys + helpers for the active diet plan and screening answers.
@@ -81,10 +82,11 @@ abstract final class DietPlanStorage {
     int? eatingWindowStartHour,
   }) async {
     if (!HiveService.isInitialized) return;
+    final now = DateTime.now().toIso8601String();
     await HiveService.settingsBox.put(activeProgramIdKey, id.value);
     await HiveService.settingsBox.put(
       startDateKey,
-      DateTime.now().toIso8601String(),
+      now,
     );
     if (eatingWindowStartHour != null) {
       await HiveService.settingsBox.put(
@@ -92,12 +94,33 @@ abstract final class DietPlanStorage {
         eatingWindowStartHour,
       );
     }
+    try {
+      await SyncEngine().enqueueChange(
+        table: 'user_diet_programs',
+        id: 'active_diet_program',
+        operation: SyncOperation.update,
+        data: {
+          'id': 'active_diet_program',
+          'program_id': id.value,
+          'start_date': now,
+          if (eatingWindowStartHour != null) 'eating_window_start_hour': eatingWindowStartHour,
+        },
+      );
+    } catch (_) {}
   }
 
   static Future<void> clearActiveProgram() async {
     if (!HiveService.isInitialized) return;
     await HiveService.settingsBox.delete(activeProgramIdKey);
     await HiveService.settingsBox.delete(startDateKey);
+    try {
+      await SyncEngine().enqueueChange(
+        table: 'user_diet_programs',
+        id: 'active_diet_program',
+        operation: SyncOperation.delete,
+        data: {'id': 'active_diet_program'},
+      );
+    } catch (_) {}
   }
 
   static Future<void> setEatingWindowStartHour(int hour) async {

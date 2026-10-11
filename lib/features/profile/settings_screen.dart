@@ -12,6 +12,7 @@ import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/features/auth/auth_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
+import 'package:vireo/core/constants/legal_urls.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
@@ -196,6 +197,38 @@ class SettingsScreen extends ConsumerWidget {
             title: Text(l10n.paywallTitle),
             subtitle: Text(l10n.settingsManageSubscription),
             onTap: () => openPaywall(context),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              Localizations.localeOf(context).languageCode.startsWith('ar') ? 'الشروط والسياسات القانونية' : 'Legal & Compliance',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.description_outlined),
+            title: Text(Localizations.localeOf(context).languageCode.startsWith('ar') ? 'شروط الاستخدام' : 'Terms of Use'),
+            trailing: const Icon(Icons.open_in_new_rounded, size: 18),
+            onTap: () => LegalUrls.openTerms(context),
+          ),
+          ListTile(
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: Text(Localizations.localeOf(context).languageCode.startsWith('ar') ? 'سياسة الخصوصية' : 'Privacy Policy'),
+            trailing: const Icon(Icons.open_in_new_rounded, size: 18),
+            onTap: () => LegalUrls.openPrivacy(context),
+          ),
+          ListTile(
+            leading: const Icon(Icons.health_and_safety_outlined),
+            title: Text(Localizations.localeOf(context).languageCode.startsWith('ar') ? 'إخلاء المسؤولية الطبية' : 'Medical Disclaimer'),
+            subtitle: Text(
+              Localizations.localeOf(context).languageCode.startsWith('ar')
+                  ? 'تطبيق للعافية ونمط الحياة — ليس بديلاً عن الطبيب'
+                  : 'Wellness app — not a substitute for medical advice',
+              style: TextStyle(fontSize: 12, color: colors.textMute),
+            ),
+            trailing: const Icon(Icons.open_in_new_rounded, size: 18),
+            onTap: () => LegalUrls.openMedicalDisclaimer(context),
           ),
           const Divider(),
           auth.when(

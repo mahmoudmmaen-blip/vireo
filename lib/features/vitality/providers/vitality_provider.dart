@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
@@ -105,6 +106,16 @@ class VitalityDailyLogNotifier extends Notifier<VitalityDailyLog> {
     if (!HiveService.isInitialized) return;
     try {
       await HiveService.cacheBox.put(_vitalityLogKey, log.toJson());
+      await ref.read(syncEngineProvider).enqueueChange(
+            table: 'vitality_daily_logs',
+            id: 'vitality_${log.dateKey}',
+            operation: SyncOperation.update,
+            data: {
+              'id': 'vitality_${log.dateKey}',
+              'date': log.dateKey,
+              ...log.toJson(),
+            },
+          );
     } catch (_) {}
   }
 }

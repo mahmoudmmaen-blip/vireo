@@ -1,6 +1,7 @@
 import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/features/activity/domain/outdoor_workout_models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,6 +28,23 @@ class OutdoorWorkoutRepository {
       _outdoorWorkoutsKey,
       next.map((s) => s.toJson()).toList(),
     );
+    try {
+      await SyncEngine().enqueueChange(
+        table: 'gps_workouts',
+        id: session.id,
+        operation: SyncOperation.insert,
+        data: {
+          'id': session.id,
+          'type': session.type.value,
+          'started_at': session.startedAt.toUtc().toIso8601String(),
+          'ended_at': session.endedAt.toUtc().toIso8601String(),
+          'distance_m': session.distanceMeters,
+          'duration_s': session.durationSeconds,
+          'calories': session.caloriesBurned,
+          'payload': session.toJson(),
+        },
+      );
+    } catch (_) {}
   }
 
   OutdoorWorkoutSession? byId(String id) {

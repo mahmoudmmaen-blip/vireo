@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:vireo/core/constants/legal_urls.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/revenue_cat_service.dart';
@@ -37,16 +37,6 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   SubscriptionPlanId _selected = SubscriptionPlanId.annual;
   var _purchasing = false;
   var _restoring = false;
-
-  static const _termsUrl = 'https://vireo.app/terms';
-  static const _privacyUrl = 'https://vireo.app/privacy';
-
-  Future<void> _openUrl(String url) async {
-    final uri = Uri.parse(url);
-    try {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } catch (_) {}
-  }
 
   Future<void> _purchase() async {
     final l10n = AppLocalizations.of(context);
@@ -600,12 +590,13 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               ),
               const SizedBox(height: 8),
 
-              // ── TERMS + PRIVACY LINKS ──
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              // ── TERMS + PRIVACY + MEDICAL DISCLAIMER LINKS ──
+              Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () => _openUrl(_termsUrl),
+                    onTap: () => LegalUrls.openTerms(context),
                     child: Text(
                       isAr ? 'الشروط والأحكام' : 'Terms of Service',
                       style: TextStyle(
@@ -616,13 +607,28 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
                     child: Text('·', style: TextStyle(color: colors.textMute)),
                   ),
                   GestureDetector(
-                    onTap: () => _openUrl(_privacyUrl),
+                    onTap: () => LegalUrls.openPrivacy(context),
                     child: Text(
                       isAr ? 'سياسة الخصوصية' : 'Privacy Policy',
+                      style: TextStyle(
+                        fontSize: 11.5,
+                        color: colors.textMute,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: Text('·', style: TextStyle(color: colors.textMute)),
+                  ),
+                  GestureDetector(
+                    onTap: () => LegalUrls.openMedicalDisclaimer(context),
+                    child: Text(
+                      isAr ? 'إخلاء المسؤولية الطبية' : 'Medical Disclaimer',
                       style: TextStyle(
                         fontSize: 11.5,
                         color: colors.textMute,

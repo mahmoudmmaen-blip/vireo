@@ -1,5 +1,6 @@
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/data/models/progress_models.dart';
 
 class ProgressRepository {
@@ -104,6 +105,19 @@ class ProgressRepository {
         : <Map<String, dynamic>>[];
     list.add(entry.toJson());
     await HiveService.cacheBox.put(_weightCacheKey, list);
+
+    try {
+      await SyncEngine().enqueueChange(
+        table: 'weight_logs',
+        id: entry.id,
+        operation: SyncOperation.insert,
+        data: {
+          'id': entry.id,
+          'weight_kg': weightKg,
+          'logged_at': at.toUtc().toIso8601String(),
+        },
+      );
+    } catch (_) {}
   }
 
   Future<List<AdherenceWeek>> fetchAdherenceWeeks({int weeks = 8}) async {

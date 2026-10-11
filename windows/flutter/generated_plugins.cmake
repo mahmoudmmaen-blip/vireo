@@ -9,6 +9,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   geolocator_windows
   pdfx
   permission_handler_windows
+  sentry_flutter
   speech_to_text_windows
   url_launcher_windows
 )

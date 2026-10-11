@@ -1,4 +1,5 @@
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/features/measurements/application/measurement_calculators.dart';
 import 'package:vireo/features/measurements/domain/body_measurement.dart';
@@ -32,6 +33,15 @@ class MeasurementRepositoryImpl implements IMeasurementRepository {
     if (!HiveService.isInitialized) return;
     try {
       await HiveService.bodyMeasurementsBox.put(enriched.id, enriched.toJson());
+      await SyncEngine().enqueueChange(
+        table: 'body_measurements',
+        id: enriched.id,
+        operation: SyncOperation.insert,
+        data: {
+          'id': enriched.id,
+          'payload': enriched.toJson(),
+        },
+      );
     } catch (_) {
       rethrow;
     }
@@ -42,6 +52,12 @@ class MeasurementRepositoryImpl implements IMeasurementRepository {
     if (!HiveService.isInitialized) return;
     try {
       await HiveService.bodyMeasurementsBox.delete(id);
+      await SyncEngine().enqueueChange(
+        table: 'body_measurements',
+        id: id,
+        operation: SyncOperation.delete,
+        data: {'id': id},
+      );
     } catch (_) {
       rethrow;
     }

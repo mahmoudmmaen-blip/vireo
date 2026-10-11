@@ -1,12 +1,17 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/utils/connectivity_check.dart';
+import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
+import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/diary/screens/diary_screen.dart';
 import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
 import 'package:vireo/features/diet_programs/screens/diet_quiz_screen.dart';
@@ -44,7 +49,7 @@ class MainShell extends ConsumerStatefulWidget {
   ConsumerState<MainShell> createState() => _MainShellState();
 }
 
-class _MainShellState extends ConsumerState<MainShell> {
+class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserver {
   static const _screens = <Widget>[
     HomeScreen(),
     WorkoutScreen(),
@@ -55,6 +60,51 @@ class _MainShellState extends ConsumerState<MainShell> {
   ];
 
   bool _offeredDietQuiz = false;
+  Timer? _connectivityPollTimer;
+  bool _wasConnected = true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _triggerSyncPull();
+      _startConnectivityWatcher();
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _connectivityPollTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _triggerSyncPull();
+    }
+  }
+
+  void _triggerSyncPull() {
+    final auth = ref.read(authProvider).valueOrNull;
+    final userId = auth?.user?.id;
+    if (userId != null && !auth!.isGuest) {
+      ref.read(syncEngineProvider).pullChanges(userId);
+    }
+  }
+
+  void _startConnectivityWatcher() {
+    _connectivityPollTimer?.cancel();
+    _connectivityPollTimer = Timer.periodic(const Duration(seconds: 15), (_) async {
+      final isConnected = await hasNetworkConnection();
+      if (isConnected && !_wasConnected) {
+        ref.read(syncEngineProvider).pushQueue();
+      }
+      _wasConnected = isConnected;
+    });
+  }
 
   @override
   void didChangeDependencies() {

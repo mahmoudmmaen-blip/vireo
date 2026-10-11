@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:vireo/core/config/app_config.dart';
 
 /// Crash and error monitoring abstraction.
@@ -34,8 +35,20 @@ abstract final class CrashMonitoringService {
     if (kDebugMode) {
       debugPrint('[CrashMonitoring ERROR] reason: $reason, fatal: $fatal, err: $error');
     }
-    // In production builds with Sentry DSN, sentry_flutter captures this event:
-    // Sentry.captureException(error, stackTrace: stackTrace, tag: {'environment': AppConfig.appEnvironment});
+
+    try {
+      await Sentry.captureException(
+        error,
+        stackTrace: stackTrace,
+        withScope: (scope) {
+          if (reason != null) {
+            scope.setTag('reason', reason);
+          }
+          scope.setTag('environment', AppConfig.appEnvironment);
+          scope.setTag('fatal', fatal.toString());
+        },
+      );
+    } catch (_) {}
   }
 
   /// Breadcrumbs for app flow (no health data allowed).
@@ -44,5 +57,14 @@ abstract final class CrashMonitoringService {
     if (kDebugMode) {
       debugPrint('[CrashMonitoring Breadcrumb] ($category) $message');
     }
+    try {
+      Sentry.addBreadcrumb(
+        Breadcrumb(
+          message: message,
+          category: category,
+          level: SentryLevel.info,
+        ),
+      );
+    } catch (_) {}
   }
 }

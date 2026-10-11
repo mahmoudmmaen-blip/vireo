@@ -22,6 +22,33 @@ This document details every Health Connect permission requested by Vireo, along 
 - **Handling Denials:**  
   Estimated based on step count and user height.
 
+### 3. `READ_WEIGHT`
+- **Permission Name:** `android.permission.health.READ_WEIGHT`
+- **User-Facing Rationale:**  
+  "Used to sync your body weight logs with Health Connect, track weight progress over time, and adjust your personalized calorie and macro targets."
+- **Why It is Essential:**  
+  Permits seamless body weight tracking and calibration of daily metabolic burn.
+- **Handling Denials:**  
+  User can manually log weight entries directly inside Vireo.
+
+### 4. `READ_BODY_FAT`
+- **Permission Name:** `android.permission.health.READ_BODY_FAT`
+- **User-Facing Rationale:**  
+  "Used to import body fat percentage from smart scales and InBody body composition scans."
+- **Why It is Essential:**  
+  Provides accurate body fat tracking and fine-tunes lean mass nutrition recommendations without manual entry.
+- **Handling Denials:**  
+  Falls back to manual entry or in-app InBody OCR scan parsing.
+
+### 5. `READ_LEAN_BODY_MASS`
+- **Permission Name:** `android.permission.health.READ_LEAN_BODY_MASS`
+- **User-Facing Rationale:**  
+  "Used to read lean body mass and skeletal muscle mass from smart scales or Health Connect-connected apps."
+- **Why It is Essential:**  
+  Essential for calculating protein intake goals (e.g. 1.6 - 2.2g per kg of lean mass) and monitoring muscle preservation during fat-loss deficits.
+- **Handling Denials:**  
+  Falls back to estimating lean body mass from height/weight or manual InBody report entry.
+
 ---
 
 ## Policy Compliance Check

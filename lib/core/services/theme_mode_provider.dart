@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 
 const _themeModeKey = 'theme_mode';
 
@@ -26,6 +27,18 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
       ThemeMode.system => 'system',
     };
     await HiveService.settingsBox.put(_themeModeKey, value);
+    try {
+      await ref.read(syncEngineProvider).enqueueChange(
+            table: 'user_settings',
+            id: _themeModeKey,
+            operation: SyncOperation.update,
+            data: {
+              'id': _themeModeKey,
+              'key': _themeModeKey,
+              'value': value,
+            },
+          );
+    } catch (_) {}
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 
 const _todayPlanChecksKey = 'today_plan_checks';
 
@@ -44,10 +45,23 @@ class TodayPlanChecksNotifier extends Notifier<Set<String>> {
 
   Future<void> _persist(Set<String> ids) async {
     if (!HiveService.isInitialized) return;
+    final day = _todayDateKey();
     await HiveService.cacheBox.put(_todayPlanChecksKey, {
-      'date': _todayDateKey(),
+      'date': day,
       'checked': ids.toList(),
     });
+    try {
+      await ref.read(syncEngineProvider).enqueueChange(
+            table: 'today_plan_completions',
+            id: 'plan_$day',
+            operation: SyncOperation.update,
+            data: {
+              'id': 'plan_$day',
+              'date': day,
+              'checked': ids.toList(),
+            },
+          );
+    } catch (_) {}
   }
 }
 

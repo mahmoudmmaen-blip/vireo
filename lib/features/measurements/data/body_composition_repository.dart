@@ -1,6 +1,7 @@
 import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/features/measurements/domain/body_composition_report.dart';
 
 const _hiveKey = 'body_composition_reports_v1';
@@ -77,6 +78,15 @@ class BodyCompositionRepository {
     } catch (e) {
       BootLog.warn('body_composition remote save failed', e);
     }
+
+    try {
+      await SyncEngine().enqueueChange(
+        table: 'body_composition',
+        id: report.id,
+        operation: SyncOperation.update,
+        data: report.toJson(),
+      );
+    } catch (_) {}
   }
 
   Future<void> delete(String id) async {
@@ -92,6 +102,15 @@ class BodyCompositionRepository {
     } catch (e) {
       BootLog.warn('body_composition delete failed', e);
     }
+
+    try {
+      await SyncEngine().enqueueChange(
+        table: 'body_composition',
+        id: id,
+        operation: SyncOperation.delete,
+        data: {'id': id},
+      );
+    } catch (_) {}
   }
 
   List<BodyCompositionReport> _loadLocal() {

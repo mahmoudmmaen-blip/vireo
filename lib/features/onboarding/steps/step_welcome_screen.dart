@@ -7,6 +7,7 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/constants/legal_urls.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
@@ -51,39 +52,92 @@ class _StepWelcomeScreenState extends ConsumerState<StepWelcomeScreen> {
       stepIndex: 0,
       stepCount: OnboardingUiState.stepCount,
       showAppBar: false,
-      bottomWidget: Pressable(
-        onTap: _start,
-        child: Container(
-          height: 54,
-          decoration: BoxDecoration(
-            color: colors.ember,
-            borderRadius: BorderRadius.circular(VRadius.md),
-            boxShadow: [
-              BoxShadow(
-                color: colors.ember.withValues(alpha: 0.35),
-                blurRadius: 18,
-                offset: const Offset(0, 6),
+      bottomWidget: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Pressable(
+            onTap: _start,
+            child: Container(
+              height: 54,
+              decoration: BoxDecoration(
+                color: colors.ember,
+                borderRadius: BorderRadius.circular(VRadius.md),
+                boxShadow: [
+                  BoxShadow(
+                    color: colors.ember.withValues(alpha: 0.35),
+                    blurRadius: 18,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
               ),
-            ],
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    l10n.continueButton,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 20),
+                ],
+              ),
+            ),
           ),
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          const SizedBox(height: 10),
+          Wrap(
+            alignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Text(
-                l10n.continueButton,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 0.2,
+              GestureDetector(
+                onTap: () => LegalUrls.openTerms(context),
+                child: Text(
+                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'الشروط' : 'Terms',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colors.textMute,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
-              const SizedBox(width: 8),
-              const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: Text('·', style: TextStyle(color: colors.textMute, fontSize: 11)),
+              ),
+              GestureDetector(
+                onTap: () => LegalUrls.openPrivacy(context),
+                child: Text(
+                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'الخصوصية' : 'Privacy',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colors.textMute,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: Text('·', style: TextStyle(color: colors.textMute, fontSize: 11)),
+              ),
+              GestureDetector(
+                onTap: () => LegalUrls.openMedicalDisclaimer(context),
+                child: Text(
+                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'إخلاء المسؤولية الطبية' : 'Medical Disclaimer',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colors.textMute,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
             ],
           ),
-        ),
+        ],
       ),
       child: Column(
         children: [

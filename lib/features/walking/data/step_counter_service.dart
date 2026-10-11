@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:vireo/core/services/health_steps_service.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
 import 'package:vireo/features/walking/data/pedometer_stream_stub.dart'
     if (dart.library.io) 'package:vireo/features/walking/data/pedometer_stream_io.dart';
@@ -89,8 +90,9 @@ abstract final class StepCounterService {
   }
 
   static Future<void> saveTodayToHistory(int steps) async {
+    final day = dateKey();
     final history = readHistory();
-    history[dateKey()] = steps;
+    history[day] = steps;
     // Keep ~60 days.
     if (history.length > 60) {
       final keys = history.keys.toList()..sort();
@@ -99,6 +101,18 @@ abstract final class StepCounterService {
       }
     }
     await _writeHistory(history);
+    try {
+      await SyncEngine().enqueueChange(
+        table: 'daily_steps_history',
+        id: 'steps_$day',
+        operation: SyncOperation.update,
+        data: {
+          'id': 'steps_$day',
+          'day': day,
+          'steps': steps,
+        },
+      );
+    } catch (_) {}
   }
 
   static List<DailyStepCount> last7DaysFromHistory({int todaySteps = 0}) {

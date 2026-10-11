@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 
 const _aiMealLogKey = 'ai_meal_logs';
@@ -54,12 +55,28 @@ class AiMealLogNotifier extends Notifier<List<AiMealLogEntry>> {
     final next = [entry, ...state];
     state = next;
     await _persist(next);
+    await ref.read(syncEngineProvider).enqueueChange(
+          table: 'ai_nutrition_scans',
+          id: entry.id,
+          operation: SyncOperation.insert,
+          data: {
+            'id': entry.id,
+            'logged_at': entry.loggedAt.toIso8601String(),
+            'payload': entry.toJson(),
+          },
+        );
   }
 
   Future<void> remove(String id) async {
     final next = state.where((e) => e.id != id).toList();
     state = next;
     await _persist(next);
+    await ref.read(syncEngineProvider).enqueueChange(
+          table: 'ai_nutrition_scans',
+          id: id,
+          operation: SyncOperation.delete,
+          data: {'id': id},
+        );
   }
 
   Future<void> _persist(List<AiMealLogEntry> entries) async {

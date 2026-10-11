@@ -1,7 +1,29 @@
+import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hive/hive.dart';
+import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/sync_engine.dart';
 
 void main() {
+  late Directory tempDir;
+
+  setUp(() async {
+    tempDir = await Directory.systemTemp.createTemp('vireo_sync_test_');
+    Hive.init(tempDir.path);
+    await Hive.openBox<dynamic>(HiveService.settingsBoxName);
+    await Hive.openBox<dynamic>(HiveService.cacheBoxName);
+    await Hive.openBox<dynamic>(HiveService.bodyMeasurementsBoxName);
+    HiveService.setInitializedForTesting(true);
+  });
+
+  tearDown(() async {
+    HiveService.setInitializedForTesting(false);
+    await Hive.close();
+    try {
+      await tempDir.delete(recursive: true);
+    } catch (_) {}
+  });
+
   group('SyncEngine Queue and Conflict Resolution Rules', () {
     test('SyncQueueItem serializes and deserializes accurately', () {
       final now = DateTime.parse('2026-10-11T20:00:00.000Z');
@@ -50,6 +72,53 @@ void main() {
 
       expect(deletedData['deleted_at'], isNotNull);
       expect(DateTime.parse(deletedData['deleted_at'] as String), deleteTime);
+    });
+
+    test('Queue persistence persists items to Hive and coalesces same record updates', () async {
+      final engine = SyncEngine();
+
+      await engine.enqueueChange(
+        table: 'weight_logs',
+        id: 'w_1',
+        operation: SyncOperation.insert,
+        data: {'weight_kg': 80.5},
+      );
+
+      expect(engine.pendingCount, 1);
+      var queue = engine.getQueue();
+      expect(queue.first.id, 'w_1');
+      expect(queue.first.data['weight_kg'], 80.5);
+
+      // Update same record -> coalesces in queue
+      await engine.enqueueChange(
+        table: 'weight_logs',
+        id: 'w_1',
+        operation: SyncOperation.update,
+        data: {'weight_kg': 81.0},
+      );
+
+      expect(engine.pendingCount, 1);
+      queue = engine.getQueue();
+      expect(queue.first.id, 'w_1');
+      expect(queue.first.data['weight_kg'], 81.0);
+      expect(queue.first.operation, SyncOperation.update);
+    });
+
+    test('Soft delete enqueues record with deleted_at and delete operation', () async {
+      final engine = SyncEngine();
+
+      await engine.enqueueChange(
+        table: 'body_measurements',
+        id: 'bm_123',
+        operation: SyncOperation.delete,
+        data: {'id': 'bm_123'},
+      );
+
+      expect(engine.pendingCount, 1);
+      final item = engine.getQueue().first;
+      expect(item.operation, SyncOperation.delete);
+      expect(item.data['deleted_at'], isNotNull);
+      expect(item.data['updated_at'], isNotNull);
     });
   });
 }

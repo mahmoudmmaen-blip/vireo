@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 
@@ -64,6 +66,8 @@ class SyncEngine {
     final iso = HiveService.settingsBox.get(_lastSyncTimeKey) as String?;
     return iso != null ? DateTime.tryParse(iso) : null;
   }
+
+  int get pendingCount => getQueue().length;
 
   List<SyncQueueItem> getQueue() {
     if (!HiveService.isInitialized) return [];
@@ -156,7 +160,8 @@ class SyncEngine {
     status.value = SyncStatus.synced;
   }
 
-  /// Pull remote changes and resolve conflicts by last-write-wins (updated_at).
+  /// Pull remote changes for every store in DATA_MAP.md and resolve conflicts
+  /// by last-write-wins (updated_at) with soft deletes (deleted_at).
   Future<void> pullChanges(String userId) async {
     if (!SupabaseService.isInitialized) {
       status.value = SyncStatus.offline;
@@ -165,41 +170,448 @@ class SyncEngine {
 
     status.value = SyncStatus.syncing;
     try {
-      // Sync water logs as primary example
-      final remoteWater = await SupabaseService.client
-          .from('water_logs')
-          .select()
-          .eq('user_id', userId)
-          .isFilter('deleted_at', null);
-
-      if (remoteWater.isNotEmpty) {
-        final todayStr = DateTime.now().toIso8601String().substring(0, 10);
-        final matches = remoteWater.where((w) => w['day'] == todayStr);
-        final todayEntry = matches.isNotEmpty ? matches.first as Map<String, dynamic>? : null;
-        if (todayEntry != null && HiveService.isInitialized) {
-          final localData = HiveService.cacheBox.get('water_tracker') as Map?;
-          final localUpdated = localData?['updated_at'] != null
-              ? DateTime.tryParse(localData!['updated_at'] as String)
-              : null;
-          final remoteUpdated = DateTime.tryParse(todayEntry['updated_at'] as String? ?? '');
-
-          // Last-write-wins conflict rule
-          if (remoteUpdated != null &&
-              (localUpdated == null || remoteUpdated.isAfter(localUpdated))) {
-            await HiveService.cacheBox.put('water_tracker', {
-              'current': todayEntry['amount_ml'],
-              'goal': todayEntry['goal_ml'],
-              'updated_at': remoteUpdated.toIso8601String(),
-            });
-          }
-        }
-      }
+      await _pullWater(userId);
+      await _pullAiNutrition(userId);
+      await _pullDailySteps(userId);
+      await _pullGpsWorkouts(userId);
+      await _pullWeightLogs(userId);
+      await _pullBodyMeasurements(userId);
+      await _pullBodyComposition(userId);
+      await _pullDietPrograms(userId);
+      await _pullTodayPlan(userId);
+      await _pullVitalityLogs(userId);
+      await _pullUserSettings(userId);
 
       await HiveService.settingsBox
           .put(_lastSyncTimeKey, DateTime.now().toIso8601String());
       status.value = SyncStatus.synced;
-    } catch (_) {
+    } catch (e) {
+      BootLog.warn('SyncEngine.pullChanges failed', e);
       status.value = SyncStatus.error;
+    }
+  }
+
+  Future<void> _pullWater(String userId) async {
+    final rows = await SupabaseService.client
+        .from('water_logs')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final todayStr = DateTime.now().toIso8601String().substring(0, 10);
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      if (map['day'] != todayStr) continue;
+
+      if (map['deleted_at'] != null) {
+        await HiveService.cacheBox.delete('water_tracker');
+        continue;
+      }
+
+      final localData = HiveService.cacheBox.get('water_tracker') as Map?;
+      final localUpdated = localData?['updated_at'] != null
+          ? DateTime.tryParse(localData!['updated_at'] as String)
+          : null;
+      final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+
+      if (remoteUpdated != null &&
+          (localUpdated == null || remoteUpdated.isAfter(localUpdated))) {
+        await HiveService.cacheBox.put('water_tracker', {
+          'date': todayStr,
+          'ml': map['amount_ml'] ?? 0,
+          'goal': map['goal_ml'] ?? 2500,
+          'updated_at': remoteUpdated.toIso8601String(),
+        });
+      }
+    }
+  }
+
+  Future<void> _pullAiNutrition(String userId) async {
+    final rows = await SupabaseService.client
+        .from('ai_nutrition_scans')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final raw = HiveService.cacheBox.get('ai_meal_logs');
+    final localList = (raw is List)
+        ? raw.map((e) => Map<String, dynamic>.from(e as Map)).toList()
+        : <Map<String, dynamic>>[];
+
+    var changed = false;
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      final id = map['id']?.toString() ?? '';
+      if (id.isEmpty) continue;
+
+      final isDeleted = map['deleted_at'] != null;
+      final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+
+      final localIdx = localList.indexWhere((e) => e['id'] == id);
+      if (isDeleted) {
+        if (localIdx != -1) {
+          localList.removeAt(localIdx);
+          changed = true;
+        }
+        continue;
+      }
+
+      if (localIdx == -1) {
+        // Parse payload
+        final payload = map['payload'] is Map ? map['payload'] as Map : null;
+        if (payload != null) {
+          localList.add(Map<String, dynamic>.from(payload));
+          changed = true;
+        }
+      } else if (remoteUpdated != null) {
+        final localUpdated = DateTime.tryParse(localList[localIdx]['updated_at'] as String? ?? '');
+        if (localUpdated == null || remoteUpdated.isAfter(localUpdated)) {
+          final payload = map['payload'] is Map ? map['payload'] as Map : null;
+          if (payload != null) {
+            localList[localIdx] = Map<String, dynamic>.from(payload);
+            changed = true;
+          }
+        }
+      }
+    }
+
+    if (changed) {
+      await HiveService.cacheBox.put('ai_meal_logs', localList);
+    }
+  }
+
+  Future<void> _pullDailySteps(String userId) async {
+    final rows = await SupabaseService.client
+        .from('daily_steps_history')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final raw = HiveService.settingsBox.get('step_history');
+    final history = (raw is Map) ? Map<String, int>.from(raw) : <String, int>{};
+
+    var changed = false;
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      final day = map['day']?.toString() ?? '';
+      if (day.isEmpty) continue;
+
+      if (map['deleted_at'] != null) {
+        if (history.containsKey(day)) {
+          history.remove(day);
+          changed = true;
+        }
+        continue;
+      }
+
+      final steps = (map['steps'] as num?)?.toInt() ?? 0;
+      final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+      // LWW
+      final existingSteps = history[day];
+      if (existingSteps == null || (remoteUpdated != null)) {
+        history[day] = steps;
+        changed = true;
+      }
+    }
+
+    if (changed) {
+      await HiveService.settingsBox.put('step_history', history);
+    }
+  }
+
+  Future<void> _pullGpsWorkouts(String userId) async {
+    final rows = await SupabaseService.client
+        .from('gps_workouts')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final raw = HiveService.cacheBox.get('outdoor_workout_sessions');
+    final localList = (raw is List)
+        ? raw.map((e) => Map<String, dynamic>.from(e as Map)).toList()
+        : <Map<String, dynamic>>[];
+
+    var changed = false;
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      final id = map['id']?.toString() ?? '';
+      if (id.isEmpty) continue;
+
+      final isDeleted = map['deleted_at'] != null;
+      final localIdx = localList.indexWhere((e) => e['id'] == id);
+
+      if (isDeleted) {
+        if (localIdx != -1) {
+          localList.removeAt(localIdx);
+          changed = true;
+        }
+        continue;
+      }
+
+      final payload = map['payload'] is Map ? map['payload'] as Map : null;
+      if (payload == null) continue;
+
+      if (localIdx == -1) {
+        localList.add(Map<String, dynamic>.from(payload));
+        changed = true;
+      } else {
+        final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+        final localUpdated = DateTime.tryParse(localList[localIdx]['updated_at'] as String? ?? '');
+        if (remoteUpdated != null && (localUpdated == null || remoteUpdated.isAfter(localUpdated))) {
+          localList[localIdx] = Map<String, dynamic>.from(payload);
+          changed = true;
+        }
+      }
+    }
+
+    if (changed) {
+      await HiveService.cacheBox.put('outdoor_workout_sessions', localList);
+    }
+  }
+
+  Future<void> _pullWeightLogs(String userId) async {
+    final rows = await SupabaseService.client
+        .from('weight_logs')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final raw = HiveService.cacheBox.get('weight_logs_cache');
+    final localList = (raw is List)
+        ? raw.map((e) => Map<String, dynamic>.from(e as Map)).toList()
+        : <Map<String, dynamic>>[];
+
+    var changed = false;
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      final id = map['id']?.toString() ?? '';
+      if (id.isEmpty) continue;
+
+      final isDeleted = map['deleted_at'] != null;
+      final localIdx = localList.indexWhere((e) => e['id'] == id);
+
+      if (isDeleted) {
+        if (localIdx != -1) {
+          localList.removeAt(localIdx);
+          changed = true;
+        }
+        continue;
+      }
+
+      final item = {
+        'id': id,
+        'weight_kg': (map['weight_kg'] as num?)?.toDouble() ?? 70.0,
+        'logged_at': map['logged_at'] ?? DateTime.now().toIso8601String(),
+        'updated_at': map['updated_at'] ?? DateTime.now().toIso8601String(),
+      };
+
+      if (localIdx == -1) {
+        localList.add(item);
+        changed = true;
+      } else {
+        final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+        final localUpdated = DateTime.tryParse(localList[localIdx]['updated_at'] as String? ?? '');
+        if (remoteUpdated != null && (localUpdated == null || remoteUpdated.isAfter(localUpdated))) {
+          localList[localIdx] = item;
+          changed = true;
+        }
+      }
+    }
+
+    if (changed) {
+      await HiveService.cacheBox.put('weight_logs_cache', localList);
+    }
+  }
+
+  Future<void> _pullBodyMeasurements(String userId) async {
+    final rows = await SupabaseService.client
+        .from('body_measurements')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final box = HiveService.bodyMeasurementsBox;
+
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      final id = map['id']?.toString() ?? '';
+      if (id.isEmpty) continue;
+
+      if (map['deleted_at'] != null) {
+        await box.delete(id);
+        continue;
+      }
+
+      final payload = map['payload'] is Map ? map['payload'] as Map : null;
+      if (payload != null) {
+        final local = box.get(id) as Map?;
+        final localUpdated = local?['updated_at'] != null
+            ? DateTime.tryParse(local!['updated_at'] as String)
+            : null;
+        final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+
+        if (remoteUpdated != null && (localUpdated == null || remoteUpdated.isAfter(localUpdated))) {
+          await box.put(id, Map<String, dynamic>.from(payload));
+        }
+      }
+    }
+  }
+
+  Future<void> _pullBodyComposition(String userId) async {
+    final rows = await SupabaseService.client
+        .from('body_composition')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final raw = HiveService.cacheBox.get('body_composition_reports_v1');
+    final localList = (raw is List)
+        ? raw.map((e) => Map<String, dynamic>.from(e as Map)).toList()
+        : <Map<String, dynamic>>[];
+
+    var changed = false;
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      final id = map['id']?.toString() ?? '';
+      if (id.isEmpty) continue;
+
+      final isDeleted = map['deleted_at'] != null;
+      final localIdx = localList.indexWhere((e) => e['id'] == id);
+
+      if (isDeleted) {
+        if (localIdx != -1) {
+          localList.removeAt(localIdx);
+          changed = true;
+        }
+        continue;
+      }
+
+      if (localIdx == -1) {
+        localList.add(map);
+        changed = true;
+      } else {
+        final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+        final localUpdated = DateTime.tryParse(localList[localIdx]['updated_at'] as String? ?? '');
+        if (remoteUpdated != null && (localUpdated == null || remoteUpdated.isAfter(localUpdated))) {
+          localList[localIdx] = map;
+          changed = true;
+        }
+      }
+    }
+
+    if (changed) {
+      await HiveService.cacheBox.put('body_composition_reports_v1', localList);
+    }
+  }
+
+  Future<void> _pullDietPrograms(String userId) async {
+    final rows = await SupabaseService.client
+        .from('user_diet_programs')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      if (map['deleted_at'] != null) {
+        await HiveService.settingsBox.delete('diet_active_program_id');
+        continue;
+      }
+
+      final programId = map['program_id']?.toString();
+      final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+      if (programId != null && remoteUpdated != null) {
+        await HiveService.settingsBox.put('diet_active_program_id', programId);
+        if (map['start_date'] != null) {
+          await HiveService.settingsBox.put('diet_program_start_date', map['start_date'].toString());
+        }
+      }
+    }
+  }
+
+  Future<void> _pullTodayPlan(String userId) async {
+    final rows = await SupabaseService.client
+        .from('today_plan_completions')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final todayStr = DateTime.now().toIso8601String().substring(0, 10);
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      if (map['date'] != todayStr) continue;
+
+      if (map['deleted_at'] != null) {
+        await HiveService.cacheBox.delete('today_plan_checks');
+        continue;
+      }
+
+      final checked = map['checked'] is List ? List<String>.from(map['checked'] as List) : <String>[];
+      final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+      final local = HiveService.cacheBox.get('today_plan_checks') as Map?;
+      final localUpdated = local?['updated_at'] != null ? DateTime.tryParse(local!['updated_at'] as String) : null;
+
+      if (remoteUpdated != null && (localUpdated == null || remoteUpdated.isAfter(localUpdated))) {
+        await HiveService.cacheBox.put('today_plan_checks', {
+          'date': todayStr,
+          'checked': checked,
+          'updated_at': remoteUpdated.toIso8601String(),
+        });
+      }
+    }
+  }
+
+  Future<void> _pullVitalityLogs(String userId) async {
+    final rows = await SupabaseService.client
+        .from('vitality_daily_logs')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    final todayStr = DateTime.now().toIso8601String().substring(0, 10);
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      if (map['date'] != todayStr) continue;
+
+      if (map['deleted_at'] != null) {
+        await HiveService.cacheBox.delete('vitality_daily_log');
+        continue;
+      }
+
+      final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+      final local = HiveService.cacheBox.get('vitality_daily_log') as Map?;
+      final localUpdated = local?['updated_at'] != null ? DateTime.tryParse(local!['updated_at'] as String) : null;
+
+      if (remoteUpdated != null && (localUpdated == null || remoteUpdated.isAfter(localUpdated))) {
+        await HiveService.cacheBox.put('vitality_daily_log', {
+          ...map,
+          'updated_at': remoteUpdated.toIso8601String(),
+        });
+      }
+    }
+  }
+
+  Future<void> _pullUserSettings(String userId) async {
+    final rows = await SupabaseService.client
+        .from('user_settings')
+        .select()
+        .eq('user_id', userId);
+
+    if (rows.isEmpty || !HiveService.isInitialized) return;
+    for (final row in rows) {
+      final map = Map<String, dynamic>.from(row as Map);
+      final key = map['key']?.toString();
+      if (key == null) continue;
+
+      if (map['deleted_at'] != null) {
+        await HiveService.settingsBox.delete(key);
+        continue;
+      }
+
+      final remoteUpdated = DateTime.tryParse(map['updated_at'] as String? ?? '');
+      if (map.containsKey('value') && remoteUpdated != null) {
+        await HiveService.settingsBox.put(key, map['value']);
+      }
     }
   }
 
@@ -262,3 +674,8 @@ class SyncEngine {
     } catch (_) {}
   }
 }
+
+/// Global Riverpod provider for SyncEngine.
+final syncEngineProvider = Provider<SyncEngine>((ref) {
+  return SyncEngine();
+});

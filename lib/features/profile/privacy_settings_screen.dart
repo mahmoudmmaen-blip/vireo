@@ -6,10 +6,6 @@ import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 
-final syncEngineProvider = Provider<SyncEngine>((ref) {
-  return SyncEngine();
-});
-
 class PrivacySettingsScreen extends ConsumerStatefulWidget {
   const PrivacySettingsScreen({super.key});
 
@@ -63,6 +59,8 @@ class _PrivacySettingsScreenState extends ConsumerState<PrivacySettingsScreen> {
     final sync = ref.watch(syncEngineProvider);
     final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
     final backupPhotos = sync.isBackupPhotosEnabled;
+    final lastSync = sync.lastSyncTime;
+    final pendingCount = sync.pendingCount;
 
     return Scaffold(
       backgroundColor: colors.background,
@@ -84,7 +82,7 @@ class _PrivacySettingsScreenState extends ConsumerState<PrivacySettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  isArabic ? 'النسخ السحابي' : 'Cloud Backup & Sync',
+                  isArabic ? 'النسخ السحابي والمزامنة' : 'Cloud Backup & Sync',
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 const SizedBox(height: 8),
@@ -93,6 +91,55 @@ class _PrivacySettingsScreenState extends ConsumerState<PrivacySettingsScreen> {
                       ? 'يتم حفظ بياناتك محلياً أولاً ومزامنتها تلقائياً عند توفر الإنترنت.'
                       : 'Your data is written locally first and synced securely to the cloud when online.',
                   style: TextStyle(color: colors.textMute, fontSize: 12),
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: colors.background,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: colors.line),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            isArabic ? 'حالة المزامنة' : 'Sync Status',
+                            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            lastSync != null
+                                ? (isArabic
+                                    ? 'آخر مزامنة: ${lastSync.hour.toString().padLeft(2, '0')}:${lastSync.minute.toString().padLeft(2, '0')}'
+                                    : 'Last synced: ${lastSync.hour.toString().padLeft(2, '0')}:${lastSync.minute.toString().padLeft(2, '0')}')
+                                : (isArabic ? 'لم تتم المزامنة بعد' : 'Not synced yet'),
+                            style: TextStyle(color: colors.textMute, fontSize: 11),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: pendingCount > 0 ? colors.gold.withValues(alpha: 0.15) : colors.success.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          pendingCount > 0
+                              ? (isArabic ? '$pendingCount معلّق' : '$pendingCount pending')
+                              : (isArabic ? 'محدّث بالكامل' : 'All synced'),
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: pendingCount > 0 ? colors.gold : colors.success,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 12),
                 SwitchListTile.adaptive(

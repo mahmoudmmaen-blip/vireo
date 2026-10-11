@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/features/water/providers/water_cup_size_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 
@@ -89,10 +90,22 @@ class WaterTrackerNotifier extends Notifier<int> {
   Future<void> _persistAsync(int ml) async {
     if (!HiveService.isInitialized) return;
     try {
+      final day = _todayDateKey();
       await HiveService.cacheBox.put(_waterTrackerKey, {
-        'date': _todayDateKey(),
+        'date': day,
         'ml': ml,
       });
+      await ref.read(syncEngineProvider).enqueueChange(
+            table: 'water_logs',
+            id: 'water_$day',
+            operation: SyncOperation.update,
+            data: {
+              'id': 'water_$day',
+              'day': day,
+              'amount_ml': ml,
+              'goal_ml': goalMl,
+            },
+          );
     } catch (_) {}
   }
 }
