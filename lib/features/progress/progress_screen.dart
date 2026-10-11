@@ -20,6 +20,7 @@ import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
 import 'package:vireo/features/progress/widgets/weight_trend_chart_card.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/features/social/screens/social_hub_screen.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 
 class ProgressScreen extends ConsumerWidget {
@@ -28,6 +29,7 @@ class ProgressScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final locale = Localizations.localeOf(context).languageCode;
     final unit = ref.watch(unitPreferenceProvider);
     final logsAsync = ref.watch(weightLogsProvider);
     final goalAsync = ref.watch(weightGoalProvider);
@@ -167,6 +169,46 @@ class ProgressScreen extends ConsumerWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 10),
+              VireoCard(
+                onTap: () => SocialHubScreen.open(context),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF22C55E).withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.people_outline, color: Color(0xFF22C55E)),
+                    ),
+                    const SizedBox(width: VSpace.sm),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            locale.startsWith('ar') ? 'المجتمع والمنافسات' : 'Community & Challenges',
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                ),
+                          ),
+                          Text(
+                            locale.startsWith('ar')
+                                ? 'تنافس بالخطوات مع الأصدقاء والعائلة بأمان تام'
+                                : 'Step challenges with friends & family (privacy-first)',
+                            style: TextStyle(
+                              color: context.vireoColors.textMute,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(Icons.chevron_right, color: context.vireoColors.textMute),
+                  ],
+                ),
               ),
               const SizedBox(height: 16),
 

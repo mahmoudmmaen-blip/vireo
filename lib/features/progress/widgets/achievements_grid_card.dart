@@ -4,6 +4,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/progress/domain/achievement_badge.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
+import 'package:vireo/features/social/widgets/social_share_card_helper.dart';
 
 class AchievementsGridCard extends ConsumerWidget {
   const AchievementsGridCard({super.key});
@@ -132,6 +133,21 @@ class _BadgeItem extends StatelessWidget {
               ],
             ),
             actions: [
+              if (isUnlocked)
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    SocialShareCardHelper.showBadgeShareSheet(
+                      context: context,
+                      title: badge.title(locale),
+                      description: badge.desc(locale),
+                      icon: badge.icon,
+                      isArabic: locale.startsWith('ar'),
+                    );
+                  },
+                  icon: const Icon(Icons.share_outlined, size: 18),
+                  label: Text(locale.startsWith('ar') ? 'مشاركة البطاقة' : 'Share Card'),
+                ),
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
                 child: const Text('OK'),
