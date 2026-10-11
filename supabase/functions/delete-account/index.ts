@@ -24,6 +24,20 @@ const USER_OWNED_TABLES = [
   'fridge_scans',
   'user_recipe_history',
   'meal_plans',
+  'nutrition_logs',
+  'water_logs',
+  'daily_steps_history',
+  'gps_workouts',
+  'user_diet_programs',
+  'today_plan_completions',
+  'vitality_daily_logs',
+  'user_settings',
+  'daily_shared_stats',
+  'challenge_members',
+  'challenges',
+  'friendships',
+  'profiles_public',
+  'subscriptions',
 ] as const;
 
 Deno.serve(async (req) => {

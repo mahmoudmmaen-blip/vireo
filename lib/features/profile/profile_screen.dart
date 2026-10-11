@@ -20,6 +20,7 @@ import 'package:vireo/features/diet_programs/screens/diet_program_detail_screen.
 import 'package:vireo/features/diet_programs/screens/diet_programs_screen.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
 import 'package:vireo/features/profile/appearance_screen.dart';
+import 'package:vireo/features/profile/privacy_settings_screen.dart';
 import 'package:vireo/features/profile/settings_screen.dart';
 import 'package:vireo/features/profile/widgets/profile_body_metrics_sheet.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
@@ -130,6 +131,16 @@ class ProfileScreen extends ConsumerWidget {
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (_) => const NotificationSettingsScreen(),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.privacy_tip_outlined, color: context.vireoColors.ember),
+                    title: Text(locale.startsWith('ar') ? 'الخصوصية وإدارة البيانات' : 'Privacy & Data'),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const PrivacySettingsScreen(),
                       ),
                     ),
                   ),
@@ -258,6 +269,29 @@ class _ProfileHeaderCard extends ConsumerWidget {
             const SizedBox(height: 6),
             Text(memberSince, style: TextStyle(color: colors.textMute, fontSize: 12)),
           ],
+          const SizedBox(height: 6),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 6,
+                height: 6,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF22C55E),
+                  shape: BoxShape.circle,
+                ),
+              ),
+              const SizedBox(width: 6),
+              Text(
+                'Cloud Sync: Offline-Ready',
+                style: TextStyle(
+                  color: colors.textMute,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
