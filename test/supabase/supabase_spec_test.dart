@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vireo/core/config/app_config.dart';
+import 'package:vireo/core/services/catalog_seed_service.dart';
+import 'package:vireo/data/demo/exercise_demo_catalog.dart';
 
 void main() {
   late String completeMigration;
@@ -110,6 +112,29 @@ void main() {
         files.indexOf('20240822160000_vireo_complete_schema_rls.sql'),
         greaterThan(files.indexOf('20240822110000_core_schema.sql')),
       );
+    });
+
+    test('CatalogSeedService is read-only and falls back to bundled catalog', () async {
+      final source = File(
+        'lib/core/services/catalog_seed_service.dart',
+      ).readAsStringSync();
+      expect(source, isNot(contains('.insert(')));
+      expect(source, isNot(contains('.upsert(')));
+      expect(source, isNot(contains('.update(')));
+      expect(source, isNot(contains('.delete(')));
+
+      final exercises = await CatalogSeedService.loadExercises();
+      expect(exercises.length, ExerciseDemoCatalog.seedRows.length);
+    });
+
+    test('server migration seeds all 42 exercises', () {
+      final seedSql = File(
+        'supabase/migrations/20261011130000_seed_exercises_catalog.sql',
+      ).readAsStringSync();
+      for (final row in ExerciseDemoCatalog.seedRows) {
+        final id = row['id'] as String;
+        expect(seedSql, contains(id), reason: 'missing exercise $id in SQL seed');
+      }
     });
   });
 

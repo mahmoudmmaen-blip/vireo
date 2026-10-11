@@ -1,40 +1,54 @@
-import 'package:vireo/core/boot/boot_log.dart';
+import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/data/demo/exercise_demo_catalog.dart';
+import 'package:vireo/data/models/exercise.dart';
 
-/// Seeds global catalog tables via Supabase client when empty (no CLI required).
+/// Read-only loader for the shared exercise catalog.
+/// Clients must never write to global catalog tables; when the remote table is
+/// empty or unreachable, the app falls back to the bundled local exercises.
 abstract final class CatalogSeedService {
-  static const _minExercises = 40;
+  static const exercisesCacheKey = 'exercises_catalog';
 
   static Future<void> seedIfNeeded() async {
-    if (!SupabaseService.isInitialized) {
-      BootLog.step('CatalogSeedService skipped (Supabase offline)');
-      return;
-    }
-
-    try {
-      await _seedExercisesIfNeeded();
-    } catch (e) {
-      BootLog.warn('CatalogSeedService failed — continuing offline', e);
-    }
+    await loadExercises();
   }
 
-  static Future<void> _seedExercisesIfNeeded() async {
-    final existing = await SupabaseService.client
-        .from('exercises')
-        .select('id')
-        .limit(_minExercises);
-
-    final count = (existing as List).length;
-    if (count >= _minExercises) {
-      BootLog.step('CatalogSeedService exercises OK ($count rows)');
-      return;
+  static Future<List<Exercise>> loadExercises() async {
+    if (SupabaseService.isInitialized) {
+      try {
+        final rows = await SupabaseService.client.from('exercises').select();
+        final exercises = (rows as List<dynamic>)
+            .map(
+              (row) => Exercise.fromJson(
+                Map<String, dynamic>.from(row as Map),
+              ),
+            )
+            .toList();
+        if (exercises.isNotEmpty) {
+          if (HiveService.isInitialized) {
+            await HiveService.cacheBox.put(exercisesCacheKey, rows);
+          }
+          return exercises;
+        }
+        return ExerciseDemoCatalog.asExercises();
+      } catch (_) {
+        // Silent fallback when Supabase is unreachable.
+      }
     }
 
-    BootLog.step('CatalogSeedService seeding ${ExerciseDemoCatalog.seedRows.length} exercises');
-    await SupabaseService.client
-        .from('exercises')
-        .upsert(ExerciseDemoCatalog.seedRows, onConflict: 'id');
-    BootLog.ok('CatalogSeedService exercises seeded');
+    if (HiveService.isInitialized) {
+      final cached = HiveService.cacheBox.get(exercisesCacheKey);
+      if (cached is List && cached.isNotEmpty) {
+        return cached
+            .map(
+              (row) => Exercise.fromJson(
+                Map<String, dynamic>.from(row as Map),
+              ),
+            )
+            .toList();
+      }
+    }
+
+    return ExerciseDemoCatalog.asExercises();
   }
 }

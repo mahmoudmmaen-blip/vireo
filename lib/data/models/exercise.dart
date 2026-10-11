@@ -93,7 +93,7 @@ class Exercise {
 
     return Exercise(
       id: json['id'] as String,
-      name: json['name'] as String,
+      name: (json['name'] ?? json['name_en'] ?? '') as String,
       nameAr: json['name_ar'] as String?,
       targetMuscle: json['target_muscle'] as String,
       targetMuscleAr: json['target_muscle_ar'] as String?,

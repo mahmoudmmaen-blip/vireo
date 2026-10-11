@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/services/catalog_seed_service.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/core/utils/program_generator.dart';
@@ -13,32 +14,9 @@ class ExerciseRepository {
   const ExerciseRepository();
 
   static const _alternativesCachePrefix = 'exercise_alternatives_';
-  static const _exercisesCacheKey = 'exercises_catalog';
 
   Future<List<Exercise>> fetchAllExercises() async {
-    try {
-      if (SupabaseService.isInitialized) {
-        final rows = await SupabaseService.client.from('exercises').select();
-        final exercises = (rows as List<dynamic>)
-            .map((row) => Exercise.fromJson(Map<String, dynamic>.from(row)))
-            .toList();
-        if (exercises.isNotEmpty) {
-          await HiveService.cacheBox.put(_exercisesCacheKey, rows);
-          return exercises;
-        }
-      }
-    } catch (_) {
-      // Fall through to cached / demo data.
-    }
-
-    final cached = HiveService.cacheBox.get(_exercisesCacheKey);
-    if (cached is List && cached.isNotEmpty) {
-      return cached
-          .map((row) => Exercise.fromJson(Map<String, dynamic>.from(row)))
-          .toList();
-    }
-
-    return ExerciseDemoCatalog.asExercises();
+    return CatalogSeedService.loadExercises();
   }
 
   Future<List<Exercise>> fetchAlternatives({
@@ -69,24 +47,30 @@ class ExerciseRepository {
             .map((row) => Exercise.fromJson(Map<String, dynamic>.from(row)))
             .toList();
 
-        await HiveService.cacheBox.put(
-          '$_alternativesCachePrefix$targetMuscle',
-          rows,
-        );
-        return exercises;
+        if (exercises.isNotEmpty) {
+          if (HiveService.isInitialized) {
+            await HiveService.cacheBox.put(
+              '$_alternativesCachePrefix$targetMuscle',
+              rows,
+            );
+          }
+          return exercises;
+        }
       }
     } catch (_) {
       // Fall through to cached / demo data.
     }
 
-    final cached = HiveService.cacheBox.get(
-      '$_alternativesCachePrefix$targetMuscle',
-    );
-    if (cached is List) {
-      return cached
-          .map((row) => Exercise.fromJson(Map<String, dynamic>.from(row)))
-          .where((e) => e.id != excludeId && e.matchesEnvironment(environment))
-          .toList();
+    if (HiveService.isInitialized) {
+      final cached = HiveService.cacheBox.get(
+        '$_alternativesCachePrefix$targetMuscle',
+      );
+      if (cached is List && cached.isNotEmpty) {
+        return cached
+            .map((row) => Exercise.fromJson(Map<String, dynamic>.from(row)))
+            .where((e) => e.id != excludeId && e.matchesEnvironment(environment))
+            .toList();
+      }
     }
 
     return ExerciseDemoCatalog.asExercises()

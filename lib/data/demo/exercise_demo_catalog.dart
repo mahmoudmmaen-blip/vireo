@@ -1,6 +1,7 @@
 import 'package:vireo/data/models/exercise.dart';
 
-/// Local catalog of 20+ exercises for client-side Supabase seeding and offline fallback.
+/// Bundled local catalog of 42 exercises used as a fallback when the Supabase
+/// exercises table is empty or unreachable.
 abstract final class ExerciseDemoCatalog {
   static final List<Map<String, dynamic>> seedRows = [
     // Home — no equipment (8)
