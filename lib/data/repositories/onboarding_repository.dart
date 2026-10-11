@@ -11,6 +11,8 @@ class OnboardingRepository {
 
   static const onboardingCompleteKey = 'onboarding_complete';
   static const notificationPrefsKey = 'notification_preferences';
+  static const onboardingDraftKey = 'onboarding_draft';
+  static const onboardingStepKey = 'onboarding_current_step';
 
   bool get isOnboardingComplete {
     if (!HiveService.isInitialized) return false;
@@ -18,8 +20,42 @@ class OnboardingRepository {
         as bool;
   }
 
+  Future<void> saveDraft(OnboardingDraft draft) async {
+    if (!HiveService.isInitialized) return;
+    await HiveService.settingsBox.put(onboardingDraftKey, draft.toJson());
+  }
+
+  OnboardingDraft? readDraft() {
+    if (!HiveService.isInitialized) return null;
+    final raw = HiveService.settingsBox.get(onboardingDraftKey);
+    if (raw is! Map) return null;
+    try {
+      return OnboardingDraft.fromJson(Map<String, dynamic>.from(raw));
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<void> saveStep(int step) async {
+    if (!HiveService.isInitialized) return;
+    await HiveService.settingsBox.put(onboardingStepKey, step);
+  }
+
+  int readStep() {
+    if (!HiveService.isInitialized) return 0;
+    final val = HiveService.settingsBox.get(onboardingStepKey, defaultValue: 0);
+    return val is int ? val : 0;
+  }
+
+  Future<void> clearDraftAndStep() async {
+    if (!HiveService.isInitialized) return;
+    await HiveService.settingsBox.delete(onboardingDraftKey);
+    await HiveService.settingsBox.delete(onboardingStepKey);
+  }
+
   Future<void> markOnboardingComplete() async {
     await HiveService.settingsBox.put(onboardingCompleteKey, true);
+    await clearDraftAndStep();
   }
 
   Future<void> saveNotificationPreferences(OnboardingDraft draft) async {

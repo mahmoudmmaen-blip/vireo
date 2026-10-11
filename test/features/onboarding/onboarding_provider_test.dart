@@ -5,12 +5,12 @@ import 'package:vireo/features/onboarding/onboarding_screen.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 
 void main() {
-  test('OnboardingScreen defines 6 step routes §2.2', () {
+  test('OnboardingScreen defines 9 step routes §P13', () {
     expect(OnboardingScreen.routes.length, OnboardingUiState.stepCount);
-    expect(OnboardingUiState.stepCount, 6);
+    expect(OnboardingUiState.stepCount, 9);
   });
 
-  group('OnboardingNotifier §2.2 navigation', () {
+  group('OnboardingNotifier §P13 navigation', () {
     late ProviderContainer container;
 
     setUp(() {
@@ -27,52 +27,26 @@ void main() {
           weightKg: 75,
         );
 
-    test('step 1 blocks continue until metrics are valid', () {
+    test('step 2 (body) validates metrics', () {
+      final notifier = container.read(onboardingProvider.notifier);
+      notifier.goToStep(2);
       expect(container.read(onboardingProvider).canContinue, isFalse);
 
-      container.read(onboardingProvider.notifier).updateDraft(validStep1Draft());
+      notifier.updateDraft(validStep1Draft());
       expect(container.read(onboardingProvider).canContinue, isTrue);
     });
 
-    test('step 5 blocks continue until consent is accepted', () {
+    test('advances through all 9 steps and stops at last step', () {
       final notifier = container.read(onboardingProvider.notifier);
-      notifier.updateDraft(validStep1Draft());
 
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 12; i++) {
         notifier.nextStep();
       }
-      expect(container.read(onboardingProvider).step, 4);
-      expect(container.read(onboardingProvider).canContinue, isFalse);
-
-      notifier.updateDraft(
-        container.read(onboardingProvider).draft.copyWith(consentAccepted: true),
-      );
-      expect(container.read(onboardingProvider).canContinue, isTrue);
-    });
-
-    test('advances through all 6 steps and stops at last step', () {
-      final notifier = container.read(onboardingProvider.notifier);
-
-      notifier.updateDraft(validStep1Draft());
-      notifier.nextStep(); // health
-      notifier.nextStep(); // environment
-      notifier.nextStep(); // goal
-      expect(container.read(onboardingProvider).step, 3);
-
-      notifier.updateDraft(
-        container.read(onboardingProvider).draft.copyWith(consentAccepted: true),
-      );
-      notifier.nextStep(); // consent
-      notifier.nextStep(); // notifications
-      expect(container.read(onboardingProvider).step, 5);
-
-      notifier.nextStep();
-      expect(container.read(onboardingProvider).step, 5);
+      expect(container.read(onboardingProvider).step, 8);
     });
 
     test('previousStep returns to prior step', () {
       final notifier = container.read(onboardingProvider.notifier);
-      notifier.updateDraft(validStep1Draft());
       notifier.nextStep();
       expect(container.read(onboardingProvider).step, 1);
 

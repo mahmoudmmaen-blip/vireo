@@ -1,6 +1,7 @@
 /// Analytics event names (Section 14).
 /// Source: `docs/analytics/event_tracking_plan.md`
 abstract final class AnalyticsEvents {
+  static const onboardingStepViewed = 'onboarding_step_viewed';
   static const onboardingStepCompleted = 'onboarding_step_completed';
   static const trainingEnvironmentSelected = 'training_environment_selected';
   static const consentAccepted = 'consent_accepted';

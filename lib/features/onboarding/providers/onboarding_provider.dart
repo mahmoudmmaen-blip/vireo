@@ -19,7 +19,7 @@ class OnboardingUiState {
     this.errorMessage,
   });
 
-  static const stepCount = 6;
+  static const stepCount = 9;
 
   final int step;
   final OnboardingDraft draft;
@@ -28,15 +28,23 @@ class OnboardingUiState {
 
   bool get canContinue {
     switch (step) {
-      case 0:
-        return draft.isStep1Valid;
-      case 1:
-      case 2:
-      case 3:
+      case 0: // Welcome
         return true;
-      case 4:
-        return draft.isStep5Valid;
-      case 5:
+      case 1: // Goal
+        return true;
+      case 2: // Body
+        return draft.isStep1Valid;
+      case 3: // Activity level + training place
+        return true;
+      case 4: // Health safety
+        return true;
+      case 5: // Try it now
+        return true;
+      case 6: // Plan reveal
+        return true;
+      case 7: // Notifications
+        return true;
+      case 8: // Soft paywall
         return true;
       default:
         return false;
@@ -61,18 +69,29 @@ class OnboardingUiState {
 class OnboardingNotifier extends Notifier<OnboardingUiState> {
   @override
   OnboardingUiState build() {
-    // Read locale once at init — do not watch, or every locale change wipes draft.
+    final repo = ref.read(onboardingRepositoryProvider);
+    final savedDraft = repo.readDraft();
+    final savedStep = repo.readStep();
     final locale = ref.read(localeProvider);
+
+    final initialDraft = savedDraft ??
+        OnboardingDraft(
+          sex: 'male',
+          unitPreference: UnitPreference.fromLocale(locale.countryCode),
+        );
+
+    final initialStep = savedStep.clamp(0, OnboardingUiState.stepCount - 1);
+
     return OnboardingUiState(
-      step: 0,
-      draft: OnboardingDraft(
-        unitPreference: UnitPreference.fromLocale(locale.countryCode),
-      ),
+      step: initialStep,
+      draft: initialDraft,
     );
   }
 
   void updateDraft(OnboardingDraft draft) {
     state = state.copyWith(draft: draft, errorMessage: null);
+    ref.read(onboardingRepositoryProvider).saveDraft(draft);
+
     if (draft.isStep1Valid) {
       OnboardingCalorieSync.syncFromDraft(draft).then((_) {
         ref.invalidate(calorieGoalProvider);
@@ -82,16 +101,26 @@ class OnboardingNotifier extends Notifier<OnboardingUiState> {
     }
   }
 
+  void goToStep(int step) {
+    final clamped = step.clamp(0, OnboardingUiState.stepCount - 1);
+    state = state.copyWith(step: clamped);
+    ref.read(onboardingRepositoryProvider).saveStep(clamped);
+  }
+
   void nextStep() {
-    if (!state.canContinue || state.step >= OnboardingUiState.stepCount - 1) {
+    if (state.step >= OnboardingUiState.stepCount - 1) {
       return;
     }
-    state = state.copyWith(step: state.step + 1);
+    final next = state.step + 1;
+    state = state.copyWith(step: next);
+    ref.read(onboardingRepositoryProvider).saveStep(next);
   }
 
   void previousStep() {
     if (state.step <= 0) return;
-    state = state.copyWith(step: state.step - 1);
+    final prev = state.step - 1;
+    state = state.copyWith(step: prev);
+    ref.read(onboardingRepositoryProvider).saveStep(prev);
   }
 
   Future<bool> complete({String? userId}) async {

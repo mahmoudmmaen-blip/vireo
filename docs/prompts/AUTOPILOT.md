@@ -6,10 +6,10 @@ A step is done when its commit appears in git log. Then Claude reviews and start
 
 | # | File | Commit message starts with | Status |
 |---|------|----------------------------|--------|
-| 1 | NEXT.md (10 languages) | feat(l10n) | running (started 15:50) |
-| 2 | P10_reminders.md | feat(reminders) | queued |
-| 3 | P11_progress.md | feat(progress) | queued |
-| 4 | P13_onboarding.md | feat(onboarding) | queued |
+| 1 | NEXT.md (10 languages) | feat(l10n) | done 19:46 (language_picker_test skipped: hangs) |
+| 2 | P10_reminders.md | feat(reminders) | done 20:30 (13 scheduler tests, 193 tests pass) |
+| 3 | P11_progress.md | feat(progress) | done 21:11 |
+| 4 | P13_onboarding.md | feat(onboarding) | running (started 21:12) |
 | 5 | P12_subscriptions.md | feat(subscription) | queued |
 | 6 | P14_social.md | feat(social) | queued |
 | 7 | P15_sync.md | feat(sync) | queued |

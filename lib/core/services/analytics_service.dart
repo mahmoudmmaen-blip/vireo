@@ -14,6 +14,32 @@ abstract final class AnalyticsService {
     }
   }
 
+  static Future<void> onboardingStepViewed({
+    required int stepIndex,
+    required String stepName,
+  }) =>
+      logEvent(
+        AnalyticsEvents.onboardingStepViewed,
+        properties: {
+          'step_index': stepIndex,
+          'step_name': stepName,
+        },
+      );
+
+  static Future<void> onboardingStepCompleted({
+    required int stepIndex,
+    required String stepName,
+    Map<String, Object?> properties = const {},
+  }) =>
+      logEvent(
+        AnalyticsEvents.onboardingStepCompleted,
+        properties: {
+          'step_index': stepIndex,
+          'step_name': stepName,
+          ...properties,
+        },
+      );
+
   static Future<void> mealSwapped({
     required String fromRecipeId,
     required String toRecipeId,
