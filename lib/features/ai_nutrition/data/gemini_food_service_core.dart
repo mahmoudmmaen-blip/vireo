@@ -87,11 +87,33 @@ abstract final class GeminiFoodServiceCore {
       }
 
       final scanned = parseScannedItems(data);
+      BootLog.step('analyze-meal items=${scanned.length}');
       if (scanned.isEmpty) {
         throw const FoodVisionParseException();
       }
-      final lines = await _resolver.resolveItems(scanned, language: language);
-      return MealScanDraft(lines: lines, imageBytes: bytes);
+      try {
+        final lines =
+            await _resolver.resolveItems(scanned, language: language);
+        BootLog.step('analyze-meal resolved=${lines.length}');
+        return MealScanDraft(lines: lines, imageBytes: bytes);
+      } catch (e) {
+        // Never lose a successful vision response to local DB issues.
+        BootLog.warn('analyze-meal resolve failed — using estimates', e);
+        final fallback = [
+          for (final item in scanned)
+            resolveLine(
+              scanned: item,
+              estimatedPer100g: const FoodMacros100g(
+                kcal: 150,
+                protein: 5,
+                carbs: 15,
+                fat: 6,
+                fiber: 1,
+              ),
+            ),
+        ];
+        return MealScanDraft(lines: fallback, imageBytes: bytes);
+      }
     } on FunctionException catch (e) {
       BootLog.warn(
         'analyze-meal FunctionException status=${e.status} body=${e.details}',
@@ -107,6 +129,7 @@ abstract final class GeminiFoodServiceCore {
           text.contains('network') ||
           text.contains('connection') ||
           text.contains('failed host lookup') ||
+          text.contains('failed to fetch') ||
           text.contains('offline') ||
           text.contains('not initialized')) {
         throw const FoodVisionOfflineException();

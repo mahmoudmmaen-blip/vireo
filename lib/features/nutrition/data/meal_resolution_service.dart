@@ -153,8 +153,17 @@ class MealResolutionService {
 
 /// Parse Gemini / Edge Function items payload.
 List<ScannedFoodItem> parseScannedItems(Object? data) {
-  if (data is! Map) return const [];
-  final items = data['items'];
+  Object? payload = data;
+  if (payload is String) {
+    try {
+      payload = jsonDecode(payload);
+    } catch (_) {
+      return const [];
+    }
+  }
+  if (payload is! Map) return const [];
+  final map = Map<String, dynamic>.from(payload);
+  final items = map['items'];
   if (items is! List) return const [];
   return items
       .whereType<Map>()

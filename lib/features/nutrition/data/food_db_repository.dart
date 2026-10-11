@@ -14,7 +14,7 @@ class FoodDbRepository {
   Future<List<FoodItem>> load() async {
     if (_foods != null) return _foods!;
     final raw = await rootBundle.loadString('assets/food_db/foods.json');
-    final decoded = jsonDecode(raw) as Map<String, dynamic>;
+    final decoded = Map<String, dynamic>.from(jsonDecode(raw) as Map);
     final list = (decoded['foods'] as List? ?? [])
         .whereType<Map>()
         .map((e) => FoodItem.fromJson(Map<String, dynamic>.from(e)))

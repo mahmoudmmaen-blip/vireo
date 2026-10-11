@@ -553,6 +553,9 @@
       "name_ar": "بيض مقلي",
       "name_en": "egg fried",
       "aliases": [
+        "sunny side up",
+        "egg sunny-side up",
+        "fried_egg",
         "بيضة مقلية",
         "fried egg"
       ],
@@ -2363,6 +2366,8 @@
       "name_ar": "أفوكادو",
       "name_en": "avocado",
       "aliases": [
+        "mashed avocado",
+        "avocado_mashed",
         "أفوكادو",
         "avocado"
       ],
@@ -5438,6 +5443,9 @@
       "name_ar": "خبز قمح كامل",
       "name_en": "whole wheat bread",
       "aliases": [
+        "whole grain toast",
+        "whole wheat toast",
+        "bread_whole_wheat_toast",
         "توست بني",
         "brown bread"
       ],
