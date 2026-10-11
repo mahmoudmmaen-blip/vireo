@@ -334,51 +334,54 @@ class _HomeHeader extends ConsumerWidget {
                 .setLocale(Locale(localeCode == 'ar' ? 'en' : 'ar')),
           ),
           const SizedBox(width: 6),
-          Pressable(
-            onTap: () => ref.read(shellTabIndexProvider.notifier).goProfile(),
-            semanticLabel: l10n.profileTitle,
-            child: Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: colors.ember, width: 2),
-              ),
-              child: Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    width: 36,
-                    height: 36,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: colors.ember.withValues(alpha: 0.15),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      initial,
-                      style: TextStyle(
-                        color: colors.ember,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: -2,
-                    bottom: -2,
-                    child: Container(
-                      width: 14,
-                      height: 14,
+          Tooltip(
+            message: l10n.profileTitle,
+            child: Pressable(
+              onTap: () => ref.read(shellTabIndexProvider.notifier).goProfile(),
+              semanticLabel: l10n.profileTitle,
+              child: Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: colors.ember, width: 2),
+                ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: 36,
+                      height: 36,
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: colors.ember,
+                        color: colors.ember.withValues(alpha: 0.15),
                         shape: BoxShape.circle,
-                        border: Border.all(color: colors.background, width: 1.5),
                       ),
-                      child: const Icon(Icons.person, size: 9, color: Colors.white),
+                      child: Text(
+                        initial,
+                        style: TextStyle(
+                          color: colors.ember,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      right: -2,
+                      bottom: -2,
+                      child: Container(
+                        width: 14,
+                        height: 14,
+                        decoration: BoxDecoration(
+                          color: colors.ember,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: colors.background, width: 1.5),
+                        ),
+                        child: const Icon(Icons.person, size: 9, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

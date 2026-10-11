@@ -1733,5 +1733,26 @@
   "mealFavoriteSaved": "Saved to favorites",
   "mealFavoritesTitle": "Favorites",
   "mealRecentTitle": "Recent meals",
-  "mealRelog": "Log again"
+  "mealRelog": "Log again",
+  "appearanceTitle": "Appearance",
+  "themeModeSystem": "System default",
+  "themeModeLight": "Light mode",
+  "themeModeDark": "Dark mode",
+  "accentThemeTitle": "Accent color",
+  "accentEmber": "Ember (Default)",
+  "accentOcean": "Ocean",
+  "accentForest": "Forest",
+  "accentRoyal": "Royal",
+  "detectedActivity": "Detected: {activity}",
+  "@detectedActivity": {
+    "placeholders": {
+      "activity": {"type": "String"}
+    }
+  },
+  "manualOverride": "Override",
+  "mealClarificationTitle": "Quick clarification",
+  "celebrationWaterTitle": "Hydration Goal Achieved! 💧",
+  "celebrationProteinTitle": "Protein Goal Smashed! 💪",
+  "celebrationStepsTitle": "Step Goal Completed! 🏃",
+  "celebrationWorkoutTitle": "Workout Finished! 🔥"
 }

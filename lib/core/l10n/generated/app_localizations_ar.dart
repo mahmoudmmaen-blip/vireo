@@ -3241,4 +3241,54 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mealRelog => 'سجّل تاني';
+
+  @override
+  String get appearanceTitle => 'المظهر';
+
+  @override
+  String get themeModeSystem => 'تلقائي للنظام';
+
+  @override
+  String get themeModeLight => 'الوضع الفاتح';
+
+  @override
+  String get themeModeDark => 'الوضع الداكن';
+
+  @override
+  String get accentThemeTitle => 'لون التمييز';
+
+  @override
+  String get accentEmber => 'إمبير (افتراضي)';
+
+  @override
+  String get accentOcean => 'محيطي';
+
+  @override
+  String get accentForest => 'غابة';
+
+  @override
+  String get accentRoyal => 'ملكي';
+
+  @override
+  String detectedActivity(String activity) {
+    return 'تم التعرف: $activity';
+  }
+
+  @override
+  String get manualOverride => 'تعديل';
+
+  @override
+  String get mealClarificationTitle => 'تأكيد سريع';
+
+  @override
+  String get celebrationWaterTitle => 'حققت هدف شرب الماء اليومي! 💧';
+
+  @override
+  String get celebrationProteinTitle => 'حققت هدف البروتين اليومي! 💪';
+
+  @override
+  String get celebrationStepsTitle => 'حققت هدف الخطوات اليومي! 🏃';
+
+  @override
+  String get celebrationWorkoutTitle => 'أحسنت! أنهيت تمرينك اليوم بنجاح 🔥';
 }

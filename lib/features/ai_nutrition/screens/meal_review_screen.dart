@@ -315,12 +315,44 @@ class _LineCard extends StatelessWidget {
               ),
               if (line.isEstimated)
                 _Badge(l10n.mealReviewEstimated, colors.gold),
-              if (line.confidence < 0.6) ...[
+              if (line.confidence < 0.6 || line.isUnsure) ...[
                 const SizedBox(width: 6),
-                _Badge(l10n.mealReviewCheckAmount, colors.ember),
+                _Badge(l10n.mealClarificationTitle, colors.ember),
               ],
             ],
           ),
+          if (line.confidence < 0.6 || line.isUnsure) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: colors.ember.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: colors.ember.withValues(alpha: 0.25)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.help_outline, size: 14, color: colors.ember),
+                      const SizedBox(width: 4),
+                      Text(
+                        locale == 'ar' ? 'تأكيد سريع:' : 'Quick clarification:',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: colors.ember,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  _buildClarificationChips(context, line, locale, onChanged, oil),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 8),
           Row(
             children: [
@@ -404,6 +436,137 @@ class _LineCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildClarificationChips(
+    BuildContext context,
+    ResolvedMealLine line,
+    String locale,
+    ValueChanged<ResolvedMealLine> onChanged,
+    FoodItem? oil,
+  ) {
+    final lowerName = '${line.nameEn} ${line.nameAr}'.toLowerCase();
+    final chips = <Widget>[];
+
+    // Question 1: Fried vs Grilled / Boiled (Cooking method clarification)
+    final isFried = line.cookingMethod == CookingMethod.fried;
+    chips.add(
+      ActionChip(
+        avatar: Icon(isFried ? Icons.check : Icons.local_fire_department, size: 14),
+        label: Text(locale == 'ar' ? 'مقلي؟' : 'Fried?'),
+        onPressed: () {
+          onChanged(
+            recomputeWithMethod(
+              line.copyWith(isUnsure: false, confidence: 0.95),
+              CookingMethod.fried,
+              oilFood: oil,
+            ),
+          );
+        },
+      ),
+    );
+    chips.add(
+      ActionChip(
+        avatar: Icon(line.cookingMethod == CookingMethod.grilled ? Icons.check : Icons.outdoor_grill, size: 14),
+        label: Text(locale == 'ar' ? 'مشوي؟' : 'Grilled?'),
+        onPressed: () {
+          onChanged(
+            recomputeWithMethod(
+              line.copyWith(isUnsure: false, confidence: 0.95),
+              CookingMethod.grilled,
+              oilFood: oil,
+            ),
+          );
+        },
+      ),
+    );
+
+    // Question 2: Rice vs Bulgur / Bread type / Grain clarification
+    if (lowerName.contains('rice') || lowerName.contains('أرز') || lowerName.contains('رز') ||
+        lowerName.contains('bulgur') || lowerName.contains('برغل')) {
+      final isRice = lowerName.contains('rice') || lowerName.contains('أرز') || lowerName.contains('رز');
+      chips.add(
+        ActionChip(
+          avatar: Icon(isRice ? Icons.check : Icons.grain, size: 14),
+          label: Text(locale == 'ar' ? 'أرز أبيض' : 'Rice'),
+          onPressed: () {
+            final food = FoodDbRepository.instance.byId('white_rice_cooked');
+            onChanged(
+              resolveLine(
+                scanned: ScannedFoodItem(
+                  nameAr: 'أرز أبيض',
+                  nameEn: 'White rice',
+                  foodIdGuess: 'white_rice_cooked',
+                  estimatedGrams: line.grams,
+                  cookingMethod: line.cookingMethod,
+                  confidence: 1.0,
+                  isUnsure: false,
+                ),
+                food: food,
+                oilFood: oil,
+              ),
+            );
+          },
+        ),
+      );
+      chips.add(
+        ActionChip(
+          avatar: const Icon(Icons.grain, size: 14),
+          label: Text(locale == 'ar' ? 'برغل' : 'Bulgur'),
+          onPressed: () {
+            final food = FoodDbRepository.instance.byId('bulgur_cooked');
+            onChanged(
+              resolveLine(
+                scanned: ScannedFoodItem(
+                  nameAr: 'برغل',
+                  nameEn: 'Bulgur',
+                  foodIdGuess: 'bulgur_cooked',
+                  estimatedGrams: line.grams,
+                  cookingMethod: line.cookingMethod,
+                  confidence: 1.0,
+                  isUnsure: false,
+                ),
+                food: food,
+                oilFood: oil,
+              ),
+            );
+          },
+        ),
+      );
+    }
+
+    // Question 3: Chicken breast vs Chicken thigh
+    if (lowerName.contains('chicken') || lowerName.contains('دجاج') || lowerName.contains('فراخ')) {
+      chips.add(
+        ActionChip(
+          label: Text(locale == 'ar' ? 'صدور دجاج' : 'Chicken breast'),
+          onPressed: () {
+            final food = FoodDbRepository.instance.byId('chicken_breast_cooked');
+            onChanged(
+              resolveLine(
+                scanned: ScannedFoodItem(
+                  nameAr: 'صدر دجاج',
+                  nameEn: 'Chicken breast',
+                  foodIdGuess: 'chicken_breast_cooked',
+                  estimatedGrams: line.grams,
+                  cookingMethod: line.cookingMethod,
+                  confidence: 1.0,
+                  isUnsure: false,
+                ),
+                food: food,
+                oilFood: oil,
+              ),
+            );
+          },
+        ),
+      );
+    }
+
+    return Wrap(
+      spacing: 6,
+      runSpacing: 4,
+      children: chips.take(3).toList(),
     );
   }
 }

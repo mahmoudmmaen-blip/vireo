@@ -117,7 +117,7 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
   }
 
   String _paceOrSpeed(AppLocalizations l10n) {
-    if (widget.type == OutdoorWorkoutType.cycle) {
+    if (_stats.currentType == OutdoorWorkoutType.cycle) {
       return l10n.outdoorSpeedKmh(_stats.speedKmh.toStringAsFixed(1));
     }
     final p = _stats.paceMinPerKm;
@@ -125,6 +125,47 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
     final min = p.floor();
     final sec = ((p - min) * 60).round();
     return l10n.outdoorPaceMinKm(min, sec);
+  }
+
+  void _showManualOverrideDialog() {
+    final l10n = AppLocalizations.of(context);
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (final t in OutdoorWorkoutType.values)
+              ListTile(
+                title: Text(_typeLabel(l10n, t)),
+                leading: Icon(
+                  t == OutdoorWorkoutType.walk
+                      ? Icons.directions_walk
+                      : t == OutdoorWorkoutType.run
+                          ? Icons.directions_run
+                          : Icons.directions_bike,
+                ),
+                trailing: _stats.currentType == t
+                    ? const Icon(Icons.check, color: Colors.green)
+                    : null,
+                onTap: () {
+                  Navigator.pop(ctx);
+                  _tracker?.manualOverrideType(t);
+                },
+              ),
+            if (_stats.isManuallyOverridden)
+              ListTile(
+                title: Text(l10n.themeModeSystem),
+                leading: const Icon(Icons.auto_mode),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  _tracker?.resetManualOverride();
+                },
+              ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -135,8 +176,13 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
     return Scaffold(
       backgroundColor: colors.background,
       appBar: AppBar(
-        title: Text(_typeLabel(l10n, widget.type)),
+        title: Text(_typeLabel(l10n, _stats.currentType)),
         actions: [
+          IconButton(
+            tooltip: l10n.manualOverride,
+            icon: const Icon(Icons.tune),
+            onPressed: _showManualOverrideDialog,
+          ),
           IconButton(
             tooltip: l10n.outdoorAutoPause,
             onPressed: () {
@@ -159,13 +205,50 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
             padding: const EdgeInsets.all(VSpace.md),
             child: Column(
               children: [
+                if (_stats.detectedType != null) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: VSpace.xs),
+                    child: InkWell(
+                      onTap: _showManualOverrideDialog,
+                      borderRadius: BorderRadius.circular(VRadius.pill),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: colors.ember.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(VRadius.pill),
+                          border: Border.all(color: colors.ember.withValues(alpha: 0.4)),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.auto_awesome, size: 14, color: colors.ember),
+                            const SizedBox(width: 6),
+                            Text(
+                              l10n.detectedActivity(_typeLabel(l10n, _stats.detectedType!)),
+                              style: TextStyle(
+                                color: colors.ember,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ),
+                            if (_stats.isManuallyOverridden) ...[
+                              const SizedBox(width: 4),
+                              Text(' (${l10n.manualOverride})',
+                                  style: TextStyle(color: colors.textMute, fontSize: 11)),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _Stat(l10n.outdoorDistance, '${(_stats.distanceMeters / 1000).toStringAsFixed(2)} km'),
                     _Stat(l10n.outdoorDuration, _formatDuration(_stats.activeSeconds)),
                     _Stat(
-                      widget.type == OutdoorWorkoutType.cycle
+                      _stats.currentType == OutdoorWorkoutType.cycle
                           ? l10n.outdoorSpeed
                           : l10n.outdoorPace,
                       _paceOrSpeed(l10n),

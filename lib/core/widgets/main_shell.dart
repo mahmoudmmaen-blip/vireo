@@ -17,6 +17,13 @@ import 'package:vireo/features/profile/profile_screen.dart';
 import 'package:vireo/features/progress/progress_screen.dart';
 import 'package:vireo/features/progress/widgets/reassessment_gate.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
+import 'package:vireo/core/services/celebration_service.dart';
+import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
+import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
+import 'package:vireo/features/walking/providers/live_steps_provider.dart';
+import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
+import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
+import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 import 'package:vireo/features/quick_log/quick_log_sheet.dart';
 import 'package:vireo/features/subscription/widgets/subscription_shell_gate.dart';
 import 'package:vireo/features/workout/workout_screen.dart';
@@ -69,6 +76,40 @@ class _MainShellState extends ConsumerState<MainShell> {
       final settings = ref.read(notificationSettingsProvider);
       if (settings.hasAnyEnabled) {
         ref.read(notificationServiceProvider).scheduleAll(settings);
+      }
+    });
+
+    // Celebrations: water goal, protein goal, step goal
+    ref.listen(waterTrackerProvider, (prev, next) {
+      final goal = ref.read(waterDailyGoalMlProvider);
+      if (goal > 0 && next >= goal) {
+        CelebrationService.trigger(
+          context,
+          type: CelebrationType.water,
+          message: AppLocalizations.of(context).celebrationWaterTitle,
+        );
+      }
+    });
+
+    ref.listen(dailyNutritionTotalsProvider, (prev, next) {
+      final target = ref.read(calorieGoalProvider).proteinG;
+      if (target > 0 && next.protein >= target) {
+        CelebrationService.trigger(
+          context,
+          type: CelebrationType.protein,
+          message: AppLocalizations.of(context).celebrationProteinTitle,
+        );
+      }
+    });
+
+    ref.listen(todayStepsProvider, (prev, next) {
+      final goal = ref.read(walkingTrackerProvider).valueOrNull?.dailyGoal ?? 6000;
+      if (goal > 0 && next >= goal) {
+        CelebrationService.trigger(
+          context,
+          type: CelebrationType.steps,
+          message: AppLocalizations.of(context).celebrationStepsTitle,
+        );
       }
     });
 

@@ -9,16 +9,26 @@ enum AccentPalette {
   oceanicBlue,
   deepViolet;
 
+  /// Aliases matching Sprint A requirements: Ember, Forest, Ocean, Royal.
+  static const ember = vireoOrange;
+  static const forest = emeraldHealth;
+  static const ocean = oceanicBlue;
+  static const royal = deepViolet;
+
   String get storageKey => name;
 
   Color get color => switch (this) {
-        AccentPalette.vireoOrange => const Color(0xFFE8763C),
-        AccentPalette.emeraldHealth => const Color(0xFF2E7D32),
-        AccentPalette.oceanicBlue => const Color(0xFF1976D2),
-        AccentPalette.deepViolet => const Color(0xFF7B1FA2),
+        AccentPalette.vireoOrange => const Color(0xFFE8763C), // Ember default
+        AccentPalette.oceanicBlue => const Color(0xFF1976D2), // Ocean
+        AccentPalette.emeraldHealth => const Color(0xFF2E7D32), // Forest
+        AccentPalette.deepViolet => const Color(0xFF7B1FA2), // Royal
       };
 
   static AccentPalette fromStorage(String? value) {
+    if (value == 'ember') return AccentPalette.vireoOrange;
+    if (value == 'forest') return AccentPalette.emeraldHealth;
+    if (value == 'ocean') return AccentPalette.oceanicBlue;
+    if (value == 'royal') return AccentPalette.deepViolet;
     return AccentPalette.values.firstWhere(
       (p) => p.storageKey == value,
       orElse: () => AccentPalette.vireoOrange,

@@ -157,6 +157,7 @@ ResolvedMealLine resolveLine({
     food: food,
     isEstimated: isEstimated,
     portions: food?.commonPortions ?? const [],
+    isUnsure: scanned.isUnsure,
   );
 }
 

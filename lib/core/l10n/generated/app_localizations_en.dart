@@ -3268,4 +3268,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mealRelog => 'Log again';
+
+  @override
+  String get appearanceTitle => 'Appearance';
+
+  @override
+  String get themeModeSystem => 'System default';
+
+  @override
+  String get themeModeLight => 'Light mode';
+
+  @override
+  String get themeModeDark => 'Dark mode';
+
+  @override
+  String get accentThemeTitle => 'Accent color';
+
+  @override
+  String get accentEmber => 'Ember (Default)';
+
+  @override
+  String get accentOcean => 'Ocean';
+
+  @override
+  String get accentForest => 'Forest';
+
+  @override
+  String get accentRoyal => 'Royal';
+
+  @override
+  String detectedActivity(String activity) {
+    return 'Detected: $activity';
+  }
+
+  @override
+  String get manualOverride => 'Override';
+
+  @override
+  String get mealClarificationTitle => 'Quick clarification';
+
+  @override
+  String get celebrationWaterTitle => 'Hydration Goal Achieved! 💧';
+
+  @override
+  String get celebrationProteinTitle => 'Protein Goal Smashed! 💪';
+
+  @override
+  String get celebrationStepsTitle => 'Step Goal Completed! 🏃';
+
+  @override
+  String get celebrationWorkoutTitle => 'Workout Finished! 🔥';
 }

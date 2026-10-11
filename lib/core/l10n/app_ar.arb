@@ -1674,5 +1674,26 @@
   "mealFavoriteSaved": "اتحفظت في المفضلة",
   "mealFavoritesTitle": "المفضلة",
   "mealRecentTitle": "وجبات أخيرة",
-  "mealRelog": "سجّل تاني"
+  "mealRelog": "سجّل تاني",
+  "appearanceTitle": "المظهر",
+  "themeModeSystem": "تلقائي للنظام",
+  "themeModeLight": "الوضع الفاتح",
+  "themeModeDark": "الوضع الداكن",
+  "accentThemeTitle": "لون التمييز",
+  "accentEmber": "إمبير (افتراضي)",
+  "accentOcean": "محيطي",
+  "accentForest": "غابة",
+  "accentRoyal": "ملكي",
+  "detectedActivity": "تم التعرف: {activity}",
+  "@detectedActivity": {
+    "placeholders": {
+      "activity": {"type": "String"}
+    }
+  },
+  "manualOverride": "تعديل",
+  "mealClarificationTitle": "تأكيد سريع",
+  "celebrationWaterTitle": "حققت هدف شرب الماء اليومي! 💧",
+  "celebrationProteinTitle": "حققت هدف البروتين اليومي! 💪",
+  "celebrationStepsTitle": "حققت هدف الخطوات اليومي! 🏃",
+  "celebrationWorkoutTitle": "أحسنت! أنهيت تمرينك اليوم بنجاح 🔥"
 }

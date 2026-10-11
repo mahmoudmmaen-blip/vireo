@@ -131,6 +131,7 @@ class ScannedFoodItem {
     required this.estimatedGrams,
     required this.cookingMethod,
     required this.confidence,
+    this.isUnsure = false,
   });
 
   final String nameAr;
@@ -139,8 +140,9 @@ class ScannedFoodItem {
   final double estimatedGrams;
   final CookingMethod cookingMethod;
   final double confidence;
+  final bool isUnsure;
 
-  factory ScannedFoodItem.fromJson(Map<String, dynamic> json) =>
+  factory ScannedFoodItem.fromJson(Map<String, dynamic> json, {bool isUnsure = false}) =>
       ScannedFoodItem(
         nameAr: json['name_ar']?.toString() ?? '',
         nameEn: json['name_en']?.toString() ?? '',
@@ -149,7 +151,8 @@ class ScannedFoodItem {
         cookingMethod: CookingMethod.fromString(
           json['cooking_method']?.toString(),
         ),
-        confidence: (json['confidence'] as num?)?.toDouble() ?? 0.5,
+        confidence: (json['confidence'] as num?)?.toDouble() ?? (isUnsure ? 0.4 : 0.5),
+        isUnsure: isUnsure,
       );
 }
 
@@ -168,6 +171,7 @@ class ResolvedMealLine {
     this.food,
     this.isEstimated = false,
     this.portions = const [],
+    this.isUnsure = false,
   });
 
   final String nameAr;
@@ -182,27 +186,36 @@ class ResolvedMealLine {
   final FoodItem? food;
   final bool isEstimated;
   final List<FoodPortion> portions;
+  final bool isUnsure;
 
   ResolvedMealLine copyWith({
+    String? nameAr,
+    String? nameEn,
     double? grams,
     CookingMethod? cookingMethod,
+    double? confidence,
     double? kcal,
     double? protein,
     double? carbs,
     double? fat,
+    FoodItem? food,
+    bool? isEstimated,
+    List<FoodPortion>? portions,
+    bool? isUnsure,
   }) =>
       ResolvedMealLine(
-        nameAr: nameAr,
-        nameEn: nameEn,
+        nameAr: nameAr ?? this.nameAr,
+        nameEn: nameEn ?? this.nameEn,
         grams: grams ?? this.grams,
         cookingMethod: cookingMethod ?? this.cookingMethod,
-        confidence: confidence,
+        confidence: confidence ?? this.confidence,
         kcal: kcal ?? this.kcal,
         protein: protein ?? this.protein,
         carbs: carbs ?? this.carbs,
         fat: fat ?? this.fat,
-        food: food,
-        isEstimated: isEstimated,
-        portions: portions,
+        food: food ?? this.food,
+        isEstimated: isEstimated ?? this.isEstimated,
+        portions: portions ?? this.portions,
+        isUnsure: isUnsure ?? this.isUnsure,
       );
 }

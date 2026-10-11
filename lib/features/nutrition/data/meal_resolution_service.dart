@@ -173,12 +173,25 @@ List<ScannedFoodItem> parseScannedItems(Object? data) {
   if (payload is! Map) return const [];
   final map = Map<String, dynamic>.from(payload);
   final items = map['items'];
-  if (items is! List) return const [];
-  return items
-      .whereType<Map>()
-      .map((e) => ScannedFoodItem.fromJson(Map<String, dynamic>.from(e)))
-      .where((e) => e.estimatedGrams > 0 || e.nameEn.isNotEmpty)
-      .toList();
+  final result = <ScannedFoodItem>[];
+  if (items is List) {
+    result.addAll(
+      items
+          .whereType<Map>()
+          .map((e) => ScannedFoodItem.fromJson(Map<String, dynamic>.from(e), isUnsure: false))
+          .where((e) => e.estimatedGrams > 0 || e.nameEn.isNotEmpty),
+    );
+  }
+  final unsure = map['items_unsure'];
+  if (unsure is List) {
+    result.addAll(
+      unsure
+          .whereType<Map>()
+          .map((e) => ScannedFoodItem.fromJson(Map<String, dynamic>.from(e), isUnsure: true))
+          .where((e) => e.estimatedGrams > 0 || e.nameEn.isNotEmpty),
+    );
+  }
+  return result;
 }
 
 String encodeFavorites(List<ResolvedMealLine> lines) => jsonEncode([

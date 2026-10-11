@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/celebration_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/workout_session.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
@@ -30,6 +31,13 @@ class _WorkoutFeedbackScreenState extends ConsumerState<WorkoutFeedbackScreen> {
       ref.read(workoutFlowProvider.notifier).completeWorkout();
       await ref.read(vitalityDailyLogProvider.notifier).markWorkoutCompleted();
       await StepCounterService.markWorkoutCompleted();
+      if (mounted) {
+        await CelebrationService.trigger(
+          context,
+          type: CelebrationType.workout,
+          message: AppLocalizations.of(context).celebrationWorkoutTitle,
+        );
+      }
       ref.read(workoutFlowProvider.notifier).clearSession();
       if (mounted) Navigator.of(context).pop();
     } catch (_) {

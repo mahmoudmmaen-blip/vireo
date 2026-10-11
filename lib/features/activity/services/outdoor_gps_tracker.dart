@@ -5,6 +5,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:vireo/features/activity/data/outdoor_met_calculator.dart';
 import 'package:vireo/features/activity/domain/outdoor_workout_models.dart';
+import 'package:vireo/features/walking/data/pedometer_stream_stub.dart'
+    if (dart.library.io) 'package:vireo/features/walking/data/pedometer_stream_io.dart';
 
 @immutable
 class OutdoorLiveStats {
@@ -18,6 +20,10 @@ class OutdoorLiveStats {
     required this.splits,
     required this.isPaused,
     required this.autoPauseEnabled,
+    this.currentType = OutdoorWorkoutType.walk,
+    this.detectedType,
+    this.isManuallyOverridden = false,
+    this.cadenceSpm = 0,
   });
 
   final int elapsedSeconds;
@@ -29,6 +35,10 @@ class OutdoorLiveStats {
   final List<OutdoorKmSplit> splits;
   final bool isPaused;
   final bool autoPauseEnabled;
+  final OutdoorWorkoutType currentType;
+  final OutdoorWorkoutType? detectedType;
+  final bool isManuallyOverridden;
+  final double cadenceSpm;
 
   static const initial = OutdoorLiveStats(
     elapsedSeconds: 0,
@@ -49,19 +59,35 @@ class OutdoorLiveStats {
   }
 }
 
+class _Sample {
+  const _Sample({required this.time, required this.speedKmh, required this.steps});
+  final DateTime time;
+  final double speedKmh;
+  final int steps;
+}
+
 /// GPS session — only tracks while [start] … [stop] is active.
 class OutdoorGpsTracker {
   OutdoorGpsTracker({
-    required this.type,
+    required OutdoorWorkoutType type,
     required this.weightKg,
     this.autoPauseEnabled = true,
-  });
+  }) : _currentType = type;
 
-  final OutdoorWorkoutType type;
+  OutdoorWorkoutType _currentType;
+  OutdoorWorkoutType get currentType => _currentType;
+  OutdoorWorkoutType? _detectedType;
+  bool _isManuallyOverridden = false;
+
   final double weightKg;
   bool autoPauseEnabled;
 
   StreamSubscription<Position>? _sub;
+  StreamSubscription<int>? _pedometerSub;
+  int _latestSteps = 0;
+  final _samples = <_Sample>[];
+  double _smoothedSpeedKmh = 0;
+  double _cadenceSpm = 0;
   DateTime? _startedAt;
   DateTime? _lastTick;
   int _elapsedSeconds = 0;
@@ -119,6 +145,14 @@ class OutdoorGpsTracker {
         activityType: ActivityType.fitness,
       );
     }
+    if (pedometerHardwareSupported && !kIsWeb) {
+      _pedometerSub = pedometerCumulativeStream().listen(
+        (steps) {
+          _latestSteps = steps;
+        },
+        onError: (_) {},
+      );
+    }
     _sub = Geolocator.getPositionStream(locationSettings: settings).listen(
       _onPosition,
       onError: (_) {},
@@ -133,6 +167,26 @@ class OutdoorGpsTracker {
 
     final speed = pos.speed >= 0 ? pos.speed * 3.6 : _speedKmh;
     _speedKmh = speed.clamp(0, 60);
+
+    // 20s smoothing buffer
+    _samples.add(_Sample(time: now, speedKmh: _speedKmh, steps: _latestSteps));
+    final windowCutoff = now.subtract(const Duration(seconds: 20));
+    _samples.removeWhere((s) => s.time.isBefore(windowCutoff));
+
+    if (_samples.isNotEmpty) {
+      final totalSpeed = _samples.fold<double>(0, (sum, s) => sum + s.speedKmh);
+      _smoothedSpeedKmh = totalSpeed / _samples.length;
+
+      if (_samples.length > 1) {
+        final durationSec = _samples.last.time.difference(_samples.first.time).inSeconds;
+        final stepDelta = _samples.last.steps - _samples.first.steps;
+        if (durationSec > 0 && stepDelta >= 0) {
+          _cadenceSpm = (stepDelta / durationSec) * 60;
+        }
+      }
+    }
+
+    _evaluateAutoDetect();
 
     if (autoPauseEnabled && !_paused) {
       if (_speedKmh < 1) {
@@ -162,14 +216,58 @@ class OutdoorGpsTracker {
       ),
     );
 
+    _recomputeCalories();
+
+    _maybeSplitKm();
+    _emit();
+  }
+
+  void _evaluateAutoDetect() {
+    // Detection rules:
+    // Cadence < 130 spm = walk, >= 140 spm = run, speed > 15 km/h with low cadence (< 90) = cycle
+    OutdoorWorkoutType? detected;
+    if (_smoothedSpeedKmh > 15.0 && _cadenceSpm < 90) {
+      detected = OutdoorWorkoutType.cycle;
+    } else if (_cadenceSpm >= 140) {
+      detected = OutdoorWorkoutType.run;
+    } else if (_cadenceSpm > 0 && _cadenceSpm < 130) {
+      detected = OutdoorWorkoutType.walk;
+    } else if (_smoothedSpeedKmh > 8.0 && _cadenceSpm == 0) {
+      // Fallback if no step sensor: fast pace without pedometer
+      detected = OutdoorWorkoutType.run;
+    }
+
+    if (detected != null) {
+      _detectedType = detected;
+      if (!_isManuallyOverridden && _currentType != detected) {
+        _currentType = detected;
+        _recomputeCalories();
+      }
+    }
+  }
+
+  void _recomputeCalories() {
     _calories = OutdoorMetCalculator.calories(
-      type: type,
+      type: _currentType,
       weightKg: weightKg,
       durationSeconds: _activeSeconds,
       speedKmh: _speedKmh > 0.5 ? _speedKmh : 3.5,
     );
+  }
 
-    _maybeSplitKm();
+  void manualOverrideType(OutdoorWorkoutType newType) {
+    _isManuallyOverridden = true;
+    _currentType = newType;
+    _recomputeCalories();
+    _emit();
+  }
+
+  void resetManualOverride() {
+    _isManuallyOverridden = false;
+    if (_detectedType != null) {
+      _currentType = _detectedType!;
+      _recomputeCalories();
+    }
     _emit();
   }
 
@@ -225,6 +323,10 @@ class OutdoorGpsTracker {
         splits: List.unmodifiable(_splits),
         isPaused: _paused,
         autoPauseEnabled: autoPauseEnabled,
+        currentType: _currentType,
+        detectedType: _detectedType,
+        isManuallyOverridden: _isManuallyOverridden,
+        cadenceSpm: _cadenceSpm,
       ),
     );
   }
@@ -235,11 +337,13 @@ class OutdoorGpsTracker {
   }) async {
     await _sub?.cancel();
     _sub = null;
+    await _pedometerSub?.cancel();
+    _pedometerSub = null;
     if (_startedAt == null) return null;
     final ended = DateTime.now();
     final session = OutdoorWorkoutSession(
       id: 'outdoor_${ended.millisecondsSinceEpoch}',
-      type: type,
+      type: _currentType,
       startedAt: _startedAt!,
       endedAt: ended,
       routePoints: List.from(_route),
@@ -256,6 +360,7 @@ class OutdoorGpsTracker {
 
   void dispose() {
     _sub?.cancel();
+    _pedometerSub?.cancel();
     _controller.close();
   }
 }

@@ -19,6 +19,7 @@ import 'package:vireo/features/diet_programs/providers/diet_programs_provider.da
 import 'package:vireo/features/diet_programs/screens/diet_program_detail_screen.dart';
 import 'package:vireo/features/diet_programs/screens/diet_programs_screen.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
+import 'package:vireo/features/profile/appearance_screen.dart';
 import 'package:vireo/features/profile/settings_screen.dart';
 import 'package:vireo/features/profile/widgets/profile_body_metrics_sheet.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
@@ -104,9 +105,16 @@ class ProfileScreen extends ConsumerWidget {
               ),
               const SizedBox(height: VSpace.sm),
               _MyPlanCard(locale: locale),
-              const SizedBox(height: VSpace.lg),
               _SettingsGroup(
                 children: [
+                  ListTile(
+                    leading: Icon(Icons.palette_outlined, color: context.vireoColors.ember),
+                    title: Text(l10n.appearanceTitle),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const AppearanceScreen()),
+                    ),
+                  ),
                   ListTile(
                     leading: Icon(Icons.settings_outlined, color: context.vireoColors.ember),
                     title: Text(l10n.settingsTitle),

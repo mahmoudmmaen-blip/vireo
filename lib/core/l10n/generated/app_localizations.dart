@@ -5932,6 +5932,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log again'**
   String get mealRelog;
+
+  /// No description provided for @appearanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearanceTitle;
+
+  /// No description provided for @themeModeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get themeModeSystem;
+
+  /// No description provided for @themeModeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light mode'**
+  String get themeModeLight;
+
+  /// No description provided for @themeModeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark mode'**
+  String get themeModeDark;
+
+  /// No description provided for @accentThemeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent color'**
+  String get accentThemeTitle;
+
+  /// No description provided for @accentEmber.
+  ///
+  /// In en, this message translates to:
+  /// **'Ember (Default)'**
+  String get accentEmber;
+
+  /// No description provided for @accentOcean.
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean'**
+  String get accentOcean;
+
+  /// No description provided for @accentForest.
+  ///
+  /// In en, this message translates to:
+  /// **'Forest'**
+  String get accentForest;
+
+  /// No description provided for @accentRoyal.
+  ///
+  /// In en, this message translates to:
+  /// **'Royal'**
+  String get accentRoyal;
+
+  /// No description provided for @detectedActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Detected: {activity}'**
+  String detectedActivity(String activity);
+
+  /// No description provided for @manualOverride.
+  ///
+  /// In en, this message translates to:
+  /// **'Override'**
+  String get manualOverride;
+
+  /// No description provided for @mealClarificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick clarification'**
+  String get mealClarificationTitle;
+
+  /// No description provided for @celebrationWaterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hydration Goal Achieved! 💧'**
+  String get celebrationWaterTitle;
+
+  /// No description provided for @celebrationProteinTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Protein Goal Smashed! 💪'**
+  String get celebrationProteinTitle;
+
+  /// No description provided for @celebrationStepsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Step Goal Completed! 🏃'**
+  String get celebrationStepsTitle;
+
+  /// No description provided for @celebrationWorkoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Workout Finished! 🔥'**
+  String get celebrationWorkoutTitle;
 }
 
 class _AppLocalizationsDelegate
