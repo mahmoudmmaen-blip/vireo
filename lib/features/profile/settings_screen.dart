@@ -11,6 +11,7 @@ import 'package:vireo/core/widgets/language_picker_screen.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/features/auth/auth_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
+import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
@@ -176,6 +177,17 @@ class SettingsScreen extends ConsumerWidget {
             trailing: const Icon(Icons.chevron_right_rounded),
             onTap: () => Navigator.of(context).push(
               LanguagePickerScreen.route(isInitial: false),
+            ),
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.notifications_outlined),
+            title: Text(l10n.notificationsTitle),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const NotificationSettingsScreen(),
+              ),
             ),
           ),
           const Divider(),

@@ -1,76 +1,182 @@
+import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/notifications/domain/notification_type.dart';
 
 class NotificationMessage {
-  const NotificationMessage({required this.title, required this.body});
+  const NotificationMessage({
+    required this.title,
+    required this.body,
+    required this.payload,
+  });
 
   final String title;
   final String body;
+  final String payload;
 }
 
 abstract final class NotificationMessages {
   static NotificationMessage forType(
     NotificationType type, {
     required String localeCode,
+    MealType? mealType,
     int? weeklyDeficitKcal,
   }) {
-    final isAr = localeCode == 'ar';
+    // Standardize Arabic vs Egyptian Arabic
+    final isArEg = localeCode == 'ar_EG' || localeCode == 'ar-EG';
+    final isAr = localeCode.startsWith('ar');
+
     return switch (type) {
       NotificationType.waterReminder => NotificationMessage(
-          title: isAr ? '💧 اشرب ماء' : '💧 Hydration check',
+          title: isAr
+              ? (isArEg ? '💧 اشرب شوية مية' : '💧 اشرب ماء')
+              : '💧 Water check',
           body: isAr
-              ? 'حان وقت كوب ماء — حافظ على ترطيب جسمك.'
-              : 'Time for a glass of water — stay hydrated.',
+              ? (isArEg
+                  ? 'كوباية مية هترطب جسمك وتصحصحك — متنساش نفسك.'
+                  : 'وقت كوب ماء منعش — حافظ على ترطيب جسمك وطاقتك.')
+              : 'Time for a fresh glass of water — stay hydrated and energized.',
+          payload: 'vireo://quick_log/water',
         ),
-      NotificationType.breakfastReminder => NotificationMessage(
-          title: isAr ? '🍳 وقت الإفطار' : '🍳 Breakfast time',
+
+      NotificationType.mealBreakfastReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '🍳 صباح الفل! وقت الفطار' : '🍳 صباح الخير! وقت الإفطار')
+              : '🍳 Morning fuel! Breakfast time',
           body: isAr
-              ? 'ابدأ يومك بوجبة متوازنة.'
-              : 'Start your day with a balanced meal.',
+              ? (isArEg
+                  ? 'فطارك المتوازن هيديك طاقة تكمل بيها باقي اليوم.'
+                  : 'ابدأ يومك بوجبة متوازنة تمنحك النشاط والحيوية.')
+              : 'Start your day with a balanced meal to stay sharp and energized.',
+          payload: 'vireo://nutrition/breakfast',
         ),
-      NotificationType.lunchReminder => NotificationMessage(
-          title: isAr ? '🍛 وقت الغداء' : '🍛 Lunch time',
+
+      NotificationType.mealLunchReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '🍛 وقت الغدا يا بطل' : '🍛 وقت وجبة الغداء')
+              : '🍛 Lunchtime fuel',
           body: isAr
-              ? 'لا تنسَ تناول غدائك وتحقيق أهداف البروتين.'
-              : 'Fuel up — keep your protein on track.',
+              ? (isArEg
+                  ? 'جدد طاقتك بوجبة غدا مغذية وكمل أهداف البروتين.'
+                  : 'جدد طاقتك بوجبة غداء مغذية لدعم عضلاتك ويومك.')
+              : 'Refuel with a nourishing lunch to keep your momentum going.',
+          payload: 'vireo://nutrition/lunch',
         ),
-      NotificationType.dinnerReminder => NotificationMessage(
-          title: isAr ? '🍽️ وقت العشاء' : '🍽️ Dinner time',
+
+      NotificationType.mealDinnerReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '🍽️ وقت العشا' : '🍽️ وقت وجبة العشاء')
+              : '🍽️ Nourishing dinner',
           body: isAr
-              ? 'خطّط لعشاء خفيف ومغذٍ قبل النوم.'
-              : 'Plan a light, nourishing dinner.',
+              ? (isArEg
+                  ? 'عشا خفيف ومغذي يساعد جسمك يتعافى وأنت نايم.'
+                  : 'عشاء خفيف ومغذٍ يساعد جسمك على التعافي أثناء النوم.')
+              : 'A light, wholesome dinner to nourish and recover tonight.',
+          payload: 'vireo://nutrition/dinner',
         ),
-      NotificationType.preWorkoutReminder => NotificationMessage(
-          title: isAr ? '🏋️ التمرين قريب' : '🏋️ Workout soon',
+
+      NotificationType.fastingWindowOpenReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '✨ نافذة الأكل بدأت' : '✨ بدأت نافذة تناول الطعام')
+              : '✨ Eating window open',
           body: isAr
-              ? '30 دقيقة حتى تمرينك — جهّز نفسك واشرب ماء.'
-              : '30 minutes until your workout — hydrate and get ready.',
+              ? (isArEg
+                  ? 'تقدر تبدأ وجباتك دلوقتي بهدوء وتستمتع بأكلك.'
+                  : 'يمكنك الآن بدء وجباتك المتوازنة براحة واعتدال.')
+              : 'Your eating window is now open — enjoy your nourishing meals mindfully.',
+          payload: 'vireo://home/fasting',
         ),
-      NotificationType.sleepReminder => NotificationMessage(
-          title: isAr ? '😴 وقت النوم' : '😴 Bedtime reminder',
+
+      NotificationType.fastingWindowCloseReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '🌙 نافذة الأكل بتنتهي' : '🌙 نافذة الصيام تبدأ قريباً')
+              : '🌙 Fasting window begins',
           body: isAr
-              ? '22:30 — ابدأ روتين النوم للتعافي الأمثل.'
-              : 'Wind down for quality sleep and recovery.',
+              ? (isArEg
+                  ? 'وقت الصيام هيبدأ — اشرب مية وريح جهازك الهضمي.'
+                  : 'حان وقت إراحة جهازك الهضمي — اشرب ماء واستعد للنوم.')
+              : 'Fasting window starts soon — hydrate well and let your body rest.',
+          payload: 'vireo://home/fasting',
         ),
-      NotificationType.weeklyReportReminder => NotificationMessage(
-          title: isAr ? '📊 تقريرك الأسبوعي' : '📊 Weekly report',
-          body: _weeklyBody(isAr, weeklyDeficitKcal),
+
+      NotificationType.workoutReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '🏋️ تمرينك قرب يا بطل' : '🏋️ اقترب موعد تمرينك')
+              : '🏋️ Workout time coming up',
+          body: isAr
+              ? (isArEg
+                  ? 'نص ساعة وتمرينك يبدأ — جهز لبسك والمية وخليك جاهز.'
+                  : '30 دقيقة تفصلك عن التمرين — جهّز نفسك واستمتع بحركتك اليوم.')
+              : '30 minutes until workout — hydrate and get ready to move.',
+          payload: 'vireo://workout/today',
+        ),
+
+      NotificationType.stepsNudgeReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '🚶‍♂️ نتمشى شوية سوا؟' : '🚶‍♂️ مشية خفيفة لتجديد طاقتك')
+              : '🚶‍♂️ Time for a refreshing walk',
+          body: isAr
+              ? (isArEg
+                  ? 'مشية ربع ساعة في الهوا هتجدد نشاطك وتقربك من هدف خطواتك.'
+                  : 'مشية خفيفة لمدة 15 دقيقة ستنعش يومك وتقربك من هدفك.')
+              : 'A gentle 15-minute walk will refresh your mind and boost your step goal.',
+          payload: 'vireo://activity/steps',
+        ),
+
+      NotificationType.bedtimeReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '😴 وقت الراحة والنوم' : '😴 وقت الاسترخاء والنوم')
+              : '😴 Wind down for sleep',
+          body: isAr
+              ? (isArEg
+                  ? 'اطفي الشاشات واسترخي — نومك هو سر تعافيك وطاقتك بكرة.'
+                  : 'ابتعد عن الشاشات واسترخِ — النوم العميق أساس تعافيك وصحتك.')
+              : 'Dim the screens and unwind — quality sleep is the foundation of recovery.',
+          payload: 'vireo://home/bedtime',
+        ),
+
+      NotificationType.weeklyCheckInReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '📊 تقريرك الأسبوعي جاهز' : '📊 تقريرك الأسبوعي')
+              : '📊 Your weekly check-in',
+          body: _weeklyBody(isAr, isArEg, weeklyDeficitKcal),
+          payload: 'vireo://progress/weekly',
+        ),
+
+      NotificationType.streakProtectionReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '🔥 حافظ على سلسلتك الحلوة' : '🔥 حافظ على تقدمك اليومي')
+              : '🔥 Protect today’s streak',
+          body: isAr
+              ? (isArEg
+                  ? 'دقيقة واحدة تسجل فيها وجبة أو كوباية مية وهتفضل سلسلتك مستمرة.'
+                  : 'دقيقة واحدة لتسجيل يومك تضمن استمرار تقدمك وسلسلتك.')
+              : 'Just a quick tap to log water or a meal keeps your awesome streak going.',
+          payload: 'vireo://diary/today',
         ),
     };
   }
 
-  static String _weeklyBody(bool isAr, int? kcal) {
+  static String _weeklyBody(bool isAr, bool isArEg, int? kcal) {
     if (kcal == null) {
-      return isAr
-          ? 'راجع تقدمك الأسبوعي في Vireo.'
-          : 'Review your weekly progress in Vireo.';
+      if (isAr) {
+        return isArEg
+            ? 'تعالى نلقي نظرة سريعة على إنجازاتك في الأسبوع اللي فات.'
+            : 'ألقِ نظرة على إنجازاتك وتقدمك خلال الأسبوع الماضي.';
+      }
+      return 'Take a friendly look back at your progress this past week.';
     }
     if (kcal >= 0) {
-      return isAr
-          ? 'عجزك الأسبوعي: $kcal kcal — أسبوع قوي!'
-          : 'Weekly deficit: $kcal kcal — strong week!';
+      if (isAr) {
+        return isArEg
+            ? 'عجزك الأسبوعي: $kcal سعرة — عاش يا بطل، خطوة رائعة لقدام!'
+            : 'عجزك الأسبوعي: $kcal سعرة حرارية — أسبوع رائع من الالتزام!';
+      }
+      return 'Weekly deficit: $kcal kcal — fantastic consistency and dedication!';
     }
-    return isAr
-        ? 'فائضك الأسبوعي: ${kcal.abs()} kcal — راجع خطتك.'
-        : 'Weekly surplus: ${kcal.abs()} kcal — review your plan.';
+    if (isAr) {
+      return isArEg
+          ? 'فائضك الأسبوعي: ${kcal.abs()} سعرة — كل أسبوع فرصة جديدة وجميلة.'
+          : 'فائضك الأسبوعي: ${kcal.abs()} سعرة حرارية — كل أسبوع بداية جديدة.';
+    }
+    return 'Weekly surplus: ${kcal.abs()} kcal — every week is a fresh opportunity to reset.';
   }
 }

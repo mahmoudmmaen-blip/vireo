@@ -1185,17 +1185,44 @@
   "notificationsLunch": "Lunch reminder",
   "notificationsOpenSettings": "Open settings",
   "notificationsPermissionBanner": "Enable notifications to stay on track",
-  "notificationsPreWorkout": "Pre-workout reminder",
+  "notificationsPreWorkout": "Workout reminder",
   "notificationsPreWorkoutSubtitle": "Get ready to train",
-  "notificationsSleep": "Sleep reminder",
+  "notificationsSleep": "Bedtime reminder",
   "notificationsSleepSubtitle": "Wind down for better recovery",
   "notificationsTest": "Send test notification",
   "notificationsTestBody": "Vireo reminders are working",
-  "notificationsTitle": "Notifications",
+  "notificationsTitle": "Reminders",
   "notificationsWater": "Water reminder",
   "notificationsWaterSubtitle": "Stay hydrated through the day",
-  "notificationsWeeklyReport": "Weekly report",
+  "notificationsWeeklyReport": "Weekly check-in",
   "notificationsWeeklyReportSubtitle": "See how your week went",
+  "notificationsFastingOpen": "Fasting window opens",
+  "notificationsFastingOpenSubtitle": "Time to start your eating window",
+  "notificationsFastingClose": "Fasting window closes",
+  "notificationsFastingCloseSubtitle": "Time to wind down meals and hydrate",
+  "notificationsStepsNudge": "Steps nudge",
+  "notificationsStepsNudgeSubtitle": "Nudge at 18:00 if under 50% of your goal",
+  "notificationsStreakProtection": "Streak protection",
+  "notificationsStreakProtectionSubtitle": "Gentle nudge at 21:00 if nothing logged today",
+  "notificationsQuietHoursTitle": "Quiet hours",
+  "notificationsQuietHoursSubtitle": "{start} to {end} — no notifications will sound",
+  "@notificationsQuietHoursSubtitle": {
+    "placeholders": {
+      "start": { "type": "String" },
+      "end": { "type": "String" }
+    }
+  },
+  "notificationsMaxDailyTitle": "Daily notification limit",
+  "notificationsMaxDailySubtitle": "Up to {count} notifications per day",
+  "@notificationsMaxDailySubtitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "notificationsPermissionDialogTitle": "Stay in your flow with reminders",
+  "notificationsPermissionDialogBody": "Vireo sends gentle, supportive nudges for hydration, workouts, and meals. We respect your quiet hours and never spam you.",
+  "notificationsPermissionAllow": "Allow reminders",
+  "notificationsPermissionNotNow": "Not now",
   "vitality12WeekProgram": "12-Week Program",
   "@vitalityArticleCount": {
     "placeholders": {

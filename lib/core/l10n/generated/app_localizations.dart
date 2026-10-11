@@ -3995,7 +3995,7 @@ abstract class AppLocalizations {
   /// No description provided for @notificationsPreWorkout.
   ///
   /// In en, this message translates to:
-  /// **'Pre-workout reminder'**
+  /// **'Workout reminder'**
   String get notificationsPreWorkout;
 
   /// No description provided for @notificationsPreWorkoutSubtitle.
@@ -4007,7 +4007,7 @@ abstract class AppLocalizations {
   /// No description provided for @notificationsSleep.
   ///
   /// In en, this message translates to:
-  /// **'Sleep reminder'**
+  /// **'Bedtime reminder'**
   String get notificationsSleep;
 
   /// No description provided for @notificationsSleepSubtitle.
@@ -4031,7 +4031,7 @@ abstract class AppLocalizations {
   /// No description provided for @notificationsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Notifications'**
+  /// **'Reminders'**
   String get notificationsTitle;
 
   /// No description provided for @notificationsWater.
@@ -4049,7 +4049,7 @@ abstract class AppLocalizations {
   /// No description provided for @notificationsWeeklyReport.
   ///
   /// In en, this message translates to:
-  /// **'Weekly report'**
+  /// **'Weekly check-in'**
   String get notificationsWeeklyReport;
 
   /// No description provided for @notificationsWeeklyReportSubtitle.
@@ -4057,6 +4057,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See how your week went'**
   String get notificationsWeeklyReportSubtitle;
+
+  /// No description provided for @notificationsFastingOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Fasting window opens'**
+  String get notificationsFastingOpen;
+
+  /// No description provided for @notificationsFastingOpenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to start your eating window'**
+  String get notificationsFastingOpenSubtitle;
+
+  /// No description provided for @notificationsFastingClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Fasting window closes'**
+  String get notificationsFastingClose;
+
+  /// No description provided for @notificationsFastingCloseSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to wind down meals and hydrate'**
+  String get notificationsFastingCloseSubtitle;
+
+  /// No description provided for @notificationsStepsNudge.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps nudge'**
+  String get notificationsStepsNudge;
+
+  /// No description provided for @notificationsStepsNudgeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nudge at 18:00 if under 50% of your goal'**
+  String get notificationsStepsNudgeSubtitle;
+
+  /// No description provided for @notificationsStreakProtection.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak protection'**
+  String get notificationsStreakProtection;
+
+  /// No description provided for @notificationsStreakProtectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle nudge at 21:00 if nothing logged today'**
+  String get notificationsStreakProtectionSubtitle;
+
+  /// No description provided for @notificationsQuietHoursTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet hours'**
+  String get notificationsQuietHoursTitle;
+
+  /// No description provided for @notificationsQuietHoursSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{start} to {end} — no notifications will sound'**
+  String notificationsQuietHoursSubtitle(String start, String end);
+
+  /// No description provided for @notificationsMaxDailyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily notification limit'**
+  String get notificationsMaxDailyTitle;
+
+  /// No description provided for @notificationsMaxDailySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to {count} notifications per day'**
+  String notificationsMaxDailySubtitle(int count);
+
+  /// No description provided for @notificationsPermissionDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay in your flow with reminders'**
+  String get notificationsPermissionDialogTitle;
+
+  /// No description provided for @notificationsPermissionDialogBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo sends gentle, supportive nudges for hydration, workouts, and meals. We respect your quiet hours and never spam you.'**
+  String get notificationsPermissionDialogBody;
+
+  /// No description provided for @notificationsPermissionAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow reminders'**
+  String get notificationsPermissionAllow;
+
+  /// No description provided for @notificationsPermissionNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notificationsPermissionNotNow;
 
   /// No description provided for @vitality12WeekProgram.
   ///

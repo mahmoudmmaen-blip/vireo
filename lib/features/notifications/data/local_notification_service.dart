@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show TimeOfDay;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest_all.dart' as tz_data;
@@ -8,28 +7,41 @@ import 'package:vireo/features/notifications/data/notification_messages.dart';
 import 'package:vireo/features/notifications/domain/i_notification_service.dart';
 import 'package:vireo/features/notifications/domain/notification_settings.dart';
 import 'package:vireo/features/notifications/domain/notification_type.dart';
+import 'package:vireo/features/notifications/domain/reminder_scheduler.dart';
 
 typedef LocaleCodeReader = String Function();
 typedef WeeklyDeficitReader = int? Function();
 typedef HasWorkoutTodayReader = bool Function();
+typedef ReminderContextProvider = ReminderContext Function();
+typedef NotificationTapHandler = void Function(String? payload);
 
 class LocalNotificationService implements INotificationService {
   LocalNotificationService({
     required LocaleCodeReader readLocaleCode,
     required WeeklyDeficitReader readWeeklyDeficit,
     required HasWorkoutTodayReader hasWorkoutToday,
+    ReminderContextProvider? reminderContextProvider,
+    NotificationTapHandler? onNotificationTap,
+    FlutterLocalNotificationsPlugin? plugin,
   })  : _readLocaleCode = readLocaleCode,
         _readWeeklyDeficit = readWeeklyDeficit,
-        _hasWorkoutToday = hasWorkoutToday;
+        _hasWorkoutToday = hasWorkoutToday,
+        _reminderContextProvider = reminderContextProvider,
+        _onNotificationTap = onNotificationTap,
+        _plugin = plugin ?? FlutterLocalNotificationsPlugin();
 
   final LocaleCodeReader _readLocaleCode;
   final WeeklyDeficitReader _readWeeklyDeficit;
   final HasWorkoutTodayReader _hasWorkoutToday;
+  final ReminderContextProvider? _reminderContextProvider;
+  final NotificationTapHandler? _onNotificationTap;
 
-  static const _channelId = 'vireo_channel';
-  static const _channelName = 'Vireo Reminders';
+  static const _channelId = 'vireo_reminders_channel';
+  static const _channelName = 'Vireo Smart Reminders';
+  static const _channelDesc = 'Timely, warm reminders for water, meals, workouts, and wellness.';
 
-  final FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _plugin;
+  final ReminderScheduler _scheduler = const ReminderScheduler();
   bool _initialized = false;
 
   @override
@@ -49,12 +61,17 @@ class LocalNotificationService implements INotificationService {
 
       await _plugin.initialize(
         const InitializationSettings(android: android, iOS: ios),
+        onDidReceiveNotificationResponse: (response) {
+          final payload = response.payload;
+          _onNotificationTap?.call(payload);
+        },
       );
 
       if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
         const channel = AndroidNotificationChannel(
           _channelId,
           _channelName,
+          description: _channelDesc,
           importance: Importance.high,
           playSound: true,
         );
@@ -62,6 +79,15 @@ class LocalNotificationService implements INotificationService {
             .resolvePlatformSpecificImplementation<
                 AndroidFlutterLocalNotificationsPlugin>()
             ?.createNotificationChannel(channel);
+      }
+
+      // Check for launch notification if app was opened via notification tap
+      final launchDetails = await _plugin.getNotificationAppLaunchDetails();
+      if (launchDetails?.didNotificationLaunchApp == true) {
+        final payload = launchDetails?.notificationResponse?.payload;
+        if (payload != null && payload.isNotEmpty) {
+          _onNotificationTap?.call(payload);
+        }
       }
 
       _initialized = true;
@@ -137,108 +163,40 @@ class LocalNotificationService implements INotificationService {
     final locale = _readLocaleCode();
     final weeklyDeficit = _readWeeklyDeficit();
 
-    for (final type in NotificationType.values) {
-      if (!settings.isEnabled(type)) continue;
+    final reminderCtx = _reminderContextProvider != null
+        ? _reminderContextProvider()
+        : ReminderContext(
+            isWaterGoalMet: false,
+            currentSteps: 0,
+            dailyStepsGoal: 6000,
+            hasLoggedToday: false,
+            hasWorkoutToday: _hasWorkoutToday(),
+            weeklyDeficitKcal: weeklyDeficit,
+          );
 
-      switch (type) {
-        case NotificationType.waterReminder:
-          await _scheduleWater(settings, locale);
-        case NotificationType.preWorkoutReminder:
-          if (_hasWorkoutToday()) {
-            await _schedulePreWorkout(settings, locale);
-          }
-        case NotificationType.weeklyReportReminder:
-          await _scheduleWeekly(locale, weeklyDeficit);
-        default:
-          await _scheduleDailyFixed(type, locale, weeklyDeficit);
-      }
-    }
-  }
+    final scheduledCandidates = _scheduler.generateSchedule(
+      settings: settings,
+      context: reminderCtx,
+    );
 
-  Future<void> _scheduleWater(NotificationSettings settings, String locale) async {
-    for (var i = 0; i < waterReminderHours.length; i++) {
-      final hour = waterReminderHours[i];
+    for (final candidate in scheduledCandidates) {
       final message = NotificationMessages.forType(
-        NotificationType.waterReminder,
+        candidate.type,
         localeCode: locale,
+        mealType: candidate.mealType,
+        weeklyDeficitKcal: weeklyDeficit,
       );
+
       await _zonedDaily(
-        id: NotificationType.waterReminder.notificationId(i),
-        hour: hour,
-        minute: 0,
+        id: candidate.id,
+        hour: candidate.hour,
+        minute: candidate.minute,
         title: message.title,
         body: message.body,
+        payload: message.payload,
+        weekday: candidate.weekday,
       );
     }
-  }
-
-  Future<void> _scheduleDailyFixed(
-    NotificationType type,
-    String locale,
-    int? weeklyDeficit,
-  ) async {
-    final time = type.fixedDailyTime;
-    if (time == null) return;
-
-    final message = NotificationMessages.forType(
-      type,
-      localeCode: locale,
-      weeklyDeficitKcal: weeklyDeficit,
-    );
-
-    await _zonedDaily(
-      id: type.notificationId(),
-      hour: time.$1,
-      minute: time.$2,
-      title: message.title,
-      body: message.body,
-      weekday: type == NotificationType.weeklyReportReminder
-          ? DateTime.sunday
-          : null,
-    );
-  }
-
-  Future<void> _scheduleWeekly(String locale, int? weeklyDeficit) async {
-    final message = NotificationMessages.forType(
-      NotificationType.weeklyReportReminder,
-      localeCode: locale,
-      weeklyDeficitKcal: weeklyDeficit,
-    );
-    await _zonedDaily(
-      id: NotificationType.weeklyReportReminder.notificationId(),
-      hour: 9,
-      minute: 0,
-      title: message.title,
-      body: message.body,
-      weekday: DateTime.sunday,
-    );
-  }
-
-  Future<void> _schedulePreWorkout(
-    NotificationSettings settings,
-    String locale,
-  ) async {
-    final workout = settings.workoutTime ?? const TimeOfDay(hour: 18, minute: 0);
-    var hour = workout.hour;
-    var minute = workout.minute - 30;
-    if (minute < 0) {
-      minute += 60;
-      hour -= 1;
-    }
-    if (hour < 0) hour = 0;
-
-    final message = NotificationMessages.forType(
-      NotificationType.preWorkoutReminder,
-      localeCode: locale,
-    );
-
-    await _zonedDaily(
-      id: NotificationType.preWorkoutReminder.notificationId(),
-      hour: hour,
-      minute: minute,
-      title: message.title,
-      body: message.body,
-    );
   }
 
   Future<void> _zonedDaily({
@@ -247,6 +205,7 @@ class LocalNotificationService implements INotificationService {
     required int minute,
     required String title,
     required String body,
+    required String payload,
     int? weekday,
   }) async {
     try {
@@ -278,6 +237,7 @@ class LocalNotificationService implements INotificationService {
         matchDateTimeComponents: weekday != null
             ? DateTimeComponents.dayOfWeekAndTime
             : DateTimeComponents.time,
+        payload: payload,
       );
     } catch (_) {
       // Skip individual slot failures.
@@ -309,6 +269,7 @@ class LocalNotificationService implements INotificationService {
       android: AndroidNotificationDetails(
         _channelId,
         _channelName,
+        channelDescription: _channelDesc,
         importance: Importance.high,
         priority: Priority.high,
         playSound: true,
@@ -348,11 +309,16 @@ class LocalNotificationService implements INotificationService {
     if (kIsWeb || !_initialized) return;
 
     try {
+      final message = NotificationMessages.forType(
+        type,
+        localeCode: _readLocaleCode(),
+      );
       await _plugin.show(
         type.notificationId(99),
         title,
         body,
         _details(),
+        payload: message.payload,
       );
     } catch (_) {
       // Non-fatal.

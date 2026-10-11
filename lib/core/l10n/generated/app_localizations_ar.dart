@@ -2155,53 +2155,113 @@ class AppLocalizationsAr extends AppLocalizations {
   String get muscleTriceps => 'الترايسبس';
 
   @override
-  String get notificationsBreakfast => 'Breakfast reminder';
+  String get notificationsBreakfast => 'تذكير الإفطار';
 
   @override
-  String get notificationsDinner => 'Dinner reminder';
+  String get notificationsDinner => 'تذكير العشاء';
 
   @override
-  String get notificationsLunch => 'Lunch reminder';
+  String get notificationsLunch => 'تذكير الغداء';
 
   @override
-  String get notificationsOpenSettings => 'Open settings';
+  String get notificationsOpenSettings => 'فتح الإعدادات';
 
   @override
   String get notificationsPermissionBanner =>
-      'Enable notifications to stay on track';
+      'فعّل التنبيهات لتصلك تذكيراتك في موعدها';
 
   @override
-  String get notificationsPreWorkout => 'Pre-workout reminder';
+  String get notificationsPreWorkout => 'تذكير التمرين';
 
   @override
-  String get notificationsPreWorkoutSubtitle => 'Get ready to train';
+  String get notificationsPreWorkoutSubtitle => 'استعد للتمرين والنشاط';
 
   @override
-  String get notificationsSleep => 'Sleep reminder';
+  String get notificationsSleep => 'تذكير موعد النوم';
 
   @override
-  String get notificationsSleepSubtitle => 'Wind down for better recovery';
+  String get notificationsSleepSubtitle =>
+      'استرخِ وجهز نفسك لنوم عميق وتعافٍ أفضل';
 
   @override
-  String get notificationsTest => 'Send test notification';
+  String get notificationsTest => 'إرسال تذكير تجريبي';
 
   @override
-  String get notificationsTestBody => 'Vireo reminders are working';
+  String get notificationsTestBody => 'تذكيرات Vireo تعمل بنجاح';
 
   @override
-  String get notificationsTitle => 'الإشعارات';
+  String get notificationsTitle => 'التذكيرات';
 
   @override
-  String get notificationsWater => 'Water reminder';
+  String get notificationsWater => 'تذكير شرب الماء';
 
   @override
-  String get notificationsWaterSubtitle => 'Stay hydrated through the day';
+  String get notificationsWaterSubtitle =>
+      'حافظ على ترطيب ونشاط جسمك طوال اليوم';
 
   @override
-  String get notificationsWeeklyReport => 'Weekly report';
+  String get notificationsWeeklyReport => 'المتابعة الأسبوعية';
 
   @override
-  String get notificationsWeeklyReportSubtitle => 'See how your week went';
+  String get notificationsWeeklyReportSubtitle =>
+      'راجع إنجازاتك وتقدمك خلال الأسبوع';
+
+  @override
+  String get notificationsFastingOpen => 'بدء نافذة الأكل';
+
+  @override
+  String get notificationsFastingOpenSubtitle => 'وقت بدء وجباتك المتوازنة';
+
+  @override
+  String get notificationsFastingClose => 'بدء نافذة الصيام';
+
+  @override
+  String get notificationsFastingCloseSubtitle =>
+      'وقت إراحة جهازك الهضمي وشرب الماء';
+
+  @override
+  String get notificationsStepsNudge => 'تذكير الخطوات';
+
+  @override
+  String get notificationsStepsNudgeSubtitle =>
+      'تنبيه لطيف الساعة 18:00 إذا كانت الخطوات أقل من 50%';
+
+  @override
+  String get notificationsStreakProtection => 'حماية السلسلة';
+
+  @override
+  String get notificationsStreakProtectionSubtitle =>
+      'تنبيه ودي الساعة 21:00 إذا لم تسجل شيئاً اليوم';
+
+  @override
+  String get notificationsQuietHoursTitle => 'ساعات الهدوء';
+
+  @override
+  String notificationsQuietHoursSubtitle(String start, String end) {
+    return 'من $start إلى $end — بدون أي إزعاج';
+  }
+
+  @override
+  String get notificationsMaxDailyTitle => 'الحد الأقصى اليومي';
+
+  @override
+  String notificationsMaxDailySubtitle(int count) {
+    return 'بحد أقصى $count تذكيرات يومياً';
+  }
+
+  @override
+  String get notificationsPermissionDialogTitle =>
+      'خلّيك في مسارك مع تذكيرات Vireo';
+
+  @override
+  String get notificationsPermissionDialogBody =>
+      'هنبعتلك تذكيرات لطيفة ودافية للماء، والتمارين، والوجبات في وقتها. بنحترم ساعات هدوئك تماماً ومش هنزعجك أبداً.';
+
+  @override
+  String get notificationsPermissionAllow => 'تفعيل التذكيرات';
+
+  @override
+  String get notificationsPermissionNotNow => 'ليس الآن';
 
   @override
   String get vitality12WeekProgram => '12-Week Program';

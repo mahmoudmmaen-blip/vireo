@@ -10,9 +10,12 @@ import 'package:vireo/data/repositories/workout_repository.dart';
 import 'package:vireo/features/diary/screens/diary_screen.dart';
 import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
 import 'package:vireo/features/diet_programs/screens/diet_quiz_screen.dart';
+import 'package:vireo/core/services/locale_provider.dart';
+import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/home/home_screen.dart';
 import 'package:vireo/features/notifications/providers/notification_settings_provider.dart';
 import 'package:vireo/features/nutrition/nutrition_screen.dart';
+import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 import 'package:vireo/features/profile/profile_screen.dart';
 import 'package:vireo/features/progress/progress_screen.dart';
 import 'package:vireo/features/progress/widgets/reassessment_gate.dart';
@@ -73,12 +76,17 @@ class _MainShellState extends ConsumerState<MainShell> {
   Widget build(BuildContext context) {
     final index = ref.watch(shellTabIndexProvider);
     ref.watch(notificationBootstrapProvider);
-    ref.listen(todayWorkoutProvider, (previous, next) {
+    void rescheduleIfEnabled() {
       final settings = ref.read(notificationSettingsProvider);
       if (settings.hasAnyEnabled) {
         ref.read(notificationServiceProvider).scheduleAll(settings);
       }
-    });
+    }
+
+    ref.listen(todayWorkoutProvider, (prev, next) => rescheduleIfEnabled());
+    ref.listen(activeDietProgramProvider, (prev, next) => rescheduleIfEnabled());
+    ref.listen(effectiveTodayMealsProvider, (prev, next) => rescheduleIfEnabled());
+    ref.listen(localeProvider, (prev, next) => rescheduleIfEnabled());
 
     // Celebrations: water goal, protein goal, step goal
     ref.listen(waterTrackerProvider, (prev, next) {

@@ -2229,6 +2229,64 @@ class AppLocalizationsUr extends AppLocalizations {
   String get notificationsWeeklyReportSubtitle => 'دیکھیں آپ کا ہفتہ کیسا رہا';
 
   @override
+  String get notificationsFastingOpen => 'Fasting window opens';
+
+  @override
+  String get notificationsFastingOpenSubtitle =>
+      'Time to start your eating window';
+
+  @override
+  String get notificationsFastingClose => 'Fasting window closes';
+
+  @override
+  String get notificationsFastingCloseSubtitle =>
+      'Time to wind down meals and hydrate';
+
+  @override
+  String get notificationsStepsNudge => 'Steps nudge';
+
+  @override
+  String get notificationsStepsNudgeSubtitle =>
+      'Nudge at 18:00 if under 50% of your goal';
+
+  @override
+  String get notificationsStreakProtection => 'Streak protection';
+
+  @override
+  String get notificationsStreakProtectionSubtitle =>
+      'Gentle nudge at 21:00 if nothing logged today';
+
+  @override
+  String get notificationsQuietHoursTitle => 'Quiet hours';
+
+  @override
+  String notificationsQuietHoursSubtitle(String start, String end) {
+    return '$start to $end — no notifications will sound';
+  }
+
+  @override
+  String get notificationsMaxDailyTitle => 'Daily notification limit';
+
+  @override
+  String notificationsMaxDailySubtitle(int count) {
+    return 'Up to $count notifications per day';
+  }
+
+  @override
+  String get notificationsPermissionDialogTitle =>
+      'Stay in your flow with reminders';
+
+  @override
+  String get notificationsPermissionDialogBody =>
+      'Vireo sends gentle, supportive nudges for hydration, workouts, and meals. We respect your quiet hours and never spam you.';
+
+  @override
+  String get notificationsPermissionAllow => 'Allow reminders';
+
+  @override
+  String get notificationsPermissionNotNow => 'Not now';
+
+  @override
   String get vitality12WeekProgram => '12 ہفتوں کا پروگرام';
 
   @override
