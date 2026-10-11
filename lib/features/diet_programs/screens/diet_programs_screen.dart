@@ -5,6 +5,7 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/features/diet_programs/application/diet_plan_engine.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
@@ -108,6 +109,21 @@ class DietProgramsScreen extends ConsumerWidget {
                           ),
                           color: colors.textMute,
                         ),
+                        if (item.targets.deficitKcal > 0 || item.targets.weeklyLossKg > 0)
+                          FatEquivalentBadge(
+                            customText: FatEquivalent.dietPlanRateText(
+                              dailyDeficitKcal: item.targets.deficitKcal,
+                              weeklyLossKg: item.targets.weeklyLossKg,
+                              l10n: l10n,
+                              lang: lang,
+                            ),
+                            style: TextStyle(
+                              color: isActive ? colors.success : colors.ember,
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            showIcon: false,
+                          ),
                         if (item.eligibility.status ==
                             EligibilityStatus.doctorRequired)
                           VireoPill(

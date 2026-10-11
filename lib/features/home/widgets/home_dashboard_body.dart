@@ -12,6 +12,8 @@ import 'package:vireo/core/ui/motion.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/ring_progress.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
+import 'package:vireo/core/utils/walking_metrics_calculator.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/models/workout_session.dart';
@@ -557,6 +559,37 @@ class _TodayHeroCard extends StatelessWidget {
               ],
             ),
           ),
+          if (data.remainingKcal > 0 && FatEquivalent.hasEquivalent(data.remainingKcal)) ...[
+            const SizedBox(height: VSpace.xs + 2),
+            Center(
+              child: FatEquivalentBadge(
+                kcal: data.remainingKcal,
+                customText: l10n.fatEquivalentTodayDeficit(
+                  FatEquivalent.formatAmount(
+                    FatEquivalent.gramsFromKcal(data.remainingKcal),
+                    languageCode: Localizations.localeOf(context).languageCode,
+                  ),
+                ),
+                style: TextStyle(
+                  color: colors.success,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ] else if (data.remainingKcal < 0) ...[
+            const SizedBox(height: VSpace.xs + 2),
+            Center(
+              child: Text(
+                l10n.fatEquivalentTodaySurplus(data.remainingKcal.abs()),
+                style: TextStyle(
+                  color: colors.textMute,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -1043,6 +1076,10 @@ class _ActivityRow extends ConsumerWidget {
     final weightKg = ref.watch(waterProfileWeightKgProvider);
     final waterRatio = waterGoal > 0 ? waterMl / waterGoal : 0.0;
     final stepRatio = stepsGoal > 0 ? stepsCurrent / stepsGoal : 0.0;
+    final stepsKcal = WalkingMetricsCalculator.compute(
+      steps: stepsCurrent,
+      weightKg: weightKg,
+    ).caloriesBurned;
 
     return IntrinsicHeight(
       child: Row(
@@ -1065,6 +1102,18 @@ class _ActivityRow extends ConsumerWidget {
                 title: l10n.walkingTitle,
                 value: NumberFormat.decimalPattern('en').format(stepsCurrent),
                 caption: '/ ${NumberFormat.compact(locale: 'en').format(stepsGoal)}',
+                footer: FatEquivalent.hasEquivalent(stepsKcal)
+                    ? FatEquivalentBadge(
+                        kcal: stepsKcal,
+                        isBurned: true,
+                        style: TextStyle(
+                          color: colors.ember,
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        showIcon: false,
+                      )
+                    : null,
               ),
             ),
           ),
@@ -1137,12 +1186,14 @@ class _MetricTile extends StatelessWidget {
     required this.title,
     required this.value,
     required this.caption,
+    this.footer,
   });
 
   final Widget ring;
   final String title;
   final String value;
   final String caption;
+  final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -1174,6 +1225,10 @@ class _MetricTile extends StatelessWidget {
                 maxLines: 1,
                 style: TextStyle(color: colors.textMute, fontSize: 11),
               ),
+              if (footer != null) ...[
+                const SizedBox(height: 2),
+                footer!,
+              ],
             ],
           ),
         ),

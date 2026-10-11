@@ -3449,4 +3449,44 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get celebrationWorkoutTitle => 'ورزش مکمل ہو گئی! 🔥';
+
+  @override
+  String fatEquivalentApprox(String amount) {
+    return '≈ $amount چربی';
+  }
+
+  @override
+  String fatEquivalentBurned(String amount) {
+    return '≈ $amount چربی جلائی';
+  }
+
+  @override
+  String fatEquivalentTodayDeficit(String amount) {
+    return 'آج کا خسارہ ≈ $amount چربی';
+  }
+
+  @override
+  String fatEquivalentTodaySurplus(int kcal) {
+    return 'اضافی +$kcal کیلوریز';
+  }
+
+  @override
+  String fatEquivalentDietPlanRate(String daily, String weekly) {
+    return '≈ $daily چربی/دن • ≈ $weekly/ہفتہ';
+  }
+
+  @override
+  String fatEquivalentThisWeek(String amount) {
+    return 'اس ہفتے ≈ $amount چربی';
+  }
+
+  @override
+  String get fatEquivalentInfoTitle => 'چربی کے برابر';
+
+  @override
+  String get fatEquivalentInfoBody =>
+      'ترازو پر اصل وزن پانی اور گلائکوجن کی وجہ سے بھی بدلتا ہے، لہٰذا روزانہ کا وزن مختلف ہو سکتا ہے۔ یہ چربی کی توانائی کے برابر ہے۔';
+
+  @override
+  String get fatEquivalentInfoDismiss => 'سمجھ گیا';
 }

@@ -984,5 +984,14 @@
   "celebrationWaterTitle": "پانی کا ہدف مکمل ہو گیا! 💧",
   "celebrationProteinTitle": "پروٹین کا ہدف حاصل کر لیا! 💪",
   "celebrationStepsTitle": "قدموں کا ہدف مکمل! 🏃",
-  "celebrationWorkoutTitle": "ورزش مکمل ہو گئی! 🔥"
+  "celebrationWorkoutTitle": "ورزش مکمل ہو گئی! 🔥",
+  "fatEquivalentApprox": "≈ {amount} چربی",
+  "fatEquivalentBurned": "≈ {amount} چربی جلائی",
+  "fatEquivalentTodayDeficit": "آج کا خسارہ ≈ {amount} چربی",
+  "fatEquivalentTodaySurplus": "اضافی +{kcal} کیلوریز",
+  "fatEquivalentDietPlanRate": "≈ {daily} چربی/دن • ≈ {weekly}/ہفتہ",
+  "fatEquivalentThisWeek": "اس ہفتے ≈ {amount} چربی",
+  "fatEquivalentInfoTitle": "چربی کے برابر",
+  "fatEquivalentInfoBody": "ترازو پر اصل وزن پانی اور گلائکوجن کی وجہ سے بھی بدلتا ہے، لہٰذا روزانہ کا وزن مختلف ہو سکتا ہے۔ یہ چربی کی توانائی کے برابر ہے۔",
+  "fatEquivalentInfoDismiss": "سمجھ گیا"
 }

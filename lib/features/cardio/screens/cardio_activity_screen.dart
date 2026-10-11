@@ -5,6 +5,7 @@ import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/core/utils/cardio_calorie_calculator.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/features/cardio/providers/cardio_log_provider.dart';
 
@@ -114,7 +115,7 @@ class _CardioActivityScreenState extends ConsumerState<CardioActivityScreen> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        l10n.cardioEstimatedBurn(_previewBurn),
+                        '${l10n.cardioEstimatedBurn(_previewBurn)}${FatEquivalent.hasEquivalent(_previewBurn) ? ' · ${FatEquivalent.approxText(_previewBurn, l10n: l10n, lang: Localizations.localeOf(context).languageCode)}' : ''}',
                         style: TextStyle(
                           color: colors.ember,
                           fontWeight: FontWeight.w700,
@@ -156,11 +157,30 @@ class _CardioActivityScreenState extends ConsumerState<CardioActivityScreen> {
                 child: ListTile(
                   leading: Icon(Icons.directions_run, color: colors.ember),
                   title: Text(_activityLabel(l10n, entry.activity)),
-                  subtitle: Text(
-                    l10n.cardioLogSubtitle(
-                      entry.durationMinutes,
-                      entry.caloriesBurned,
-                    ),
+                  subtitle: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          l10n.cardioLogSubtitle(
+                            entry.durationMinutes,
+                            entry.caloriesBurned,
+                          ),
+                        ),
+                      ),
+                      if (FatEquivalent.hasEquivalent(entry.caloriesBurned)) ...[
+                        const Text(' · '),
+                        FatEquivalentBadge(
+                          kcal: entry.caloriesBurned,
+                          isBurned: false,
+                          style: TextStyle(
+                            color: colors.ember,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          showIcon: false,
+                        ),
+                      ],
+                    ],
                   ),
                   trailing: IconButton(
                     icon: Icon(Icons.delete_outline, color: colors.textMute),

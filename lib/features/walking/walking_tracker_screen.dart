@@ -6,6 +6,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/core/utils/walking_metrics_calculator.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/features/walking/data/body_metrics.dart';
@@ -194,6 +195,18 @@ class _WalkingTrackerBodyState extends ConsumerState<_WalkingTrackerBody> {
                   label: l10n.walkingCalories,
                   value: '${metrics.caloriesBurned} kcal',
                   colors: colors,
+                  footer: FatEquivalent.hasEquivalent(metrics.caloriesBurned)
+                      ? FatEquivalentBadge(
+                          kcal: metrics.caloriesBurned,
+                          isBurned: true,
+                          style: TextStyle(
+                            color: colors.ember,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          showIcon: false,
+                        )
+                      : null,
                 ),
               ),
               const SizedBox(width: VSpace.sm),
@@ -250,12 +263,14 @@ class _MetricTile extends StatelessWidget {
     required this.label,
     required this.value,
     required this.colors,
+    this.footer,
   });
 
   final IconData icon;
   final String label;
   final String value;
   final VireoColors colors;
+  final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -269,6 +284,10 @@ class _MetricTile extends StatelessWidget {
           const SizedBox(height: VSpace.sm),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w800)),
           Text(label, style: TextStyle(fontSize: 11, color: colors.textMute)),
+          if (footer != null) ...[
+            const SizedBox(height: 2),
+            footer!,
+          ],
         ],
       ),
     );

@@ -9,8 +9,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/services/locale_provider.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/features/progress/domain/weekly_progress_report_data.dart';
+import 'package:vireo/features/progress/models/daily_deficit_entry.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
+import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
 
 class WeeklyProgressReportScreen extends ConsumerStatefulWidget {
   const WeeklyProgressReportScreen({super.key});
@@ -69,6 +72,8 @@ class _WeeklyProgressReportScreenState extends ConsumerState<WeeklyProgressRepor
     final l10n = AppLocalizations.of(context);
     final reportAsync = ref.watch(weeklyProgressReportDataProvider);
 
+    final deficitSummary = ref.watch(weeklyDeficitProvider);
+
     return Scaffold(
       backgroundColor: colors.background,
       appBar: AppBar(
@@ -97,8 +102,23 @@ class _WeeklyProgressReportScreenState extends ConsumerState<WeeklyProgressRepor
                 // RepaintBoundary for high-res social card export
                 RepaintBoundary(
                   key: _cardKey,
-                  child: _ReportShareableCard(data: data, isArabic: _isArabic),
+                  child: _ReportShareableCard(
+                    data: data,
+                    isArabic: _isArabic,
+                    deficitSummary: deficitSummary,
+                  ),
                 ),
+                if (deficitSummary.totalNetKcal > 0) ...[
+                  const SizedBox(height: 16),
+                  FatEquivalentBadge(
+                    customText: l10n.fatEquivalentThisWeek(
+                      FatEquivalent.formatAmount(
+                        FatEquivalent.gramsFromKcal(deficitSummary.totalNetKcal),
+                        languageCode: Localizations.localeOf(context).languageCode,
+                      ),
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 24),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
@@ -125,10 +145,15 @@ class _WeeklyProgressReportScreenState extends ConsumerState<WeeklyProgressRepor
 }
 
 class _ReportShareableCard extends StatelessWidget {
-  const _ReportShareableCard({required this.data, required this.isArabic});
+  const _ReportShareableCard({
+    required this.data,
+    required this.isArabic,
+    required this.deficitSummary,
+  });
 
   final WeeklyProgressReportData data;
   final bool isArabic;
+  final WeeklyDeficitSummary deficitSummary;
 
   @override
   Widget build(BuildContext context) {
@@ -323,7 +348,35 @@ class _ReportShareableCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 12),
+            if (deficitSummary.totalNetKcal > 0) ...[
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF10B981).withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
+                ),
+                child: Row(
+                  children: [
+                    const Text('🔥', style: TextStyle(fontSize: 16)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        isArabic
+                            ? 'عجز الأسبوع ≈ ${FatEquivalent.formatAmount(FatEquivalent.gramsFromKcal(deficitSummary.totalNetKcal), languageCode: 'ar')} دهون'
+                            : 'This week\'s deficit ≈ ${FatEquivalent.formatAmount(FatEquivalent.gramsFromKcal(deficitSummary.totalNetKcal), languageCode: 'en')} fat',
+                        style: const TextStyle(
+                          color: Color(0xFF34D399),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 11.5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
 
             // AI Coach Tip
             Container(

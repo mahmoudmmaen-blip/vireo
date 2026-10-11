@@ -3452,4 +3452,44 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get celebrationWorkoutTitle => 'वर्कआउट समाप्त हुआ! 🔥';
+
+  @override
+  String fatEquivalentApprox(String amount) {
+    return '≈ $amount फैट';
+  }
+
+  @override
+  String fatEquivalentBurned(String amount) {
+    return '≈ $amount फैट बर्न किया';
+  }
+
+  @override
+  String fatEquivalentTodayDeficit(String amount) {
+    return 'आज का डेफिसिट ≈ $amount फैट';
+  }
+
+  @override
+  String fatEquivalentTodaySurplus(int kcal) {
+    return 'सरप्लस +$kcal kcal';
+  }
+
+  @override
+  String fatEquivalentDietPlanRate(String daily, String weekly) {
+    return '≈ $daily फैट/दिन • ≈ $weekly/सप्ताह';
+  }
+
+  @override
+  String fatEquivalentThisWeek(String amount) {
+    return 'इस सप्ताह ≈ $amount फैट';
+  }
+
+  @override
+  String get fatEquivalentInfoTitle => 'फैट समतुल्य';
+
+  @override
+  String get fatEquivalentInfoBody =>
+      'पैमाने पर वास्तविक वजन पानी और ग्लाइकोजन से भी बदलता है, इसलिए दैनिक वजन अलग दिख सकता है। यह वसा का ऊर्जा समतुल्य है।';
+
+  @override
+  String get fatEquivalentInfoDismiss => 'समझ गया';
 }

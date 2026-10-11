@@ -3482,4 +3482,44 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get celebrationWorkoutTitle => '¡Entrenamiento completado! 🔥';
+
+  @override
+  String fatEquivalentApprox(String amount) {
+    return '≈ $amount de grasa';
+  }
+
+  @override
+  String fatEquivalentBurned(String amount) {
+    return 'Quemaste ≈ $amount de grasa';
+  }
+
+  @override
+  String fatEquivalentTodayDeficit(String amount) {
+    return 'Déficit de hoy ≈ $amount de grasa';
+  }
+
+  @override
+  String fatEquivalentTodaySurplus(int kcal) {
+    return 'Superávit +$kcal kcal';
+  }
+
+  @override
+  String fatEquivalentDietPlanRate(String daily, String weekly) {
+    return '≈ $daily grasa/día • ≈ $weekly/sem.';
+  }
+
+  @override
+  String fatEquivalentThisWeek(String amount) {
+    return '≈ $amount de grasa esta semana';
+  }
+
+  @override
+  String get fatEquivalentInfoTitle => 'Equivalente de grasa';
+
+  @override
+  String get fatEquivalentInfoBody =>
+      'El peso real en la báscula también varía con el agua y el glucógeno, por lo que el peso diario puede cambiar de forma distinta. Este es el equivalente energético de la grasa.';
+
+  @override
+  String get fatEquivalentInfoDismiss => 'Entendido';
 }

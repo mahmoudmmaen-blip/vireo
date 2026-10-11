@@ -984,5 +984,14 @@
   "celebrationWaterTitle": "Objectif d'hydratation atteint ! 💧",
   "celebrationProteinTitle": "Objectif de protéines pulvérisé ! 💪",
   "celebrationStepsTitle": "Objectif de pas accompli ! 🏃",
-  "celebrationWorkoutTitle": "Séance terminée ! 🔥"
+  "celebrationWorkoutTitle": "Séance terminée ! 🔥",
+  "fatEquivalentApprox": "≈ {amount} de graisse",
+  "fatEquivalentBurned": "Brûlé ≈ {amount} de graisse",
+  "fatEquivalentTodayDeficit": "Déficit du jour ≈ {amount} de graisse",
+  "fatEquivalentTodaySurplus": "Surplus +{kcal} kcal",
+  "fatEquivalentDietPlanRate": "≈ {daily} graisse/jour • ≈ {weekly}/sem.",
+  "fatEquivalentThisWeek": "≈ {amount} de graisse cette semaine",
+  "fatEquivalentInfoTitle": "Équivalent en graisse",
+  "fatEquivalentInfoBody": "Le poids réel sur la balance varie aussi avec l'eau et le glycogène, donc le poids quotidien peut évoluer différemment. Ceci est l'équivalent énergétique de la graisse.",
+  "fatEquivalentInfoDismiss": "Compris"
 }

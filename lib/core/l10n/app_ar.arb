@@ -1741,5 +1741,14 @@
   "celebrationWaterTitle": "حققت هدف شرب الماء اليومي! 💧",
   "celebrationProteinTitle": "حققت هدف البروتين اليومي! 💪",
   "celebrationStepsTitle": "حققت هدف الخطوات اليومي! 🏃",
-  "celebrationWorkoutTitle": "أحسنت! أنهيت تمرينك اليوم بنجاح 🔥"
+  "celebrationWorkoutTitle": "أحسنت! أنهيت تمرينك اليوم بنجاح 🔥",
+  "fatEquivalentApprox": "≈ {amount} دهون",
+  "fatEquivalentBurned": "حرقت ما يعادل ≈ {amount} دهون",
+  "fatEquivalentTodayDeficit": "عجز اليوم ≈ {amount} دهون",
+  "fatEquivalentTodaySurplus": "فائض +{kcal} سعرة",
+  "fatEquivalentDietPlanRate": "≈ {daily} دهون/يوم • ≈ {weekly}/أسبوع",
+  "fatEquivalentThisWeek": "≈ {amount} دهون هذا الأسبوع",
+  "fatEquivalentInfoTitle": "معادل الدهون",
+  "fatEquivalentInfoBody": "الوزن على الميزان يتأثر أيضاً بالماء والجليكوجين، لذا قد يتغير وزنك اليومي بشكل مختلف. هذا هو المكافئ الحسابي لطاقة الدهون.",
+  "fatEquivalentInfoDismiss": "فهمت"
 }

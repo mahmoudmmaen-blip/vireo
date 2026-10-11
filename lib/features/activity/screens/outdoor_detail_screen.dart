@@ -7,6 +7,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/features/activity/data/outdoor_workout_repository.dart';
 import 'package:vireo/features/activity/widgets/outdoor_map_view.dart';
 
@@ -54,9 +55,21 @@ class OutdoorDetailScreen extends ConsumerWidget {
           _Row(l10n.outdoorDuration, _dur(session.durationSeconds)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Text(
-              l10n.outdoorCalories(session.caloriesBurned),
-              style: const TextStyle(fontWeight: FontWeight.w700),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.outdoorCalories(session.caloriesBurned),
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                if (FatEquivalent.hasEquivalent(session.caloriesBurned)) ...[
+                  const SizedBox(height: 4),
+                  FatEquivalentBadge(
+                    kcal: session.caloriesBurned,
+                    isBurned: true,
+                  ),
+                ],
+              ],
             ),
           ),
           if (session.splits.isNotEmpty) ...[

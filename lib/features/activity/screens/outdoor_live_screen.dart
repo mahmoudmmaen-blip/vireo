@@ -11,6 +11,8 @@ import 'package:vireo/features/activity/providers/outdoor_session_actions.dart';
 import 'package:vireo/features/activity/services/outdoor_gps_tracker.dart';
 import 'package:vireo/features/activity/services/outdoor_voice_cues.dart';
 import 'package:vireo/features/activity/widgets/outdoor_map_view.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
+import 'package:vireo/features/activity/screens/outdoor_detail_screen.dart';
 import 'package:vireo/features/walking/data/body_metrics.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 
@@ -107,7 +109,16 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
     if (session != null) {
       await persistOutdoorSession(ref, session);
     }
-    if (mounted) Navigator.of(context).popUntil((r) => r.isFirst);
+    if (mounted) {
+      Navigator.of(context).popUntil((r) => r.isFirst);
+      if (session != null) {
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => OutdoorDetailScreen(sessionId: session.id),
+          ),
+        );
+      }
+    }
   }
 
   String _formatDuration(int seconds) {
@@ -263,6 +274,13 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
                         color: colors.ember,
                       ),
                 ),
+                if (FatEquivalent.hasEquivalent(_stats.calories)) ...[
+                  const SizedBox(height: 4),
+                  FatEquivalentBadge(
+                    kcal: _stats.calories,
+                    isBurned: true,
+                  ),
+                ],
                 if (_stats.isPaused)
                   Padding(
                     padding: const EdgeInsets.only(top: 8),

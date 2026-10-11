@@ -10,6 +10,7 @@ A step is done when its commit appears in git log. Then Claude reviews and start
 | 2 | P10_reminders.md | feat(reminders) | done 20:30 (13 scheduler tests, 193 tests pass) |
 | 3 | P11_progress.md | feat(progress) | done 21:11 |
 | 4 | P13_onboarding.md | feat(onboarding) | running (started 21:12) |
+| 4b | P11b_fat_equivalent.md | feat(energy) | queued (owner request 21:32) |
 | 5 | P12_subscriptions.md | feat(subscription) | queued |
 | 6 | P14_social.md | feat(social) | queued |
 | 7 | P15_sync.md | feat(sync) | queued |

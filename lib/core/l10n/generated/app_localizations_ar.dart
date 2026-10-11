@@ -3410,6 +3410,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get celebrationWorkoutTitle => 'أحسنت! أنهيت تمرينك اليوم بنجاح 🔥';
+
+  @override
+  String fatEquivalentApprox(String amount) {
+    return '≈ $amount دهون';
+  }
+
+  @override
+  String fatEquivalentBurned(String amount) {
+    return 'حرقت ما يعادل ≈ $amount دهون';
+  }
+
+  @override
+  String fatEquivalentTodayDeficit(String amount) {
+    return 'عجز اليوم ≈ $amount دهون';
+  }
+
+  @override
+  String fatEquivalentTodaySurplus(int kcal) {
+    return 'فائض +$kcal سعرة';
+  }
+
+  @override
+  String fatEquivalentDietPlanRate(String daily, String weekly) {
+    return '≈ $daily دهون/يوم • ≈ $weekly/أسبوع';
+  }
+
+  @override
+  String fatEquivalentThisWeek(String amount) {
+    return '≈ $amount دهون هذا الأسبوع';
+  }
+
+  @override
+  String get fatEquivalentInfoTitle => 'معادل الدهون';
+
+  @override
+  String get fatEquivalentInfoBody =>
+      'الوزن على الميزان يتأثر أيضاً بالماء والجليكوجين، لذا قد يتغير وزنك اليومي بشكل مختلف. هذا هو المكافئ الحسابي لطاقة الدهون.';
+
+  @override
+  String get fatEquivalentInfoDismiss => 'فهمت';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -3567,6 +3607,21 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get celebrationWorkoutTitle =>
       'عاش يا بطل! خلّصت تمرينك النهاردة بنجاح 🔥';
+
+  @override
+  String fatEquivalentBurned(String amount) {
+    return 'حرقت ما يعادل ≈ $amount دهون 🔥';
+  }
+
+  @override
+  String fatEquivalentTodayDeficit(String amount) {
+    return 'عجز النهاردة ≈ $amount دهون 🔥';
+  }
+
+  @override
+  String fatEquivalentThisWeek(String amount) {
+    return '≈ $amount دهون الأسبوع ده 🔥';
+  }
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -3724,4 +3779,19 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String get celebrationWorkoutTitle => 'كفو والله! خلصت تمرينك اليوم بنجاح 🔥';
+
+  @override
+  String fatEquivalentBurned(String amount) {
+    return 'حرقت ما يعادل ≈ $amount دهون، كفو!';
+  }
+
+  @override
+  String fatEquivalentTodayDeficit(String amount) {
+    return 'عجز اليوم ≈ $amount دهون، كفو!';
+  }
+
+  @override
+  String fatEquivalentThisWeek(String amount) {
+    return '≈ $amount دهون هذا الأسبوع، كفو!';
+  }
 }

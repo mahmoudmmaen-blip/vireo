@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/features/progress/models/daily_deficit_entry.dart';
 
 const _deficitGreen = Color(0xFF2E7D32);
@@ -55,6 +56,20 @@ class WeeklyDeficitChart extends StatelessWidget {
                 color: summary.totalNetKcal >= 0 ? _deficitGreen : _surplusAmber,
               ),
         ),
+        if (summary.totalNetKcal > 0) ...[
+          const SizedBox(height: 6),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: FatEquivalentBadge(
+              customText: l10n.fatEquivalentThisWeek(
+                FatEquivalent.formatAmount(
+                  FatEquivalent.gramsFromKcal(summary.totalNetKcal),
+                  languageCode: locale,
+                ),
+              ),
+            ),
+          ),
+        ],
         const SizedBox(height: 12),
         SizedBox(
           height: 260,

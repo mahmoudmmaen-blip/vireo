@@ -6252,6 +6252,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Workout Finished! 🔥'**
   String get celebrationWorkoutTitle;
+
+  /// No description provided for @fatEquivalentApprox.
+  ///
+  /// In en, this message translates to:
+  /// **'≈ {amount} of fat'**
+  String fatEquivalentApprox(String amount);
+
+  /// No description provided for @fatEquivalentBurned.
+  ///
+  /// In en, this message translates to:
+  /// **'≈ {amount} of fat'**
+  String fatEquivalentBurned(String amount);
+
+  /// No description provided for @fatEquivalentTodayDeficit.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s deficit ≈ {amount} of fat'**
+  String fatEquivalentTodayDeficit(String amount);
+
+  /// No description provided for @fatEquivalentTodaySurplus.
+  ///
+  /// In en, this message translates to:
+  /// **'Surplus +{kcal} kcal'**
+  String fatEquivalentTodaySurplus(int kcal);
+
+  /// No description provided for @fatEquivalentDietPlanRate.
+  ///
+  /// In en, this message translates to:
+  /// **'≈ {daily} fat/day • ≈ {weekly}/week'**
+  String fatEquivalentDietPlanRate(String daily, String weekly);
+
+  /// No description provided for @fatEquivalentThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'≈ {amount} of fat this week'**
+  String fatEquivalentThisWeek(String amount);
+
+  /// No description provided for @fatEquivalentInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fat Equivalent'**
+  String get fatEquivalentInfoTitle;
+
+  /// No description provided for @fatEquivalentInfoBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Real scale weight also changes with water and glycogen, so daily weight can move differently. This is the energy equivalent of fat.'**
+  String get fatEquivalentInfoBody;
+
+  /// No description provided for @fatEquivalentInfoDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get fatEquivalentInfoDismiss;
 }
 
 class _AppLocalizationsDelegate

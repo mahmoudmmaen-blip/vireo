@@ -984,5 +984,14 @@
   "celebrationWaterTitle": "Su Hedefine Ulaşıldı! 💧",
   "celebrationProteinTitle": "Protein Hedefi Tamamlandı! 💪",
   "celebrationStepsTitle": "Adım Hedefi Başarıldı! 🏃",
-  "celebrationWorkoutTitle": "Antrenman Tamamlandı! 🔥"
+  "celebrationWorkoutTitle": "Antrenman Tamamlandı! 🔥",
+  "fatEquivalentApprox": "≈ {amount} yağ",
+  "fatEquivalentBurned": "≈ {amount} yağ yakıldı",
+  "fatEquivalentTodayDeficit": "Bugünkü açık ≈ {amount} yağ",
+  "fatEquivalentTodaySurplus": "Fazla +{kcal} kcal",
+  "fatEquivalentDietPlanRate": "≈ {daily} yağ/gün • ≈ {weekly}/hafta",
+  "fatEquivalentThisWeek": "Bu hafta ≈ {amount} yağ",
+  "fatEquivalentInfoTitle": "Yağ karşılığı",
+  "fatEquivalentInfoBody": "Tartıdaki gerçek kilo su ve glikojenle de değişir, bu nedenle günlük kilo farklı hareket edebilir. Bu, yağın enerji karşılığıdır.",
+  "fatEquivalentInfoDismiss": "Anladım"
 }

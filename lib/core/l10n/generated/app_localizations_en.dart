@@ -3435,4 +3435,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get celebrationWorkoutTitle => 'Workout Finished! 🔥';
+
+  @override
+  String fatEquivalentApprox(String amount) {
+    return '≈ $amount of fat';
+  }
+
+  @override
+  String fatEquivalentBurned(String amount) {
+    return '≈ $amount of fat';
+  }
+
+  @override
+  String fatEquivalentTodayDeficit(String amount) {
+    return 'Today\'s deficit ≈ $amount of fat';
+  }
+
+  @override
+  String fatEquivalentTodaySurplus(int kcal) {
+    return 'Surplus +$kcal kcal';
+  }
+
+  @override
+  String fatEquivalentDietPlanRate(String daily, String weekly) {
+    return '≈ $daily fat/day • ≈ $weekly/week';
+  }
+
+  @override
+  String fatEquivalentThisWeek(String amount) {
+    return '≈ $amount of fat this week';
+  }
+
+  @override
+  String get fatEquivalentInfoTitle => 'Fat Equivalent';
+
+  @override
+  String get fatEquivalentInfoBody =>
+      'Real scale weight also changes with water and glycogen, so daily weight can move differently. This is the energy equivalent of fat.';
+
+  @override
+  String get fatEquivalentInfoDismiss => 'Got it';
 }

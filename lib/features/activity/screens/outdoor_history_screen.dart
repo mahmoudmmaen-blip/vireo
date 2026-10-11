@@ -5,6 +5,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/features/activity/data/outdoor_workout_repository.dart';
 import 'package:vireo/features/activity/domain/outdoor_workout_models.dart';
 import 'package:vireo/features/activity/screens/outdoor_detail_screen.dart';
@@ -50,7 +51,8 @@ class OutdoorHistoryScreen extends ConsumerWidget {
                     subtitle: Text(
                       '${DateFormat.yMMMd().add_jm().format(s.startedAt)} · '
                       '${(s.distanceMeters / 1000).toStringAsFixed(2)} km · '
-                      '${s.caloriesBurned} kcal',
+                      '${s.caloriesBurned} kcal'
+                      '${FatEquivalent.hasEquivalent(s.caloriesBurned) ? ' · ${FatEquivalent.approxText(s.caloriesBurned, l10n: l10n, lang: Localizations.localeOf(context).languageCode)}' : ''}',
                     ),
                     trailing: const Icon(Icons.chevron_right),
                   ),

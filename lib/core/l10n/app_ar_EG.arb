@@ -60,5 +60,8 @@
   "uxRestDayHint": "الراحة جزء من التمرين.. امشِ شوية، اعمل استطالة، وكمّل بروتينك.",
   "mealScanHintLabel": "زوّد كلمتين لو حابب (اختياري)",
   "mealScanHintPlaceholder": "فيها زيت؟ صوص؟ نوع العيش؟",
-  "dietPrefSkipBreakfast": "تقدر تعدّي الفطار من غير ما تتعب؟"
+  "dietPrefSkipBreakfast": "تقدر تعدّي الفطار من غير ما تتعب؟",
+  "fatEquivalentBurned": "حرقت ما يعادل ≈ {amount} دهون 🔥",
+  "fatEquivalentTodayDeficit": "عجز النهاردة ≈ {amount} دهون 🔥",
+  "fatEquivalentThisWeek": "≈ {amount} دهون الأسبوع ده 🔥"
 }

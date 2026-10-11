@@ -3460,4 +3460,44 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get celebrationWorkoutTitle => 'Antrenman Tamamlandı! 🔥';
+
+  @override
+  String fatEquivalentApprox(String amount) {
+    return '≈ $amount yağ';
+  }
+
+  @override
+  String fatEquivalentBurned(String amount) {
+    return '≈ $amount yağ yakıldı';
+  }
+
+  @override
+  String fatEquivalentTodayDeficit(String amount) {
+    return 'Bugünkü açık ≈ $amount yağ';
+  }
+
+  @override
+  String fatEquivalentTodaySurplus(int kcal) {
+    return 'Fazla +$kcal kcal';
+  }
+
+  @override
+  String fatEquivalentDietPlanRate(String daily, String weekly) {
+    return '≈ $daily yağ/gün • ≈ $weekly/hafta';
+  }
+
+  @override
+  String fatEquivalentThisWeek(String amount) {
+    return 'Bu hafta ≈ $amount yağ';
+  }
+
+  @override
+  String get fatEquivalentInfoTitle => 'Yağ karşılığı';
+
+  @override
+  String get fatEquivalentInfoBody =>
+      'Tartıdaki gerçek kilo su ve glikojenle de değişir, bu nedenle günlük kilo farklı hareket edebilir. Bu, yağın enerji karşılığıdır.';
+
+  @override
+  String get fatEquivalentInfoDismiss => 'Anladım';
 }

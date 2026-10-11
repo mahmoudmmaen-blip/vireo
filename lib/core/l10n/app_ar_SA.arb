@@ -60,5 +60,8 @@
   "uxRestDayHint": "يوم راحة وتجديد نشاط.. خذ لك مشوار خفيف واضبط بروتينك.",
   "mealScanHintLabel": "أضف كلمتين لو ودّك (اختياري)",
   "mealScanHintPlaceholder": "زيت؟ صوص؟ نوع الخبز؟",
-  "dietPrefSkipBreakfast": "تقدر تعدّي الفطور براحة؟"
+  "dietPrefSkipBreakfast": "تقدر تعدّي الفطور براحة؟",
+  "fatEquivalentBurned": "حرقت ما يعادل ≈ {amount} دهون، كفو!",
+  "fatEquivalentTodayDeficit": "عجز اليوم ≈ {amount} دهون، كفو!",
+  "fatEquivalentThisWeek": "≈ {amount} دهون هذا الأسبوع، كفو!"
 }

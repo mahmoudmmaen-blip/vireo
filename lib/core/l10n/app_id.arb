@@ -984,5 +984,14 @@
   "celebrationProteinTitle": "Target Protein Terpenuhi! 💪",
   "celebrationStepsTitle": "Target Langkah Selesai! 🏃",
   "celebrationWorkoutTitle": "Latihan Selesai! 🔥",
-  "inbodyLatestTitle": "Laporan terbaru"
+  "inbodyLatestTitle": "Laporan terbaru",
+  "fatEquivalentApprox": "≈ {amount} lemak",
+  "fatEquivalentBurned": "Membakar ≈ {amount} lemak",
+  "fatEquivalentTodayDeficit": "Defisit hari ini ≈ {amount} lemak",
+  "fatEquivalentTodaySurplus": "Surplus +{kcal} kkal",
+  "fatEquivalentDietPlanRate": "≈ {daily} lemak/hari • ≈ {weekly}/minggu",
+  "fatEquivalentThisWeek": "≈ {amount} lemak minggu ini",
+  "fatEquivalentInfoTitle": "Setara lemak",
+  "fatEquivalentInfoBody": "Berat badan nyata di timbangan juga dipengaruhi air dan glikogen, jadi berat harian bisa bergerak berbeda. Ini adalah energi yang setara dengan lemak.",
+  "fatEquivalentInfoDismiss": "Mengerti"
 }

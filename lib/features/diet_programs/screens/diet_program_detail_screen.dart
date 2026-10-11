@@ -6,6 +6,7 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/ring_progress.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/features/diet_programs/application/diet_plan_engine.dart';
 import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
@@ -242,6 +243,22 @@ class _DietProgramDetailScreenState
                         l10n.dietWeeklyLoss(t.weeklyLossKg.toStringAsFixed(2)),
                         style: TextStyle(color: colors.textMute, fontSize: 13),
                       ),
+                      if (t.deficitKcal > 0 || t.weeklyLossKg > 0) ...[
+                        const SizedBox(height: 6),
+                        FatEquivalentBadge(
+                          customText: FatEquivalent.dietPlanRateText(
+                            dailyDeficitKcal: t.deficitKcal,
+                            weeklyLossKg: t.weeklyLossKg,
+                            l10n: l10n,
+                            lang: _lang,
+                          ),
+                          style: TextStyle(
+                            color: colors.ember,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),

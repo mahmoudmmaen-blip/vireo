@@ -1800,5 +1800,45 @@
   "celebrationWaterTitle": "Hydration Goal Achieved! 💧",
   "celebrationProteinTitle": "Protein Goal Smashed! 💪",
   "celebrationStepsTitle": "Step Goal Completed! 🏃",
-  "celebrationWorkoutTitle": "Workout Finished! 🔥"
+  "celebrationWorkoutTitle": "Workout Finished! 🔥",
+  "fatEquivalentApprox": "≈ {amount} of fat",
+  "@fatEquivalentApprox": {
+    "placeholders": {
+      "amount": {"type": "String"}
+    }
+  },
+  "fatEquivalentBurned": "≈ {amount} of fat",
+  "@fatEquivalentBurned": {
+    "placeholders": {
+      "amount": {"type": "String"}
+    }
+  },
+  "fatEquivalentTodayDeficit": "Today's deficit ≈ {amount} of fat",
+  "@fatEquivalentTodayDeficit": {
+    "placeholders": {
+      "amount": {"type": "String"}
+    }
+  },
+  "fatEquivalentTodaySurplus": "Surplus +{kcal} kcal",
+  "@fatEquivalentTodaySurplus": {
+    "placeholders": {
+      "kcal": {"type": "int"}
+    }
+  },
+  "fatEquivalentDietPlanRate": "≈ {daily} fat/day • ≈ {weekly}/week",
+  "@fatEquivalentDietPlanRate": {
+    "placeholders": {
+      "daily": {"type": "String"},
+      "weekly": {"type": "String"}
+    }
+  },
+  "fatEquivalentThisWeek": "≈ {amount} of fat this week",
+  "@fatEquivalentThisWeek": {
+    "placeholders": {
+      "amount": {"type": "String"}
+    }
+  },
+  "fatEquivalentInfoTitle": "Fat Equivalent",
+  "fatEquivalentInfoBody": "Real scale weight also changes with water and glycogen, so daily weight can move differently. This is the energy equivalent of fat.",
+  "fatEquivalentInfoDismiss": "Got it"
 }

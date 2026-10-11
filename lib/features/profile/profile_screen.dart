@@ -7,6 +7,7 @@ import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
@@ -352,6 +353,7 @@ class _MyPlanCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final program = ref.watch(activeDietProgramProvider);
+    final targets = ref.watch(activeDietTargetsProvider);
 
     return VireoCard(
       child: Column(
@@ -361,7 +363,29 @@ class _MyPlanCard extends ConsumerWidget {
             contentPadding: EdgeInsets.zero,
             leading: Icon(Icons.restaurant_menu_rounded, color: context.vireoColors.ember),
             title: Text(program?.name.of(locale) ?? l10n.dietChoosePlanCard),
-            subtitle: Text(l10n.dietMyPlan),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(l10n.dietMyPlan),
+                if (targets != null && (targets.deficitKcal > 0 || targets.weeklyLossKg > 0)) ...[
+                  const SizedBox(height: 2),
+                  FatEquivalentBadge(
+                    customText: FatEquivalent.dietPlanRateText(
+                      dailyDeficitKcal: targets.deficitKcal,
+                      weeklyLossKg: targets.weeklyLossKg,
+                      l10n: l10n,
+                      lang: locale,
+                    ),
+                    style: TextStyle(
+                      color: context.vireoColors.ember,
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    showIcon: false,
+                  ),
+                ],
+              ],
+            ),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
               if (program != null) {

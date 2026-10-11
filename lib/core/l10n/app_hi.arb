@@ -984,5 +984,14 @@
   "celebrationWaterTitle": "हाइड्रेशन का लक्ष्य पूरा हुआ! 💧",
   "celebrationProteinTitle": "प्रोटीन का लक्ष्य हासिल किया! 💪",
   "celebrationStepsTitle": "कदमों का लक्ष्य पूरा हुआ! 🏃",
-  "celebrationWorkoutTitle": "वर्कआउट समाप्त हुआ! 🔥"
+  "celebrationWorkoutTitle": "वर्कआउट समाप्त हुआ! 🔥",
+  "fatEquivalentApprox": "≈ {amount} फैट",
+  "fatEquivalentBurned": "≈ {amount} फैट बर्न किया",
+  "fatEquivalentTodayDeficit": "आज का डेफिसिट ≈ {amount} फैट",
+  "fatEquivalentTodaySurplus": "सरप्लस +{kcal} kcal",
+  "fatEquivalentDietPlanRate": "≈ {daily} फैट/दिन • ≈ {weekly}/सप्ताह",
+  "fatEquivalentThisWeek": "इस सप्ताह ≈ {amount} फैट",
+  "fatEquivalentInfoTitle": "फैट समतुल्य",
+  "fatEquivalentInfoBody": "पैमाने पर वास्तविक वजन पानी और ग्लाइकोजन से भी बदलता है, इसलिए दैनिक वजन अलग दिख सकता है। यह वसा का ऊर्जा समतुल्य है।",
+  "fatEquivalentInfoDismiss": "समझ गया"
 }
