@@ -3292,3 +3292,317 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get celebrationWorkoutTitle => 'أحسنت! أنهيت تمرينك اليوم بنجاح 🔥';
 }
+
+/// The translations for Arabic, as used in Egypt (`ar_EG`).
+class AppLocalizationsArEg extends AppLocalizationsAr {
+  AppLocalizationsArEg() : super('ar_EG');
+
+  @override
+  String get continueButton => 'يلا بينا';
+
+  @override
+  String get skipButton => 'عدّيها';
+
+  @override
+  String get finishButton => 'خلّصنا';
+
+  @override
+  String get yesButton => 'أيوه';
+
+  @override
+  String get noButton => 'لأ';
+
+  @override
+  String get authWelcomeTitle => 'أهلاً بيك في ڤيريو!';
+
+  @override
+  String get authWelcomeSubtitle => 'رحلتك لجسم أصح ولياقة أعلى بتبدأ هنا.';
+
+  @override
+  String get workoutFinishCoolDown => 'عاش.. ننهي التمرين';
+
+  @override
+  String get workoutStartButton => 'يلا نتمرن';
+
+  @override
+  String get workoutSwapEmpty => 'مفيش تمارين بديلة دلوقتي';
+
+  @override
+  String get workoutEmptyProgram =>
+      'مفيش تمرين متسجل النهاردة.. ريّح واستعد للجي!';
+
+  @override
+  String homeGreeting(String name) {
+    return 'منوّر يا $name 👋';
+  }
+
+  @override
+  String homeStreakDays(int days) {
+    return '$days أيام ورا بعض.. عاش يا بطل!';
+  }
+
+  @override
+  String get homeStartStreak => 'ابدأ سلسلتك النهاردة وعاش!';
+
+  @override
+  String get habitsEmpty => 'لسه ما ضفتش عادات.. ابدأ بعادة بسيطة النهاردة!';
+
+  @override
+  String uxGoodMorning(String name) {
+    return 'صباح الفل يا $name';
+  }
+
+  @override
+  String uxGoodAfternoon(String name) {
+    return 'مساء الفل يا $name';
+  }
+
+  @override
+  String uxGoodEvening(String name) {
+    return 'مساء الورد يا $name';
+  }
+
+  @override
+  String get uxActionCoach => 'الكابتن';
+
+  @override
+  String get uxLogEmptyTitle => 'لسه ما سجلتش أكل النهاردة';
+
+  @override
+  String get uxLogEmptyBody =>
+      'صوّر وجبتك والذكاء الاصطناعي هيحسب السعرات والماكروز في ثانية.';
+
+  @override
+  String get uxRestDayHint =>
+      'الراحة جزء من التمرين.. امشِ شوية، اعمل استطالة، وكمّل بروتينك.';
+
+  @override
+  String get uxWaterGoalDone => 'قفلت هدف المية 💧 عاش يا بطل!';
+
+  @override
+  String get uxQuickCoach => 'اسأل كابتنك';
+
+  @override
+  String get uxQuickCoachSub => 'نصيحة ذكية وسريعة ليك';
+
+  @override
+  String get uxCoachOnline => 'أونلاين · وحافظ أرقامك';
+
+  @override
+  String get uxCoachTyping => 'بيكتب لك…';
+
+  @override
+  String get uxCoachHeroTitle => 'كابتنك الذكي معاك خطوة بخطوة';
+
+  @override
+  String get uxCoachHeroBody =>
+      'اسأل عن الأكل، البروتين، الحلويات أو التمرين.. كل إجابة على قد أرقامك النهاردة.';
+
+  @override
+  String get uxCoachChipWorkout => 'آكل إيه قبل التمرين؟';
+
+  @override
+  String get measurementsNoData =>
+      'لسه ما سجلتش مقاسات.. ابدأ أول قياس النهاردة!';
+
+  @override
+  String get vitalityProgramStartCta => 'يلا نبدأ البرنامج';
+
+  @override
+  String get dietQuizContinue => 'فاهم.. يلا نكمل';
+
+  @override
+  String get dietQuizYes => 'أيوه';
+
+  @override
+  String get dietQuizNo => 'لأ';
+
+  @override
+  String get dietPrefSkipBreakfast => 'تقدر تعدّي الفطار من غير ما تتعب؟';
+
+  @override
+  String get dietStartProgram => 'يلا نبدأ البرنامج ده';
+
+  @override
+  String get outdoorHistoryEmpty =>
+      'لسه ما نزلتش تمرين بره.. يلا جرّب أول جولة!';
+
+  @override
+  String get mealScanHintLabel => 'زوّد كلمتين لو حابب (اختياري)';
+
+  @override
+  String get mealScanHintPlaceholder => 'فيها زيت؟ صوص؟ نوع العيش؟';
+
+  @override
+  String get inbodyEmpty => 'لسه مفيش تقارير.. صوّر ورقة InBody ويلا بينا!';
+
+  @override
+  String get celebrationWaterTitle => 'عاش! قفلت هدف المية النهاردة 💧';
+
+  @override
+  String get celebrationProteinTitle => 'عاش يا وحش! قفلت هدف البروتين 💪';
+
+  @override
+  String get celebrationStepsTitle => 'عاش! كمّلت خطواتك النهاردة كلها 🏃';
+
+  @override
+  String get celebrationWorkoutTitle =>
+      'عاش يا بطل! خلّصت تمرينك النهاردة بنجاح 🔥';
+}
+
+/// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
+class AppLocalizationsArSa extends AppLocalizationsAr {
+  AppLocalizationsArSa() : super('ar_SA');
+
+  @override
+  String get continueButton => 'قدّام';
+
+  @override
+  String get skipButton => 'تخطّي';
+
+  @override
+  String get finishButton => 'تم';
+
+  @override
+  String get yesButton => 'إي والله';
+
+  @override
+  String get noButton => 'لا';
+
+  @override
+  String get authWelcomeTitle => 'يا هلا ومسهلا في ڤيريو!';
+
+  @override
+  String get authWelcomeSubtitle => 'رحلتك لجسم صحي ولياقة أفضل تبدأ الحين.';
+
+  @override
+  String get workoutFinishCoolDown => 'كفو.. إنهاء التمرين';
+
+  @override
+  String get workoutStartButton => 'يلا نبدأ التمرين';
+
+  @override
+  String get workoutSwapEmpty => 'ما فيه تمارين بديلة متوفرة حالياً';
+
+  @override
+  String get workoutEmptyProgram =>
+      'ما فيه تمرين مجدول اليوم.. ارتاح وجهّز نفسك للجاي!';
+
+  @override
+  String homeGreeting(String name) {
+    return 'هلا والله يا $name 👋';
+  }
+
+  @override
+  String homeStreakDays(int days) {
+    return '$days أيام ورا بعض.. كفو ومستمرين!';
+  }
+
+  @override
+  String get homeStartStreak => 'ابدأ حماسك اليوم وكفو!';
+
+  @override
+  String get habitsEmpty => 'ما أضفت عادات بعد.. ابدأ بعادة بسيطة اليوم!';
+
+  @override
+  String uxGoodMorning(String name) {
+    return 'صباح الخير يا $name';
+  }
+
+  @override
+  String uxGoodAfternoon(String name) {
+    return 'مساك الله بالخير يا $name';
+  }
+
+  @override
+  String uxGoodEvening(String name) {
+    return 'مساء النور يا $name';
+  }
+
+  @override
+  String get uxActionCoach => 'المدرب';
+
+  @override
+  String get uxLogEmptyTitle => 'ما سجّلت وجباتك اليوم بعد';
+
+  @override
+  String get uxLogEmptyBody =>
+      'صوّر وجبتك والذكاء الاصطناعي بيحسب لك السعرات والماكروز بثواني.';
+
+  @override
+  String get uxRestDayHint =>
+      'يوم راحة وتجديد نشاط.. خذ لك مشوار خفيف واضبط بروتينك.';
+
+  @override
+  String get uxWaterGoalDone => 'وصلت لهدف الموية 💧 كفو!';
+
+  @override
+  String get uxQuickCoach => 'اسأل مدربك';
+
+  @override
+  String get uxQuickCoachSub => 'استشارة فورية لك';
+
+  @override
+  String get uxCoachOnline => 'متصل · وحافظ أرقامك';
+
+  @override
+  String get uxCoachTyping => 'يكتب لك الحين…';
+
+  @override
+  String get uxCoachHeroTitle => 'مدربك الذكي الشخصي معك خطوة بخطوة';
+
+  @override
+  String get uxCoachHeroBody =>
+      'اسأل عن أكلك، البروتين، الوجبات أو التمرين.. وكل إجابة على حسب أرقامك اليوم.';
+
+  @override
+  String get uxCoachChipWorkout => 'وش آكل قبل التمرين؟';
+
+  @override
+  String get measurementsNoData =>
+      'ما سجّلت قياسات بعد.. ابدأ قياسك الأول اليوم!';
+
+  @override
+  String get vitalityProgramStartCta => 'يلا نبدأ البرنامج';
+
+  @override
+  String get dietQuizContinue => 'فاهم عليك.. يلا نكمل';
+
+  @override
+  String get dietQuizYes => 'إي والله';
+
+  @override
+  String get dietQuizNo => 'لا';
+
+  @override
+  String get dietPrefSkipBreakfast => 'تقدر تعدّي الفطور براحة؟';
+
+  @override
+  String get dietStartProgram => 'يلا نبدأ هذا البرنامج';
+
+  @override
+  String get outdoorHistoryEmpty =>
+      'ما سجّلت تمارين خارجية بعد.. اخرج وتحرّك اليوم!';
+
+  @override
+  String get mealScanHintLabel => 'أضف كلمتين لو ودّك (اختياري)';
+
+  @override
+  String get mealScanHintPlaceholder => 'زيت؟ صوص؟ نوع الخبز؟';
+
+  @override
+  String get inbodyEmpty => 'ما فيه تقارير بعد.. صوّر فحص InBody وقدّام!';
+
+  @override
+  String get celebrationWaterTitle => 'كفو! جبت هدف الموية اليوم 💧';
+
+  @override
+  String get celebrationProteinTitle =>
+      'كفو يا بطل! صكيت هدف البروتين اليوم 💪';
+
+  @override
+  String get celebrationStepsTitle => 'كفو! قفلت هدف الخطوات بالكامل 🏃';
+
+  @override
+  String get celebrationWorkoutTitle => 'كفو والله! خلصت تمرينك اليوم بنجاح 🔥';
+}

@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/accent_palette_provider.dart';
 import 'package:vireo/core/services/app_skin_provider.dart';
+import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/services/theme_mode_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_scroll_behavior.dart';
+import 'package:vireo/core/widgets/language_picker_screen.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/features/auth/auth_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
@@ -166,6 +168,16 @@ class SettingsScreen extends ConsumerWidget {
                 style: TextStyle(color: colors.textMute, fontSize: 12),
               ),
             ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.language_rounded),
+            title: Text(ref.watch(activeAppLanguageProvider).languageLabel),
+            subtitle: Text(ref.watch(activeAppLanguageProvider).nativeName),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => Navigator.of(context).push(
+              LanguagePickerScreen.route(isInitial: false),
+            ),
+          ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.workspace_premium_outlined),

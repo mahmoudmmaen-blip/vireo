@@ -36,9 +36,40 @@ export function coachContextBlock(args: {
 export function buildCoachSystemInstruction(
   args: Parameters<typeof coachContextBlock>[0] & { language?: string },
 ): string {
-  const lang =
-    args.language === 'en'
-      ? '\nRespond in clear, concise English unless the user writes in Arabic.'
-      : '\nRespond in Arabic (عربي فصحي مبسط أو لهجة بيضاء راقية) unless the user writes in English.';
-  return `${coachSystemPrompt}\n\n${coachContextBlock(args)}${lang}`;
+  const code = (args.language ?? 'ar').toLowerCase().replace('-', '_');
+  let langGuidance: string;
+
+  if (code === 'ar_eg') {
+    langGuidance =
+      '\nRespond in warm, encouraging Egyptian Arabic dialect (لهجة مصرية عامية محفزة وودودة، مثل "عاش يا وحش!"، "يلا بينا"). Keep numbers in Western digits (0-9).';
+  } else if (code === 'ar_sa') {
+    langGuidance =
+      '\nRespond in warm, encouraging Gulf Arabic dialect (لهجة خليجية بيضاء محفزة، مثل "كفو يا بطل!"، "هلا والله"). Keep numbers in Western digits (0-9).';
+  } else if (code.startsWith('ar')) {
+    langGuidance =
+      '\nRespond in clear, modern, encouraging Arabic (عربي فصيح مبسط أو لهجة بيضاء راقية). Keep numbers in Western digits (0-9).';
+  } else if (code === 'fr') {
+    langGuidance =
+      '\nRespond in clear, concise, motivating French. Keep numbers in Western digits (0-9).';
+  } else if (code === 'es') {
+    langGuidance =
+      '\nRespond in clear, concise, motivating Spanish. Keep numbers in Western digits (0-9).';
+  } else if (code === 'tr') {
+    langGuidance =
+      '\nRespond in clear, concise, motivating Turkish. Keep numbers in Western digits (0-9).';
+  } else if (code === 'ur') {
+    langGuidance =
+      '\nRespond in clear, concise, motivating Urdu. Keep numbers strictly in Western digits (0-9).';
+  } else if (code === 'hi') {
+    langGuidance =
+      '\nRespond in clear, concise, motivating Hindi. Keep numbers strictly in Western digits (0-9).';
+  } else if (code === 'id') {
+    langGuidance =
+      '\nRespond in clear, concise, motivating Indonesian. Keep numbers in Western digits (0-9).';
+  } else {
+    langGuidance =
+      '\nRespond in clear, concise, motivating English unless the user writes in another language. Keep numbers in Western digits (0-9).';
+  }
+
+  return `${coachSystemPrompt}\n\n${coachContextBlock(args)}${langGuidance}`;
 }

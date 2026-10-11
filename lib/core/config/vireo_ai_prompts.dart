@@ -62,6 +62,39 @@ Live user context (use these exact numbers in every answer):
 - Current weight: ${currentWeight.toStringAsFixed(1)} kg
 - Fitness goal: $goal''';
 
+  /// Dialect and language-aware coach prompt.
+  static String coachInstructionForLanguage(String languageCode) {
+    final code = languageCode.toLowerCase().replaceAll('-', '_');
+    if (code == 'ar_eg') {
+      return '\nRespond in warm, encouraging Egyptian Arabic dialect (لهجة مصرية عامية محفزة وودودة، مثل "عاش يا وحش!"، "يلا بينا"). Keep numbers in Western digits (0-9).';
+    }
+    if (code == 'ar_sa') {
+      return '\nRespond in warm, encouraging Gulf Arabic dialect (لهجة خليجية بيضاء محفزة، مثل "كفو يا بطل!"، "هلا والله"). Keep numbers in Western digits (0-9).';
+    }
+    if (code.startsWith('ar')) {
+      return '\nRespond in clear, modern, encouraging Arabic (عربي فصيح مبسط أو لهجة بيضاء راقية). Keep numbers in Western digits (0-9).';
+    }
+    if (code == 'fr') {
+      return '\nRespond in clear, concise, motivating French. Keep numbers in Western digits (0-9).';
+    }
+    if (code == 'es') {
+      return '\nRespond in clear, concise, motivating Spanish. Keep numbers in Western digits (0-9).';
+    }
+    if (code == 'tr') {
+      return '\nRespond in clear, concise, motivating Turkish. Keep numbers in Western digits (0-9).';
+    }
+    if (code == 'ur') {
+      return '\nRespond in clear, concise, motivating Urdu. Keep numbers strictly in Western digits (0-9).';
+    }
+    if (code == 'hi') {
+      return '\nRespond in clear, concise, motivating Hindi. Keep numbers strictly in Western digits (0-9).';
+    }
+    if (code == 'id') {
+      return '\nRespond in clear, concise, motivating Indonesian. Keep numbers in Western digits (0-9).';
+    }
+    return '\nRespond in clear, concise, motivating English unless the user writes in another language. Keep numbers in Western digits (0-9).';
+  }
+
   /// Legacy alias.
   static const vireoAiCoachSystem = coachSystemPrompt;
 }

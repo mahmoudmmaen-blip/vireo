@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/features/ai_coach/application/ai_coach_state.dart';
 import 'package:vireo/features/ai_coach/data/ai_coach_history_store.dart';
 import 'package:vireo/features/ai_coach/data/gemini_coach_service.dart';
@@ -67,12 +68,17 @@ class AiCoachNotifier extends AsyncNotifier<AiCoachState> {
 
   Future<void> _completeSend(List<ChatMessage> history, String userText) async {
     final context = ref.read(aiCoachUserContextProvider);
+    final locale = ref.read(localeProvider);
+    final localeCode = locale.countryCode != null
+        ? '${locale.languageCode}_${locale.countryCode}'
+        : locale.languageCode;
 
     try {
       final reply = await ref.read(aiCoachServiceProvider).sendMessage(
             history,
             userText,
             context,
+            languageCode: localeCode,
           );
 
       final nextMessages = [

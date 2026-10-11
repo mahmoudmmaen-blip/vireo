@@ -23,6 +23,7 @@ import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provid
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
+import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 import 'package:vireo/features/quick_log/quick_log_sheet.dart';
 import 'package:vireo/features/subscription/widgets/subscription_shell_gate.dart';
@@ -109,6 +110,16 @@ class _MainShellState extends ConsumerState<MainShell> {
           context,
           type: CelebrationType.steps,
           message: AppLocalizations.of(context).celebrationStepsTitle,
+        );
+      }
+    });
+
+    ref.listen(vitalityDailyLogProvider, (prev, next) {
+      if (next.workoutCompleted && (prev == null || !prev.workoutCompleted)) {
+        CelebrationService.trigger(
+          context,
+          type: CelebrationType.workout,
+          message: AppLocalizations.of(context).celebrationWorkoutTitle,
         );
       }
     });

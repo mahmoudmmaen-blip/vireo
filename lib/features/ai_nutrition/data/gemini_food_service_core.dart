@@ -21,19 +21,26 @@ class MealScanDraft {
   final List<ResolvedMealLine> lines;
   final Uint8List imageBytes;
 
-  FoodAnalysisResult toAnalysisResult() {
+  FoodAnalysisResult toAnalysisResult({String language = 'ar'}) {
     final kcal = lines.fold<double>(0, (s, l) => s + l.kcal).round();
     final protein = lines.fold<double>(0, (s, l) => s + l.protein);
     final carbs = lines.fold<double>(0, (s, l) => s + l.carbs);
     final fats = lines.fold<double>(0, (s, l) => s + l.fat);
-    final name = lines.map((l) => l.nameAr).where((n) => n.isNotEmpty).join(' + ');
+    final isArabic = language.startsWith('ar');
+    final name = lines
+        .map((l) => isArabic ? l.nameAr : (l.nameEn.isNotEmpty ? l.nameEn : l.nameAr))
+        .where((n) => n.isNotEmpty)
+        .join(' + ');
+    final defaultName = isArabic ? 'وجبة' : 'Meal';
     return FoodAnalysisResult(
-      foodName: name.isEmpty ? 'وجبة' : name,
+      foodName: name.isEmpty ? defaultName : name,
       calories: kcal,
       protein: protein,
       carbs: carbs,
       fats: fats,
-      portionEstimate: lines.map((l) => '${l.grams.round()}g ${l.nameEn}').join(', '),
+      portionEstimate: lines
+          .map((l) => '${l.grams.round()}g ${isArabic ? l.nameAr : l.nameEn}')
+          .join(', '),
       isHighCalorie: kcal > 600,
       smartSwaps: const [],
     );

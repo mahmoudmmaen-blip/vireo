@@ -1,0 +1,64 @@
+{
+  "@@locale": "ar_EG",
+  "homeGreeting": "منوّر يا {name} 👋",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "uxGoodMorning": "صباح الفل يا {name}",
+  "uxGoodAfternoon": "مساء الفل يا {name}",
+  "uxGoodEvening": "مساء الورد يا {name}",
+  "authWelcomeTitle": "أهلاً بيك في ڤيريو!",
+  "authWelcomeSubtitle": "رحلتك لجسم أصح ولياقة أعلى بتبدأ هنا.",
+  "continueButton": "يلا بينا",
+  "skipButton": "عدّيها",
+  "finishButton": "خلّصنا",
+  "yesButton": "أيوه",
+  "noButton": "لأ",
+  "workoutStartButton": "يلا نتمرن",
+  "workoutFinishCoolDown": "عاش.. ننهي التمرين",
+  "dietQuizContinue": "فاهم.. يلا نكمل",
+  "dietQuizYes": "أيوه",
+  "dietQuizNo": "لأ",
+  "dietStartProgram": "يلا نبدأ البرنامج ده",
+  "vitalityProgramStartCta": "يلا نبدأ البرنامج",
+  "celebrationWorkoutTitle": "عاش يا بطل! خلّصت تمرينك النهاردة بنجاح 🔥",
+  "celebrationWaterTitle": "عاش! قفلت هدف المية النهاردة 💧",
+  "celebrationProteinTitle": "عاش يا وحش! قفلت هدف البروتين 💪",
+  "celebrationStepsTitle": "عاش! كمّلت خطواتك النهاردة كلها 🏃",
+  "uxWaterGoalDone": "قفلت هدف المية 💧 عاش يا بطل!",
+  "homeStartStreak": "ابدأ سلسلتك النهاردة وعاش!",
+  "homeStreakDays": "{days} أيام ورا بعض.. عاش يا بطل!",
+  "@homeStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "uxLogEmptyTitle": "لسه ما سجلتش أكل النهاردة",
+  "uxLogEmptyBody": "صوّر وجبتك والذكاء الاصطناعي هيحسب السعرات والماكروز في ثانية.",
+  "workoutSwapEmpty": "مفيش تمارين بديلة دلوقتي",
+  "workoutEmptyProgram": "مفيش تمرين متسجل النهاردة.. ريّح واستعد للجي!",
+  "habitsEmpty": "لسه ما ضفتش عادات.. ابدأ بعادة بسيطة النهاردة!",
+  "inbodyEmpty": "لسه مفيش تقارير.. صوّر ورقة InBody ويلا بينا!",
+  "outdoorHistoryEmpty": "لسه ما نزلتش تمرين بره.. يلا جرّب أول جولة!",
+  "measurementsNoData": "لسه ما سجلتش مقاسات.. ابدأ أول قياس النهاردة!",
+  "uxActionCoach": "الكابتن",
+  "uxQuickCoach": "اسأل كابتنك",
+  "uxQuickCoachSub": "نصيحة ذكية وسريعة ليك",
+  "uxCoachHeroTitle": "كابتنك الذكي معاك خطوة بخطوة",
+  "uxCoachHeroBody": "اسأل عن الأكل، البروتين، الحلويات أو التمرين.. كل إجابة على قد أرقامك النهاردة.",
+  "uxCoachOnline": "أونلاين · وحافظ أرقامك",
+  "uxCoachTyping": "بيكتب لك…",
+  "uxCoachChipWorkout": "آكل إيه قبل التمرين؟",
+  "uxCoachChipHunger": "جعان بليل.. آكل إيه خفيف؟",
+  "uxCoachChipProtein": "ازاي أزوّد البروتين النهاردة؟",
+  "uxRestDayHint": "الراحة جزء من التمرين.. امشِ شوية، اعمل استطالة، وكمّل بروتينك.",
+  "mealScanHintLabel": "زوّد كلمتين لو حابب (اختياري)",
+  "mealScanHintPlaceholder": "فيها زيت؟ صوص؟ نوع العيش؟",
+  "dietPrefSkipBreakfast": "تقدر تعدّي الفطار من غير ما تتعب؟"
+}

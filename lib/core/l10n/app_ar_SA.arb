@@ -1,0 +1,64 @@
+{
+  "@@locale": "ar_SA",
+  "homeGreeting": "هلا والله يا {name} 👋",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "uxGoodMorning": "صباح الخير يا {name}",
+  "uxGoodAfternoon": "مساك الله بالخير يا {name}",
+  "uxGoodEvening": "مساء النور يا {name}",
+  "authWelcomeTitle": "يا هلا ومسهلا في ڤيريو!",
+  "authWelcomeSubtitle": "رحلتك لجسم صحي ولياقة أفضل تبدأ الحين.",
+  "continueButton": "قدّام",
+  "skipButton": "تخطّي",
+  "finishButton": "تم",
+  "yesButton": "إي والله",
+  "noButton": "لا",
+  "workoutStartButton": "يلا نبدأ التمرين",
+  "workoutFinishCoolDown": "كفو.. إنهاء التمرين",
+  "dietQuizContinue": "فاهم عليك.. يلا نكمل",
+  "dietQuizYes": "إي والله",
+  "dietQuizNo": "لا",
+  "dietStartProgram": "يلا نبدأ هذا البرنامج",
+  "vitalityProgramStartCta": "يلا نبدأ البرنامج",
+  "celebrationWorkoutTitle": "كفو والله! خلصت تمرينك اليوم بنجاح 🔥",
+  "celebrationWaterTitle": "كفو! جبت هدف الموية اليوم 💧",
+  "celebrationProteinTitle": "كفو يا بطل! صكيت هدف البروتين اليوم 💪",
+  "celebrationStepsTitle": "كفو! قفلت هدف الخطوات بالكامل 🏃",
+  "uxWaterGoalDone": "وصلت لهدف الموية 💧 كفو!",
+  "homeStartStreak": "ابدأ حماسك اليوم وكفو!",
+  "homeStreakDays": "{days} أيام ورا بعض.. كفو ومستمرين!",
+  "@homeStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "uxLogEmptyTitle": "ما سجّلت وجباتك اليوم بعد",
+  "uxLogEmptyBody": "صوّر وجبتك والذكاء الاصطناعي بيحسب لك السعرات والماكروز بثواني.",
+  "workoutSwapEmpty": "ما فيه تمارين بديلة متوفرة حالياً",
+  "workoutEmptyProgram": "ما فيه تمرين مجدول اليوم.. ارتاح وجهّز نفسك للجاي!",
+  "habitsEmpty": "ما أضفت عادات بعد.. ابدأ بعادة بسيطة اليوم!",
+  "inbodyEmpty": "ما فيه تقارير بعد.. صوّر فحص InBody وقدّام!",
+  "outdoorHistoryEmpty": "ما سجّلت تمارين خارجية بعد.. اخرج وتحرّك اليوم!",
+  "measurementsNoData": "ما سجّلت قياسات بعد.. ابدأ قياسك الأول اليوم!",
+  "uxActionCoach": "المدرب",
+  "uxQuickCoach": "اسأل مدربك",
+  "uxQuickCoachSub": "استشارة فورية لك",
+  "uxCoachHeroTitle": "مدربك الذكي الشخصي معك خطوة بخطوة",
+  "uxCoachHeroBody": "اسأل عن أكلك، البروتين، الوجبات أو التمرين.. وكل إجابة على حسب أرقامك اليوم.",
+  "uxCoachOnline": "متصل · وحافظ أرقامك",
+  "uxCoachTyping": "يكتب لك الحين…",
+  "uxCoachChipWorkout": "وش آكل قبل التمرين؟",
+  "uxCoachChipHunger": "جيعان بالليل.. وش آكل شي خفيف؟",
+  "uxCoachChipProtein": "كيف أرفع بروتيني اليوم؟",
+  "uxRestDayHint": "يوم راحة وتجديد نشاط.. خذ لك مشوار خفيف واضبط بروتينك.",
+  "mealScanHintLabel": "أضف كلمتين لو ودّك (اختياري)",
+  "mealScanHintPlaceholder": "زيت؟ صوص؟ نوع الخبز؟",
+  "dietPrefSkipBreakfast": "تقدر تعدّي الفطور براحة؟"
+}

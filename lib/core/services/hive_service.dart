@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vireo/core/boot/boot_log.dart';
 
@@ -13,6 +14,11 @@ abstract final class HiveService {
   static bool _initialized = false;
 
   static bool get isInitialized => _initialized;
+
+  @visibleForTesting
+  static void setInitializedForTesting([bool value = true]) {
+    _initialized = value;
+  }
 
   static Future<void> init() async {
     if (_initialized) {

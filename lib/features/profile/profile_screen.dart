@@ -14,7 +14,6 @@ import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/data/models/subscription_state.dart';
 import 'package:vireo/features/auth/auth_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
-import 'package:vireo/features/diet_programs/domain/diet_program.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/diet_programs/screens/diet_program_detail_screen.dart';
 import 'package:vireo/features/diet_programs/screens/diet_programs_screen.dart';

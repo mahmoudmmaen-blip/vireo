@@ -1,16 +1,22 @@
-Act as a Senior Flutter Engineer working on Vireo (branch ux-v2). Read lib/ first. Reuse lib/core/ui and the existing l10n (ARB files in lib/core/l10n, then run flutter gen-l10n).
+Act as a Senior Flutter Engineer working on Vireo (branch ux-v2). Read lib/core/l10n, lib/core/services/locale_provider.dart, lib/app.dart and the onboarding flow first.
 
-Finish the missing Sprint A items:
+TASK: MULTI-LANGUAGE (10 languages incl. Egyptian and Gulf dialects)
 
-1. APPEARANCE: Profile → new "Appearance / المظهر" screen: theme mode (System / Light / Dark) using the existing theme_mode_provider, plus 4 accent color themes (Ember default, Ocean, Forest, Royal) persisted in Hive and applied app-wide via AppTheme. Make Profile easy to find: tapping the Home avatar opens it, and add a clear "Profile" entry in the Home header.
+1. Languages: English (en), Arabic Fusha (ar), Egyptian Arabic (ar_EG), Gulf Arabic (ar_SA), French (fr), Spanish (es), Turkish (tr), Urdu (ur), Hindi (hi), Indonesian (id).
+- Create one ARB per locale in lib/core/l10n and translate ALL existing keys naturally (not word-for-word). Keep placeholders/plurals valid.
+- ar_EG and ar_SA override only casual copy (greetings, coach tone, celebrations, empty states, microcopy) in the dialect; everything else falls back to ar. Examples: ar_EG "يلا بينا", "عاش!"; ar_SA "هلا والله", "كفو!".
+- Run flutter gen-l10n. Add all locales to supportedLocales in app.dart. RTL for ar, ar_EG, ar_SA, ur.
 
-2. AUTO-DETECT WALK / RUN / CYCLE in the outdoor live workout: use GPS speed + step cadence (pedometer). Cadence < 130 spm = walk, >= 140 spm = run, speed > 15 km/h with low cadence = cycle. Smooth over 20 s, switch type automatically, show a small chip "Detected: Running", allow manual override. Recalculate MET/calories when the type changes.
+2. Language picker:
+- First launch (before onboarding): a clean full-screen picker with each language shown in its own name + flag-free icon, default = device language if supported, else English.
+- Profile → Settings → Language: same list, applies instantly, persisted in Hive.
+- The AI coach and meal-scan food names follow the selected language/dialect (pass the locale code to the Edge Functions that already accept `language`; treat ar_EG/ar_SA as Arabic with a dialect hint for the coach tone).
 
-3. MEAL SCAN FOLLOW-UP: after analyze-meal, if any item is in items_unsure or confidence < 0.6, show 1-3 quick questions on the review screen (e.g. "Is this rice or bulgur?", "Fried or grilled?") as tappable chips that update the item.
+3. Small fix: the "finished a workout" celebration is missing — call CelebrationService.trigger with CelebrationType.workout when a workout is completed (once per day).
 
-4. CELEBRATIONS: subtle confetti + haptic + short message when the user hits the daily water goal, protein goal, step goal, or finishes a workout (once per day per goal).
+4. Do not change numbers/units logic. Numbers stay Western digits (0-9) in all languages.
 
 Work autonomously. Do not ask me questions — pick the best option yourself and note your choices in the final summary.
 flutter analyze → 0 errors; flutter test green.
-git add -A && git commit -m "polish: sprint A part 2 (appearance, auto-detect, scan follow-ups, celebrations)"
+git add -A && git commit -m "feat(l10n): 10 languages incl. Egyptian & Gulf dialects, language picker"
 Do not push.

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/app_init_provider.dart';
+import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/widgets/app_loading.dart';
+import 'package:vireo/core/widgets/language_picker_screen.dart';
 import 'package:vireo/core/widgets/main_shell.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/features/auth/auth_screen.dart';
@@ -32,11 +34,16 @@ class AppRouter extends ConsumerWidget {
           }
 
           final auth = ref.watch(authProvider);
+          final initialLangSelected =
+              ref.watch(hasSelectedInitialLanguageProvider);
 
           return auth.when(
             loading: () => const AppLoading(),
             error: (error, stackTrace) => const AuthScreen(),
             data: (authState) {
+              if (!initialLangSelected) {
+                return const LanguagePickerScreen(isInitial: true);
+              }
               if (authState is AppAuthUnauthenticated) {
                 return const AuthScreen();
               }

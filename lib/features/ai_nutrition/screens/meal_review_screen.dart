@@ -309,7 +309,9 @@ class _LineCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  locale == 'ar' ? line.nameAr : line.nameEn,
+                  locale.startsWith('ar')
+                      ? line.nameAr
+                      : (line.nameEn.isNotEmpty ? line.nameEn : line.nameAr),
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
               ),
@@ -573,7 +575,9 @@ class _LineCard extends StatelessWidget {
 
 String _howCalculated(ResolvedMealLine line, String locale) {
   final per100 = line.food?.per100g;
-  final name = locale == 'ar' ? line.nameAr : line.nameEn;
+  final name = locale.startsWith('ar')
+      ? line.nameAr
+      : (line.nameEn.isNotEmpty ? line.nameEn : line.nameAr);
   if (per100 == null) {
     return '$name · ${line.grams.round()} g · ${line.kcal.round()} kcal (estimated)';
   }

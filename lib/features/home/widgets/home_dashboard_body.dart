@@ -7,6 +7,7 @@ import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_scroll_behavior.dart';
+import 'package:vireo/core/widgets/language_picker_screen.dart';
 import 'package:vireo/core/ui/motion.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/ring_progress.dart';
@@ -328,10 +329,10 @@ class _HomeHeader extends ConsumerWidget {
           const SizedBox(width: 6),
           _CircleIconButton(
             icon: Icons.translate_rounded,
-            tooltip: localeCode == 'ar' ? l10n.languageEnglish : l10n.languageArabic,
-            onTap: () => ref
-                .read(localeProvider.notifier)
-                .setLocale(Locale(localeCode == 'ar' ? 'en' : 'ar')),
+            tooltip: ref.watch(activeAppLanguageProvider).languageLabel,
+            onTap: () => Navigator.of(context).push(
+              LanguagePickerScreen.route(isInitial: false),
+            ),
           ),
           const SizedBox(width: 6),
           Tooltip(

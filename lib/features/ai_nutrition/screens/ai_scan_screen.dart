@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_nutrition/application/ai_scan_state.dart';
@@ -73,7 +74,10 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
     if (!mounted) return;
     setState(() => _previewBytes = compressed);
 
-    final lang = Localizations.localeOf(context).languageCode;
+    final loc = ref.read(localeProvider);
+    final lang = loc.countryCode != null
+        ? '${loc.languageCode}_${loc.countryCode}'
+        : loc.languageCode;
     final scanInput = mealScanInputFromPicker(picked, compressed);
     await ref.read(aiScanProvider.notifier).scanMeal(
           scanInput,
