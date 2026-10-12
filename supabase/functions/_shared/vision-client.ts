@@ -1,70 +1,57 @@
-import { FRIDGE_VISION_SYSTEM_PROMPT } from '../_shared/prompts/fridge-vision.ts';
-
-const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY');
-const VISION_MODEL = Deno.env.get('VISION_MODEL') ?? 'gpt-4o-mini';
-
-export type VisionMessage = {
-  role: 'system' | 'user';
-  content: string | VisionContentPart[];
-};
-
-export type VisionContentPart =
-  | { type: 'text'; text: string }
-  | { type: 'image_url'; image_url: { url: string; detail?: 'low' | 'high' | 'auto' } };
+import { generateContent, stripDataUrl } from './gemini-client.ts';
+import {
+  FRIDGE_VISION_SYSTEM_PROMPT,
+  FRIDGE_VISION_USER_MESSAGE,
+} from './prompts/fridge-vision.ts';
 
 /**
- * Calls the configured vision model and returns raw text (expected: JSON array).
+ * Calls Gemini with the fridge vision prompt and image.
+ * Accepts either a base64 string (with or without data URL prefix) or an HTTP/HTTPS image URL.
  */
 export async function analyzeFridgeImage(
-  imageUrl: string,
-  userText: string,
+  imageInput: string,
+  mimeType = 'image/jpeg',
+  userText = FRIDGE_VISION_USER_MESSAGE,
 ): Promise<string> {
-  if (!OPENAI_API_KEY) {
-    throw new Error('VISION_API_NOT_CONFIGURED');
+  let base64Data: string;
+  let mime = mimeType;
+
+  if (imageInput.startsWith('http://') || imageInput.startsWith('https://')) {
+    const res = await fetch(imageInput);
+    if (!res.ok) {
+      throw new Error(`FAILED_TO_FETCH_IMAGE:${res.status}`);
+    }
+    const buf = await res.arrayBuffer();
+    const bytes = new Uint8Array(buf);
+    let binary = '';
+    for (let i = 0; i < bytes.byteLength; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    base64Data = btoa(binary);
+    mime = res.headers.get('content-type') || mime;
+  } else {
+    base64Data = stripDataUrl(imageInput);
   }
 
-  const messages: VisionMessage[] = [
-    { role: 'system', content: FRIDGE_VISION_SYSTEM_PROMPT },
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: userText },
-        { type: 'image_url', image_url: { url: imageUrl, detail: 'auto' } },
-      ],
-    },
-  ];
-
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: VISION_MODEL,
-      temperature: 0.1,
-      max_tokens: 512,
-      messages,
-    }),
+  return await generateContent({
+    systemInstruction: FRIDGE_VISION_SYSTEM_PROMPT,
+    contents: [
+      {
+        role: 'user',
+        parts: [
+          { text: userText },
+          { inline_data: { mime_type: mime, data: base64Data } },
+        ],
+      },
+    ],
+    responseJson: true,
+    temperature: 0.1,
   });
-
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`VISION_API_ERROR:${response.status}:${body}`);
-  }
-
-  const payload = await response.json();
-  const content = payload?.choices?.[0]?.message?.content;
-  if (typeof content !== 'string' || content.trim().length === 0) {
-    throw new Error('VISION_EMPTY_RESPONSE');
-  }
-
-  return content.trim();
 }
 
 /**
  * Parses model output into a deduplicated Arabic ingredient list.
- * Accepts raw JSON array or fenced ```json blocks.
+ * Accepts raw JSON array or fenced ```json blocks or wrapped JSON objects.
  */
 export function parseIngredientArray(raw: string): string[] {
   let text = raw.trim();
@@ -74,15 +61,43 @@ export function parseIngredientArray(raw: string): string[] {
     text = fenced[1].trim();
   }
 
-  const parsed = JSON.parse(text);
-  if (!Array.isArray(parsed)) {
+  const startArr = text.indexOf('[');
+  const endArr = text.lastIndexOf(']');
+  if (startArr >= 0 && endArr > startArr) {
+    text = text.slice(startArr, endArr + 1);
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    try {
+      parsed = JSON.parse(raw.trim());
+    } catch {
+      throw new Error('VISION_INVALID_SHAPE');
+    }
+  }
+
+  let items: unknown[] | null = null;
+  if (Array.isArray(parsed)) {
+    items = parsed;
+  } else if (parsed && typeof parsed === 'object') {
+    const obj = parsed as Record<string, unknown>;
+    if (Array.isArray(obj.ingredients)) {
+      items = obj.ingredients;
+    } else if (Array.isArray(obj.items)) {
+      items = obj.items;
+    }
+  }
+
+  if (!items) {
     throw new Error('VISION_INVALID_SHAPE');
   }
 
   const ingredients: string[] = [];
   const seen = new Set<string>();
 
-  for (const item of parsed) {
+  for (const item of items) {
     if (typeof item !== 'string') continue;
     const normalized = item.trim();
     if (!normalized) continue;

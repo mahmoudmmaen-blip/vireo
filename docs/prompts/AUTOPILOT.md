@@ -16,4 +16,5 @@ A step is done when its commit appears in git log. Then Claude reviews and start
 | 7 | P15_sync.md | feat(sync) | done 23:06 (3 tests) |
 | 8 | P16_quality.md | chore(quality) | done 23:12 (all test suites green) |
 | 9 | P17_store.md | chore(store) | done 23:15 |
-| 10 | Phase 18 release | — | STOP: needs the owner (keystore, applicationId, push) |
+| 10 | P18a_final_fixes.md | fix(release) | done 23:59 |
+| 11 | Phase 18 release | — | STOP: needs the owner (keystore, applicationId, push) |

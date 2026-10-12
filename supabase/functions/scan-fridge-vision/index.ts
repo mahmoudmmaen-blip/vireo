@@ -3,15 +3,25 @@ import {
   analyzeFridgeImage,
   parseIngredientArray,
 } from '../_shared/vision-client.ts';
+import {
+  approxBase64Bytes,
+  stripDataUrl,
+} from '../_shared/gemini-client.ts';
 import { FRIDGE_VISION_USER_MESSAGE } from '../_shared/prompts/fridge-vision.ts';
+import {
+  consumeDailyQuota,
+  hasPremiumEntitlement,
+  mealScanLimit,
+} from '../_shared/ai-usage.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers':
     'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
-const BASIC_MONTHLY_SCAN_LIMIT = 5;
+const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
 
 type ScanRequest = {
   image_url?: string;
@@ -21,7 +31,7 @@ type ScanRequest = {
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+    return json({ ok: true }, 200);
   }
 
   try {
@@ -44,31 +54,47 @@ Deno.serve(async (req) => {
     } = await userClient.auth.getUser();
 
     if (userError || !user) {
-      return json({ error: 'Unauthorized' }, 401);
+      return json({ error: 'Unauthorized', detail: userError?.message }, 401);
     }
 
     const body = (await req.json()) as ScanRequest;
-    const imageUrl = await resolveImageUrl(body, userClient, user.id);
-    if (!imageUrl) {
+    if (!body.image_url && !body.image_base64) {
       return json({ error: 'image_url or image_base64 is required' }, 400);
+    }
+
+    if (
+      body.image_base64 &&
+      typeof body.image_base64 === 'string' &&
+      approxBase64Bytes(body.image_base64) > MAX_IMAGE_BYTES
+    ) {
+      return json({ error: 'IMAGE_TOO_LARGE' }, 413);
     }
 
     const adminClient = createClient(supabaseUrl, serviceRoleKey);
     const premium = await hasPremiumEntitlement(adminClient, user.id);
-    if (!premium) {
-      const allowed = await checkBasicScanQuota(adminClient, user.id);
-      if (!allowed) {
-        return json(
-          {
-            error: 'SCAN_LIMIT_REACHED',
-            message: 'Monthly fridge scan limit reached. Upgrade for unlimited scans.',
-          },
-          429,
-        );
-      }
+    const isAnonymous = user.is_anonymous === true;
+    const limit = mealScanLimit({ premium, isAnonymous });
+    const allowed = await consumeDailyQuota(
+      adminClient,
+      user.id,
+      'meal_scan',
+      limit,
+    );
+    if (!allowed) {
+      return json(
+        {
+          error: 'SCAN_LIMIT_REACHED',
+          message: 'Daily meal scan limit reached.',
+        },
+        429,
+      );
     }
 
-    const raw = await analyzeFridgeImage(imageUrl, FRIDGE_VISION_USER_MESSAGE);
+    const imageUrl = await resolveImageUrl(body, userClient, user.id);
+    const imageInput = body.image_base64 ?? imageUrl!;
+    const mime = body.mime_type ?? 'image/jpeg';
+
+    const raw = await analyzeFridgeImage(imageInput, mime, FRIDGE_VISION_USER_MESSAGE);
     let ingredients: string[] = [];
     try {
       ingredients = parseIngredientArray(raw);
@@ -80,7 +106,7 @@ Deno.serve(async (req) => {
       .from('fridge_scans')
       .insert({
         user_id: user.id,
-        image_url: body.image_url ?? 'inline-base64',
+        image_url: imageUrl ?? 'inline-base64',
         detected_items: ingredients,
         confirmed_items: [],
       })
@@ -93,7 +119,7 @@ Deno.serve(async (req) => {
 
     const remaining = premium
       ? null
-      : Math.max(0, BASIC_MONTHLY_SCAN_LIMIT - (await countScansThisMonth(adminClient, user.id)));
+      : Math.max(0, limit - (await countDailyUsage(adminClient, user.id, 'meal_scan')));
 
     return json({
       scan_id: scanRow.id,
@@ -102,9 +128,44 @@ Deno.serve(async (req) => {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
+    console.error('[scan-fridge-vision]', message);
+    if (message === 'GEMINI_NOT_CONFIGURED') {
+      return json({ error: message }, 503);
+    }
+    if (/abort/i.test(message)) {
+      return json({ error: 'GEMINI_API_ERROR:503:timeout' }, 503);
+    }
+    if (message.startsWith('GEMINI_API_ERROR:')) {
+      const status = message.includes(':503:')
+        ? 503
+        : message.includes(':429:')
+        ? 429
+        : 502;
+      return json({ error: message }, status);
+    }
+    if (message === 'GEMINI_EMPTY_RESPONSE') {
+      return json({ error: message }, 502);
+    }
     return json({ error: message }, 500);
   }
 });
+
+async function countDailyUsage(
+  admin: ReturnType<typeof createClient>,
+  userId: string,
+  kind: string,
+): Promise<number> {
+  const day = new Date().toISOString().slice(0, 10);
+  const { data } = await admin
+    .from('ai_usage')
+    .select('count')
+    .eq('user_id', userId)
+    .eq('day', day)
+    .eq('kind', kind)
+    .maybeSingle();
+
+  return (data?.count as number | undefined) ?? 0;
+}
 
 async function resolveImageUrl(
   body: ScanRequest,
@@ -115,58 +176,35 @@ async function resolveImageUrl(
 
   if (body.image_base64) {
     const mime = body.mime_type ?? 'image/jpeg';
-    const bytes = Uint8Array.from(atob(body.image_base64), (c) => c.charCodeAt(0));
-    const path = `${userId}/${crypto.randomUUID()}.jpg`;
+    try {
+      const cleanBase64 = stripDataUrl(body.image_base64);
+      const binaryStr = atob(cleanBase64);
+      const bytes = new Uint8Array(binaryStr.length);
+      for (let i = 0; i < binaryStr.length; i++) {
+        bytes[i] = binaryStr.charCodeAt(i);
+      }
+      const path = `${userId}/${crypto.randomUUID()}.jpg`;
 
-    const { error } = await client.storage.from('fridge-scans').upload(path, bytes, {
-      contentType: mime,
-      upsert: false,
-    });
-    if (error) throw new Error(error.message);
+      const { error } = await client.storage
+        .from('fridge-scans')
+        .upload(path, bytes, {
+          contentType: mime,
+          upsert: false,
+        });
 
-    const { data } = client.storage.from('fridge-scans').getPublicUrl(path);
-    return data.publicUrl;
+      if (!error) {
+        const { data } = client.storage
+          .from('fridge-scans')
+          .getPublicUrl(path);
+        return data.publicUrl;
+      }
+      console.warn('[scan-fridge-vision] storage upload failed:', error.message);
+    } catch (e) {
+      console.warn('[scan-fridge-vision] storage upload exception:', e);
+    }
   }
 
   return null;
-}
-
-async function hasPremiumEntitlement(
-  admin: ReturnType<typeof createClient>,
-  userId: string,
-): Promise<boolean> {
-  const { data } = await admin
-    .from('users')
-    .select('subscription_tier')
-    .eq('id', userId)
-    .maybeSingle();
-
-  return data?.subscription_tier === 'premium';
-}
-
-async function countScansThisMonth(
-  admin: ReturnType<typeof createClient>,
-  userId: string,
-): Promise<number> {
-  const start = new Date();
-  start.setUTCDate(1);
-  start.setUTCHours(0, 0, 0, 0);
-
-  const { count } = await admin
-    .from('fridge_scans')
-    .select('id', { count: 'exact', head: true })
-    .eq('user_id', userId)
-    .gte('created_at', start.toISOString());
-
-  return count ?? 0;
-}
-
-async function checkBasicScanQuota(
-  admin: ReturnType<typeof createClient>,
-  userId: string,
-): Promise<boolean> {
-  const used = await countScansThisMonth(admin, userId);
-  return used < BASIC_MONTHLY_SCAN_LIMIT;
 }
 
 function json(body: unknown, status = 200): Response {
