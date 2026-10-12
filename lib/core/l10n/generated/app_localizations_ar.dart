@@ -2142,7 +2142,8 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get measurementsNeedMoreData => 'Log more entries to see trends';
+  String get measurementsNeedMoreData =>
+      'سجّل المزيد من القياسات لمتابعة التطور والرسوم البيانية';
 
   @override
   String get measurementsNoData => 'No measurements yet';
@@ -2346,37 +2347,37 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get vitalityBreathingLog => 'Breathing';
+  String get vitalityBreathingLog => 'جلسة تنفس';
 
   @override
-  String get vitalityCategoryAdvanced => 'Advanced';
+  String get vitalityCategoryAdvanced => 'متقدم';
 
   @override
-  String get vitalityCategoryEnvironmental => 'Environment';
+  String get vitalityCategoryEnvironmental => 'البيئة المحيطة';
 
   @override
-  String get vitalityCategoryLifestyle => 'Lifestyle';
+  String get vitalityCategoryLifestyle => 'نمط الحياة';
 
   @override
-  String get vitalityCategoryNutrition => 'Nutrition';
+  String get vitalityCategoryNutrition => 'التغذية';
 
   @override
-  String get vitalityCategoryTraining => 'Training';
+  String get vitalityCategoryTraining => 'التدريب';
 
   @override
-  String get vitalityCheckProtein => 'Hit protein';
+  String get vitalityCheckProtein => 'تحقيق هدف البروتين';
 
   @override
-  String get vitalityCheckSleep => 'Quality sleep';
+  String get vitalityCheckSleep => 'نوم مريح وصحي';
 
   @override
-  String get vitalityCheckSunlight => 'Morning light';
+  String get vitalityCheckSunlight => 'ضوء الشمس الصباحي';
 
   @override
-  String get vitalityCheckWorkout => 'Move / train';
+  String get vitalityCheckWorkout => 'التمرين والحركة';
 
   @override
-  String get vitalityCheckZincVitD => 'Zinc / Vit D';
+  String get vitalityCheckZincVitD => 'الزنك وفيتامين د';
 
   @override
   String vitalityDailyChecklistProgress(int done, int total) {
@@ -2820,7 +2821,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get todayPlanVitalitySleepSubtitle => 'سجّل 7.5+ ساعات في Vitality';
 
   @override
-  String get todayPlanVitalityProteinSubtitle => 'حقّق هدف البروtein';
+  String get todayPlanVitalityProteinSubtitle => 'حقّق هدف البروتين';
 
   @override
   String get todayPlanVitalitySunSubtitle => 'ضوء الشمس الصباحي';
@@ -3876,6 +3877,238 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chartGoalLine => 'خط الهدف';
+
+  @override
+  String get scanSourceSheetTitle => 'طريقة تسجيل الوجبة';
+
+  @override
+  String get scanSourceCamera => 'صوّر بالكاميرا';
+
+  @override
+  String get scanSourceGallery => 'اختار من الاستوديو';
+
+  @override
+  String get scanSourceText => 'اكتب الأكل';
+
+  @override
+  String get scanSourceFridgeTitle => 'مسح الثلاجة أو الخزانة';
+
+  @override
+  String get scanSourceInBodyTitle => 'رفع تقرير إن بادي';
+
+  @override
+  String get todayPlanMorning => 'صباحاً';
+
+  @override
+  String get todayPlanAfternoon => 'الظهر';
+
+  @override
+  String get todayPlanEvening => 'المساء';
+
+  @override
+  String get todayPlanWaterQuickAdd => '+250 مل';
+
+  @override
+  String todayPlanWaterProgress(String current, String goal) {
+    return '$current / $goal لتر';
+  }
+
+  @override
+  String get todayPlanSleepLogTitle => 'تسجيل جودة النوم';
+
+  @override
+  String todayPlanSleepDuration(String hours) {
+    return 'نمت $hours ساعات';
+  }
+
+  @override
+  String get todayPlanSleepLogSave => 'حفظ النوم';
+
+  @override
+  String get todayPlanSleepMarkDone => 'تم (7+ ساعات نوم)';
+
+  @override
+  String get todayPlanSleepQuality => 'جودة النوم';
+
+  @override
+  String get todayPlanSupplements => 'المكملات اليومية';
+
+  @override
+  String get todayPlanBreathingAction => 'جلسة تنفس';
+
+  @override
+  String get stepsHeroTitle => 'خطوات اليوم';
+
+  @override
+  String get stepsEnableButton => 'فعّل عدّ الخطوات';
+
+  @override
+  String get stepsPermissionTitle => 'تتبع دقيق للخطوات';
+
+  @override
+  String get stepsPermissionBody =>
+      'يستخدم ڤيريو حساس الحركة المدمج في جهازك لعد الخطوات بدقة على مدار اليوم بدون استهلاك البطارية.';
+
+  @override
+  String get stepsPermissionGrant => 'تفعيل الآن';
+
+  @override
+  String get stepsActiveMinutes => 'دقائق نشاط';
+
+  @override
+  String stepsFatBurned(String grams) {
+    return '≈ $grams جم دهون';
+  }
+
+  @override
+  String stepsKm(String km) {
+    return '$km كم';
+  }
+
+  @override
+  String get stepsDetailTitle => 'الخطوات والنشاط';
+
+  @override
+  String get stepsHourlyTitle => 'توزيع الساعات';
+
+  @override
+  String stepsStreakDays(int days) {
+    return 'التزام $days أيام متتالية';
+  }
+
+  @override
+  String stepsBestDay(String steps) {
+    return 'أفضل يوم: $steps خطوة';
+  }
+
+  @override
+  String get stepsWeekTab => 'أسبوع';
+
+  @override
+  String get stepsMonthTab => 'شهر';
+
+  @override
+  String get mealReviewItemQty => 'الكمية';
+
+  @override
+  String mealReviewConfidence(int pct) {
+    return 'دقة $pct%';
+  }
+
+  @override
+  String get mealReviewSourceUsda => 'قاعدة بيانات USDA';
+
+  @override
+  String get mealReviewSourceEgypt => 'جدول الأغذية المصري';
+
+  @override
+  String get mealReviewSourceAi => 'تقدير الذكاء الاصطناعي';
+
+  @override
+  String get mealReviewUnitPiece => 'حبة';
+
+  @override
+  String get mealReviewUnitHandful => 'حفنة';
+
+  @override
+  String get mealReviewUnitGrams => 'جم';
+
+  @override
+  String get mealReviewCookingRaw => 'نيء';
+
+  @override
+  String get mealReviewCookingBoiled => 'مسلوق';
+
+  @override
+  String get mealReviewCookingGrilled => 'مشوي';
+
+  @override
+  String get mealReviewCookingFried => 'مقلي (+زيت)';
+
+  @override
+  String get mealReviewCookingBaked => 'في الفرن';
+
+  @override
+  String mealReviewCaloriesFormat(int count) {
+    return '$count سعرة';
+  }
+
+  @override
+  String mealReviewProteinFormat(int count) {
+    return '$count جم بروتين';
+  }
+
+  @override
+  String mealReviewCarbsFormat(int count) {
+    return '$count جم كارب';
+  }
+
+  @override
+  String mealReviewFatFormat(int count) {
+    return '$count جم دهون';
+  }
+
+  @override
+  String get cuisineSettingTitle => 'المطبخ';
+
+  @override
+  String get cuisineEgyptian => 'مصري';
+
+  @override
+  String get cuisineSaudi => 'سعودي وخليجي';
+
+  @override
+  String get cuisineLevantine => 'شامي';
+
+  @override
+  String get cuisineMoroccan => 'مغربي ومغاربي';
+
+  @override
+  String get cuisineTurkish => 'تركي';
+
+  @override
+  String get cuisineIndian => 'هندي وباكستاني';
+
+  @override
+  String get cuisineIndonesian => 'إندونيسي';
+
+  @override
+  String get cuisineWestern => 'غربي / متوسطي';
+
+  @override
+  String dietProgramFitReason(String reason) {
+    return 'مناسب لهدفك: $reason';
+  }
+
+  @override
+  String get exerciseMusclesTargeted => 'العضلات المستهدفة';
+
+  @override
+  String get exerciseStepsTitle => 'طريقة الأداء خطوة بخطوة';
+
+  @override
+  String get exerciseCommonMistakes => 'أخطاء شائعة';
+
+  @override
+  String get exerciseBreathingCue => 'التنفس أثناء الحركة';
+
+  @override
+  String get exerciseEasierVariation => 'تدرج أسهل';
+
+  @override
+  String get exerciseHarderVariation => 'تدرج أصعب';
+
+  @override
+  String get exerciseSafetyNote => 'تعليمات الأمان';
+
+  @override
+  String get exerciseWarmUpHeader => 'حركات الإحماء';
+
+  @override
+  String get reassessmentLaterSnooze => 'لاحقاً (تذكير بعد 3 أيام)';
+
+  @override
+  String get measurementsAddEntry => 'سجّل قياس جديد';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -4480,6 +4713,238 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String get chartGoalLine => 'خط الهدف';
+
+  @override
+  String get scanSourceSheetTitle => 'هتسجل الأكل إزاي؟';
+
+  @override
+  String get scanSourceCamera => 'صوّر بالكاميرا';
+
+  @override
+  String get scanSourceGallery => 'اختار من الاستوديو';
+
+  @override
+  String get scanSourceText => 'اكتب الأكل';
+
+  @override
+  String get scanSourceFridgeTitle => 'صوّر التلاجة أو المطبخ';
+
+  @override
+  String get scanSourceInBodyTitle => 'ارفع ورقة الإن بادي';
+
+  @override
+  String get todayPlanMorning => 'صباحاً';
+
+  @override
+  String get todayPlanAfternoon => 'الظهر';
+
+  @override
+  String get todayPlanEvening => 'المساء';
+
+  @override
+  String get todayPlanWaterQuickAdd => '+250 مل';
+
+  @override
+  String todayPlanWaterProgress(String current, String goal) {
+    return '$current / $goal لتر';
+  }
+
+  @override
+  String get todayPlanSleepLogTitle => 'سجل نومك النهاردة';
+
+  @override
+  String todayPlanSleepDuration(String hours) {
+    return 'نمت $hours ساعات';
+  }
+
+  @override
+  String get todayPlanSleepLogSave => 'احفظ النوم';
+
+  @override
+  String get todayPlanSleepMarkDone => 'تمام (7+ ساعات نوم)';
+
+  @override
+  String get todayPlanSleepQuality => 'جودة النوم';
+
+  @override
+  String get todayPlanSupplements => 'المكملات والفيتامينات';
+
+  @override
+  String get todayPlanBreathingAction => 'جلسة تنفس';
+
+  @override
+  String get stepsHeroTitle => 'خطوات النهاردة';
+
+  @override
+  String get stepsEnableButton => 'فعّل عدّ الخطوات';
+
+  @override
+  String get stepsPermissionTitle => 'تتبع دقيق لخطواتك';
+
+  @override
+  String get stepsPermissionBody =>
+      'ڤيريو بيستخدم حساس الحركة في موبايلك عشان يحسب خطواتك بدقة طول اليوم من غير ما يستهلك البطارية.';
+
+  @override
+  String get stepsPermissionGrant => 'فعّلها دلوقتي';
+
+  @override
+  String get stepsActiveMinutes => 'دقايق حركة';
+
+  @override
+  String stepsFatBurned(String grams) {
+    return '≈ $grams جم دهون';
+  }
+
+  @override
+  String stepsKm(String km) {
+    return '$km كم';
+  }
+
+  @override
+  String get stepsDetailTitle => 'الخطوات والمشي';
+
+  @override
+  String get stepsHourlyTitle => 'توزيع الساعات';
+
+  @override
+  String stepsStreakDays(int days) {
+    return 'عاش! $days أيام التزام ورا بعض';
+  }
+
+  @override
+  String stepsBestDay(String steps) {
+    return 'أعلى يوم: $steps خطوة';
+  }
+
+  @override
+  String get stepsWeekTab => 'الأسبوع';
+
+  @override
+  String get stepsMonthTab => 'الشهر';
+
+  @override
+  String get mealReviewItemQty => 'الكمية';
+
+  @override
+  String mealReviewConfidence(int pct) {
+    return 'دقة $pct%';
+  }
+
+  @override
+  String get mealReviewSourceUsda => 'قاعدة بيانات USDA';
+
+  @override
+  String get mealReviewSourceEgypt => 'جدول الأغذية المصري';
+
+  @override
+  String get mealReviewSourceAi => 'تقدير الذكاء الاصطناعي';
+
+  @override
+  String get mealReviewUnitPiece => 'حبة';
+
+  @override
+  String get mealReviewUnitHandful => 'حفنة';
+
+  @override
+  String get mealReviewUnitGrams => 'جم';
+
+  @override
+  String get mealReviewCookingRaw => 'نيء';
+
+  @override
+  String get mealReviewCookingBoiled => 'مسلوق';
+
+  @override
+  String get mealReviewCookingGrilled => 'مشوي';
+
+  @override
+  String get mealReviewCookingFried => 'مقلي (+زيت)';
+
+  @override
+  String get mealReviewCookingBaked => 'في الفرن';
+
+  @override
+  String mealReviewCaloriesFormat(int count) {
+    return '$count سعرة';
+  }
+
+  @override
+  String mealReviewProteinFormat(int count) {
+    return '$count جم بروتين';
+  }
+
+  @override
+  String mealReviewCarbsFormat(int count) {
+    return '$count جم كارب';
+  }
+
+  @override
+  String mealReviewFatFormat(int count) {
+    return '$count جم دهون';
+  }
+
+  @override
+  String get cuisineSettingTitle => 'المطبخ';
+
+  @override
+  String get cuisineEgyptian => 'الأكل النضيف المصري';
+
+  @override
+  String get cuisineSaudi => 'سعودي وخليجي';
+
+  @override
+  String get cuisineLevantine => 'شامي';
+
+  @override
+  String get cuisineMoroccan => 'مغربي ومغاربي';
+
+  @override
+  String get cuisineTurkish => 'تركي';
+
+  @override
+  String get cuisineIndian => 'هندي وباكستاني';
+
+  @override
+  String get cuisineIndonesian => 'إندونيسي';
+
+  @override
+  String get cuisineWestern => 'غربي / متوسطي';
+
+  @override
+  String dietProgramFitReason(String reason) {
+    return 'مناسب لهدفك: $reason';
+  }
+
+  @override
+  String get exerciseMusclesTargeted => 'العضلات المستهدفة';
+
+  @override
+  String get exerciseStepsTitle => 'إزاي تعمل التمرين صح خطوة بخطوة';
+
+  @override
+  String get exerciseCommonMistakes => 'أخطاء شائعة خلّي بالك منها';
+
+  @override
+  String get exerciseBreathingCue => 'طريقة النفس الصح';
+
+  @override
+  String get exerciseEasierVariation => 'تدرج أسهل لو صعب عليك';
+
+  @override
+  String get exerciseHarderVariation => 'تدرج أصعب لو سهل عليك';
+
+  @override
+  String get exerciseSafetyNote => 'أمان وإرشادات وقاية';
+
+  @override
+  String get exerciseWarmUpHeader => 'حركات التسخين والإحماء';
+
+  @override
+  String get reassessmentLaterSnooze => 'لاحقاً (فكرني كمان 3 أيام)';
+
+  @override
+  String get measurementsAddEntry => 'سجّل قياس جديد';
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -5086,4 +5551,236 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String get chartGoalLine => 'خط الهدف';
+
+  @override
+  String get scanSourceSheetTitle => 'كيف تحب تسجل وجبتك؟';
+
+  @override
+  String get scanSourceCamera => 'صوّر بالكاميرا';
+
+  @override
+  String get scanSourceGallery => 'اختر من الاستوديو';
+
+  @override
+  String get scanSourceText => 'اكتب الوجبة';
+
+  @override
+  String get scanSourceFridgeTitle => 'صوّر الثلاجة أو المطبخ';
+
+  @override
+  String get scanSourceInBodyTitle => 'رفع تقرير إن بادي';
+
+  @override
+  String get todayPlanMorning => 'صباحاً';
+
+  @override
+  String get todayPlanAfternoon => 'الظهر';
+
+  @override
+  String get todayPlanEvening => 'المساء';
+
+  @override
+  String get todayPlanWaterQuickAdd => '+250 مل';
+
+  @override
+  String todayPlanWaterProgress(String current, String goal) {
+    return '$current / $goal لتر';
+  }
+
+  @override
+  String get todayPlanSleepLogTitle => 'سجل نومك اليوم';
+
+  @override
+  String todayPlanSleepDuration(String hours) {
+    return 'نمت $hours ساعات';
+  }
+
+  @override
+  String get todayPlanSleepLogSave => 'حفظ النوم';
+
+  @override
+  String get todayPlanSleepMarkDone => 'تم (7+ ساعات نوم)';
+
+  @override
+  String get todayPlanSleepQuality => 'جودة النوم';
+
+  @override
+  String get todayPlanSupplements => 'المكملات اليومية';
+
+  @override
+  String get todayPlanBreathingAction => 'جلسة تنفس';
+
+  @override
+  String get stepsHeroTitle => 'خطوات اليوم';
+
+  @override
+  String get stepsEnableButton => 'فعّل عدّ الخطوات';
+
+  @override
+  String get stepsPermissionTitle => 'تتبع دقيق للخطوات';
+
+  @override
+  String get stepsPermissionBody =>
+      'يستخدم ڤيريو حساس الحركة في جوالك لعد الخطوات بدقة على مدار اليوم بدون استهلاك البطارية.';
+
+  @override
+  String get stepsPermissionGrant => 'تفعيل الحين';
+
+  @override
+  String get stepsActiveMinutes => 'دقائق نشاط';
+
+  @override
+  String stepsFatBurned(String grams) {
+    return '≈ $grams جم دهون';
+  }
+
+  @override
+  String stepsKm(String km) {
+    return '$km كم';
+  }
+
+  @override
+  String get stepsDetailTitle => 'الخطوات والمشي';
+
+  @override
+  String get stepsHourlyTitle => 'توزيع الساعات';
+
+  @override
+  String stepsStreakDays(int days) {
+    return 'كفو! $days أيام متتالية';
+  }
+
+  @override
+  String stepsBestDay(String steps) {
+    return 'أفضل يوم: $steps خطوة';
+  }
+
+  @override
+  String get stepsWeekTab => 'أسبوع';
+
+  @override
+  String get stepsMonthTab => 'شهر';
+
+  @override
+  String get mealReviewItemQty => 'الكمية';
+
+  @override
+  String mealReviewConfidence(int pct) {
+    return 'دقة $pct%';
+  }
+
+  @override
+  String get mealReviewSourceUsda => 'قاعدة بيانات USDA';
+
+  @override
+  String get mealReviewSourceEgypt => 'جدول الأغذية المصري';
+
+  @override
+  String get mealReviewSourceAi => 'تقدير الذكاء الاصطناعي';
+
+  @override
+  String get mealReviewUnitPiece => 'حبة';
+
+  @override
+  String get mealReviewUnitHandful => 'قبضة يد';
+
+  @override
+  String get mealReviewUnitGrams => 'جم';
+
+  @override
+  String get mealReviewCookingRaw => 'نيء';
+
+  @override
+  String get mealReviewCookingBoiled => 'مسلوق';
+
+  @override
+  String get mealReviewCookingGrilled => 'مشوي';
+
+  @override
+  String get mealReviewCookingFried => 'مقلي (+زيت)';
+
+  @override
+  String get mealReviewCookingBaked => 'بالفرن';
+
+  @override
+  String mealReviewCaloriesFormat(int count) {
+    return '$count سعرة';
+  }
+
+  @override
+  String mealReviewProteinFormat(int count) {
+    return '$count جم بروتين';
+  }
+
+  @override
+  String mealReviewCarbsFormat(int count) {
+    return '$count جم كارب';
+  }
+
+  @override
+  String mealReviewFatFormat(int count) {
+    return '$count جم دهون';
+  }
+
+  @override
+  String get cuisineSettingTitle => 'المطبخ';
+
+  @override
+  String get cuisineEgyptian => 'مصري';
+
+  @override
+  String get cuisineSaudi => 'سعودي وخليجي';
+
+  @override
+  String get cuisineLevantine => 'شامي';
+
+  @override
+  String get cuisineMoroccan => 'مغربي ومغاربي';
+
+  @override
+  String get cuisineTurkish => 'تركي';
+
+  @override
+  String get cuisineIndian => 'هندي وباكستاني';
+
+  @override
+  String get cuisineIndonesian => 'إندونيسي';
+
+  @override
+  String get cuisineWestern => 'غربي / متوسطي';
+
+  @override
+  String dietProgramFitReason(String reason) {
+    return 'مناسب لهدفك: $reason';
+  }
+
+  @override
+  String get exerciseMusclesTargeted => 'العضلات المستهدفة';
+
+  @override
+  String get exerciseStepsTitle => 'طريقة أداء التمرين خطوة بخطوة';
+
+  @override
+  String get exerciseCommonMistakes => 'أخطاء شائعة انتبه منها';
+
+  @override
+  String get exerciseBreathingCue => 'طريقة التنفس الصحيحة';
+
+  @override
+  String get exerciseEasierVariation => 'تدرج أسهل';
+
+  @override
+  String get exerciseHarderVariation => 'تدرج أصعب';
+
+  @override
+  String get exerciseSafetyNote => 'تعليمات الأمان';
+
+  @override
+  String get exerciseWarmUpHeader => 'حركات الإحماء والتسخين';
+
+  @override
+  String get reassessmentLaterSnooze => 'لاحقاً (ذكرني بعد 3 أيام)';
+
+  @override
+  String get measurementsAddEntry => 'سجّل قياس جديد';
 }

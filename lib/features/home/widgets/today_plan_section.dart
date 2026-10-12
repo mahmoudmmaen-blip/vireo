@@ -10,15 +10,16 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/ring_progress.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/features/activity/screens/activity_hub_screen.dart';
+import 'package:vireo/features/breathing/screens/breathing_hub_screen.dart';
 import 'package:vireo/features/home/domain/today_plan_item.dart';
-import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/home/providers/today_plan_checks_provider.dart';
 import 'package:vireo/features/home/providers/today_plan_provider.dart';
+import 'package:vireo/features/home/widgets/sleep_log_sheet.dart';
+import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
-import 'package:vireo/features/activity/screens/activity_hub_screen.dart';
-import 'package:vireo/features/breathing/screens/breathing_hub_screen.dart';
 import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
 
 class TodayPlanSection extends ConsumerStatefulWidget {
@@ -88,6 +89,8 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
         final type = item.mealType;
         if (type != null) {
           ref.read(shellTabIndexProvider.notifier).goNutrition(mealTab: type);
+        } else {
+          ref.read(shellTabIndexProvider.notifier).goNutrition();
         }
         return;
       case TodayPlanKind.workout:
@@ -104,7 +107,7 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
         await ref.read(waterTrackerProvider.notifier).addGlass();
         return;
       case TodayPlanKind.vitalitySun:
-        await ref.read(vitalityDailyLogProvider.notifier).toggleSunlightDone(true);
+        await ref.read(vitalityDailyLogProvider.notifier).toggleSunlightDone(!complete);
         return;
       case TodayPlanKind.vitalityBreathing:
         await Navigator.of(context).push(
@@ -112,22 +115,22 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
         );
         return;
       case TodayPlanKind.vitalityZinc:
-        await ref.read(vitalityDailyLogProvider.notifier).toggleZincVitDDone(true);
+        await ref.read(vitalityDailyLogProvider.notifier).toggleZincVitDDone(!complete);
+        return;
+      case TodayPlanKind.vitalitySleep:
+      case TodayPlanKind.sleepBedtime:
+        await showSleepLogSheet(context, ref);
         return;
       case TodayPlanKind.protocolPro:
       case TodayPlanKind.aiSuggestionPro:
-        if (!complete) {
-          await ref.read(todayPlanChecksProvider.notifier).toggle(item.id, value: true);
-        }
+        await ref.read(todayPlanChecksProvider.notifier).toggle(item.id, value: !complete);
         return;
       case TodayPlanKind.fastingOpen:
       case TodayPlanKind.fastingClose:
-      case TodayPlanKind.sleepBedtime:
         await ref
             .read(todayPlanChecksProvider.notifier)
             .toggle(item.id, value: !complete);
         return;
-      case TodayPlanKind.vitalitySleep:
       case TodayPlanKind.vitalityProtein:
         ref.read(shellTabIndexProvider.notifier).goNutrition();
         return;
@@ -152,7 +155,22 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
       return;
     }
 
-    if (item.autoComplete) return;
+    if (item.kind == TodayPlanKind.vitalitySun) {
+      await ref.read(vitalityDailyLogProvider.notifier).toggleSunlightDone(!complete);
+      HapticFeedback.selectionClick();
+      return;
+    }
+
+    if (item.kind == TodayPlanKind.vitalityZinc) {
+      await ref.read(vitalityDailyLogProvider.notifier).toggleZincVitDDone(!complete);
+      HapticFeedback.selectionClick();
+      return;
+    }
+
+    if (item.kind == TodayPlanKind.vitalitySleep || item.kind == TodayPlanKind.sleepBedtime) {
+      await showSleepLogSheet(context, ref);
+      return;
+    }
 
     await ref
         .read(todayPlanChecksProvider.notifier)
@@ -176,6 +194,9 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
     }
 
     final pct = (plan.progress * 100).round();
+    final morningItems = plan.itemsForSection(TodayPlanSectionKind.morning);
+    final afternoonItems = plan.itemsForSection(TodayPlanSectionKind.afternoon);
+    final eveningItems = plan.itemsForSection(TodayPlanSectionKind.evening);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -212,29 +233,97 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
             style: TextStyle(color: colors.textMute, fontSize: 13),
           ),
         ),
+
+        // ── Single Water Card with Ring & Quick Add ──
+        if (plan.waterItem != null) ...[
+          _WaterHighlightCard(
+            item: plan.waterItem!,
+            onTap: () => _onTapItem(plan.waterItem!, plan.isComplete(plan.waterItem!.id)),
+            onQuickAdd: () async {
+              HapticFeedback.selectionClick();
+              await ref.read(waterTrackerProvider.notifier).addGlass();
+            },
+          ),
+          const SizedBox(height: VSpace.sm),
+        ],
+
+        // ── Plan Sections Grouped: Morning, Afternoon, Evening ──
         VireoCard(
           padding: const EdgeInsets.symmetric(vertical: VSpace.sm, horizontal: VSpace.md),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              for (var i = 0; i < plan.items.length; i++)
-                _TimelineRow(
-                  item: plan.items[i],
-                  isFirst: i == 0,
-                  isLast: i == plan.items.length - 1,
-                  isNow: plan.items[i].id == plan.nowItemId,
-                  complete: plan.isComplete(plan.items[i].id),
-                  timeLabel: _formatTime(plan.items[i].minutesOfDay),
-                  nowLabel: l10n.todayPlanNow,
-                  proLabel: l10n.todayPlanPro,
-                  onTap: () => _onTapItem(
-                    plan.items[i],
-                    plan.isComplete(plan.items[i].id),
-                  ),
-                  onCheck: () => _onCheck(
-                    plan.items[i],
-                    plan.isComplete(plan.items[i].id),
-                  ),
+              if (morningItems.isNotEmpty) ...[
+                _SectionHeaderRow(
+                  title: l10n.todayPlanMorning,
+                  icon: Icons.wb_twilight_rounded,
                 ),
+                for (var i = 0; i < morningItems.length; i++)
+                  _PlanRow(
+                    item: morningItems[i],
+                    isNow: morningItems[i].id == plan.nowItemId,
+                    complete: plan.isComplete(morningItems[i].id),
+                    timeLabel: _formatTime(morningItems[i].minutesOfDay),
+                    nowLabel: l10n.todayPlanNow,
+                    proLabel: l10n.todayPlanPro,
+                    onTap: () => _onTapItem(
+                      morningItems[i],
+                      plan.isComplete(morningItems[i].id),
+                    ),
+                    onCheck: () => _onCheck(
+                      morningItems[i],
+                      plan.isComplete(morningItems[i].id),
+                    ),
+                  ),
+              ],
+              if (afternoonItems.isNotEmpty) ...[
+                const SizedBox(height: VSpace.sm),
+                _SectionHeaderRow(
+                  title: l10n.todayPlanAfternoon,
+                  icon: Icons.wb_sunny_rounded,
+                ),
+                for (var i = 0; i < afternoonItems.length; i++)
+                  _PlanRow(
+                    item: afternoonItems[i],
+                    isNow: afternoonItems[i].id == plan.nowItemId,
+                    complete: plan.isComplete(afternoonItems[i].id),
+                    timeLabel: _formatTime(afternoonItems[i].minutesOfDay),
+                    nowLabel: l10n.todayPlanNow,
+                    proLabel: l10n.todayPlanPro,
+                    onTap: () => _onTapItem(
+                      afternoonItems[i],
+                      plan.isComplete(afternoonItems[i].id),
+                    ),
+                    onCheck: () => _onCheck(
+                      afternoonItems[i],
+                      plan.isComplete(afternoonItems[i].id),
+                    ),
+                  ),
+              ],
+              if (eveningItems.isNotEmpty) ...[
+                const SizedBox(height: VSpace.sm),
+                _SectionHeaderRow(
+                  title: l10n.todayPlanEvening,
+                  icon: Icons.nightlight_round,
+                ),
+                for (var i = 0; i < eveningItems.length; i++)
+                  _PlanRow(
+                    item: eveningItems[i],
+                    isNow: eveningItems[i].id == plan.nowItemId,
+                    complete: plan.isComplete(eveningItems[i].id),
+                    timeLabel: _formatTime(eveningItems[i].minutesOfDay),
+                    nowLabel: l10n.todayPlanNow,
+                    proLabel: l10n.todayPlanPro,
+                    onTap: () => _onTapItem(
+                      eveningItems[i],
+                      plan.isComplete(eveningItems[i].id),
+                    ),
+                    onCheck: () => _onCheck(
+                      eveningItems[i],
+                      plan.isComplete(eveningItems[i].id),
+                    ),
+                  ),
+              ],
             ],
           ),
         ),
@@ -250,11 +339,112 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
   }
 }
 
-class _TimelineRow extends StatelessWidget {
-  const _TimelineRow({
+class _WaterHighlightCard extends StatelessWidget {
+  const _WaterHighlightCard({
     required this.item,
-    required this.isFirst,
-    required this.isLast,
+    required this.onTap,
+    required this.onQuickAdd,
+  });
+
+  final TodayPlanItem item;
+  final VoidCallback onTap;
+  final VoidCallback onQuickAdd;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    final ratio = item.progress ?? 0.0;
+
+    return VireoCard(
+      padding: const EdgeInsets.symmetric(horizontal: VSpace.md, vertical: VSpace.sm + 2),
+      onTap: onTap,
+      child: Row(
+        children: [
+          RingProgress(
+            progress: ratio,
+            size: 40,
+            stroke: 4.5,
+            color: VMacro.water,
+            child: Icon(Icons.water_drop_rounded, size: 18, color: VMacro.water),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.title,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+                if (item.progressLabel != null)
+                  Text(
+                    item.progressLabel!,
+                    style: TextStyle(
+                      color: colors.textMute,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          TextButton.icon(
+            style: TextButton.styleFrom(
+              backgroundColor: VMacro.water.withValues(alpha: 0.12),
+              foregroundColor: VMacro.water,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(VRadius.pill),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              minimumSize: const Size(0, 32),
+            ),
+            onPressed: onQuickAdd,
+            icon: const Icon(Icons.add, size: 16),
+            label: Text(
+              item.quickActionLabel ?? '+250 ml',
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionHeaderRow extends StatelessWidget {
+  const _SectionHeaderRow({required this.title, required this.icon});
+
+  final String title;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+      child: Row(
+        children: [
+          Icon(icon, size: 16, color: colors.ember),
+          const SizedBox(width: 6),
+          Text(
+            title,
+            style: TextStyle(
+              color: colors.ember,
+              fontWeight: FontWeight.w800,
+              fontSize: 13,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PlanRow extends StatelessWidget {
+  const _PlanRow({
+    required this.item,
     required this.isNow,
     required this.complete,
     required this.timeLabel,
@@ -265,8 +455,6 @@ class _TimelineRow extends StatelessWidget {
   });
 
   final TodayPlanItem item;
-  final bool isFirst;
-  final bool isLast;
   final bool isNow;
   final bool complete;
   final String timeLabel;
@@ -280,154 +468,144 @@ class _TimelineRow extends StatelessWidget {
     final colors = context.vireoColors;
     final highlight = isNow && !complete;
 
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            width: 56,
-            child: Column(
-              children: [
-                if (!isFirst)
-                  Expanded(
-                    child: Container(width: 2, color: colors.line),
-                  ),
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: highlight
+    return Pressable(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 3),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        decoration: BoxDecoration(
+          color: highlight
+              ? colors.ember.withValues(alpha: 0.08)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(VRadius.md),
+          border: highlight
+              ? Border.all(color: colors.ember.withValues(alpha: 0.35))
+              : null,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 34,
+              height: 34,
+              decoration: BoxDecoration(
+                color: complete
+                    ? colors.success.withValues(alpha: 0.12)
+                    : (highlight
                         ? colors.ember.withValues(alpha: 0.15)
-                        : colors.surfaceRaised,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: highlight ? colors.ember : colors.line,
-                    ),
-                  ),
-                  child: Icon(item.icon, size: 18, color: colors.text),
-                ),
-                if (!isLast)
-                  Expanded(
-                    child: Container(width: 2, color: colors.line),
-                  ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Pressable(
-              onTap: onTap,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: VSpace.sm, top: 2),
-                child: Container(
-                  padding: const EdgeInsets.all(VSpace.sm),
-                  decoration: BoxDecoration(
-                    color: highlight
-                        ? colors.ember.withValues(alpha: 0.08)
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(VRadius.md),
-                    border: highlight
-                        ? Border.all(color: colors.ember.withValues(alpha: 0.35))
-                        : null,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  timeLabel,
-                                  style: TextStyle(
-                                    color: colors.textMute,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                if (highlight) ...[
-                                  const SizedBox(width: 8),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 2,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: colors.ember,
-                                      borderRadius: BorderRadius.circular(999),
-                                    ),
-                                    child: Text(
-                                      nowLabel,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                                if (item.isPro) ...[
-                                  const SizedBox(width: 6),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 6,
-                                      vertical: 2,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: colors.gold.withValues(alpha: 0.2),
-                                      borderRadius: BorderRadius.circular(999),
-                                    ),
-                                    child: Text(
-                                      proLabel,
-                                      style: TextStyle(
-                                        color: colors.gold,
-                                        fontSize: 9,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              item.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(fontWeight: FontWeight.w700),
-                            ),
-                            if (item.subtitle.isNotEmpty) ...[
-                              const SizedBox(height: 2),
-                              Text(
-                                item.subtitle,
-                                style: TextStyle(
-                                  color: colors.textMute,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ],
-                        ),
-                      ),
-                      IconButton(
-                        visualDensity: VisualDensity.compact,
-                        onPressed: onCheck,
-                        icon: Icon(
-                          complete
-                              ? Icons.check_circle_rounded
-                              : Icons.radio_button_unchecked_rounded,
-                          color: complete ? colors.success : colors.textMute,
-                        ),
-                      ),
-                    ],
-                  ),
+                        : colors.surfaceRaised),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: complete
+                      ? colors.success
+                      : (highlight ? colors.ember : colors.line),
                 ),
               ),
+              child: Icon(
+                item.icon,
+                size: 17,
+                color: complete
+                    ? colors.success
+                    : (highlight ? colors.ember : colors.text),
+              ),
             ),
-          ),
-        ],
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        timeLabel,
+                        style: TextStyle(
+                          color: colors.textMute,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      if (highlight) ...[
+                        const SizedBox(width: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 1.5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: colors.ember,
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Text(
+                            nowLabel,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                      if (item.isPro) ...[
+                        const SizedBox(width: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 1.5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: colors.gold.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Text(
+                            proLabel,
+                            style: TextStyle(
+                              color: colors.gold,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const SizedBox(height: 2),
+                  AnimatedDefaultTextStyle(
+                    duration: const Duration(milliseconds: 200),
+                    style: TextStyle(
+                      color: complete ? colors.textMute : colors.text,
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.w700,
+                      decoration: complete ? TextDecoration.lineThrough : null,
+                    ),
+                    child: Text(item.title),
+                  ),
+                  if (item.subtitle.isNotEmpty) ...[
+                    const SizedBox(height: 1),
+                    Text(
+                      item.subtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: colors.textMute,
+                        fontSize: 11.5,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            IconButton(
+              visualDensity: VisualDensity.compact,
+              onPressed: onCheck,
+              icon: Icon(
+                complete
+                    ? Icons.check_circle_rounded
+                    : Icons.radio_button_unchecked_rounded,
+                color: complete ? colors.success : colors.textMute,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

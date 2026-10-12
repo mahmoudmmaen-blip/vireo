@@ -18,6 +18,12 @@ enum TodayPlanKind {
   aiSuggestionPro,
 }
 
+enum TodayPlanSectionKind {
+  morning,
+  afternoon,
+  evening,
+}
+
 @immutable
 class TodayPlanItem {
   const TodayPlanItem({
@@ -30,6 +36,10 @@ class TodayPlanItem {
     required this.isPro,
     this.mealType,
     this.autoComplete = false,
+    this.section = TodayPlanSectionKind.morning,
+    this.progress,
+    this.progressLabel,
+    this.quickActionLabel,
   });
 
   final String id;
@@ -41,8 +51,20 @@ class TodayPlanItem {
   final bool isPro;
   final MealType? mealType;
 
-  /// When true, checking is driven by other app state (workout, meals, etc.).
+  /// When true, item completion is synchronized with underlying app state.
   final bool autoComplete;
+
+  /// Section group: Morning (صباحاً), Afternoon (الظهر), Evening (المساء).
+  final TodayPlanSectionKind section;
+
+  /// Optional progress ratio 0.0 - 1.0 (e.g. for water ring).
+  final double? progress;
+
+  /// Optional text label e.g. "0.5 / 3.3 L".
+  final String? progressLabel;
+
+  /// Optional quick button label e.g. "+250 ml".
+  final String? quickActionLabel;
 
   DateTime get sortTime {
     final now = DateTime.now();

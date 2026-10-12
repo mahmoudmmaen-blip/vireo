@@ -212,7 +212,7 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
             ref.read(shellTabIndexProvider.notifier).goTo(value);
           },
           onQuickLog: () => showQuickLogSheet(context, ref),
-          onQuickLogLongPress: () => AiScanScreen.open(context, ref, fromCamera: true),
+          onQuickLogLongPress: () => AiScanScreen.open(context, ref),
         ),
       ),
     );

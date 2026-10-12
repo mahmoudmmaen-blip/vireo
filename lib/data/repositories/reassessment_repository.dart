@@ -8,29 +8,99 @@ import 'package:vireo/data/models/training_environment.dart';
 class ReassessmentRepository {
   const ReassessmentRepository();
 
-  static const minDaysBetween = 28;
+  static const minDaysBetween = 30;
   static const maxDaysBetween = 42;
+  static const snoozeDays = 3;
+  static const onboardingGraceDays = 7;
   static const lastReassessmentKey = 'last_reassessment_at';
+  static const snoozeUntilKey = 'reassessment_snoozed_until';
+  static const onboardingCompletedAtKey = 'onboarding_completed_at';
   static const meaningfulWeightDeltaKg = 2.0;
 
   Future<bool> isReassessmentDue() async {
-    final last = await _lastReassessmentDate();
     final onboarding = HiveService.settingsBox.get('onboarding_complete') == true;
+    if (!onboarding) return false;
+
+    final last = await _lastReassessmentDate();
+    final snoozedUntil = _readSnoozedUntil();
+    var onboardingCompletedAt = _readOnboardingCompletedAt();
+    if (onboardingCompletedAt == null) {
+      onboardingCompletedAt = DateTime.now();
+      await HiveService.settingsBox.put(
+        onboardingCompletedAtKey,
+        onboardingCompletedAt.toUtc().toIso8601String(),
+      );
+    }
+
     return isReassessmentDueFor(
       lastReassessment: last,
       referenceNow: DateTime.now(),
       onboardingComplete: onboarding,
+      onboardingCompletedAt: onboardingCompletedAt,
+      snoozedUntil: snoozedUntil,
     );
   }
 
-  /// Pure due-check used by [isReassessmentDue] and §2.7 tests.
+  /// Pure due-check used by [isReassessmentDue] and scheduling tests.
   static bool isReassessmentDueFor({
     required DateTime? lastReassessment,
     required DateTime referenceNow,
     required bool onboardingComplete,
+    DateTime? onboardingCompletedAt,
+    DateTime? snoozedUntil,
   }) {
-    if (lastReassessment == null) return onboardingComplete;
-    return referenceNow.difference(lastReassessment).inDays >= minDaysBetween;
+    if (!onboardingComplete) return false;
+
+    // 1. Snoozed?
+    if (snoozedUntil != null && referenceNow.isBefore(snoozedUntil)) {
+      return false;
+    }
+
+    // 2. Never show during first 7 days after onboarding
+    if (onboardingCompletedAt != null &&
+        referenceNow.difference(onboardingCompletedAt).inDays < onboardingGraceDays) {
+      return false;
+    }
+
+    // 3. Show at most once per 30 days after last completed check-in
+    if (lastReassessment != null) {
+      return referenceNow.difference(lastReassessment).inDays >= minDaysBetween;
+    }
+
+    // 4. If no prior check-in, show after 30 days from onboarding completion
+    if (onboardingCompletedAt != null) {
+      return referenceNow.difference(onboardingCompletedAt).inDays >= minDaysBetween;
+    }
+
+    return false;
+  }
+
+  DateTime? _readSnoozedUntil() {
+    if (!HiveService.isInitialized) return null;
+    final stored = HiveService.settingsBox.get(snoozeUntilKey) as String?;
+    if (stored != null) {
+      try {
+        return DateTime.parse(stored);
+      } catch (_) {}
+    }
+    return null;
+  }
+
+  DateTime? _readOnboardingCompletedAt() {
+    if (!HiveService.isInitialized) return null;
+    final stored = HiveService.settingsBox.get(onboardingCompletedAtKey) as String?;
+    if (stored != null) {
+      try {
+        return DateTime.parse(stored);
+      } catch (_) {}
+    }
+    return null;
+  }
+
+  Future<void> snooze({int days = snoozeDays}) async {
+    if (!HiveService.isInitialized) return;
+    final until = DateTime.now().add(Duration(days: days));
+    await HiveService.settingsBox.put(snoozeUntilKey, until.toUtc().toIso8601String());
   }
 
   Future<DateTime?> _lastReassessmentDate() async {
@@ -163,6 +233,7 @@ class ReassessmentRepository {
     }
 
     await HiveService.settingsBox.put(lastReassessmentKey, now.toIso8601String());
+    await HiveService.settingsBox.delete(snoozeUntilKey);
     await HiveService.cacheBox.put('last_reassessment', {
       'weight_kg': weightKg,
       'activity_level': activityLevel.value,

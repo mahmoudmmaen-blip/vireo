@@ -50,11 +50,11 @@ void main() {
   });
 
   group('ReassessmentRepository §2.7 monthly background check', () {
-    test('minDaysBetween is 28 days', () {
-      expect(ReassessmentRepository.minDaysBetween, 28);
+    test('minDaysBetween is 30 days', () {
+      expect(ReassessmentRepository.minDaysBetween, 30);
     });
 
-    test('isReassessmentDueFor triggers after 28 days', () {
+    test('isReassessmentDueFor triggers after 30 days', () {
       final last = DateTime(2026, 7, 1);
       final now = DateTime(2026, 8, 1);
 
@@ -68,7 +68,7 @@ void main() {
       );
     });
 
-    test('isReassessmentDueFor false before 28 days', () {
+    test('isReassessmentDueFor false before 30 days', () {
       final last = DateTime(2026, 8, 1);
       final now = DateTime(2026, 8, 20);
 
@@ -94,10 +94,11 @@ void main() {
       expect(
         ReassessmentRepository.isReassessmentDueFor(
           lastReassessment: null,
-          referenceNow: DateTime(2026, 8, 22),
+          referenceNow: DateTime(2026, 8, 5),
           onboardingComplete: true,
+          onboardingCompletedAt: DateTime(2026, 8, 1),
         ),
-        isTrue,
+        isFalse,
       );
     });
   });

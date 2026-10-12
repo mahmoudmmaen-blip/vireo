@@ -3919,4 +3919,236 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get chartGoalLine => 'लक्ष्य रेखा';
+
+  @override
+  String get scanSourceSheetTitle => 'भोजन लॉग करने का तरीका चुनें';
+
+  @override
+  String get scanSourceCamera => 'कैमरे से फोटो लें';
+
+  @override
+  String get scanSourceGallery => 'गैलरी से चुनें';
+
+  @override
+  String get scanSourceText => 'खाना लिखें';
+
+  @override
+  String get scanSourceFridgeTitle => 'फ्रिज या किचन स्कैन करें';
+
+  @override
+  String get scanSourceInBodyTitle => 'इनबॉडी रिपोर्ट अपलोड करें';
+
+  @override
+  String get todayPlanMorning => 'सुबह';
+
+  @override
+  String get todayPlanAfternoon => 'दोपहर';
+
+  @override
+  String get todayPlanEvening => 'शाम';
+
+  @override
+  String get todayPlanWaterQuickAdd => '+250 मिली';
+
+  @override
+  String todayPlanWaterProgress(String current, String goal) {
+    return '$current / $goal ली';
+  }
+
+  @override
+  String get todayPlanSleepLogTitle => 'गुणवत्तापूर्ण नींद लॉग';
+
+  @override
+  String todayPlanSleepDuration(String hours) {
+    return '$hours घंटे सोए';
+  }
+
+  @override
+  String get todayPlanSleepLogSave => 'नींद सहेजें';
+
+  @override
+  String get todayPlanSleepMarkDone => 'पूर्ण (7+ घंटे नींद)';
+
+  @override
+  String get todayPlanSleepQuality => 'नींद की गुणवत्ता';
+
+  @override
+  String get todayPlanSupplements => 'दैनिक सप्लीमेंट्स';
+
+  @override
+  String get todayPlanBreathingAction => 'श्वास सत्र';
+
+  @override
+  String get stepsHeroTitle => 'आज के कदम';
+
+  @override
+  String get stepsEnableButton => 'कदम गणना सक्षम करें';
+
+  @override
+  String get stepsPermissionTitle => 'सटीक कदम ट्रैकिंग';
+
+  @override
+  String get stepsPermissionBody =>
+      'Vireo आपकी बैटरी खर्च किए बिना दिन भर सटीक कदम गिनने के लिए आपके डिवाइस के मोशन सेंसर का उपयोग करता है।';
+
+  @override
+  String get stepsPermissionGrant => 'अभी सक्षम करें';
+
+  @override
+  String get stepsActiveMinutes => 'सक्रिय मिनट';
+
+  @override
+  String stepsFatBurned(String grams) {
+    return '≈ $gramsग्रा वसा';
+  }
+
+  @override
+  String stepsKm(String km) {
+    return '$km किमी';
+  }
+
+  @override
+  String get stepsDetailTitle => 'कदम और चलना';
+
+  @override
+  String get stepsHourlyTitle => 'प्रति घंटा विवरण';
+
+  @override
+  String stepsStreakDays(int days) {
+    return '$days-दिनों का स्ट्रीक';
+  }
+
+  @override
+  String stepsBestDay(String steps) {
+    return 'सर्वश्रेष्ठ दिन: $steps कदम';
+  }
+
+  @override
+  String get stepsWeekTab => 'सप्ताह';
+
+  @override
+  String get stepsMonthTab => 'महीना';
+
+  @override
+  String get mealReviewItemQty => 'मात्रा';
+
+  @override
+  String mealReviewConfidence(int pct) {
+    return '$pct% सटीकता';
+  }
+
+  @override
+  String get mealReviewSourceUsda => 'USDA डेटाबेस';
+
+  @override
+  String get mealReviewSourceEgypt => 'मिस्र खाद्य तालिका';
+
+  @override
+  String get mealReviewSourceAi => 'AI विज़न अनुमान';
+
+  @override
+  String get mealReviewUnitPiece => 'पीस';
+
+  @override
+  String get mealReviewUnitHandful => 'मुट्ठी';
+
+  @override
+  String get mealReviewUnitGrams => 'ग्रा';
+
+  @override
+  String get mealReviewCookingRaw => 'कच्चा';
+
+  @override
+  String get mealReviewCookingBoiled => 'उबला हुआ';
+
+  @override
+  String get mealReviewCookingGrilled => 'ग्रिल्ड';
+
+  @override
+  String get mealReviewCookingFried => 'तला हुआ (+तेल)';
+
+  @override
+  String get mealReviewCookingBaked => 'ओवन बेक्ड';
+
+  @override
+  String mealReviewCaloriesFormat(int count) {
+    return '$count कैलोरी';
+  }
+
+  @override
+  String mealReviewProteinFormat(int count) {
+    return '$countग्रा प्रोटीन';
+  }
+
+  @override
+  String mealReviewCarbsFormat(int count) {
+    return '$countग्रा कार्ब्स';
+  }
+
+  @override
+  String mealReviewFatFormat(int count) {
+    return '$countग्रा फैट';
+  }
+
+  @override
+  String get cuisineSettingTitle => 'व्यंजन शैली';
+
+  @override
+  String get cuisineEgyptian => 'मिस्री';
+
+  @override
+  String get cuisineSaudi => 'सऊदी और खाड़ी';
+
+  @override
+  String get cuisineLevantine => 'लेवेंटाइन';
+
+  @override
+  String get cuisineMoroccan => 'मोरक्कन';
+
+  @override
+  String get cuisineTurkish => 'तुर्की';
+
+  @override
+  String get cuisineIndian => 'भारतीय और पाकिस्तानी';
+
+  @override
+  String get cuisineIndonesian => 'इंडोनेशियाई';
+
+  @override
+  String get cuisineWestern => 'पश्चिमी / भूमध्यसागरीय';
+
+  @override
+  String dietProgramFitReason(String reason) {
+    return 'आपके लक्ष्य के अनुकूल: $reason';
+  }
+
+  @override
+  String get exerciseMusclesTargeted => 'लक्षित मांसपेशियां';
+
+  @override
+  String get exerciseStepsTitle => 'स्टेप-बाय-स्टेप कैसे करें';
+
+  @override
+  String get exerciseCommonMistakes => 'सामान्य गलतियां';
+
+  @override
+  String get exerciseBreathingCue => 'सांस लेने की तकनीक';
+
+  @override
+  String get exerciseEasierVariation => 'आसान विकल्प';
+
+  @override
+  String get exerciseHarderVariation => 'कठिन विकल्प';
+
+  @override
+  String get exerciseSafetyNote => 'सुरक्षा नोट';
+
+  @override
+  String get exerciseWarmUpHeader => 'वार्म-अप मूव्स';
+
+  @override
+  String get reassessmentLaterSnooze => 'बाद में (3 दिन बाद याद दिलाएं)';
+
+  @override
+  String get measurementsAddEntry => 'नया माप जोड़ें';
 }

@@ -53,8 +53,14 @@ class OnboardingRepository {
     await HiveService.settingsBox.delete(onboardingStepKey);
   }
 
+  static const onboardingCompletedAtKey = 'onboarding_completed_at';
+
   Future<void> markOnboardingComplete() async {
     await HiveService.settingsBox.put(onboardingCompleteKey, true);
+    await HiveService.settingsBox.put(
+      onboardingCompletedAtKey,
+      DateTime.now().toUtc().toIso8601String(),
+    );
     await clearDraftAndStep();
   }
 

@@ -116,7 +116,13 @@ class _ReassessmentFlowScreenState extends ConsumerState<ReassessmentFlowScreen>
         automaticallyImplyLeading: false,
         actions: [
           TextButton(
-            onPressed: _submitting ? null : () => Navigator.of(context).pop(false),
+            onPressed: _submitting
+                ? null
+                : () async {
+                    await ref.read(reassessmentRepositoryProvider).snooze();
+                    ref.invalidate(reassessmentDueProvider);
+                    if (context.mounted) Navigator.of(context).pop(false);
+                  },
             child: Text(l10n.reassessmentLater),
           ),
         ],

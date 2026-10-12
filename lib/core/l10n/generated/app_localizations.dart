@@ -7092,6 +7092,420 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Goal Line'**
   String get chartGoalLine;
+
+  /// No description provided for @scanSourceSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Meal Source'**
+  String get scanSourceSheetTitle;
+
+  /// No description provided for @scanSourceCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take photo with camera'**
+  String get scanSourceCamera;
+
+  /// No description provided for @scanSourceGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get scanSourceGallery;
+
+  /// No description provided for @scanSourceText.
+  ///
+  /// In en, this message translates to:
+  /// **'Write what you ate'**
+  String get scanSourceText;
+
+  /// No description provided for @scanSourceFridgeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Fridge or Pantry'**
+  String get scanSourceFridgeTitle;
+
+  /// No description provided for @scanSourceInBodyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Body Composition'**
+  String get scanSourceInBodyTitle;
+
+  /// No description provided for @todayPlanMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get todayPlanMorning;
+
+  /// No description provided for @todayPlanAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon'**
+  String get todayPlanAfternoon;
+
+  /// No description provided for @todayPlanEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get todayPlanEvening;
+
+  /// No description provided for @todayPlanWaterQuickAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'+250 ml'**
+  String get todayPlanWaterQuickAdd;
+
+  /// No description provided for @todayPlanWaterProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {goal} L'**
+  String todayPlanWaterProgress(String current, String goal);
+
+  /// No description provided for @todayPlanSleepLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality Sleep Log'**
+  String get todayPlanSleepLogTitle;
+
+  /// No description provided for @todayPlanSleepDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} hrs slept'**
+  String todayPlanSleepDuration(String hours);
+
+  /// No description provided for @todayPlanSleepLogSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Sleep'**
+  String get todayPlanSleepLogSave;
+
+  /// No description provided for @todayPlanSleepMarkDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as 7h+ Sleep'**
+  String get todayPlanSleepMarkDone;
+
+  /// No description provided for @todayPlanSleepQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep Quality'**
+  String get todayPlanSleepQuality;
+
+  /// No description provided for @todayPlanSupplements.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Supplements'**
+  String get todayPlanSupplements;
+
+  /// No description provided for @todayPlanBreathingAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing Session'**
+  String get todayPlanBreathingAction;
+
+  /// No description provided for @stepsHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Steps'**
+  String get stepsHeroTitle;
+
+  /// No description provided for @stepsEnableButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Step Counting'**
+  String get stepsEnableButton;
+
+  /// No description provided for @stepsPermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accurate Step Tracking'**
+  String get stepsPermissionTitle;
+
+  /// No description provided for @stepsPermissionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo uses your device\'s built-in motion sensor to count steps accurately throughout the day without draining your battery.'**
+  String get stepsPermissionBody;
+
+  /// No description provided for @stepsPermissionGrant.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Now'**
+  String get stepsPermissionGrant;
+
+  /// No description provided for @stepsActiveMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Mins'**
+  String get stepsActiveMinutes;
+
+  /// No description provided for @stepsFatBurned.
+  ///
+  /// In en, this message translates to:
+  /// **'≈ {grams}g Fat'**
+  String stepsFatBurned(String grams);
+
+  /// No description provided for @stepsKm.
+  ///
+  /// In en, this message translates to:
+  /// **'{km} km'**
+  String stepsKm(String km);
+
+  /// No description provided for @stepsDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps & Walking'**
+  String get stepsDetailTitle;
+
+  /// No description provided for @stepsHourlyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hourly Breakdown'**
+  String get stepsHourlyTitle;
+
+  /// No description provided for @stepsStreakDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days}-Day Streak'**
+  String stepsStreakDays(int days);
+
+  /// No description provided for @stepsBestDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Day: {steps} steps'**
+  String stepsBestDay(String steps);
+
+  /// No description provided for @stepsWeekTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get stepsWeekTab;
+
+  /// No description provided for @stepsMonthTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get stepsMonthTab;
+
+  /// No description provided for @mealReviewItemQty.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get mealReviewItemQty;
+
+  /// No description provided for @mealReviewConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}% confidence'**
+  String mealReviewConfidence(int pct);
+
+  /// No description provided for @mealReviewSourceUsda.
+  ///
+  /// In en, this message translates to:
+  /// **'USDA Database'**
+  String get mealReviewSourceUsda;
+
+  /// No description provided for @mealReviewSourceEgypt.
+  ///
+  /// In en, this message translates to:
+  /// **'Egyptian Food Table'**
+  String get mealReviewSourceEgypt;
+
+  /// No description provided for @mealReviewSourceAi.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Vision Estimate'**
+  String get mealReviewSourceAi;
+
+  /// No description provided for @mealReviewUnitPiece.
+  ///
+  /// In en, this message translates to:
+  /// **'piece'**
+  String get mealReviewUnitPiece;
+
+  /// No description provided for @mealReviewUnitHandful.
+  ///
+  /// In en, this message translates to:
+  /// **'handful'**
+  String get mealReviewUnitHandful;
+
+  /// No description provided for @mealReviewUnitGrams.
+  ///
+  /// In en, this message translates to:
+  /// **'g'**
+  String get mealReviewUnitGrams;
+
+  /// No description provided for @mealReviewCookingRaw.
+  ///
+  /// In en, this message translates to:
+  /// **'Raw'**
+  String get mealReviewCookingRaw;
+
+  /// No description provided for @mealReviewCookingBoiled.
+  ///
+  /// In en, this message translates to:
+  /// **'Boiled'**
+  String get mealReviewCookingBoiled;
+
+  /// No description provided for @mealReviewCookingGrilled.
+  ///
+  /// In en, this message translates to:
+  /// **'Grilled'**
+  String get mealReviewCookingGrilled;
+
+  /// No description provided for @mealReviewCookingFried.
+  ///
+  /// In en, this message translates to:
+  /// **'Fried (+oil)'**
+  String get mealReviewCookingFried;
+
+  /// No description provided for @mealReviewCookingBaked.
+  ///
+  /// In en, this message translates to:
+  /// **'Oven Baked'**
+  String get mealReviewCookingBaked;
+
+  /// No description provided for @mealReviewCaloriesFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} kcal'**
+  String mealReviewCaloriesFormat(int count);
+
+  /// No description provided for @mealReviewProteinFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}g protein'**
+  String mealReviewProteinFormat(int count);
+
+  /// No description provided for @mealReviewCarbsFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}g carbs'**
+  String mealReviewCarbsFormat(int count);
+
+  /// No description provided for @mealReviewFatFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}g fat'**
+  String mealReviewFatFormat(int count);
+
+  /// No description provided for @cuisineSettingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cuisine'**
+  String get cuisineSettingTitle;
+
+  /// No description provided for @cuisineEgyptian.
+  ///
+  /// In en, this message translates to:
+  /// **'Egyptian'**
+  String get cuisineEgyptian;
+
+  /// No description provided for @cuisineSaudi.
+  ///
+  /// In en, this message translates to:
+  /// **'Saudi & Gulf'**
+  String get cuisineSaudi;
+
+  /// No description provided for @cuisineLevantine.
+  ///
+  /// In en, this message translates to:
+  /// **'Levantine'**
+  String get cuisineLevantine;
+
+  /// No description provided for @cuisineMoroccan.
+  ///
+  /// In en, this message translates to:
+  /// **'Moroccan & Maghreb'**
+  String get cuisineMoroccan;
+
+  /// No description provided for @cuisineTurkish.
+  ///
+  /// In en, this message translates to:
+  /// **'Turkish'**
+  String get cuisineTurkish;
+
+  /// No description provided for @cuisineIndian.
+  ///
+  /// In en, this message translates to:
+  /// **'Indian & Pakistani'**
+  String get cuisineIndian;
+
+  /// No description provided for @cuisineIndonesian.
+  ///
+  /// In en, this message translates to:
+  /// **'Indonesian'**
+  String get cuisineIndonesian;
+
+  /// No description provided for @cuisineWestern.
+  ///
+  /// In en, this message translates to:
+  /// **'Western / Mediterranean'**
+  String get cuisineWestern;
+
+  /// No description provided for @dietProgramFitReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Fits your goal: {reason}'**
+  String dietProgramFitReason(String reason);
+
+  /// No description provided for @exerciseMusclesTargeted.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Muscles'**
+  String get exerciseMusclesTargeted;
+
+  /// No description provided for @exerciseStepsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How to Perform'**
+  String get exerciseStepsTitle;
+
+  /// No description provided for @exerciseCommonMistakes.
+  ///
+  /// In en, this message translates to:
+  /// **'Common Mistakes'**
+  String get exerciseCommonMistakes;
+
+  /// No description provided for @exerciseBreathingCue.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing'**
+  String get exerciseBreathingCue;
+
+  /// No description provided for @exerciseEasierVariation.
+  ///
+  /// In en, this message translates to:
+  /// **'Easier Variation'**
+  String get exerciseEasierVariation;
+
+  /// No description provided for @exerciseHarderVariation.
+  ///
+  /// In en, this message translates to:
+  /// **'Harder Variation'**
+  String get exerciseHarderVariation;
+
+  /// No description provided for @exerciseSafetyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Safety Note'**
+  String get exerciseSafetyNote;
+
+  /// No description provided for @exerciseWarmUpHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Warm-Up Moves'**
+  String get exerciseWarmUpHeader;
+
+  /// No description provided for @reassessmentLaterSnooze.
+  ///
+  /// In en, this message translates to:
+  /// **'Later (remind in 3 days)'**
+  String get reassessmentLaterSnooze;
+
+  /// No description provided for @measurementsAddEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Log New Entry'**
+  String get measurementsAddEntry;
 }
 
 class _AppLocalizationsDelegate

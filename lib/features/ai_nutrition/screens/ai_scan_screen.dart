@@ -16,6 +16,8 @@ import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/ai_nutrition/application/meal_scan_native_file.dart'
     if (dart.library.html) 'package:vireo/features/ai_nutrition/application/meal_scan_native_file_web.dart';
 
+import 'package:vireo/features/ai_nutrition/widgets/meal_scan_source_sheet.dart';
+
 class AiScanScreen extends ConsumerStatefulWidget {
   const AiScanScreen({super.key, this.initialSource});
 
@@ -24,8 +26,11 @@ class AiScanScreen extends ConsumerStatefulWidget {
   static Future<void> open(
     BuildContext context,
     WidgetRef ref, {
-    required bool fromCamera,
+    bool? fromCamera,
   }) {
+    if (fromCamera == null) {
+      return showMealScanSourceSheet(context, ref);
+    }
     return Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => AiScanScreen(

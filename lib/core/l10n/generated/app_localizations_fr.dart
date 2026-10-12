@@ -3970,4 +3970,236 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chartGoalLine => 'Ligne d\'objectif';
+
+  @override
+  String get scanSourceSheetTitle => 'Choisir le mode d\'enregistrement';
+
+  @override
+  String get scanSourceCamera => 'Prendre une photo';
+
+  @override
+  String get scanSourceGallery => 'Choisir dans la galerie';
+
+  @override
+  String get scanSourceText => 'Écrire le repas';
+
+  @override
+  String get scanSourceFridgeTitle => 'Scanner le frigo ou placard';
+
+  @override
+  String get scanSourceInBodyTitle => 'Importer rapport InBody';
+
+  @override
+  String get todayPlanMorning => 'Matin';
+
+  @override
+  String get todayPlanAfternoon => 'Après-midi';
+
+  @override
+  String get todayPlanEvening => 'Soir';
+
+  @override
+  String get todayPlanWaterQuickAdd => '+250 ml';
+
+  @override
+  String todayPlanWaterProgress(String current, String goal) {
+    return '$current / $goal L';
+  }
+
+  @override
+  String get todayPlanSleepLogTitle => 'Journal de sommeil de qualité';
+
+  @override
+  String todayPlanSleepDuration(String hours) {
+    return '$hours h de sommeil';
+  }
+
+  @override
+  String get todayPlanSleepLogSave => 'Enregistrer le sommeil';
+
+  @override
+  String get todayPlanSleepMarkDone => 'Validé (7+ h de sommeil)';
+
+  @override
+  String get todayPlanSleepQuality => 'Qualité du sommeil';
+
+  @override
+  String get todayPlanSupplements => 'Compléments quotidiens';
+
+  @override
+  String get todayPlanBreathingAction => 'Session de respiration';
+
+  @override
+  String get stepsHeroTitle => 'Pas d\'aujourd\'hui';
+
+  @override
+  String get stepsEnableButton => 'Activer le podomètre';
+
+  @override
+  String get stepsPermissionTitle => 'Suivi précis des pas';
+
+  @override
+  String get stepsPermissionBody =>
+      'Vireo utilise le capteur de mouvement intégré de votre appareil pour compter vos pas précisément toute la journée sans vider la batterie.';
+
+  @override
+  String get stepsPermissionGrant => 'Activer maintenant';
+
+  @override
+  String get stepsActiveMinutes => 'Minutes actives';
+
+  @override
+  String stepsFatBurned(String grams) {
+    return '≈ ${grams}g graisse';
+  }
+
+  @override
+  String stepsKm(String km) {
+    return '$km km';
+  }
+
+  @override
+  String get stepsDetailTitle => 'Pas et marche';
+
+  @override
+  String get stepsHourlyTitle => 'Répartition horaire';
+
+  @override
+  String stepsStreakDays(int days) {
+    return 'Série de $days jours';
+  }
+
+  @override
+  String stepsBestDay(String steps) {
+    return 'Record : $steps pas';
+  }
+
+  @override
+  String get stepsWeekTab => 'Semaine';
+
+  @override
+  String get stepsMonthTab => 'Mois';
+
+  @override
+  String get mealReviewItemQty => 'Quantité';
+
+  @override
+  String mealReviewConfidence(int pct) {
+    return '$pct% de confiance';
+  }
+
+  @override
+  String get mealReviewSourceUsda => 'Base de données USDA';
+
+  @override
+  String get mealReviewSourceEgypt => 'Table nutritionnelle égyptienne';
+
+  @override
+  String get mealReviewSourceAi => 'Estimation IA Vision';
+
+  @override
+  String get mealReviewUnitPiece => 'pièce';
+
+  @override
+  String get mealReviewUnitHandful => 'poignée';
+
+  @override
+  String get mealReviewUnitGrams => 'g';
+
+  @override
+  String get mealReviewCookingRaw => 'Cru';
+
+  @override
+  String get mealReviewCookingBoiled => 'Bouilli';
+
+  @override
+  String get mealReviewCookingGrilled => 'Grillé';
+
+  @override
+  String get mealReviewCookingFried => 'Frit (+huile)';
+
+  @override
+  String get mealReviewCookingBaked => 'Au four';
+
+  @override
+  String mealReviewCaloriesFormat(int count) {
+    return '$count kcal';
+  }
+
+  @override
+  String mealReviewProteinFormat(int count) {
+    return '${count}g protéines';
+  }
+
+  @override
+  String mealReviewCarbsFormat(int count) {
+    return '${count}g glucides';
+  }
+
+  @override
+  String mealReviewFatFormat(int count) {
+    return '${count}g lipides';
+  }
+
+  @override
+  String get cuisineSettingTitle => 'Cuisine';
+
+  @override
+  String get cuisineEgyptian => 'Égyptienne';
+
+  @override
+  String get cuisineSaudi => 'Saoudienne et Golfe';
+
+  @override
+  String get cuisineLevantine => 'Levantine';
+
+  @override
+  String get cuisineMoroccan => 'Marocaine et Maghreb';
+
+  @override
+  String get cuisineTurkish => 'Turque';
+
+  @override
+  String get cuisineIndian => 'Indienne et Pakistanaise';
+
+  @override
+  String get cuisineIndonesian => 'Indonésienne';
+
+  @override
+  String get cuisineWestern => 'Occidentale / Méditerranéenne';
+
+  @override
+  String dietProgramFitReason(String reason) {
+    return 'Adapté à votre objectif : $reason';
+  }
+
+  @override
+  String get exerciseMusclesTargeted => 'Muscles ciblés';
+
+  @override
+  String get exerciseStepsTitle => 'Instructions pas à pas';
+
+  @override
+  String get exerciseCommonMistakes => 'Erreurs fréquentes';
+
+  @override
+  String get exerciseBreathingCue => 'Respiration';
+
+  @override
+  String get exerciseEasierVariation => 'Variante plus facile';
+
+  @override
+  String get exerciseHarderVariation => 'Variante plus difficile';
+
+  @override
+  String get exerciseSafetyNote => 'Consigne de sécurité';
+
+  @override
+  String get exerciseWarmUpHeader => 'Mouvements d\'échauffement';
+
+  @override
+  String get reassessmentLaterSnooze => 'Plus tard (rappeler dans 3 jours)';
+
+  @override
+  String get measurementsAddEntry => 'Nouvelle mesure';
 }

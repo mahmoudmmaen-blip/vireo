@@ -43,6 +43,7 @@ abstract final class StepCounterService {
   static const _workoutDaysKey = 'workout_completion_days';
 
   static StreamSubscription<int>? _sub;
+  static Timer? _foregroundRefreshTimer;
   static final _controller = StreamController<LiveStepsSnapshot>.broadcast();
   static LiveStepsSnapshot _latest = LiveStepsSnapshot.empty;
   static bool _started = false;
@@ -187,11 +188,19 @@ abstract final class StepCounterService {
         await _emitMerged(pedoSteps: null, sensorError: true);
       },
     );
+
+    // Refresh every 60 seconds while foregrounded.
+    _foregroundRefreshTimer?.cancel();
+    _foregroundRefreshTimer = Timer.periodic(const Duration(seconds: 60), (_) {
+      refresh();
+    });
   }
 
   static Future<void> stopListening() async {
     await _sub?.cancel();
     _sub = null;
+    _foregroundRefreshTimer?.cancel();
+    _foregroundRefreshTimer = null;
     _started = false;
   }
 

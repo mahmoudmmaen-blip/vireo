@@ -3935,4 +3935,236 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get chartGoalLine => 'Hedef Çizgisi';
+
+  @override
+  String get scanSourceSheetTitle => 'Kayıt Yöntemini Seçin';
+
+  @override
+  String get scanSourceCamera => 'Kamerayla çek';
+
+  @override
+  String get scanSourceGallery => 'Galeriden seç';
+
+  @override
+  String get scanSourceText => 'Yemeği yaz';
+
+  @override
+  String get scanSourceFridgeTitle => 'Buzdolabı veya Kileri Tara';
+
+  @override
+  String get scanSourceInBodyTitle => 'InBody Raporu Yükle';
+
+  @override
+  String get todayPlanMorning => 'Sabah';
+
+  @override
+  String get todayPlanAfternoon => 'Öğle';
+
+  @override
+  String get todayPlanEvening => 'Akşam';
+
+  @override
+  String get todayPlanWaterQuickAdd => '+250 ml';
+
+  @override
+  String todayPlanWaterProgress(String current, String goal) {
+    return '$current / $goal L';
+  }
+
+  @override
+  String get todayPlanSleepLogTitle => 'Kaliteli Uyku Günlüğü';
+
+  @override
+  String todayPlanSleepDuration(String hours) {
+    return '$hours saat uyundu';
+  }
+
+  @override
+  String get todayPlanSleepLogSave => 'Uykuyu Kaydet';
+
+  @override
+  String get todayPlanSleepMarkDone => 'Tamamlandı (7+ saat uyku)';
+
+  @override
+  String get todayPlanSleepQuality => 'Uyku Kalitesi';
+
+  @override
+  String get todayPlanSupplements => 'Günlük Takviyeler';
+
+  @override
+  String get todayPlanBreathingAction => 'Nefes Egzersizi';
+
+  @override
+  String get stepsHeroTitle => 'Bugünün Adımları';
+
+  @override
+  String get stepsEnableButton => 'Adım Sayarı Etkinleştir';
+
+  @override
+  String get stepsPermissionTitle => 'Hassas Adım Takibi';
+
+  @override
+  String get stepsPermissionBody =>
+      'Vireo, pilinizi tüketmeden gün boyu adımlarınızı hassas bir şekilde saymak için cihazınızın dahili hareket sensörünü kullanır.';
+
+  @override
+  String get stepsPermissionGrant => 'Şimdi Etkinleştir';
+
+  @override
+  String get stepsActiveMinutes => 'Aktif Dakika';
+
+  @override
+  String stepsFatBurned(String grams) {
+    return '≈ ${grams}g Yağ';
+  }
+
+  @override
+  String stepsKm(String km) {
+    return '$km km';
+  }
+
+  @override
+  String get stepsDetailTitle => 'Adımlar ve Yürüyüş';
+
+  @override
+  String get stepsHourlyTitle => 'Saatlik Dağılım';
+
+  @override
+  String stepsStreakDays(int days) {
+    return '$days Günlük Seri';
+  }
+
+  @override
+  String stepsBestDay(String steps) {
+    return 'En İyi Gün: $steps adım';
+  }
+
+  @override
+  String get stepsWeekTab => 'Hafta';
+
+  @override
+  String get stepsMonthTab => 'Ay';
+
+  @override
+  String get mealReviewItemQty => 'Miktar';
+
+  @override
+  String mealReviewConfidence(int pct) {
+    return '%$pct güven';
+  }
+
+  @override
+  String get mealReviewSourceUsda => 'USDA Veritabanı';
+
+  @override
+  String get mealReviewSourceEgypt => 'Mısır Besin Tablosu';
+
+  @override
+  String get mealReviewSourceAi => 'Yapay Zeka Tahmini';
+
+  @override
+  String get mealReviewUnitPiece => 'adet';
+
+  @override
+  String get mealReviewUnitHandful => 'avuç';
+
+  @override
+  String get mealReviewUnitGrams => 'g';
+
+  @override
+  String get mealReviewCookingRaw => 'Çiğ';
+
+  @override
+  String get mealReviewCookingBoiled => 'Haşlama';
+
+  @override
+  String get mealReviewCookingGrilled => 'Izgara';
+
+  @override
+  String get mealReviewCookingFried => 'Kızartma (+yağ)';
+
+  @override
+  String get mealReviewCookingBaked => 'Fırında';
+
+  @override
+  String mealReviewCaloriesFormat(int count) {
+    return '$count kcal';
+  }
+
+  @override
+  String mealReviewProteinFormat(int count) {
+    return '${count}g protein';
+  }
+
+  @override
+  String mealReviewCarbsFormat(int count) {
+    return '${count}g karbonhidrat';
+  }
+
+  @override
+  String mealReviewFatFormat(int count) {
+    return '${count}g yağ';
+  }
+
+  @override
+  String get cuisineSettingTitle => 'Mutfak';
+
+  @override
+  String get cuisineEgyptian => 'Mısır Mutfağı';
+
+  @override
+  String get cuisineSaudi => 'Suudi ve Körfez';
+
+  @override
+  String get cuisineLevantine => 'Levanten';
+
+  @override
+  String get cuisineMoroccan => 'Fas ve Mağrip';
+
+  @override
+  String get cuisineTurkish => 'Türk Mutfağı';
+
+  @override
+  String get cuisineIndian => 'Hint ve Pakistan';
+
+  @override
+  String get cuisineIndonesian => 'Endonezya';
+
+  @override
+  String get cuisineWestern => 'Batı / Akdeniz';
+
+  @override
+  String dietProgramFitReason(String reason) {
+    return 'Hedefinize uygun: $reason';
+  }
+
+  @override
+  String get exerciseMusclesTargeted => 'Hedef Kaslar';
+
+  @override
+  String get exerciseStepsTitle => 'Adım Adım Yapılışı';
+
+  @override
+  String get exerciseCommonMistakes => 'Sık Yapılan Hatalar';
+
+  @override
+  String get exerciseBreathingCue => 'Nefes Tekniği';
+
+  @override
+  String get exerciseEasierVariation => 'Daha Kolay Varyasyon';
+
+  @override
+  String get exerciseHarderVariation => 'Daha Zor Varyasyon';
+
+  @override
+  String get exerciseSafetyNote => 'Güvenlik Notu';
+
+  @override
+  String get exerciseWarmUpHeader => 'Isınma Hareketleri';
+
+  @override
+  String get reassessmentLaterSnooze => 'Daha Sonra (3 gün sonra hatırlat)';
+
+  @override
+  String get measurementsAddEntry => 'Yeni Ölçüm Ekle';
 }

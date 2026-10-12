@@ -4,14 +4,13 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
-import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
+import 'package:vireo/features/diet_programs/domain/cuisine_meal_catalog.dart';
+import 'package:vireo/features/diet_programs/domain/cuisine_type.dart';
 import 'package:vireo/features/home/domain/today_plan_item.dart';
 import 'package:vireo/features/home/providers/today_plan_checks_provider.dart';
+import 'package:vireo/features/notifications/providers/notification_settings_provider.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
-import 'package:vireo/features/notifications/providers/notification_settings_provider.dart';
-import 'package:vireo/features/vitality/data/vitality_content_repository.dart';
-import 'package:vireo/features/vitality/domain/vitality_models.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
@@ -26,6 +25,7 @@ class TodayPlanSnapshot {
     required this.totalCount,
     required this.progress,
     required this.nowItemId,
+    this.waterItem,
   });
 
   final List<TodayPlanItem> items;
@@ -34,16 +34,13 @@ class TodayPlanSnapshot {
   final int totalCount;
   final double progress;
   final String? nowItemId;
+  final TodayPlanItem? waterItem;
 
   bool isComplete(String id) => completedById[id] ?? false;
-}
 
-int _mealMinutes(MealType type) => switch (type) {
-      MealType.breakfast => 8 * 60,
-      MealType.lunch => 13 * 60,
-      MealType.dinner => 19 * 60,
-      MealType.snack => 16 * 60,
-    };
+  List<TodayPlanItem> itemsForSection(TodayPlanSectionKind section) =>
+      items.where((it) => it.section == section).toList();
+}
 
 int _minutesNow() {
   final n = DateTime.now();
@@ -59,7 +56,7 @@ int _bedtimeMinutes() {
       if (dt != null) return dt.hour * 60 + dt.minute;
     }
   }
-  return 23 * 60;
+  return 22 * 60 + 30; // 10:30 PM
 }
 
 int _workoutMinutes() {
@@ -74,17 +71,7 @@ int _workoutMinutes() {
       if (dt != null) return dt.hour * 60 + dt.minute;
     }
   }
-  return 17 * 60;
-}
-
-List<int> _waterReminderMinutes(int count, {int wake = 7 * 60, int sleep = 22 * 60}) {
-  if (count <= 0) return const [];
-  if (count == 1) return [(wake + sleep) ~/ 2];
-  final span = sleep - wake;
-  return List.generate(count, (i) {
-    final t = wake + ((i + 1) * span ~/ (count + 1));
-    return t.clamp(wake, sleep);
-  });
+  return 16 * 60; // 4:00 PM
 }
 
 bool isTodayPlanItemComplete(
@@ -92,11 +79,13 @@ bool isTodayPlanItemComplete(
   Ref ref,
   Set<String> manualChecks,
 ) {
+  if (manualChecks.contains(item.id)) return true;
+
   switch (item.kind) {
     case TodayPlanKind.waterReminder:
-      final idx = int.tryParse(item.id.replaceFirst('water_', '')) ?? 0;
       final ml = ref.watch(waterTrackerProvider);
-      return ml >= (idx + 1) * waterGlassMl;
+      final goal = ref.watch(waterDailyGoalMlProvider);
+      return goal > 0 && ml >= goal;
     case TodayPlanKind.meal:
       final type = item.mealType;
       if (type == null) return false;
@@ -121,7 +110,7 @@ bool isTodayPlanItemComplete(
     case TodayPlanKind.vitalityZinc:
       return ref.watch(vitalityDailyLogProvider).zincVitDDone;
     case TodayPlanKind.sleepBedtime:
-      return manualChecks.contains(item.id);
+      return ref.watch(vitalityDailyLogProvider).sleepGoalMet;
     case TodayPlanKind.protocolPro:
     case TodayPlanKind.aiSuggestionPro:
       return manualChecks.contains(item.id);
@@ -135,11 +124,8 @@ typedef TodayPlanBuilder = TodayPlanSnapshot Function(
 
 final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
   ref.watch(waterDailyGoalMlProvider);
-  ref.watch(waterGlassCountProvider);
   ref.watch(waterTrackerProvider);
   ref.watch(effectiveTodayMealsProvider);
-  ref.watch(activeDietProgramProvider);
-  ref.watch(fastingWindowStatusProvider);
   ref.watch(todayWorkoutProvider);
   ref.watch(todayPlanChecksProvider);
   ref.watch(todayStepsProvider);
@@ -147,248 +133,175 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
   ref.watch(vitalityDailyLogProvider);
   ref.watch(proteinGoalMetProvider);
   ref.watch(confirmedMealsProvider);
+  final cuisine = ref.watch(cuisineProvider);
 
   final waterGoal = ref.read(waterDailyGoalMlProvider);
-  final glassCount = ref.read(waterGlassCountProvider);
+  final waterMl = ref.read(waterTrackerProvider);
   final meals = ref.read(effectiveTodayMealsProvider).valueOrNull ?? const [];
-  final activeDiet = ref.read(activeDietProgramProvider);
-  final fasting = ref.read(fastingWindowStatusProvider);
   final workout = ref.read(todayWorkoutProvider).valueOrNull;
   final manualChecks = ref.read(todayPlanChecksProvider);
   final steps = ref.read(todayStepsProvider);
   final stepsGoal =
       ref.read(walkingContextProvider).valueOrNull?.dailyGoal ?? 6000;
 
-  VitalityArticle? protocolArticle;
-  final articles = const VitalityContentRepository().getArticles();
-  for (final a in articles) {
-    if (a.hasProtocol && a.id.contains('zinc')) {
-      protocolArticle = a;
-      break;
-    }
-  }
-  if (protocolArticle == null) {
-    for (final a in articles) {
-      if (a.hasProtocol) {
-        protocolArticle = a;
-        break;
-      }
-    }
-  }
-
   return (AppLocalizations l10n, String locale) {
-    final items = <TodayPlanItem>[];
-    final waterTimes = _waterReminderMinutes(glassCount);
+    // 1. Single collapsed water card / item
+    final waterRatio = waterGoal > 0 ? (waterMl / waterGoal).clamp(0.0, 1.0) : 0.0;
+    final curL = (waterMl / 1000.0).toStringAsFixed(1);
+    final goalL = (waterGoal / 1000.0).toStringAsFixed(1);
+    final waterProgressStr = l10n.todayPlanWaterProgress(curL, goalL);
 
-    for (var i = 0; i < glassCount; i++) {
-      items.add(
-        TodayPlanItem(
-          id: 'water_$i',
-          kind: TodayPlanKind.waterReminder,
-          minutesOfDay: waterTimes[i],
-          icon: Icons.water_drop_outlined,
-          title: l10n.todayPlanWaterReminder(i + 1, glassCount),
-          subtitle: l10n.todayPlanWaterGoalLine(waterGoal),
-          isPro: false,
-          autoComplete: true,
-        ),
-      );
-    }
+    final waterItem = TodayPlanItem(
+      id: 'water_summary',
+      kind: TodayPlanKind.waterReminder,
+      minutesOfDay: 8 * 60,
+      icon: Icons.water_drop_rounded,
+      title: l10n.planRevealHydration,
+      subtitle: waterProgressStr,
+      isPro: false,
+      section: TodayPlanSectionKind.morning,
+      progress: waterRatio,
+      progressLabel: waterProgressStr,
+      quickActionLabel: l10n.todayPlanWaterQuickAdd,
+      autoComplete: true,
+    );
 
-    if (meals.isNotEmpty) {
-      for (final entry in meals) {
-        items.add(
-          TodayPlanItem(
-            id: 'meal_${entry.mealType.value}',
-            kind: TodayPlanKind.meal,
-            minutesOfDay: _mealMinutes(entry.mealType),
-            icon: _mealIcon(entry.mealType),
-            title: _mealTitle(l10n, entry.mealType),
-            subtitle: entry.recipe.localizedTitle(locale),
-            isPro: false,
-            mealType: entry.mealType,
-            autoComplete: true,
-          ),
-        );
+    // Helper to resolve dish subtitle per meal type
+    String dishSubtitle(MealType type) {
+      final logged = meals.where((m) => m.mealType == type).firstOrNull;
+      if (logged != null) {
+        return logged.recipe.localizedTitle(locale);
       }
-    } else if (activeDiet != null) {
-      final sample = activeDiet.sampleDay;
-      const types = [
-        MealType.breakfast,
-        MealType.lunch,
-        MealType.snack,
-        MealType.dinner,
-      ];
-      for (var i = 0; i < sample.length && i < types.length; i++) {
-        final type = types[i];
-        items.add(
-          TodayPlanItem(
-            id: 'meal_${type.value}',
-            kind: TodayPlanKind.meal,
-            minutesOfDay: _mealMinutes(type),
-            icon: _mealIcon(type),
-            title: _mealTitle(l10n, type),
-            subtitle: sample[i].name.of(locale),
-            isPro: false,
-            mealType: type,
-            autoComplete: true,
-          ),
-        );
-      }
-    }
-
-    if (fasting != null && activeDiet?.window != null) {
-      final openMin = fasting.startHour * 60;
-      final closeMin =
-          (fasting.startHour * 60 + fasting.eatingHours * 60) % (24 * 60);
-      items.add(
-        TodayPlanItem(
-          id: 'fasting_open',
-          kind: TodayPlanKind.fastingOpen,
-          minutesOfDay: openMin,
-          icon: Icons.restaurant_outlined,
-          title: l10n.todayPlanFastingOpen,
-          subtitle: l10n.todayPlanFastingOpenSubtitle(fasting.eatingHours),
-          isPro: false,
-        ),
-      );
-      items.add(
-        TodayPlanItem(
-          id: 'fasting_close',
-          kind: TodayPlanKind.fastingClose,
-          minutesOfDay: closeMin,
-          icon: Icons.nightlight_round_outlined,
-          title: l10n.todayPlanFastingClose,
-          subtitle: l10n.todayPlanFastingCloseSubtitle(fasting.fastingHours),
-          isPro: false,
-        ),
+      return CuisineMealCatalog.sampleDishName(
+        cuisine: cuisine,
+        type: type,
+        locale: locale,
       );
     }
 
-    if (workout != null && workout.exercises.isNotEmpty) {
-      items.add(
-        TodayPlanItem(
-          id: 'workout',
-          kind: TodayPlanKind.workout,
-          minutesOfDay: _workoutMinutes(),
-          icon: Icons.fitness_center_outlined,
-          title: l10n.todayPlanWorkout,
-          subtitle: l10n.homeWorkoutExerciseCount(workout.exercises.length),
-          isPro: false,
-          autoComplete: true,
-        ),
-      );
-    }
+    // 2. Sections: Morning, Afternoon, Evening (~8 items max)
+    final items = <TodayPlanItem>[
+      // ── MORNING (صباحاً) ──
+      TodayPlanItem(
+        id: 'vitality_sun',
+        kind: TodayPlanKind.vitalitySun,
+        minutesOfDay: 7 * 60 + 30,
+        icon: Icons.wb_sunny_rounded,
+        title: l10n.vitalityCheckSunlight,
+        subtitle: l10n.todayPlanVitalitySunSubtitle,
+        isPro: false,
+        section: TodayPlanSectionKind.morning,
+        autoComplete: true,
+      ),
+      TodayPlanItem(
+        id: 'meal_breakfast',
+        kind: TodayPlanKind.meal,
+        minutesOfDay: 8 * 60 + 30,
+        icon: _mealIcon(MealType.breakfast),
+        title: _mealTitle(l10n, MealType.breakfast),
+        subtitle: dishSubtitle(MealType.breakfast),
+        isPro: false,
+        mealType: MealType.breakfast,
+        section: TodayPlanSectionKind.morning,
+        autoComplete: true,
+      ),
 
-    items.add(
+      // ── AFTERNOON (الظهر) ──
+      TodayPlanItem(
+        id: 'meal_lunch',
+        kind: TodayPlanKind.meal,
+        minutesOfDay: 13 * 60,
+        icon: _mealIcon(MealType.lunch),
+        title: _mealTitle(l10n, MealType.lunch),
+        subtitle: dishSubtitle(MealType.lunch),
+        isPro: false,
+        mealType: MealType.lunch,
+        section: TodayPlanSectionKind.afternoon,
+        autoComplete: true,
+      ),
+      TodayPlanItem(
+        id: 'workout',
+        kind: TodayPlanKind.workout,
+        minutesOfDay: _workoutMinutes(),
+        icon: Icons.fitness_center_rounded,
+        title: l10n.todayPlanWorkout,
+        subtitle: workout != null && workout.exercises.isNotEmpty
+            ? '${workout.exercises.first.localizedName(locale)} · ${l10n.homeWorkoutExerciseCount(workout.exercises.length)}'
+            : l10n.homeWorkoutExerciseCount(5),
+        isPro: false,
+        section: TodayPlanSectionKind.afternoon,
+        autoComplete: true,
+      ),
       TodayPlanItem(
         id: 'steps',
         kind: TodayPlanKind.steps,
-        minutesOfDay: 12 * 60,
-        icon: Icons.directions_walk_outlined,
+        minutesOfDay: 15 * 60,
+        icon: Icons.directions_walk_rounded,
         title: l10n.todayPlanSteps,
         subtitle: l10n.todayPlanStepsProgress(steps, stepsGoal),
         isPro: false,
+        section: TodayPlanSectionKind.afternoon,
         autoComplete: true,
       ),
-    );
 
-    items.addAll([
+      // ── EVENING (المساء) ──
       TodayPlanItem(
-        id: 'vitality_sleep',
-        kind: TodayPlanKind.vitalitySleep,
-        minutesOfDay: 7 * 60 + 30,
-        icon: Icons.bedtime_outlined,
-        title: l10n.vitalityCheckSleep,
-        subtitle: l10n.todayPlanVitalitySleepSubtitle,
+        id: 'meal_dinner',
+        kind: TodayPlanKind.meal,
+        minutesOfDay: 19 * 60,
+        icon: _mealIcon(MealType.dinner),
+        title: _mealTitle(l10n, MealType.dinner),
+        subtitle: dishSubtitle(MealType.dinner),
         isPro: false,
+        mealType: MealType.dinner,
+        section: TodayPlanSectionKind.evening,
         autoComplete: true,
       ),
       TodayPlanItem(
         id: 'vitality_protein',
         kind: TodayPlanKind.vitalityProtein,
         minutesOfDay: 20 * 60,
-        icon: Icons.egg_outlined,
+        icon: Icons.egg_rounded,
         title: l10n.vitalityCheckProtein,
         subtitle: l10n.todayPlanVitalityProteinSubtitle,
         isPro: false,
-        autoComplete: true,
-      ),
-      TodayPlanItem(
-        id: 'vitality_sun',
-        kind: TodayPlanKind.vitalitySun,
-        minutesOfDay: 9 * 60,
-        icon: Icons.wb_sunny_outlined,
-        title: l10n.vitalityCheckSunlight,
-        subtitle: l10n.todayPlanVitalitySunSubtitle,
-        isPro: false,
+        section: TodayPlanSectionKind.evening,
         autoComplete: true,
       ),
       TodayPlanItem(
         id: 'vitality_breathing',
         kind: TodayPlanKind.vitalityBreathing,
-        minutesOfDay: 15 * 60,
-        icon: Icons.self_improvement_outlined,
-        title: l10n.todayPlanVitalityStress,
+        minutesOfDay: 21 * 60,
+        icon: Icons.self_improvement_rounded,
+        title: l10n.todayPlanBreathingAction,
         subtitle: l10n.todayPlanVitalityStressSubtitle,
         isPro: false,
+        section: TodayPlanSectionKind.evening,
         autoComplete: true,
       ),
       TodayPlanItem(
-        id: 'vitality_zinc',
-        kind: TodayPlanKind.vitalityZinc,
-        minutesOfDay: 21 * 60,
-        icon: Icons.medication_outlined,
-        title: l10n.vitalityCheckZincVitD,
-        subtitle: l10n.todayPlanVitalityZincSubtitle,
-        isPro: false,
-        autoComplete: true,
-      ),
-      TodayPlanItem(
-        id: 'sleep_bedtime',
-        kind: TodayPlanKind.sleepBedtime,
+        id: 'vitality_sleep',
+        kind: TodayPlanKind.vitalitySleep,
         minutesOfDay: _bedtimeMinutes(),
-        icon: Icons.nights_stay_outlined,
-        title: l10n.todayPlanSleepTarget,
-        subtitle: l10n.todayPlanSleepTargetSubtitle,
+        icon: Icons.bedtime_rounded,
+        title: l10n.vitalityCheckSleep,
+        subtitle: l10n.todayPlanVitalitySleepSubtitle,
         isPro: false,
+        section: TodayPlanSectionKind.evening,
+        autoComplete: true,
       ),
-    ]);
-
-    if (protocolArticle != null) {
-      items.add(
-        TodayPlanItem(
-          id: 'protocol_zinc',
-          kind: TodayPlanKind.protocolPro,
-          minutesOfDay: 10 * 60,
-          icon: Icons.science_outlined,
-          title: l10n.todayPlanProtocolItem,
-          subtitle: protocolArticle.titleFor(locale),
-          isPro: true,
-        ),
-      );
-    }
-
-    items.add(
-      TodayPlanItem(
-        id: 'ai_suggestion',
-        kind: TodayPlanKind.aiSuggestionPro,
-        minutesOfDay: 14 * 60,
-        icon: Icons.auto_awesome_outlined,
-        title: l10n.todayPlanAiSuggestion,
-        subtitle: l10n.todayPlanAiSuggestionSubtitle,
-        isPro: true,
-      ),
-    );
+    ];
 
     items.sort((a, b) => a.minutesOfDay.compareTo(b.minutesOfDay));
 
     final completedById = <String, bool>{};
     for (final item in items) {
-      completedById[item.id] =
-          isTodayPlanItemComplete(item, ref, manualChecks);
+      completedById[item.id] = isTodayPlanItemComplete(item, ref, manualChecks);
     }
+    completedById[waterItem.id] = isTodayPlanItemComplete(waterItem, ref, manualChecks);
+
     final completed = completedById.values.where((v) => v).length;
+    final total = items.length + 1; // including water summary
 
     final now = _minutesNow();
     String? nowId;
@@ -399,7 +312,6 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
       }
     }
 
-    final total = items.length;
     return TodayPlanSnapshot(
       items: items,
       completedById: completedById,
@@ -407,15 +319,16 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
       totalCount: total,
       progress: total > 0 ? completed / total : 0,
       nowItemId: nowId,
+      waterItem: waterItem,
     );
   };
 });
 
 IconData _mealIcon(MealType type) => switch (type) {
-      MealType.breakfast => Icons.free_breakfast_outlined,
-      MealType.lunch => Icons.lunch_dining_outlined,
-      MealType.dinner => Icons.dinner_dining_outlined,
-      MealType.snack => Icons.cookie_outlined,
+      MealType.breakfast => Icons.free_breakfast_rounded,
+      MealType.lunch => Icons.lunch_dining_rounded,
+      MealType.dinner => Icons.dinner_dining_rounded,
+      MealType.snack => Icons.cookie_rounded,
     };
 
 String _mealTitle(AppLocalizations l10n, MealType type) => switch (type) {

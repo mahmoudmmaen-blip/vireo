@@ -2127,5 +2127,135 @@
   "chartThirtyDayTrend": "30-Day Trend",
   "chartRawDot": "Raw Dot",
   "chartTrendLine": "Trend Line",
-  "chartGoalLine": "Goal Line"
+  "chartGoalLine": "Goal Line",
+  "scanSourceSheetTitle": "Choose Meal Source",
+  "scanSourceCamera": "Take photo with camera",
+  "scanSourceGallery": "Choose from gallery",
+  "scanSourceText": "Write what you ate",
+  "scanSourceFridgeTitle": "Scan Fridge or Pantry",
+  "scanSourceInBodyTitle": "Upload Body Composition",
+  "todayPlanMorning": "Morning",
+  "todayPlanAfternoon": "Afternoon",
+  "todayPlanEvening": "Evening",
+  "todayPlanWaterQuickAdd": "+250 ml",
+  "todayPlanWaterProgress": "{current} / {goal} L",
+  "@todayPlanWaterProgress": {
+    "placeholders": {
+      "current": { "type": "String" },
+      "goal": { "type": "String" }
+    }
+  },
+  "todayPlanSleepLogTitle": "Quality Sleep Log",
+  "todayPlanSleepDuration": "{hours} hrs slept",
+  "@todayPlanSleepDuration": {
+    "placeholders": {
+      "hours": { "type": "String" }
+    }
+  },
+  "todayPlanSleepLogSave": "Save Sleep",
+  "todayPlanSleepMarkDone": "Mark as 7h+ Sleep",
+  "todayPlanSleepQuality": "Sleep Quality",
+  "todayPlanSupplements": "Daily Supplements",
+  "todayPlanBreathingAction": "Breathing Session",
+  "stepsHeroTitle": "Today's Steps",
+  "stepsEnableButton": "Enable Step Counting",
+  "stepsPermissionTitle": "Accurate Step Tracking",
+  "stepsPermissionBody": "Vireo uses your device's built-in motion sensor to count steps accurately throughout the day without draining your battery.",
+  "stepsPermissionGrant": "Enable Now",
+  "stepsActiveMinutes": "Active Mins",
+  "stepsFatBurned": "≈ {grams}g Fat",
+  "@stepsFatBurned": {
+    "placeholders": {
+      "grams": { "type": "String" }
+    }
+  },
+  "stepsKm": "{km} km",
+  "@stepsKm": {
+    "placeholders": {
+      "km": { "type": "String" }
+    }
+  },
+  "stepsDetailTitle": "Steps & Walking",
+  "stepsHourlyTitle": "Hourly Breakdown",
+  "stepsStreakDays": "{days}-Day Streak",
+  "@stepsStreakDays": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "stepsBestDay": "Best Day: {steps} steps",
+  "@stepsBestDay": {
+    "placeholders": {
+      "steps": { "type": "String" }
+    }
+  },
+  "stepsWeekTab": "Week",
+  "stepsMonthTab": "Month",
+  "mealReviewItemQty": "Quantity",
+  "mealReviewConfidence": "{pct}% confidence",
+  "@mealReviewConfidence": {
+    "placeholders": {
+      "pct": { "type": "int" }
+    }
+  },
+  "mealReviewSourceUsda": "USDA Database",
+  "mealReviewSourceEgypt": "Egyptian Food Table",
+  "mealReviewSourceAi": "AI Vision Estimate",
+  "mealReviewUnitPiece": "piece",
+  "mealReviewUnitHandful": "handful",
+  "mealReviewUnitGrams": "g",
+  "mealReviewCookingRaw": "Raw",
+  "mealReviewCookingBoiled": "Boiled",
+  "mealReviewCookingGrilled": "Grilled",
+  "mealReviewCookingFried": "Fried (+oil)",
+  "mealReviewCookingBaked": "Oven Baked",
+  "mealReviewCaloriesFormat": "{count} kcal",
+  "@mealReviewCaloriesFormat": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "mealReviewProteinFormat": "{count}g protein",
+  "@mealReviewProteinFormat": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "mealReviewCarbsFormat": "{count}g carbs",
+  "@mealReviewCarbsFormat": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "mealReviewFatFormat": "{count}g fat",
+  "@mealReviewFatFormat": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "cuisineSettingTitle": "Cuisine",
+  "cuisineEgyptian": "Egyptian",
+  "cuisineSaudi": "Saudi & Gulf",
+  "cuisineLevantine": "Levantine",
+  "cuisineMoroccan": "Moroccan & Maghreb",
+  "cuisineTurkish": "Turkish",
+  "cuisineIndian": "Indian & Pakistani",
+  "cuisineIndonesian": "Indonesian",
+  "cuisineWestern": "Western / Mediterranean",
+  "dietProgramFitReason": "Fits your goal: {reason}",
+  "@dietProgramFitReason": {
+    "placeholders": {
+      "reason": { "type": "String" }
+    }
+  },
+  "exerciseMusclesTargeted": "Target Muscles",
+  "exerciseStepsTitle": "How to Perform",
+  "exerciseCommonMistakes": "Common Mistakes",
+  "exerciseBreathingCue": "Breathing",
+  "exerciseEasierVariation": "Easier Variation",
+  "exerciseHarderVariation": "Harder Variation",
+  "exerciseSafetyNote": "Safety Note",
+  "exerciseWarmUpHeader": "Warm-Up Moves",
+  "reassessmentLaterSnooze": "Later (remind in 3 days)",
+  "measurementsAddEntry": "Log New Entry"
 }

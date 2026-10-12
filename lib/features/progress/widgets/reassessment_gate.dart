@@ -29,12 +29,16 @@ class _ReassessmentGateState extends ConsumerState<ReassessmentGate> {
     final due = await ref.read(reassessmentDueProvider.future);
     if (!due || !mounted) return;
 
-    await Navigator.of(context).push<bool>(
+    final result = await Navigator.of(context).push<bool>(
       MaterialPageRoute<bool>(
         fullscreenDialog: true,
         builder: (_) => const ReassessmentFlowScreen(),
       ),
     );
+    if (result != true && mounted) {
+      await ref.read(reassessmentRepositoryProvider).snooze();
+      ref.invalidate(reassessmentDueProvider);
+    }
   }
 
   @override

@@ -49,6 +49,16 @@ This document details every Health Connect permission requested by Vireo, along 
 - **Handling Denials:**  
   Falls back to estimating lean body mass from height/weight or manual InBody report entry.
 
+### 6. `READ_SLEEP`
+- **Permission Name:** `android.permission.health.READ_SLEEP`
+- **Health Data Type:** `SLEEP_SESSION`
+- **User-Facing Rationale:**  
+  "Vireo reads your sleep session duration to track restorative recovery, automatically complete your Today Plan sleep goal (≥7 hours), and correlate sleep quality with athletic vitality."
+- **Why It is Essential:**  
+  Recovery and quality sleep are vital for muscle protein synthesis and metabolic regulation. Automatically reading sleep sessions removes logging friction for wearable and health tracker users.
+- **Handling Denials:**  
+  If the user denies permission, Vireo falls back seamlessly to an in-app manual sleep logger (bedtime, wake-time, and 1–5 quality rating).
+
 ---
 
 ## Policy Compliance Check
