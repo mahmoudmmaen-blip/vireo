@@ -102,7 +102,7 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
       properties: {'step': 5},
     );
 
-    await AiScanScreen.open(context, ref, fromCamera: true);
+    await AiScanScreen.open(context, ref);
 
     if (mounted) {
       AnalyticsService.onboardingStepCompleted(

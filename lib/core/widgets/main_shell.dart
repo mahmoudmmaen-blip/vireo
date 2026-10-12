@@ -32,6 +32,7 @@ import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/core/services/celebration_service.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
+import 'package:vireo/features/walking/data/step_counter_service.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
@@ -39,7 +40,7 @@ import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 import 'package:vireo/features/quick_log/quick_log_sheet.dart';
 import 'package:vireo/features/subscription/widgets/subscription_shell_gate.dart';
-import 'package:vireo/features/walking/walking_tracker_screen.dart';
+import 'package:vireo/features/walking/screens/full_walk_tab_screen.dart';
 import 'package:vireo/features/workout/workout_screen.dart';
 
 /// App shell: 4 primary tabs + a centre "+" quick-log action.
@@ -58,7 +59,7 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
   static const _screens = <Widget>[
     HomeScreen(),
     NutritionScreen(),
-    WalkingTrackerScreen(),
+    FullWalkTabScreen(),
     WorkoutScreen(),
     ProgressScreen(),
     ProfileScreen(),
@@ -76,6 +77,8 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _triggerSyncPull();
       _startConnectivityWatcher();
+      // Ensure pedometer stream and step counter are booted silently if permitted
+      ref.read(stepCounterBootstrapProvider);
       final isPro = ref.read(isProUserProvider);
       AdService.instance.initialize(isPro: isPro);
     });
@@ -93,6 +96,8 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
     if (state == AppLifecycleState.resumed) {
       _triggerSyncPull();
       _syncWidget();
+      // Refresh steps on app resume
+      StepCounterService.refresh();
     } else if (state == AppLifecycleState.paused) {
       _syncWidget();
     }

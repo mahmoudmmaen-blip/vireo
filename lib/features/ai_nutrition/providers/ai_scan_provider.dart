@@ -74,6 +74,54 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
       );
     }
   }
+
+  Future<void> scanMealMulti(
+    List<Uint8List> images, {
+    String language = 'ar',
+    String? userHint,
+  }) async {
+    final preview = images.isNotEmpty ? images.first : null;
+    state = AsyncValue.data(
+      AiScanScanning(previewBytes: preview, hint: 'rice…'),
+    );
+
+    try {
+      final draft = await GeminiFoodServiceCore.analyzeImagesToDraft(
+        images,
+        ref.read(remainingCaloriesForAiScanProvider),
+        ref.read(remainingProteinForAiScanProvider),
+        language: language,
+        userHint: userHint,
+      );
+      state = AsyncValue.data(AiScanSuccess(draft));
+    } on FoodVisionOfflineException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.offline, previewBytes: preview),
+      );
+    } on FoodVisionParseException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.parse, previewBytes: preview),
+      );
+    } on FoodVisionConfigException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.config, previewBytes: preview),
+      );
+    } on FoodVisionDailyLimitException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.dailyLimit, previewBytes: preview),
+      );
+    } on FoodVisionException catch (e) {
+      BootLog.warn('ai scan FoodVisionException', e);
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.api, previewBytes: preview),
+      );
+    } catch (e) {
+      BootLog.warn('ai scan unexpected', e);
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.api, previewBytes: preview),
+      );
+    }
+  }
 }
 
 final aiScanProvider =

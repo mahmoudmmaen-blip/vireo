@@ -70,7 +70,7 @@ final homeDashboardProvider = Provider<HomeDashboardSnapshot>((ref) {
   final stepsGoal = walkingCtx?.dailyGoal ??
       WalkingGoalCalculator.baseGoalFor(ActivityLevel.moderatelyActive);
   // Spec default when nothing is configured yet.
-  final effectiveGoal = stepsGoal > 0 ? stepsGoal : 6000;
+  final effectiveGoal = stepsGoal > 0 ? stepsGoal : 7000;
 
   final weeklyCompleted = StepCounterService.computeWeeklyCompletedDays(
     stepsGoal: effectiveGoal,

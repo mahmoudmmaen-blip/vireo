@@ -6,21 +6,24 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
-import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
+import 'package:vireo/features/ai_nutrition/screens/cal_ai_camera_screen.dart';
+import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
 
-/// Shows a bottom sheet allowing the user to choose the meal scan source:
-/// 1. Camera ("صوّر بالكاميرا")
-/// 2. Gallery ("اختار من الاستوديو")
-/// 3. Text description ("اكتب الأكل")
+/// Shows the unified bottom sheet "سجّل وجبتك" with 5 big tiles:
+/// 1. صوّر الوجبة (CalAi camera)
+/// 2. من الاستوديو (pickMultiImage)
+/// 3. اكتب (text entry)
+/// 4. بالصوت (voice speech-to-text)
+/// 5. باركود (barcode scanner)
 Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
   HapticFeedback.lightImpact();
-  final l10n = AppLocalizations.of(context);
   final colors = context.vireoColors;
 
   return showModalBottomSheet<void>(
     context: context,
     backgroundColor: colors.surface,
+    isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(VRadius.xl)),
     ),
@@ -45,24 +48,22 @@ Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
               ),
               const SizedBox(height: 16),
               Text(
-                l10n.scanSourceSheetTitle,
+                'سجّل وجبتك',
                 textAlign: TextAlign.center,
-                style: Theme.of(sheetCtx).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
+                style: Theme.of(sheetCtx).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w900,
                     ),
               ),
               const SizedBox(height: 18),
               _SourceOptionTile(
                 icon: Icons.camera_alt_rounded,
                 iconColor: colors.ember,
-                title: l10n.scanSourceCamera,
+                title: 'صوّر الوجبة',
                 onTap: () {
                   Navigator.of(sheetCtx).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => const AiScanScreen(
-                        initialSource: ImageSource.camera,
-                      ),
+                      builder: (_) => const CalAiCameraScreen(),
                     ),
                   );
                 },
@@ -71,28 +72,66 @@ Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
               _SourceOptionTile(
                 icon: Icons.photo_library_rounded,
                 iconColor: const Color(0xFF38BDF8), // sky blue
-                title: l10n.scanSourceGallery,
-                onTap: () {
+                title: 'من الاستوديو',
+                onTap: () async {
                   Navigator.of(sheetCtx).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const AiScanScreen(
-                        initialSource: ImageSource.gallery,
-                      ),
-                    ),
-                  );
+                  final picker = ImagePicker();
+                  final pickedFiles = await picker.pickMultiImage(limit: 5);
+                  if (pickedFiles.isNotEmpty && context.mounted) {
+                    final bytesList = <Uint8List>[];
+                    for (final pf in pickedFiles.take(5)) {
+                      bytesList.add(await pf.readAsBytes());
+                    }
+                    if (context.mounted) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => CalAiCameraScreen(
+                            initialPhotos: bytesList,
+                          ),
+                        ),
+                      );
+                    }
+                  }
                 },
               ),
               const SizedBox(height: 10),
               _SourceOptionTile(
                 icon: Icons.edit_note_rounded,
                 iconColor: const Color(0xFF10B981), // emerald
-                title: l10n.scanSourceText,
+                title: 'اكتب',
                 onTap: () {
                   Navigator.of(sheetCtx).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (_) => const MealLogTextScreen(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 10),
+              _SourceOptionTile(
+                icon: Icons.mic_rounded,
+                iconColor: const Color(0xFFA855F7), // purple
+                title: 'بالصوت',
+                onTap: () {
+                  Navigator.of(sheetCtx).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const MealLogTextScreen(startListeningOnInit: true),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 10),
+              _SourceOptionTile(
+                icon: Icons.qr_code_scanner_rounded,
+                iconColor: const Color(0xFFF59E0B), // amber
+                title: 'باركود',
+                onTap: () {
+                  Navigator.of(sheetCtx).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const MealBarcodeScreen(),
                     ),
                   );
                 },

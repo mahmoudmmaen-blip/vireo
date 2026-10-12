@@ -27,18 +27,10 @@ class AiScanScreen extends ConsumerStatefulWidget {
   static Future<void> open(
     BuildContext context,
     WidgetRef ref, {
+    @Deprecated('Direct camera opening is deprecated; all entries route to the unified sheet')
     bool? fromCamera,
   }) {
-    if (fromCamera == null) {
-      return showMealScanSourceSheet(context, ref);
-    }
-    return Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => AiScanScreen(
-          initialSource: fromCamera ? ImageSource.camera : ImageSource.gallery,
-        ),
-      ),
-    );
+    return showMealScanSourceSheet(context, ref);
   }
 
   @override

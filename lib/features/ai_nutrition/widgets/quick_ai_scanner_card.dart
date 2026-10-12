@@ -55,19 +55,9 @@ class QuickAiScannerCard extends ConsumerWidget {
             children: [
               Expanded(
                 child: FilledButton.icon(
-                  onPressed: () =>
-                      AiScanScreen.open(context, ref, fromCamera: true),
-                  icon: const Icon(Icons.camera_alt_outlined, size: 20),
-                  label: Text(l10n.aiScanCamera),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () =>
-                      AiScanScreen.open(context, ref, fromCamera: false),
-                  icon: const Icon(Icons.photo_library_outlined, size: 20),
-                  label: Text(l10n.aiScanGallery),
+                  onPressed: () => AiScanScreen.open(context, ref),
+                  icon: const Icon(Icons.add_a_photo_outlined, size: 20),
+                  label: Text(l10n.scanSourceSheetTitle),
                 ),
               ),
             ],

@@ -35,10 +35,11 @@ import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/activity/screens/health_hub_screen.dart';
 import 'package:vireo/features/home/widgets/daily_score_hero_card.dart';
 import 'package:vireo/features/home/widgets/smart_next_action_card.dart';
-import 'package:vireo/features/home/widgets/quick_water_card.dart';
 import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
 import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/features/home/widgets/today_plan_section.dart';
+import 'package:vireo/features/home/widgets/premium_steps_hero_card.dart';
+import 'package:vireo/features/home/widgets/today_pillars_grid.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
 
 const _headerPad = EdgeInsets.fromLTRB(4, VSpace.sm, 4, 0);
@@ -74,17 +75,24 @@ class HomeDashboardBody extends ConsumerWidget {
       ),
       const SaveProgressPromptHost(),
 
-      // ── Card 1: Daily Score + Steps hero ──
+      // ── HERO: Big 220dp Steps Ring Card ──
+      PremiumStepsHeroCard(
+        stepsCurrent: dash.stepsToday,
+        stepsGoal: dash.stepsGoal,
+        onTap: () => ref.read(shellTabIndexProvider.notifier).goWalk(),
+      ),
+
+      // ── Card 1: Daily Score Chip Card ──
       const DailyScoreHeroCard(),
 
-      // ── Card 2: "الخطوة الجاية" — ONE smart next-action card ──
+      // ── Card 2: "اليوم" 2-Column Pillars Grid (Food, Water, Workout, Sleep) ──
+      const TodayPillarsGrid(),
+
+      // ── Card 3: "الخطوة الجاية" — ONE smart next-action card ──
       const SmartNextActionCard(),
 
-      // ── Card 3: Today Plan (collapsed to next 3 items + 'عرض الكل') ──
+      // ── Card 4: Today Plan (collapsed to next 3 items + 'عرض الكل') ──
       const TodayPlanSection(),
-
-      // ── Card 4: Water quick card (1 tap = +250 ml) ──
-      const QuickWaterCard(),
 
       // ── Card 5: One native ad slot for free users ──
       const VireoNativeAdCard(),
@@ -160,7 +168,7 @@ class HomeDashboardBody extends ConsumerWidget {
         ),
         _TodayLog(
           items: nutrition.items,
-          onScan: () => AiScanScreen.open(context, ref, fromCamera: true),
+          onScan: () => AiScanScreen.open(context, ref),
           onRemoveAi: (id) {
             ref.read(aiMealLogProvider.notifier).remove(id);
             ScaffoldMessenger.of(context)

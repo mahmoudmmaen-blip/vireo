@@ -16,10 +16,15 @@ class MealScanDraft {
   const MealScanDraft({
     required this.lines,
     required this.imageBytes,
+    this.imagesBytes = const [],
   });
 
   final List<ResolvedMealLine> lines;
   final Uint8List imageBytes;
+  final List<Uint8List> imagesBytes;
+
+  List<Uint8List> get allImages =>
+      imagesBytes.isNotEmpty ? imagesBytes : (imageBytes.isNotEmpty ? [imageBytes] : []);
 
   FoodAnalysisResult toAnalysisResult({String language = 'ar'}) {
     final kcal = lines.fold<double>(0, (s, l) => s + l.kcal).round();
@@ -56,24 +61,50 @@ abstract final class GeminiFoodServiceCore {
     double remainingProtein, {
     String language = 'ar',
     String? userHint,
+  }) =>
+      analyzeImagesToDraft(
+        [imageBytes],
+        remainingCalories,
+        remainingProtein,
+        language: language,
+        userHint: userHint,
+      );
+
+  static Future<MealScanDraft> analyzeImagesToDraft(
+    List<Uint8List> images,
+    int remainingCalories,
+    double remainingProtein, {
+    String language = 'ar',
+    String? userHint,
   }) async {
     if (!SupabaseService.isInitialized) {
       throw const FoodVisionOfflineException();
     }
 
     try {
-      final bytes = await MealImageCompressor.compress(imageBytes);
+      final compressedImages = <Uint8List>[];
+      for (final img in images.take(5)) {
+        compressedImages.add(await MealImageCompressor.compress(img));
+      }
+      if (compressedImages.isEmpty) {
+        throw const FoodVisionParseException();
+      }
+
+      final payload = <String, dynamic>{
+        'images': compressedImages.map(base64Encode).toList(),
+        // Keep image_base64 for backward compatibility with existing server
+        'image_base64': base64Encode(compressedImages.first),
+        'mime_type': 'image/jpeg',
+        'remaining_calories': remainingCalories,
+        'remaining_protein': remainingProtein,
+        'language': language,
+        if (userHint != null && userHint.trim().isNotEmpty)
+          'user_hint': userHint.trim(),
+      };
+
       final response = await SupabaseService.client.functions.invoke(
         AppConfig.analyzeMealFunctionName,
-        body: {
-          'image_base64': base64Encode(bytes),
-          'mime_type': 'image/jpeg',
-          'remaining_calories': remainingCalories,
-          'remaining_protein': remainingProtein,
-          'language': language,
-          if (userHint != null && userHint.trim().isNotEmpty)
-            'user_hint': userHint.trim(),
-        },
+        body: payload,
       );
 
       final data = response.data;
@@ -105,7 +136,11 @@ abstract final class GeminiFoodServiceCore {
         final lines =
             await _resolver.resolveItems(scanned, language: language);
         BootLog.step('analyze-meal resolved=${lines.length}');
-        return MealScanDraft(lines: lines, imageBytes: bytes);
+        return MealScanDraft(
+          lines: lines,
+          imageBytes: compressedImages.first,
+          imagesBytes: compressedImages,
+        );
       } catch (e) {
         // Never lose a successful vision response to local DB issues.
         BootLog.warn('analyze-meal resolve failed — using estimates', e);
@@ -122,7 +157,11 @@ abstract final class GeminiFoodServiceCore {
               ),
             ),
         ];
-        return MealScanDraft(lines: fallback, imageBytes: bytes);
+        return MealScanDraft(
+          lines: fallback,
+          imageBytes: compressedImages.first,
+          imagesBytes: compressedImages,
+        );
       }
     } on FunctionException catch (e) {
       BootLog.warn(

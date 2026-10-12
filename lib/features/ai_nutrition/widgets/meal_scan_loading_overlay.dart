@@ -18,13 +18,11 @@ class MealScanLoadingOverlay extends StatefulWidget {
 class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
     with SingleTickerProviderStateMixin {
   static const _cues = [
-    'أرز…',
-    'فراخ…',
-    'سلطة…',
-    'عيش…',
-    'rice…',
-    'chicken…',
-    'salad…',
+    'بنتعرّف على الأكل…',
+    'بنحسب البروتين…',
+    'بنحلل المكونات والدهون…',
+    'بنراجع الكميات والأوزان…',
+    'بنسجل قيم الطاقة…',
   ];
 
   late final AnimationController _controller;

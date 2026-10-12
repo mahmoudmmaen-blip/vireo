@@ -37,7 +37,7 @@ class SmartNextActionCard extends ConsumerWidget {
             ? 'باقي $proteinDiff جم بروتين — سجّل وجبتك'
             : '$proteinDiff g protein remaining — log your meal',
         actionLabel: isArabic ? 'سجّل وجبة' : 'Log meal',
-        onTap: () => AiScanScreen.open(context, ref, fromCamera: true),
+        onTap: () => AiScanScreen.open(context, ref),
       );
     }
 

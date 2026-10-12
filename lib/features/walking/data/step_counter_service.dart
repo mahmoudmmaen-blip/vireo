@@ -62,6 +62,14 @@ abstract final class StepCounterService {
     return '${d.year}-$m-$day';
   }
 
+  static Map<String, dynamic> readRawState() => _readState();
+
+  static Future<void> resetBaseline() async {
+    if (!HiveService.isInitialized) return;
+    await HiveService.settingsBox.delete(_stateKey);
+    await refresh();
+  }
+
   static Map<String, dynamic> _readState() {
     if (!HiveService.isInitialized) return {};
     final raw = HiveService.settingsBox.get(_stateKey);

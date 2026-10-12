@@ -22,6 +22,7 @@ const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
 
 type AnalyzeMealRequest = {
   image_base64?: string;
+  images?: string[];
   mime_type?: string;
   remaining_calories?: number;
   remaining_protein?: number;
@@ -58,12 +59,23 @@ Deno.serve(async (req) => {
     }
 
     const body = (await req.json()) as AnalyzeMealRequest;
-    if (!body.image_base64 || typeof body.image_base64 !== 'string') {
-      return json({ error: 'image_base64 is required' }, 400);
+    
+    // Normalize images: accept images: string[] (max 5) or single image_base64
+    const rawImages: string[] = [];
+    if (Array.isArray(body.images) && body.images.length > 0) {
+      rawImages.push(...body.images.slice(0, 5));
+    } else if (body.image_base64 && typeof body.image_base64 === 'string') {
+      rawImages.push(body.image_base64);
     }
 
-    if (approxBase64Bytes(body.image_base64) > MAX_IMAGE_BYTES) {
-      return json({ error: 'IMAGE_TOO_LARGE' }, 413);
+    if (rawImages.length === 0) {
+      return json({ error: 'image_base64 or images array is required' }, 400);
+    }
+
+    for (const img of rawImages) {
+      if (approxBase64Bytes(img) > MAX_IMAGE_BYTES) {
+        return json({ error: 'IMAGE_TOO_LARGE' }, 413);
+      }
     }
 
     const adminClient = createClient(supabaseUrl, serviceRoleKey);
@@ -83,14 +95,21 @@ Deno.serve(async (req) => {
     const remainingCalories = Number(body.remaining_calories ?? 0);
     const remainingProtein = Number(body.remaining_protein ?? 0);
     const mime = body.mime_type ?? 'image/jpeg';
-    const data = stripDataUrl(body.image_base64);
+
+    const multiPhotoInstruction = rawImages.length > 1
+      ? '\nNOTE: These photos show the SAME meal from different angles; do not double count.\n'
+      : '';
 
     const prompt = mealVisionPrompt({
       remainingCalories,
       remainingProtein,
       language: body.language,
-      userHint: body.user_hint,
+      userHint: (body.user_hint ?? '') + multiPhotoInstruction,
     });
+
+    const imageParts = rawImages.map((img) => ({
+      inline_data: { mime_type: mime, data: stripDataUrl(img) },
+    }));
 
     const raw = await generateContent({
       contents: [
@@ -98,7 +117,7 @@ Deno.serve(async (req) => {
           role: 'user',
           parts: [
             { text: prompt },
-            { inline_data: { mime_type: mime, data } },
+            ...imageParts,
           ],
         },
       ],

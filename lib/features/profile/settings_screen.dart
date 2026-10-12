@@ -19,6 +19,7 @@ import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
+import 'package:vireo/features/walking/screens/step_diagnostic_screen.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -243,6 +244,19 @@ class SettingsScreen extends ConsumerWidget {
                 ref.read(isAdvancedFeaturesUnlockedProvider.notifier).resetToProgressive();
               }
             },
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(Icons.directions_walk_rounded),
+            title: Text(isAr ? 'تشخيص عداد الخطوات' : 'Step Counter Diagnostics'),
+            subtitle: Text(
+              isAr ? 'فحص الحساس، الصلاحيات، وإعادة ضبط العدّاد' : 'Check sensor, permissions & reset baseline',
+              style: TextStyle(fontSize: 12, color: colors.textMute),
+            ),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const StepDiagnosticScreen()),
+            ),
           ),
         ],
       ),

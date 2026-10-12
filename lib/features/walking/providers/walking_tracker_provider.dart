@@ -12,17 +12,22 @@ class WalkingContext {
   const WalkingContext({
     required this.activityLevel,
     required this.goalStartDate,
+    this.customDailyGoal,
   });
 
   final ActivityLevel activityLevel;
   final DateTime goalStartDate;
+  final int? customDailyGoal;
 
   int get dailyGoal {
+    if (customDailyGoal != null && customDailyGoal! > 0) {
+      return customDailyGoal!;
+    }
     final goal = WalkingGoalCalculator.dailyGoal(
       activityLevel: activityLevel,
       goalStartDate: goalStartDate,
     );
-    return goal > 0 ? goal : 6000;
+    return goal > 0 ? goal : 7000;
   }
 }
 
@@ -164,6 +169,18 @@ class WalkingTrackerNotifier extends AsyncNotifier<WalkingTrackerState> {
     }
   }
 
+  Future<void> setDailyGoal(int newGoal) async {
+    final clamped = newGoal.clamp(1000, 50000);
+    if (HiveService.isInitialized) {
+      await HiveService.settingsBox.put('walking_custom_daily_goal', clamped);
+    }
+    final current = state.valueOrNull;
+    if (current != null) {
+      state = AsyncData(current.copyWith(dailyGoal: clamped));
+    }
+    ref.invalidate(walkingContextProvider);
+  }
+
   Future<void> refresh() async {
     final current = state.valueOrNull;
     if (current != null) {
@@ -210,9 +227,15 @@ final walkingContextProvider = FutureProvider<WalkingContext>((ref) async {
     }
   }
 
+  int? customDailyGoal;
+  if (HiveService.isInitialized) {
+    customDailyGoal = HiveService.settingsBox.get('walking_custom_daily_goal') as int?;
+  }
+
   return WalkingContext(
     activityLevel: activityLevel,
     goalStartDate: goalStartDate,
+    customDailyGoal: customDailyGoal ?? 7000,
   );
 });
 

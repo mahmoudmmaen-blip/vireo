@@ -174,11 +174,48 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
       ),
       body: Column(
         children: [
-          if (widget.draft.imageBytes.isNotEmpty)
+          if (widget.draft.allImages.isNotEmpty)
             SizedBox(
-              height: 160,
+              height: 180,
               width: double.infinity,
-              child: Image.memory(widget.draft.imageBytes, fit: BoxFit.cover),
+              child: widget.draft.allImages.length == 1
+                  ? Image.memory(widget.draft.allImages.first, fit: BoxFit.cover)
+                  : PageView.builder(
+                      itemCount: widget.draft.allImages.length,
+                      itemBuilder: (ctx, idx) {
+                        return Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Image.memory(
+                              widget.draft.allImages[idx],
+                              fit: BoxFit.cover,
+                            ),
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withValues(alpha: 0.65),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  '${idx + 1}/${widget.draft.allImages.length}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
             ),
           Expanded(
             child: ListView.builder(
