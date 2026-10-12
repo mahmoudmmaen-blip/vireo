@@ -282,14 +282,18 @@ class _ProfileHeaderCard extends ConsumerWidget {
                 ),
               ),
               const SizedBox(width: 6),
-              Text(
-                Localizations.localeOf(context).languageCode.startsWith('ar')
-                    ? 'المزامنة السحابية: جاهز دون اتصال'
-                    : 'Cloud Sync: Offline-Ready',
-                style: TextStyle(
-                  color: colors.textMute,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
+              Flexible(
+                child: Text(
+                  Localizations.localeOf(context).languageCode.startsWith('ar')
+                      ? 'المزامنة السحابية: جاهز دون اتصال'
+                      : 'Cloud Sync: Offline-Ready',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: colors.textMute,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -462,10 +466,23 @@ class _BodyRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w600)),
+          Expanded(
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ),
         ],
       ),
     );

@@ -130,14 +130,18 @@ class _StepHealthSafetyScreenState
                       size: 22,
                     ),
                     const SizedBox(width: 8),
-                    Text(
-                      l10n.healthSafetyNoneApply,
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
-                        color: _selectedConditions.isEmpty
-                            ? VMacro.steps
-                            : colors.text,
+                    Flexible(
+                      child: Text(
+                        l10n.healthSafetyNoneApply,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: _selectedConditions.isEmpty
+                              ? VMacro.steps
+                              : colors.text,
+                        ),
                       ),
                     ),
                   ],
@@ -152,11 +156,15 @@ class _StepHealthSafetyScreenState
             child: Row(
               children: [
                 Expanded(child: Divider(color: colors.line)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    l10n.healthSafetyOrSelect,
-                    style: VType.overline(context),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      l10n.healthSafetyOrSelect,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: VType.overline(context),
+                    ),
                   ),
                 ),
                 Expanded(child: Divider(color: colors.line)),

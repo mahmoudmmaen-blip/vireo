@@ -82,15 +82,19 @@ class DailyScoreHeroCard extends ConsumerWidget {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            isArabic ? 'سكور اليوم' : 'Daily Score',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w900,
-                              fontSize: 16,
+                          Expanded(
+                            child: Text(
+                              isArabic ? 'سكور اليوم' : 'Daily Score',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
-                          const Spacer(),
-                          if (streak > 0)
+                          if (streak > 0) ...[
+                            const SizedBox(width: 8),
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
@@ -113,6 +117,7 @@ class DailyScoreHeroCard extends ConsumerWidget {
                                 ],
                               ),
                             ),
+                          ],
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -144,12 +149,16 @@ class DailyScoreHeroCard extends ConsumerWidget {
                                 children: [
                                   const Icon(Icons.directions_walk_rounded, size: 14, color: Color(0xFF10B981)),
                                   const SizedBox(width: 4),
-                                  Text(
-                                    '${dash.stepsToday} / ${dash.stepsGoal}',
-                                    style: const TextStyle(
-                                      color: Color(0xFF10B981),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 11.5,
+                                  Flexible(
+                                    child: Text(
+                                      '${dash.stepsToday} / ${dash.stepsGoal}',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        color: Color(0xFF10B981),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 11.5,
+                                      ),
                                     ),
                                   ),
                                 ],

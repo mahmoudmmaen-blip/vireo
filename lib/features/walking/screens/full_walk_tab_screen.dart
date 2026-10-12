@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
@@ -41,16 +42,17 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
   }
 
   void _pauseOrStopSession() {
+    final l10n = AppLocalizations.of(context);
     HapticFeedback.mediumImpact();
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('إيقاف جولة المشي؟'),
-        content: const Text('هل ترغب في حفظ أو إنهاء جولة المشي الحالية؟'),
+        title: Text(l10n.walkingStopSessionTitle),
+        content: Text(l10n.walkingStopSessionDesc),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('استمرار'),
+            child: Text(l10n.walkingSessionContinue),
           ),
           FilledButton(
             onPressed: () {
@@ -59,7 +61,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                 _isSessionActive = false;
               });
             },
-            child: const Text('إنهاء الجولة'),
+            child: Text(l10n.walkingSessionEnd),
           ),
         ],
       ),
@@ -67,24 +69,25 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
   }
 
   void _editGoal(int currentGoal) {
+    final l10n = AppLocalizations.of(context);
     final ctrl = TextEditingController(text: '$currentGoal');
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('تعديل هدف الخطوات اليومي'),
+        title: Text(l10n.walkingEditGoalTitle),
         content: TextField(
           controller: ctrl,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          decoration: const InputDecoration(
-            labelText: 'عدد الخطوات المستهدف',
-            suffixText: 'خطوة',
+          decoration: InputDecoration(
+            labelText: l10n.walkingTargetStepsLabel,
+            suffixText: l10n.walkingStepsSuffix,
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('إلغاء'),
+            child: Text(l10n.cancelButton),
           ),
           FilledButton(
             onPressed: () {
@@ -94,7 +97,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
               }
               Navigator.pop(ctx);
             },
-            child: const Text('حفظ'),
+            child: Text(l10n.saveButton),
           ),
         ],
       ),
@@ -104,6 +107,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
+    final l10n = AppLocalizations.of(context);
     final trackerState = ref.watch(walkingTrackerProvider);
     final notifier = ref.read(walkingTrackerProvider.notifier);
     final live = ref.watch(liveStepsProvider).valueOrNull;
@@ -129,17 +133,17 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
     return Scaffold(
       backgroundColor: colors.background,
       appBar: AppBar(
-        title: const Text('المشي والنشاط', style: TextStyle(fontWeight: FontWeight.w900)),
+        title: Text(l10n.walkingScreenTitle, style: const TextStyle(fontWeight: FontWeight.w900)),
         actions: [
           IconButton(
-            tooltip: 'تشخيص الخطوات',
+            tooltip: l10n.walkingDiagnosticsTooltip,
             icon: const Icon(Icons.settings_suggest_rounded),
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(builder: (_) => const StepDiagnosticScreen()),
             ),
           ),
           IconButton(
-            tooltip: 'تحديث',
+            tooltip: l10n.walkingRefreshTooltip,
             icon: const Icon(Icons.refresh_rounded),
             onPressed: () => notifier.refresh(),
           ),
@@ -383,7 +387,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                           ),
                         );
                       },
-                      child: const Text('ابدأ GPS', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                      child: Text(l10n.walkingStartGps, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                     ),
                   ],
                 ),
@@ -405,10 +409,10 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                     // Header without overflow
                     Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Text(
-                            'سجل الحركة والخطوات',
-                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                            l10n.walkingActivityHistory,
+                            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
                           ),
                         ),
                         SizedBox(
@@ -418,10 +422,10 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                               visualDensity: VisualDensity.compact,
                               padding: const EdgeInsets.symmetric(horizontal: 8),
                             ),
-                            segments: const [
-                              ButtonSegment(value: WalkChartFilter.day, label: Text('اليوم', style: TextStyle(fontSize: 12))),
-                              ButtonSegment(value: WalkChartFilter.week, label: Text('أسبوع', style: TextStyle(fontSize: 12))),
-                              ButtonSegment(value: WalkChartFilter.month, label: Text('شهر', style: TextStyle(fontSize: 12))),
+                            segments: [
+                              ButtonSegment(value: WalkChartFilter.day, label: Text(l10n.walkingFilterDay, style: const TextStyle(fontSize: 12))),
+                              ButtonSegment(value: WalkChartFilter.week, label: Text(l10n.walkingFilterWeek, style: const TextStyle(fontSize: 12))),
+                              ButtonSegment(value: WalkChartFilter.month, label: Text(l10n.walkingFilterMonth, style: const TextStyle(fontSize: 12))),
                             ],
                             selected: {_filter},
                             onSelectionChanged: (set) {
@@ -456,7 +460,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text('الإنجازات والأرقام القياسية 🏆', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                    Text(l10n.walkingAchievementsTitle, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
                     const SizedBox(height: 12),
                     GridView.count(
                       crossAxisCount: 2,

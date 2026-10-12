@@ -92,41 +92,51 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
           child: LanguageSelector(compact: true),
         ),
       ],
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: const QuickAiScannerCard(),
-          ),
-          if (FeatureGates.shouldShowUpsellBanners(isPro: isPro))
-            FridgeScanBanner(
-              remaining: remaining,
-              onScan: () => _openFridgeScan(context, remaining),
-            ),
-          const DailyCalorieGoalCard(),
-          const MealQuickRelogRow(),
-          TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            tabs: [
-              Tab(text: l10n.nutritionTabBreakfast),
-              Tab(text: l10n.nutritionTabLunch),
-              Tab(text: l10n.nutritionTabDinner),
-              Tab(text: l10n.nutritionTabSnack),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverToBoxAdapter(
+            child: Column(
               children: [
-                _MealTab(mealType: MealType.breakfast),
-                _MealTab(mealType: MealType.lunch),
-                _MealTab(mealType: MealType.dinner),
-                _MealTab(mealType: MealType.snack),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: QuickAiScannerCard(),
+                ),
+                if (FeatureGates.shouldShowUpsellBanners(isPro: isPro))
+                  FridgeScanBanner(
+                    remaining: remaining,
+                    onScan: () => _openFridgeScan(context, remaining),
+                  ),
+                const DailyCalorieGoalCard(),
+                const MealQuickRelogRow(),
               ],
             ),
           ),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _SliverTabBarDelegate(
+              TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                tabs: [
+                  Tab(text: l10n.nutritionTabBreakfast),
+                  Tab(text: l10n.nutritionTabLunch),
+                  Tab(text: l10n.nutritionTabDinner),
+                  Tab(text: l10n.nutritionTabSnack),
+                ],
+              ),
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+          ),
         ],
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            _MealTab(mealType: MealType.breakfast),
+            _MealTab(mealType: MealType.lunch),
+            _MealTab(mealType: MealType.dinner),
+            _MealTab(mealType: MealType.snack),
+          ],
+        ),
       ),
     );
   }
@@ -178,6 +188,32 @@ class _MealTab extends ConsumerWidget {
         );
       },
     );
+  }
+}
+
+class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverTabBarDelegate(this.tabBar, {required this.color});
+
+  final TabBar tabBar;
+  final Color color;
+
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return ColoredBox(
+      color: color,
+      child: tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverTabBarDelegate oldDelegate) {
+    return tabBar != oldDelegate.tabBar || color != oldDelegate.color;
   }
 }
 

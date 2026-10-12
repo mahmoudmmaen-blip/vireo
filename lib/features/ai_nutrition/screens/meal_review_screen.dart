@@ -253,11 +253,14 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
 
                   // Items List Header
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        isArabic ? 'محتويات الوجبة (${_lines.length})' : 'Meal Items (${_lines.length})',
-                        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                      Expanded(
+                        child: Text(
+                          isArabic ? 'محتويات الوجبة (${_lines.length})' : 'Meal Items (${_lines.length})',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                        ),
                       ),
                       TextButton.icon(
                         style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
@@ -506,43 +509,58 @@ class _StickyTopSummaryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _MacroBadge(
-                          label: isArabic ? 'بروتين' : 'Protein',
-                          grams: '${proteinG.round()}g',
-                          pct: '$pPct%',
-                          color: VMacro.protein,
+                        Expanded(
+                          child: _MacroBadge(
+                            label: isArabic ? 'بروتين' : 'Protein',
+                            grams: '${proteinG.round()}g',
+                            pct: '$pPct%',
+                            color: VMacro.protein,
+                          ),
                         ),
-                        _MacroBadge(
-                          label: isArabic ? 'كارب' : 'Carbs',
-                          grams: '${carbsG.round()}g',
-                          pct: '$cPct%',
-                          color: VMacro.carbs,
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: _MacroBadge(
+                            label: isArabic ? 'كارب' : 'Carbs',
+                            grams: '${carbsG.round()}g',
+                            pct: '$cPct%',
+                            color: VMacro.carbs,
+                          ),
                         ),
-                        _MacroBadge(
-                          label: isArabic ? 'دهون' : 'Fat',
-                          grams: '${fatG.round()}g',
-                          pct: '$fPct%',
-                          color: VMacro.fat,
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: _MacroBadge(
+                            label: isArabic ? 'دهون' : 'Fat',
+                            grams: '${fatG.round()}g',
+                            pct: '$fPct%',
+                            color: VMacro.fat,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     // Fat equivalent & Remaining calories
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          '≈ $fatEquivalentG جم دهون',
-                          style: TextStyle(color: colors.textMute, fontSize: 11, fontWeight: FontWeight.bold),
+                        Flexible(
+                          child: Text(
+                            '≈ $fatEquivalentG جم دهون',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: colors.textMute, fontSize: 11, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        Text(
-                          isArabic ? 'المتبقي من يومك: $remainingAfter سعرة' : 'Remaining: $remainingAfter kcal',
-                          style: TextStyle(
-                            color: remainingAfter >= 0 ? colors.ember : colors.danger,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w800,
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            isArabic ? 'المتبقي: $remainingAfter سعرة' : 'Remaining: $remainingAfter kcal',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: remainingAfter >= 0 ? colors.ember : colors.danger,
+                              fontSize: 10.5,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
                         ),
                       ],
@@ -649,11 +667,23 @@ class _MacroBadge extends StatelessWidget {
           children: [
             Container(width: 7, height: 7, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
             const SizedBox(width: 4),
-            Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700)),
+            Expanded(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 2),
-        Text('$grams ($pct)', style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w800)),
+        Text(
+          '$grams ($pct)',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(fontSize: 10.5, color: color, fontWeight: FontWeight.w800),
+        ),
       ],
     );
   }
@@ -759,15 +789,22 @@ class _MfpItemRow extends StatelessWidget {
                   Expanded(
                     child: Text(
                       name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
                     ),
                   ),
-                  Text(
-                    '${line.grams.round()} جم  ·  ${line.kcal.round()} سعرة',
-                    style: TextStyle(
-                      color: colors.textMute,
-                      fontSize: 12.5,
-                      fontWeight: FontWeight.w700,
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
+                      '${line.grams.round()} جم  ·  ${line.kcal.round()} سعرة',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: colors.textMute,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 8),

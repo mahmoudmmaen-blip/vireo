@@ -162,8 +162,9 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                 children: [
                   // Plate visual container
                   Container(
-                    height: 140,
+                    constraints: const BoxConstraints(minHeight: 140),
                     width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
                       color: colors.background,
                       borderRadius: BorderRadius.circular(VRadius.lg),
@@ -177,12 +178,13 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                           children: [
                             Icon(
                               Icons.dinner_dining_rounded,
-                              size: 54,
+                              size: 48,
                               color: colors.ember,
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 6),
                             Text(
                               l10n.tryScanSamplePlateTitle,
+                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700,
@@ -191,6 +193,7 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                             const SizedBox(height: 2),
                             Text(
                               l10n.tryScanSamplePlateDesc,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: colors.textMute,
@@ -199,13 +202,15 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                           ],
                         ),
                         if (_isAnalyzing)
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.7),
-                              borderRadius: BorderRadius.circular(VRadius.lg),
-                            ),
-                            child: const Center(
-                              child: CircularProgressIndicator(),
+                          Positioned.fill(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.7),
+                                borderRadius: BorderRadius.circular(VRadius.lg),
+                              ),
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
                           ),
                       ],
@@ -217,7 +222,8 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                   Pressable(
                     onTap: _isAnalyzing ? null : _scanSamplePlate,
                     child: Container(
-                      height: 50,
+                      constraints: const BoxConstraints(minHeight: 50),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                       decoration: BoxDecoration(
                         color: colors.ember,
                         borderRadius: BorderRadius.circular(VRadius.md),
@@ -228,12 +234,17 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                         children: [
                           const Icon(Icons.flash_on_rounded, color: Colors.white, size: 20),
                           const SizedBox(width: 8),
-                          Text(
-                            _isAnalyzing ? l10n.tryScanAnalyzing : l10n.tryScanSampleCta,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w800,
+                          Flexible(
+                            child: Text(
+                              _isAnalyzing ? l10n.tryScanAnalyzing : l10n.tryScanSampleCta,
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w800,
+                              ),
                             ),
                           ),
                         ],
@@ -252,9 +263,16 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
             child: Row(
               children: [
                 Expanded(child: Divider(color: colors.line)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(l10n.tryScanOrTestLive, style: VType.overline(context)),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      l10n.tryScanOrTestLive,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: VType.overline(context),
+                    ),
+                  ),
                 ),
                 Expanded(child: Divider(color: colors.line)),
               ],

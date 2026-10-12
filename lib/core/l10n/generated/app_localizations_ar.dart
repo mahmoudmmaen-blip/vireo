@@ -48,6 +48,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get finishButton => 'إنهاء';
 
   @override
+  String get cancelButton => 'إلغاء';
+
+  @override
+  String get saveButton => 'حفظ';
+
+  @override
   String get yesButton => 'نعم';
 
   @override
@@ -4109,6 +4115,55 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get measurementsAddEntry => 'سجّل قياس جديد';
+
+  @override
+  String get walkingStopSessionTitle => 'إيقاف جولة المشي؟';
+
+  @override
+  String get walkingStopSessionDesc =>
+      'هل ترغب في حفظ أو إنهاء جولة المشي الحالية؟';
+
+  @override
+  String get walkingSessionContinue => 'استمرار';
+
+  @override
+  String get walkingSessionEnd => 'إنهاء الجولة';
+
+  @override
+  String get walkingEditGoalTitle => 'تعديل هدف الخطوات اليومي';
+
+  @override
+  String get walkingTargetStepsLabel => 'عدد الخطوات المستهدف';
+
+  @override
+  String get walkingStepsSuffix => 'خطوة';
+
+  @override
+  String get walkingScreenTitle => 'المشي والنشاط';
+
+  @override
+  String get walkingDiagnosticsTooltip => 'تشخيص الخطوات';
+
+  @override
+  String get walkingRefreshTooltip => 'تحديث';
+
+  @override
+  String get walkingStartGps => 'ابدأ GPS';
+
+  @override
+  String get walkingActivityHistory => 'سجل الحركة والخطوات';
+
+  @override
+  String get walkingFilterDay => 'اليوم';
+
+  @override
+  String get walkingFilterWeek => 'أسبوع';
+
+  @override
+  String get walkingFilterMonth => 'شهر';
+
+  @override
+  String get walkingAchievementsTitle => 'الإنجازات والأرقام القياسية 🏆';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -4945,6 +5000,55 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String get measurementsAddEntry => 'سجّل قياس جديد';
+
+  @override
+  String get walkingStopSessionTitle => 'توقف جولة المشي؟';
+
+  @override
+  String get walkingStopSessionDesc =>
+      'حابب تحفظ أو تنهي جولة المشي دي دلوقتي؟';
+
+  @override
+  String get walkingSessionContinue => 'كمّل';
+
+  @override
+  String get walkingSessionEnd => 'إنهاء الجولة';
+
+  @override
+  String get walkingEditGoalTitle => 'تعديل هدف الخطوات اليومي';
+
+  @override
+  String get walkingTargetStepsLabel => 'عدد الخطوات المستهدف';
+
+  @override
+  String get walkingStepsSuffix => 'خطوة';
+
+  @override
+  String get walkingScreenTitle => 'المشي والنشاط';
+
+  @override
+  String get walkingDiagnosticsTooltip => 'تشخيص الخطوات';
+
+  @override
+  String get walkingRefreshTooltip => 'تحديث';
+
+  @override
+  String get walkingStartGps => 'ابدأ GPS';
+
+  @override
+  String get walkingActivityHistory => 'سجل الحركة والخطوات';
+
+  @override
+  String get walkingFilterDay => 'النهارده';
+
+  @override
+  String get walkingFilterWeek => 'أسبوع';
+
+  @override
+  String get walkingFilterMonth => 'شهر';
+
+  @override
+  String get walkingAchievementsTitle => 'الإنجازات والأرقام القياسية 🏆';
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).

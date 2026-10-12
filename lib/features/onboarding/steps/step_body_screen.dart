@@ -384,12 +384,16 @@ class _SexButton extends StatelessWidget {
                 color: isSelected ? Colors.white : colors.textMute,
               ),
               const SizedBox(width: 4),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: isSelected ? Colors.white : colors.textMute,
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: isSelected ? Colors.white : colors.textMute,
+                  ),
                 ),
               ),
             ],

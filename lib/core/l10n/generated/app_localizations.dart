@@ -190,6 +190,18 @@ abstract class AppLocalizations {
   /// **'Finish'**
   String get finishButton;
 
+  /// No description provided for @cancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelButton;
+
+  /// No description provided for @saveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get saveButton;
+
   /// No description provided for @yesButton.
   ///
   /// In en, this message translates to:
@@ -7506,6 +7518,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log New Entry'**
   String get measurementsAddEntry;
+
+  /// No description provided for @walkingStopSessionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop walking session?'**
+  String get walkingStopSessionTitle;
+
+  /// No description provided for @walkingStopSessionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Would you like to save or end the current walking session?'**
+  String get walkingStopSessionDesc;
+
+  /// No description provided for @walkingSessionContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get walkingSessionContinue;
+
+  /// No description provided for @walkingSessionEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'End Session'**
+  String get walkingSessionEnd;
+
+  /// No description provided for @walkingEditGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Daily Step Goal'**
+  String get walkingEditGoalTitle;
+
+  /// No description provided for @walkingTargetStepsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Steps'**
+  String get walkingTargetStepsLabel;
+
+  /// No description provided for @walkingStepsSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'steps'**
+  String get walkingStepsSuffix;
+
+  /// No description provided for @walkingScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Walking & Activity'**
+  String get walkingScreenTitle;
+
+  /// No description provided for @walkingDiagnosticsTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Step Diagnostics'**
+  String get walkingDiagnosticsTooltip;
+
+  /// No description provided for @walkingRefreshTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get walkingRefreshTooltip;
+
+  /// No description provided for @walkingStartGps.
+  ///
+  /// In en, this message translates to:
+  /// **'Start GPS'**
+  String get walkingStartGps;
+
+  /// No description provided for @walkingActivityHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Movement & Step History'**
+  String get walkingActivityHistory;
+
+  /// No description provided for @walkingFilterDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get walkingFilterDay;
+
+  /// No description provided for @walkingFilterWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get walkingFilterWeek;
+
+  /// No description provided for @walkingFilterMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get walkingFilterMonth;
+
+  /// No description provided for @walkingAchievementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements & Records 🏆'**
+  String get walkingAchievementsTitle;
 }
 
 class _AppLocalizationsDelegate

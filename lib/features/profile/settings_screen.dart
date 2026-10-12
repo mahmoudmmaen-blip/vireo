@@ -655,12 +655,16 @@ class _SettingsSectionHeader extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: colors.ember),
           const SizedBox(width: 8),
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: colors.text,
-                ),
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: colors.text,
+                  ),
+            ),
           ),
         ],
       ),

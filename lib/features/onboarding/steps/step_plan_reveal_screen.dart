@@ -205,12 +205,16 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        l10n.planRevealDailyCalories,
-                        style: VType.overline(context),
+                      Expanded(
+                        child: Text(
+                          l10n.planRevealDailyCalories,
+                          style: VType.overline(context),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
@@ -229,14 +233,13 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       AnimatedCount(
                         value: target.calories,
                         style: VType.number(
-                          size: 40,
+                          size: 36,
                           weight: FontWeight.w800,
                           color: colors.text,
                         ),
@@ -307,7 +310,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                 // Diet Program
                 Expanded(
                   child: Container(
-                    height: 110,
+                    constraints: const BoxConstraints(minHeight: 110),
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: colors.surfaceRaised,
@@ -330,7 +333,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                             ),
                           ],
                         ),
-                        const Spacer(),
+                        const SizedBox(height: 8),
                         Text(
                           programName,
                           maxLines: 2,
@@ -378,7 +381,7 @@ class _MetricCard extends StatelessWidget {
     final colors = context.vireoColors;
 
     return Container(
-      height: 110,
+      constraints: const BoxConstraints(minHeight: 110),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: colors.surfaceRaised,
@@ -401,11 +404,11 @@ class _MetricCard extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
+          const SizedBox(height: 8),
           AnimatedCount(
             value: value,
             style: VType.number(
-              size: 26,
+              size: 24,
               weight: FontWeight.w800,
               color: color,
             ),
@@ -445,7 +448,7 @@ class _MetricWaterCard extends StatelessWidget {
     final colors = context.vireoColors;
 
     return Container(
-      height: 110,
+      constraints: const BoxConstraints(minHeight: 110),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: colors.surfaceRaised,
@@ -468,11 +471,11 @@ class _MetricWaterCard extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
+          const SizedBox(height: 8),
           Text(
             display,
             style: VType.number(
-              size: 26,
+              size: 24,
               weight: FontWeight.w800,
               color: color,
             ),

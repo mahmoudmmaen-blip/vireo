@@ -266,5 +266,21 @@
   "exerciseSafetyNote": "أمان وإرشادات وقاية",
   "exerciseWarmUpHeader": "حركات التسخين والإحماء",
   "reassessmentLaterSnooze": "لاحقاً (فكرني كمان 3 أيام)",
-  "measurementsAddEntry": "سجّل قياس جديد"
+  "measurementsAddEntry": "سجّل قياس جديد",
+  "walkingStopSessionTitle": "توقف جولة المشي؟",
+  "walkingStopSessionDesc": "حابب تحفظ أو تنهي جولة المشي دي دلوقتي؟",
+  "walkingSessionContinue": "كمّل",
+  "walkingSessionEnd": "إنهاء الجولة",
+  "walkingEditGoalTitle": "تعديل هدف الخطوات اليومي",
+  "walkingTargetStepsLabel": "عدد الخطوات المستهدف",
+  "walkingStepsSuffix": "خطوة",
+  "walkingScreenTitle": "المشي والنشاط",
+  "walkingDiagnosticsTooltip": "تشخيص الخطوات",
+  "walkingRefreshTooltip": "تحديث",
+  "walkingStartGps": "ابدأ GPS",
+  "walkingActivityHistory": "سجل الحركة والخطوات",
+  "walkingFilterDay": "النهارده",
+  "walkingFilterWeek": "أسبوع",
+  "walkingFilterMonth": "شهر",
+  "walkingAchievementsTitle": "الإنجازات والأرقام القياسية 🏆"
 }

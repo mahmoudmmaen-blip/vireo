@@ -215,28 +215,33 @@ class PremiumStepsHeroCard extends ConsumerWidget {
 
             // Row 3: 3 Stats Columns (كم, سعرات, الوقت)
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 // Distance
-                _LeapStatColumn(
-                  icon: Icons.track_changes_rounded,
-                  iconColor: const Color(0xFFFBBF24), // Yellow
-                  value: metrics.distanceKm.toStringAsFixed(2),
-                  label: 'كم',
+                Expanded(
+                  child: _LeapStatColumn(
+                    icon: Icons.track_changes_rounded,
+                    iconColor: const Color(0xFFFBBF24), // Yellow
+                    value: metrics.distanceKm.toStringAsFixed(2),
+                    label: 'كم',
+                  ),
                 ),
                 // Calories
-                _LeapStatColumn(
-                  icon: Icons.local_fire_department_rounded,
-                  iconColor: const Color(0xFFF97316), // Orange
-                  value: '${metrics.caloriesKcal}',
-                  label: 'السعرات',
+                Expanded(
+                  child: _LeapStatColumn(
+                    icon: Icons.local_fire_department_rounded,
+                    iconColor: const Color(0xFFF97316), // Orange
+                    value: '${metrics.caloriesKcal}',
+                    label: 'السعرات',
+                  ),
                 ),
                 // Time
-                _LeapStatColumn(
-                  icon: Icons.access_time_filled_rounded,
-                  iconColor: const Color(0xFF38BDF8), // Cyan
-                  value: '${(metrics.activeMinutes ~/ 60)}س ${(metrics.activeMinutes % 60)}د',
-                  label: 'الوقت',
+                Expanded(
+                  child: _LeapStatColumn(
+                    icon: Icons.access_time_filled_rounded,
+                    iconColor: const Color(0xFF38BDF8), // Cyan
+                    value: '${(metrics.activeMinutes ~/ 60)}س ${(metrics.activeMinutes % 60)}د',
+                    label: 'الوقت',
+                  ),
                 ),
               ],
             ),
@@ -245,19 +250,18 @@ class PremiumStepsHeroCard extends ConsumerWidget {
             const SizedBox(height: 16),
 
             // Row 4: Daily average & 7-day circular row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox.shrink(),
-                Text(
-                  'المتوسط اليومي: $dailyAvg',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14,
-                  ),
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: Text(
+                'المتوسط اليومي: $dailyAvg',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14,
                 ),
-              ],
+              ),
             ),
             const SizedBox(height: 12),
 

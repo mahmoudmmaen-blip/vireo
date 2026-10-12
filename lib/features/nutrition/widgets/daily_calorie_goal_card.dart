@@ -90,31 +90,38 @@ class DailyCalorieGoalCard extends ConsumerWidget {
                 border: Border.all(color: colors.line),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _FormulaItem(
-                    label: 'الهدف',
-                    value: '${target.calories}',
-                    color: colors.text,
+                  Expanded(
+                    child: _FormulaItem(
+                      label: 'الهدف',
+                      value: '${target.calories}',
+                      color: colors.text,
+                    ),
                   ),
-                  Text('−', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 16)),
-                  _FormulaItem(
-                    label: 'الأكل',
-                    value: '$consumed',
-                    color: colors.ember,
+                  Text('−', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 14)),
+                  Expanded(
+                    child: _FormulaItem(
+                      label: 'الأكل',
+                      value: '$consumed',
+                      color: colors.ember,
+                    ),
                   ),
-                  Text('+', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 16)),
-                  _FormulaItem(
-                    label: 'التمرين',
-                    value: '${totals.burnedKcal}',
-                    color: colors.gold,
+                  Text('+', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 14)),
+                  Expanded(
+                    child: _FormulaItem(
+                      label: 'التمرين',
+                      value: '${totals.burnedKcal}',
+                      color: colors.gold,
+                    ),
                   ),
-                  Text('=', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 16)),
-                  _FormulaItem(
-                    label: 'الباقي',
-                    value: '${(target.calories - consumed + totals.burnedKcal).clamp(0, 99999)}',
-                    color: (target.calories - consumed + totals.burnedKcal) >= 0 ? colors.success : colors.danger,
-                    isBold: true,
+                  Text('=', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 14)),
+                  Expanded(
+                    child: _FormulaItem(
+                      label: 'الباقي',
+                      value: '${(target.calories - consumed + totals.burnedKcal).clamp(0, 99999)}',
+                      color: (target.calories - consumed + totals.burnedKcal) >= 0 ? colors.success : colors.danger,
+                      isBold: true,
+                    ),
                   ),
                 ],
               ),

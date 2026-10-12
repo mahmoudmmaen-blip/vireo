@@ -87,7 +87,7 @@ class WorkoutScreen extends ConsumerWidget {
               );
             }
 
-            return Padding(
+            return SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -176,7 +176,7 @@ class WorkoutScreen extends ConsumerWidget {
                     icon: const Icon(Icons.directions_run),
                     label: Text(l10n.cardioLogCta),
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () {
                       ref.read(workoutFlowProvider.notifier).startSession(session);

@@ -131,7 +131,7 @@ class _ProfileBodyMetricsSheetState
             onChanged: (v) => setState(() => _weight = v),
           ),
           DropdownButtonFormField<FitnessGoal>(
-            value: _goal,
+            initialValue: _goal,
             decoration: InputDecoration(labelText: l10n.profileFitnessGoal),
             items: FitnessGoal.values
                 .map(
@@ -147,7 +147,7 @@ class _ProfileBodyMetricsSheetState
           ),
           const SizedBox(height: 8),
           DropdownButtonFormField<ActivityLevel>(
-            value: _activity,
+            initialValue: _activity,
             decoration: InputDecoration(labelText: l10n.profileActivityLevel),
             items: ActivityLevel.values
                 .map(

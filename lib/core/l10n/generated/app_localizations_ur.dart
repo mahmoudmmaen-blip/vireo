@@ -48,6 +48,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get finishButton => 'مکمل کریں';
 
   @override
+  String get cancelButton => 'Cancel';
+
+  @override
+  String get saveButton => 'Save';
+
+  @override
   String get yesButton => 'ہاں';
 
   @override
@@ -4153,4 +4159,53 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get measurementsAddEntry => 'نیا اندراج شامل کریں';
+
+  @override
+  String get walkingStopSessionTitle => 'Stop walking session?';
+
+  @override
+  String get walkingStopSessionDesc =>
+      'Would you like to save or end the current walking session?';
+
+  @override
+  String get walkingSessionContinue => 'Continue';
+
+  @override
+  String get walkingSessionEnd => 'End Session';
+
+  @override
+  String get walkingEditGoalTitle => 'Edit Daily Step Goal';
+
+  @override
+  String get walkingTargetStepsLabel => 'Target Steps';
+
+  @override
+  String get walkingStepsSuffix => 'steps';
+
+  @override
+  String get walkingScreenTitle => 'Walking & Activity';
+
+  @override
+  String get walkingDiagnosticsTooltip => 'Step Diagnostics';
+
+  @override
+  String get walkingRefreshTooltip => 'Refresh';
+
+  @override
+  String get walkingStartGps => 'Start GPS';
+
+  @override
+  String get walkingActivityHistory => 'Movement & Step History';
+
+  @override
+  String get walkingFilterDay => 'Day';
+
+  @override
+  String get walkingFilterWeek => 'Week';
+
+  @override
+  String get walkingFilterMonth => 'Month';
+
+  @override
+  String get walkingAchievementsTitle => 'Achievements & Records 🏆';
 }
