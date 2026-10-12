@@ -11,6 +11,8 @@ import 'package:vireo/features/ai_coach/providers/ai_coach_provider.dart';
 import 'package:vireo/features/ai_coach/widgets/chat_message_bubble.dart';
 import 'package:vireo/features/ai_coach/widgets/typing_indicator.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
+import 'package:vireo/core/widgets/rewarded_unlock_sheet.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
 class AiCoachScreen extends ConsumerStatefulWidget {
@@ -180,6 +182,27 @@ class _AiCoachScreenState extends ConsumerState<AiCoachScreen> {
               content: Text(l10n.aiDailyLimitReached),
               backgroundColor: colors.ember.withValues(alpha: 0.12),
               actions: [
+                TextButton(
+                  onPressed: () {
+                    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+                    showRewardedUnlockSheet(
+                      context: context,
+                      featureTitle: isArabic ? 'فتح المدرب الذكي 24 ساعة' : 'Unlock AI Coach for 24 Hours',
+                      featureDescription: isArabic
+                          ? 'شاهد إعلان قصير وافتح محادثات المدرب الذكي لمدة 24 ساعة، أو اشترك في Pro لمحادثات غير محدودة.'
+                          : 'Watch a short ad to unlock AI Coach messages for 24 hours, or subscribe to Pro.',
+                      onUnlockGranted: () async {
+                        await FeatureGates.grantRewardedAiCoach();
+                        ref.invalidate(aiCoachProvider);
+                      },
+                    );
+                  },
+                  child: Text(
+                    Localizations.localeOf(context).languageCode.startsWith('ar')
+                        ? 'فتح عبر إعلان 🎁'
+                        : 'Unlock via Ad 🎁',
+                  ),
+                ),
                 TextButton(
                   onPressed: () => openPaywall(context),
                   child: Text(l10n.aiUpgradeCta),

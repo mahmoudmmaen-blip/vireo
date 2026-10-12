@@ -20,6 +20,7 @@ import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
 import 'package:vireo/features/progress/widgets/weight_trend_chart_card.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/features/social/screens/social_hub_screen.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 
@@ -43,18 +44,21 @@ class ProgressScreen extends ConsumerWidget {
       child: FeatureScaffold(
         title: l10n.progressTitle,
         transparentBackground: true,
-        body: RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(weightLogsProvider);
-            ref.invalidate(weightGoalProvider);
-            ref.invalidate(adherenceWeeksProvider);
-            ref.invalidate(energyCheckInsProvider);
-            ref.invalidate(weeklyDeficitProvider);
-            ref.invalidate(weeklyProgressReportDataProvider);
-            await Future<void>.delayed(const Duration(milliseconds: 400));
-          },
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+        body: Column(
+          children: [
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  ref.invalidate(weightLogsProvider);
+                  ref.invalidate(weightGoalProvider);
+                  ref.invalidate(adherenceWeeksProvider);
+                  ref.invalidate(energyCheckInsProvider);
+                  ref.invalidate(weeklyDeficitProvider);
+                  ref.invalidate(weeklyProgressReportDataProvider);
+                  await Future<void>.delayed(const Duration(milliseconds: 400));
+                },
+                child: ListView(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
             children: [
               // ── Quick Links: Weekly Report, Health Hub, InBody ──
               VireoCard(
@@ -282,7 +286,11 @@ class ProgressScreen extends ConsumerWidget {
           ),
         ),
       ),
-    );
+      const VireoBannerAdWidget(),
+    ],
+  ),
+),
+);
   }
 }
 

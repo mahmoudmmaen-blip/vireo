@@ -4,6 +4,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/core/widgets/language_selector.dart';
+import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/repositories/nutrition_repository.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
@@ -169,6 +170,8 @@ class _MealTab extends ConsumerWidget {
           children: [
             MealCard(entry: meal),
             MealBuilderPanel(mealType: mealType),
+            const SizedBox(height: 12),
+            const VireoNativeAdCard(),
           ],
         );
       },

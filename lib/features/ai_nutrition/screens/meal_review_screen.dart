@@ -13,6 +13,8 @@ import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';
 import 'package:vireo/features/nutrition/data/food_db_repository.dart';
 import 'package:vireo/features/nutrition/data/meal_resolution_service.dart';
+import 'package:vireo/core/services/ad_service.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
 import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
@@ -108,7 +110,9 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
         content: Text(l10n.aiScanSavedSnack),
       ),
     );
+    final isPro = ref.read(isProUserProvider);
     Navigator.of(context).pop(true);
+    await AdService.instance.showInterstitialIfEligible(isPro: isPro);
   }
 
   Future<void> _saveFavorite() async {

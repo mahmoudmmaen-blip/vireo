@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
@@ -11,6 +12,7 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/core/utils/connectivity_check.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/diary/screens/diary_screen.dart';
 import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
@@ -70,6 +72,8 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _triggerSyncPull();
       _startConnectivityWatcher();
+      final isPro = ref.read(isProUserProvider);
+      AdService.instance.initialize(isPro: isPro);
     });
   }
 

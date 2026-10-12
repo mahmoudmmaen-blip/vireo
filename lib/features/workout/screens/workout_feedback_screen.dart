@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/core/services/celebration_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/workout_session.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/walking/data/step_counter_service.dart';
 import 'package:vireo/features/workout/providers/workout_flow_provider.dart';
@@ -38,8 +40,10 @@ class _WorkoutFeedbackScreenState extends ConsumerState<WorkoutFeedbackScreen> {
           message: AppLocalizations.of(context).celebrationWorkoutTitle,
         );
       }
+      final isPro = ref.read(isProUserProvider);
       ref.read(workoutFlowProvider.notifier).clearSession();
       if (mounted) Navigator.of(context).pop();
+      await AdService.instance.showInterstitialIfEligible(isPro: isPro);
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

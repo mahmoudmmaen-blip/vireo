@@ -36,6 +36,10 @@ android {
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        val admobAppId = (project.findProperty("ADMOB_APP_ID") as? String)
+            ?: "ca-app-pub-3940256099942544~3347511713"
+        manifestPlaceholders["ADMOB_APP_ID"] = admobAppId
     }
 
     signingConfigs {

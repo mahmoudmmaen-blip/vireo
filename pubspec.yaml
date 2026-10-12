@@ -52,6 +52,8 @@ dependencies:
   file_picker: ^8.1.4
   pdfx: ^2.8.0
   sentry_flutter: ^8.14.2
+  google_mobile_ads: ^9.1.0
+  home_widget: ^0.10.0
 
 dev_dependencies:
   flutter_test:

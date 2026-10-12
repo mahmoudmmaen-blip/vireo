@@ -7,6 +7,8 @@ import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
+import 'package:vireo/core/widgets/rewarded_unlock_sheet.dart';
+import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/features/diet_programs/application/diet_plan_engine.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/diet_programs/screens/diet_program_detail_screen.dart';
@@ -43,9 +45,12 @@ class DietProgramsScreen extends ConsumerWidget {
           ),
         ),
       ],
-      body: ListView.builder(
-        padding: const EdgeInsets.fromLTRB(VSpace.md, VSpace.sm, VSpace.md, VSpace.xxl),
-        itemCount: ranked.length,
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.fromLTRB(VSpace.md, VSpace.sm, VSpace.md, VSpace.xxl),
+              itemCount: ranked.length,
         itemBuilder: (context, i) {
           final item = ranked[i];
           final p = item.program;
@@ -58,9 +63,26 @@ class DietProgramsScreen extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: VSpace.sm),
               child: VireoCard(
-                onTap: () {
+                onTap: () async {
                   if (!isUnlocked) {
-                    FeatureGates.requirePro(context, ref, force: true);
+                    final isArabic = lang.startsWith('ar');
+                    await showRewardedUnlockSheet(
+                      context: context,
+                      featureTitle: isArabic ? 'فتح برنامج ${p.name.of(lang)}' : 'Unlock ${p.name.of(lang)}',
+                      featureDescription: isArabic
+                          ? 'شاهد إعلان قصير لتجربة هذا النظام الغذائي لمدة 24 ساعة، أو اشترك في Pro للوصول الدائم.'
+                          : 'Watch a short ad to unlock this diet program for 24 hours, or subscribe to Pro.',
+                      onUnlockGranted: () async {
+                        await FeatureGates.grantRewardedDietProgram(p.id);
+                        if (context.mounted) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => DietProgramDetailScreen(programId: p.id),
+                            ),
+                          );
+                        }
+                      },
+                    );
                     return;
                   }
                   Navigator.of(context).push(
@@ -175,7 +197,11 @@ class DietProgramsScreen extends ConsumerWidget {
           );
         },
       ),
-    );
+    ),
+    const VireoBannerAdWidget(),
+  ],
+),
+);
   }
 }
 

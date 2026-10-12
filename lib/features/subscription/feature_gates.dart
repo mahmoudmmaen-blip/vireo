@@ -26,10 +26,78 @@ abstract final class FeatureGates {
     DietProgramId.egyptianClean,
   };
 
-  /// Check whether a given diet program is unlocked for the current access level.
+  static const _rewardedExtraScansKey = 'rewarded_extra_scans_today';
+  static const _rewardedDietProgramKeyPrefix = 'rewarded_unlock_diet_';
+  static const _rewardedAiCoachKey = 'rewarded_unlock_ai_coach';
+  static const _rewardedVitalityKey = 'rewarded_unlock_vitality_pro';
+
+  /// Total free meal scans allowed today (base 3 + rewarded scans).
+  static int getDailyFreeMealScansAllowed() {
+    if (!HiveService.isInitialized) return freeMealScansPerDay;
+    final today = _todayKey();
+    final extra = HiveService.settingsBox.get('${_rewardedExtraScansKey}_$today') as int? ?? 0;
+    return freeMealScansPerDay + extra;
+  }
+
+  /// Grants +2 extra AI meal scans for today via rewarded ad.
+  static Future<void> grantRewardedMealScans() async {
+    if (!HiveService.isInitialized) return;
+    final today = _todayKey();
+    final current = HiveService.settingsBox.get('${_rewardedExtraScansKey}_$today') as int? ?? 0;
+    await HiveService.settingsBox.put('${_rewardedExtraScansKey}_$today', current + 2);
+  }
+
+  /// Unlocks a diet program for 24 hours via rewarded ad.
+  static Future<void> grantRewardedDietProgram(DietProgramId id) async {
+    if (!HiveService.isInitialized) return;
+    final expiry = DateTime.now().add(const Duration(hours: 24)).toIso8601String();
+    await HiveService.settingsBox.put('$_rewardedDietProgramKeyPrefix${id.name}', expiry);
+  }
+
+  /// Unlocks the AI coach for 24 hours via rewarded ad.
+  static Future<void> grantRewardedAiCoach() async {
+    if (!HiveService.isInitialized) return;
+    final expiry = DateTime.now().add(const Duration(hours: 24)).toIso8601String();
+    await HiveService.settingsBox.put(_rewardedAiCoachKey, expiry);
+  }
+
+  /// Checks if AI coach is unlocked via rewarded ad.
+  static bool isAiCoachRewardedUnlocked() {
+    if (!HiveService.isInitialized) return false;
+    final expiryStr = HiveService.settingsBox.get(_rewardedAiCoachKey) as String?;
+    if (expiryStr == null) return false;
+    final expiry = DateTime.tryParse(expiryStr);
+    return expiry != null && expiry.isAfter(DateTime.now());
+  }
+
+  /// Unlocks today's Pro vitality protocol item via rewarded ad.
+  static Future<void> grantRewardedVitalityItem() async {
+    if (!HiveService.isInitialized) return;
+    final today = _todayKey();
+    await HiveService.settingsBox.put('${_rewardedVitalityKey}_$today', true);
+  }
+
+  /// Checks if today's Pro vitality item is unlocked via rewarded ad.
+  static bool isVitalityRewardedUnlocked() {
+    if (!HiveService.isInitialized) return false;
+    final today = _todayKey();
+    return HiveService.settingsBox.get('${_rewardedVitalityKey}_$today') as bool? ?? false;
+  }
+
+  /// Check whether a given diet program is unlocked for the current access level or rewarded unlock.
   static bool isDietProgramUnlocked(DietProgramId id, {required bool isPro}) {
     if (isPro) return true;
-    return freeDietPrograms.contains(id);
+    if (freeDietPrograms.contains(id)) return true;
+    if (HiveService.isInitialized) {
+      final expiryStr = HiveService.settingsBox.get('$_rewardedDietProgramKeyPrefix${id.name}') as String?;
+      if (expiryStr != null) {
+        final expiry = DateTime.tryParse(expiryStr);
+        if (expiry != null && expiry.isAfter(DateTime.now())) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   /// Check whether adaptive calorie recommendations are unlocked.
@@ -48,7 +116,10 @@ abstract final class FeatureGates {
   static bool canAccessWearableHealthTrends({required bool isPro}) => isPro;
 
   /// Check whether Vitality Pro protocol is unlocked.
-  static bool canAccessVitalityPro({required bool isPro}) => isPro;
+  static bool canAccessVitalityPro({required bool isPro}) {
+    if (isPro) return true;
+    return isVitalityRewardedUnlocked();
+  }
 
   /// Check whether upsell banners should be hidden (no upsell banners on Pro).
   static bool shouldShowUpsellBanners({required bool isPro}) => !isPro;

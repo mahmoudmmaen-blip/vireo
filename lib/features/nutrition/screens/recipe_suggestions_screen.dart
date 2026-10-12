@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/locale_provider.dart';
+import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/data/repositories/nutrition_repository.dart';
 import 'package:vireo/features/nutrition/providers/fridge_scan_provider.dart';
 import 'package:vireo/features/nutrition/widgets/recipe_suggestion_card.dart';
@@ -28,24 +29,31 @@ class RecipeSuggestionsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.nutritionRecipeSuggestions)),
-      body: recipesAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
-        data: (recipes) {
-          if (recipes.isEmpty) {
-            return Center(child: Text(l10n.nutritionNoRecipesFound));
-          }
-          return ListView(
-            padding: const EdgeInsets.all(20),
-            children: [
-              Text(l10n.nutritionRecipeSuggestionsSubtitle),
-              const SizedBox(height: 16),
-              ...recipes.map(
-                (r) => RecipeSuggestionCard(recipe: r, locale: locale),
-              ),
-            ],
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: recipesAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
+              data: (recipes) {
+                if (recipes.isEmpty) {
+                  return Center(child: Text(l10n.nutritionNoRecipesFound));
+                }
+                return ListView(
+                  padding: const EdgeInsets.all(20),
+                  children: [
+                    Text(l10n.nutritionRecipeSuggestionsSubtitle),
+                    const SizedBox(height: 16),
+                    ...recipes.map(
+                      (r) => RecipeSuggestionCard(recipe: r, locale: locale),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          const VireoBannerAdWidget(),
+        ],
       ),
     );
   }

@@ -196,12 +196,39 @@ class SubscriptionNotifier extends AsyncNotifier<SubscriptionSnapshot> {
   }
 }
 
+final proGrantProvider = FutureProvider<bool>((ref) async {
+  try {
+    if (!SupabaseService.isInitialized) return false;
+    final email = SupabaseService.auth.currentUser?.email;
+    if (email == null || email.isEmpty) return false;
+
+    final row = await SupabaseService.client
+        .from('pro_grants')
+        .select('email, expires_at')
+        .eq('email', email.trim().toLowerCase())
+        .maybeSingle();
+
+    if (row != null) {
+      final expiresAtStr = row['expires_at'] as String?;
+      if (expiresAtStr == null) return true; // Lifetime grant
+      final expiresAt = DateTime.tryParse(expiresAtStr);
+      if (expiresAt == null || expiresAt.isAfter(DateTime.now())) {
+        return true;
+      }
+    }
+  } catch (_) {}
+  return false;
+});
+
 final subscriptionProvider =
     AsyncNotifierProvider<SubscriptionNotifier, SubscriptionSnapshot>(
   SubscriptionNotifier.new,
 );
 
 final hasPremiumAccessProvider = Provider<bool>((ref) {
+  final hasGrant = ref.watch(proGrantProvider).valueOrNull ?? false;
+  if (hasGrant) return true;
+
   return ref.watch(subscriptionProvider).maybeWhen(
         data: (s) => s.hasPremiumAccess,
         orElse: () => false,

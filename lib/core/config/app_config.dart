@@ -94,4 +94,25 @@ abstract final class AppConfig {
     'APPLE_AUTH_ENABLED',
     defaultValue: false,
   );
+
+  /// AdMob IDs (default to Google Official Test IDs)
+  static const admobBannerId = String.fromEnvironment(
+    'ADMOB_BANNER_ID',
+    defaultValue: 'ca-app-pub-3940256099942544/6300978111',
+  );
+
+  static const admobNativeId = String.fromEnvironment(
+    'ADMOB_NATIVE_ID',
+    defaultValue: 'ca-app-pub-3940256099942544/2247696110',
+  );
+
+  static const admobInterstitialId = String.fromEnvironment(
+    'ADMOB_INTERSTITIAL_ID',
+    defaultValue: 'ca-app-pub-3940256099942544/1033173712',
+  );
+
+  static const admobRewardedId = String.fromEnvironment(
+    'ADMOB_REWARDED_ID',
+    defaultValue: 'ca-app-pub-3940256099942544/5224354917',
+  );
 }

@@ -38,6 +38,7 @@ import 'package:vireo/features/walking/walking_tracker_screen.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 import 'package:vireo/features/activity/screens/health_hub_screen.dart';
 import 'package:vireo/features/home/widgets/steps_hero_card.dart';
+import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/features/home/widgets/today_plan_section.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
 
@@ -120,6 +121,7 @@ class HomeDashboardBody extends ConsumerWidget {
         stepsGoal: dash.stepsGoal,
         onTap: () => push(const WalkingTrackerScreen()),
       ),
+      const VireoNativeAdCard(),
       const TodayPlanSection(),
       _QuickActions(
         onWater: () => _addWater(context, ref),

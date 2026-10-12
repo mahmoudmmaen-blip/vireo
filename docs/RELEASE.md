@@ -95,7 +95,11 @@ flutter build appbundle --release `
   --dart-define=GOOGLE_WEB_CLIENT_ID="<GOOGLE_WEB_CLIENT_ID>" `
   --dart-define=GOOGLE_IOS_CLIENT_ID="<GOOGLE_IOS_CLIENT_ID>" `
   --dart-define=GOOGLE_AUTH_ENABLED=true `
-  --dart-define=APPLE_AUTH_ENABLED=false
+  --dart-define=APPLE_AUTH_ENABLED=false `
+  --dart-define=ADMOB_BANNER_ID="<ADMOB_BANNER_ID>" `
+  --dart-define=ADMOB_NATIVE_ID="<ADMOB_NATIVE_ID>" `
+  --dart-define=ADMOB_INTERSTITIAL_ID="<ADMOB_INTERSTITIAL_ID>" `
+  --dart-define=ADMOB_REWARDED_ID="<ADMOB_REWARDED_ID>"
 ```
 
 ### Complete List of Environment Variables from `AppConfig`
@@ -116,6 +120,25 @@ flutter build appbundle --release `
 | `GOOGLE_IOS_CLIENT_ID` | `""` | Google OAuth iOS Client ID |
 | `GOOGLE_AUTH_ENABLED` | `false` | Set to `true` to enable Google Sign-In |
 | `APPLE_AUTH_ENABLED` | `false` | Set to `true` to enable Apple Sign-In |
+| `ADMOB_BANNER_ID` | `ca-app-pub-3940256099942544/6300978111` | AdMob Banner ad unit ID (default: Google test ID) |
+| `ADMOB_NATIVE_ID` | `ca-app-pub-3940256099942544/2247696110` | AdMob Native ad unit ID (default: Google test ID) |
+| `ADMOB_INTERSTITIAL_ID` | `ca-app-pub-3940256099942544/1033173712` | AdMob Interstitial ad unit ID (default: Google test ID) |
+| `ADMOB_REWARDED_ID` | `ca-app-pub-3940256099942544/5224354917` | AdMob Rewarded ad unit ID (default: Google test ID) |
+
+---
+
+## 5b. Google Play Reviewer Access Grant
+
+Reviewers need full Pro access without paying. Run the following single SQL command in your Supabase SQL editor or via CLI to grant reviewer access to their email:
+
+```sql
+INSERT INTO public.pro_grants (email, note, expires_at)
+VALUES ('reviewer@example.com', 'Google Play App Reviewer', NULL)
+ON CONFLICT (email) DO UPDATE SET expires_at = NULL;
+```
+
+*(Replace `'reviewer@example.com'` with the actual reviewer email provided in Google Play Console credentials)*.
+When the reviewer signs into Vireo, the app automatically grants them Pro access across all features with zero ads.
 
 ---
 

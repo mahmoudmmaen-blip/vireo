@@ -17,6 +17,8 @@ import 'package:vireo/features/home/providers/today_plan_checks_provider.dart';
 import 'package:vireo/features/home/providers/today_plan_provider.dart';
 import 'package:vireo/features/home/widgets/sleep_log_sheet.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
+import 'package:vireo/core/widgets/rewarded_unlock_sheet.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
@@ -82,7 +84,27 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
   }
 
   Future<void> _onTapItem(TodayPlanItem item, bool complete) async {
-    if (item.isPro && !requirePremiumAccess(context, ref)) return;
+    if (item.isPro && !ref.read(isProUserProvider)) {
+      if (item.kind == TodayPlanKind.protocolPro || item.kind == TodayPlanKind.aiSuggestionPro) {
+        if (!FeatureGates.isVitalityRewardedUnlocked()) {
+          final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+          await showRewardedUnlockSheet(
+            context: context,
+            featureTitle: isArabic ? 'فتح مهمة البروتوكول لليوم' : 'Unlock Today\'s Pro Task',
+            featureDescription: isArabic
+                ? 'شاهد إعلان قصير لفتح بند بروتوكول العافية المتقدم لليوم، أو اشترك في Pro للوصول الشامل.'
+                : 'Watch a short ad to unlock today\'s vitality protocol task, or subscribe to Pro.',
+            onUnlockGranted: () async {
+              await FeatureGates.grantRewardedVitalityItem();
+              setState(() {});
+            },
+          );
+          return;
+        }
+      } else {
+        if (!requirePremiumAccess(context, ref)) return;
+      }
+    }
 
     switch (item.kind) {
       case TodayPlanKind.meal:
@@ -138,7 +160,27 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
   }
 
   Future<void> _onCheck(TodayPlanItem item, bool complete) async {
-    if (item.isPro && !complete && !requirePremiumAccess(context, ref)) return;
+    if (item.isPro && !complete && !ref.read(isProUserProvider)) {
+      if (item.kind == TodayPlanKind.protocolPro || item.kind == TodayPlanKind.aiSuggestionPro) {
+        if (!FeatureGates.isVitalityRewardedUnlocked()) {
+          final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+          await showRewardedUnlockSheet(
+            context: context,
+            featureTitle: isArabic ? 'فتح مهمة البروتوكول لليوم' : 'Unlock Today\'s Pro Task',
+            featureDescription: isArabic
+                ? 'شاهد إعلان قصير لفتح بند بروتوكول العافية المتقدم لليوم، أو اشترك في Pro للوصول الشامل.'
+                : 'Watch a short ad to unlock today\'s vitality protocol task, or subscribe to Pro.',
+            onUnlockGranted: () async {
+              await FeatureGates.grantRewardedVitalityItem();
+              setState(() {});
+            },
+          );
+          return;
+        }
+      } else {
+        if (!requirePremiumAccess(context, ref)) return;
+      }
+    }
 
     if (item.kind == TodayPlanKind.meal && item.mealType != null) {
       final type = item.mealType!;

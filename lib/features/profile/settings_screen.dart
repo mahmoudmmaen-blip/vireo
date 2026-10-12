@@ -15,6 +15,7 @@ import 'package:vireo/features/notifications/screens/notification_settings_scree
 import 'package:vireo/core/constants/legal_urls.dart';
 import 'package:vireo/features/diet_programs/domain/cuisine_type.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
+import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -206,6 +207,23 @@ class SettingsScreen extends ConsumerWidget {
             title: Text(l10n.paywallTitle),
             subtitle: Text(l10n.settingsManageSubscription),
             onTap: () => openPaywall(context),
+          ),
+          FutureBuilder<bool>(
+            future: AdService.instance.isPrivacyOptionsRequired(),
+            builder: (ctx, snap) {
+              if (snap.data != true) return const SizedBox.shrink();
+              return ListTile(
+                leading: const Icon(Icons.security_update_good_outlined),
+                title: Text(Localizations.localeOf(context).languageCode.startsWith('ar')
+                    ? 'خيارات الخصوصية والإعلانات (EEA/UK)'
+                    : 'Privacy Options (Consent)'),
+                subtitle: Text(Localizations.localeOf(context).languageCode.startsWith('ar')
+                    ? 'تعديل موافقتك على الإعلانات والبيانات'
+                    : 'Review and update your ad tracking consent'),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () => AdService.instance.showPrivacyOptionsForm(),
+              );
+            },
           ),
           const Divider(),
           Padding(
