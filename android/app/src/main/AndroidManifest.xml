@@ -23,7 +23,7 @@
         android:required="false"/>
 
     <application
-        android:label="vireo"
+        android:label="Vireo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -45,6 +45,15 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+            <!-- Deep link intent filter for Supabase Auth redirect -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="com.vireofit.app"
+                    android:host="login-callback" />
             </intent-filter>
         </activity>
         <activity-alias

@@ -1,4 +1,4 @@
-package com.example.vireo
+package com.vireofit.app
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 
