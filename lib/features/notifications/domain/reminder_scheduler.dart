@@ -288,6 +288,22 @@ class ReminderScheduler {
       );
     }
 
+    // 7b. Weekly Wrapped (Friday evening at 19:00 / 7:00 PM)
+    if (settings.isEnabled(NotificationType.weeklyWrappedReminder)) {
+      final time = settings.customTimes[NotificationType.weeklyWrappedReminder] ??
+          settings.timeFor(NotificationType.weeklyWrappedReminder);
+      candidates.add(
+        ReminderCandidate(
+          type: NotificationType.weeklyWrappedReminder,
+          slotIndex: 0,
+          hour: time.hour,
+          minute: time.minute,
+          priority: 2,
+          weekday: DateTime.friday,
+        ),
+      );
+    }
+
     // 8. Streak protection at 21:00 if nothing logged today
     if (settings.isEnabled(NotificationType.streakProtectionReminder)) {
       if (!context.hasLoggedToday) {

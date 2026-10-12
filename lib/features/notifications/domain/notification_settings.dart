@@ -13,6 +13,7 @@ Map<NotificationType, bool> defaultEnabledMap({required bool hasWorkoutToday}) {
     NotificationType.stepsNudgeReminder: true,
     NotificationType.bedtimeReminder: true,
     NotificationType.weeklyCheckInReminder: true,
+    NotificationType.weeklyWrappedReminder: true,
     NotificationType.streakProtectionReminder: true,
   };
 }

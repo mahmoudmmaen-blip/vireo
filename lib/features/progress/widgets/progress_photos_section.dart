@@ -8,6 +8,9 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/progress/domain/progress_photo_service.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
 
+import 'package:vireo/features/progress/screens/photo_comparison_screen.dart';
+import 'package:vireo/features/progress/screens/photo_ghost_camera_screen.dart';
+
 class ProgressPhotosSection extends ConsumerStatefulWidget {
   const ProgressPhotosSection({super.key});
 
@@ -28,7 +31,7 @@ class _ProgressPhotosSectionState extends ConsumerState<ProgressPhotosSection> {
           children: [
             ListTile(
               leading: const Icon(Icons.camera_alt_outlined),
-              title: Text(l10n.photoSourceCamera),
+              title: Text('${l10n.photoSourceCamera} (مع محاذاة الشبح 👻)'),
               onTap: () => Navigator.pop(ctx, ImageSource.camera),
             ),
             ListTile(
@@ -41,13 +44,30 @@ class _ProgressPhotosSectionState extends ConsumerState<ProgressPhotosSection> {
       ),
     );
 
-    if (source == null) return;
+    if (source == null || !mounted) return;
 
-    final picked = await _picker.pickImage(source: source, imageQuality: 85);
-    if (picked == null || !mounted) return;
+    File? imageFile;
+    if (source == ImageSource.camera) {
+      // Find latest photo for ghost overlay
+      final allPhotos = ref.read(progressPhotosProvider);
+      final lastPhoto = allPhotos.where((p) => p.pose == _selectedPose).firstOrNull;
+      imageFile = await Navigator.of(context).push<File>(
+        MaterialPageRoute<File>(
+          builder: (_) => PhotoGhostCameraScreen(
+            pose: _selectedPose,
+            ghostPhoto: lastPhoto,
+          ),
+        ),
+      );
+    } else {
+      final picked = await _picker.pickImage(source: source, imageQuality: 85);
+      if (picked != null) imageFile = File(picked.path);
+    }
+
+    if (imageFile == null || !mounted) return;
 
     await ProgressPhotoStorageService.savePhoto(
-      sourceFile: File(picked.path),
+      sourceFile: imageFile,
       date: DateTime.now(),
       pose: _selectedPose,
     );
@@ -243,161 +263,4 @@ class _ProgressPhotosSectionState extends ConsumerState<ProgressPhotosSection> {
       ),
     );
   }
-}
-
-class PhotoComparisonScreen extends StatefulWidget {
-  const PhotoComparisonScreen({super.key, required this.photos});
-
-  final List<ProgressPhotoRecord> photos;
-
-  @override
-  State<PhotoComparisonScreen> createState() => _PhotoComparisonScreenState();
-}
-
-class _PhotoComparisonScreenState extends State<PhotoComparisonScreen> {
-  late ProgressPhotoRecord _beforePhoto;
-  late ProgressPhotoRecord _afterPhoto;
-  double _sliderPosition = 0.5;
-
-  @override
-  void initState() {
-    super.initState();
-    // Default: oldest is before, newest is after
-    final sorted = [...widget.photos]..sort((a, b) => a.date.compareTo(b.date));
-    _beforePhoto = sorted.first;
-    _afterPhoto = sorted.last;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    final l10n = AppLocalizations.of(context);
-
-    return Scaffold(
-      backgroundColor: colors.background,
-      appBar: AppBar(
-        title: Text(l10n.photosCompareSideBySide),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(l10n.photoBeforeLabel, style: TextStyle(color: colors.textMute, fontSize: 12)),
-                    Text(
-                      DateFormat.yMMMd().format(_beforePhoto.date),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(l10n.photoAfterLabel, style: TextStyle(color: colors.textMute, fontSize: 12)),
-                    Text(
-                      DateFormat.yMMMd().format(_afterPhoto.date),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: LayoutBuilder(
-              builder: (ctx, constraints) {
-                final width = constraints.maxWidth;
-                final height = constraints.maxHeight;
-
-                final beforeFile = File(_beforePhoto.localPath);
-                final afterFile = File(_afterPhoto.localPath);
-
-                return Stack(
-                  children: [
-                    // Base: After Photo (full width)
-                    Positioned.fill(
-                      child: afterFile.existsSync()
-                          ? Image.file(afterFile, fit: BoxFit.cover)
-                          : Center(child: Text(l10n.photoMissingFile)),
-                    ),
-                    // Clipped overlay: Before Photo
-                    ClipRect(
-                      clipper: _ComparisonClipper(splitX: width * _sliderPosition),
-                      child: SizedBox(
-                        width: width,
-                        height: height,
-                        child: beforeFile.existsSync()
-                            ? Image.file(beforeFile, fit: BoxFit.cover)
-                            : Center(child: Text(l10n.photoMissingFile)),
-                      ),
-                    ),
-                    // Divider Line
-                    Positioned(
-                      left: width * _sliderPosition - 1.5,
-                      top: 0,
-                      bottom: 0,
-                      child: Container(
-                        width: 3,
-                        color: Colors.white,
-                      ),
-                    ),
-                    // Drag handle
-                    Positioned(
-                      left: width * _sliderPosition - 16,
-                      top: height / 2 - 16,
-                      child: GestureDetector(
-                        onHorizontalDragUpdate: (details) {
-                          setState(() {
-                            _sliderPosition =
-                                (_sliderPosition + details.primaryDelta! / width).clamp(0.0, 1.0);
-                          });
-                        },
-                        child: Container(
-                          width: 32,
-                          height: 32,
-                          decoration: BoxDecoration(
-                            color: colors.ember,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
-                            boxShadow: const [
-                              BoxShadow(color: Colors.black38, blurRadius: 4),
-                            ],
-                          ),
-                          child: const Icon(Icons.drag_indicator, size: 16, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          Slider(
-            value: _sliderPosition,
-            activeColor: colors.ember,
-            onChanged: (v) => setState(() => _sliderPosition = v),
-          ),
-          const SizedBox(height: 12),
-        ],
-      ),
-    );
-  }
-}
-
-class _ComparisonClipper extends CustomClipper<Rect> {
-  _ComparisonClipper({required this.splitX});
-  final double splitX;
-
-  @override
-  Rect getClip(Size size) {
-    return Rect.fromLTWH(0, 0, splitX, size.height);
-  }
-
-  @override
-  bool shouldReclip(covariant _ComparisonClipper oldClipper) => oldClipper.splitX != splitX;
 }

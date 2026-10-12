@@ -1,18 +1,14 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:vireo/core/boot/boot_log.dart';
-import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/features/ai_nutrition/data/barcode_lookup_service.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
-import 'package:vireo/features/nutrition/data/food_db_models.dart';
 
-/// Barcode → Open Food Facts → review screen.
 class MealBarcodeScreen extends ConsumerStatefulWidget {
   const MealBarcodeScreen({super.key});
 
@@ -21,64 +17,109 @@ class MealBarcodeScreen extends ConsumerStatefulWidget {
 }
 
 class _MealBarcodeScreenState extends ConsumerState<MealBarcodeScreen> {
-  bool _handled = false;
-  String? _error;
+  final MobileScannerController _scannerController = MobileScannerController(
+    detectionSpeed: DetectionSpeed.noDuplicates,
+    facing: CameraFacing.back,
+    torchEnabled: false,
+  );
 
-  Future<void> _onCode(String code) async {
-    if (_handled) return;
-    _handled = true;
-    final l10n = AppLocalizations.of(context);
+  bool _isProcessing = false;
+  bool _isTorchOn = false;
+  String? _notFoundBarcode;
+  String? _errorMessage;
+
+  @override
+  void dispose() {
+    _scannerController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _toggleTorch() async {
     try {
-      final uri = Uri.parse(
-        'https://world.openfoodfacts.org/api/v2/product/$code.json',
-      );
-      final res = await http.get(uri, headers: {'User-Agent': 'Vireo/1.0'});
-      if (res.statusCode != 200) {
-        throw Exception('OFF ${res.statusCode}');
-      }
-      final decoded = jsonDecode(res.body) as Map<String, dynamic>;
-      final product = decoded['product'] as Map<String, dynamic>?;
-      if (product == null) throw Exception('not found');
-      final name = product['product_name']?.toString() ??
-          product['product_name_en']?.toString() ??
-          'Product';
-      final nutriments = product['nutriments'] as Map<String, dynamic>? ?? {};
-      final kcal = (nutriments['energy-kcal_100g'] as num?)?.toDouble() ??
-          ((nutriments['energy_100g'] as num?)?.toDouble() ?? 0) / 4.184;
-      final protein = (nutriments['proteins_100g'] as num?)?.toDouble() ?? 0;
-      final carbs = (nutriments['carbohydrates_100g'] as num?)?.toDouble() ?? 0;
-      final fat = (nutriments['fat_100g'] as num?)?.toDouble() ?? 0;
-      final serving = (product['serving_quantity'] as num?)?.toDouble() ?? 100;
+      await _scannerController.toggleTorch();
+      setState(() => _isTorchOn = !_isTorchOn);
+    } catch (_) {}
+  }
 
-      final line = ResolvedMealLine(
-        nameAr: name,
-        nameEn: name,
-        grams: serving,
-        cookingMethod: CookingMethod.raw,
-        confidence: 0.85,
-        kcal: kcal * serving / 100,
-        protein: protein * serving / 100,
-        carbs: carbs * serving / 100,
-        fat: fat * serving / 100,
-        isEstimated: true,
-        portions: [
-          FoodPortion(nameAr: 'حصة', nameEn: 'serving', grams: serving),
-          const FoodPortion(nameAr: '100 جم', nameEn: '100 g', grams: 100),
-        ],
+  Future<void> _onBarcodeDetected(String code) async {
+    if (_isProcessing) return;
+    setState(() {
+      _isProcessing = true;
+      _errorMessage = null;
+      _notFoundBarcode = null;
+    });
+
+    // Haptic feedback when a code is scanned
+    HapticFeedback.mediumImpact();
+
+    try {
+      final result = await BarcodeLookupService.lookup(code);
+      if (result != null) {
+        if (!mounted) return;
+        HapticFeedback.lightImpact();
+        await MealReviewScreen.open(
+          context,
+          MealScanDraft(
+            lines: [result.line],
+            imageBytes: Uint8List(0),
+          ),
+        );
+        if (mounted) Navigator.of(context).maybePop();
+        return;
+      }
+
+      // If not found in Cache, DB, or Open Food Facts
+      if (mounted) {
+        HapticFeedback.vibrate();
+        setState(() {
+          _isProcessing = false;
+          _notFoundBarcode = code;
+        });
+      }
+    } catch (e) {
+      BootLog.warn('Barcode scan error', e);
+      if (mounted) {
+        setState(() {
+          _isProcessing = false;
+          _errorMessage = 'حدث خطأ أثناء البحث عن الباركود، يرجى المحاولة مرة أخرى.';
+        });
+      }
+    }
+  }
+
+  Future<void> _captureNutritionLabel() async {
+    if (_notFoundBarcode == null) return;
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: ImageSource.camera, imageQuality: 85);
+    if (picked == null || !mounted) return;
+
+    setState(() => _isProcessing = true);
+    final bytes = await picked.readAsBytes();
+
+    if (!mounted) return;
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    try {
+      final result = await BarcodeLookupService.analyzeNutritionLabel(
+        labelImageBytes: bytes,
+        barcode: _notFoundBarcode!,
+        language: isArabic ? 'ar' : 'en',
       );
 
       if (!mounted) return;
       await MealReviewScreen.open(
         context,
-        MealScanDraft(lines: [line], imageBytes: Uint8List(0)),
+        MealScanDraft(
+          lines: [result.line],
+          imageBytes: bytes,
+        ),
       );
       if (mounted) Navigator.of(context).maybePop();
     } catch (e) {
-      BootLog.warn('barcode OFF lookup failed', e);
+      BootLog.warn('Label scan error', e);
       if (mounted) {
         setState(() {
-          _error = l10n.mealBarcodeFailed;
-          _handled = false;
+          _isProcessing = false;
+          _errorMessage = 'لم نتمكن من قراءة الملصق الغذائي، يمكنك إدخال الوجبة يدوياً.';
         });
       }
     }
@@ -86,27 +127,189 @@ class _MealBarcodeScreenState extends ConsumerState<MealBarcodeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final colors = context.vireoColors;
+    final isAr = Localizations.localeOf(context).languageCode.startsWith('ar');
+
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.mealBarcodeTitle)),
-      body: Column(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text(isAr ? 'ماسح الباركود' : 'Barcode Scanner'),
+        backgroundColor: Colors.black.withValues(alpha: 0.7),
+        foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: Icon(_isTorchOn ? Icons.flash_on : Icons.flash_off),
+            tooltip: isAr ? 'الكشاف' : 'Torch',
+            onPressed: _toggleTorch,
+          ),
+        ],
+      ),
+      body: Stack(
         children: [
-          if (_error != null)
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Text(
-                _error!,
-                style: TextStyle(color: context.vireoColors.danger),
+          // Full-screen camera view
+          MobileScanner(
+            controller: _scannerController,
+            onDetect: (capture) {
+              final barcode = capture.barcodes.firstOrNull?.rawValue;
+              if (barcode != null && barcode.isNotEmpty) {
+                _onBarcodeDetected(barcode);
+              }
+            },
+          ),
+
+          // Viewfinder reticle overlay
+          Center(
+            child: Container(
+              width: 260,
+              height: 260,
+              decoration: BoxDecoration(
+                border: Border.all(color: colors.ember, width: 2.5),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 8,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          isAr ? 'وجّه الكاميرا نحو الباركود' : 'Align barcode within frame',
+                          style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          Expanded(
-            child: MobileScanner(
-              onDetect: (capture) {
-                final code = capture.barcodes.firstOrNull?.rawValue;
-                if (code != null) _onCode(code);
-              },
-            ),
           ),
+
+          // Processing spinner
+          if (_isProcessing)
+            Container(
+              color: Colors.black54,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const CircularProgressIndicator(color: Colors.white),
+                    const SizedBox(height: 16),
+                    Text(
+                      isAr ? 'جاري البحث عن بيانات المنتج...' : 'Looking up product details...',
+                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+          // Fallback UI when barcode is not found in database or Open Food Facts
+          if (_notFoundBarcode != null && !_isProcessing)
+            Positioned(
+              left: 16,
+              right: 16,
+              bottom: 30,
+              child: Container(
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  color: colors.surface,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: colors.ember.withValues(alpha: 0.5)),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black45, blurRadius: 12, offset: Offset(0, 4)),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.info_outline, color: colors.ember),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            isAr ? 'المنتج غير مسجل في قاعدة البيانات' : 'Product not found in database',
+                            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      isAr
+                          ? 'رمز الباركود: $_notFoundBarcode\nصوّر الملصق الغذائي وسيقوم الذكاء الاصطناعي بقراءة السعرات والماكروز وحفظه لك.'
+                          : 'Barcode: $_notFoundBarcode\nTake a photo of the nutrition label and AI will read the macros and save it.',
+                      style: TextStyle(color: colors.textMute, fontSize: 12),
+                    ),
+                    const SizedBox(height: 14),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: FilledButton.icon(
+                            style: FilledButton.styleFrom(
+                              backgroundColor: colors.ember,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
+                            icon: const Icon(Icons.camera_alt),
+                            label: Text(isAr ? 'صوّر الملصق الغذائي' : 'Scan Nutrition Label'),
+                            onPressed: _captureNutritionLabel,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _notFoundBarcode = null;
+                            });
+                          },
+                          child: Text(isAr ? 'إلغاء' : 'Cancel'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+          // Error banner
+          if (_errorMessage != null && !_isProcessing && _notFoundBarcode == null)
+            Positioned(
+              left: 16,
+              right: 16,
+              bottom: 30,
+              child: Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: colors.surface,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: colors.danger),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.error_outline, color: colors.danger),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        _errorMessage!,
+                        style: TextStyle(color: colors.danger, fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close, size: 16),
+                      onPressed: () => setState(() => _errorMessage = null),
+                    ),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );

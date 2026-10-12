@@ -252,6 +252,16 @@ final weeklyProgressReportDataProvider = FutureProvider<WeeklyProgressReportData
     );
   } catch (_) {}
 
+  final totalWeeklySteps = recentSteps.isNotEmpty
+      ? recentSteps.fold<int>(0, (s, e) => s + e.steps)
+      : (dash.stepsToday * 7);
+
+  final proteinGoalDays = recentMeals
+      .where((m) => m.result.protein >= (target.proteinG * 0.9))
+      .map((m) => '${m.loggedAt.year}-${m.loggedAt.month}-${m.loggedAt.day}')
+      .toSet()
+      .length;
+
   return WeeklyProgressReportData(
     weekStartDate: weekStart,
     weekEndDate: now,
@@ -267,5 +277,8 @@ final weeklyProgressReportDataProvider = FutureProvider<WeeklyProgressReportData
     trendWeightChangeKg: trendDelta,
     bestDayTitle: bestDayTitle,
     aiCoachTip: tip,
+    totalWeeklySteps: totalWeeklySteps,
+    streakDays: math.max(1, dash.streakDays),
+    proteinGoalDays: proteinGoalDays,
   );
 });

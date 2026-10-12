@@ -121,3 +121,32 @@ Created modular, isolated audit tests in `test/audit/` with mocked authenticatio
 ## 9. Static Analysis & Build Verification
 - **Analyzer**: `flutter analyze --no-fatal-infos lib/` completed with 0 errors and 0 warnings.
 - **Build**: `flutter build apk --debug` verified and passing cleanly.
+
+---
+
+## 10. P30 New Features Hardening & Audit (Items 3–5)
+### Consistency & Design System:
+- **Barcode Scanner (`meal_barcode_screen.dart`)**:
+  - Unified reticle styling with rounded corners, theme border tints, responsive control action chips for flash/torch, and matching typography.
+  - Consistent bottom sheet for label OCR fallback using `VireoColors` and elevation tokens.
+- **Weekly Wrapped 🎁 (`weekly_wrapped_story_screen.dart`)**:
+  - Full-screen story presentation with standard 5-second automatic progression bars, tap-to-pause/skip gestures, and localized cultural comparisons (Egypt: الهرم الأكبر / كوبري قصر النيل; Gulf: برج خليفة; general: ملاعب كرة القدم).
+  - Explicit privacy controls: meals and weight trends excluded from generated 1080×1920 share image unless explicitly toggled on by user.
+- **Progress Photo Compare (`photo_comparison_screen.dart` & `photo_ghost_camera_screen.dart`)**:
+  - Consistent segmented control between Draggable Slider and Side-by-Side comparison modes.
+  - Interactive ghost overlay camera with live opacity slider and posture alignment guides.
+
+### Performance & Memory:
+- **Hardware Acceleration & Offscreen Rendering**:
+  - Shareable Weekly Wrapped story card (1080×1920) rendered offscreen with `pixelRatio: 2.0` on isolated `RepaintBoundary` and immediately flushed from memory after sharing.
+  - Ghost camera utilizes camera controller stream with direct GPU texture layer and stacked semi-transparent canvas without redundant image re-encoding.
+- **Open Food Facts & Cache Tiering**:
+  - Barcode lookup strictly short-circuits: Local SharedPreferences Cache -> Bundled Egyptian Food DB -> Open Food Facts API -> Gemini Nutrition Label Vision fallback. No redundant HTTP calls when barcode exists locally.
+
+### Crash Safety & Arabic Error Handling on Async UI Actions:
+- **Protected Async Flows**:
+  - `MealBarcodeScreen`: Camera permissions, barcode scanning stream handlers, and image picking for nutrition label fallback wrapped in `try/catch` with friendly Arabic notifications (`فشل تشغيل الكاميرا`, `تعذر قراءة الملصق الغذائي`).
+  - `PhotoComparisonScreen`: Photo export and face blur generation wrapped in `try/catch` with `تعذر تجهيز أو مشاركة صورة المقارنة`.
+  - `WeeklyWrappedStoryScreen`: Share card image capture and share flow wrapped in `try/catch` with `تعذر مشاركة الملخص حالياً`.
+  - All async gaps guarded with `if (!mounted) return;` before touching `BuildContext` or showing SnackBars.
+

@@ -69,6 +69,7 @@ class FoodItem {
     required this.state,
     required this.commonPortions,
     required this.source,
+    this.barcodes = const [],
   });
 
   final String id;
@@ -79,6 +80,7 @@ class FoodItem {
   final String state;
   final List<FoodPortion> commonPortions;
   final FoodSource source;
+  final List<String> barcodes;
 
   bool get isAlreadyFried => state == 'fried';
 
@@ -100,6 +102,9 @@ class FoodItem {
         source: FoodSource.fromJson(
           Map<String, dynamic>.from(json['source'] as Map? ?? {}),
         ),
+        barcodes: (json['barcodes'] as List? ?? [])
+            .map((e) => e.toString())
+            .toList(),
       );
 
   String displayName(String locale) => locale == 'ar' ? nameAr : nameEn;

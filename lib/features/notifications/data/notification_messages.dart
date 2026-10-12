@@ -141,6 +141,18 @@ abstract final class NotificationMessages {
           payload: 'vireo://progress/weekly',
         ),
 
+      NotificationType.weeklyWrappedReminder => NotificationMessage(
+          title: isAr
+              ? (isArEg ? '🎁 ملخص أسبوعك جاهز!' : '🎁 ملخص أسبوعك جاهز!')
+              : '🎁 Your Weekly Wrapped is ready!',
+          body: isAr
+              ? (isArEg
+                  ? 'شوف إنجازاتك في الخطوات والتمارين وحرق الدهون وشاركها مع أصحابك!'
+                  : 'شاهد إنجازاتك في الخطوات والتمارين وحرق الدهون وشاركها!')
+              : 'See your weekly steps, workouts, and fat burn milestones and share your story!',
+          payload: 'vireo://progress/weekly_wrapped',
+        ),
+
       NotificationType.streakProtectionReminder => NotificationMessage(
           title: isAr
               ? (isArEg ? '🔥 حافظ على سلسلتك الحلوة' : '🔥 حافظ على تقدمك اليومي')

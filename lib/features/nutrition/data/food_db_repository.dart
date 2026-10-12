@@ -10,6 +10,7 @@ class FoodDbRepository {
 
   List<FoodItem>? _foods;
   Map<String, FoodItem>? _byId;
+  Map<String, FoodItem>? _byBarcode;
 
   Future<List<FoodItem>> load() async {
     if (_foods != null) return _foods!;
@@ -21,10 +22,17 @@ class FoodDbRepository {
         .toList();
     _foods = list;
     _byId = {for (final f in list) f.id: f};
+    _byBarcode = {};
+    for (final f in list) {
+      for (final bc in f.barcodes) {
+        _byBarcode![bc] = f;
+      }
+    }
     return list;
   }
 
   FoodItem? byId(String id) => _byId?[id];
+  FoodItem? byBarcode(String barcode) => _byBarcode?[barcode];
 
   Future<FoodItem?> match({
     String? foodIdGuess,

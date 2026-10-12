@@ -59,6 +59,7 @@ dependencies:
   flutter_foreground_task: ^10.0.0
   hijri: ^3.0.1
   adhan: ^2.0.0+1
+  share_plus: ^12.0.2
 
 dev_dependencies:
   flutter_test:

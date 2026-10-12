@@ -10,6 +10,7 @@ import 'package:vireo/features/progress/providers/progress_extended_provider.dar
 import 'package:vireo/features/progress/providers/progress_provider.dart';
 import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_progress_report_screen.dart';
+import 'package:vireo/features/progress/screens/weekly_wrapped_story_screen.dart';
 import 'package:vireo/features/progress/widgets/achievements_grid_card.dart';
 import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
 import 'package:vireo/features/progress/widgets/adaptive_calorie_suggestion_card.dart';
@@ -60,59 +61,98 @@ class ProgressScreen extends ConsumerWidget {
                 child: ListView(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
             children: [
-              // ── Quick Links: Weekly Report, Health Hub, InBody ──
-              VireoCard(
-                onTap: () {
-                  if (!FeatureGates.requirePro(context, ref, force: true)) return;
-                  WeeklyProgressReportScreen.open(context);
-                },
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: context.vireoColors.ember.withValues(alpha: 0.15),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(Icons.assessment_outlined, color: context.vireoColors.ember),
-                    ),
-                    const SizedBox(width: VSpace.sm),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              // ── Quick Links: Weekly Report, Weekly Wrapped, Health Hub, InBody ──
+              Row(
+                children: [
+                  Expanded(
+                    child: VireoCard(
+                      onTap: () {
+                        if (!FeatureGates.requirePro(context, ref, force: true)) return;
+                        WeeklyProgressReportScreen.open(context);
+                      },
+                      child: Row(
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                l10n.weeklyReportTitle,
-                                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                              ),
-                              if (!ref.watch(isProUserProvider)) ...[
-                                const SizedBox(width: 8),
-                                VireoPill(
-                                  label: 'PRO',
-                                  icon: Icons.lock_outline,
-                                  color: context.vireoColors.gold,
-                                  filled: true,
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: context.vireoColors.ember.withValues(alpha: 0.15),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(Icons.assessment_outlined, color: context.vireoColors.ember),
+                          ),
+                          const SizedBox(width: VSpace.xs),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  l10n.weeklyReportTitle,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                ),
+                                Text(
+                                  l10n.weeklyReportSubtitle,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: context.vireoColors.textMute,
+                                    fontSize: 11,
+                                  ),
                                 ),
                               ],
-                            ],
-                          ),
-                          Text(
-                            l10n.weeklyReportSubtitle,
-                            style: TextStyle(
-                              color: context.vireoColors.textMute,
-                              fontSize: 12,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Icon(Icons.chevron_right, color: context.vireoColors.textMute),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: VireoCard(
+                      onTap: () => WeeklyWrappedStoryScreen.open(context),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF97316).withValues(alpha: 0.15),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Text('🎁', style: TextStyle(fontSize: 18)),
+                          ),
+                          const SizedBox(width: VSpace.xs),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'ملخص الأسبوع' : 'Weekly Wrapped',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                ),
+                                Text(
+                                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'شارك إنجازاتك' : 'Share stories',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: context.vireoColors.textMute,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 12),
               Row(

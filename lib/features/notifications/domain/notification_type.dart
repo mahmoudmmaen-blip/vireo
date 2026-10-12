@@ -9,6 +9,7 @@ enum NotificationType {
   stepsNudgeReminder,
   bedtimeReminder,
   weeklyCheckInReminder,
+  weeklyWrappedReminder,
   streakProtectionReminder;
 
   // Legacy compatibility aliases if needed
@@ -32,6 +33,7 @@ extension NotificationTypeIds on NotificationType {
         NotificationType.stepsNudgeReminder => 3500,
         NotificationType.bedtimeReminder => 4000,
         NotificationType.weeklyCheckInReminder => 5000,
+        NotificationType.weeklyWrappedReminder => 5500,
         NotificationType.streakProtectionReminder => 6000,
       };
 
@@ -57,6 +59,7 @@ extension NotificationTypeSchedule on NotificationType {
         NotificationType.stepsNudgeReminder => (18, 0),
         NotificationType.bedtimeReminder => (22, 30),
         NotificationType.weeklyCheckInReminder => (9, 0),
+        NotificationType.weeklyWrappedReminder => (19, 0),
         NotificationType.streakProtectionReminder => (21, 0),
       };
 
@@ -70,6 +73,7 @@ extension NotificationTypeSchedule on NotificationType {
         NotificationType.stepsNudgeReminder => (18, 0),
         NotificationType.bedtimeReminder => (22, 30),
         NotificationType.weeklyCheckInReminder => (9, 0),
+        NotificationType.weeklyWrappedReminder => (19, 0),
         NotificationType.streakProtectionReminder => (21, 0),
         _ => null,
       };
