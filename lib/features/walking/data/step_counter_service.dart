@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:vireo/core/services/health_steps_service.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/sync_engine.dart';
@@ -177,6 +178,12 @@ abstract final class StepCounterService {
       'offset': offset,
       'lastCumulative': lastCumulative,
     });
+    try {
+      await FlutterForegroundTask.saveData(key: 'step_date', value: today);
+      await FlutterForegroundTask.saveData(key: 'step_baseline', value: baseline);
+      await FlutterForegroundTask.saveData(key: 'step_offset', value: offset);
+      await FlutterForegroundTask.saveData(key: 'step_last_cumulative', value: lastCumulative);
+    } catch (_) {}
     await saveTodayToHistory(todaySteps);
     return todaySteps;
   }
