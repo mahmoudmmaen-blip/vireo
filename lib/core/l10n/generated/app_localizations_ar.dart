@@ -2529,14 +2529,14 @@ class AppLocalizationsAr extends AppLocalizations {
     int protein,
     int stress,
   ) {
-    return 'Sleep $sleep · Train $workout · Protein $protein · Stress $stress';
+    return 'النوم $sleep · التمرين $workout · البروتين $protein · التوتر $stress';
   }
 
   @override
   String get vitalityScoreLabel => 'الحيوية';
 
   @override
-  String get vitalitySleepHint => 'How did you sleep?';
+  String get vitalitySleepHint => 'كيف كان نومك اليوم؟';
 
   @override
   String vitalitySleepHours(num hours) {
@@ -2544,10 +2544,10 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get vitalitySleepLog => 'Sleep';
+  String get vitalitySleepLog => 'سجل النوم';
 
   @override
-  String get vitalitySleepQuality => 'Quality';
+  String get vitalitySleepQuality => 'جودة النوم';
 
   @override
   String vitalityStreak(int days) {

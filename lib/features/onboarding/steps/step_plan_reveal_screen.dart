@@ -101,8 +101,11 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
         conditions: conditions,
       ),
     );
-    final topProg = ranked.isNotEmpty ? ranked.first : null;
-    final programName = topProg?.program.name.en ?? l10n.planRevealBalancedPlanDefault;
+    final topProg = ranked.firstOrNull;
+    final locale = Localizations.localeOf(context).languageCode;
+    final programName = topProg != null
+        ? topProg.program.name.of(locale)
+        : l10n.planRevealBalancedPlanDefault;
 
     return OnboardingStepShell(
       stepIndex: 6,

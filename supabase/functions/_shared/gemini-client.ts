@@ -27,6 +27,10 @@ export type GeminiGenerateOptions = {
   systemInstruction?: string;
   responseJson?: boolean;
   temperature?: number;
+  modelOverride?: string;
+  thinkingBudget?: number;
+  maxOutputTokens?: number;
+  responseSchema?: Record<string, unknown>;
 };
 
 /**
@@ -60,9 +64,10 @@ export async function generateContent(
     throw new Error('GEMINI_NOT_CONFIGURED');
   }
 
+  const primary = options.modelOverride || GEMINI_MODEL;
   const models = [
-    GEMINI_MODEL,
-    ...MODEL_FALLBACKS.filter((m) => m !== GEMINI_MODEL),
+    primary,
+    ...MODEL_FALLBACKS.filter((m) => m !== primary),
   ];
 
   let lastError = 'GEMINI_EMPTY_RESPONSE';
@@ -106,6 +111,15 @@ async function callModel(
       temperature: options.temperature ?? 0.2,
       ...(options.responseJson
         ? { responseMimeType: 'application/json' }
+        : {}),
+      ...(options.thinkingBudget !== undefined
+        ? { thinkingConfig: { thinkingBudget: options.thinkingBudget } }
+        : {}),
+      ...(options.maxOutputTokens !== undefined
+        ? { maxOutputTokens: options.maxOutputTokens }
+        : {}),
+      ...(options.responseSchema
+        ? { responseSchema: options.responseSchema }
         : {}),
     },
   };

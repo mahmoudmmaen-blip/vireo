@@ -7,6 +7,8 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
 import 'package:vireo/features/activity/domain/outdoor_workout_models.dart';
 import 'package:vireo/features/activity/screens/outdoor_live_screen.dart';
+import 'package:vireo/features/walking/data/step_counter_service.dart';
+import 'package:vireo/features/walking/data/step_foreground_service.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
@@ -105,6 +107,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
     final trackerState = ref.watch(walkingTrackerProvider);
     final notifier = ref.read(walkingTrackerProvider.notifier);
     final live = ref.watch(liveStepsProvider).valueOrNull;
+    final isRunning = ref.watch(isStepCounterRunningProvider);
 
     final steps = live?.todaySteps ?? trackerState.valueOrNull?.todaySteps ?? 0;
     final goal = trackerState.valueOrNull?.dailyGoal ?? 7000;
@@ -120,8 +123,6 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
       isFemale: profile.isFemale,
     );
     final progress = goal > 0 ? (steps / goal).clamp(0.0, 1.0) : 0.0;
-    final pct = (progress * 100).round();
-    final remaining = (goal - steps).clamp(0, goal);
 
     final sessionSteps = _isSessionActive ? (steps - _sessionStepsStart).clamp(0, 100000) : 0;
 
@@ -151,93 +152,140 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             children: [
-              // ── HERO: Big Ring with Live Steps & Progress ──
-              Center(
-                child: SizedBox(
-                  width: 220,
-                  height: 220,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        value: progress,
-                        strokeWidth: 16,
-                        backgroundColor: colors.line.withValues(alpha: 0.5),
-                        valueColor: const AlwaysStoppedAnimation<Color>(_stepsAccent),
-                        strokeCap: StrokeCap.round,
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            NumberFormat.decimalPattern().format(steps),
-                            style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                                  fontWeight: FontWeight.w900,
-                                  fontFeatures: const [FontFeature.tabularFigures()],
-                                  height: 1.1,
-                                ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            remaining > 0 ? 'باقي $remaining خطوة' : 'حققت الهدف! 🎉',
-                            style: TextStyle(
-                              color: remaining > 0 ? colors.textMute : _stepsAccent,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12.5,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              // ── HERO: Matching Leap Dark Theme Hero ──
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF162032), // Deep Navy from Leap reference
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.25),
+                      blurRadius: 16,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // Top row: Play/Pause button + steps + goal
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Play/Pause circle toggle
+                        InkWell(
+                          onTap: () async {
+                            HapticFeedback.heavyImpact();
+                            await StepForegroundService.toggle();
+                            ref.read(isStepCounterRunningProvider.notifier).state = StepForegroundService.isActive;
+                          },
+                          borderRadius: BorderRadius.circular(999),
+                          child: Container(
+                            width: 52,
+                            height: 52,
                             decoration: BoxDecoration(
-                              color: colors.background,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
-                              '$pct%',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w900,
-                                color: _stepsAccent,
-                                fontSize: 13,
+                              color: const Color(0xFF2C3E55),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isRunning ? _stepsAccent : Colors.white24,
+                                width: 1.5,
                               ),
+                            ),
+                            child: Icon(
+                              isRunning ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                              color: isRunning ? _stepsAccent : Colors.white,
+                              size: 28,
                             ),
                           ),
-                          const SizedBox(height: 6),
-                          GestureDetector(
-                            onTap: () => _editGoal(goal),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: colors.surfaceRaised,
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: colors.line),
-                              ),
-                              child: Row(
+                        ),
+
+                        // Large Step Number + Goal
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
+                                  IconButton(
+                                    visualDensity: VisualDensity.compact,
+                                    icon: const Icon(Icons.edit, size: 16, color: Colors.white54),
+                                    onPressed: () => _editGoal(goal),
+                                  ),
                                   Text(
-                                    'الهدف: $goal',
-                                    style: TextStyle(
-                                      color: colors.textMute,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 11,
+                                    NumberFormat.decimalPattern().format(steps),
+                                    style: const TextStyle(
+                                      fontSize: 48,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                      letterSpacing: -1,
+                                      height: 1.0,
                                     ),
                                   ),
-                                  const SizedBox(width: 4),
-                                  Icon(Icons.edit, size: 11, color: colors.textMute),
                                 ],
                               ),
-                            ),
+                              const SizedBox(height: 6),
+                              Text(
+                                '/$goal خطوة',
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 18),
+
+                    // Thick Green Progress Bar
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: SizedBox(
+                        height: 16,
+                        child: LinearProgressIndicator(
+                          value: progress,
+                          backgroundColor: const Color(0xFF2C3E55),
+                          valueColor: const AlwaysStoppedAnimation<Color>(_stepsAccent),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // 3 Stat Columns (كم, سعرات, الوقت)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _WalkStatCol(
+                          icon: Icons.track_changes_rounded,
+                          iconColor: const Color(0xFFFBBF24),
+                          value: metrics.distanceKm.toStringAsFixed(2),
+                          label: 'كم',
+                        ),
+                        _WalkStatCol(
+                          icon: Icons.local_fire_department_rounded,
+                          iconColor: const Color(0xFFF97316),
+                          value: '${metrics.caloriesKcal}',
+                          label: 'السعرات',
+                        ),
+                        _WalkStatCol(
+                          icon: Icons.access_time_filled_rounded,
+                          iconColor: const Color(0xFF38BDF8),
+                          value: '${(metrics.activeMinutes ~/ 60)}س ${(metrics.activeMinutes % 60)}د',
+                          label: 'الوقت',
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 20),
 
-              // ── Session Controls: Start/Pause/Stop session ──
+              // ── Session Controls: Walk Session Start/Pause/Stop ──
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -250,8 +298,8 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(VRadius.pill)),
                       ),
                       onPressed: () => _startSession(steps),
-                      icon: const Icon(Icons.play_arrow_rounded, size: 22),
-                      label: const Text('ابدأ جولة مشي', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                      icon: const Icon(Icons.directions_walk_rounded, size: 22),
+                      label: const Text('ابدأ جولة مشي محددة', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
                     )
                   else ...[
                     Container(
@@ -273,55 +321,9 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(VRadius.pill)),
                       ),
                       onPressed: _pauseOrStopSession,
-                      child: const Text('إيقاف', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text('إنهاء الجولة', style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ],
-                ],
-              ),
-              const SizedBox(height: 24),
-
-              // ── Stat Tiles (Distance, Calories, Fat burned, Active time) ──
-              Row(
-                children: [
-                  Expanded(
-                    child: _StatTile(
-                      icon: Icons.straighten_rounded,
-                      label: 'المسافة',
-                      value: '${metrics.distanceKm.toStringAsFixed(2)} كم',
-                      color: _stepsCyan,
-                      colors: colors,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: _StatTile(
-                      icon: Icons.local_fire_department_rounded,
-                      label: 'السعرات',
-                      value: '${metrics.caloriesKcal} ك.ع',
-                      color: colors.ember,
-                      colors: colors,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: _StatTile(
-                      icon: Icons.water_drop_outlined,
-                      label: 'الدهون',
-                      value: '${metrics.fatBurnedGrams.toStringAsFixed(1)} جم',
-                      color: colors.gold,
-                      colors: colors,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: _StatTile(
-                      icon: Icons.timer_outlined,
-                      label: 'النشاط',
-                      value: '${metrics.activeMinutes} د',
-                      color: colors.recovery,
-                      colors: colors,
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(height: 20),
@@ -389,6 +391,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
               const SizedBox(height: 24),
 
               // ── Segmented Control & Charts (Day / Week / Month) ──
+              // Uses Column + Row without horizontal overflow
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -399,28 +402,41 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // Header without overflow
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('سجل الحركة والخطوات', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-                        SegmentedButton<WalkChartFilter>(
-                          segments: const [
-                            ButtonSegment(value: WalkChartFilter.day, label: Text('اليوم')),
-                            ButtonSegment(value: WalkChartFilter.week, label: Text('أسبوع')),
-                            ButtonSegment(value: WalkChartFilter.month, label: Text('شهر')),
-                          ],
-                          selected: {_filter},
-                          onSelectionChanged: (set) {
-                            if (set.isNotEmpty) setState(() => _filter = set.first);
-                          },
+                        const Expanded(
+                          child: Text(
+                            'سجل الحركة والخطوات',
+                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 36,
+                          child: SegmentedButton<WalkChartFilter>(
+                            style: SegmentedButton.styleFrom(
+                              visualDensity: VisualDensity.compact,
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                            ),
+                            segments: const [
+                              ButtonSegment(value: WalkChartFilter.day, label: Text('اليوم', style: TextStyle(fontSize: 12))),
+                              ButtonSegment(value: WalkChartFilter.week, label: Text('أسبوع', style: TextStyle(fontSize: 12))),
+                              ButtonSegment(value: WalkChartFilter.month, label: Text('شهر', style: TextStyle(fontSize: 12))),
+                            ],
+                            selected: {_filter},
+                            onSelectionChanged: (set) {
+                              if (set.isNotEmpty) setState(() => _filter = set.first);
+                            },
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    _BarChart(
-                      days: last7,
-                      goal: goal,
+                    _WalkPeriodChart(
                       filter: _filter,
+                      todaySteps: steps,
+                      last7Days: last7,
+                      goal: goal,
                       colors: colors,
                       accent: _stepsAccent,
                     ),
@@ -492,44 +508,43 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
   }
 }
 
-class _StatTile extends StatelessWidget {
-  const _StatTile({
+class _WalkStatCol extends StatelessWidget {
+  const _WalkStatCol({
     required this.icon,
-    required this.label,
+    required this.iconColor,
     required this.value,
-    required this.color,
-    required this.colors,
+    required this.label,
   });
 
   final IconData icon;
-  final String label;
+  final Color iconColor;
   final String value;
-  final Color color;
-  final VireoColors colors;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-      decoration: BoxDecoration(
-        color: colors.surface,
-        borderRadius: BorderRadius.circular(VRadius.md),
-        border: Border.all(color: colors.line.withValues(alpha: 0.6)),
-      ),
-      child: Column(
-        children: [
-          Icon(icon, size: 20, color: color),
-          const SizedBox(height: 6),
-          Text(
-            value,
-            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12.5),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+    return Column(
+      children: [
+        Icon(icon, color: iconColor, size: 22),
+        const SizedBox(height: 6),
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            fontSize: 18,
           ),
-          const SizedBox(height: 2),
-          Text(label, style: TextStyle(color: colors.textMute, fontSize: 11)),
-        ],
-      ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white60,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -596,40 +611,107 @@ class _AchievementTile extends StatelessWidget {
   }
 }
 
-class _BarChart extends StatelessWidget {
-  const _BarChart({
-    required this.days,
-    required this.goal,
+class _WalkPeriodChart extends StatelessWidget {
+  const _WalkPeriodChart({
     required this.filter,
+    required this.todaySteps,
+    required this.last7Days,
+    required this.goal,
     required this.colors,
     required this.accent,
   });
 
-  final List<DailyStepCount> days;
-  final int goal;
   final WalkChartFilter filter;
+  final int todaySteps;
+  final List<DailyStepCount> last7Days;
+  final int goal;
   final VireoColors colors;
   final Color accent;
 
   @override
   Widget build(BuildContext context) {
-    final maxSteps = days.fold<int>(goal, (m, d) => d.steps > m ? d.steps : m);
+    return switch (filter) {
+      WalkChartFilter.day => _buildHourlyChart(),
+      WalkChartFilter.week => _buildWeekChart(),
+      WalkChartFilter.month => _buildMonthChart(),
+    };
+  }
+
+  Widget _buildHourlyChart() {
+    // Generate realistic hourly distribution for today based on current steps
+    final currentHour = DateTime.now().hour;
+    final hours = [8, 10, 12, 14, 16, 18, 20, 22];
+    final activeHoursCount = hours.where((h) => h <= currentHour).length;
+    final stepsPerBlock = activeHoursCount > 0 ? (todaySteps / activeHoursCount).round() : 0;
+
+    final maxVal = (todaySteps > 0 ? stepsPerBlock * 1.5 : 500).toDouble();
 
     return SizedBox(
       height: 140,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          for (var i = 0; i < days.length; i++)
+          for (final h in hours)
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: LayoutBuilder(
+                          builder: (ctx, constraints) {
+                            final blockSteps = h <= currentHour ? stepsPerBlock : 0;
+                            final height = maxVal > 0
+                                ? (blockSteps / maxVal * constraints.maxHeight).clamp(4.0, constraints.maxHeight)
+                                : 4.0;
+                            return Container(
+                              height: height,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: blockSteps > 0 ? accent : colors.line.withValues(alpha: 0.4),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      '$h:00',
+                      style: TextStyle(color: colors.textMute, fontSize: 9, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWeekChart() {
+    final list = last7Days.isNotEmpty ? last7Days : _fallback7Days();
+    final maxSteps = list.fold<int>(goal, (m, d) => d.steps > m ? d.steps : m);
+
+    return SizedBox(
+      height: 140,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          for (var i = 0; i < list.length && i < 7; i++)
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    if (days[i].steps > 0)
+                    if (list[i].steps > 0)
                       Text(
-                        _compact(days[i].steps),
+                        _compact(list[i].steps),
                         style: TextStyle(color: colors.textMute, fontSize: 9, fontWeight: FontWeight.bold),
                       ),
                     const SizedBox(height: 4),
@@ -639,9 +721,9 @@ class _BarChart extends StatelessWidget {
                         child: LayoutBuilder(
                           builder: (ctx, constraints) {
                             final h = maxSteps > 0
-                                ? (days[i].steps / maxSteps * constraints.maxHeight).clamp(4.0, constraints.maxHeight)
+                                ? (list[i].steps / maxSteps * constraints.maxHeight).clamp(4.0, constraints.maxHeight)
                                 : 4.0;
-                            final hit = goal > 0 && days[i].steps >= goal;
+                            final hit = goal > 0 && list[i].steps >= goal;
                             return Container(
                               height: h,
                               width: double.infinity,
@@ -656,11 +738,11 @@ class _BarChart extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      _dayInitial(days[i].date),
+                      _dayInitial(list[i].date),
                       style: TextStyle(
-                        color: _isToday(days[i].date) ? accent : colors.textMute,
+                        color: _isToday(list[i].date) ? accent : colors.textMute,
                         fontSize: 10,
-                        fontWeight: _isToday(days[i].date) ? FontWeight.w900 : FontWeight.w600,
+                        fontWeight: _isToday(list[i].date) ? FontWeight.w900 : FontWeight.w600,
                       ),
                     ),
                   ],
@@ -670,6 +752,72 @@ class _BarChart extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildMonthChart() {
+    final history = StepCounterService.readHistory();
+    final now = DateTime.now();
+    final daysInMonth = DateTime(now.year, now.month + 1, 0).day;
+    final maxSteps = goal > 0 ? goal * 1.3 : 10000.0;
+
+    return SizedBox(
+      height: 140,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          for (var d = 1; d <= daysInMonth; d++)
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 1),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: LayoutBuilder(
+                          builder: (ctx, constraints) {
+                            final dt = DateTime(now.year, now.month, d);
+                            final key = StepCounterService.dateKey(dt);
+                            final s = d == now.day ? todaySteps : (history[key] ?? 0);
+                            final h = (s / maxSteps * constraints.maxHeight).clamp(2.0, constraints.maxHeight);
+                            final hit = s >= goal;
+                            return Container(
+                              height: h,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: hit
+                                    ? accent
+                                    : (s > 0 ? accent.withValues(alpha: 0.5) : colors.line.withValues(alpha: 0.3)),
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    if (d % 5 == 1) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        '$d',
+                        style: TextStyle(color: colors.textMute, fontSize: 8),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  static List<DailyStepCount> _fallback7Days() {
+    final now = DateTime.now();
+    return List.generate(7, (i) {
+      final d = now.subtract(Duration(days: 6 - i));
+      return DailyStepCount(date: d, steps: 0);
+    });
   }
 
   String _compact(int s) {

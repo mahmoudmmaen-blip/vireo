@@ -62,6 +62,10 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.dailyLimit, previewBytes: preview),
       );
+    } on FoodVisionTimeoutException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.timeout, previewBytes: preview),
+      );
     } on FoodVisionException catch (e) {
       BootLog.warn('ai scan FoodVisionException', e);
       state = AsyncValue.data(
@@ -109,6 +113,10 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
     } on FoodVisionDailyLimitException {
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.dailyLimit, previewBytes: preview),
+      );
+    } on FoodVisionTimeoutException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.timeout, previewBytes: preview),
       );
     } on FoodVisionException catch (e) {
       BootLog.warn('ai scan FoodVisionException', e);

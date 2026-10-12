@@ -2,35 +2,34 @@ import 'dart:typed_data';
 
 import 'package:image/image.dart' as img;
 
-/// Compresses meal photos to at most [maxBytes] (default 1 MB).
+/// Compresses meal photos to max [maxDimension] (768 px on long side)
+/// at JPEG quality [quality] (~80–150 KB) for high-speed analysis.
 abstract final class MealImageCompressor {
-  static const maxBytes = 1024 * 1024;
+  static const int maxDimension = 768;
+  static const int defaultQuality = 70;
 
-  static Future<Uint8List> compress(Uint8List input, {int maxSize = maxBytes}) async {
-    if (input.length <= maxSize) return input;
-
+  static Future<Uint8List> compress(
+    Uint8List input, {
+    int maxSide = maxDimension,
+    int quality = defaultQuality,
+  }) async {
     final decoded = img.decodeImage(input);
     if (decoded == null) return input;
 
-    var quality = 85;
-    var width = decoded.width;
+    img.Image working = decoded;
+    final int origWidth = decoded.width;
+    final int origHeight = decoded.height;
+    final int maxDim = origWidth >= origHeight ? origWidth : origHeight;
 
-    while (true) {
-      final working = width < decoded.width
-          ? img.copyResize(decoded, width: width)
-          : decoded;
-      final encoded = Uint8List.fromList(img.encodeJpg(working, quality: quality));
-      if (encoded.length <= maxSize) return encoded;
-      if (quality > 45) {
-        quality -= 10;
-        continue;
+    if (maxDim > maxSide) {
+      if (origWidth >= origHeight) {
+        working = img.copyResize(decoded, width: maxSide);
+      } else {
+        working = img.copyResize(decoded, height: maxSide);
       }
-      if (width > 480) {
-        width = (width * 0.85).round();
-        quality = 75;
-        continue;
-      }
-      return encoded;
     }
+
+    final encoded = img.encodeJpg(working, quality: quality);
+    return Uint8List.fromList(encoded);
   }
 }

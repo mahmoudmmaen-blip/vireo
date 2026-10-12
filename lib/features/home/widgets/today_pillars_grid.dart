@@ -62,7 +62,7 @@ class TodayPillarsGrid extends ConsumerWidget {
           physics: const NeverScrollableScrollPhysics(),
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 1.45,
+          childAspectRatio: 1.18,
           children: [
             // Food Card
             _PillarCard(
@@ -145,6 +145,7 @@ class _PillarCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(VRadius.lg),
           border: Border.all(color: colors.line.withValues(alpha: 0.6)),
         ),
+        constraints: const BoxConstraints(minHeight: 90),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

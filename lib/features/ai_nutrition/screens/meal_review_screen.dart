@@ -1,9 +1,10 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
-import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
@@ -13,11 +14,9 @@ import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';
 import 'package:vireo/features/nutrition/data/food_db_repository.dart';
 import 'package:vireo/features/nutrition/data/meal_resolution_service.dart';
-import 'package:vireo/core/services/ad_service.dart';
-import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
-import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
 class MealReviewScreen extends ConsumerStatefulWidget {
   const MealReviewScreen({super.key, required this.draft});
@@ -37,6 +36,8 @@ class MealReviewScreen extends ConsumerStatefulWidget {
 class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   late List<ResolvedMealLine> _lines;
   late MealType _slot;
+  final Set<int> _expandedIndices = {};
+  final _scrollController = ScrollController();
   final _resolver = MealResolutionService(FoodDbRepository.instance);
 
   @override
@@ -44,36 +45,13 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     super.initState();
     _lines = List.of(widget.draft.lines);
     _slot = _mealSlotForNow();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _askPlateSizeOnce());
+    // No interrupting popup: Plate size is configured in Settings
   }
 
-  Future<void> _askPlateSizeOnce() async {
-    if (!mounted) return;
-    if (ref.read(plateSizeProvider) != null) return;
-    final l10n = AppLocalizations.of(context);
-    final picked = await showDialog<PlateSize>(
-      context: context,
-      builder: (ctx) => SimpleDialog(
-        title: Text(l10n.plateSizeAskTitle),
-        children: [
-          SimpleDialogOption(
-            onPressed: () => Navigator.pop(ctx, PlateSize.small),
-            child: Text(l10n.plateSizeSmall),
-          ),
-          SimpleDialogOption(
-            onPressed: () => Navigator.pop(ctx, PlateSize.medium),
-            child: Text(l10n.plateSizeMedium),
-          ),
-          SimpleDialogOption(
-            onPressed: () => Navigator.pop(ctx, PlateSize.large),
-            child: Text(l10n.plateSizeLarge),
-          ),
-        ],
-      ),
-    );
-    if (picked != null) {
-      await ref.read(plateSizeProvider.notifier).setSize(picked);
-    }
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   MealType _mealSlotForNow() {
@@ -89,24 +67,52 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   double get _c => _lines.fold(0.0, (s, l) => s + l.carbs);
   double get _f => _lines.fold(0.0, (s, l) => s + l.fat);
 
+  String _suggestedMealName(bool isArabic) {
+    if (_lines.isEmpty) return isArabic ? 'وجبة فارغة' : 'Empty meal';
+    return _lines
+        .map((l) => isArabic ? l.nameAr : (l.nameEn.isNotEmpty ? l.nameEn : l.nameAr))
+        .where((n) => n.isNotEmpty)
+        .join(' + ');
+  }
+
+  (int score, String verdict) _evaluateHealth(bool isArabic) {
+    if (_lines.isEmpty) return (5, isArabic ? 'أضف أصناف لوجبتك' : 'Add items');
+    final total = _kcal;
+    if (total == 0) return (5, isArabic ? 'وجبة خفيفة' : 'Light snack');
+
+    final pRatio = (_p * 4) / total;
+    final fRatio = (_f * 9) / total;
+
+    if (pRatio >= 0.25 && fRatio <= 0.35) {
+      return (9, isArabic ? 'وجبة متوازنة، بروتين عالي ودقيقة 💪' : 'Balanced, high protein');
+    } else if (pRatio >= 0.20) {
+      return (8, isArabic ? 'وجبة صحية ومغذية وممتازة لهدفك' : 'Nutritious & goal-aligned');
+    } else if (fRatio > 0.45) {
+      return (6, isArabic ? 'نسبة الدهون مرتفعة نسبيًا في الوجبة' : 'Relatively high fat');
+    } else {
+      return (7, isArabic ? 'وجبة معتدلة ومتوازنة السعرات' : 'Moderate balanced meal');
+    }
+  }
+
   Future<void> _save() async {
     final result = MealScanDraft(
       lines: _lines,
       imageBytes: widget.draft.imageBytes,
+      imagesBytes: widget.draft.imagesBytes,
     ).toAnalysisResult();
+
     await ref.read(aiMealLogProvider.notifier).save(result);
     await recordSuccessfulMealScan();
     await _resolver.rememberLines(_lines);
     await ref.read(mealRecentProvider.notifier).push(_lines);
     ref.read(confirmedMealsProvider.notifier).update((s) => {...s, _slot});
-    // Force dependent UIs (Home eaten, macros, Nutrition log) to rebuild.
     ref.invalidate(todayNutritionProvider);
+
     if (!mounted) return;
     final l10n = AppLocalizations.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 3),
-        persist: false,
         content: Text(l10n.aiScanSavedSnack),
       ),
     );
@@ -119,7 +125,10 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     await ref.read(mealFavoritesProvider.notifier).add(_lines);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(AppLocalizations.of(context).mealFavoriteSaved)),
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        content: Text(AppLocalizations.of(context).mealFavoriteSaved),
+      ),
     );
   }
 
@@ -149,6 +158,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
           oilFood: oil,
         ),
       );
+      _expandedIndices.add(_lines.length - 1);
     });
   }
 
@@ -157,13 +167,18 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final locale = Localizations.localeOf(context).languageCode;
+    final isArabic = locale.startsWith('ar');
     final nutrition = ref.watch(todayNutritionProvider(locale));
-    final remaining = nutrition.remainingKcal;
+    final remainingAfter = (nutrition.remainingKcal - _kcal.round());
+
+    final mealName = _suggestedMealName(isArabic);
+    final (healthScore, healthVerdict) = _evaluateHealth(isArabic);
 
     return Scaffold(
       backgroundColor: colors.background,
       appBar: AppBar(
         title: Text(l10n.mealReviewTitle),
+        elevation: 0,
         actions: [
           IconButton(
             tooltip: l10n.mealFavoriteSave,
@@ -172,148 +187,154 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          if (widget.draft.allImages.isNotEmpty)
-            SizedBox(
-              height: 180,
-              width: double.infinity,
-              child: widget.draft.allImages.length == 1
-                  ? Image.memory(widget.draft.allImages.first, fit: BoxFit.cover)
-                  : PageView.builder(
-                      itemCount: widget.draft.allImages.length,
-                      itemBuilder: (ctx, idx) {
-                        return Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Image.memory(
-                              widget.draft.allImages[idx],
-                              fit: BoxFit.cover,
-                            ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withValues(alpha: 0.65),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  '${idx + 1}/${widget.draft.allImages.length}',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-            ),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(VSpace.md),
-              itemCount: _lines.length + 1,
-              itemBuilder: (context, i) {
-                if (i == _lines.length) {
-                  return TextButton.icon(
-                    onPressed: _addFood,
-                    icon: const Icon(Icons.add),
-                    label: Text(l10n.mealReviewAddItem),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // ── TOP STICKY SUMMARY CARD (MFP-Style, always visible) ──
+            _StickyTopSummaryCard(
+              mealName: mealName,
+              kcal: _kcal.round(),
+              proteinG: _p,
+              carbsG: _c,
+              fatG: _f,
+              fatEquivalentG: (_kcal / 8.84).round(),
+              remainingAfter: remainingAfter,
+              healthScore: healthScore,
+              healthVerdict: healthVerdict,
+              slot: _slot,
+              slotLabel: _slotLabel(l10n, _slot),
+              onSlotChanged: (next) => setState(() => _slot = next),
+              onSave: _lines.isEmpty ? null : _save,
+              onEditDetails: () {
+                setState(() {
+                  if (_expandedIndices.length == _lines.length) {
+                    _expandedIndices.clear();
+                  } else {
+                    _expandedIndices.addAll(List.generate(_lines.length, (i) => i));
+                  }
+                });
+                if (_scrollController.hasClients) {
+                  _scrollController.animateTo(
+                    120,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
                   );
                 }
-                final line = _lines[i];
-                return Dismissible(
-                  key: ValueKey('${line.nameEn}_$i'),
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (_) => setState(() => _lines.removeAt(i)),
-                  background: Container(
-                    alignment: Alignment.centerRight,
-                    color: colors.danger,
-                    padding: const EdgeInsets.only(right: 16),
-                    child: const Icon(Icons.delete, color: Colors.white),
-                  ),
-                  child: _LineCard(
-                    line: line,
-                    locale: locale,
-                    onChanged: (next) => setState(() => _lines[i] = next),
-                  ),
-                );
               },
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-            decoration: BoxDecoration(
-              color: colors.surface,
-              border: Border(top: BorderSide(color: colors.line)),
-            ),
-            child: SafeArea(
-              top: false,
-              child: Column(
+
+            // ── SCROLLABLE DETAILS: Items List & Collapsed Math Table ──
+            Expanded(
+              child: ListView(
+                controller: _scrollController,
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 children: [
-                  Row(
-                    children: [
-                      Text(l10n.mealReviewSlot),
-                      const SizedBox(width: 8),
-                      DropdownButton<MealType>(
-                        value: _slot,
-                        items: MealType.values
-                            .map(
-                              (m) => DropdownMenuItem(
-                                value: m,
-                                child: Text(_slotLabel(l10n, m)),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (v) {
-                          if (v != null) setState(() => _slot = v);
-                        },
+                  // Photo thumbnails if available
+                  if (widget.draft.allImages.isNotEmpty) ...[
+                    SizedBox(
+                      height: 100,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: widget.draft.allImages.length,
+                        separatorBuilder: (_, _) => const SizedBox(width: 8),
+                        itemBuilder: (ctx, idx) => ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.memory(
+                            widget.draft.allImages[idx],
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
+
+                  // Items List Header
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        l10n.mealReviewCaloriesFormat(_kcal.round()),
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w900,
-                            ),
+                        isArabic ? 'محتويات الوجبة (${_lines.length})' : 'Meal Items (${_lines.length})',
+                        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
                       ),
-                      Text(
-                        locale.startsWith('ar')
-                            ? 'بروتين ${_p.round()} · كارب ${_c.round()} · دهون ${_f.round()}'
-                            : 'P ${_p.round()} · C ${_c.round()} · F ${_f.round()}',
-                        style: TextStyle(color: colors.textMute, fontSize: 13),
+                      TextButton.icon(
+                        style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
+                        onPressed: _addFood,
+                        icon: const Icon(Icons.add, size: 16),
+                        label: Text(l10n.mealReviewAddItem),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    l10n.mealReviewRemaining(remaining),
-                    style: TextStyle(color: colors.textMute, fontSize: 12),
-                  ),
-                  const SizedBox(height: 10),
-                  FilledButton(
-                    onPressed: _lines.isEmpty ? null : _save,
-                    style: FilledButton.styleFrom(
-                      minimumSize: const Size.fromHeight(48),
+                  const SizedBox(height: 6),
+
+                  // Compact items list
+                  for (var i = 0; i < _lines.length; i++) ...[
+                    _MfpItemRow(
+                      key: ValueKey('${_lines[i].nameEn}_$i'),
+                      line: _lines[i],
+                      index: i,
+                      isExpanded: _expandedIndices.contains(i),
+                      isArabic: isArabic,
+                      onToggleExpand: () {
+                        setState(() {
+                          if (_expandedIndices.contains(i)) {
+                            _expandedIndices.remove(i);
+                          } else {
+                            _expandedIndices.add(i);
+                          }
+                        });
+                      },
+                      onChanged: (updated) => setState(() => _lines[i] = updated),
+                      onDelete: () => setState(() {
+                        _lines.removeAt(i);
+                        _expandedIndices.remove(i);
+                      }),
                     ),
-                    child: Text(l10n.aiScanSaveToLog),
+                    const SizedBox(height: 8),
+                  ],
+
+                  const SizedBox(height: 16),
+
+                  // Collapsed "إزاي حسبناها" at the bottom
+                  Container(
+                    decoration: BoxDecoration(
+                      color: colors.surface,
+                      borderRadius: BorderRadius.circular(VRadius.md),
+                      border: Border.all(color: colors.line.withValues(alpha: 0.5)),
+                    ),
+                    child: ExpansionTile(
+                      initiallyExpanded: false,
+                      tilePadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+                      childrenPadding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+                      title: Text(
+                        l10n.mealHowCalculated,
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w700,
+                          color: colors.textMute,
+                        ),
+                      ),
+                      children: [
+                        for (final l in _lines) ...[
+                          _ItemMathTable(
+                            line: l,
+                            locale: locale,
+                            l10n: l10n,
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                      ],
+                    ),
                   ),
+
+                  const SizedBox(height: 32),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -326,245 +347,277 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
       };
 }
 
-class _LineCard extends StatelessWidget {
-  const _LineCard({
-    required this.line,
-    required this.locale,
-    required this.onChanged,
+/// ── TOP STICKY SUMMARY CARD (MFP Style) ──
+class _StickyTopSummaryCard extends StatelessWidget {
+  const _StickyTopSummaryCard({
+    required this.mealName,
+    required this.kcal,
+    required this.proteinG,
+    required this.carbsG,
+    required this.fatG,
+    required this.fatEquivalentG,
+    required this.remainingAfter,
+    required this.healthScore,
+    required this.healthVerdict,
+    required this.slot,
+    required this.slotLabel,
+    required this.onSlotChanged,
+    required this.onSave,
+    required this.onEditDetails,
   });
 
-  final ResolvedMealLine line;
-  final String locale;
-  final ValueChanged<ResolvedMealLine> onChanged;
+  final String mealName;
+  final int kcal;
+  final double proteinG;
+  final double carbsG;
+  final double fatG;
+  final int fatEquivalentG;
+  final int remainingAfter;
+  final int healthScore;
+  final String healthVerdict;
+  final MealType slot;
+  final String slotLabel;
+  final ValueChanged<MealType> onSlotChanged;
+  final VoidCallback? onSave;
+  final VoidCallback onEditDetails;
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
-    final oil = FoodDbRepository.instance.byId('sunflower_oil');
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
 
-    return VireoCard(
-      padding: const EdgeInsets.all(VSpace.sm + 2),
+    // Macro percentages
+    final totalMacroKcal = (proteinG * 4) + (carbsG * 4) + (fatG * 9);
+    final pPct = totalMacroKcal > 0 ? ((proteinG * 4) / totalMacroKcal * 100).round() : 0;
+    final cPct = totalMacroKcal > 0 ? ((carbsG * 4) / totalMacroKcal * 100).round() : 0;
+    final fPct = totalMacroKcal > 0 ? ((fatG * 9) / totalMacroKcal * 100).round() : 0;
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 4, 16, 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: colors.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: colors.line.withValues(alpha: 0.7)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.15),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // Header: Meal Name & Meal Slot Dropdown
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Text(
-                  locale.startsWith('ar')
-                      ? line.nameAr
-                      : (line.nameEn.isNotEmpty ? line.nameEn : line.nameAr),
-                  style: const TextStyle(fontWeight: FontWeight.w800),
+                  mealName,
+                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-              if (line.isEstimated)
-                _Badge(l10n.mealReviewEstimated, colors.gold),
-              if (line.confidence < 0.6 || line.isUnsure) ...[
-                const SizedBox(width: 6),
-                _Badge(l10n.mealClarificationTitle, colors.ember),
-              ],
-            ],
-          ),
-          if (line.confidence < 0.6 || line.isUnsure) ...[
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: colors.ember.withValues(alpha: 0.08),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: colors.ember.withValues(alpha: 0.25)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.help_outline, size: 14, color: colors.ember),
-                      const SizedBox(width: 4),
-                      Text(
-                        locale == 'ar' ? 'تأكيد سريع:' : 'Quick clarification:',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          color: colors.ember,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  _buildClarificationChips(context, line, locale, onChanged, oil),
-                ],
-              ),
-            ),
-          ],
-          const SizedBox(height: 8),
-          const SizedBox(height: 10),
-          // ── Grams / Unit selection ──
-          Row(
-            children: [
-              IconButton(
-                visualDensity: VisualDensity.compact,
-                onPressed: () {
-                  HapticFeedback.selectionClick();
-                  onChanged(rescaleLine(line, (line.grams - 10).clamp(10, 2000)));
-                },
-                icon: const Icon(Icons.remove_circle_outline, size: 20),
-              ),
+              const SizedBox(width: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                 decoration: BoxDecoration(
                   color: colors.background,
-                  borderRadius: BorderRadius.circular(VRadius.sm),
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: colors.line),
                 ),
-                child: Text(
-                  '${line.grams.round()} g',
-                  style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
-                ),
-              ),
-              IconButton(
-                visualDensity: VisualDensity.compact,
-                onPressed: () {
-                  HapticFeedback.selectionClick();
-                  onChanged(rescaleLine(line, (line.grams + 10).clamp(10, 2000)));
-                },
-                icon: const Icon(Icons.add_circle_outline, size: 20),
-              ),
-              Expanded(
-                child: Slider(
-                  value: line.grams.clamp(10, 500),
-                  min: 10,
-                  max: 500,
-                  divisions: 49,
-                  onChanged: (v) => onChanged(rescaleLine(line, v)),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<MealType>(
+                    isDense: true,
+                    value: slot,
+                    items: MealType.values
+                        .map(
+                          (m) => DropdownMenuItem(
+                            value: m,
+                            child: Text(
+                              switch (m) {
+                                MealType.breakfast => isArabic ? 'فطار' : 'Breakfast',
+                                MealType.lunch => isArabic ? 'غدا' : 'Lunch',
+                                MealType.dinner => isArabic ? 'عشا' : 'Dinner',
+                                MealType.snack => isArabic ? 'سناك' : 'Snack',
+                              },
+                              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (v) {
+                      if (v != null) onSlotChanged(v);
+                    },
+                  ),
                 ),
               ),
             ],
           ),
-          // Unit Chips: Common portions plus localized quick units "حبة", "حفنة"
-          Padding(
-            padding: const EdgeInsets.only(top: 2, bottom: 6),
-            child: Wrap(
-              spacing: 6,
-              runSpacing: 4,
-              children: [
-                if (line.portions.isNotEmpty)
-                  for (final p in line.portions.take(3))
-                    ActionChip(
-                      visualDensity: VisualDensity.compact,
-                      label: Text('${p.label(locale)} (${p.grams.round()}g)'),
-                      onPressed: () => onChanged(rescaleLine(line, p.grams)),
+          const SizedBox(height: 12),
+
+          // Big Total Kcal & Macro Donut Chart
+          Row(
+            children: [
+              // Macro Donut
+              SizedBox(
+                width: 72,
+                height: 72,
+                child: CustomPaint(
+                  painter: _MacroDonutPainter(
+                    pRatio: totalMacroKcal > 0 ? (proteinG * 4) / totalMacroKcal : 0.33,
+                    cRatio: totalMacroKcal > 0 ? (carbsG * 4) / totalMacroKcal : 0.33,
+                    fRatio: totalMacroKcal > 0 ? (fatG * 9) / totalMacroKcal : 0.34,
+                    pColor: VMacro.protein,
+                    cColor: VMacro.carbs,
+                    fColor: VMacro.fat,
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '$kcal',
+                          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
+                        ),
+                        Text(
+                          isArabic ? 'سعرة' : 'kcal',
+                          semanticsLabel: '$kcal kcal',
+                          style: TextStyle(
+                            color: colors.textMute,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                // "حبة" (Piece / ~80g)
-                ActionChip(
-                  visualDensity: VisualDensity.compact,
-                  label: Text(locale.startsWith('ar') ? 'حبة (80g)' : 'Piece (80g)'),
-                  onPressed: () => onChanged(rescaleLine(line, 80)),
+                  ),
                 ),
-                // "حفنة" (Handful / ~35g)
-                ActionChip(
-                  visualDensity: VisualDensity.compact,
-                  label: Text(locale.startsWith('ar') ? 'حفنة (35g)' : 'Handful (35g)'),
-                  onPressed: () => onChanged(rescaleLine(line, 35)),
+              ),
+              const SizedBox(width: 16),
+
+              // Macro Grams and Percentages
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _MacroBadge(
+                          label: isArabic ? 'بروتين' : 'Protein',
+                          grams: '${proteinG.round()}g',
+                          pct: '$pPct%',
+                          color: VMacro.protein,
+                        ),
+                        _MacroBadge(
+                          label: isArabic ? 'كارب' : 'Carbs',
+                          grams: '${carbsG.round()}g',
+                          pct: '$cPct%',
+                          color: VMacro.carbs,
+                        ),
+                        _MacroBadge(
+                          label: isArabic ? 'دهون' : 'Fat',
+                          grams: '${fatG.round()}g',
+                          pct: '$fPct%',
+                          color: VMacro.fat,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    // Fat equivalent & Remaining calories
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '≈ $fatEquivalentG جم دهون',
+                          style: TextStyle(color: colors.textMute, fontSize: 11, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          isArabic ? 'المتبقي من يومك: $remainingAfter سعرة' : 'Remaining: $remainingAfter kcal',
+                          style: TextStyle(
+                            color: remainingAfter >= 0 ? colors.ember : colors.danger,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                // Standard 100g
-                ActionChip(
-                  visualDensity: VisualDensity.compact,
-                  label: const Text('100g'),
-                  onPressed: () => onChanged(rescaleLine(line, 100)),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          // ── Cooking Method Chips with Delta (e.g. fried adds oil delta) ──
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Wrap(
-              spacing: 6,
-              runSpacing: 4,
-              children: [
-                _CookingMethodDeltaChip(
-                  label: l10n.mealReviewCookingRaw,
-                  method: CookingMethod.raw,
-                  isSelected: line.cookingMethod == CookingMethod.raw,
-                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.raw, oilFood: oil)),
-                ),
-                _CookingMethodDeltaChip(
-                  label: l10n.mealReviewCookingBoiled,
-                  method: CookingMethod.boiled,
-                  isSelected: line.cookingMethod == CookingMethod.boiled,
-                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.boiled, oilFood: oil)),
-                ),
-                _CookingMethodDeltaChip(
-                  label: l10n.mealReviewCookingGrilled,
-                  method: CookingMethod.grilled,
-                  isSelected: line.cookingMethod == CookingMethod.grilled,
-                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.grilled, oilFood: oil)),
-                ),
-                _CookingMethodDeltaChip(
-                  label: '${l10n.mealReviewCookingFried} +${(line.grams * 0.08 * 8.84).round()}kcal',
-                  method: CookingMethod.fried,
-                  isSelected: line.cookingMethod == CookingMethod.fried,
-                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.fried, oilFood: oil)),
-                ),
-                _CookingMethodDeltaChip(
-                  label: l10n.mealReviewCookingBaked,
-                  method: CookingMethod.baked,
-                  isSelected: line.cookingMethod == CookingMethod.baked,
-                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.baked, oilFood: oil)),
-                ),
-              ],
-            ),
-          ),
-          // ── Macro chips (kcal, protein, carbs, fat colored chips) ──
+          const SizedBox(height: 10),
+
+          // Health Score Badge & Verdict
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: colors.background.withValues(alpha: 0.5),
-              borderRadius: BorderRadius.circular(VRadius.md),
-              border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+              color: colors.background,
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _MacroColoredChip(
-                  label: locale.startsWith('ar') ? 'سعرة' : 'kcal',
-                  value: '${line.kcal.round()}',
-                  color: colors.ember,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF10B981).withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    '★ $healthScore/10',
+                    style: const TextStyle(
+                      color: Color(0xFF10B981),
+                      fontWeight: FontWeight.w900,
+                      fontSize: 11,
+                    ),
+                  ),
                 ),
-                _MacroColoredChip(
-                  label: locale.startsWith('ar') ? 'بروتين' : 'Protein',
-                  value: '${line.protein.round()}g',
-                  color: VMacro.protein,
-                ),
-                _MacroColoredChip(
-                  label: locale.startsWith('ar') ? 'كارب' : 'Carbs',
-                  value: '${line.carbs.round()}g',
-                  color: VMacro.carbs,
-                ),
-                _MacroColoredChip(
-                  label: locale.startsWith('ar') ? 'دهون' : 'Fat',
-                  value: '${line.fat.round()}g',
-                  color: VMacro.fat,
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    healthVerdict,
+                    style: TextStyle(color: colors.textMute, fontSize: 11.5, fontWeight: FontWeight.w600),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 6),
-          // ── "إزاي حسبناها" Clean Table ──
-          ExpansionTile(
-            tilePadding: EdgeInsets.zero,
-            childrenPadding: const EdgeInsets.only(bottom: 6),
-            title: Text(
-              l10n.mealHowCalculated,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: colors.textMute),
-            ),
+          const SizedBox(height: 12),
+
+          // Primary & Secondary Buttons: "حفظ" (one tap) & "عدّل التفاصيل"
+          Row(
             children: [
-              _ItemMathTable(
-                line: line,
-                locale: locale,
-                l10n: l10n,
+              Expanded(
+                flex: 3,
+                child: FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: colors.ember,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    minimumSize: const Size.fromHeight(44),
+                  ),
+                  onPressed: onSave,
+                  child: const Text('حفظ', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15)),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                flex: 2,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    minimumSize: const Size.fromHeight(44),
+                  ),
+                  onPressed: onEditDetails,
+                  child: const Text('عدّل التفاصيل', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                ),
               ),
             ],
           ),
@@ -572,150 +625,382 @@ class _LineCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildClarificationChips(
-    BuildContext context,
-    ResolvedMealLine line,
-    String locale,
-    ValueChanged<ResolvedMealLine> onChanged,
-    FoodItem? oil,
-  ) {
-    final lowerName = '${line.nameEn} ${line.nameAr}'.toLowerCase();
-    final chips = <Widget>[];
+class _MacroBadge extends StatelessWidget {
+  const _MacroBadge({
+    required this.label,
+    required this.grams,
+    required this.pct,
+    required this.color,
+  });
 
-    // Question 1: Fried vs Grilled / Boiled (Cooking method clarification)
-    final isFried = line.cookingMethod == CookingMethod.fried;
-    chips.add(
-      ActionChip(
-        avatar: Icon(isFried ? Icons.check : Icons.local_fire_department, size: 14),
-        label: Text(locale == 'ar' ? 'مقلي؟' : 'Fried?'),
-        onPressed: () {
-          onChanged(
-            recomputeWithMethod(
-              line.copyWith(isUnsure: false, confidence: 0.95),
-              CookingMethod.fried,
-              oilFood: oil,
-            ),
-          );
-        },
-      ),
-    );
-    chips.add(
-      ActionChip(
-        avatar: Icon(line.cookingMethod == CookingMethod.grilled ? Icons.check : Icons.outdoor_grill, size: 14),
-        label: Text(locale == 'ar' ? 'مشوي؟' : 'Grilled?'),
-        onPressed: () {
-          onChanged(
-            recomputeWithMethod(
-              line.copyWith(isUnsure: false, confidence: 0.95),
-              CookingMethod.grilled,
-              oilFood: oil,
-            ),
-          );
-        },
-      ),
-    );
+  final String label;
+  final String grams;
+  final String pct;
+  final Color color;
 
-    // Question 2: Rice vs Bulgur / Bread type / Grain clarification
-    if (lowerName.contains('rice') || lowerName.contains('أرز') || lowerName.contains('رز') ||
-        lowerName.contains('bulgur') || lowerName.contains('برغل')) {
-      final isRice = lowerName.contains('rice') || lowerName.contains('أرز') || lowerName.contains('رز');
-      chips.add(
-        ActionChip(
-          avatar: Icon(isRice ? Icons.check : Icons.grain, size: 14),
-          label: Text(locale == 'ar' ? 'أرز أبيض' : 'Rice'),
-          onPressed: () {
-            final food = FoodDbRepository.instance.byId('white_rice_cooked');
-            onChanged(
-              resolveLine(
-                scanned: ScannedFoodItem(
-                  nameAr: 'أرز أبيض',
-                  nameEn: 'White rice',
-                  foodIdGuess: 'white_rice_cooked',
-                  estimatedGrams: line.grams,
-                  cookingMethod: line.cookingMethod,
-                  confidence: 1.0,
-                  isUnsure: false,
-                ),
-                food: food,
-                oilFood: oil,
-              ),
-            );
-          },
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(width: 7, height: 7, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+            const SizedBox(width: 4),
+            Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700)),
+          ],
         ),
-      );
-      chips.add(
-        ActionChip(
-          avatar: const Icon(Icons.grain, size: 14),
-          label: Text(locale == 'ar' ? 'برغل' : 'Bulgur'),
-          onPressed: () {
-            final food = FoodDbRepository.instance.byId('bulgur_cooked');
-            onChanged(
-              resolveLine(
-                scanned: ScannedFoodItem(
-                  nameAr: 'برغل',
-                  nameEn: 'Bulgur',
-                  foodIdGuess: 'bulgur_cooked',
-                  estimatedGrams: line.grams,
-                  cookingMethod: line.cookingMethod,
-                  confidence: 1.0,
-                  isUnsure: false,
-                ),
-                food: food,
-                oilFood: oil,
-              ),
-            );
-          },
-        ),
-      );
-    }
-
-    // Question 3: Chicken breast vs Chicken thigh
-    if (lowerName.contains('chicken') || lowerName.contains('دجاج') || lowerName.contains('فراخ')) {
-      chips.add(
-        ActionChip(
-          label: Text(locale == 'ar' ? 'صدور دجاج' : 'Chicken breast'),
-          onPressed: () {
-            final food = FoodDbRepository.instance.byId('chicken_breast_cooked');
-            onChanged(
-              resolveLine(
-                scanned: ScannedFoodItem(
-                  nameAr: 'صدر دجاج',
-                  nameEn: 'Chicken breast',
-                  foodIdGuess: 'chicken_breast_cooked',
-                  estimatedGrams: line.grams,
-                  cookingMethod: line.cookingMethod,
-                  confidence: 1.0,
-                  isUnsure: false,
-                ),
-                food: food,
-                oilFood: oil,
-              ),
-            );
-          },
-        ),
-      );
-    }
-
-    return Wrap(
-      spacing: 6,
-      runSpacing: 4,
-      children: chips.take(3).toList(),
+        const SizedBox(height: 2),
+        Text('$grams ($pct)', style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w800)),
+      ],
     );
   }
 }
 
+class _MacroDonutPainter extends CustomPainter {
+  const _MacroDonutPainter({
+    required this.pRatio,
+    required this.cRatio,
+    required this.fRatio,
+    required this.pColor,
+    required this.cColor,
+    required this.fColor,
+  });
 
-class _CookingMethodDeltaChip extends StatelessWidget {
-  const _CookingMethodDeltaChip({
+  final double pRatio;
+  final double cRatio;
+  final double fRatio;
+  final Color pColor;
+  final Color cColor;
+  final Color fColor;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final stroke = 9.0;
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = (size.width - stroke) / 2;
+    final rect = Rect.fromCircle(center: center, radius: radius);
+
+    final paintP = Paint()
+      ..color = pColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke;
+
+    final paintC = Paint()
+      ..color = cColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke;
+
+    final paintF = Paint()
+      ..color = fColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke;
+
+    var start = -math.pi / 2;
+    final pAngle = 2 * math.pi * pRatio;
+    final cAngle = 2 * math.pi * cRatio;
+    final fAngle = 2 * math.pi * fRatio;
+
+    canvas.drawArc(rect, start, pAngle, false, paintP);
+    start += pAngle;
+    canvas.drawArc(rect, start, cAngle, false, paintC);
+    start += cAngle;
+    canvas.drawArc(rect, start, fAngle, false, paintF);
+  }
+
+  @override
+  bool shouldRepaint(covariant _MacroDonutPainter oldDelegate) => true;
+}
+
+/// ── COMPACT ITEM ROW (MFP Style) ──
+class _MfpItemRow extends StatelessWidget {
+  const _MfpItemRow({
+    super.key,
+    required this.line,
+    required this.index,
+    required this.isExpanded,
+    required this.isArabic,
+    required this.onToggleExpand,
+    required this.onChanged,
+    required this.onDelete,
+  });
+
+  final ResolvedMealLine line;
+  final int index;
+  final bool isExpanded;
+  final bool isArabic;
+  final VoidCallback onToggleExpand;
+  final ValueChanged<ResolvedMealLine> onChanged;
+  final VoidCallback onDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    final name = isArabic ? line.nameAr : (line.nameEn.isNotEmpty ? line.nameEn : line.nameAr);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: colors.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+      ),
+      child: Column(
+        children: [
+          // Row: name · grams · kcal
+          InkWell(
+            onTap: onToggleExpand,
+            borderRadius: BorderRadius.circular(14),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      name,
+                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                    ),
+                  ),
+                  Text(
+                    '${line.grams.round()} جم  ·  ${line.kcal.round()} سعرة',
+                    style: TextStyle(
+                      color: colors.textMute,
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Icon(
+                    isExpanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
+                    color: colors.textMute,
+                    size: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Expanded Editor
+          if (isExpanded) ...[
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.all(14),
+              child: _ExpandedItemEditor(
+                line: line,
+                isArabic: isArabic,
+                onChanged: onChanged,
+                onDelete: onDelete,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+/// ── ITEM EDITOR (Expanded only) ──
+class _ExpandedItemEditor extends StatelessWidget {
+  const _ExpandedItemEditor({
+    required this.line,
+    required this.isArabic,
+    required this.onChanged,
+    required this.onDelete,
+  });
+
+  final ResolvedMealLine line;
+  final bool isArabic;
+  final ValueChanged<ResolvedMealLine> onChanged;
+  final VoidCallback onDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    final oil = FoodDbRepository.instance.byId('sunflower_oil');
+    final foodNameLower = '${line.nameEn} ${line.nameAr}'.toLowerCase();
+
+    // Specific unit table per food type
+    final unitChips = _getUnitsForFood(foodNameLower, isArabic);
+
+    // Cooking methods relevant only where it matters (chicken, meat, eggs, fish, potatoes)
+    final showsCookingMethod = foodNameLower.contains('chicken') ||
+        foodNameLower.contains('دجاج') ||
+        foodNameLower.contains('فراخ') ||
+        foodNameLower.contains('meat') ||
+        foodNameLower.contains('لحم') ||
+        foodNameLower.contains('fish') ||
+        foodNameLower.contains('سمك') ||
+        foodNameLower.contains('egg') ||
+        foodNameLower.contains('بيض') ||
+        foodNameLower.contains('potato') ||
+        foodNameLower.contains('بطاطس');
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // Grams stepper and slider
+        Row(
+          children: [
+            IconButton(
+              visualDensity: VisualDensity.compact,
+              onPressed: () {
+                HapticFeedback.selectionClick();
+                onChanged(rescaleLine(line, (line.grams - 10).clamp(10, 2000)));
+              },
+              icon: const Icon(Icons.remove_circle_outline, size: 20),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: colors.background,
+                borderRadius: BorderRadius.circular(VRadius.sm),
+                border: Border.all(color: colors.line),
+              ),
+              child: Text(
+                '${line.grams.round()} جم',
+                style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+              ),
+            ),
+            IconButton(
+              visualDensity: VisualDensity.compact,
+              onPressed: () {
+                HapticFeedback.selectionClick();
+                onChanged(rescaleLine(line, (line.grams + 10).clamp(10, 2000)));
+              },
+              icon: const Icon(Icons.add_circle_outline, size: 20),
+            ),
+            Expanded(
+              child: Slider(
+                value: line.grams.clamp(10, 500),
+                min: 10,
+                max: 500,
+                divisions: 49,
+                onChanged: (v) => onChanged(rescaleLine(line, v)),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+
+        // Per-Food Unit Chips
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: [
+            for (final u in unitChips)
+              ActionChip(
+                visualDensity: VisualDensity.compact,
+                label: Text(u.label),
+                onPressed: () => onChanged(rescaleLine(line, u.grams)),
+              ),
+            ActionChip(
+              visualDensity: VisualDensity.compact,
+              label: const Text('100 جم'),
+              onPressed: () => onChanged(rescaleLine(line, 100)),
+            ),
+          ],
+        ),
+
+        // Cooking Method Chips (Only where relevant)
+        if (showsCookingMethod) ...[
+          const SizedBox(height: 10),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: [
+              _CookingChip(
+                label: isArabic ? 'مسلوق' : 'Boiled',
+                isSelected: line.cookingMethod == CookingMethod.boiled,
+                onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.boiled, oilFood: oil)),
+              ),
+              _CookingChip(
+                label: isArabic ? 'مشوي' : 'Grilled',
+                isSelected: line.cookingMethod == CookingMethod.grilled,
+                onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.grilled, oilFood: oil)),
+              ),
+              _CookingChip(
+                label: isArabic ? 'مقلي' : 'Fried',
+                isSelected: line.cookingMethod == CookingMethod.fried,
+                onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.fried, oilFood: oil)),
+              ),
+              _CookingChip(
+                label: isArabic ? 'في الفرن' : 'Baked',
+                isSelected: line.cookingMethod == CookingMethod.baked,
+                onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.baked, oilFood: oil)),
+              ),
+            ],
+          ),
+        ],
+
+        const SizedBox(height: 10),
+
+        // Row of individual macros + Delete button
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '${line.kcal.round()} سعرة  ·  P: ${line.protein.round()}g  ·  C: ${line.carbs.round()}g  ·  F: ${line.fat.round()}g',
+              style: TextStyle(color: colors.textMute, fontSize: 11, fontWeight: FontWeight.bold),
+            ),
+            IconButton(
+              tooltip: 'حذف الصنف',
+              icon: Icon(Icons.delete_outline, size: 18, color: colors.danger),
+              onPressed: onDelete,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  List<({String label, double grams})> _getUnitsForFood(String food, bool isArabic) {
+    if (food.contains('rice') || food.contains('أرز') || food.contains('رز')) {
+      return [
+        (label: isArabic ? 'كوب (150 جم)' : 'Cup (150g)', grams: 150),
+        (label: isArabic ? 'ملعقة (25 جم)' : 'Tbsp (25g)', grams: 25),
+        (label: isArabic ? 'نصف كوب (75 جم)' : '1/2 Cup (75g)', grams: 75),
+      ];
+    } else if (food.contains('chicken') || food.contains('دجاج') || food.contains('فراخ')) {
+      return [
+        (label: isArabic ? 'صدر كامل (180 جم)' : 'Breast (180g)', grams: 180),
+        (label: isArabic ? 'قطعة (120 جم)' : 'Piece (120g)', grams: 120),
+        (label: isArabic ? 'ورك (150 جم)' : 'Thigh (150g)', grams: 150),
+      ];
+    } else if (food.contains('bread') || food.contains('خبز') || food.contains('عيش')) {
+      return [
+        (label: isArabic ? 'رغيف بلدي (100 جم)' : 'Loaf (100g)', grams: 100),
+        (label: isArabic ? 'نصف رغيف (50 جم)' : '1/2 Loaf (50g)', grams: 50),
+        (label: isArabic ? 'شريحة توست (30 جم)' : 'Slice (30g)', grams: 30),
+      ];
+    } else if (food.contains('egg') || food.contains('بيض')) {
+      return [
+        (label: isArabic ? 'بيضة واحدة (50 جم)' : '1 Egg (50g)', grams: 50),
+        (label: isArabic ? 'بيضتان (100 جم)' : '2 Eggs (100g)', grams: 100),
+      ];
+    } else if (food.contains('salad') || food.contains('سلطة') || food.contains('خضار')) {
+      return [
+        (label: isArabic ? 'طبق صغير (100 جم)' : 'Small bowl (100g)', grams: 100),
+        (label: isArabic ? 'طبق كبير (200 جم)' : 'Large bowl (200g)', grams: 200),
+      ];
+    }
+
+    return [
+      (label: isArabic ? 'حصة صغيرة (50 جم)' : 'Small (50g)', grams: 50),
+      (label: isArabic ? 'حصة متوسطة (100 جم)' : 'Medium (100g)', grams: 100),
+      (label: isArabic ? 'حصة كبيرة (150 جم)' : 'Large (150g)', grams: 150),
+    ];
+  }
+}
+
+class _CookingChip extends StatelessWidget {
+  const _CookingChip({
     required this.label,
-    required this.method,
     required this.isSelected,
     required this.onSelected,
   });
 
   final String label;
-  final CookingMethod method;
   final bool isSelected;
   final VoidCallback onSelected;
 
@@ -726,52 +1011,6 @@ class _CookingMethodDeltaChip extends StatelessWidget {
       label: Text(label),
       selected: isSelected,
       onSelected: (_) => onSelected(),
-    );
-  }
-}
-
-class _MacroColoredChip extends StatelessWidget {
-  const _MacroColoredChip({
-    required this.label,
-    required this.value,
-    required this.color,
-  });
-
-  final String label;
-  final String value;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(VRadius.sm),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            value,
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 12,
-              color: color,
-            ),
-          ),
-          const SizedBox(height: 1),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: color,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -804,23 +1043,23 @@ class _ItemMathTable extends StatelessWidget {
         children: [
           _TableRow(
             title: l10n.mealReviewItemQty,
-            value: '${line.grams.round()} g',
+            value: '${line.grams.round()} جم',
             colors: colors,
           ),
-          const Divider(height: 12),
+          const Divider(height: 10),
           _TableRow(
             title: locale.startsWith('ar') ? 'السعرات' : 'Calories',
             value: l10n.mealReviewCaloriesFormat(line.kcal.round()),
             colors: colors,
             highlightColor: colors.ember,
           ),
-          const Divider(height: 12),
+          const Divider(height: 10),
           _TableRow(
             title: locale.startsWith('ar') ? 'المغذيات (بروتين / كارب / دهون)' : 'Macros (P / C / F)',
             value: '${line.protein.round()}g / ${line.carbs.round()}g / ${line.fat.round()}g',
             colors: colors,
           ),
-          const Divider(height: 12),
+          const Divider(height: 10),
           _TableRow(
             title: locale.startsWith('ar') ? 'المصدر والدقة' : 'Source & Confidence',
             value: '$sourceName (${l10n.mealReviewConfidence(confPct)})',
@@ -853,7 +1092,7 @@ class _TableRow extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            fontSize: 11.5,
+            fontSize: 11,
             color: colors.textMute,
             fontWeight: FontWeight.w600,
           ),
@@ -861,33 +1100,12 @@ class _TableRow extends StatelessWidget {
         Text(
           value,
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 11.5,
             fontWeight: FontWeight.w800,
             color: highlightColor ?? colors.text,
           ),
         ),
       ],
-    );
-  }
-}
-
-class _Badge extends StatelessWidget {
-  const _Badge(this.text, this.color);
-  final String text;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w700),
-      ),
     );
   }
 }

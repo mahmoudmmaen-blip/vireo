@@ -81,6 +81,44 @@ class DailyCalorieGoalCard extends ConsumerWidget {
               l10n.nutritionCalorieProgress(consumed, target.calories),
               style: TextStyle(color: colors.textMute, fontSize: 12),
             ),
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              decoration: BoxDecoration(
+                color: colors.surfaceRaised,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: colors.line),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _FormulaItem(
+                    label: 'الهدف',
+                    value: '${target.calories}',
+                    color: colors.text,
+                  ),
+                  Text('−', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 16)),
+                  _FormulaItem(
+                    label: 'الأكل',
+                    value: '$consumed',
+                    color: colors.ember,
+                  ),
+                  Text('+', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 16)),
+                  _FormulaItem(
+                    label: 'التمرين',
+                    value: '${totals.burnedKcal}',
+                    color: colors.gold,
+                  ),
+                  Text('=', style: TextStyle(color: colors.textMute, fontWeight: FontWeight.bold, fontSize: 16)),
+                  _FormulaItem(
+                    label: 'الباقي',
+                    value: '${(target.calories - consumed + totals.burnedKcal).clamp(0, 99999)}',
+                    color: (target.calories - consumed + totals.burnedKcal) >= 0 ? colors.success : colors.danger,
+                    isBold: true,
+                  ),
+                ],
+              ),
+            ),
             if (carbsMax != null && carbsMax > 0) ...[
               const SizedBox(height: 14),
               Text(
@@ -155,3 +193,44 @@ class DailyCalorieGoalCard extends ConsumerWidget {
     }
   }
 }
+
+class _FormulaItem extends StatelessWidget {
+  const _FormulaItem({
+    required this.label,
+    required this.value,
+    required this.color,
+    this.isBold = false,
+  });
+
+  final String label;
+  final String value;
+  final Color color;
+  final bool isBold;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          value,
+          style: TextStyle(
+            color: color,
+            fontWeight: isBold ? FontWeight.w900 : FontWeight.w700,
+            fontSize: isBold ? 15 : 13,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: TextStyle(
+            color: color.withValues(alpha: 0.8),
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+}
+

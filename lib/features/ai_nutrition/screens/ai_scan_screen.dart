@@ -113,6 +113,9 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
           AiScanErrorKind.parse => l10n.aiScanParseError,
           AiScanErrorKind.config => l10n.aiScanConfigError,
           AiScanErrorKind.dailyLimit => l10n.aiDailyLimitReached,
+          AiScanErrorKind.timeout => (Localizations.localeOf(context).languageCode.startsWith('ar')
+              ? 'استغرق التحليل وقتاً أطول من المتوقع. حاول مرة أخرى.'
+              : 'Analysis timed out. Please try again.'),
           AiScanErrorKind.api => l10n.aiScanFailed,
         };
 

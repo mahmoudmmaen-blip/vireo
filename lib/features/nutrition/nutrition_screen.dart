@@ -15,6 +15,7 @@ import 'package:vireo/features/nutrition/widgets/daily_calorie_goal_card.dart';
 import 'package:vireo/features/nutrition/widgets/fridge_scan_banner.dart';
 import 'package:vireo/features/nutrition/widgets/meal_builder_panel.dart';
 import 'package:vireo/features/nutrition/widgets/meal_card.dart';
+import 'package:vireo/features/nutrition/widgets/meal_quick_relog_row.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
@@ -103,6 +104,7 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
               onScan: () => _openFridgeScan(context, remaining),
             ),
           const DailyCalorieGoalCard(),
+          const MealQuickRelogRow(),
           TabBar(
             controller: _tabController,
             isScrollable: true,

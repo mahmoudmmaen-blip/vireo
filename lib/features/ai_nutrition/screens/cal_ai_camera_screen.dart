@@ -183,6 +183,8 @@ class _CalAiCameraScreenState extends ConsumerState<CalAiCameraScreen> {
         backgroundColor: Colors.black,
         body: MealScanLoadingOverlay(
           imageBytes: _photos.isNotEmpty ? _photos.first : null,
+          onRetry: _analyze,
+          onCancel: () => ref.read(aiScanProvider.notifier).reset(),
         ),
       );
     }

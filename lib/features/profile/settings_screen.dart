@@ -17,6 +17,7 @@ import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/diet_programs/domain/cuisine_type.dart';
 import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
+import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/walking/screens/step_diagnostic_screen.dart';
@@ -223,6 +224,46 @@ class SettingsScreen extends ConsumerWidget {
             subtitle: Text(ref.watch(cuisineProvider).localizedName(l10n)),
             trailing: const Icon(Icons.chevron_right_rounded),
             onTap: () => _showCuisineSelector(context, ref, l10n),
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(Icons.room_service_outlined),
+            title: Text(l10n.plateSizeAskTitle),
+            subtitle: Text(
+              switch (ref.watch(plateSizeProvider)) {
+                PlateSize.small => l10n.plateSizeSmall,
+                PlateSize.medium => l10n.plateSizeMedium,
+                PlateSize.large => l10n.plateSizeLarge,
+                null => isAr ? 'غير محدد' : 'Default (Medium)',
+              },
+              style: TextStyle(fontSize: 12, color: colors.textMute),
+            ),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () async {
+              final picked = await showDialog<PlateSize>(
+                context: context,
+                builder: (ctx) => SimpleDialog(
+                  title: Text(l10n.plateSizeAskTitle),
+                  children: [
+                    SimpleDialogOption(
+                      onPressed: () => Navigator.pop(ctx, PlateSize.small),
+                      child: Text(l10n.plateSizeSmall),
+                    ),
+                    SimpleDialogOption(
+                      onPressed: () => Navigator.pop(ctx, PlateSize.medium),
+                      child: Text(l10n.plateSizeMedium),
+                    ),
+                    SimpleDialogOption(
+                      onPressed: () => Navigator.pop(ctx, PlateSize.large),
+                      child: Text(l10n.plateSizeLarge),
+                    ),
+                  ],
+                ),
+              );
+              if (picked != null) {
+                await ref.read(plateSizeProvider.notifier).setSize(picked);
+              }
+            },
           ),
           const Divider(height: 1),
           SwitchListTile.adaptive(

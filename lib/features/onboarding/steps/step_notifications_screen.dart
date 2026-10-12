@@ -3,6 +3,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/analytics_service.dart';
+import 'package:vireo/core/services/health_steps_service.dart';
+import 'package:vireo/features/walking/data/step_permission.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
 import 'package:vireo/core/ui/pressable.dart';
@@ -49,6 +51,12 @@ class _StepNotificationsScreenState
           .resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
           ?.requestPermissions(alert: true, badge: true, sound: true);
+
+      // Best-effort request Health Connect READ_STEPS and activity recognition
+      if (HealthStepsService.isSupported) {
+        await HealthStepsService.requestPermission();
+      }
+      await StepPermission.request();
     } catch (_) {
       // Best-effort permission request; never block onboarding
     }

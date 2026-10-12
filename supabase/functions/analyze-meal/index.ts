@@ -111,7 +111,45 @@ Deno.serve(async (req) => {
       inline_data: { mime_type: mime, data: stripDataUrl(img) },
     }));
 
+    const fastVisionModel =
+      Deno.env.get('FAST_VISION_MODEL') ?? 'gemini-2.5-flash';
+
+    const itemSchema = {
+      type: 'OBJECT',
+      properties: {
+        name_ar: { type: 'STRING' },
+        name_en: { type: 'STRING' },
+        food_id_guess: { type: 'STRING', nullable: true },
+        estimated_grams: { type: 'NUMBER' },
+        cooking_method: {
+          type: 'STRING',
+          enum: ['boiled', 'grilled', 'fried', 'baked', 'raw', 'steamed', 'other'],
+        },
+        confidence: { type: 'NUMBER' },
+      },
+      required: ['name_ar', 'name_en', 'estimated_grams', 'cooking_method', 'confidence'],
+    };
+
+    const mealSchema = {
+      type: 'OBJECT',
+      properties: {
+        items: {
+          type: 'ARRAY',
+          items: itemSchema,
+        },
+        items_unsure: {
+          type: 'ARRAY',
+          items: itemSchema,
+        },
+      },
+      required: ['items'],
+    };
+
+    const startTime = Date.now();
+    console.log(`[analyze-meal] starting vision analysis with model=${fastVisionModel}, imageCount=${rawImages.length}`);
+
     const raw = await generateContent({
+      modelOverride: fastVisionModel,
       contents: [
         {
           role: 'user',
@@ -122,8 +160,14 @@ Deno.serve(async (req) => {
         },
       ],
       responseJson: true,
+      thinkingBudget: 0,
+      maxOutputTokens: 1200,
+      responseSchema: mealSchema,
       temperature: 0.1,
     });
+
+    const elapsedMs = Date.now() - startTime;
+    console.log(`[analyze-meal] completed in ${elapsedMs}ms`);
 
     const parsed = parseItemsJson(raw);
     if (!parsed) {

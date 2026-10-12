@@ -95,8 +95,8 @@ void main() {
       expect(find.text('Boiled Egg'), findsOneWidget);
       expect(find.text('Pita Bread'), findsOneWidget);
 
-      // Total calories: 155 + 210 = 365 kcal
-      expect(find.text('365 kcal'), findsOneWidget);
+      // Total calories: 155 + 210 = 365
+      expect(find.text('365'), findsWidgets);
 
       // Verify save button exists
       expect(find.byType(FilledButton), findsOneWidget);

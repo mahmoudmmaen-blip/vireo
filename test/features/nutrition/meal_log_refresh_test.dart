@@ -3,11 +3,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
+import 'package:vireo/data/models/meal_type.dart';
+import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
 
 void main() {
   test('saving a meal updates daily totals and today nutrition eaten', () async {
-    final container = ProviderContainer();
+    final container = ProviderContainer(
+      overrides: [
+        confirmedMealsProvider.overrideWith((ref) => <MealType>{}),
+      ],
+    );
     addTearDown(container.dispose);
 
     final beforeTotals = container.read(dailyNutritionTotalsProvider);

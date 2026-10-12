@@ -1,17 +1,23 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
-import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
+import 'package:vireo/features/walking/data/step_foreground_service.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 
-/// Premium 220dp circular gradient ring steps hero card (inspired by Honor Health and Leap Fitness).
+/// Steps hero card matching Leap Step Tracker (leap_step_tracker_home.jpg).
+/// Features:
+/// - Huge step number with edit goal icon
+/// - "/7000 خطوة"
+/// - Big Play / Pause button
+/// - Thick progress bar
+/// - 3 stats: كم (Distance), سعرات (Calories), الوقت (Time)
+/// - 7-day circular row with stars on goal reached + daily average
 class PremiumStepsHeroCard extends ConsumerWidget {
   const PremiumStepsHeroCard({
     super.key,
@@ -24,19 +30,25 @@ class PremiumStepsHeroCard extends ConsumerWidget {
   final int stepsGoal;
   final VoidCallback onTap;
 
-  static const stepsAccent = Color(0xFF10B981); // Emerald 500
-  static const stepsTeal = Color(0xFF06B6D4);   // Cyan 500
+  static const stepsAccent = Color(0xFF10B981); // Bright Emerald Green
+  static const stepsCardBg = Color(0xFF1E293B); // Deep slate blue / Leap style
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final live = ref.watch(liveStepsProvider).valueOrNull;
+    final isRunning = ref.watch(isStepCounterRunningProvider);
     final permissionGranted = live?.permissionGranted ?? true;
 
     if (!permissionGranted && stepsCurrent == 0) {
-      return VireoCard(
+      return Container(
         padding: const EdgeInsets.all(VSpace.lg),
+        decoration: BoxDecoration(
+          color: colors.surface,
+          borderRadius: BorderRadius.circular(VRadius.lg),
+          border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+        ),
         child: Column(
           children: [
             Container(
@@ -90,278 +102,221 @@ class PremiumStepsHeroCard extends ConsumerWidget {
       weightKg: profile.weightKg,
       isFemale: profile.isFemale,
     );
-    final ratio = stepsGoal > 0 ? (stepsCurrent / stepsGoal).clamp(0.0, 1.0) : 0.0;
-    final pct = (ratio * 100).round();
-    final remaining = (stepsGoal - stepsCurrent).clamp(0, stepsGoal);
+    final effectiveGoal = stepsGoal > 0 ? stepsGoal : 7000;
+    final ratio = (stepsCurrent / effectiveGoal).clamp(0.0, 1.0);
     final last7 = live?.last7Days ?? const <DailyStepCount>[];
 
-    return VireoCard(
-      onTap: onTap,
-      padding: const EdgeInsets.all(VSpace.lg),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Header row with Goal
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const Icon(Icons.directions_walk_rounded, color: stepsAccent, size: 20),
-                  const SizedBox(width: 8),
-                  Text(
-                    l10n.stepsHeroTitle,
-                    style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
-                  ),
-                ],
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: stepsAccent.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(VRadius.pill),
-                  border: Border.all(color: stepsAccent.withValues(alpha: 0.3)),
-                ),
-                child: Text(
-                  'هدف: ${NumberFormat.decimalPattern().format(stepsGoal)}',
-                  style: const TextStyle(
-                    color: stepsAccent,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: VSpace.lg),
+    // Compute weekly daily average
+    final totalSteps7 = last7.fold<int>(0, (s, d) => s + d.steps);
+    final dailyAvg = last7.isNotEmpty ? (totalSteps7 / last7.length).round() : stepsCurrent;
 
-          // 220dp Center Circular Gradient Ring
-          Center(
-            child: SizedBox(
-              width: 220,
-              height: 220,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  CustomPaint(
-                    size: const Size(220, 220),
-                    painter: _GradientRingPainter(
-                      progress: ratio,
-                      trackColor: colors.line.withValues(alpha: 0.5),
-                      startColor: stepsAccent,
-                      endColor: stepsTeal,
-                      strokeWidth: 16,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: const Color(0xFF162032), // Dark Navy matching leap_step_tracker_home.jpg
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.25),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Row 1: Big steps number, goal, Play/Pause button
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Play / Pause Circle Button
+                InkWell(
+                  onTap: () async {
+                    HapticFeedback.heavyImpact();
+                    await StepForegroundService.toggle();
+                    ref.read(isStepCounterRunningProvider.notifier).state = StepForegroundService.isActive;
+                  },
+                  borderRadius: BorderRadius.circular(999),
+                  child: Container(
+                    width: 52,
+                    height: 52,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2C3E55),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isRunning ? stepsAccent : Colors.white24,
+                        width: 1.5,
+                      ),
+                    ),
+                    child: Icon(
+                      isRunning ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                      color: isRunning ? stepsAccent : Colors.white,
+                      size: 28,
                     ),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
+                ),
+
+                // Center / Right: Big step number + goal
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        NumberFormat.decimalPattern().format(stepsCurrent),
-                        style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.edit, size: 16, color: Colors.white54),
+                          const SizedBox(width: 6),
+                          Text(
+                            NumberFormat.decimalPattern().format(stepsCurrent),
+                            style: const TextStyle(
+                              fontSize: 48,
                               fontWeight: FontWeight.w900,
-                              fontFeatures: const [FontFeature.tabularFigures()],
-                              height: 1.1,
+                              color: Colors.white,
+                              letterSpacing: -1,
+                              height: 1.0,
                             ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        remaining > 0 ? 'باقي $remaining خطوة' : 'تم تحقيق الهدف! 🎉',
-                        style: TextStyle(
-                          color: remaining > 0 ? colors.textMute : stepsAccent,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12.5,
-                        ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 6),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: colors.background,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          '$pct%',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w900,
-                            color: stepsAccent,
-                            fontSize: 13,
-                          ),
+                      Text(
+                        '/$effectiveGoal خطوة',
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],
                   ),
-                ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 18),
+
+            // Row 2: Thick progress bar
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: SizedBox(
+                height: 16,
+                child: LinearProgressIndicator(
+                  value: ratio,
+                  backgroundColor: const Color(0xFF2C3E55),
+                  valueColor: const AlwaysStoppedAnimation<Color>(stepsAccent),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: VSpace.xl),
+            const SizedBox(height: 22),
 
-          // 4 Metric Tiles (Km, Kcal, Fat, Active Minutes)
-          Row(
-            children: [
-              Expanded(
-                child: _HeroStatTile(
-                  icon: Icons.straighten_rounded,
-                  label: 'المسافة',
-                  value: '${metrics.distanceKm.toStringAsFixed(1)} كم',
-                  color: stepsTeal,
-                  colors: colors,
+            // Row 3: 3 Stats Columns (كم, سعرات, الوقت)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                // Distance
+                _LeapStatColumn(
+                  icon: Icons.track_changes_rounded,
+                  iconColor: const Color(0xFFFBBF24), // Yellow
+                  value: metrics.distanceKm.toStringAsFixed(2),
+                  label: 'كم',
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _HeroStatTile(
+                // Calories
+                _LeapStatColumn(
                   icon: Icons.local_fire_department_rounded,
+                  iconColor: const Color(0xFFF97316), // Orange
+                  value: '${metrics.caloriesKcal}',
                   label: 'السعرات',
-                  value: '${metrics.caloriesKcal} ك.ع',
-                  color: colors.ember,
-                  colors: colors,
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _HeroStatTile(
-                  icon: Icons.water_drop_outlined,
-                  label: 'الدهون',
-                  value: '${metrics.fatBurnedGrams.toStringAsFixed(1)} جم',
-                  color: colors.gold,
-                  colors: colors,
+                // Time
+                _LeapStatColumn(
+                  icon: Icons.access_time_filled_rounded,
+                  iconColor: const Color(0xFF38BDF8), // Cyan
+                  value: '${(metrics.activeMinutes ~/ 60)}س ${(metrics.activeMinutes % 60)}د',
+                  label: 'الوقت',
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _HeroStatTile(
-                  icon: Icons.timer_outlined,
-                  label: 'وقت النشاط',
-                  value: '${metrics.activeMinutes} د',
-                  color: colors.recovery,
-                  colors: colors,
-                ),
-              ),
-            ],
-          ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            const Divider(color: Colors.white12, height: 1),
+            const SizedBox(height: 16),
 
-          if (last7.isNotEmpty) ...[
-            const SizedBox(height: VSpace.md),
-            _Mini7DayBarChart(days: last7, goal: stepsGoal, accent: stepsAccent),
+            // Row 4: Daily average & 7-day circular row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox.shrink(),
+                Text(
+                  'المتوسط اليومي: $dailyAvg',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            // 7 Days Circles with Star when goal hit
+            _Leap7DayRow(
+              days: last7,
+              goal: effectiveGoal,
+              accent: stepsAccent,
+            ),
           ],
-        ],
+        ),
       ),
     );
   }
 }
 
-class _HeroStatTile extends StatelessWidget {
-  const _HeroStatTile({
+class _LeapStatColumn extends StatelessWidget {
+  const _LeapStatColumn({
     required this.icon,
-    required this.label,
+    required this.iconColor,
     required this.value,
-    required this.color,
-    required this.colors,
+    required this.label,
   });
 
   final IconData icon;
-  final String label;
+  final Color iconColor;
   final String value;
-  final Color color;
-  final VireoColors colors;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-      decoration: BoxDecoration(
-        color: colors.background.withValues(alpha: 0.6),
-        borderRadius: BorderRadius.circular(VRadius.md),
-        border: Border.all(color: colors.line.withValues(alpha: 0.5)),
-      ),
-      child: Column(
-        children: [
-          Icon(icon, size: 18, color: color),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+    return Column(
+      children: [
+        Icon(icon, color: iconColor, size: 22),
+        const SizedBox(height: 6),
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            fontSize: 18,
           ),
-          const SizedBox(height: 2),
-          Text(
-            label,
-            style: TextStyle(color: colors.textMute, fontSize: 10.5, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white60,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
-class _GradientRingPainter extends CustomPainter {
-  _GradientRingPainter({
-    required this.progress,
-    required this.trackColor,
-    required this.startColor,
-    required this.endColor,
-    required this.strokeWidth,
-  });
-
-  final double progress;
-  final Color trackColor;
-  final Color startColor;
-  final Color endColor;
-  final double strokeWidth;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = (size.width - strokeWidth) / 2;
-    final rect = Rect.fromCircle(center: center, radius: radius);
-
-    // Track
-    final trackPaint = Paint()
-      ..color = trackColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round;
-
-    canvas.drawCircle(center, radius, trackPaint);
-
-    if (progress <= 0) return;
-
-    final sweepAngle = 2 * math.pi * progress;
-    const startAngle = -math.pi / 2;
-
-    final gradientPaint = Paint()
-      ..shader = SweepGradient(
-        startAngle: startAngle,
-        endAngle: startAngle + 2 * math.pi,
-        colors: [
-          startColor,
-          endColor,
-          startColor,
-        ],
-        stops: const [0.0, 0.5, 1.0],
-        transform: GradientRotation(startAngle),
-      ).createShader(rect)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round;
-
-    canvas.drawArc(rect, startAngle, sweepAngle, false, gradientPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _GradientRingPainter oldDelegate) {
-    return oldDelegate.progress != progress ||
-        oldDelegate.trackColor != trackColor ||
-        oldDelegate.startColor != startColor ||
-        oldDelegate.endColor != endColor;
-  }
-}
-
-class _Mini7DayBarChart extends StatelessWidget {
-  const _Mini7DayBarChart({
+class _Leap7DayRow extends StatelessWidget {
+  const _Leap7DayRow({
     required this.days,
     required this.goal,
     required this.accent,
@@ -373,58 +328,80 @@ class _Mini7DayBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    final maxSteps = days.fold<int>(goal, (m, d) => d.steps > m ? d.steps : m);
+    // Generate 7 days ending today
+    final list = days.isNotEmpty ? days : _generateFallbackDays();
 
-    return SizedBox(
-      height: 48,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          for (var i = 0; i < days.length; i++)
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: LayoutBuilder(
-                          builder: (ctx, constraints) {
-                            final h = maxSteps > 0
-                                ? (days[i].steps / maxSteps * constraints.maxHeight).clamp(4.0, constraints.maxHeight)
-                                : 4.0;
-                            final hit = goal > 0 && days[i].steps >= goal;
-                            return Container(
-                              height: h,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: hit ? accent : colors.line,
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      _dayInitial(days[i].date),
-                      style: TextStyle(color: colors.textMute, fontSize: 9.5, fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-              ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        for (var i = 0; i < list.length && i < 7; i++)
+          _DayCircleItem(
+            day: list[i],
+            goal: goal,
+            accent: accent,
+          ),
+      ],
+    );
+  }
+
+  static List<DailyStepCount> _generateFallbackDays() {
+    final now = DateTime.now();
+    return List.generate(7, (i) {
+      final d = now.subtract(Duration(days: 6 - i));
+      return DailyStepCount(date: d, steps: 0);
+    });
+  }
+}
+
+class _DayCircleItem extends StatelessWidget {
+  const _DayCircleItem({
+    required this.day,
+    required this.goal,
+    required this.accent,
+  });
+
+  final DailyStepCount day;
+  final int goal;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    final reached = goal > 0 && day.steps >= goal;
+    final initial = _dayInitial(day.date);
+
+    return Column(
+      children: [
+        Container(
+          width: 38,
+          height: 38,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: reached ? accent : const Color(0xFF223048),
+            border: Border.all(
+              color: reached ? accent : Colors.white12,
+              width: 1.5,
             ),
-        ],
-      ),
+          ),
+          alignment: Alignment.center,
+          child: reached
+              ? const Icon(Icons.star_rounded, color: Colors.white, size: 22)
+              : null,
+        ),
+        const SizedBox(height: 6),
+        Text(
+          initial,
+          style: const TextStyle(
+            color: Colors.white60,
+            fontSize: 11,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
     );
   }
 
   String _dayInitial(DateTime dt) {
-    final names = ['إث', 'ثل', 'أر', 'خم', 'جم', 'سب', 'أح'];
-    return names[(dt.weekday - 1) % 7];
+    final days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    return days[(dt.weekday - 1) % 7];
   }
 }

@@ -105,6 +105,9 @@ abstract final class GeminiFoodServiceCore {
       final response = await SupabaseService.client.functions.invoke(
         AppConfig.analyzeMealFunctionName,
         body: payload,
+      ).timeout(
+        const Duration(seconds: 25),
+        onTimeout: () => throw const FoodVisionTimeoutException(),
       );
 
       final data = response.data;

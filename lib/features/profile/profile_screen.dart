@@ -283,7 +283,9 @@ class _ProfileHeaderCard extends ConsumerWidget {
               ),
               const SizedBox(width: 6),
               Text(
-                'Cloud Sync: Offline-Ready',
+                Localizations.localeOf(context).languageCode.startsWith('ar')
+                    ? 'المزامنة السحابية: جاهز دون اتصال'
+                    : 'Cloud Sync: Offline-Ready',
                 style: TextStyle(
                   color: colors.textMute,
                   fontSize: 11,
