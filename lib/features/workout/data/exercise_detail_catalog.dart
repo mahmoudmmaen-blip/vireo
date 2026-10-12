@@ -335,4 +335,123 @@ abstract final class ExerciseDetailCatalog {
       'Pair $name with adequate protein to support recovery.',
     ];
   }
+
+  /// Breathing cue tailored to exercise mechanics and localized.
+  static String breathingCueFor(String id, String name, String locale) {
+    final lower = name.toLowerCase();
+    final isArEg = locale == 'ar_EG';
+    final isAr = locale.startsWith('ar');
+
+    if (lower.contains('plank') || lower.contains('hold')) {
+      if (isArEg) return 'اتنفس براحة وبانتظام وماتكتمش نفسك أبداً طول ما عضلات بطنك شادة.';
+      if (isAr) return 'تنفس بعمق وبانتظام ولا تحبس أنفاسك أثناء شد عضلات البطن.';
+      return 'Breathe steadily and deeply — avoid holding your breath while bracing.';
+    }
+    if (lower.contains('squat') || lower.contains('press') || lower.contains('push-up') || lower.contains('dips')) {
+      if (isArEg) return 'خد نفس عميق وأنت نازل، واطلع بالنفس بقوة وأنت بتزق لفوق.';
+      if (isAr) return 'استنشق بعمق أثناء النزول، وازفر بقوة أثناء الدفع لأعلى.';
+      return 'Inhale deeply as you lower down, then exhale forcefully as you drive up.';
+    }
+    if (lower.contains('deadlift') || lower.contains('row') || lower.contains('pull') || lower.contains('curl')) {
+      if (isArEg) return 'خد نفس وأنت بتثبت جسمك، وازفر وأنت بتسحب الوزن ناحيتك.';
+      if (isAr) return 'استنشق أثناء التثبيت، وازفر بقوة أثناء سحب الوزن.';
+      return 'Inhale to brace your trunk, then exhale as you pull the load.';
+    }
+    if (isArEg) return 'اتنفس برتم مظبوط: شهيق مع الرجوع وزفير مع المجهود.';
+    if (isAr) return 'تنفس بانتظام: شهيق مع مرحلة الرجوع وزفير مع المجهود.';
+    return 'Maintain a controlled breathing cadence: inhale on the eccentric, exhale on exertion.';
+  }
+
+  /// Easier progressive regression for beginner scaling.
+  static String easierVariationFor(String id, String name, String locale) {
+    final lower = name.toLowerCase();
+    final isArEg = locale == 'ar_EG';
+    final isAr = locale.startsWith('ar');
+
+    if (lower.contains('push-up') || lower.contains('ضغط')) {
+      if (isArEg) return 'ضغط على الركبتين أو على حرف كنبة أو ترابيزة مرتفعة.';
+      if (isAr) return 'تمرين الضغط على الركبتين أو بالاستناد على سطح مرتفع.';
+      return 'Incline push-ups against a bench or knee-supported push-ups.';
+    }
+    if (lower.contains('pull-up') || lower.contains('عقلة')) {
+      if (isArEg) return 'استخدم أستك مقاومة تحت رجلك أو ابدأ بنزول بطيء (Negative pull-ups).';
+      if (isAr) return 'استخدم حزام المقاومة أو ركّز على مرحلة الهبوط التدريجي.';
+      return 'Resistance band assisted pull-ups or eccentric slow-lowering reps.';
+    }
+    if (lower.contains('squat') || lower.contains('سكوات')) {
+      if (isArEg) return 'سكوات على كرسي (Box Squat) بلمسة خفيفة للمقعد والوقوف.';
+      if (isAr) return 'سكوات إلى كرسي مع لمس المقعد والنهوض.';
+      return 'Box squats onto a bench or chair with bodyweight.';
+    }
+    if (lower.contains('burpee')) {
+      if (isArEg) return 'خطوة بخطوة من غير نطة ومن غير لمس الصدر للأرض.';
+      if (isAr) return 'أداء الحركة خطوة بخطوة بدون قفزة وبدون نزول الصدر.';
+      return 'Step-back burpees without the push-up or jump.';
+    }
+    if (lower.contains('plank') || lower.contains('بلانك')) {
+      if (isArEg) return 'بلانك على الكوع والركبتين بدل مشط الرجل.';
+      if (isAr) return 'بلانك مع الارتكاز على الركبتين.';
+      return 'Knee plank on forearms to build initial core endurance.';
+    }
+    if (isArEg) return 'قلل الوزن أو المدى الحركي وركّز على التكنيك الصح.';
+    if (isAr) return 'تقليل الوزن أو مدى الحركة للتركيز على الأداء السليم.';
+    return 'Reduce the load or range of motion to master proper mechanics.';
+  }
+
+  /// Harder progressive overload variation.
+  static String harderVariationFor(String id, String name, String locale) {
+    final lower = name.toLowerCase();
+    final isArEg = locale == 'ar_EG';
+    final isAr = locale.startsWith('ar');
+
+    if (lower.contains('push-up') || lower.contains('ضغط')) {
+      if (isArEg) return 'ضغط برجلين مرفوعين على دكة (Decline) أو ثبات ثانيتين تحت.';
+      if (isAr) return 'ضغط مع رفع القدمين أو ثبات لثانيتين في القاع.';
+      return 'Feet-elevated decline push-ups or pause at the bottom.';
+    }
+    if (lower.contains('pull-up') || lower.contains('عقلة')) {
+      if (isArEg) return 'عقلة بوزن إضافي أو ثبات 3 ثواني فوق مع لمس الصدر للبار.';
+      if (isAr) return 'عقلة بأوزان إضافية أو ثبات 3 ثوانٍ في الأعلى.';
+      return 'Weighted pull-ups or chest-to-bar pauses for 3 seconds.';
+    }
+    if (lower.contains('squat') || lower.contains('سكوات')) {
+      if (isArEg) return 'سكوات بثبات ثانيتين في القاع أو سكوات برجل واحدة (Pistol).';
+      if (isAr) return 'سكوات مع التوقف لثانيتين بالأسفل أو سكوات بساق واحدة.';
+      return 'Pause squats (2-sec pause at depth) or single-leg pistol squats.';
+    }
+    if (lower.contains('plank') || lower.contains('بلانك')) {
+      if (isArEg) return 'بلانك مع رفع رجل واحدة بالتناوب أو بلانك ديناميكي.';
+      if (isAr) return 'بلانك مع رفع ساق بالتناوب أو التبديل للساعد والكف.';
+      return 'Single-leg elevated plank or walking plank transfers.';
+    }
+    if (isArEg) return 'زود زمن الشد (Tempo بطيء: 3 ثواني نزول) أو زود الوزن.';
+    if (isAr) return 'زيادة وقت التوتر العضلي (3 ثوانٍ نزول) أو زيادة الحمل.';
+    return 'Increase time-under-tension (3-second eccentric tempo) or add weight.';
+  }
+
+  /// Safety precautions and joint protection.
+  static String safetyNoteFor(String id, String name, String locale) {
+    final lower = name.toLowerCase();
+    final isArEg = locale == 'ar_EG';
+    final isAr = locale.startsWith('ar');
+
+    if (lower.contains('deadlift') || lower.contains('ديدليفت')) {
+      if (isArEg) return 'حافظ على استقامة ضهرك وماتقوسش أبداً. البار دايماً قريب من قصبة رجلك.';
+      if (isAr) return 'حافظ على استقامة العمود الفقري وتجنب تقوس أسفل الظهر. أبقِ الثقل قريباً من الساق.';
+      return 'Keep your spine neutral and never round your lower back. Keep the bar close to your shins.';
+    }
+    if (lower.contains('squat') || lower.contains('سكوات') || lower.contains('lunge') || lower.contains('لانج')) {
+      if (isArEg) return 'ماتخليش ركبك تضم لجوه وأنت طالع، وركز إن كعب رجلك ثابت على الأرض.';
+      if (isAr) return 'تجنب انحناء الركبتين للداخل أثناء الصعود، وثبت الكعبين بإحكام على الأرض.';
+      return 'Avoid letting knees cave inward upon ascent; distribute weight firmly across the midfoot and heel.';
+    }
+    if (lower.contains('press') || lower.contains('بنش') || lower.contains('كتف')) {
+      if (isArEg) return 'ثبت كتافك لورا وماتقفلش كوعك للآخر في قمة الحركة لحماية المفاصل.';
+      if (isAr) return 'اسحب لوحي الكتف للخلف وتجنب قفل مفصل الكوع بالكامل في القمة لحماية المفصل.';
+      return 'Retract your scapulae and avoid aggressive lockout at the top to protect the elbow joint.';
+    }
+    if (isArEg) return 'لو حسيت بأي وخز أو وجع في المفاصل وقف فوراً، الألم العضلي طبيعي لكن وجع المفاصل خطر.';
+    if (isAr) return 'إذا شعرت بألم حاد في المفاصل توقف فوراً. إجهاد العضلة طبيعي أما ألم المفصل فيتطلب إيقاف الحركة.';
+    return 'Stop immediately if you experience sharp joint pain. Muscular fatigue is normal, but joint pain is a warning signal.';
+  }
 }

@@ -8,6 +8,7 @@ import 'package:vireo/core/widgets/animated_backgrounds.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/services/rest_alert_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/features/workout/data/exercise_detail_catalog.dart';
 import 'package:vireo/features/workout/domain/exercise_detail.dart';
 import 'package:vireo/features/workout/domain/exercise_media.dart';
 import 'package:vireo/features/workout/providers/exercise_detail_provider.dart';
@@ -303,6 +304,34 @@ class _ExerciseDetailScreenState extends ConsumerState<ExerciseDetailScreen> {
                               iconColor: colors.gold,
                               items: detail.tips,
                             ),
+                            const SizedBox(height: 12),
+                            _SingleGuideCard(
+                              title: l10n.exerciseBreathingCue,
+                              content: ExerciseDetailCatalog.breathingCueFor(detail.id, detail.name, locale),
+                              icon: Icons.air_rounded,
+                              iconColor: colors.ember,
+                            ),
+                            const SizedBox(height: 12),
+                            _SingleGuideCard(
+                              title: l10n.exerciseEasierVariation,
+                              content: ExerciseDetailCatalog.easierVariationFor(detail.id, detail.name, locale),
+                              icon: Icons.trending_down_rounded,
+                              iconColor: colors.success,
+                            ),
+                            const SizedBox(height: 12),
+                            _SingleGuideCard(
+                              title: l10n.exerciseHarderVariation,
+                              content: ExerciseDetailCatalog.harderVariationFor(detail.id, detail.name, locale),
+                              icon: Icons.trending_up_rounded,
+                              iconColor: colors.ember,
+                            ),
+                            const SizedBox(height: 12),
+                            _SingleGuideCard(
+                              title: l10n.exerciseSafetyNote,
+                              content: ExerciseDetailCatalog.safetyNoteFor(detail.id, detail.name, locale),
+                              icon: Icons.shield_outlined,
+                              iconColor: colors.danger,
+                            ),
                           ],
                         ),
                       ),
@@ -455,6 +484,55 @@ class _InstructionAccordion extends StatelessWidget {
               ),
             )
             .toList(),
+      ),
+    );
+  }
+}
+
+class _SingleGuideCard extends StatelessWidget {
+  const _SingleGuideCard({
+    required this.title,
+    required this.content,
+    required this.icon,
+    required this.iconColor,
+  });
+
+  final String title;
+  final String content;
+  final IconData icon;
+  final Color iconColor;
+
+  @override
+  Widget build(BuildContext context) {
+    if (content.isEmpty) return const SizedBox.shrink();
+    final colors = context.vireoColors;
+
+    return Card(
+      color: colors.surfaceRaised,
+      child: ExpansionTile(
+        initiallyExpanded: false,
+        leading: Icon(icon, color: iconColor),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    content,
+                    style: TextStyle(
+                      color: colors.text,
+                      fontSize: 13.5,
+                      height: 1.45,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

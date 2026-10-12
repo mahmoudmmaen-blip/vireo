@@ -23,6 +23,19 @@ enum CuisineType {
     );
   }
 
+  String localizedName(dynamic l10n) {
+    return switch (this) {
+      CuisineType.egyptian => l10n.cuisineEgyptian as String,
+      CuisineType.saudi => l10n.cuisineSaudi as String,
+      CuisineType.levantine => l10n.cuisineLevantine as String,
+      CuisineType.moroccan => l10n.cuisineMoroccan as String,
+      CuisineType.turkish => l10n.cuisineTurkish as String,
+      CuisineType.indian => l10n.cuisineIndian as String,
+      CuisineType.indonesian => l10n.cuisineIndonesian as String,
+      CuisineType.western => l10n.cuisineWestern as String,
+    };
+  }
+
   static CuisineType defaultForLocale(String languageCode, String? countryCode) {
     final country = countryCode?.toUpperCase();
     if (country == 'EG') return CuisineType.egyptian;

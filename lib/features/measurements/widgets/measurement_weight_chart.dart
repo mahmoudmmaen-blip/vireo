@@ -9,9 +9,11 @@ class MeasurementWeightChart extends StatelessWidget {
   const MeasurementWeightChart({
     super.key,
     required this.measurements,
+    this.onAddEntry,
   });
 
   final List<BodyMeasurement> measurements;
+  final VoidCallback? onAddEntry;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +25,28 @@ class MeasurementWeightChart extends StatelessWidget {
       return SizedBox(
         height: 220,
         child: Center(
-          child: Text(
-            l10n.measurementsNeedMoreData,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: colors.textMute),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.show_chart_rounded, size: 40, color: colors.textMute.withValues(alpha: 0.6)),
+                const SizedBox(height: 10),
+                Text(
+                  l10n.measurementsNeedMoreData,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: colors.textMute, fontSize: 13, height: 1.3),
+                ),
+                if (onAddEntry != null) ...[
+                  const SizedBox(height: 12),
+                  FilledButton.tonalIcon(
+                    onPressed: onAddEntry,
+                    icon: const Icon(Icons.add, size: 16),
+                    label: Text(l10n.measurementsAddEntry),
+                  ),
+                ],
+              ],
+            ),
           ),
         ),
       );

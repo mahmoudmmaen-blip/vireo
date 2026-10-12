@@ -11,6 +11,8 @@ import 'package:vireo/features/diet_programs/application/diet_plan_engine.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/diet_programs/screens/diet_program_detail_screen.dart';
 import 'package:vireo/features/diet_programs/screens/diet_quiz_screen.dart';
+import 'package:vireo/features/diet_programs/domain/cuisine_type.dart';
+import 'package:vireo/features/diet_programs/domain/diet_program.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 
 class DietProgramsScreen extends ConsumerWidget {
@@ -28,6 +30,11 @@ class DietProgramsScreen extends ConsumerWidget {
     return FeatureScaffold(
       title: l10n.dietProgramsTitle,
       actions: [
+        IconButton(
+          tooltip: l10n.cuisineSettingTitle,
+          icon: const Icon(Icons.restaurant_menu_rounded),
+          onPressed: () => _showCuisineSelector(context, ref, l10n),
+        ),
         IconButton(
           tooltip: l10n.dietQuizTitle,
           icon: const Icon(Icons.quiz_outlined),
@@ -126,6 +133,11 @@ class DietProgramsScreen extends ConsumerWidget {
                           ),
                           color: colors.textMute,
                         ),
+                        VireoPill(
+                          label: l10n.dietProgramFitReason(_fitReason(p.id, lang)),
+                          icon: Icons.check_circle_outline_rounded,
+                          color: colors.success,
+                        ),
                         if (item.targets.deficitKcal > 0 || item.targets.weeklyLossKg > 0)
                           FatEquivalentBadge(
                             customText: FatEquivalent.dietPlanRateText(
@@ -190,4 +202,83 @@ class _DifficultyDots extends StatelessWidget {
       }),
     );
   }
+}
+
+String _fitReason(DietProgramId id, String lang) {
+  final isAr = lang.startsWith('ar');
+  return switch (id) {
+    DietProgramId.balancedDeficit =>
+      isAr ? 'خسارة دهون مستدامة بأقل حرمان' : 'Sustainable fat loss with flexibility',
+    DietProgramId.highProtein =>
+      isAr ? 'حرق الدهون وبناء ونحت العضلات' : 'Maximum muscle retention & satiety',
+    DietProgramId.intermittentFasting =>
+      isAr ? 'تنظيم الهرمونات والتحكم في الشهية' : 'Appetite control & metabolic rhythm',
+    DietProgramId.lowCarb =>
+      isAr ? 'تقليل احتباس السوائل وسرعة النزول' : 'Reduced water retention & steady energy',
+    DietProgramId.keto =>
+      isAr ? 'حرق مخزون الدهون العنيدة بكفاءة' : 'Deep nutritional ketosis',
+    DietProgramId.fastingLowCarb =>
+      isAr ? 'مضاعفة حرق الدهون وتنظيم الأنسولين' : 'Accelerated fat mobilization',
+    DietProgramId.egyptianClean =>
+      isAr ? 'أكلات بيتك المصرية بأسلوب صحي محسوب' : 'Wholesome local Egyptian cuisine',
+  };
+}
+
+void _showCuisineSelector(BuildContext context, WidgetRef ref, AppLocalizations l10n) {
+  final colors = context.vireoColors;
+  final current = ref.read(cuisineProvider);
+
+  showModalBottomSheet<void>(
+    context: context,
+    backgroundColor: colors.surface,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
+    builder: (ctx) {
+      return SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Text(
+                  l10n.cuisineSettingTitle,
+                  style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
+              Flexible(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: CuisineType.values.map((c) {
+                    final selected = c == current;
+                    return ListTile(
+                      title: Text(
+                        c.localizedName(l10n),
+                        style: TextStyle(
+                          fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+                          color: selected ? colors.ember : colors.text,
+                        ),
+                      ),
+                      trailing: selected
+                          ? Icon(Icons.check_rounded, color: colors.ember)
+                          : null,
+                      onTap: () {
+                        ref.read(cuisineProvider.notifier).setCuisine(c);
+                        Navigator.of(ctx).pop();
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }

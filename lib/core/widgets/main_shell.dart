@@ -301,7 +301,6 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
-    final color = selected ? colors.ember : colors.textMute;
 
     return Semantics(
       selected: selected,
@@ -311,42 +310,47 @@ class _NavItem extends StatelessWidget {
       child: Pressable(
         onTap: onTap,
         haptic: false,
-        scale: 0.92,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedContainer(
-              duration: VMotion.base,
-              curve: VMotion.standard,
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-              decoration: BoxDecoration(
-                color: selected
-                    ? colors.ember.withValues(alpha: 0.14)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(VRadius.pill),
-              ),
-              child: AnimatedSwitcher(
-                duration: VMotion.fast,
-                child: Icon(
+        scale: 0.94,
+        child: Center(
+          child: AnimatedContainer(
+            duration: VMotion.base,
+            curve: VMotion.standard,
+            padding: EdgeInsets.symmetric(
+              horizontal: selected ? 10 : 4,
+              vertical: 6,
+            ),
+            decoration: BoxDecoration(
+              color: selected
+                  ? colors.ember.withValues(alpha: 0.16)
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(VRadius.pill),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
                   selected ? activeIcon : icon,
-                  key: ValueKey<bool>(selected),
-                  color: color,
-                  size: 24,
+                  color: selected ? colors.ember : colors.textMute,
+                  size: 23,
                 ),
-              ),
+                const SizedBox(height: 2),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: selected ? colors.ember : colors.textMute,
+                      fontSize: 12.5,
+                      fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
+                      height: 1.1,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 3),
-            Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: color,
-                fontSize: 11,
-                fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -61,18 +61,43 @@ class _WarmUpScreenState extends ConsumerState<WarmUpScreen>
     super.dispose();
   }
 
-  List<_WarmUpStep> _baseSteps(AppLocalizations l10n) => [
-        _WarmUpStep(l10n.workoutWarmUpStep1, 30, Icons.accessibility_new),
-        _WarmUpStep(l10n.workoutWarmUpStep2, 60, Icons.directions_walk),
-        _WarmUpStep(l10n.workoutWarmUpStep3, 10, Icons.fitness_center),
-      ];
+  List<_WarmUpStep> _baseSteps(AppLocalizations l10n, String locale) {
+    final isArEg = locale == 'ar_EG';
+    final isAr = locale.startsWith('ar');
+
+    final sub1 = isArEg
+        ? 'لف كتافك لورا في دواير واسعة وسلسة ووسّع قفصك الصدري'
+        : isAr
+            ? 'قم بتدوير الكتفين للخلف بدوائر واسعة لتهيئة المفاصل'
+            : 'Roll shoulders back in wide, smooth circles to mobilize joints.';
+
+    final sub2 = isArEg
+        ? 'ارفع ركبك بالتبادل مع مرجحة خفيفة للذراعين لرفع النبض'
+        : isAr
+            ? 'ارفع الركبتين بالتناوب مع تحريك الذراعين لتنشيط الدورة الدموية'
+            : 'March briskly, pumping arms to elevate heart rate and body temperature.';
+
+    final sub3 = isArEg
+        ? 'انزل بوزن جسمك براحة واطلع وركز على تشغيل عضلات الفخذ والمؤخرة'
+        : isAr
+            ? 'اهبط بوزن الجسم بهدوء واصعد لتفعيل عضلات الفخذين والحوض'
+            : 'Lower into a shallow squat and drive up to activate glutes and quads.';
+
+    return [
+      _WarmUpStep(l10n.workoutWarmUpStep1, sub1, 30, Icons.accessibility_new),
+      _WarmUpStep(l10n.workoutWarmUpStep2, sub2, 60, Icons.directions_walk),
+      _WarmUpStep(l10n.workoutWarmUpStep3, sub3, 10, Icons.fitness_center),
+    ];
+  }
 
   List<_WarmUpStep> _steps(AppLocalizations l10n) {
-    final base = _baseSteps(l10n);
+    final locale = ref.read(localeProvider).toString();
+    final base = _baseSteps(l10n, locale);
     return [
       for (var i = 0; i < base.length; i++)
         _WarmUpStep(
           _overrides[i] ?? base[i].label,
+          base[i].instruction,
           base[i].durationSeconds,
           base[i].icon,
         ),
@@ -216,6 +241,18 @@ class _WarmUpScreenState extends ConsumerState<WarmUpScreen>
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
+                if (step.instruction.isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    step.instruction,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: colors.textMute,
+                      fontSize: 13,
+                      height: 1.35,
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 12),
                 Text(
                   '$_secondsLeft',
@@ -261,6 +298,13 @@ class _WarmUpScreenState extends ConsumerState<WarmUpScreen>
                             color: active ? colors.text : colors.textMute,
                           ),
                         ),
+                        subtitle: Text(
+                          steps[i].instruction,
+                          style: TextStyle(
+                            fontSize: 11.5,
+                            color: active ? colors.textMute : colors.textMute.withValues(alpha: 0.7),
+                          ),
+                        ),
                       );
                     }),
                   ),
@@ -298,9 +342,10 @@ class _WarmUpScreenState extends ConsumerState<WarmUpScreen>
 }
 
 class _WarmUpStep {
-  const _WarmUpStep(this.label, this.durationSeconds, this.icon);
+  const _WarmUpStep(this.label, this.instruction, this.durationSeconds, this.icon);
 
   final String label;
+  final String instruction;
   final int durationSeconds;
   final IconData icon;
 }

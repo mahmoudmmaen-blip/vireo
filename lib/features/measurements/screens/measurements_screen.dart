@@ -161,7 +161,10 @@ class _MeasurementsBody extends ConsumerWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: VireoDecorations.premiumCard(colors),
-          child: MeasurementWeightChart(measurements: chartData),
+          child: MeasurementWeightChart(
+            measurements: chartData,
+            onAddEntry: () => showAddMeasurementSheet(context),
+          ),
         ),
         const SizedBox(height: 24),
         Text(l10n.measurementsHistory, style: Theme.of(context).textTheme.titleMedium),

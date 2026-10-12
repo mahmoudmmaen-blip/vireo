@@ -29,6 +29,12 @@ Act as a Senior Flutter monetization engineer on Vireo (branch ux-v2). Add famil
    - Update docs/store/DATA_SAFETY.md: Device or other IDs collected and shared with Google AdMob for advertising/analytics; approximate location shared for ads only if AdMob collects it.
    - Update the "Contains ads" answer to Yes.
 
+5b. Google Play reviewer access. Reviewers need full Pro access without paying.
+   - Add a Supabase migration: table public.pro_grants(email text primary key, note text, expires_at timestamptz null). Enable RLS; a user can select only the row matching auth.email().
+   - The entitlement provider treats a signed-in user whose email is in pro_grants (and not expired) as Pro: no ads, all Pro features.
+   - Do NOT insert any row yourself. Document in docs/RELEASE.md the one SQL line the owner runs (or Claude runs via `npx supabase db query`) to grant the reviewer email.
+   - Push the migration with `npx supabase db push`. Stop and report if it asks for a password.
+
 6. Tests and wrap-up
    - Unit tests: interstitial frequency cap, rewarded unlock expiry, Pro users get no ad widgets.
    - flutter gen-l10n (all 10 locales).

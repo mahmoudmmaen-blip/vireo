@@ -13,6 +13,7 @@ import 'package:vireo/features/auth/auth_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
 import 'package:vireo/core/constants/legal_urls.dart';
+import 'package:vireo/features/diet_programs/domain/cuisine_type.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
@@ -182,6 +183,14 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const Divider(),
           ListTile(
+            leading: const Icon(Icons.restaurant_menu_rounded),
+            title: Text(l10n.cuisineSettingTitle),
+            subtitle: Text(ref.watch(cuisineProvider).localizedName(l10n)),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => _showCuisineSelector(context, ref, l10n),
+          ),
+          const Divider(),
+          ListTile(
             leading: const Icon(Icons.notifications_outlined),
             title: Text(l10n.notificationsTitle),
             trailing: const Icon(Icons.chevron_right_rounded),
@@ -300,5 +309,64 @@ class SettingsScreen extends ConsumerWidget {
       AccentPalette.oceanicBlue => l10n.settingsAccentBlue,
       AccentPalette.deepViolet => l10n.settingsAccentViolet,
     };
+  }
+
+  void _showCuisineSelector(BuildContext context, WidgetRef ref, AppLocalizations l10n) {
+    final colors = context.vireoColors;
+    final current = ref.read(cuisineProvider);
+
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: colors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (ctx) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Text(
+                    l10n.cuisineSettingTitle,
+                    style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+                Flexible(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: CuisineType.values.map((c) {
+                      final selected = c == current;
+                      return ListTile(
+                        title: Text(
+                          c.localizedName(l10n),
+                          style: TextStyle(
+                            fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+                            color: selected ? colors.ember : colors.text,
+                          ),
+                        ),
+                        trailing: selected
+                            ? Icon(Icons.check_rounded, color: colors.ember)
+                            : null,
+                        onTap: () {
+                          ref.read(cuisineProvider.notifier).setCuisine(c);
+                          Navigator.of(ctx).pop();
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

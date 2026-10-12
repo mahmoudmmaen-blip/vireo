@@ -242,13 +242,15 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${_kcal.round()} kcal',
+                        l10n.mealReviewCaloriesFormat(_kcal.round()),
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w900,
                             ),
                       ),
                       Text(
-                        'P ${_p.round()} · C ${_c.round()} · F ${_f.round()}',
+                        locale.startsWith('ar')
+                            ? 'بروتين ${_p.round()} · كارب ${_c.round()} · دهون ${_f.round()}'
+                            : 'P ${_p.round()} · C ${_c.round()} · F ${_f.round()}',
                         style: TextStyle(color: colors.textMute, fontSize: 13),
                       ),
                     ],
@@ -356,83 +358,172 @@ class _LineCard extends StatelessWidget {
             ),
           ],
           const SizedBox(height: 8),
+          const SizedBox(height: 10),
+          // ── Grams / Unit selection ──
           Row(
             children: [
               IconButton(
+                visualDensity: VisualDensity.compact,
                 onPressed: () {
                   HapticFeedback.selectionClick();
                   onChanged(rescaleLine(line, (line.grams - 10).clamp(10, 2000)));
                 },
-                icon: const Icon(Icons.remove_circle_outline),
+                icon: const Icon(Icons.remove_circle_outline, size: 20),
               ),
-              Text('${line.grams.round()} g',
-                  style: const TextStyle(fontWeight: FontWeight.w700)),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: colors.background,
+                  borderRadius: BorderRadius.circular(VRadius.sm),
+                  border: Border.all(color: colors.line),
+                ),
+                child: Text(
+                  '${line.grams.round()} g',
+                  style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                ),
+              ),
               IconButton(
+                visualDensity: VisualDensity.compact,
                 onPressed: () {
                   HapticFeedback.selectionClick();
                   onChanged(rescaleLine(line, (line.grams + 10).clamp(10, 2000)));
                 },
-                icon: const Icon(Icons.add_circle_outline),
+                icon: const Icon(Icons.add_circle_outline, size: 20),
               ),
               Expanded(
                 child: Slider(
                   value: line.grams.clamp(10, 500),
                   min: 10,
                   max: 500,
+                  divisions: 49,
                   onChanged: (v) => onChanged(rescaleLine(line, v)),
                 ),
               ),
             ],
           ),
-          if (line.portions.isNotEmpty)
-            Wrap(
+          // Unit Chips: Common portions plus localized quick units "حبة", "حفنة"
+          Padding(
+            padding: const EdgeInsets.only(top: 2, bottom: 6),
+            child: Wrap(
               spacing: 6,
+              runSpacing: 4,
               children: [
-                for (final p in line.portions.take(4))
-                  ActionChip(
-                    label: Text(p.label(locale)),
-                    onPressed: () => onChanged(rescaleLine(line, p.grams)),
-                  ),
+                if (line.portions.isNotEmpty)
+                  for (final p in line.portions.take(3))
+                    ActionChip(
+                      visualDensity: VisualDensity.compact,
+                      label: Text('${p.label(locale)} (${p.grams.round()}g)'),
+                      onPressed: () => onChanged(rescaleLine(line, p.grams)),
+                    ),
+                // "حبة" (Piece / ~80g)
+                ActionChip(
+                  visualDensity: VisualDensity.compact,
+                  label: Text(locale.startsWith('ar') ? 'حبة (80g)' : 'Piece (80g)'),
+                  onPressed: () => onChanged(rescaleLine(line, 80)),
+                ),
+                // "حفنة" (Handful / ~35g)
+                ActionChip(
+                  visualDensity: VisualDensity.compact,
+                  label: Text(locale.startsWith('ar') ? 'حفنة (35g)' : 'Handful (35g)'),
+                  onPressed: () => onChanged(rescaleLine(line, 35)),
+                ),
+                // Standard 100g
+                ActionChip(
+                  visualDensity: VisualDensity.compact,
+                  label: const Text('100g'),
+                  onPressed: () => onChanged(rescaleLine(line, 100)),
+                ),
               ],
             ),
-          const SizedBox(height: 6),
-          Wrap(
-            spacing: 6,
-            children: [
-              for (final m in [
-                CookingMethod.raw,
-                CookingMethod.boiled,
-                CookingMethod.grilled,
-                CookingMethod.fried,
-                CookingMethod.baked,
-              ])
-                ChoiceChip(
-                  label: Text(_cookLabel(l10n, m)),
-                  selected: line.cookingMethod == m,
-                  onSelected: (_) => onChanged(
-                    recomputeWithMethod(line, m, oilFood: oil),
-                  ),
+          ),
+          // ── Cooking Method Chips with Delta (e.g. fried adds oil delta) ──
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: [
+                _CookingMethodDeltaChip(
+                  label: l10n.mealReviewCookingRaw,
+                  method: CookingMethod.raw,
+                  isSelected: line.cookingMethod == CookingMethod.raw,
+                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.raw, oilFood: oil)),
                 ),
-            ],
+                _CookingMethodDeltaChip(
+                  label: l10n.mealReviewCookingBoiled,
+                  method: CookingMethod.boiled,
+                  isSelected: line.cookingMethod == CookingMethod.boiled,
+                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.boiled, oilFood: oil)),
+                ),
+                _CookingMethodDeltaChip(
+                  label: l10n.mealReviewCookingGrilled,
+                  method: CookingMethod.grilled,
+                  isSelected: line.cookingMethod == CookingMethod.grilled,
+                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.grilled, oilFood: oil)),
+                ),
+                _CookingMethodDeltaChip(
+                  label: '${l10n.mealReviewCookingFried} +${(line.grams * 0.08 * 8.84).round()}kcal',
+                  method: CookingMethod.fried,
+                  isSelected: line.cookingMethod == CookingMethod.fried,
+                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.fried, oilFood: oil)),
+                ),
+                _CookingMethodDeltaChip(
+                  label: l10n.mealReviewCookingBaked,
+                  method: CookingMethod.baked,
+                  isSelected: line.cookingMethod == CookingMethod.baked,
+                  onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.baked, oilFood: oil)),
+                ),
+              ],
+            ),
+          ),
+          // ── Macro chips (kcal, protein, carbs, fat colored chips) ──
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            decoration: BoxDecoration(
+              color: colors.background.withValues(alpha: 0.5),
+              borderRadius: BorderRadius.circular(VRadius.md),
+              border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _MacroColoredChip(
+                  label: locale.startsWith('ar') ? 'سعرة' : 'kcal',
+                  value: '${line.kcal.round()}',
+                  color: colors.ember,
+                ),
+                _MacroColoredChip(
+                  label: locale.startsWith('ar') ? 'بروتين' : 'Protein',
+                  value: '${line.protein.round()}g',
+                  color: VMacro.protein,
+                ),
+                _MacroColoredChip(
+                  label: locale.startsWith('ar') ? 'كارب' : 'Carbs',
+                  value: '${line.carbs.round()}g',
+                  color: VMacro.carbs,
+                ),
+                _MacroColoredChip(
+                  label: locale.startsWith('ar') ? 'دهون' : 'Fat',
+                  value: '${line.fat.round()}g',
+                  color: VMacro.fat,
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 6),
-          Text(
-            '${line.kcal.round()} kcal · P ${line.protein.round()} · C ${line.carbs.round()} · F ${line.fat.round()}',
-            style: TextStyle(color: colors.textMute, fontSize: 12),
-          ),
+          // ── "إزاي حسبناها" Clean Table ──
           ExpansionTile(
             tilePadding: EdgeInsets.zero,
+            childrenPadding: const EdgeInsets.only(bottom: 6),
             title: Text(
               l10n.mealHowCalculated,
-              style: TextStyle(fontSize: 12, color: colors.textMute),
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: colors.textMute),
             ),
             children: [
-              Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: Text(
-                  _howCalculated(line, locale),
-                  style: TextStyle(fontSize: 12, color: colors.textMute),
-                ),
+              _ItemMathTable(
+                line: line,
+                locale: locale,
+                l10n: l10n,
               ),
             ],
           ),
@@ -573,31 +664,171 @@ class _LineCard extends StatelessWidget {
   }
 }
 
-String _howCalculated(ResolvedMealLine line, String locale) {
-  final per100 = line.food?.per100g;
-  final name = locale.startsWith('ar')
-      ? line.nameAr
-      : (line.nameEn.isNotEmpty ? line.nameEn : line.nameAr);
-  if (per100 == null) {
-    return '$name · ${line.grams.round()} g · ${line.kcal.round()} kcal (estimated)';
+
+class _CookingMethodDeltaChip extends StatelessWidget {
+  const _CookingMethodDeltaChip({
+    required this.label,
+    required this.method,
+    required this.isSelected,
+    required this.onSelected,
+  });
+
+  final String label;
+  final CookingMethod method;
+  final bool isSelected;
+  final VoidCallback onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoiceChip(
+      visualDensity: VisualDensity.compact,
+      label: Text(label),
+      selected: isSelected,
+      onSelected: (_) => onSelected(),
+    );
   }
-  final source = line.food?.source;
-  final src = source == null
-      ? ''
-      : '\n${source.name} FDC ${source.fdcId}';
-  final scaled = (per100.kcal * line.grams / 100).round();
-  return '$name · ${line.grams.round()} g × ${per100.kcal.round()} kcal/100 g ≈ $scaled kcal$src';
 }
 
-String _cookLabel(AppLocalizations l10n, CookingMethod m) => switch (m) {
-      CookingMethod.raw => l10n.cookMethodRaw,
-      CookingMethod.boiled => l10n.cookMethodBoiled,
-      CookingMethod.grilled => l10n.cookMethodGrilled,
-      CookingMethod.fried => l10n.cookMethodFried,
-      CookingMethod.baked => l10n.cookMethodBaked,
-      CookingMethod.steamed => l10n.cookMethodSteamed,
-      CookingMethod.other => l10n.cookMethodOther,
-    };
+class _MacroColoredChip extends StatelessWidget {
+  const _MacroColoredChip({
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  final String label;
+  final String value;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(VRadius.sm),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            value,
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 12,
+              color: color,
+            ),
+          ),
+          const SizedBox(height: 1),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+              color: color,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ItemMathTable extends StatelessWidget {
+  const _ItemMathTable({
+    required this.line,
+    required this.locale,
+    required this.l10n,
+  });
+
+  final ResolvedMealLine line;
+  final String locale;
+  final AppLocalizations l10n;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    final sourceName = line.food?.source.name ?? (line.isEstimated ? 'AI Estimate' : 'Database');
+    final confPct = (line.confidence * 100).round();
+
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: colors.background,
+        borderRadius: BorderRadius.circular(VRadius.sm),
+        border: Border.all(color: colors.line.withValues(alpha: 0.5)),
+      ),
+      child: Column(
+        children: [
+          _TableRow(
+            title: l10n.mealReviewItemQty,
+            value: '${line.grams.round()} g',
+            colors: colors,
+          ),
+          const Divider(height: 12),
+          _TableRow(
+            title: locale.startsWith('ar') ? 'السعرات' : 'Calories',
+            value: l10n.mealReviewCaloriesFormat(line.kcal.round()),
+            colors: colors,
+            highlightColor: colors.ember,
+          ),
+          const Divider(height: 12),
+          _TableRow(
+            title: locale.startsWith('ar') ? 'المغذيات (بروتين / كارب / دهون)' : 'Macros (P / C / F)',
+            value: '${line.protein.round()}g / ${line.carbs.round()}g / ${line.fat.round()}g',
+            colors: colors,
+          ),
+          const Divider(height: 12),
+          _TableRow(
+            title: locale.startsWith('ar') ? 'المصدر والدقة' : 'Source & Confidence',
+            value: '$sourceName (${l10n.mealReviewConfidence(confPct)})',
+            colors: colors,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TableRow extends StatelessWidget {
+  const _TableRow({
+    required this.title,
+    required this.value,
+    required this.colors,
+    this.highlightColor,
+  });
+
+  final String title;
+  final String value;
+  final VireoColors colors;
+  final Color? highlightColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 11.5,
+            color: colors.textMute,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w800,
+            color: highlightColor ?? colors.text,
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 class _Badge extends StatelessWidget {
   const _Badge(this.text, this.color);
