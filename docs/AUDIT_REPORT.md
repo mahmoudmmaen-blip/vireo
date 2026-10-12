@@ -85,6 +85,39 @@ Created modular, isolated audit tests in `test/audit/` with mocked authenticatio
 
 ---
 
-## 6. Static Analysis & Build Verification
+## 6. UI Consistency Audit (P28 Item 3)
+1. **Design System & Spacing**:
+   - Standardized container cards across Home, Nutrition, Profile, and Settings to use `14–16px` border radii and consistent subtle stroke borders (`colors.line.withValues(alpha: 0.6)`).
+   - Unified color tokens (`context.vireoColors` with `ember`, `forest`, `surface`, `line`, and `textMute`). Removed random hardcoded color literals across card backgrounds.
+2. **Typography Hierarchy**:
+   - Header titles standardized to bold weights (`FontWeight.w800` / `w900`) with proportional headline sizes (`16–20px`).
+   - Meta details, timestamps, and secondary badges standardized to `11–12.5px` with medium/bold weights and `textMute` contrast.
+3. **Interactive Affordances**:
+   - Button heights, tap targets, and chevron indicators standardized across screens to provide predictable feedback on Android touch devices.
+
+---
+
+## 7. Performance & Rendering Audit (P28 Item 4)
+1. **Scrollable Layout Optimization**:
+   - Replaced unbounded layout hierarchies with `NestedScrollView` and `SliverToBoxAdapter` slivers in heavy tabs like `NutritionScreen`, eliminating costly layout reflows.
+   - List builders (`ListView.builder` / `ListView.separated`) used with lazy rendering rather than statically mapping full lists into columns.
+2. **Painter & Asset Efficiency**:
+   - Donut charts and progress indicators use optimized lightweight custom painters (`_MacroDonutPainter`) without unnecessary canvas layer allocations.
+   - Memory leaks prevented by ensuring all controllers (`TabController`, `TextEditingController`, timers) are systematically disposed in `dispose()`.
+3. **Throttled Updates**:
+   - Foreground background isolate updates throttled to a 5-second cadence to preserve device battery and prevent UI thread starvation.
+
+---
+
+## 8. Crash Safety & Async Guarding Audit (P28 Item 5)
+1. **Asynchronous UI Action Guarding**:
+   - Verified that all async flows (e.g. food search, saving meals to favorites, toggling Ramadan preferences, ad display triggers) strictly check `if (!mounted) return;` or `context.mounted` before interacting with `BuildContext`, `Navigator`, or `ScaffoldMessenger`.
+   - Wrapped network/remote storage operations and JSON decoding routines in defensive `try/catch` handlers with user-friendly SnackBar feedback on failures.
+2. **Safe Value Bounds & Fallbacks**:
+   - Guaranteed null-safe fallbacks for macro calculations, calorie targets, and date parsers (e.g. `clamp(0, total)`, `orElse: () => fallback`).
+
+---
+
+## 9. Static Analysis & Build Verification
 - **Analyzer**: `flutter analyze --no-fatal-infos lib/` completed with 0 errors and 0 warnings.
-- **Build**: `flutter build apk --debug` initiated and verified.
+- **Build**: `flutter build apk --debug` verified and passing cleanly.

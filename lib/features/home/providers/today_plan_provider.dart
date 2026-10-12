@@ -16,6 +16,7 @@ import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 
 class TodayPlanSnapshot {
   const TodayPlanSnapshot({
@@ -151,15 +152,24 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
     final goalL = (waterGoal / 1000.0).toStringAsFixed(1);
     final waterProgressStr = l10n.todayPlanWaterProgress(curL, goalL);
 
+    final isRamadan = ref.watch(ramadanSettingsProvider).isEnabled;
+    final prayer = ref.watch(ramadanPrayerTimesProvider);
+
+    final waterSubtitle = isRamadan
+        ? (locale.startsWith('ar')
+            ? '$waterProgressStr (موزعة بين الإفطار والسحور)'
+            : '$waterProgressStr (split: iftar & suhoor)')
+        : waterProgressStr;
+
     final waterItem = TodayPlanItem(
       id: 'water_summary',
       kind: TodayPlanKind.waterReminder,
-      minutesOfDay: 8 * 60,
+      minutesOfDay: isRamadan ? (18 * 60) : (8 * 60),
       icon: Icons.water_drop_rounded,
       title: l10n.planRevealHydration,
-      subtitle: waterProgressStr,
+      subtitle: waterSubtitle,
       isPro: false,
-      section: TodayPlanSectionKind.morning,
+      section: isRamadan ? TodayPlanSectionKind.evening : TodayPlanSectionKind.morning,
       progress: waterRatio,
       progressLabel: waterProgressStr,
       quickActionLabel: l10n.todayPlanWaterQuickAdd,
@@ -168,6 +178,18 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
 
     // Helper to resolve dish subtitle per meal type
     String dishSubtitle(MealType type) {
+      if (isRamadan) {
+        final slot = switch (type) {
+          MealType.breakfast => 'suhoor',
+          MealType.lunch || MealType.dinner => 'iftar',
+          MealType.snack => 'snack',
+        };
+        return CuisineMealCatalog.sampleRamadanDishName(
+          cuisine: cuisine,
+          slot: slot,
+          locale: locale,
+        );
+      }
       final logged = meals.where((m) => m.mealType == type).firstOrNull;
       if (logged != null) {
         return logged.recipe.localizedTitle(locale);
@@ -180,83 +202,161 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
     }
 
     // 2. Sections: Morning, Afternoon, Evening (~8 items max)
-    final items = <TodayPlanItem>[
-      // ── MORNING (صباحاً) ──
-      TodayPlanItem(
-        id: 'vitality_sun',
-        kind: TodayPlanKind.vitalitySun,
-        minutesOfDay: 7 * 60 + 30,
-        icon: Icons.wb_sunny_rounded,
-        title: l10n.vitalityCheckSunlight,
-        subtitle: l10n.todayPlanVitalitySunSubtitle,
-        isPro: false,
-        section: TodayPlanSectionKind.morning,
-        autoComplete: true,
-      ),
-      TodayPlanItem(
-        id: 'meal_breakfast',
-        kind: TodayPlanKind.meal,
-        minutesOfDay: 8 * 60 + 30,
-        icon: _mealIcon(MealType.breakfast),
-        title: _mealTitle(l10n, MealType.breakfast),
-        subtitle: dishSubtitle(MealType.breakfast),
-        isPro: false,
-        mealType: MealType.breakfast,
-        section: TodayPlanSectionKind.morning,
-        autoComplete: true,
-      ),
+    final items = <TodayPlanItem>[];
 
-      // ── AFTERNOON (الظهر) ──
-      TodayPlanItem(
-        id: 'meal_lunch',
-        kind: TodayPlanKind.meal,
-        minutesOfDay: 13 * 60,
-        icon: _mealIcon(MealType.lunch),
-        title: _mealTitle(l10n, MealType.lunch),
-        subtitle: dishSubtitle(MealType.lunch),
-        isPro: false,
-        mealType: MealType.lunch,
-        section: TodayPlanSectionKind.afternoon,
-        autoComplete: true,
-      ),
-      TodayPlanItem(
-        id: 'workout',
-        kind: TodayPlanKind.workout,
-        minutesOfDay: _workoutMinutes(),
-        icon: Icons.fitness_center_rounded,
-        title: l10n.todayPlanWorkout,
-        subtitle: workout != null && workout.exercises.isNotEmpty
-            ? '${workout.exercises.first.localizedName(locale)} · ${l10n.homeWorkoutExerciseCount(workout.exercises.length)}'
-            : l10n.homeWorkoutExerciseCount(5),
-        isPro: false,
-        section: TodayPlanSectionKind.afternoon,
-        autoComplete: true,
-      ),
-      TodayPlanItem(
-        id: 'steps',
-        kind: TodayPlanKind.steps,
-        minutesOfDay: 15 * 60,
-        icon: Icons.directions_walk_rounded,
-        title: l10n.todayPlanSteps,
-        subtitle: l10n.todayPlanStepsProgress(steps, stepsGoal),
-        isPro: false,
-        section: TodayPlanSectionKind.afternoon,
-        autoComplete: true,
-      ),
+    if (isRamadan && prayer != null) {
+      final suhoorMinutes = prayer.fajr.hour * 60 + prayer.fajr.minute - 60; // 1h before Fajr
+      final iftarMinutes = prayer.maghrib.hour * 60 + prayer.maghrib.minute;
+      final workoutMinutes = iftarMinutes + 75; // 75 min after iftar
 
-      // ── EVENING (المساء) ──
-      TodayPlanItem(
-        id: 'meal_dinner',
-        kind: TodayPlanKind.meal,
-        minutesOfDay: 19 * 60,
-        icon: _mealIcon(MealType.dinner),
-        title: _mealTitle(l10n, MealType.dinner),
-        subtitle: dishSubtitle(MealType.dinner),
-        isPro: false,
-        mealType: MealType.dinner,
-        section: TodayPlanSectionKind.evening,
-        autoComplete: true,
-      ),
+      items.addAll([
+        // Suhoor (Dawn)
+        TodayPlanItem(
+          id: 'meal_suhoor',
+          kind: TodayPlanKind.meal,
+          minutesOfDay: suhoorMinutes.clamp(180, 360),
+          icon: Icons.nightlight_round,
+          title: locale.startsWith('ar') ? 'سحور مبارك' : 'Suhoor',
+          subtitle: dishSubtitle(MealType.breakfast),
+          isPro: false,
+          mealType: MealType.breakfast,
+          section: TodayPlanSectionKind.morning,
+          autoComplete: true,
+        ),
+        // Afternoon Light Walk / Steps
+        TodayPlanItem(
+          id: 'steps',
+          kind: TodayPlanKind.steps,
+          minutesOfDay: (iftarMinutes - 45).clamp(900, 1140),
+          icon: Icons.directions_walk_rounded,
+          title: locale.startsWith('ar') ? 'مشي خفيف قبل الإفطار' : 'Pre-Iftar Light Walk',
+          subtitle: l10n.todayPlanStepsProgress(steps, stepsGoal),
+          isPro: false,
+          section: TodayPlanSectionKind.afternoon,
+          autoComplete: true,
+        ),
+        // Iftar (Evening)
+        TodayPlanItem(
+          id: 'meal_iftar',
+          kind: TodayPlanKind.meal,
+          minutesOfDay: iftarMinutes,
+          icon: Icons.wb_twilight_rounded,
+          title: locale.startsWith('ar') ? 'إفطار هنيء' : 'Iftar Meal',
+          subtitle: dishSubtitle(MealType.lunch),
+          isPro: false,
+          mealType: MealType.lunch,
+          section: TodayPlanSectionKind.evening,
+          autoComplete: true,
+        ),
+        // Workout post-Iftar
+        TodayPlanItem(
+          id: 'workout',
+          kind: TodayPlanKind.workout,
+          minutesOfDay: workoutMinutes.clamp(1140, 1380),
+          icon: Icons.fitness_center_rounded,
+          title: locale.startsWith('ar') ? 'تمرين ما بعد الإفطار' : 'Post-Iftar Workout',
+          subtitle: workout != null && workout.exercises.isNotEmpty
+              ? '${workout.exercises.first.localizedName(locale)} · ${l10n.homeWorkoutExerciseCount(workout.exercises.length)}'
+              : (locale.startsWith('ar') ? 'توقيت مثالي لتجديد الطاقة والنشاط' : 'Optimal timing for energy and hydration'),
+          isPro: false,
+          section: TodayPlanSectionKind.evening,
+          autoComplete: true,
+        ),
+        // Post-Iftar snack
+        TodayPlanItem(
+          id: 'meal_snack',
+          kind: TodayPlanKind.meal,
+          minutesOfDay: (workoutMinutes + 60).clamp(1200, 1410),
+          icon: Icons.cookie_outlined,
+          title: locale.startsWith('ar') ? 'سناك بعد الفطار' : 'Post-Iftar Snack',
+          subtitle: dishSubtitle(MealType.snack),
+          isPro: false,
+          mealType: MealType.snack,
+          section: TodayPlanSectionKind.evening,
+          autoComplete: true,
+        ),
+      ]);
+    } else {
+      items.addAll([
+        // ── MORNING (صباحاً) ──
+        TodayPlanItem(
+          id: 'vitality_sun',
+          kind: TodayPlanKind.vitalitySun,
+          minutesOfDay: 7 * 60 + 30,
+          icon: Icons.wb_sunny_rounded,
+          title: l10n.vitalityCheckSunlight,
+          subtitle: l10n.todayPlanVitalitySunSubtitle,
+          isPro: false,
+          section: TodayPlanSectionKind.morning,
+          autoComplete: true,
+        ),
+        TodayPlanItem(
+          id: 'meal_breakfast',
+          kind: TodayPlanKind.meal,
+          minutesOfDay: 8 * 60 + 30,
+          icon: _mealIcon(MealType.breakfast),
+          title: _mealTitle(l10n, MealType.breakfast),
+          subtitle: dishSubtitle(MealType.breakfast),
+          isPro: false,
+          mealType: MealType.breakfast,
+          section: TodayPlanSectionKind.morning,
+          autoComplete: true,
+        ),
+
+        // ── AFTERNOON (الظهر) ──
+        TodayPlanItem(
+          id: 'meal_lunch',
+          kind: TodayPlanKind.meal,
+          minutesOfDay: 13 * 60,
+          icon: _mealIcon(MealType.lunch),
+          title: _mealTitle(l10n, MealType.lunch),
+          subtitle: dishSubtitle(MealType.lunch),
+          isPro: false,
+          mealType: MealType.lunch,
+          section: TodayPlanSectionKind.afternoon,
+          autoComplete: true,
+        ),
+        TodayPlanItem(
+          id: 'workout',
+          kind: TodayPlanKind.workout,
+          minutesOfDay: _workoutMinutes(),
+          icon: Icons.fitness_center_rounded,
+          title: l10n.todayPlanWorkout,
+          subtitle: workout != null && workout.exercises.isNotEmpty
+              ? '${workout.exercises.first.localizedName(locale)} · ${l10n.homeWorkoutExerciseCount(workout.exercises.length)}'
+              : l10n.homeWorkoutExerciseCount(5),
+          isPro: false,
+          section: TodayPlanSectionKind.afternoon,
+          autoComplete: true,
+        ),
+        TodayPlanItem(
+          id: 'steps',
+          kind: TodayPlanKind.steps,
+          minutesOfDay: 15 * 60,
+          icon: Icons.directions_walk_rounded,
+          title: l10n.todayPlanSteps,
+          subtitle: l10n.todayPlanStepsProgress(steps, stepsGoal),
+          isPro: false,
+          section: TodayPlanSectionKind.afternoon,
+          autoComplete: true,
+        ),
+
+        // ── EVENING (المساء) ──
+        TodayPlanItem(
+          id: 'meal_dinner',
+          kind: TodayPlanKind.meal,
+          minutesOfDay: 19 * 60,
+          icon: _mealIcon(MealType.dinner),
+          title: _mealTitle(l10n, MealType.dinner),
+          subtitle: dishSubtitle(MealType.dinner),
+          isPro: false,
+          mealType: MealType.dinner,
+          section: TodayPlanSectionKind.evening,
+          autoComplete: true,
+        ),
+      ]);
+    }
+    items.addAll([
       TodayPlanItem(
         id: 'vitality_protein',
         kind: TodayPlanKind.vitalityProtein,
@@ -290,7 +390,7 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
         section: TodayPlanSectionKind.evening,
         autoComplete: true,
       ),
-    ];
+    ]);
 
     items.sort((a, b) => a.minutesOfDay.compareTo(b.minutesOfDay));
 

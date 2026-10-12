@@ -85,10 +85,22 @@ class FoodDbRepository {
     return scored.take(limit).map((e) => e.food).toList();
   }
 
-  static String _norm(String s) => s
-      .toLowerCase()
-      .replaceAll(RegExp(r'[^\w\u0600-\u06FF]+'), ' ')
-      .trim();
+  static String normalizeArabic(String s) {
+    var out = s.toLowerCase();
+    // Strip Arabic diacritics / tashkeel (\u064B-\u065F, \u0670)
+    out = out.replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '');
+    // Normalize Alef variants: أ, إ, آ, ٱ -> ا
+    out = out.replaceAll(RegExp(r'[أإآٱ]'), 'ا');
+    // Normalize Taa Marbuta and Haa: ة -> ه
+    out = out.replaceAll(RegExp(r'[ة]'), 'ه');
+    // Normalize Yaa variants: ى, ئ -> ي
+    out = out.replaceAll(RegExp(r'[ىئ]'), 'ي');
+    // Replace non-word / non-Arabic characters with space
+    out = out.replaceAll(RegExp(r'[^\w\u0600-\u06FF]+'), ' ');
+    return out.trim();
+  }
+
+  static String _norm(String s) => normalizeArabic(s);
 
   static double _fuzzy(String a, String b) {
     if (a.isEmpty || b.isEmpty) return 0;

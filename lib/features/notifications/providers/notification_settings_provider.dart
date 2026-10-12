@@ -19,6 +19,7 @@ import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 
 const _notificationSettingsKey = 'notification_settings';
 const _permissionRequestedKey = 'notification_permission_requested';
@@ -80,6 +81,9 @@ final notificationServiceProvider = Provider<INotificationService>((ref) {
       final preferredWorkout = readPreferredWorkoutTimeFromProfile();
       final weeklyDeficit = ref.read(weeklyDeficitProvider);
 
+      final ramadan = ref.read(ramadanSettingsProvider);
+      final prayer = ramadan.isEnabled ? ref.read(ramadanPrayerTimesProvider) : null;
+
       return ReminderContext(
         isWaterGoalMet: waterGoal > 0 && waterCurrent >= waterGoal,
         currentSteps: stepsCurrent,
@@ -92,6 +96,11 @@ final notificationServiceProvider = Provider<INotificationService>((ref) {
         preferredWorkoutTime: preferredWorkout,
         weeklyDeficitKcal:
             weeklyDeficit.hasData ? weeklyDeficit.totalNetKcal : null,
+        isRamadanMode: ramadan.isEnabled,
+        fastingStartHour: prayer?.fajr.hour,
+        fastingStartMinute: prayer?.fajr.minute,
+        fastingEndHour: prayer?.maghrib.hour,
+        fastingEndMinute: prayer?.maghrib.minute,
       );
     },
     onNotificationTap: (payload) {

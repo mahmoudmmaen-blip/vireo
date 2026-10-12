@@ -59,4 +59,34 @@ abstract final class CuisineMealCatalog {
         },
     };
   }
+
+  static String sampleRamadanDishName({
+    required CuisineType cuisine,
+    required String slot, // 'suhoor', 'iftar', 'snack'
+    required String locale,
+  }) {
+    final isAr = locale.startsWith('ar');
+    return switch (cuisine) {
+      CuisineType.egyptian => switch (slot) {
+          'suhoor' => isAr ? 'فول بالكمون وزيت الزيتون، بيض مسلوق، عيش بلدي، زبادي خفيف' : 'Ful mudammas, boiled eggs, baladi bread, light yogurt',
+          'iftar' => isAr ? 'شوربة لسان عصفور، فراخ مشوية، سلطة خضراء، أرز بالشعرية' : 'Orzo soup, grilled chicken, green salad, vermicelli rice',
+          _ => isAr ? 'تمرتان وقطايف مشوية باعتدال أو زبادي مع عسل' : '2 dates & moderate baked qatayef or yogurt with honey',
+        },
+      CuisineType.saudi => switch (slot) {
+          'suhoor' => isAr ? 'فول حجازي، بيض، زبادي وتمر مع ماء وفير' : 'Hijazi ful, eggs, yogurt and dates with plenty of water',
+          'iftar' => isAr ? 'شوربة شوفان باللحم، كبسة دجاج خفيفة، سمبوسة بالفرن، سلطة' : 'Meat oat soup, baked sambusa, light chicken kabsa',
+          _ => isAr ? 'تمر ورطب مع قهوة سعودية وحفنة لوز' : 'Fresh dates with Saudi coffee & almonds',
+        },
+      CuisineType.levantine => switch (slot) {
+          'suhoor' => isAr ? 'مناقيش زعتر خفيفة، لبنة بلدية، خيار وطماطم، بيض مسلوق' : 'Light zaatar manoushe, labneh, cucumber & eggs',
+          'iftar' => isAr ? 'شوربة عدس، فتوش خفيف، شيش طاووق مع أرز أو برغل' : 'Lentil soup, light fattoush, shish tawook with bulgur',
+          _ => isAr ? 'مهلبية خفيفة أو فواكه مجففة مع جوز' : 'Light muhallabia or dried fruits with walnuts',
+        },
+      _ => switch (slot) {
+          'suhoor' => isAr ? 'شوفان بالحليب والمكسرات، بيض مسلوق، زبادي' : 'Oats with milk & nuts, boiled eggs, yogurt',
+          'iftar' => isAr ? 'شوربة خضار أو عدس، بروتين مشوي، أرز وسلطة مشكلة' : 'Lentil or vegetable soup, grilled protein, rice & salad',
+          _ => isAr ? 'تمر ومكسرات أو سلطة فواكه طازجة' : 'Dates and mixed nuts or fresh fruit salad',
+        },
+    };
+  }
 }

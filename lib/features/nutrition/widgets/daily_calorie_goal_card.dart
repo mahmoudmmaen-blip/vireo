@@ -8,6 +8,8 @@ import 'package:vireo/features/diet_programs/providers/diet_programs_provider.da
 import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
+import 'package:vireo/features/ramadan/services/ramadan_schedule_service.dart';
 
 class DailyCalorieGoalCard extends ConsumerWidget {
   const DailyCalorieGoalCard({super.key});
@@ -126,6 +128,67 @@ class DailyCalorieGoalCard extends ConsumerWidget {
                 ],
               ),
             ),
+            if (ref.watch(ramadanSettingsProvider).isEnabled) ...[
+              const SizedBox(height: 12),
+              Builder(
+                builder: (context) {
+                  final split = RamadanScheduleService.splitMacros(
+                    totalCalories: target.calories,
+                    totalProteinG: target.proteinG,
+                  );
+                  return Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: colors.gold.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: colors.gold.withValues(alpha: 0.25)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Text('🌙 ', style: TextStyle(fontSize: 13)),
+                            Text(
+                              'توزيع وجبات رمضان (سعرات / بروتين):',
+                              style: TextStyle(
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.bold,
+                                color: colors.gold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _RamadanSlotChip(
+                              title: 'سحور (35%)',
+                              cals: split['suhoor']!.calories,
+                              protein: split['suhoor']!.proteinG,
+                              colors: colors,
+                            ),
+                            _RamadanSlotChip(
+                              title: 'فطار (45%)',
+                              cals: split['iftar']!.calories,
+                              protein: split['iftar']!.proteinG,
+                              colors: colors,
+                            ),
+                            _RamadanSlotChip(
+                              title: 'سناك (20%)',
+                              cals: split['snack']!.calories,
+                              protein: split['snack']!.proteinG,
+                              colors: colors,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
             if (carbsMax != null && carbsMax > 0) ...[
               const SizedBox(height: 14),
               Text(
@@ -237,6 +300,53 @@ class _FormulaItem extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _RamadanSlotChip extends StatelessWidget {
+  const _RamadanSlotChip({
+    required this.title,
+    required this.cals,
+    required this.protein,
+    required this.colors,
+  });
+
+  final String title;
+  final int cals;
+  final int protein;
+  final VireoColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: colors.surface,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: colors.line),
+      ),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: colors.text,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            '$cals س.ع • $proteinج ب',
+            style: TextStyle(
+              fontSize: 9.5,
+              fontWeight: FontWeight.w700,
+              color: colors.ember,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

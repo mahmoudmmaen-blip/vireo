@@ -41,6 +41,7 @@ import 'package:vireo/features/home/widgets/today_plan_section.dart';
 import 'package:vireo/features/home/widgets/premium_steps_hero_card.dart';
 import 'package:vireo/features/home/widgets/today_pillars_grid.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
+import 'package:vireo/features/ramadan/widgets/ramadan_countdown_card.dart';
 
 const _headerPad = EdgeInsets.fromLTRB(4, VSpace.sm, 4, 0);
 
@@ -74,6 +75,7 @@ class HomeDashboardBody extends ConsumerWidget {
             : l10n.homeDayPhase(dash.programDay, homePhaseName(l10n, dash, locale)),
       ),
       const SaveProgressPromptHost(),
+      const RamadanCountdownCard(),
 
       // ── HERO: Big 220dp Steps Ring Card ──
       PremiumStepsHeroCard(

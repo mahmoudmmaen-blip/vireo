@@ -4,6 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/features/ramadan/services/ramadan_schedule_service.dart';
 
 /// Handles MobileAds initialization, UMP user consent, ad loading,
 /// interstitial frequency capping, and rewarded ad unlock logic.
@@ -161,6 +162,18 @@ class AdService {
 
     final now = nowOverride ?? DateTime.now();
     final box = HiveService.settingsBox;
+    // Suppress ads during Ramadan fasting hours if Ramadan mode is enabled
+    final ramadanEnabled = box.get('ramadan_mode_enabled') as bool? ?? false;
+    if (ramadanEnabled) {
+      final methodKey = box.get('ramadan_calculation_method') as String?;
+      final method = RamadanCalculationMethod.fromKey(methodKey);
+      final lat = (box.get('ramadan_lat') as num?)?.toDouble() ?? method.defaultLat;
+      final lng = (box.get('ramadan_lng') as num?)?.toDouble() ?? method.defaultLng;
+      final prayer = RamadanPrayerTimes.calculate(lat: lat, lng: lng, method: method, date: now);
+      if (prayer.isFasting) {
+        return false;
+      }
+    }
 
     // Check 3 days post-install grace period
     final installStr = box.get(_installDateKey) as String?;

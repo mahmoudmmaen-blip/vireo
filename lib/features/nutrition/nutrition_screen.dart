@@ -8,6 +8,7 @@ import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/repositories/nutrition_repository.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
+import 'package:vireo/features/nutrition/screens/food_search_screen.dart';
 import 'package:vireo/features/nutrition/screens/fridge_scan_screen.dart';
 import 'package:vireo/features/nutrition/screens/manual_food_entry_screen.dart';
 import 'package:vireo/features/ai_nutrition/widgets/quick_ai_scanner_card.dart';
@@ -19,6 +20,7 @@ import 'package:vireo/features/nutrition/widgets/meal_quick_relog_row.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 
 class NutritionScreen extends ConsumerStatefulWidget {
   const NutritionScreen({super.key});
@@ -29,20 +31,47 @@ class NutritionScreen extends ConsumerStatefulWidget {
 
 class _NutritionScreenState extends ConsumerState<NutritionScreen>
     with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
+  late TabController _tabController;
+  bool _lastRamadan = false;
 
-  static int _indexFor(MealType? type) => switch (type) {
-        MealType.breakfast => 0,
-        MealType.lunch => 1,
-        MealType.dinner => 2,
-        MealType.snack => 3,
+  static int _indexFor(MealType? type, bool isRamadan) {
+    if (isRamadan) {
+      return switch (type) {
+        MealType.breakfast => 0, // Suhoor
+        MealType.lunch => 1,     // Iftar
+        MealType.dinner => 1,    // Iftar
+        MealType.snack => 2,     // Post-Iftar snack
         null => 0,
       };
+    }
+    return switch (type) {
+      MealType.breakfast => 0,
+      MealType.lunch => 1,
+      MealType.dinner => 2,
+      MealType.snack => 3,
+      null => 0,
+    };
+  }
 
   @override
   void initState() {
     super.initState();
+    _lastRamadan = false;
     _tabController = TabController(length: 4, vsync: this);
+  }
+
+  void _ensureTabController(bool isRamadan) {
+    if (_lastRamadan != isRamadan) {
+      _lastRamadan = isRamadan;
+      final oldIndex = _tabController.index;
+      _tabController.dispose();
+      final newLength = isRamadan ? 3 : 4;
+      _tabController = TabController(
+        length: newLength,
+        initialIndex: oldIndex.clamp(0, newLength - 1),
+        vsync: this,
+      );
+    }
   }
 
   @override
@@ -54,13 +83,17 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final isAr = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final isRamadan = ref.watch(ramadanSettingsProvider).isEnabled;
+    _ensureTabController(isRamadan);
+
     final isPro = ref.watch(isProUserProvider);
     final remainingAsync = ref.watch(remainingFridgeScansProvider);
     final remaining = remainingAsync.valueOrNull ?? NutritionRepository.basicMonthlyLimit;
 
     ref.listen<MealType?>(nutritionInitialTabProvider, (prev, next) {
       if (next == null) return;
-      final index = _indexFor(next);
+      final index = _indexFor(next, isRamadan);
       if (_tabController.index != index) {
         _tabController.animateTo(index);
       }
@@ -69,10 +102,10 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
 
     // Apply pending tab on first build after navigation.
     final pending = ref.read(nutritionInitialTabProvider);
-    if (pending != null && _tabController.index != _indexFor(pending)) {
+    if (pending != null && _tabController.index != _indexFor(pending, isRamadan)) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
-        _tabController.animateTo(_indexFor(pending));
+        _tabController.animateTo(_indexFor(pending, isRamadan));
         ref.read(nutritionInitialTabProvider.notifier).state = null;
       });
     }
@@ -80,6 +113,13 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
     return FeatureScaffold(
       title: l10n.nutritionTitle,
       actions: [
+        IconButton(
+          tooltip: isAr ? 'البحث في قاعدة الأطعمة' : 'Search Food Database',
+          icon: const Icon(Icons.search_rounded),
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const FoodSearchScreen()),
+          ),
+        ),
         IconButton(
           tooltip: l10n.nutritionManualEntry,
           icon: const Icon(Icons.edit_outlined),
@@ -117,12 +157,18 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
               TabBar(
                 controller: _tabController,
                 isScrollable: true,
-                tabs: [
-                  Tab(text: l10n.nutritionTabBreakfast),
-                  Tab(text: l10n.nutritionTabLunch),
-                  Tab(text: l10n.nutritionTabDinner),
-                  Tab(text: l10n.nutritionTabSnack),
-                ],
+                tabs: isRamadan
+                    ? [
+                        Tab(text: isAr ? 'سحور' : 'Suhoor'),
+                        Tab(text: isAr ? 'فطار' : 'Iftar'),
+                        Tab(text: isAr ? 'سناك بعد الفطار' : 'Post-Iftar Snack'),
+                      ]
+                    : [
+                        Tab(text: l10n.nutritionTabBreakfast),
+                        Tab(text: l10n.nutritionTabLunch),
+                        Tab(text: l10n.nutritionTabDinner),
+                        Tab(text: l10n.nutritionTabSnack),
+                      ],
               ),
               color: Theme.of(context).scaffoldBackgroundColor,
             ),
@@ -130,12 +176,18 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen>
         ],
         body: TabBarView(
           controller: _tabController,
-          children: [
-            _MealTab(mealType: MealType.breakfast),
-            _MealTab(mealType: MealType.lunch),
-            _MealTab(mealType: MealType.dinner),
-            _MealTab(mealType: MealType.snack),
-          ],
+          children: isRamadan
+              ? const [
+                  _MealTab(mealType: MealType.breakfast), // Maps to Suhoor
+                  _MealTab(mealType: MealType.lunch),     // Maps to Iftar
+                  _MealTab(mealType: MealType.snack),     // Maps to Post-Iftar snack
+                ]
+              : const [
+                  _MealTab(mealType: MealType.breakfast),
+                  _MealTab(mealType: MealType.lunch),
+                  _MealTab(mealType: MealType.dinner),
+                  _MealTab(mealType: MealType.snack),
+                ],
         ),
       ),
     );

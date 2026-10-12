@@ -21,6 +21,8 @@ import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/walking/screens/step_diagnostic_screen.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
+import 'package:vireo/features/ramadan/services/ramadan_schedule_service.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -218,6 +220,60 @@ class SettingsScreen extends ConsumerWidget {
     return _SectionCard(
       child: Column(
         children: [
+          SwitchListTile.adaptive(
+            secondary: const Text('🌙', style: TextStyle(fontSize: 22)),
+            title: Text(isAr ? 'وضع رمضان' : 'Ramadan Mode'),
+            subtitle: Text(
+              ref.watch(ramadanSettingsProvider).isEnabled
+                  ? (isAr
+                      ? '${ref.watch(ramadanSettingsProvider).cityName} — ${ref.watch(ramadanSettingsProvider).calculationMethod.labelAr}'
+                      : '${ref.watch(ramadanSettingsProvider).cityName} — ${ref.watch(ramadanSettingsProvider).calculationMethod.name}')
+                  : (isAr
+                      ? (ref.watch(ramadanSettingsProvider).isAutoSuggested
+                          ? 'مُقترح الآن (شهر رمضان المبارك)'
+                          : 'مواقيت الإمساك والإفطار وتوزيع السعرات والماء')
+                      : 'Fasting hours, prayer times & meal slots'),
+              style: TextStyle(fontSize: 12, color: colors.textMute),
+            ),
+            value: ref.watch(ramadanSettingsProvider).isEnabled,
+            activeTrackColor: colors.gold,
+            activeThumbColor: Colors.white,
+            onChanged: (val) {
+              ref.read(ramadanSettingsProvider.notifier).toggleEnabled(val);
+            },
+          ),
+          if (ref.watch(ramadanSettingsProvider).isEnabled) ...[
+            ListTile(
+              dense: true,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+              leading: const Icon(Icons.location_on_outlined, size: 20),
+              title: Text(isAr ? 'طريقة الحساب والمدينة' : 'Prayer Calculation Method'),
+              subtitle: Text(
+                '${ref.watch(ramadanSettingsProvider).cityName} (${ref.watch(ramadanSettingsProvider).calculationMethod.labelAr})',
+                style: TextStyle(fontSize: 12, color: colors.gold),
+              ),
+              trailing: const Icon(Icons.chevron_right_rounded),
+              onTap: () async {
+                final picked = await showDialog<RamadanCalculationMethod>(
+                  context: context,
+                  builder: (ctx) => SimpleDialog(
+                    title: Text(isAr ? 'طريقة الحساب والمدينة' : 'Calculation Method'),
+                    children: [
+                      for (final m in RamadanCalculationMethod.values)
+                        SimpleDialogOption(
+                          onPressed: () => Navigator.pop(ctx, m),
+                          child: Text('${m.defaultCity} — ${m.labelAr}'),
+                        ),
+                    ],
+                  ),
+                );
+                if (picked != null) {
+                  await ref.read(ramadanSettingsProvider.notifier).setCalculationMethod(picked);
+                }
+              },
+            ),
+          ],
+          const Divider(height: 1),
           ListTile(
             leading: const Icon(Icons.restaurant_menu_rounded),
             title: Text(l10n.cuisineSettingTitle),

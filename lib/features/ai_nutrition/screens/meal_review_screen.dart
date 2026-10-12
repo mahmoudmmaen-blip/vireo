@@ -787,11 +787,37 @@ class _MfpItemRow extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                        ),
+                        const SizedBox(height: 3),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                          decoration: BoxDecoration(
+                            color: line.food != null
+                                ? const Color(0xFF10B981).withValues(alpha: 0.12)
+                                : const Color(0xFF6366F1).withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            line.food != null
+                                ? (isArabic ? 'من قاعدة البيانات' : 'From Database')
+                                : (isArabic ? 'تقدير الذكاء الاصطناعي' : 'AI Estimate'),
+                            style: TextStyle(
+                              color: line.food != null ? const Color(0xFF10B981) : const Color(0xFF6366F1),
+                              fontSize: 9.5,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(width: 8),

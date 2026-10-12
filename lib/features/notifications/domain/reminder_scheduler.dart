@@ -50,6 +50,11 @@ class ReminderContext {
     this.weeklyDeficitKcal,
     this.wakeHour = 7,
     this.sleepHour = 23,
+    this.isRamadanMode = false,
+    this.fastingStartHour,
+    this.fastingStartMinute,
+    this.fastingEndHour,
+    this.fastingEndMinute,
   });
 
   final bool isWaterGoalMet;
@@ -64,6 +69,11 @@ class ReminderContext {
   final int? weeklyDeficitKcal;
   final int wakeHour;
   final int sleepHour;
+  final bool isRamadanMode;
+  final int? fastingStartHour;
+  final int? fastingStartMinute;
+  final int? fastingEndHour;
+  final int? fastingEndMinute;
 }
 
 /// Pure business logic engine for scheduling Vireo smart local reminders.
@@ -295,21 +305,43 @@ class ReminderScheduler {
       }
     }
 
-    // Filter out quiet hours
-    final nonQuiet = candidates.where((c) {
-      return !isInQuietHours(
+    // Filter out quiet hours and Ramadan fasting hours (for food/water)
+    final filtered = candidates.where((c) {
+      if (isInQuietHours(
         hour: c.hour,
         minute: c.minute,
         startHour: settings.quietHoursStartHour,
         startMinute: settings.quietHoursStartMinute,
         endHour: settings.quietHoursEndHour,
         endMinute: settings.quietHoursEndMinute,
-      );
+      )) {
+        return false;
+      }
+
+      // If Ramadan mode is on, suppress food and water reminders during fasting hours (Fajr to Maghrib)
+      if (context.isRamadanMode &&
+          context.fastingStartHour != null &&
+          context.fastingEndHour != null) {
+        final isFoodOrWater = c.type == NotificationType.waterReminder ||
+            c.type == NotificationType.mealBreakfastReminder ||
+            c.type == NotificationType.mealLunchReminder ||
+            c.type == NotificationType.mealDinnerReminder;
+        if (isFoodOrWater) {
+          final tMin = c.hour * 60 + c.minute;
+          final fStart = context.fastingStartHour! * 60 + (context.fastingStartMinute ?? 0);
+          final fEnd = context.fastingEndHour! * 60 + (context.fastingEndMinute ?? 0);
+          if (tMin >= fStart && tMin < fEnd) {
+            return false;
+          }
+        }
+      }
+
+      return true;
     }).toList();
 
     // Group candidates into daily candidates vs weekly candidates
-    final dailyCandidates = nonQuiet.where((c) => c.weekday == null).toList();
-    final weeklyCandidates = nonQuiet.where((c) => c.weekday != null).toList();
+    final dailyCandidates = filtered.where((c) => c.weekday == null).toList();
+    final weeklyCandidates = filtered.where((c) => c.weekday != null).toList();
 
     // Apply max daily cap to daily notifications
     final maxDaily = settings.maxDailyNotifications;
