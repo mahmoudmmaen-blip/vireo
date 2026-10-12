@@ -11,7 +11,12 @@ import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_quick_relog_row.dart';
 
 class MealLogTextScreen extends ConsumerStatefulWidget {
-  const MealLogTextScreen({super.key});
+  const MealLogTextScreen({
+    super.key,
+    this.startListeningOnInit = false,
+  });
+
+  final bool startListeningOnInit;
 
   @override
   ConsumerState<MealLogTextScreen> createState() => _MealLogTextScreenState();
@@ -23,6 +28,16 @@ class _MealLogTextScreenState extends ConsumerState<MealLogTextScreen> {
   bool _loading = false;
   bool _listening = false;
   String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.startListeningOnInit) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _toggleVoice();
+      });
+    }
+  }
 
   Future<void> _submit() async {
     final text = _ctrl.text.trim();

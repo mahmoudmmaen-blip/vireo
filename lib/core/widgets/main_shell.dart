@@ -9,6 +9,8 @@ import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/services/widget_service.dart';
+import 'package:vireo/features/home/providers/daily_score_provider.dart';
 import 'package:vireo/core/utils/connectivity_check.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
@@ -88,7 +90,23 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       _triggerSyncPull();
+      _syncWidget();
+    } else if (state == AppLifecycleState.paused) {
+      _syncWidget();
     }
+  }
+
+  void _syncWidget() {
+    try {
+      final scoreBreakdown = ref.read(dailyScoreProvider);
+      final waterMl = ref.read(waterTrackerProvider);
+      final steps = ref.read(todayStepsProvider);
+      WidgetService.updateWidget(
+        steps: steps,
+        waterMl: waterMl,
+        dailyScore: scoreBreakdown.totalScore,
+      );
+    } catch (_) {}
   }
 
   void _triggerSyncPull() {

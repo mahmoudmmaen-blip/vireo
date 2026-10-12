@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_small_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/widget_score_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vireo Score"
+        android:textColor="#9CA3AF"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_score_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="85"
+        android:textColor="#10B981"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium" />
+
+    <View
+        android:layout_width="32dp"
+        android:layout_height="1dp"
+        android:background="#1F2937"
+        android:layout_marginVertical="4dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/widget_steps_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👣 8,420"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:layout_marginEnd="6dp" />
+
+        <TextView
+            android:id="@+id/widget_water_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💧 1.7L"
+            android:textColor="#38BDF8"
+            android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>

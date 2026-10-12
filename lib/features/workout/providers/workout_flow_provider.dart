@@ -15,6 +15,7 @@ class WorkoutFlowState {
     this.isPaused = false,
     this.isRestActive = false,
     this.restSecondsRemaining = 0,
+    this.totalRestSeconds = 0,
   });
 
   final WorkoutFlowPhase phase;
@@ -25,6 +26,7 @@ class WorkoutFlowState {
   final bool isPaused;
   final bool isRestActive;
   final int restSecondsRemaining;
+  final int totalRestSeconds;
 
   Exercise? get currentExercise {
     if (exerciseIndex < 0 || exerciseIndex >= exercises.length) return null;
@@ -51,6 +53,7 @@ class WorkoutFlowState {
     bool? isPaused,
     bool? isRestActive,
     int? restSecondsRemaining,
+    int? totalRestSeconds,
   }) {
     return WorkoutFlowState(
       phase: phase ?? this.phase,
@@ -61,6 +64,7 @@ class WorkoutFlowState {
       isPaused: isPaused ?? this.isPaused,
       isRestActive: isRestActive ?? this.isRestActive,
       restSecondsRemaining: restSecondsRemaining ?? this.restSecondsRemaining,
+      totalRestSeconds: totalRestSeconds ?? this.totalRestSeconds,
     );
   }
 }
@@ -221,6 +225,7 @@ class WorkoutFlowNotifier extends Notifier<WorkoutFlowState?> {
     if (state == null || !state!.isRestActive) return;
     state = state!.copyWith(
       restSecondsRemaining: state!.restSecondsRemaining + seconds,
+      totalRestSeconds: state!.totalRestSeconds + seconds,
     );
   }
 
@@ -231,6 +236,7 @@ class WorkoutFlowNotifier extends Notifier<WorkoutFlowState?> {
     state = state!.copyWith(
       isRestActive: true,
       restSecondsRemaining: seconds,
+      totalRestSeconds: seconds,
     );
     _restTimer = Timer.periodic(const Duration(seconds: 1), (_) => _tickRest());
   }

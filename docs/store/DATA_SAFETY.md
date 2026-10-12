@@ -54,6 +54,13 @@ This document outlines the exact responses required for the Google Play Data Saf
 - **Shared:** No.
 - **Purpose:** Subscription entitlement and premium feature unlocking. Credit card data is never handled directly.
 
+### Audio (Voice Logging)
+- **Data Type:** Voice recordings / audio data (`RECORD_AUDIO`).
+- **Collected:** No (processed ephemerally on-device; never saved or stored).
+- **Shared:** No.
+- **Ephemeral Processing:** Yes. Audio is converted to text on-device using platform speech recognition (`speech_to_text`). Only the recognized meal description text is transmitted to the AI meal parser Edge Function. Audio recordings are never retained, stored on disk, or uploaded to servers.
+- **Purpose:** App functionality (voice logging meals and nutrition).
+
 ### App Info & Performance
 - **Data Type:** Crash logs and diagnostics.
 - **Collected:** Yes (via Sentry and Google AdMob diagnostics).

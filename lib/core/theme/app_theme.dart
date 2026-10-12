@@ -13,52 +13,63 @@ abstract final class AppTheme {
   static ThemeData darkWithAccent([
     AccentPalette accent = AccentPalette.vireoOrange,
     AppSkin skin = AppSkin.standard,
+    String languageCode = 'ar',
   ]) {
     final base = switch (skin) {
       AppSkin.standard => VireoColors.dark.withAccent(accent.color),
       AppSkin.amoled => VireoColors.amoled,
       AppSkin.navy => VireoColors.navy,
     };
-    return _build(base, Brightness.dark);
+    return _build(base, Brightness.dark, languageCode);
   }
 
   static ThemeData lightWithAccent([
     AccentPalette accent = AccentPalette.vireoOrange,
+    String languageCode = 'ar',
   ]) =>
-      _build(VireoColors.light.withAccent(accent.color), Brightness.light);
+      _build(VireoColors.light.withAccent(accent.color), Brightness.light, languageCode);
 
-  static ThemeData _build(VireoColors colors, Brightness brightness) {
-    final cairo = GoogleFonts.cairoTextTheme();
-    final tajawal = GoogleFonts.tajawalTextTheme();
-    final notoAr = GoogleFonts.notoSansArabicTextTheme();
+  static ThemeData _build(VireoColors colors, Brightness brightness, [String languageCode = 'ar']) {
+    final isArabic = languageCode.startsWith('ar');
+
+    // Arabic locales: IBM Plex Sans Arabic; Latin locales: Inter
+    final fontTheme = isArabic
+        ? GoogleFonts.ibmPlexSansArabicTextTheme()
+        : GoogleFonts.interTextTheme();
 
     TextStyle heading(TextStyle? base) => (base ?? const TextStyle()).copyWith(
-          fontFamily: GoogleFonts.cairo().fontFamily,
+          fontFamily: isArabic
+              ? GoogleFonts.ibmPlexSansArabic().fontFamily
+              : GoogleFonts.inter().fontFamily,
           fontWeight: FontWeight.w800,
           color: colors.text,
+          fontFeatures: const [FontFeature.tabularFigures()],
         );
 
     TextStyle body(TextStyle? base) => (base ?? const TextStyle()).copyWith(
-          fontFamily: GoogleFonts.notoSansArabic().fontFamily,
+          fontFamily: isArabic
+              ? GoogleFonts.ibmPlexSansArabic().fontFamily
+              : GoogleFonts.inter().fontFamily,
           color: colors.text,
+          fontFeatures: const [FontFeature.tabularFigures()],
         );
 
     final textTheme = TextTheme(
-      displayLarge: heading(cairo.displayLarge),
-      displayMedium: heading(cairo.displayMedium),
-      displaySmall: heading(cairo.displaySmall),
-      headlineLarge: heading(cairo.headlineLarge),
-      headlineMedium: heading(cairo.headlineMedium),
-      headlineSmall: heading(cairo.headlineSmall),
-      titleLarge: heading(cairo.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
-      titleMedium: body(notoAr.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
-      titleSmall: body(notoAr.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
-      bodyLarge: body(notoAr.bodyLarge),
-      bodyMedium: body(notoAr.bodyMedium),
-      bodySmall: body(notoAr.bodySmall?.copyWith(color: colors.textMute)),
-      labelLarge: body(tajawal.labelLarge?.copyWith(fontWeight: FontWeight.w700)),
-      labelMedium: body(notoAr.labelMedium?.copyWith(color: colors.textMute)),
-      labelSmall: body(notoAr.labelSmall?.copyWith(color: colors.textMute)),
+      displayLarge: heading(fontTheme.displayLarge),
+      displayMedium: heading(fontTheme.displayMedium),
+      displaySmall: heading(fontTheme.displaySmall),
+      headlineLarge: heading(fontTheme.headlineLarge),
+      headlineMedium: heading(fontTheme.headlineMedium),
+      headlineSmall: heading(fontTheme.headlineSmall),
+      titleLarge: heading(fontTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
+      titleMedium: body(fontTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+      titleSmall: body(fontTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+      bodyLarge: body(fontTheme.bodyLarge),
+      bodyMedium: body(fontTheme.bodyMedium),
+      bodySmall: body(fontTheme.bodySmall?.copyWith(color: colors.textMute)),
+      labelLarge: body(fontTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700)),
+      labelMedium: body(fontTheme.labelMedium?.copyWith(color: colors.textMute)),
+      labelSmall: body(fontTheme.labelSmall?.copyWith(color: colors.textMute)),
     );
 
     final colorScheme = brightness == Brightness.dark
@@ -98,7 +109,7 @@ abstract final class AppTheme {
         foregroundColor: colors.text,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: heading(cairo.titleLarge),
+        titleTextStyle: heading(fontTheme.titleLarge),
       ),
       cardTheme: CardThemeData(
         color: colors.surfaceRaised,
@@ -113,7 +124,7 @@ abstract final class AppTheme {
         backgroundColor: colors.surface,
         indicatorColor: colors.ember.withValues(alpha: 0.2),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          return body(tajawal.labelSmall).copyWith(
+          return body(fontTheme.labelSmall).copyWith(
             fontWeight: states.contains(WidgetState.selected)
                 ? FontWeight.w700
                 : FontWeight.w500,
@@ -165,7 +176,7 @@ abstract final class AppTheme {
       ),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: colors.surfaceRaised,
-        contentTextStyle: body(tajawal.bodyMedium),
+        contentTextStyle: body(fontTheme.bodyMedium),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14),
@@ -177,7 +188,7 @@ abstract final class AppTheme {
           backgroundColor: colors.ember,
           foregroundColor: Colors.white,
           minimumSize: const Size(48, 48),
-          textStyle: body(tajawal.labelLarge).copyWith(fontWeight: FontWeight.w800),
+          textStyle: body(fontTheme.labelLarge).copyWith(fontWeight: FontWeight.w800),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(VireoDecorations.buttonRadius),
           ),
@@ -195,7 +206,7 @@ abstract final class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: colors.surfaceRaised,
         side: BorderSide(color: colors.line),
-        labelStyle: body(tajawal.labelLarge).copyWith(fontWeight: FontWeight.w600),
+        labelStyle: body(fontTheme.labelLarge).copyWith(fontWeight: FontWeight.w600),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(VireoDecorations.chipRadius),
         ),

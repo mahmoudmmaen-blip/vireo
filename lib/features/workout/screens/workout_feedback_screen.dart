@@ -59,19 +59,83 @@ class _WorkoutFeedbackScreenState extends ConsumerState<WorkoutFeedbackScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
+    final flow = ref.watch(workoutFlowProvider);
+    final lang = Localizations.localeOf(context).languageCode;
 
-    return Padding(
+    // Calculate completed sets and estimated metrics
+    int totalSets = 0;
+    if (flow != null) {
+      for (final setsList in flow.completedSets.values) {
+        totalSets += setsList.where((d) => d).length;
+      }
+    }
+    if (totalSets == 0 && flow != null) {
+      totalSets = flow.exercises.fold<int>(0, (sum, e) => sum + e.sets);
+    }
+    final estMinutes = (totalSets * 2.5).round().clamp(15, 90);
+    final estKcal = (totalSets * 18).round().clamp(100, 650);
+    final estFatG = (estKcal * 0.08).toStringAsFixed(1);
+
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Spacer(),
+          const SizedBox(height: 16),
           Text(
             l10n.workoutFeedbackTitle,
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 20),
+          // Workout summary stats card
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: colors.surfaceRaised,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: colors.ember.withValues(alpha: 0.3)),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  lang == 'ar' ? 'ملخص جلسة اليوم 🔥' : 'Today\'s Session Summary 🔥',
+                  style: TextStyle(
+                    color: colors.ember,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _SummaryMetric(
+                      title: lang == 'ar' ? 'المدة' : 'Duration',
+                      value: '$estMinutes ${lang == 'ar' ? 'د' : 'min'}',
+                      colors: colors,
+                    ),
+                    _SummaryMetric(
+                      title: lang == 'ar' ? 'المجموعات' : 'Sets',
+                      value: '$totalSets',
+                      colors: colors,
+                    ),
+                    _SummaryMetric(
+                      title: lang == 'ar' ? 'السعرات' : 'Calories',
+                      value: '~$estKcal ${lang == 'ar' ? 'ك.س' : 'kcal'}',
+                      colors: colors,
+                    ),
+                    _SummaryMetric(
+                      title: lang == 'ar' ? 'دهون' : 'Fat',
+                      value: '~$estFatG ${lang == 'ar' ? 'جم' : 'g'}',
+                      colors: colors,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 28),
           _FeedbackButton(
             label: l10n.workoutFeedbackEasy,
             color: colors.success,
@@ -126,6 +190,39 @@ class _FeedbackButton extends StatelessWidget {
       ),
       onPressed: enabled ? onTap : null,
       child: Text(label),
+    );
+  }
+}
+
+class _SummaryMetric extends StatelessWidget {
+  const _SummaryMetric({
+    required this.title,
+    required this.value,
+    required this.colors,
+  });
+
+  final String title;
+  final String value;
+  final VireoColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: TextStyle(color: colors.textMute, fontSize: 12),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            fontFeatures: [FontFeature.tabularFigures()],
+          ),
+        ),
+      ],
     );
   }
 }

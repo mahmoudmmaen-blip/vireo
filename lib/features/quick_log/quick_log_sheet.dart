@@ -17,6 +17,9 @@ import 'package:vireo/features/progress/widgets/weight_log_sheet.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 
+import 'package:vireo/features/home/widgets/sleep_log_sheet.dart';
+import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
+
 /// One-tap logging hub opened from the centre "+" of the bottom bar.
 ///
 /// [hostContext] / [ref] belong to the long-lived shell so actions can run
@@ -39,11 +42,14 @@ Future<void> showQuickLogSheet(BuildContext hostContext, WidgetRef ref) {
 enum QuickLogAction {
   scanCamera,
   scanGallery,
+  mealVoice,
   mealText,
   mealBarcode,
   inbody,
   water,
   weight,
+  workout,
+  sleep,
   cardio,
   outdoor,
   coach,
@@ -61,10 +67,22 @@ Future<void> _run(
       await AiScanScreen.open(context, ref, fromCamera: true);
     case QuickLogAction.scanGallery:
       await AiScanScreen.open(context, ref, fromCamera: false);
+    case QuickLogAction.mealVoice:
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => const MealLogTextScreen(startListeningOnInit: true),
+        ),
+      );
     case QuickLogAction.water:
       await _logWater(context, ref, l10n);
     case QuickLogAction.weight:
       await showWeightLogSheet(context, ref);
+    case QuickLogAction.workout:
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const WorkoutFlowScreen()),
+      );
+    case QuickLogAction.sleep:
+      await showSleepLogSheet(context, ref);
     case QuickLogAction.cardio:
       await Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (_) => const CardioActivityScreen()),
@@ -130,6 +148,12 @@ class _QuickLogSheet extends StatelessWidget {
           l10n.uxQuickWaterSub, VMacro.water),
       _TileData(QuickLogAction.weight, Icons.monitor_weight_outlined,
           l10n.uxQuickWeight, l10n.uxQuickWeightSub, colors.gold),
+      _TileData(QuickLogAction.workout, Icons.fitness_center_rounded,
+          l10n.workoutTitle, l10n.homeTodayWorkoutTitle, colors.ember),
+      _TileData(QuickLogAction.sleep, Icons.bedtime_outlined,
+          l10n.vitalitySleepLog, l10n.vitalitySleepHint, VMacro.ai),
+      _TileData(QuickLogAction.mealVoice, Icons.mic_rounded,
+          l10n.mealVoiceStart, l10n.uxQuickMealTextSub, colors.success),
       _TileData(QuickLogAction.mealText, Icons.keyboard_alt_outlined,
           l10n.uxQuickMealText, l10n.uxQuickMealTextSub, colors.ember),
       _TileData(QuickLogAction.mealBarcode, Icons.qr_code_scanner,
@@ -166,6 +190,7 @@ class _QuickLogSheet extends StatelessWidget {
             child: _ScanHero(
               onCamera: () => onAction(QuickLogAction.scanCamera),
               onGallery: () => onAction(QuickLogAction.scanGallery),
+              onVoice: () => onAction(QuickLogAction.mealVoice),
             ),
           ),
           const SizedBox(height: VSpace.sm),
@@ -204,10 +229,15 @@ class _TileData {
 }
 
 class _ScanHero extends StatelessWidget {
-  const _ScanHero({required this.onCamera, required this.onGallery});
+  const _ScanHero({
+    required this.onCamera,
+    required this.onGallery,
+    required this.onVoice,
+  });
 
   final VoidCallback onCamera;
   final VoidCallback onGallery;
+  final VoidCallback onVoice;
 
   @override
   Widget build(BuildContext context) {
@@ -272,6 +302,16 @@ class _ScanHero extends StatelessWidget {
               ),
             ),
             const SizedBox(width: VSpace.xs),
+            Material(
+              color: Colors.white.withValues(alpha: 0.18),
+              shape: const CircleBorder(),
+              child: IconButton(
+                tooltip: l10n.mealVoiceStart,
+                onPressed: onVoice,
+                icon: const Icon(Icons.mic_rounded, color: Colors.white),
+              ),
+            ),
+            const SizedBox(width: 4),
             Material(
               color: Colors.white.withValues(alpha: 0.18),
               shape: const CircleBorder(),

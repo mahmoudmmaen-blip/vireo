@@ -135,6 +135,55 @@ class ActiveExerciseScreen extends ConsumerWidget {
                   icon: const Icon(Icons.swap_horiz),
                   label: Text(l10n.workoutSwapExercise),
                 ),
+                if (!flow.isLastExercise && flow.exerciseIndex + 1 < flow.exercises.length) ...[
+                  const SizedBox(height: 24),
+                  Text(
+                    locale == 'ar' ? 'التمرين التالي:' : 'Next up:',
+                    style: TextStyle(
+                      color: colors.textMute,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: colors.surfaceRaised,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: colors.surfaceRaised),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            color: colors.ember.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(Icons.fitness_center_rounded, color: colors.ember, size: 20),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                flow.exercises[flow.exerciseIndex + 1].localizedName(locale),
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                              ),
+                              Text(
+                                '${flow.exercises[flow.exerciseIndex + 1].sets} × ${flow.exercises[flow.exerciseIndex + 1].reps} · ${flow.exercises[flow.exerciseIndex + 1].localizedTargetMuscle(locale)}',
+                                style: TextStyle(color: colors.textMute, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

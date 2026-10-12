@@ -13,11 +13,37 @@ import 'package:vireo/features/workout/widgets/exercise_media_overlay.dart';
 import 'package:vireo/features/workout/widgets/pause_overlay.dart';
 import 'package:vireo/features/workout/widgets/rest_timer_overlay.dart';
 
-class WorkoutFlowScreen extends ConsumerWidget {
+import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:vireo/core/services/workout_tts_service.dart';
+
+class WorkoutFlowScreen extends ConsumerStatefulWidget {
   const WorkoutFlowScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<WorkoutFlowScreen> createState() => _WorkoutFlowScreenState();
+}
+
+class _WorkoutFlowScreenState extends ConsumerState<WorkoutFlowScreen> {
+  bool _isMuted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    try {
+      WakelockPlus.enable();
+    } catch (_) {}
+  }
+
+  @override
+  void dispose() {
+    try {
+      WakelockPlus.disable();
+    } catch (_) {}
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final flow = ref.watch(workoutFlowProvider);
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
@@ -55,6 +81,16 @@ class WorkoutFlowScreen extends ConsumerWidget {
                 ref.read(workoutFlowProvider.notifier).togglePause(true),
           ),
           actions: [
+            IconButton(
+              icon: Icon(_isMuted ? Icons.volume_off_rounded : Icons.volume_up_rounded),
+              tooltip: _isMuted ? 'Unmute voice cues' : 'Mute voice cues',
+              onPressed: () {
+                setState(() {
+                  _isMuted = !_isMuted;
+                  WorkoutTtsService.instance.isMuted = _isMuted;
+                });
+              },
+            ),
             if (showPause)
               IconButton(
                 icon: const Icon(Icons.pause_circle_outline),
