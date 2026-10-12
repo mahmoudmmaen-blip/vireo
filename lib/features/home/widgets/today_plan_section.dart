@@ -34,6 +34,7 @@ class TodayPlanSection extends ConsumerStatefulWidget {
 class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
     with SingleTickerProviderStateMixin {
   bool _celebrated = false;
+  bool _isExpanded = false;
   OverlayEntry? _confettiEntry;
   late AnimationController _confettiCtrl;
 
@@ -236,9 +237,6 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
     }
 
     final pct = (plan.progress * 100).round();
-    final morningItems = plan.itemsForSection(TodayPlanSectionKind.morning);
-    final afternoonItems = plan.itemsForSection(TodayPlanSectionKind.afternoon);
-    final eveningItems = plan.itemsForSection(TodayPlanSectionKind.evening);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -289,85 +287,58 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
           const SizedBox(height: VSpace.sm),
         ],
 
-        // ── Plan Sections Grouped: Morning, Afternoon, Evening ──
-        VireoCard(
-          padding: const EdgeInsets.symmetric(vertical: VSpace.sm, horizontal: VSpace.md),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (morningItems.isNotEmpty) ...[
-                _SectionHeaderRow(
-                  title: l10n.todayPlanMorning,
-                  icon: Icons.wb_twilight_rounded,
-                ),
-                for (var i = 0; i < morningItems.length; i++)
-                  _PlanRow(
-                    item: morningItems[i],
-                    isNow: morningItems[i].id == plan.nowItemId,
-                    complete: plan.isComplete(morningItems[i].id),
-                    timeLabel: _formatTime(morningItems[i].minutesOfDay),
-                    nowLabel: l10n.todayPlanNow,
-                    proLabel: l10n.todayPlanPro,
-                    onTap: () => _onTapItem(
-                      morningItems[i],
-                      plan.isComplete(morningItems[i].id),
+        // ── Plan Items (Progressive Disclosure: Next 3 items collapsed, expandable on tap) ──
+        Builder(
+          builder: (context) {
+            final allItems = plan.items;
+            final displayedItems = _isExpanded ? allItems : allItems.take(3).toList();
+            final isArabic = locale.startsWith('ar');
+
+            return VireoCard(
+              padding: const EdgeInsets.symmetric(vertical: VSpace.sm, horizontal: VSpace.md),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (var i = 0; i < displayedItems.length; i++)
+                    _PlanRow(
+                      item: displayedItems[i],
+                      isNow: displayedItems[i].id == plan.nowItemId,
+                      complete: plan.isComplete(displayedItems[i].id),
+                      timeLabel: _formatTime(displayedItems[i].minutesOfDay),
+                      nowLabel: l10n.todayPlanNow,
+                      proLabel: l10n.todayPlanPro,
+                      onTap: () => _onTapItem(
+                        displayedItems[i],
+                        plan.isComplete(displayedItems[i].id),
+                      ),
+                      onCheck: () => _onCheck(
+                        displayedItems[i],
+                        plan.isComplete(displayedItems[i].id),
+                      ),
                     ),
-                    onCheck: () => _onCheck(
-                      morningItems[i],
-                      plan.isComplete(morningItems[i].id),
+                  if (allItems.length > 3) ...[
+                    const Divider(height: 16),
+                    TextButton.icon(
+                      onPressed: () {
+                        HapticFeedback.selectionClick();
+                        setState(() => _isExpanded = !_isExpanded);
+                      },
+                      icon: Icon(
+                        _isExpanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
+                        size: 20,
+                      ),
+                      label: Text(
+                        _isExpanded
+                            ? (isArabic ? 'إخفاء التفاصيل' : 'Show less')
+                            : (isArabic ? 'عرض الكل (${allItems.length - 3} مهام إضافية)' : 'Show all (${allItems.length - 3} more)'),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      ),
                     ),
-                  ),
-              ],
-              if (afternoonItems.isNotEmpty) ...[
-                const SizedBox(height: VSpace.sm),
-                _SectionHeaderRow(
-                  title: l10n.todayPlanAfternoon,
-                  icon: Icons.wb_sunny_rounded,
-                ),
-                for (var i = 0; i < afternoonItems.length; i++)
-                  _PlanRow(
-                    item: afternoonItems[i],
-                    isNow: afternoonItems[i].id == plan.nowItemId,
-                    complete: plan.isComplete(afternoonItems[i].id),
-                    timeLabel: _formatTime(afternoonItems[i].minutesOfDay),
-                    nowLabel: l10n.todayPlanNow,
-                    proLabel: l10n.todayPlanPro,
-                    onTap: () => _onTapItem(
-                      afternoonItems[i],
-                      plan.isComplete(afternoonItems[i].id),
-                    ),
-                    onCheck: () => _onCheck(
-                      afternoonItems[i],
-                      plan.isComplete(afternoonItems[i].id),
-                    ),
-                  ),
-              ],
-              if (eveningItems.isNotEmpty) ...[
-                const SizedBox(height: VSpace.sm),
-                _SectionHeaderRow(
-                  title: l10n.todayPlanEvening,
-                  icon: Icons.nightlight_round,
-                ),
-                for (var i = 0; i < eveningItems.length; i++)
-                  _PlanRow(
-                    item: eveningItems[i],
-                    isNow: eveningItems[i].id == plan.nowItemId,
-                    complete: plan.isComplete(eveningItems[i].id),
-                    timeLabel: _formatTime(eveningItems[i].minutesOfDay),
-                    nowLabel: l10n.todayPlanNow,
-                    proLabel: l10n.todayPlanPro,
-                    onTap: () => _onTapItem(
-                      eveningItems[i],
-                      plan.isComplete(eveningItems[i].id),
-                    ),
-                    onCheck: () => _onCheck(
-                      eveningItems[i],
-                      plan.isComplete(eveningItems[i].id),
-                    ),
-                  ),
-              ],
-            ],
-          ),
+                  ],
+                ],
+              ),
+            );
+          },
         ),
       ],
     );
@@ -455,34 +426,6 @@ class _WaterHighlightCard extends StatelessWidget {
   }
 }
 
-class _SectionHeaderRow extends StatelessWidget {
-  const _SectionHeaderRow({required this.title, required this.icon});
-
-  final String title;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-      child: Row(
-        children: [
-          Icon(icon, size: 16, color: colors.ember),
-          const SizedBox(width: 6),
-          Text(
-            title,
-            style: TextStyle(
-              color: colors.ember,
-              fontWeight: FontWeight.w800,
-              fontSize: 13,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _PlanRow extends StatelessWidget {
   const _PlanRow({

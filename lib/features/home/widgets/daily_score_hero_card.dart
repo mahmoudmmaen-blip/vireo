@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/home/providers/daily_score_provider.dart';
+import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
+import 'package:vireo/features/walking/walking_tracker_screen.dart';
 
 /// Hero card on Home displaying the 0-100 Daily Score ("سكور اليوم"),
 /// animated circular progress ring, and streak badge.
@@ -122,15 +124,39 @@ class DailyScoreHeroCard extends ConsumerWidget {
                           fontSize: 13,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        isArabic
-                            ? 'اضغط لعرض تفاصيل التقييم والنصائح اليومية'
-                            : 'Tap to view breakdown & next steps',
-                        style: TextStyle(
-                          color: colors.textMute,
-                          fontSize: 11.5,
-                        ),
+                      const SizedBox(height: 6),
+                      Consumer(
+                        builder: (context, ref, _) {
+                          final dash = ref.watch(homeDashboardProvider);
+                          return InkWell(
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute<void>(builder: (_) => const WalkingTrackerScreen()),
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF10B981).withValues(alpha: 0.12),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.directions_walk_rounded, size: 14, color: Color(0xFF10B981)),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '${dash.stepsToday} / ${dash.stepsGoal}',
+                                    style: const TextStyle(
+                                      color: Color(0xFF10B981),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 11.5,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

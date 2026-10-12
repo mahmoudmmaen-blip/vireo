@@ -39,13 +39,14 @@ import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 import 'package:vireo/features/quick_log/quick_log_sheet.dart';
 import 'package:vireo/features/subscription/widgets/subscription_shell_gate.dart';
+import 'package:vireo/features/walking/walking_tracker_screen.dart';
 import 'package:vireo/features/workout/workout_screen.dart';
 
 /// App shell: 4 primary tabs + a centre "+" quick-log action.
+/// The 3 pillars: Home / Food / "+" / Walk / Workouts.
 ///
-/// Bottom-bar destinations: 0 home, 1 workout, 2 nutrition, 3 progress.
-/// Profile (4) is reached from the avatar on Home; Diary (5) stays available
-/// via [ShellTabIndexNotifier.goDiary] / deep links.
+/// Bottom-bar destinations: 0 Home, 1 Food (Nutrition), 2 Workout, 3 Walk.
+/// Progress (4), Profile (5) and Diary (6) remain available via notifier / deep links.
 class MainShell extends ConsumerStatefulWidget {
   const MainShell({super.key});
 
@@ -56,8 +57,9 @@ class MainShell extends ConsumerStatefulWidget {
 class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserver {
   static const _screens = <Widget>[
     HomeScreen(),
-    WorkoutScreen(),
     NutritionScreen(),
+    WalkingTrackerScreen(),
+    WorkoutScreen(),
     ProgressScreen(),
     ProfileScreen(),
     DiaryScreen(),
@@ -283,8 +285,8 @@ class _VireoBottomBar extends StatelessWidget {
           child: Row(
             children: [
               tab(0, Icons.home_outlined, Icons.home_rounded, l10n.homeTitle),
-              tab(1, Icons.fitness_center_outlined, Icons.fitness_center_rounded,
-                  l10n.workoutTitle),
+              tab(1, Icons.restaurant_outlined, Icons.restaurant_rounded,
+                  l10n.nutritionTitle),
               Expanded(
                 child: Center(
                   child: _QuickLogButton(
@@ -293,10 +295,10 @@ class _VireoBottomBar extends StatelessWidget {
                   ),
                 ),
               ),
-              tab(2, Icons.restaurant_outlined, Icons.restaurant_rounded,
-                  l10n.nutritionTitle),
-              tab(3, Icons.insights_outlined, Icons.insights_rounded,
-                  l10n.progressTitle),
+              tab(2, Icons.directions_walk_rounded, Icons.directions_walk_rounded,
+                  l10n.walkingTitle),
+              tab(3, Icons.fitness_center_outlined, Icons.fitness_center_rounded,
+                  l10n.workoutTitle),
             ],
           ),
         ),

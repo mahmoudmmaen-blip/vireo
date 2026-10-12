@@ -3,25 +3,26 @@ import 'package:vireo/data/models/meal_type.dart';
 
 /// Controls the bottom-nav / shell tab index in [MainShell].
 ///
-/// Indices: 0 home, 1 workout, 2 nutrition, 3 progress, 4 profile, 5 diary.
+/// Indices: 0 Home, 1 Food (Nutrition), 2 Walk, 3 Workout, 4 Progress, 5 Profile, 6 Diary.
 class ShellTabIndexNotifier extends Notifier<int> {
   @override
   int build() => 0;
 
-  void goTo(int index) => state = index.clamp(0, 5);
+  void goTo(int index) => state = index.clamp(0, 6);
 
   void goHome() => state = 0;
-  void goWorkout() => state = 1;
   void goNutrition({MealType? mealTab}) {
     if (mealTab != null) {
       ref.read(nutritionInitialTabProvider.notifier).state = mealTab;
     }
-    state = 2;
+    state = 1;
   }
 
-  void goProgress() => state = 3;
-  void goProfile() => state = 4;
-  void goDiary() => state = 5;
+  void goWalk() => state = 2;
+  void goWorkout() => state = 3;
+  void goProgress() => state = 4;
+  void goProfile() => state = 5;
+  void goDiary() => state = 6;
 }
 
 final shellTabIndexProvider =

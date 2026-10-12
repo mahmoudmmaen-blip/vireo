@@ -17,10 +17,8 @@ import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/data/repositories/meal_plan_repository.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
-import 'package:vireo/features/ai_coach/screens/ai_coach_screen.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
-import 'package:vireo/features/ai_nutrition/widgets/meal_quick_relog_row.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/core/services/hive_service.dart';
@@ -34,11 +32,11 @@ import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/home/widgets/recovery_breakdown_sheet.dart';
 import 'package:vireo/features/progress/providers/weekly_checkin_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
-import 'package:vireo/features/walking/walking_tracker_screen.dart';
-import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 import 'package:vireo/features/activity/screens/health_hub_screen.dart';
-import 'package:vireo/features/home/widgets/steps_hero_card.dart';
 import 'package:vireo/features/home/widgets/daily_score_hero_card.dart';
+import 'package:vireo/features/home/widgets/smart_next_action_card.dart';
+import 'package:vireo/features/home/widgets/quick_water_card.dart';
+import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
 import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/features/home/widgets/today_plan_section.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
@@ -64,6 +62,8 @@ class HomeDashboardBody extends ConsumerWidget {
           MaterialPageRoute<void>(builder: (_) => screen),
         );
 
+    final isAdvancedUnlocked = ref.watch(isAdvancedFeaturesUnlockedProvider);
+
     final sections = <Widget>[
       _HomeHeader(
         name: homeDisplayName(l10n, dash, isGuest),
@@ -73,138 +73,127 @@ class HomeDashboardBody extends ConsumerWidget {
             : l10n.homeDayPhase(dash.programDay, homePhaseName(l10n, dash, locale)),
       ),
       const SaveProgressPromptHost(),
-      VireoCard(
-        onTap: () => AiScanScreen.open(context, ref, fromCamera: true),
-        padding: const EdgeInsets.symmetric(vertical: VSpace.md, horizontal: VSpace.md),
-        child: Row(
-          children: [
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: context.vireoColors.ember.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Icon(Icons.camera_alt_rounded, color: context.vireoColors.ember),
-            ),
-            const SizedBox(width: VSpace.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.mealScanHeroTitle,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w900,
-                        ),
-                  ),
-                  Text(
-                    l10n.mealScanHeroSubtitle,
-                    style: TextStyle(
-                      color: context.vireoColors.textMute,
-                      fontSize: 13,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Icon(Icons.chevron_right, color: context.vireoColors.textMute),
-          ],
-        ),
-      ),
-      TodayHeroCard(
-        data: nutrition,
-        onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
-        onBurnedTap: () => push(const CardioActivityScreen()),
-      ),
+
+      // ── Card 1: Daily Score + Steps hero ──
       const DailyScoreHeroCard(),
-      StepsHeroCard(
-        stepsCurrent: dash.stepsToday,
-        stepsGoal: dash.stepsGoal,
-        onTap: () => push(const WalkingTrackerScreen()),
-      ),
-      const VireoNativeAdCard(),
+
+      // ── Card 2: "الخطوة الجاية" — ONE smart next-action card ──
+      const SmartNextActionCard(),
+
+      // ── Card 3: Today Plan (collapsed to next 3 items + 'عرض الكل') ──
       const TodayPlanSection(),
-      _QuickActions(
-        onWater: () => _addWater(context, ref),
-        onWorkout: () => ref.read(shellTabIndexProvider.notifier).goWorkout(),
-        onCoach: () => push(const AiCoachScreen()),
-      ),
-      const MealQuickRelogRow(),
-      if (activeDiet == null)
-        ChooseDietPlanCard(
-          onTap: () {
-            final screened = HiveService.isInitialized &&
-                HiveService.settingsBox.containsKey(
-                  DietPlanStorage.preferencesKey,
-                );
-            push(
-              screened
-                  ? const DietProgramsScreen()
-                  : const DietQuizScreen(),
-            );
+
+      // ── Card 4: Water quick card (1 tap = +250 ml) ──
+      const QuickWaterCard(),
+
+      // ── Card 5: One native ad slot for free users ──
+      const VireoNativeAdCard(),
+
+      // ── Progressive disclosure / "المزيد" for Day 3+ or full unlocked ──
+      if (isAdvancedUnlocked) ...[
+        SectionHeader(
+          title: locale.startsWith('ar') ? 'المزيد والتحليلات' : 'More & Analytics',
+          padding: _headerPad,
+        ),
+        TodayHeroCard(
+          data: nutrition,
+          onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
+          onBurnedTap: () => push(const CardioActivityScreen()),
+        ),
+        if (activeDiet == null)
+          ChooseDietPlanCard(
+            onTap: () {
+              final screened = HiveService.isInitialized &&
+                  HiveService.settingsBox.containsKey(
+                    DietPlanStorage.preferencesKey,
+                  );
+              push(
+                screened
+                    ? const DietProgramsScreen()
+                    : const DietQuizScreen(),
+              );
+            },
+          ),
+        if (fasting != null) const FastingWindowCard(),
+        VireoCard(
+          onTap: () => push(const HealthHubScreen()),
+          padding: const EdgeInsets.all(VSpace.sm + 2),
+          child: Row(
+            children: [
+              Icon(Icons.monitor_heart_outlined, color: context.vireoColors.ember),
+              const SizedBox(width: VSpace.sm),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.activityHealthHomeCardTitle,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
+                    ),
+                    Text(
+                      l10n.activityHealthHomeCardSubtitle,
+                      style: TextStyle(
+                        color: context.vireoColors.textMute,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right, color: context.vireoColors.textMute),
+            ],
+          ),
+        ),
+        if (dash.showCheckIn || weeklyDue)
+          _CheckInBanner(onTap: () => push(const WeeklyCheckInScreen())),
+        SectionHeader(title: l10n.uxSectionThisWeek, padding: _headerPad),
+        _WeekStrip(completedDays: dash.weeklyCompletedDays),
+        _RecoveryCard(
+          score: dash.recoveryScore,
+          onInfo: () => showRecoveryBreakdownSheet(context, dash.recovery),
+        ),
+        SectionHeader(
+          title: l10n.uxSectionTodayLog,
+          padding: _headerPad,
+        ),
+        _TodayLog(
+          items: nutrition.items,
+          onScan: () => AiScanScreen.open(context, ref, fromCamera: true),
+          onRemoveAi: (id) {
+            ref.read(aiMealLogProvider.notifier).remove(id);
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  duration: const Duration(seconds: 3),
+                  persist: false,
+                  content: Text(l10n.uxMealRemoved),
+                ),
+              );
           },
         ),
-      if (fasting != null) const FastingWindowCard(),
-      VireoCard(
-        onTap: () => push(const HealthHubScreen()),
-        padding: const EdgeInsets.all(VSpace.sm + 2),
-        child: Row(
-          children: [
-            Icon(Icons.monitor_heart_outlined, color: context.vireoColors.ember),
-            const SizedBox(width: VSpace.sm),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.activityHealthHomeCardTitle,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                        ),
-                  ),
-                  Text(
-                    l10n.activityHealthHomeCardSubtitle,
-                    style: TextStyle(
-                      color: context.vireoColors.textMute,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+      ] else ...[
+        // Day 1 & Day 2 prompt to view all features anytime
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: Center(
+            child: TextButton.icon(
+              onPressed: () {
+                ref.read(isAdvancedFeaturesUnlockedProvider.notifier).unlockAllManually();
+              },
+              icon: const Icon(Icons.tune_rounded, size: 18),
+              label: Text(
+                locale.startsWith('ar')
+                    ? 'عرض كل المميزات والتحليلات الآن'
+                    : 'Show all features & analytics now',
+                style: TextStyle(color: context.vireoColors.textMute, fontSize: 13),
               ),
             ),
-            Icon(Icons.chevron_right, color: context.vireoColors.textMute),
-          ],
+          ),
         ),
-      ),
-      if (dash.showCheckIn || weeklyDue)
-        _CheckInBanner(onTap: () => push(const WeeklyCheckInScreen())),
-      SectionHeader(title: l10n.uxSectionThisWeek, padding: _headerPad),
-      _WeekStrip(completedDays: dash.weeklyCompletedDays),
-      _RecoveryCard(
-        score: dash.recoveryScore,
-        onInfo: () => showRecoveryBreakdownSheet(context, dash.recovery),
-      ),
-      SectionHeader(
-        title: l10n.uxSectionTodayLog,
-        padding: _headerPad,
-      ),
-      _TodayLog(
-        items: nutrition.items,
-        onScan: () => AiScanScreen.open(context, ref, fromCamera: true),
-        onRemoveAi: (id) {
-          ref.read(aiMealLogProvider.notifier).remove(id);
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                duration: const Duration(seconds: 3),
-                persist: false,
-                content: Text(l10n.uxMealRemoved),
-              ),
-            );
-        },
-      ),
+      ],
     ];
 
     return NoScrollbarScrollConfiguration(
@@ -242,26 +231,6 @@ class HomeDashboardBody extends ConsumerWidget {
   }
 }
 
-Future<void> _addWater(BuildContext context, WidgetRef ref) async {
-  final l10n = AppLocalizations.of(context);
-  final added = await ref.read(waterTrackerProvider.notifier).addGlass();
-  if (!context.mounted) return;
-  final ml = ref.read(waterTrackerProvider);
-  // Brief confirmation only — undo lives on the Water card.
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
-    ..showSnackBar(
-      SnackBar(
-        persist: false,
-        duration: const Duration(seconds: 3),
-        content: Text(
-          added
-              ? l10n.uxWaterAdded((ml / 1000).toStringAsFixed(2))
-              : l10n.uxWaterGoalDone,
-        ),
-      ),
-    );
-}
 
 // ───────────────────────────── Header ─────────────────────────────
 
@@ -640,146 +609,6 @@ class _HeroStat extends StatelessWidget {
   }
 }
 
-// ───────────────────────────── Quick actions ─────────────────────────────
-
-class _QuickActions extends ConsumerWidget {
-  const _QuickActions({
-    required this.onWater,
-    required this.onWorkout,
-    required this.onCoach,
-  });
-
-  final VoidCallback onWater;
-  final VoidCallback onWorkout;
-  final VoidCallback onCoach;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final waterMl = ref.watch(waterTrackerProvider);
-
-    return Row(
-      children: [
-        _QuickAction(
-          icon: Icons.water_drop_rounded,
-          label: '${(waterMl / 1000).toStringAsFixed(1)}L',
-          color: VMacro.water,
-          onTap: onWater,
-          badge: Icons.add_rounded,
-          highlighted: true,
-        ),
-        _QuickAction(
-          icon: Icons.fitness_center_rounded,
-          label: l10n.uxActionTrain,
-          color: VMacro.steps,
-          onTap: onWorkout,
-        ),
-        _QuickAction(
-          icon: Icons.auto_awesome_rounded,
-          label: l10n.uxActionCoach,
-          color: VMacro.ai,
-          onTap: onCoach,
-        ),
-      ],
-    );
-  }
-}
-
-class _QuickAction extends StatelessWidget {
-  const _QuickAction({
-    required this.icon,
-    required this.label,
-    required this.color,
-    required this.onTap,
-    this.highlighted = false,
-    this.badge,
-  });
-
-  final IconData icon;
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
-  final bool highlighted;
-  final IconData? badge;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    return Expanded(
-      child: Pressable(
-        onTap: onTap,
-        semanticLabel: label,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: VSpace.xs),
-          child: Column(
-            children: [
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    width: 58,
-                    height: 58,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(VRadius.md),
-                      color: highlighted ? null : color.withValues(alpha: 0.14),
-                      gradient: highlighted
-                          ? LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [Color.lerp(color, Colors.white, 0.15)!, color],
-                            )
-                          : null,
-                      border: highlighted
-                          ? null
-                          : Border.all(color: color.withValues(alpha: 0.25)),
-                      boxShadow: highlighted
-                          ? [
-                              BoxShadow(
-                                color: color.withValues(alpha: 0.4),
-                                blurRadius: 16,
-                                spreadRadius: -4,
-                                offset: const Offset(0, 6),
-                              ),
-                            ]
-                          : null,
-                    ),
-                    child: Icon(
-                      icon,
-                      color: highlighted ? Colors.white : color,
-                      size: 26,
-                    ),
-                  ),
-                  if (badge != null)
-                    PositionedDirectional(
-                      end: -4,
-                      top: -4,
-                      child: Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          color: color,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: colors.background, width: 2),
-                        ),
-                        child: Icon(badge, size: 12, color: Colors.white),
-                      ),
-                    ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 
 // ───────────────────────────── Week ─────────────────────────────
