@@ -877,7 +877,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get paywallPlanLifetime => 'Ömür Boyu';
 
   @override
-  String get paywallFeatureUnlimitedScans => 'Sınırsız buzdolabı taraması';
+  String get paywallFeatureUnlimitedScans => 'Sınırsız Anında Tabak Tarama';
 
   @override
   String get paywallFeatureFullProgram =>
@@ -3500,4 +3500,439 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get fatEquivalentInfoDismiss => 'Anladım';
+
+  @override
+  String get legalTerms => 'Şartlar';
+
+  @override
+  String get legalPrivacy => 'Gizlilik';
+
+  @override
+  String get legalMedicalDisclaimer => 'Tıbbi Sorumluluk Reddi';
+
+  @override
+  String get welcomeTagline =>
+      'Erkekler için özel olarak geliştirilmiş akıllı beslenme ve fitness.';
+
+  @override
+  String get welcomePillarScannerTitle => 'Anında Tabak Tarayıcı';
+
+  @override
+  String get welcomePillarScannerDesc =>
+      'Yemeğini çek, 2 saniyede kalori ve proteinini net öğren';
+
+  @override
+  String get welcomePillarPlanTitle => 'Kişiselleştirilmiş Günlük Plan';
+
+  @override
+  String get welcomePillarPlanDesc =>
+      'Vücuduna ve hedefine göre bilimsel hedefler';
+
+  @override
+  String get welcomePillarSafetyTitle => 'Klinik Olarak Güvenli Beslenme';
+
+  @override
+  String get welcomePillarSafetyDesc =>
+      'Metabolizmanı ve genel sağlığını koruyan rehberlik';
+
+  @override
+  String get onboardingGoalTitle => 'Temel hedefin nedir?';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'En önemli olanı seç. Günlük hedeflerini buna göre belirleyelim.';
+
+  @override
+  String get goalLoseFatTitle => 'Yağ Yakımı';
+
+  @override
+  String get goalLoseFatSubtitle => 'Kas kütleni korurken inatçı yağları erit';
+
+  @override
+  String get goalBuildMuscleTitle => 'Kas Kazanımı';
+
+  @override
+  String get goalBuildMuscleSubtitle =>
+      'Optimize protein ve aşamalı yükleme ile kas kütleni artır';
+
+  @override
+  String get goalMoreEnergyTitle => 'Daha Fazla Enerji';
+
+  @override
+  String get goalMoreEnergySubtitle =>
+      'Gün ortası yorgunluğunu bitir, günlük zindeliğini yükselt';
+
+  @override
+  String get goalAllOfAboveTitle => 'Hepsi Bir Arada';
+
+  @override
+  String get goalAllOfAboveSubtitle =>
+      'Tam vücut dönüşümü: yağ yak, güç kazan ve zinde hisset';
+
+  @override
+  String get onboardingBodyTitle => 'Vücut Profilin';
+
+  @override
+  String get onboardingBodySubtitle =>
+      'Doğru ölçümler, günlük kalori yakımını ve hedeflerini tam hesaplamamızı sağlar.';
+
+  @override
+  String get sexMale => 'Erkek';
+
+  @override
+  String get sexFemale => 'Kadın';
+
+  @override
+  String get unitMetric => 'Metrik';
+
+  @override
+  String get unitImperial => 'İngiliz (lb)';
+
+  @override
+  String get bodyMetricAge => 'Yaş';
+
+  @override
+  String bodyMetricYears(int age) {
+    return '$age yaş';
+  }
+
+  @override
+  String get selectAgeTitle => 'Yaş Seç';
+
+  @override
+  String ageYearsSuffix(int age) {
+    return '$age yaş';
+  }
+
+  @override
+  String get bodyMetricHeight => 'Boy';
+
+  @override
+  String get selectHeightTitle => 'Boy Seç';
+
+  @override
+  String get bodyMetricCurrentWeight => 'Mevcut Kilo';
+
+  @override
+  String get selectCurrentWeightTitle => 'Mevcut Kiloyu Seç';
+
+  @override
+  String get bodyMetricTargetWeight => 'Hedef Kilo';
+
+  @override
+  String get selectTargetWeightTitle => 'Hedef Kiloyu Seç';
+
+  @override
+  String get pickerDone => 'Tamam';
+
+  @override
+  String get onboardingActivityTitle => 'Aktivite ve Antrenman Alanı';
+
+  @override
+  String get onboardingActivitySubtitle =>
+      'Günlük kalori yakımını dengeler ve en uygun egzersizleri öneririz.';
+
+  @override
+  String get dailyActivityLevelHeader => 'GÜNLÜK AKTİVİTE SEVİYESİ';
+
+  @override
+  String get activitySedentaryTitle => 'Hareketsiz / Masa Başı';
+
+  @override
+  String get activitySedentarySubtitle =>
+      'Az yürüyüş, masa başı iş, 5.000 adımın altında';
+
+  @override
+  String get activityModeratelyActiveTitle => 'Orta Düzeyde Aktif';
+
+  @override
+  String get activityModeratelyActiveSubtitle =>
+      'Düzenli hareketli, günde 6.000–10.000 adım';
+
+  @override
+  String get activityVeryActiveTitle => 'Çok Aktif / Fiziksel İş';
+
+  @override
+  String get activityVeryActiveSubtitle =>
+      'Sürekli hareket halinde veya günde 12.000+ adım';
+
+  @override
+  String get trainingPlaceHeader => 'NEREDE ANTRENMAN YAPMAYI PLANLIYORSUN?';
+
+  @override
+  String get trainingPlaceGymTitle => 'Spor Salonu';
+
+  @override
+  String get trainingPlaceGymSubtitle =>
+      'Halter, makine ve dambıllara tam erişim';
+
+  @override
+  String get trainingPlaceHomeTitle => 'Evde';
+
+  @override
+  String get trainingPlaceHomeSubtitle =>
+      'Vücut ağırlığı, direnç bantları veya hafif dambıllar';
+
+  @override
+  String get trainingPlaceWalkingTitle => 'Yürüyüş';
+
+  @override
+  String get trainingPlaceWalkingSubtitle =>
+      'Kardiyo adımları ve açık hava yürüyüş rutinleri';
+
+  @override
+  String get onboardingHealthSafetyTitle => 'Sağlık ve Güvenlik Taraması';
+
+  @override
+  String get onboardingHealthSafetySubtitle =>
+      'Sistemimizin güvenliğini sağlaması için geçerli durumları seç.';
+
+  @override
+  String get healthSafetyNoneApply => 'Bunların hiçbiri bende yok';
+
+  @override
+  String get healthSafetyOrSelect => 'VEYA GEÇERLİ OLANLARI SEÇ';
+
+  @override
+  String get onboardingTryScanTitle => 'Anında Taramayı Deneyimle';
+
+  @override
+  String get onboardingTryScanSubtitle =>
+      'Vireo\'nun gerçek yemekleri kalori ve makrolara nasıl anında böldüğünü gör.';
+
+  @override
+  String get tryScanSamplePlateTitle => 'Örnek Yüksek Proteinli Tabak';
+
+  @override
+  String get tryScanSamplePlateDesc =>
+      'Izgara Tavuk, Pirinç Pilavı ve Mevsim Salatası';
+
+  @override
+  String get tryScanAnalyzing => 'Tabak Analiz Ediliyor...';
+
+  @override
+  String get tryScanSampleCta => 'Örnek Tabağı Tara (Anında)';
+
+  @override
+  String get tryScanOrTestLive => 'VEYA CANLI DENE';
+
+  @override
+  String get tryScanOwnMealTitle => 'Kendi Yemeğini Tara';
+
+  @override
+  String get tryScanOwnMealDesc => 'Önündeki tabağın anlık fotoğrafını çek';
+
+  @override
+  String get onboardingPlanRevealTitle => 'Sana Özel Yol Haritası';
+
+  @override
+  String get onboardingPlanRevealSubtitle =>
+      'Metabolizman ve hedeflerin için özel olarak tasarlandı.';
+
+  @override
+  String get planRevealStartPlan => 'Planımı Başlat';
+
+  @override
+  String get planRevealProjectedPace => 'ÖNGÖRÜLEN HIZ';
+
+  @override
+  String get planRevealSteadyRecomp => 'İstikrarlı vücut gelişimi';
+
+  @override
+  String planRevealFatLossPace(String amount) {
+    return '-$amount kg / hafta yağ kaybı';
+  }
+
+  @override
+  String planRevealLeanMassPace(String amount) {
+    return '+$amount kg / hafta kas kazanımı';
+  }
+
+  @override
+  String get planRevealDailyCalories => 'GÜNLÜK KALORİ HEDEFİ';
+
+  @override
+  String get planRevealPersonalizedBadge => 'Kişiye Özel';
+
+  @override
+  String get planRevealKcalPerDay => 'kcal / gün';
+
+  @override
+  String get planRevealDailyProtein => 'GÜNLÜK PROTEİN';
+
+  @override
+  String get planRevealGramPerDay => 'g / gün';
+
+  @override
+  String get planRevealHydration => 'HİDRASYON (SU)';
+
+  @override
+  String get planRevealDailySteps => 'GÜNLÜK ADIM';
+
+  @override
+  String get planRevealStepsPerDay => 'adım / gün';
+
+  @override
+  String get planRevealDietProtocol => 'BESLENME PROTOKOLÜ';
+
+  @override
+  String get planRevealOptimalMatch => 'En uygun eşleşme';
+
+  @override
+  String get planRevealBalancedPlanDefault => 'Dengeli Kalori Açığı Planı';
+
+  @override
+  String get onboardingNotificationsTitle => 'Hiçbir Hedefi Kaçırma';
+
+  @override
+  String get onboardingNotificationsSubtitle =>
+      'Öğün takibi, su tüketimi ve antrenmanlarını aksatmamak için nazik hatırlatmalar.';
+
+  @override
+  String get notificationsHeroTitle =>
+      'İstikrar İçin Tasarlandı, Rahatsız Etmek İçin Değil';
+
+  @override
+  String get notificationsHeroBody =>
+      'Hatırlatıcıları açan kullanıcıların hedef kilolarına ulaşma şansı 3,4 kat daha yüksektir.';
+
+  @override
+  String get notificationsMealLoggingTitle => 'Öğün ve Tabak Takibi';
+
+  @override
+  String get notificationsMealLoggingDesc =>
+      'Öğle ve akşam yemeklerinde zamanında hatırlatıcılar';
+
+  @override
+  String get notificationsWorkoutSessionTitle => 'Günlük Antrenman';
+
+  @override
+  String get notificationsWorkoutSessionDesc =>
+      'Antrenman programına sadık kal';
+
+  @override
+  String get notificationsWeeklyReviewTitle => 'Haftalık İlerleme İncelemesi';
+
+  @override
+  String get notificationsWeeklyReviewDesc =>
+      'Pazar tartısı ve haftalık düzenleme özeti';
+
+  @override
+  String get notificationsEnableButton => 'Hatırlatıcıları Aç';
+
+  @override
+  String get notificationsMaybeLater => 'Belki Daha Sonra';
+
+  @override
+  String get onboardingPaywallTitle => 'Sonuçlarını Hızlandır';
+
+  @override
+  String get onboardingPaywallSubtitle =>
+      'Sınırsız tabak tarama, yapay zeka antrenmanları ve gelişmiş analizlerin kilidini aç.';
+
+  @override
+  String get paywallProBadge => 'VIREO PRO';
+
+  @override
+  String get paywallFeatureUnlimitedScansDesc =>
+      'Günlük sınır veya kota derdi olmadan';
+
+  @override
+  String get paywallFeatureSmartSub =>
+      'Yapay Zeka Akıllı Yemek Değişimi ve Hazırlığı';
+
+  @override
+  String get paywallFeatureSmartSubDesc =>
+      'Yerel yemekler için makro dostu anında alternatifler';
+
+  @override
+  String get paywallFeatureAdaptiveSplits =>
+      'Kişiye Özel Uyum Sağlayan Antrenman Programları';
+
+  @override
+  String get paywallFeatureAdaptiveSplitsDesc =>
+      'Spor salonu veya ev için aşamalı ağırlık takibi';
+
+  @override
+  String get paywallPlanAnnualPrice => '4,99 \$ / ay';
+
+  @override
+  String get paywallPlanAnnualSubtext =>
+      'Yıllık faturalandırılır (%50 Tasarruf)';
+
+  @override
+  String get paywallBadgeBestValue => 'EN İYİ FİYAT';
+
+  @override
+  String get paywallPlanMonthlyPrice => '9,99 \$ / ay';
+
+  @override
+  String get paywallPlanMonthlySubtext => 'Aylık faturalandırılır';
+
+  @override
+  String get paywallStartTrialCta => '7 Günlük Ücretsiz Denemeyi Başlat';
+
+  @override
+  String get paywallContinueFreeTier => 'Ücretsiz Sürümle Devam Et';
+
+  @override
+  String get appInitErrorFailed => 'Uygulama servisleri başlatılamadı.';
+
+  @override
+  String get appInitRetry => 'Tekrar Dene';
+
+  @override
+  String get privacyExportTitle => 'Verilerimi Dışa Aktar';
+
+  @override
+  String get privacyExportReady =>
+      'Veri paketiniz JSON ve CSV formatlarında hazır:';
+
+  @override
+  String get weeklyProgressShareFailed => 'Paylaşım görseli oluşturulamadı';
+
+  @override
+  String get adaptiveCalorieCurrentTarget => 'Mevcut Hedef';
+
+  @override
+  String get adaptiveCalorieSuggestedTarget => 'Önerilen Hedef';
+
+  @override
+  String get adaptiveCalorieWindowSpan => 'Zaman aralığı';
+
+  @override
+  String get adaptiveCalorieFoodLogsCount => 'Yemek kaydedilen gün sayısı';
+
+  @override
+  String get adaptiveCalorieWeighInsCount => 'Tartılma sayısı';
+
+  @override
+  String get adaptiveCalorieAverageIntake => 'Ortalama kalori alımı';
+
+  @override
+  String get adaptiveCalorieTrendWeightChange => 'Kilo eğilimi değişimi';
+
+  @override
+  String get adaptiveCalorieEstimatedMaintenance => 'Tahmini kalori koruma';
+
+  @override
+  String get adaptiveCalorieWeeklyChangeCap => 'Haftalık değişim sınırı';
+
+  @override
+  String get adaptiveCalorieSafetyFloorApplied => 'Güvenlik tabanı uygulandı';
+
+  @override
+  String get chartSevenDayTrend => '7 Günlük Trend';
+
+  @override
+  String get chartThirtyDayTrend => '30 Günlük Trend';
+
+  @override
+  String get chartRawDot => 'Ham Ölçüm';
+
+  @override
+  String get chartTrendLine => 'Trend Çizgisi';
+
+  @override
+  String get chartGoalLine => 'Hedef Çizgisi';
 }

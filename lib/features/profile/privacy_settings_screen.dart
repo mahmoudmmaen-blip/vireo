@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/sync_engine.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
@@ -17,6 +18,7 @@ class _PrivacySettingsScreenState extends ConsumerState<PrivacySettingsScreen> {
   bool _isExporting = false;
 
   Future<void> _exportData() async {
+    final l10n = AppLocalizations.of(context);
     final auth = ref.read(authProvider).valueOrNull;
     final userId = auth?.user?.id ?? 'guest_user';
     final sync = ref.read(syncEngineProvider);
@@ -28,12 +30,12 @@ class _PrivacySettingsScreenState extends ConsumerState<PrivacySettingsScreen> {
       showDialog<void>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Export My Data'),
+          title: Text(l10n.privacyExportTitle),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Your data package is ready in JSON & CSV formats:'),
+              Text(l10n.privacyExportReady),
               const SizedBox(height: 12),
               ...export.keys.map(
                 (k) => Text('• $k (${export[k]!.length} bytes)', style: const TextStyle(fontSize: 12)),
@@ -43,7 +45,7 @@ class _PrivacySettingsScreenState extends ConsumerState<PrivacySettingsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('Done'),
+              child: Text(l10n.pickerDone),
             ),
           ],
         ),

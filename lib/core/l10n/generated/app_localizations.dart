@@ -1663,7 +1663,7 @@ abstract class AppLocalizations {
   /// No description provided for @paywallFeatureUnlimitedScans.
   ///
   /// In en, this message translates to:
-  /// **'Unlimited fridge scans'**
+  /// **'Unlimited Instant Plate Scans'**
   String get paywallFeatureUnlimitedScans;
 
   /// No description provided for @paywallFeatureFullProgram.
@@ -6306,6 +6306,792 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Got it'**
   String get fatEquivalentInfoDismiss;
+
+  /// No description provided for @legalTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms'**
+  String get legalTerms;
+
+  /// No description provided for @legalPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get legalPrivacy;
+
+  /// No description provided for @legalMedicalDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical Disclaimer'**
+  String get legalMedicalDisclaimer;
+
+  /// No description provided for @welcomeTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart nutrition & intelligent fitness built specifically for men.'**
+  String get welcomeTagline;
+
+  /// No description provided for @welcomePillarScannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Instant Plate Scanner'**
+  String get welcomePillarScannerTitle;
+
+  /// No description provided for @welcomePillarScannerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Snap your meal, get accurate calories & protein in 2 seconds'**
+  String get welcomePillarScannerDesc;
+
+  /// No description provided for @welcomePillarPlanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalized Daily Plan'**
+  String get welcomePillarPlanTitle;
+
+  /// No description provided for @welcomePillarPlanDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence-backed targets tailored to your body and goal'**
+  String get welcomePillarPlanDesc;
+
+  /// No description provided for @welcomePillarSafetyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinically Safe Nutrition'**
+  String get welcomePillarSafetyTitle;
+
+  /// No description provided for @welcomePillarSafetyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Guidance that protects your metabolism and overall health'**
+  String get welcomePillarSafetyDesc;
+
+  /// No description provided for @onboardingGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your primary focus?'**
+  String get onboardingGoalTitle;
+
+  /// No description provided for @onboardingGoalSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick what matters most. We will engineer your daily targets around this.'**
+  String get onboardingGoalSubtitle;
+
+  /// No description provided for @goalLoseFatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lose Fat'**
+  String get goalLoseFatTitle;
+
+  /// No description provided for @goalLoseFatSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Torch stubborn fat while maintaining hard-earned muscle mass'**
+  String get goalLoseFatSubtitle;
+
+  /// No description provided for @goalBuildMuscleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Build Muscle'**
+  String get goalBuildMuscleTitle;
+
+  /// No description provided for @goalBuildMuscleSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximize lean hypertrophy with optimized protein & progressive overload'**
+  String get goalBuildMuscleSubtitle;
+
+  /// No description provided for @goalMoreEnergyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'More Energy'**
+  String get goalMoreEnergyTitle;
+
+  /// No description provided for @goalMoreEnergySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Eliminate mid-day crashes and elevate everyday stamina & vitality'**
+  String get goalMoreEnergySubtitle;
+
+  /// No description provided for @goalAllOfAboveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All of the Above'**
+  String get goalAllOfAboveTitle;
+
+  /// No description provided for @goalAllOfAboveSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Total body recomposition: drop body fat, gain strength, and feel relentless'**
+  String get goalAllOfAboveSubtitle;
+
+  /// No description provided for @onboardingBodyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Body Profile'**
+  String get onboardingBodyTitle;
+
+  /// No description provided for @onboardingBodySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accurate metrics allow us to calculate your exact caloric burn & daily targets.'**
+  String get onboardingBodySubtitle;
+
+  /// No description provided for @sexMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get sexMale;
+
+  /// No description provided for @sexFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get sexFemale;
+
+  /// No description provided for @unitMetric.
+  ///
+  /// In en, this message translates to:
+  /// **'Metric'**
+  String get unitMetric;
+
+  /// No description provided for @unitImperial.
+  ///
+  /// In en, this message translates to:
+  /// **'US (lb)'**
+  String get unitImperial;
+
+  /// No description provided for @bodyMetricAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Age'**
+  String get bodyMetricAge;
+
+  /// No description provided for @bodyMetricYears.
+  ///
+  /// In en, this message translates to:
+  /// **'{age} years'**
+  String bodyMetricYears(int age);
+
+  /// No description provided for @selectAgeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Age'**
+  String get selectAgeTitle;
+
+  /// No description provided for @ageYearsSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'{age} yrs'**
+  String ageYearsSuffix(int age);
+
+  /// No description provided for @bodyMetricHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get bodyMetricHeight;
+
+  /// No description provided for @selectHeightTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Height'**
+  String get selectHeightTitle;
+
+  /// No description provided for @bodyMetricCurrentWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Weight'**
+  String get bodyMetricCurrentWeight;
+
+  /// No description provided for @selectCurrentWeightTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Current Weight'**
+  String get selectCurrentWeightTitle;
+
+  /// No description provided for @bodyMetricTargetWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Weight'**
+  String get bodyMetricTargetWeight;
+
+  /// No description provided for @selectTargetWeightTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Target Weight'**
+  String get selectTargetWeightTitle;
+
+  /// No description provided for @pickerDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get pickerDone;
+
+  /// No description provided for @onboardingActivityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity & Training Place'**
+  String get onboardingActivityTitle;
+
+  /// No description provided for @onboardingActivitySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We calibrate daily calorie output and recommend optimal workouts.'**
+  String get onboardingActivitySubtitle;
+
+  /// No description provided for @dailyActivityLevelHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'DAILY ACTIVITY LEVEL'**
+  String get dailyActivityLevelHeader;
+
+  /// No description provided for @activitySedentaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sedentary / Desk Work'**
+  String get activitySedentaryTitle;
+
+  /// No description provided for @activitySedentarySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimal daily walking, desk job, under 5,000 steps'**
+  String get activitySedentarySubtitle;
+
+  /// No description provided for @activityModeratelyActiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderately Active'**
+  String get activityModeratelyActiveTitle;
+
+  /// No description provided for @activityModeratelyActiveSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'On your feet regularly, 6,000–10,000 daily steps'**
+  String get activityModeratelyActiveSubtitle;
+
+  /// No description provided for @activityVeryActiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Very Active / Physical Job'**
+  String get activityVeryActiveTitle;
+
+  /// No description provided for @activityVeryActiveSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Constantly on the move or 12,000+ daily steps'**
+  String get activityVeryActiveSubtitle;
+
+  /// No description provided for @trainingPlaceHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'WHERE DO YOU PLAN TO TRAIN?'**
+  String get trainingPlaceHeader;
+
+  /// No description provided for @trainingPlaceGymTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gym'**
+  String get trainingPlaceGymTitle;
+
+  /// No description provided for @trainingPlaceGymSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Full access to barbells, machines & dumbbells'**
+  String get trainingPlaceGymSubtitle;
+
+  /// No description provided for @trainingPlaceHomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get trainingPlaceHomeTitle;
+
+  /// No description provided for @trainingPlaceHomeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bodyweight, resistance bands, or light dumbbells'**
+  String get trainingPlaceHomeSubtitle;
+
+  /// No description provided for @trainingPlaceWalkingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Walking'**
+  String get trainingPlaceWalkingTitle;
+
+  /// No description provided for @trainingPlaceWalkingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cardio steps & outdoor walking routines'**
+  String get trainingPlaceWalkingSubtitle;
+
+  /// No description provided for @onboardingHealthSafetyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Safety Screening'**
+  String get onboardingHealthSafetyTitle;
+
+  /// No description provided for @onboardingHealthSafetySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select any conditions that apply so our engine can protect your safety.'**
+  String get onboardingHealthSafetySubtitle;
+
+  /// No description provided for @healthSafetyNoneApply.
+  ///
+  /// In en, this message translates to:
+  /// **'None of these apply to me'**
+  String get healthSafetyNoneApply;
+
+  /// No description provided for @healthSafetyOrSelect.
+  ///
+  /// In en, this message translates to:
+  /// **'OR SELECT ANY APPLICABLE'**
+  String get healthSafetyOrSelect;
+
+  /// No description provided for @onboardingTryScanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Experience Instant Scanning'**
+  String get onboardingTryScanTitle;
+
+  /// No description provided for @onboardingTryScanSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'See how effortlessly Vireo breaks down real food into macros and calories.'**
+  String get onboardingTryScanSubtitle;
+
+  /// No description provided for @tryScanSamplePlateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample High-Protein Plate'**
+  String get tryScanSamplePlateTitle;
+
+  /// No description provided for @tryScanSamplePlateDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Grilled Chicken, Egyptian Rice & Garden Salad'**
+  String get tryScanSamplePlateDesc;
+
+  /// No description provided for @tryScanAnalyzing.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing Plate...'**
+  String get tryScanAnalyzing;
+
+  /// No description provided for @tryScanSampleCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Sample Plate (Instant)'**
+  String get tryScanSampleCta;
+
+  /// No description provided for @tryScanOrTestLive.
+  ///
+  /// In en, this message translates to:
+  /// **'OR TEST LIVE'**
+  String get tryScanOrTestLive;
+
+  /// No description provided for @tryScanOwnMealTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Your Own Meal'**
+  String get tryScanOwnMealTitle;
+
+  /// No description provided for @tryScanOwnMealDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a live photo of your current plate'**
+  String get tryScanOwnMealDesc;
+
+  /// No description provided for @onboardingPlanRevealTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Personalized Blueprint'**
+  String get onboardingPlanRevealTitle;
+
+  /// No description provided for @onboardingPlanRevealSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Engineered specifically for your metabolic profile and fitness goal.'**
+  String get onboardingPlanRevealSubtitle;
+
+  /// No description provided for @planRevealStartPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Start My Plan'**
+  String get planRevealStartPlan;
+
+  /// No description provided for @planRevealProjectedPace.
+  ///
+  /// In en, this message translates to:
+  /// **'PROJECTED PACE'**
+  String get planRevealProjectedPace;
+
+  /// No description provided for @planRevealSteadyRecomp.
+  ///
+  /// In en, this message translates to:
+  /// **'Steady body recomposition'**
+  String get planRevealSteadyRecomp;
+
+  /// No description provided for @planRevealFatLossPace.
+  ///
+  /// In en, this message translates to:
+  /// **'-{amount} kg / week fat loss'**
+  String planRevealFatLossPace(String amount);
+
+  /// No description provided for @planRevealLeanMassPace.
+  ///
+  /// In en, this message translates to:
+  /// **'+{amount} kg / week lean mass'**
+  String planRevealLeanMassPace(String amount);
+
+  /// No description provided for @planRevealDailyCalories.
+  ///
+  /// In en, this message translates to:
+  /// **'DAILY CALORIC TARGET'**
+  String get planRevealDailyCalories;
+
+  /// No description provided for @planRevealPersonalizedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalized'**
+  String get planRevealPersonalizedBadge;
+
+  /// No description provided for @planRevealKcalPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'kcal / day'**
+  String get planRevealKcalPerDay;
+
+  /// No description provided for @planRevealDailyProtein.
+  ///
+  /// In en, this message translates to:
+  /// **'DAILY PROTEIN'**
+  String get planRevealDailyProtein;
+
+  /// No description provided for @planRevealGramPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'g / day'**
+  String get planRevealGramPerDay;
+
+  /// No description provided for @planRevealHydration.
+  ///
+  /// In en, this message translates to:
+  /// **'HYDRATION'**
+  String get planRevealHydration;
+
+  /// No description provided for @planRevealDailySteps.
+  ///
+  /// In en, this message translates to:
+  /// **'DAILY STEPS'**
+  String get planRevealDailySteps;
+
+  /// No description provided for @planRevealStepsPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'steps / day'**
+  String get planRevealStepsPerDay;
+
+  /// No description provided for @planRevealDietProtocol.
+  ///
+  /// In en, this message translates to:
+  /// **'DIET PROTOCOL'**
+  String get planRevealDietProtocol;
+
+  /// No description provided for @planRevealOptimalMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimal match'**
+  String get planRevealOptimalMatch;
+
+  /// No description provided for @planRevealBalancedPlanDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced Deficit Plan'**
+  String get planRevealBalancedPlanDefault;
+
+  /// No description provided for @onboardingNotificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Never Miss a Target'**
+  String get onboardingNotificationsTitle;
+
+  /// No description provided for @onboardingNotificationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle nudges keep your nutrition log, hydration, and workouts on track.'**
+  String get onboardingNotificationsSubtitle;
+
+  /// No description provided for @notificationsHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Built For Accountability, Not Spam'**
+  String get notificationsHeroTitle;
+
+  /// No description provided for @notificationsHeroBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Users who enable reminders are 3.4x more likely to reach their target weight and build lasting fitness habits.'**
+  String get notificationsHeroBody;
+
+  /// No description provided for @notificationsMealLoggingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Meal & Plate Logging'**
+  String get notificationsMealLoggingTitle;
+
+  /// No description provided for @notificationsMealLoggingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Timely reminders around lunch and dinner'**
+  String get notificationsMealLoggingDesc;
+
+  /// No description provided for @notificationsWorkoutSessionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Workout Session'**
+  String get notificationsWorkoutSessionTitle;
+
+  /// No description provided for @notificationsWorkoutSessionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay committed to your training schedule'**
+  String get notificationsWorkoutSessionDesc;
+
+  /// No description provided for @notificationsWeeklyReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Progress Review'**
+  String get notificationsWeeklyReviewTitle;
+
+  /// No description provided for @notificationsWeeklyReviewDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday weigh-in & weekly adjustment summary'**
+  String get notificationsWeeklyReviewDesc;
+
+  /// No description provided for @notificationsEnableButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Reminders'**
+  String get notificationsEnableButton;
+
+  /// No description provided for @notificationsMaybeLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe Later'**
+  String get notificationsMaybeLater;
+
+  /// No description provided for @onboardingPaywallTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accelerate Your Results'**
+  String get onboardingPaywallTitle;
+
+  /// No description provided for @onboardingPaywallSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock unlimited plate scans, full AI workout generation, and advanced analytics.'**
+  String get onboardingPaywallSubtitle;
+
+  /// No description provided for @paywallProBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'VIREO PRO'**
+  String get paywallProBadge;
+
+  /// No description provided for @paywallFeatureUnlimitedScansDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Never worry about daily limits or quotas'**
+  String get paywallFeatureUnlimitedScansDesc;
+
+  /// No description provided for @paywallFeatureSmartSub.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Smart Substitution & Meal Prep'**
+  String get paywallFeatureSmartSub;
+
+  /// No description provided for @paywallFeatureSmartSubDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Instant macro-friendly swaps for local dishes'**
+  String get paywallFeatureSmartSubDesc;
+
+  /// No description provided for @paywallFeatureAdaptiveSplits.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Adaptive Workout Splits'**
+  String get paywallFeatureAdaptiveSplits;
+
+  /// No description provided for @paywallFeatureAdaptiveSplitsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Progressive overload tracking for gym or home'**
+  String get paywallFeatureAdaptiveSplitsDesc;
+
+  /// No description provided for @paywallPlanAnnualPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'\$4.99 / mo'**
+  String get paywallPlanAnnualPrice;
+
+  /// No description provided for @paywallPlanAnnualSubtext.
+  ///
+  /// In en, this message translates to:
+  /// **'Billed yearly (Save 50%)'**
+  String get paywallPlanAnnualSubtext;
+
+  /// No description provided for @paywallBadgeBestValue.
+  ///
+  /// In en, this message translates to:
+  /// **'BEST VALUE'**
+  String get paywallBadgeBestValue;
+
+  /// No description provided for @paywallPlanMonthlyPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'\$9.99 / mo'**
+  String get paywallPlanMonthlyPrice;
+
+  /// No description provided for @paywallPlanMonthlySubtext.
+  ///
+  /// In en, this message translates to:
+  /// **'Billed monthly'**
+  String get paywallPlanMonthlySubtext;
+
+  /// No description provided for @paywallStartTrialCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Start 7-Day Free Trial'**
+  String get paywallStartTrialCta;
+
+  /// No description provided for @paywallContinueFreeTier.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Free Tier'**
+  String get paywallContinueFreeTier;
+
+  /// No description provided for @appInitErrorFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to initialize app services.'**
+  String get appInitErrorFailed;
+
+  /// No description provided for @appInitRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get appInitRetry;
+
+  /// No description provided for @privacyExportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export My Data'**
+  String get privacyExportTitle;
+
+  /// No description provided for @privacyExportReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data package is ready in JSON & CSV formats:'**
+  String get privacyExportReady;
+
+  /// No description provided for @weeklyProgressShareFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not generate share image'**
+  String get weeklyProgressShareFailed;
+
+  /// No description provided for @adaptiveCalorieCurrentTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Target'**
+  String get adaptiveCalorieCurrentTarget;
+
+  /// No description provided for @adaptiveCalorieSuggestedTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested Target'**
+  String get adaptiveCalorieSuggestedTarget;
+
+  /// No description provided for @adaptiveCalorieWindowSpan.
+  ///
+  /// In en, this message translates to:
+  /// **'Window span'**
+  String get adaptiveCalorieWindowSpan;
+
+  /// No description provided for @adaptiveCalorieFoodLogsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Food logs count'**
+  String get adaptiveCalorieFoodLogsCount;
+
+  /// No description provided for @adaptiveCalorieWeighInsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Weigh-ins count'**
+  String get adaptiveCalorieWeighInsCount;
+
+  /// No description provided for @adaptiveCalorieAverageIntake.
+  ///
+  /// In en, this message translates to:
+  /// **'Average intake'**
+  String get adaptiveCalorieAverageIntake;
+
+  /// No description provided for @adaptiveCalorieTrendWeightChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend weight change'**
+  String get adaptiveCalorieTrendWeightChange;
+
+  /// No description provided for @adaptiveCalorieEstimatedMaintenance.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated maintenance'**
+  String get adaptiveCalorieEstimatedMaintenance;
+
+  /// No description provided for @adaptiveCalorieWeeklyChangeCap.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly change cap'**
+  String get adaptiveCalorieWeeklyChangeCap;
+
+  /// No description provided for @adaptiveCalorieSafetyFloorApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Safety floor applied'**
+  String get adaptiveCalorieSafetyFloorApplied;
+
+  /// No description provided for @chartSevenDayTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'7-Day Trend'**
+  String get chartSevenDayTrend;
+
+  /// No description provided for @chartThirtyDayTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'30-Day Trend'**
+  String get chartThirtyDayTrend;
+
+  /// No description provided for @chartRawDot.
+  ///
+  /// In en, this message translates to:
+  /// **'Raw Dot'**
+  String get chartRawDot;
+
+  /// No description provided for @chartTrendLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend Line'**
+  String get chartTrendLine;
+
+  /// No description provided for @chartGoalLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal Line'**
+  String get chartGoalLine;
 }
 
 class _AppLocalizationsDelegate

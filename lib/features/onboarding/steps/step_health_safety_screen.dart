@@ -91,8 +91,8 @@ class _StepHealthSafetyScreenState
     return OnboardingStepShell(
       stepIndex: 4,
       stepCount: OnboardingUiState.stepCount,
-      title: 'Health Safety Screening',
-      subtitle: 'Select any conditions that apply so our engine can protect your safety.',
+      title: l10n.onboardingHealthSafetyTitle,
+      subtitle: l10n.onboardingHealthSafetySubtitle,
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onSkip: _syncAndContinue,
       onContinue: _syncAndContinue,
@@ -131,7 +131,7 @@ class _StepHealthSafetyScreenState
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'None of these apply to me',
+                      l10n.healthSafetyNoneApply,
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
@@ -155,7 +155,7 @@ class _StepHealthSafetyScreenState
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
-                    'OR SELECT ANY APPLICABLE',
+                    l10n.healthSafetyOrSelect,
                     style: VType.overline(context),
                   ),
                 ),
@@ -207,7 +207,7 @@ class _StepHealthSafetyScreenState
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           _ChipButton(
-                            label: 'No',
+                            label: l10n.noButton,
                             isSelected: !isYes,
                             activeColor: colors.textMute,
                             onTap: () {
@@ -218,7 +218,7 @@ class _StepHealthSafetyScreenState
                           ),
                           const SizedBox(width: 6),
                           _ChipButton(
-                            label: 'Yes',
+                            label: l10n.yesButton,
                             isSelected: isYes,
                             activeColor: colors.ember,
                             onTap: () {

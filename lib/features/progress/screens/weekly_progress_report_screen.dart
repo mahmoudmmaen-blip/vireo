@@ -60,8 +60,9 @@ class _WeeklyProgressReportScreenState extends ConsumerState<WeeklyProgressRepor
       );
     } catch (_) {
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not generate share image')),
+        SnackBar(content: Text(l10n.weeklyProgressShareFailed)),
       );
     }
   }

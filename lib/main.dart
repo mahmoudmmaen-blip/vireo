@@ -6,11 +6,18 @@ import 'package:vireo/app.dart';
 import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/crash_monitoring_service.dart';
+import 'package:vireo/core/services/hive_service.dart';
 
 Future<void> main() async {
   BootLog.step('WidgetsFlutterBinding.ensureInitialized');
   WidgetsFlutterBinding.ensureInitialized();
   BootLog.ok('WidgetsFlutterBinding.ensureInitialized');
+
+  try {
+    await HiveService.init();
+  } catch (e) {
+    BootLog.warn('HiveService.init in main failed — fallback in AppInitNotifier', e);
+  }
 
   void startApp() {
     BootLog.step('runApp');

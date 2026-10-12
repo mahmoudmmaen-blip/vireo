@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/analytics_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
@@ -124,13 +125,14 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
 
     return OnboardingStepShell(
       stepIndex: 5,
       stepCount: OnboardingUiState.stepCount,
-      title: 'Experience Instant Scanning',
-      subtitle: 'See how effortlessly Vireo breaks down real food into macros and calories.',
+      title: l10n.onboardingTryScanTitle,
+      subtitle: l10n.onboardingTryScanSubtitle,
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onSkip: _skip,
       child: Column(
@@ -179,16 +181,16 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                               color: colors.ember,
                             ),
                             const SizedBox(height: 8),
-                            const Text(
-                              'Sample High-Protein Plate',
-                              style: TextStyle(
+                            Text(
+                              l10n.tryScanSamplePlateTitle,
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              'Grilled Chicken, Egyptian Rice & Garden Salad',
+                              l10n.tryScanSamplePlateDesc,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: colors.textMute,
@@ -227,7 +229,7 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                           const Icon(Icons.flash_on_rounded, color: Colors.white, size: 20),
                           const SizedBox(width: 8),
                           Text(
-                            _isAnalyzing ? 'Analyzing Plate...' : 'Scan Sample Plate (Instant)',
+                            _isAnalyzing ? l10n.tryScanAnalyzing : l10n.tryScanSampleCta,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -252,7 +254,7 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                 Expanded(child: Divider(color: colors.line)),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text('OR TEST LIVE', style: VType.overline(context)),
+                  child: Text(l10n.tryScanOrTestLive, style: VType.overline(context)),
                 ),
                 Expanded(child: Divider(color: colors.line)),
               ],
@@ -292,16 +294,16 @@ class _StepTryScanScreenState extends ConsumerState<StepTryScanScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Scan Your Own Meal',
-                            style: TextStyle(
+                          Text(
+                            l10n.tryScanOwnMealTitle,
+                            style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'Take a live photo of your current plate',
+                            l10n.tryScanOwnMealDesc,
                             style: TextStyle(
                               fontSize: 12,
                               color: colors.textMute,

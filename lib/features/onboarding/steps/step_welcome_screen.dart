@@ -97,7 +97,7 @@ class _StepWelcomeScreenState extends ConsumerState<StepWelcomeScreen> {
               GestureDetector(
                 onTap: () => LegalUrls.openTerms(context),
                 child: Text(
-                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'الشروط' : 'Terms',
+                  l10n.legalTerms,
                   style: TextStyle(
                     fontSize: 11,
                     color: colors.textMute,
@@ -112,7 +112,7 @@ class _StepWelcomeScreenState extends ConsumerState<StepWelcomeScreen> {
               GestureDetector(
                 onTap: () => LegalUrls.openPrivacy(context),
                 child: Text(
-                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'الخصوصية' : 'Privacy',
+                  l10n.legalPrivacy,
                   style: TextStyle(
                     fontSize: 11,
                     color: colors.textMute,
@@ -127,7 +127,7 @@ class _StepWelcomeScreenState extends ConsumerState<StepWelcomeScreen> {
               GestureDetector(
                 onTap: () => LegalUrls.openMedicalDisclaimer(context),
                 child: Text(
-                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'إخلاء المسؤولية الطبية' : 'Medical Disclaimer',
+                  l10n.legalMedicalDisclaimer,
                   style: TextStyle(
                     fontSize: 11,
                     color: colors.textMute,
@@ -192,7 +192,7 @@ class _StepWelcomeScreenState extends ConsumerState<StepWelcomeScreen> {
           FadeSlideIn(
             index: 2,
             child: Text(
-              'Smart nutrition & intelligent fitness built specifically for men.',
+              l10n.welcomeTagline,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -220,22 +220,22 @@ class _StepWelcomeScreenState extends ConsumerState<StepWelcomeScreen> {
                   _PillarRow(
                     icon: Icons.camera_alt_outlined,
                     iconColor: VMacro.carbs,
-                    title: 'Instant Plate Scanner',
-                    subtitle: 'Snap your meal, get accurate calories & protein in 2 seconds',
+                    title: l10n.welcomePillarScannerTitle,
+                    subtitle: l10n.welcomePillarScannerDesc,
                   ),
                   const Divider(height: 24),
                   _PillarRow(
                     icon: Icons.bolt_rounded,
                     iconColor: colors.ember,
-                    title: 'Personalized Daily Plan',
-                    subtitle: 'Evidence-backed targets tailored to your body and goal',
+                    title: l10n.welcomePillarPlanTitle,
+                    subtitle: l10n.welcomePillarPlanDesc,
                   ),
                   const Divider(height: 24),
                   _PillarRow(
                     icon: Icons.shield_outlined,
                     iconColor: VMacro.steps,
-                    title: 'Clinically Safe Nutrition',
-                    subtitle: 'Guidance that protects your metabolism and overall health',
+                    title: l10n.welcomePillarSafetyTitle,
+                    subtitle: l10n.welcomePillarSafetyDesc,
                   ),
                 ],
               ),

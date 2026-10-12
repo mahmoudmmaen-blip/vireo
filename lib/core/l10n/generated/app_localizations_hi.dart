@@ -871,7 +871,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get paywallPlanLifetime => 'लाइफटाइम';
 
   @override
-  String get paywallFeatureUnlimitedScans => 'असीमित फ्रिज स्कैन';
+  String get paywallFeatureUnlimitedScans => 'असीमित तुरंत प्लेट स्कैन';
 
   @override
   String get paywallFeatureFullProgram =>
@@ -3492,4 +3492,431 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get fatEquivalentInfoDismiss => 'समझ गया';
+
+  @override
+  String get legalTerms => 'शर्तें';
+
+  @override
+  String get legalPrivacy => 'गोपनीयता';
+
+  @override
+  String get legalMedicalDisclaimer => 'चिकित्सीय अस्वीकरण';
+
+  @override
+  String get welcomeTagline =>
+      'पुरुषों के लिए विशेष रूप से डिज़ाइन किया गया स्मार्ट पोषण और फ़िटनेस।';
+
+  @override
+  String get welcomePillarScannerTitle => 'तुरंत प्लेट स्कैनर';
+
+  @override
+  String get welcomePillarScannerDesc =>
+      'भोजन की फ़ोटो लें, 2 सेकंड में सटीक कैलोरी और प्रोटीन जानें';
+
+  @override
+  String get welcomePillarPlanTitle => 'व्यक्तिगत दैनिक योजना';
+
+  @override
+  String get welcomePillarPlanDesc =>
+      'आपके शरीर और लक्ष्य के अनुसार वैज्ञानिक लक्ष्य';
+
+  @override
+  String get welcomePillarSafetyTitle => 'चिकित्सकीय रूप से सुरक्षित पोषण';
+
+  @override
+  String get welcomePillarSafetyDesc =>
+      'मार्गदर्शन जो आपके चयापचय और समग्र स्वास्थ्य की रक्षा करता है';
+
+  @override
+  String get onboardingGoalTitle => 'आपका प्राथमिक लक्ष्य क्या है?';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'जो सबसे महत्वपूर्ण है उसे चुनें। हम उसी के अनुसार आपके दैनिक लक्ष्य बनाएंगे।';
+
+  @override
+  String get goalLoseFatTitle => 'चर्बी घटाना';
+
+  @override
+  String get goalLoseFatSubtitle =>
+      'कमाई हुई मांसपेशियों को बनाए रखते हुए जिद्दी चर्बी जलाएं';
+
+  @override
+  String get goalBuildMuscleTitle => 'मांसपेशियां बढ़ाना';
+
+  @override
+  String get goalBuildMuscleSubtitle =>
+      'अनुकूलित प्रोटीन और प्रगतिशील भार के साथ मांसपेशियों का विकास करें';
+
+  @override
+  String get goalMoreEnergyTitle => 'अधिक ऊर्जा';
+
+  @override
+  String get goalMoreEnergySubtitle =>
+      'दिन के बीच की थकान मिटाएं और रोज़मर्रा की ऊर्जा बढ़ाएं';
+
+  @override
+  String get goalAllOfAboveTitle => 'उपरोक्त सभी';
+
+  @override
+  String get goalAllOfAboveSubtitle =>
+      'शरीर का संपूर्ण पुनर्गठन: चर्बी घटाएं, ताकत पाएं और ऊर्जावान रहें';
+
+  @override
+  String get onboardingBodyTitle => 'आपका शारीरिक प्रोफ़ाइल';
+
+  @override
+  String get onboardingBodySubtitle =>
+      'सटीक माप हमें आपकी कैलोरी बर्न और दैनिक लक्ष्यों की सटीक गणना करने में मदद करते हैं।';
+
+  @override
+  String get sexMale => 'पुरुष';
+
+  @override
+  String get sexFemale => 'महिला';
+
+  @override
+  String get unitMetric => 'मीट्रिक';
+
+  @override
+  String get unitImperial => 'इंपीरियल (lb)';
+
+  @override
+  String get bodyMetricAge => 'आयु';
+
+  @override
+  String bodyMetricYears(int age) {
+    return '$age वर्ष';
+  }
+
+  @override
+  String get selectAgeTitle => 'आयु चुनें';
+
+  @override
+  String ageYearsSuffix(int age) {
+    return '$age वर्ष';
+  }
+
+  @override
+  String get bodyMetricHeight => 'लंबाई';
+
+  @override
+  String get selectHeightTitle => 'लंबाई चुनें';
+
+  @override
+  String get bodyMetricCurrentWeight => 'वर्तमान वजन';
+
+  @override
+  String get selectCurrentWeightTitle => 'वर्तमान वजन चुनें';
+
+  @override
+  String get bodyMetricTargetWeight => 'लक्ष्य वजन';
+
+  @override
+  String get selectTargetWeightTitle => 'लक्ष्य वजन चुनें';
+
+  @override
+  String get pickerDone => 'हो गया';
+
+  @override
+  String get onboardingActivityTitle => 'गतिविधि और प्रशिक्षण स्थान';
+
+  @override
+  String get onboardingActivitySubtitle =>
+      'हम दैनिक कैलोरी खर्च की गणना करते हैं और सर्वोत्तम वर्कआउट सुझाते हैं।';
+
+  @override
+  String get dailyActivityLevelHeader => 'दैनिक गतिविधि स्तर';
+
+  @override
+  String get activitySedentaryTitle => 'कम सक्रिय / डेस्क कार्य';
+
+  @override
+  String get activitySedentarySubtitle => 'कम चलना, डेस्क जॉब, 5,000 से कम कदम';
+
+  @override
+  String get activityModeratelyActiveTitle => 'मध्यम सक्रिय';
+
+  @override
+  String get activityModeratelyActiveSubtitle =>
+      'नियमित गतिशीलता, 6,000–10,000 दैनिक कदम';
+
+  @override
+  String get activityVeryActiveTitle => 'अत्यधिक सक्रिय / शारीरिक कार्य';
+
+  @override
+  String get activityVeryActiveSubtitle => 'लगातार सक्रिय या 12,000+ दैनिक कदम';
+
+  @override
+  String get trainingPlaceHeader => 'आप कहाँ कसरत करने की योजना बना रहे हैं?';
+
+  @override
+  String get trainingPlaceGymTitle => 'जिम';
+
+  @override
+  String get trainingPlaceGymSubtitle =>
+      'बारबेल, मशीनों और डम्बल तक पूरी पहुंच';
+
+  @override
+  String get trainingPlaceHomeTitle => 'घर पर';
+
+  @override
+  String get trainingPlaceHomeSubtitle =>
+      'शरीर का भार, रेसिस्टेंस बैंड या हल्के डम्बल';
+
+  @override
+  String get trainingPlaceWalkingTitle => 'पैदल चलना';
+
+  @override
+  String get trainingPlaceWalkingSubtitle => 'कार्डियो कदम और आउटडोर वॉक';
+
+  @override
+  String get onboardingHealthSafetyTitle => 'स्वास्थ्य सुरक्षा जांच';
+
+  @override
+  String get onboardingHealthSafetySubtitle =>
+      'लागू होने वाली स्थितियाँ चुनें ताकि हमारा इंजन आपकी सुरक्षा कर सके।';
+
+  @override
+  String get healthSafetyNoneApply => 'इनमें से कोई भी मुझ पर लागू नहीं होता';
+
+  @override
+  String get healthSafetyOrSelect => 'या जो लागू हो उसे चुनें';
+
+  @override
+  String get onboardingTryScanTitle => 'तुरंत स्कैनिंग का अनुभव करें';
+
+  @override
+  String get onboardingTryScanSubtitle =>
+      'देखें कि कैसे Vireo आसानी से भोजन को कैलोरी और पोषक तत्वों में बदलता है।';
+
+  @override
+  String get tryScanSamplePlateTitle => 'उच्च प्रोटीन प्लेट का नमूना';
+
+  @override
+  String get tryScanSamplePlateDesc => 'ग्रिल्ड चिकन, सफेद चावल और हरा सलाद';
+
+  @override
+  String get tryScanAnalyzing => 'प्लेट का विश्लेषण हो रहा है...';
+
+  @override
+  String get tryScanSampleCta => 'नमूना प्लेट स्कैन करें (तुरंत)';
+
+  @override
+  String get tryScanOrTestLive => 'या लाइव आज़माएं';
+
+  @override
+  String get tryScanOwnMealTitle => 'अपना भोजन स्कैन करें';
+
+  @override
+  String get tryScanOwnMealDesc => 'अपनी वर्तमान प्लेट की एक लाइव तस्वीर लें';
+
+  @override
+  String get onboardingPlanRevealTitle => 'आपकी व्यक्तिगत रूपरेखा';
+
+  @override
+  String get onboardingPlanRevealSubtitle =>
+      'आपके चयापचय और फिटनेस लक्ष्य के लिए विशेष रूप से तैयार।';
+
+  @override
+  String get planRevealStartPlan => 'मेरी योजना शुरू करें';
+
+  @override
+  String get planRevealProjectedPace => 'अनुमानित गति';
+
+  @override
+  String get planRevealSteadyRecomp => 'शरीर का स्थिर पुनर्गठन';
+
+  @override
+  String planRevealFatLossPace(String amount) {
+    return '-$amount किग्रा / सप्ताह चर्बी कम';
+  }
+
+  @override
+  String planRevealLeanMassPace(String amount) {
+    return '+$amount किग्रा / सप्ताह मांसपेशियों का विकास';
+  }
+
+  @override
+  String get planRevealDailyCalories => 'दैनिक कैलोरी लक्ष्य';
+
+  @override
+  String get planRevealPersonalizedBadge => 'व्यक्तिगत';
+
+  @override
+  String get planRevealKcalPerDay => 'किलोकेलोरी / दिन';
+
+  @override
+  String get planRevealDailyProtein => 'दैनिक प्रोटीन';
+
+  @override
+  String get planRevealGramPerDay => 'ग्राम / दिन';
+
+  @override
+  String get planRevealHydration => 'जलयोजन (पानी)';
+
+  @override
+  String get planRevealDailySteps => 'दैनिक कदम';
+
+  @override
+  String get planRevealStepsPerDay => 'कदम / दिन';
+
+  @override
+  String get planRevealDietProtocol => 'आहार प्रोटोकॉल';
+
+  @override
+  String get planRevealOptimalMatch => 'सर्वोत्तम मिलान';
+
+  @override
+  String get planRevealBalancedPlanDefault => 'संतुलित घाटा योजना';
+
+  @override
+  String get onboardingNotificationsTitle => 'कोई भी लक्ष्य न चूकें';
+
+  @override
+  String get onboardingNotificationsSubtitle =>
+      'हल्के रिमाइंडर आपके पोषण, पानी और वर्कआउट को ट्रैक पर रखते हैं।';
+
+  @override
+  String get notificationsHeroTitle =>
+      'जवाबदेही के लिए बनाया गया, स्पैम के लिए नहीं';
+
+  @override
+  String get notificationsHeroBody =>
+      'रिमाइंडर सक्षम करने वाले उपयोगकर्ताओं के लक्ष्य तक पहुंचने की संभावना 3.4 गुना अधिक होती है।';
+
+  @override
+  String get notificationsMealLoggingTitle => 'भोजन ट्रैकिंग';
+
+  @override
+  String get notificationsMealLoggingDesc =>
+      'दोपहर और रात के खाने पर समय पर रिमाइंडर';
+
+  @override
+  String get notificationsWorkoutSessionTitle => 'दैनिक वर्कआउट सत्र';
+
+  @override
+  String get notificationsWorkoutSessionDesc =>
+      'अपने कसरत कार्यक्रम के प्रति प्रतिबद्ध रहें';
+
+  @override
+  String get notificationsWeeklyReviewTitle => 'साप्ताहिक प्रगति समीक्षा';
+
+  @override
+  String get notificationsWeeklyReviewDesc => 'साप्ताहिक वजन और समायोजन सारांश';
+
+  @override
+  String get notificationsEnableButton => 'रिमाइंडर चालू करें';
+
+  @override
+  String get notificationsMaybeLater => 'शायद बाद में';
+
+  @override
+  String get onboardingPaywallTitle => 'अपने परिणामों में तेज़ी लाएं';
+
+  @override
+  String get onboardingPaywallSubtitle =>
+      'असीमित स्कैन, AI वर्कआउट और उन्नत विश्लेषण अनलॉक करें।';
+
+  @override
+  String get paywallProBadge => 'VIREO PRO';
+
+  @override
+  String get paywallFeatureUnlimitedScansDesc => 'दैनिक सीमा की चिंता किए बिना';
+
+  @override
+  String get paywallFeatureSmartSub => 'AI स्मार्ट भोजन प्रतिस्थापन';
+
+  @override
+  String get paywallFeatureSmartSubDesc =>
+      'स्थानीय व्यंजनों के लिए तुरंत मैक्रो-फ्रेंडली विकल्प';
+
+  @override
+  String get paywallFeatureAdaptiveSplits => 'अनुकूलित वर्कआउट कार्यक्रम';
+
+  @override
+  String get paywallFeatureAdaptiveSplitsDesc =>
+      'जिम या घर के लिए प्रोग्रेसिव ओवरलोड ट्रैकिंग';
+
+  @override
+  String get paywallPlanAnnualPrice => '\$4.99 / माह';
+
+  @override
+  String get paywallPlanAnnualSubtext => 'वार्षिक बिल (50% बचत)';
+
+  @override
+  String get paywallBadgeBestValue => 'सर्वोत्तम मूल्य';
+
+  @override
+  String get paywallPlanMonthlyPrice => '\$9.99 / माह';
+
+  @override
+  String get paywallPlanMonthlySubtext => 'मासिक बिल';
+
+  @override
+  String get paywallStartTrialCta => '7-दिवसीय नि:शुल्क परीक्षण शुरू करें';
+
+  @override
+  String get paywallContinueFreeTier => 'मुफ़्त संस्करण के साथ जारी रखें';
+
+  @override
+  String get appInitErrorFailed => 'ऐप सेवाएं प्रारंभ करने में विफल।';
+
+  @override
+  String get appInitRetry => 'पुनः प्रयास करें';
+
+  @override
+  String get privacyExportTitle => 'मेरा डेटा निर्यात करें';
+
+  @override
+  String get privacyExportReady =>
+      'आपका डेटा पैकेज JSON और CSV प्रारूपों में तैयार है:';
+
+  @override
+  String get weeklyProgressShareFailed => 'साझा करने वाली छवि नहीं बनाई जा सकी';
+
+  @override
+  String get adaptiveCalorieCurrentTarget => 'वर्तमान लक्ष्य';
+
+  @override
+  String get adaptiveCalorieSuggestedTarget => 'सुझाया गया लक्ष्य';
+
+  @override
+  String get adaptiveCalorieWindowSpan => 'समय अवधि';
+
+  @override
+  String get adaptiveCalorieFoodLogsCount => 'भोजन दर्ज किए गए दिन';
+
+  @override
+  String get adaptiveCalorieWeighInsCount => 'वजन मापने की संख्या';
+
+  @override
+  String get adaptiveCalorieAverageIntake => 'औसत सेवन';
+
+  @override
+  String get adaptiveCalorieTrendWeightChange => 'वजन प्रवृत्ति में बदलाव';
+
+  @override
+  String get adaptiveCalorieEstimatedMaintenance => 'अनुमानित मेंटेनेंस';
+
+  @override
+  String get adaptiveCalorieWeeklyChangeCap => 'साप्ताहिक बदलाव की सीमा';
+
+  @override
+  String get adaptiveCalorieSafetyFloorApplied => 'सुरक्षा न्यूनतम लागू';
+
+  @override
+  String get chartSevenDayTrend => '7-दिवसीय रुझान';
+
+  @override
+  String get chartThirtyDayTrend => '30-दिवसीय रुझान';
+
+  @override
+  String get chartRawDot => 'माप बिंदु';
+
+  @override
+  String get chartTrendLine => 'रुझान रेखा';
+
+  @override
+  String get chartGoalLine => 'लक्ष्य रेखा';
 }

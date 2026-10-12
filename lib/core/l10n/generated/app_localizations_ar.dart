@@ -857,7 +857,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paywallPlanLifetime => 'مدى الحياة';
 
   @override
-  String get paywallFeatureUnlimitedScans => 'مسح تلاجة غير محدود';
+  String get paywallFeatureUnlimitedScans => 'مسح غير محدود للأطباق';
 
   @override
   String get paywallFeatureFullProgram => 'مراحل برنامج كاملة وتمارين متقدمة';
@@ -3450,6 +3450,432 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get fatEquivalentInfoDismiss => 'فهمت';
+
+  @override
+  String get legalTerms => 'الشروط';
+
+  @override
+  String get legalPrivacy => 'الخصوصية';
+
+  @override
+  String get legalMedicalDisclaimer => 'إخلاء المسؤولية الطبية';
+
+  @override
+  String get welcomeTagline => 'تغذية ذكية ولياقة متطورة مصممة خصيصاً للرجال.';
+
+  @override
+  String get welcomePillarScannerTitle => 'المسح الفوري للأطباق';
+
+  @override
+  String get welcomePillarScannerDesc =>
+      'صوّر وجبتك، واعرف السعرات والبروتين بدقة في ثانيتين';
+
+  @override
+  String get welcomePillarPlanTitle => 'خطة يومية مخصصة';
+
+  @override
+  String get welcomePillarPlanDesc =>
+      'أهداف علمية مدروسة تناسب طبيعة جسمك وهدفك';
+
+  @override
+  String get welcomePillarSafetyTitle => 'تغذية آمنة سريرياً';
+
+  @override
+  String get welcomePillarSafetyDesc => 'إرشادات تحمي عملية الأيض وصحتك العامة';
+
+  @override
+  String get onboardingGoalTitle => 'ما هو هدفك الأساسي؟';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'اختر الأهم بالنسبة لك، وسنصمم أهدافك اليومية بناءً عليه.';
+
+  @override
+  String get goalLoseFatTitle => 'خسارة الدهون';
+
+  @override
+  String get goalLoseFatSubtitle =>
+      'حرق الدهون العنيدة مع الحفاظ الكامل على الكتلة العضلية';
+
+  @override
+  String get goalBuildMuscleTitle => 'بناء العضلات';
+
+  @override
+  String get goalBuildMuscleSubtitle =>
+      'تحفيز الضخامة العضلية الصافية بتوزيع مثالي للبروتين وتدرج الأحمال';
+
+  @override
+  String get goalMoreEnergyTitle => 'طاقة ونشاط أعلى';
+
+  @override
+  String get goalMoreEnergySubtitle =>
+      'التخلص من خمول منتصف اليوم ورفع مستوى التحمل والحيوية';
+
+  @override
+  String get goalAllOfAboveTitle => 'كل ما سبق';
+
+  @override
+  String get goalAllOfAboveSubtitle =>
+      'إعادة تشكيل شاملة للجسم: خسارة الدهون، زيادة القوة، وطاقة مستمرة';
+
+  @override
+  String get onboardingBodyTitle => 'بيانات جسمك';
+
+  @override
+  String get onboardingBodySubtitle =>
+      'البيانات الدقيقة تساعدنا في حساب معدل حرقك واحتياجاتك اليومية بدقة.';
+
+  @override
+  String get sexMale => 'ذكر';
+
+  @override
+  String get sexFemale => 'أنثى';
+
+  @override
+  String get unitMetric => 'متري';
+
+  @override
+  String get unitImperial => 'باوند';
+
+  @override
+  String get bodyMetricAge => 'العمر';
+
+  @override
+  String bodyMetricYears(int age) {
+    return '$age سنة';
+  }
+
+  @override
+  String get selectAgeTitle => 'اختر العمر';
+
+  @override
+  String ageYearsSuffix(int age) {
+    return '$age سنة';
+  }
+
+  @override
+  String get bodyMetricHeight => 'الطول';
+
+  @override
+  String get selectHeightTitle => 'اختر الطول';
+
+  @override
+  String get bodyMetricCurrentWeight => 'الوزن الحالي';
+
+  @override
+  String get selectCurrentWeightTitle => 'اختر الوزن الحالي';
+
+  @override
+  String get bodyMetricTargetWeight => 'الوزن المستهدف';
+
+  @override
+  String get selectTargetWeightTitle => 'اختر الوزن المستهدف';
+
+  @override
+  String get pickerDone => 'تم';
+
+  @override
+  String get onboardingActivityTitle => 'النشاط ومكان التدريب';
+
+  @override
+  String get onboardingActivitySubtitle =>
+      'نحسب معدل حرق السعرات ونقترح أفضل التمارين المناسبة لك.';
+
+  @override
+  String get dailyActivityLevelHeader => 'مستوى النشاط اليومي';
+
+  @override
+  String get activitySedentaryTitle => 'قليل الحركة / عمل مكتبي';
+
+  @override
+  String get activitySedentarySubtitle =>
+      'مشي يومي قليل، وظيفة مكتبية، أقل من 5,000 خطوة';
+
+  @override
+  String get activityModeratelyActiveTitle => 'نشاط متوسط';
+
+  @override
+  String get activityModeratelyActiveSubtitle =>
+      'حركة منتظمة على مدار اليوم، 6,000 إلى 10,000 خطوة يومياً';
+
+  @override
+  String get activityVeryActiveTitle => 'نشط جداً / عمل بدني';
+
+  @override
+  String get activityVeryActiveSubtitle =>
+      'حركة مستمرة أو أكثر من 12,000 خطوة يومياً';
+
+  @override
+  String get trainingPlaceHeader => 'أين تخطط للتمرن؟';
+
+  @override
+  String get trainingPlaceGymTitle => 'النادي الرياضي (الجيم)';
+
+  @override
+  String get trainingPlaceGymSubtitle => 'توفر كامل للأوزان والبارات والأجهزة';
+
+  @override
+  String get trainingPlaceHomeTitle => 'في المنزل';
+
+  @override
+  String get trainingPlaceHomeSubtitle =>
+      'بوزن الجسم، أحبال المقاومة، أو أوزان خفيفة';
+
+  @override
+  String get trainingPlaceWalkingTitle => 'المشي';
+
+  @override
+  String get trainingPlaceWalkingSubtitle =>
+      'خطوات كارديو ومشي في الهواء الطلق';
+
+  @override
+  String get onboardingHealthSafetyTitle => 'فحص السلامة الصحية';
+
+  @override
+  String get onboardingHealthSafetySubtitle =>
+      'حدد أي حالات تنطبق عليك ليصمم نظامنا خطة آمنة تماماً لصحتك.';
+
+  @override
+  String get healthSafetyNoneApply => 'لا ينطبق عليّ أي مما سبق';
+
+  @override
+  String get healthSafetyOrSelect => 'أو اختر ما ينطبق عليك';
+
+  @override
+  String get onboardingTryScanTitle => 'جرّب المسح الفوري للوجبات';
+
+  @override
+  String get onboardingTryScanSubtitle =>
+      'شاهد كيف يحلل ڤيريو الوجبات الحقيقية إلى سعرات وعناصر غذائية في لحظات.';
+
+  @override
+  String get tryScanSamplePlateTitle => 'نموذج وجبة غنية بالبروتين';
+
+  @override
+  String get tryScanSamplePlateDesc => 'دجاج مشوي، أرز أبيض وسلطة خضراء';
+
+  @override
+  String get tryScanAnalyzing => 'جاري تحليل الوجبة...';
+
+  @override
+  String get tryScanSampleCta => 'امسح الطبق النموذجي (تجربة فورية)';
+
+  @override
+  String get tryScanOrTestLive => 'أو جرّب على طبقك الحقيقي';
+
+  @override
+  String get tryScanOwnMealTitle => 'صوّر وجبتك الحالية';
+
+  @override
+  String get tryScanOwnMealDesc => 'التقط صورة حية للطبق الذي أمامك';
+
+  @override
+  String get onboardingPlanRevealTitle => 'خطتك المصممة خصيصاً لك';
+
+  @override
+  String get onboardingPlanRevealSubtitle =>
+      'مصممة وفقاً لمعدل حرقك وطبيعة جسمك وهدفك الرياضي.';
+
+  @override
+  String get planRevealStartPlan => 'ابدأ خطتي';
+
+  @override
+  String get planRevealProjectedPace => 'المعدل المتوقع';
+
+  @override
+  String get planRevealSteadyRecomp => 'إعادة تشكيل متوازنة للجسم';
+
+  @override
+  String planRevealFatLossPace(String amount) {
+    return 'نزول -$amount كجم دهون أسبوعياً';
+  }
+
+  @override
+  String planRevealLeanMassPace(String amount) {
+    return 'زيادة +$amount كجم عضلات صافية أسبوعياً';
+  }
+
+  @override
+  String get planRevealDailyCalories => 'هدف السعرات اليومي';
+
+  @override
+  String get planRevealPersonalizedBadge => 'مخصص لك';
+
+  @override
+  String get planRevealKcalPerDay => 'سعرة / يوم';
+
+  @override
+  String get planRevealDailyProtein => 'البروتين اليومي';
+
+  @override
+  String get planRevealGramPerDay => 'جم / يوم';
+
+  @override
+  String get planRevealHydration => 'شرب الماء';
+
+  @override
+  String get planRevealDailySteps => 'الخطوات اليومية';
+
+  @override
+  String get planRevealStepsPerDay => 'خطوة / يوم';
+
+  @override
+  String get planRevealDietProtocol => 'نظام التغذية';
+
+  @override
+  String get planRevealOptimalMatch => 'الخطة الأنسب لك';
+
+  @override
+  String get planRevealBalancedPlanDefault => 'خطة العجز المتوازن';
+
+  @override
+  String get onboardingNotificationsTitle => 'لا تفوّت أهدافك اليومية';
+
+  @override
+  String get onboardingNotificationsSubtitle =>
+      'تنبيهات لطيفة تضمن التزامك بتسجيل الوجبات وشرب الماء ومواعيد التمرين.';
+
+  @override
+  String get notificationsHeroTitle => 'مصممة للالتزام.. وليس للإزعاج';
+
+  @override
+  String get notificationsHeroBody =>
+      'المستخدمون الذين يفعّلون التنبيهات أكثر نجاحاً بـ 3.4 أضعاف في الوصول لوزنهم المثالي وبناء عادات مستدامة.';
+
+  @override
+  String get notificationsMealLoggingTitle => 'تسجيل الوجبات والأطباق';
+
+  @override
+  String get notificationsMealLoggingDesc => 'تذكير في أوقات الغداء والعشاء';
+
+  @override
+  String get notificationsWorkoutSessionTitle => 'التمرين اليومي';
+
+  @override
+  String get notificationsWorkoutSessionDesc =>
+      'حافظ على التزامك بجدول تمارينك';
+
+  @override
+  String get notificationsWeeklyReviewTitle => 'المراجعة الأسبوعية للتقدم';
+
+  @override
+  String get notificationsWeeklyReviewDesc =>
+      'قياس الوزن أسبوعياً وملخص التعديلات المقترحة';
+
+  @override
+  String get notificationsEnableButton => 'تفعيل التنبيهات';
+
+  @override
+  String get notificationsMaybeLater => 'ربما لاحقاً';
+
+  @override
+  String get onboardingPaywallTitle => 'سرّع تحقيق نتائجك';
+
+  @override
+  String get onboardingPaywallSubtitle =>
+      'امسح الأطباق بلا حدود، واحصل على جداول تمارين ذكية وتحليلات متقدمة.';
+
+  @override
+  String get paywallProBadge => 'ڤيريو برو';
+
+  @override
+  String get paywallFeatureUnlimitedScansDesc =>
+      'بدون أي حدود أو قيود يومية على عدد الوجبات';
+
+  @override
+  String get paywallFeatureSmartSub => 'بدائل الوجبات الذكية بالذكاء الاصطناعي';
+
+  @override
+  String get paywallFeatureSmartSubDesc =>
+      'بدائل صحية ومناسبة للماكروز للأطباق المحلية';
+
+  @override
+  String get paywallFeatureAdaptiveSplits => 'جداول تمارين ذكية متكيفة';
+
+  @override
+  String get paywallFeatureAdaptiveSplitsDesc =>
+      'تتبع زيادة الأوزان والأحمال للجيم أو المنزل';
+
+  @override
+  String get paywallPlanAnnualPrice => '\$4.99 / شهرياً';
+
+  @override
+  String get paywallPlanAnnualSubtext => 'اشتراك سنوي (وفّر 50%)';
+
+  @override
+  String get paywallBadgeBestValue => 'أفضل قيمة';
+
+  @override
+  String get paywallPlanMonthlyPrice => '\$9.99 / شهرياً';
+
+  @override
+  String get paywallPlanMonthlySubtext => 'اشتراك شهري';
+
+  @override
+  String get paywallStartTrialCta => 'ابدأ تجربة مجانية لمدة 7 أيام';
+
+  @override
+  String get paywallContinueFreeTier => 'المتابعة بالباقة المجانية';
+
+  @override
+  String get appInitErrorFailed => 'فشل في تهيئة خدمات التطبيق.';
+
+  @override
+  String get appInitRetry => 'إعادة المحاولة';
+
+  @override
+  String get privacyExportTitle => 'تصدير بياناتي';
+
+  @override
+  String get privacyExportReady => 'حزمة بياناتك جاهزة بصيغتي JSON و CSV:';
+
+  @override
+  String get weeklyProgressShareFailed => 'تعذر إنشاء صورة المشاركة';
+
+  @override
+  String get adaptiveCalorieCurrentTarget => 'الهدف الحالي';
+
+  @override
+  String get adaptiveCalorieSuggestedTarget => 'الهدف المقترح';
+
+  @override
+  String get adaptiveCalorieWindowSpan => 'المدة الزمنية';
+
+  @override
+  String get adaptiveCalorieFoodLogsCount => 'عدد أيام تسجيل الطعام';
+
+  @override
+  String get adaptiveCalorieWeighInsCount => 'عدد مرات قياس الوزن';
+
+  @override
+  String get adaptiveCalorieAverageIntake => 'متوسط السعرات المتناولة';
+
+  @override
+  String get adaptiveCalorieTrendWeightChange => 'تغير اتجاه الوزن';
+
+  @override
+  String get adaptiveCalorieEstimatedMaintenance => 'سعرات الثبات التقديرية';
+
+  @override
+  String get adaptiveCalorieWeeklyChangeCap => 'الحد الأقصى للتغير الأسبوعي';
+
+  @override
+  String get adaptiveCalorieSafetyFloorApplied => 'تطبيق الحد الأدنى الآمن';
+
+  @override
+  String get chartSevenDayTrend => 'اتجاه 7 أيام';
+
+  @override
+  String get chartThirtyDayTrend => 'اتجاه 30 يوماً';
+
+  @override
+  String get chartRawDot => 'قياس فردي';
+
+  @override
+  String get chartTrendLine => 'خط الاتجاه';
+
+  @override
+  String get chartGoalLine => 'خط الهدف';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -3489,6 +3915,15 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get workoutEmptyProgram =>
       'مفيش تمرين متسجل النهاردة.. ريّح واستعد للجي!';
+
+  @override
+  String get paywallPlanMonthly => 'شهري';
+
+  @override
+  String get paywallPlanAnnual => 'سنوي';
+
+  @override
+  String get paywallFeatureUnlimitedScans => 'مسح غير محدود للوجبات بالكاميرا';
 
   @override
   String homeGreeting(String name) {
@@ -3622,6 +4057,429 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   String fatEquivalentThisWeek(String amount) {
     return '≈ $amount دهون الأسبوع ده 🔥';
   }
+
+  @override
+  String get legalTerms => 'الشروط';
+
+  @override
+  String get legalPrivacy => 'الخصوصية';
+
+  @override
+  String get legalMedicalDisclaimer => 'إخلاء المسؤولية الطبية';
+
+  @override
+  String get welcomeTagline => 'تغذية ذكية وتمرين مظبوط متفصلين مخصوص للرجالة.';
+
+  @override
+  String get welcomePillarScannerTitle => 'مسح فوري للطبق';
+
+  @override
+  String get welcomePillarScannerDesc =>
+      'صوّر وجبتك، واعرف السعرات والبروتين في ثانيتين';
+
+  @override
+  String get welcomePillarPlanTitle => 'خطة يومية متفصلة ليك';
+
+  @override
+  String get welcomePillarPlanDesc => 'أرقام علمية مدروسة على قد جسمك وهدفك';
+
+  @override
+  String get welcomePillarSafetyTitle => 'تغذية آمنة وصحية 100%';
+
+  @override
+  String get welcomePillarSafetyDesc => 'توجيهات تحافظ على حرقك وصحتك العامة';
+
+  @override
+  String get onboardingGoalTitle => 'إيه هو هدفك الأساسي؟';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'اختار الأهم بالنسبة لك، وهنظبط أرقامك اليومية عليه.';
+
+  @override
+  String get goalLoseFatTitle => 'حرق وتنزيل الدهون';
+
+  @override
+  String get goalLoseFatSubtitle => 'احرق الدهون العنيدة مع الحفاظ على عضلاتك';
+
+  @override
+  String get goalBuildMuscleTitle => 'بناء وزيادة العضلات';
+
+  @override
+  String get goalBuildMuscleSubtitle =>
+      'زوّد حجم عضلاتك ببروتين مظبوط وزيادة أوزان ذكية';
+
+  @override
+  String get goalMoreEnergyTitle => 'طاقة ونشاط أعلى';
+
+  @override
+  String get goalMoreEnergySubtitle =>
+      'خلّص على كسل نص اليوم وزوّد نشاطك ولياقتك';
+
+  @override
+  String get goalAllOfAboveTitle => 'كل اللي فات مع بعض';
+
+  @override
+  String get goalAllOfAboveSubtitle =>
+      'إعادة تشكيل شاملة لجسمك: نزول دهون، زيادة قوة، ونشاط عالي';
+
+  @override
+  String get onboardingBodyTitle => 'بيانات جسمك';
+
+  @override
+  String get onboardingBodySubtitle =>
+      'أرقامك المظبوطة بتخلينا نحسب حرقك واحتياجك اليومي بدقة.';
+
+  @override
+  String get sexMale => 'راجل';
+
+  @override
+  String get sexFemale => 'ست';
+
+  @override
+  String get unitMetric => 'متري';
+
+  @override
+  String get unitImperial => 'باوند';
+
+  @override
+  String get bodyMetricAge => 'السن';
+
+  @override
+  String bodyMetricYears(int age) {
+    return '$age سنة';
+  }
+
+  @override
+  String get selectAgeTitle => 'اختار سنك';
+
+  @override
+  String ageYearsSuffix(int age) {
+    return '$age سنة';
+  }
+
+  @override
+  String get bodyMetricHeight => 'الطول';
+
+  @override
+  String get selectHeightTitle => 'اختار طولك';
+
+  @override
+  String get bodyMetricCurrentWeight => 'وزنك الحالي';
+
+  @override
+  String get selectCurrentWeightTitle => 'اختار وزنك الحالي';
+
+  @override
+  String get bodyMetricTargetWeight => 'الوزن المستهدف';
+
+  @override
+  String get selectTargetWeightTitle => 'اختار وزنك المستهدف';
+
+  @override
+  String get pickerDone => 'تمام';
+
+  @override
+  String get onboardingActivityTitle => 'نشاطك ومكان تمرينك';
+
+  @override
+  String get onboardingActivitySubtitle =>
+      'بنحسب حرق سعراتك ونرشح لك أنسب تمارين.';
+
+  @override
+  String get dailyActivityLevelHeader => 'مستوى حركتك اليومية';
+
+  @override
+  String get activitySedentaryTitle => 'قليل الحركة / شغل مكتب';
+
+  @override
+  String get activitySedentarySubtitle =>
+      'حركة قليلة وشغل مكتبي، أقل من 5,000 خطوة';
+
+  @override
+  String get activityModeratelyActiveTitle => 'حركة متوسطة';
+
+  @override
+  String get activityModeratelyActiveSubtitle =>
+      'بتتحرك بانتظام، من 6,000 لـ 10,000 خطوة يومياً';
+
+  @override
+  String get activityVeryActiveTitle => 'حركة عالية جداً / شغل بدني';
+
+  @override
+  String get activityVeryActiveSubtitle =>
+      'حركة مستمرة أو أكتر من 12,000 خطوة يومياً';
+
+  @override
+  String get trainingPlaceHeader => 'ناوي تتمرن فين؟';
+
+  @override
+  String get trainingPlaceGymTitle => 'الجيم';
+
+  @override
+  String get trainingPlaceGymSubtitle => 'أجهزة وأوزان وبارات متكاملة';
+
+  @override
+  String get trainingPlaceHomeTitle => 'في البيت';
+
+  @override
+  String get trainingPlaceHomeSubtitle =>
+      'وزن الجسم، أستك مقاومة، أو دمبل خفيف';
+
+  @override
+  String get trainingPlaceWalkingTitle => 'مشي بس';
+
+  @override
+  String get trainingPlaceWalkingSubtitle =>
+      'خطوات وتمارين مشي في الهواء الطلق';
+
+  @override
+  String get onboardingHealthSafetyTitle => 'فحص السلامة الصحية';
+
+  @override
+  String get onboardingHealthSafetySubtitle =>
+      'علّم على أي حالة عندك عشان نظبط لك خطة آمنة تماماً لصحتك.';
+
+  @override
+  String get healthSafetyNoneApply => 'معنديش أي حاجة من دول';
+
+  @override
+  String get healthSafetyOrSelect => 'أو علّم على اللي عندك';
+
+  @override
+  String get onboardingTryScanTitle => 'جرّب مسح الوجبات الذكي';
+
+  @override
+  String get onboardingTryScanSubtitle =>
+      'شوف إزاي ڤيريو بيحسب السعرات والماكروز في ثواني.';
+
+  @override
+  String get tryScanSamplePlateTitle => 'نموذج طبق عالي البروتين';
+
+  @override
+  String get tryScanSamplePlateDesc => 'فراخ مشوية، رز أبيض مصري، وسلطة بلدي';
+
+  @override
+  String get tryScanAnalyzing => 'بنحلل الطبق...';
+
+  @override
+  String get tryScanSampleCta => 'امسح الطبق ده (تجربة فورية)';
+
+  @override
+  String get tryScanOrTestLive => 'أو جرّب على أكلك الحقيقي';
+
+  @override
+  String get tryScanOwnMealTitle => 'صوّر وجبتك دلوقتي';
+
+  @override
+  String get tryScanOwnMealDesc => 'خد صورة حية للطبق اللي قدامك';
+
+  @override
+  String get onboardingPlanRevealTitle => 'خطتك المتفصلة ليك';
+
+  @override
+  String get onboardingPlanRevealSubtitle =>
+      'متصممة مخصوص لجسمك وهدفك ومعدل حرقك.';
+
+  @override
+  String get planRevealStartPlan => 'يلا نبدأ الخطة';
+
+  @override
+  String get planRevealProjectedPace => 'المعدل المتوقع';
+
+  @override
+  String get planRevealSteadyRecomp => 'إعادة تشكيل وتناسق للجسم بثبات';
+
+  @override
+  String planRevealFatLossPace(String amount) {
+    return 'نزول ≈ $amount كجم دهون في الأسبوع';
+  }
+
+  @override
+  String planRevealLeanMassPace(String amount) {
+    return 'زيادة ≈ $amount كجم عضلات في الأسبوع';
+  }
+
+  @override
+  String get planRevealDailyCalories => 'هدفك اليومي من السعرات';
+
+  @override
+  String get planRevealPersonalizedBadge => 'مخصوص ليك';
+
+  @override
+  String get planRevealKcalPerDay => 'سعرة / يوم';
+
+  @override
+  String get planRevealDailyProtein => 'البروتين اليومي';
+
+  @override
+  String get planRevealGramPerDay => 'جم / يوم';
+
+  @override
+  String get planRevealHydration => 'شرب المية';
+
+  @override
+  String get planRevealDailySteps => 'الخطوات اليومية';
+
+  @override
+  String get planRevealStepsPerDay => 'خطوة / يوم';
+
+  @override
+  String get planRevealDietProtocol => 'نظام الدايت';
+
+  @override
+  String get planRevealOptimalMatch => 'أنسب خطة لجسمك';
+
+  @override
+  String get planRevealBalancedPlanDefault => 'خطة العجز المتوازن';
+
+  @override
+  String get onboardingNotificationsTitle => 'مش هتفوّت ولا هدف';
+
+  @override
+  String get onboardingNotificationsSubtitle =>
+      'تنبيهات خفيفة تساعدك تسجل أكلك، تشرب ميتك، وتلتزم بتمرينك.';
+
+  @override
+  String get notificationsHeroTitle => 'عشان تلتزم.. مش عشان نزعجك';
+
+  @override
+  String get notificationsHeroBody =>
+      'اللي بيفعّلوا التنبيهات فرصتهم أعلى بـ 3.4 أضعاف يوصلوا لوزنهم المثالي ويثبتوا عليه.';
+
+  @override
+  String get notificationsMealLoggingTitle => 'تسجيل الوجبات';
+
+  @override
+  String get notificationsMealLoggingDesc => 'تذكير في ميعاد الغدا والعشا';
+
+  @override
+  String get notificationsWorkoutSessionTitle => 'تمرينك اليومي';
+
+  @override
+  String get notificationsWorkoutSessionDesc =>
+      'عشان تفضل ملتزم بمواعيد تمرينك';
+
+  @override
+  String get notificationsWeeklyReviewTitle => 'مراجعة التقدم الأسبوعية';
+
+  @override
+  String get notificationsWeeklyReviewDesc =>
+      'قياس الوزن كل أسبوع وتعديل الأرقام';
+
+  @override
+  String get notificationsEnableButton => 'تفعيل التنبيهات';
+
+  @override
+  String get notificationsMaybeLater => 'ممكن بعدين';
+
+  @override
+  String get onboardingPaywallTitle => 'سرّع نتايجك';
+
+  @override
+  String get onboardingPaywallSubtitle =>
+      'امسح وجبات من غير حدود، مع برامج تمرين ذكية وإحصائيات متقدمة.';
+
+  @override
+  String get paywallProBadge => 'ڤيريو برو';
+
+  @override
+  String get paywallFeatureUnlimitedScansDesc => 'من غير أي حدود يومية';
+
+  @override
+  String get paywallFeatureSmartSub => 'بدائل ذكية للأكلات العربية والمصرية';
+
+  @override
+  String get paywallFeatureSmartSubDesc =>
+      'أكلات متوافقة مع الدايت من غير حرمان';
+
+  @override
+  String get paywallFeatureAdaptiveSplits => 'جداول تمرين مرنة بتتطور معاك';
+
+  @override
+  String get paywallFeatureAdaptiveSplitsDesc =>
+      'متابعة زيادة الأوزان في الجيم أو البيت';
+
+  @override
+  String get paywallPlanAnnualPrice => '\$4.99 / شهرياً';
+
+  @override
+  String get paywallPlanAnnualSubtext => 'اشتراك سنوي (وفّر 50%)';
+
+  @override
+  String get paywallBadgeBestValue => 'أفضل توفير';
+
+  @override
+  String get paywallPlanMonthlyPrice => '\$9.99 / شهرياً';
+
+  @override
+  String get paywallPlanMonthlySubtext => 'اشتراك شهري';
+
+  @override
+  String get paywallStartTrialCta => 'ابدأ التجربة المجانية 7 أيام';
+
+  @override
+  String get paywallContinueFreeTier => 'كمّل بالباقة المجانية';
+
+  @override
+  String get appInitErrorFailed => 'حصل خطأ في تشغيل خدمات التطبيق.';
+
+  @override
+  String get appInitRetry => 'جرّب تاني';
+
+  @override
+  String get privacyExportTitle => 'تصدير بياناتي';
+
+  @override
+  String get privacyExportReady => 'ملف بياناتك جاهز بصيغة JSON و CSV:';
+
+  @override
+  String get weeklyProgressShareFailed => 'معرفناش نعمل صورة المشاركة';
+
+  @override
+  String get adaptiveCalorieCurrentTarget => 'الهدف الحالي';
+
+  @override
+  String get adaptiveCalorieSuggestedTarget => 'الهدف المقترح';
+
+  @override
+  String get adaptiveCalorieWindowSpan => 'المدة الزمنية';
+
+  @override
+  String get adaptiveCalorieFoodLogsCount => 'أيام تسجيل الأكل';
+
+  @override
+  String get adaptiveCalorieWeighInsCount => 'مرات وزن نفسك';
+
+  @override
+  String get adaptiveCalorieAverageIntake => 'متوسط سعرات أكلك';
+
+  @override
+  String get adaptiveCalorieTrendWeightChange => 'تغيّر اتجاه الوزن';
+
+  @override
+  String get adaptiveCalorieEstimatedMaintenance => 'سعرات الثبات التقديرية';
+
+  @override
+  String get adaptiveCalorieWeeklyChangeCap => 'الحد الأقصى للتغيير الأسبوعي';
+
+  @override
+  String get adaptiveCalorieSafetyFloorApplied => 'الحد الأدنى الآمن مطبق';
+
+  @override
+  String get chartSevenDayTrend => 'اتجاه 7 أيام';
+
+  @override
+  String get chartThirtyDayTrend => 'اتجاه 30 يوم';
+
+  @override
+  String get chartRawDot => 'قياس يومي';
+
+  @override
+  String get chartTrendLine => 'خط الاتجاه';
+
+  @override
+  String get chartGoalLine => 'خط الهدف';
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -3661,6 +4519,15 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
   @override
   String get workoutEmptyProgram =>
       'ما فيه تمرين مجدول اليوم.. ارتاح وجهّز نفسك للجاي!';
+
+  @override
+  String get paywallPlanMonthly => 'شهري';
+
+  @override
+  String get paywallPlanAnnual => 'سنوي';
+
+  @override
+  String get paywallFeatureUnlimitedScans => 'مسح غير محدود للأطباق';
 
   @override
   String homeGreeting(String name) {
@@ -3794,4 +4661,429 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
   String fatEquivalentThisWeek(String amount) {
     return '≈ $amount دهون هذا الأسبوع، كفو!';
   }
+
+  @override
+  String get legalTerms => 'الشروط';
+
+  @override
+  String get legalPrivacy => 'الخصوصية';
+
+  @override
+  String get legalMedicalDisclaimer => 'إخلاء المسؤولية الطبية';
+
+  @override
+  String get welcomeTagline => 'تغذية ذكية ولياقة متطورة مصممة خصيصاً للرجال.';
+
+  @override
+  String get welcomePillarScannerTitle => 'المسح الفوري للوجبات';
+
+  @override
+  String get welcomePillarScannerDesc =>
+      'صوّر وجبتك، واعرف السعرات والبروتين بدقة في ثانيتين';
+
+  @override
+  String get welcomePillarPlanTitle => 'خطة يومية مخصصة';
+
+  @override
+  String get welcomePillarPlanDesc => 'أهداف علمية تناسب طبيعة جسمك وهدفك';
+
+  @override
+  String get welcomePillarSafetyTitle => 'تغذية آمنة سريرياً';
+
+  @override
+  String get welcomePillarSafetyDesc => 'إرشادات تحمي عملية الأيض وصحتك العامة';
+
+  @override
+  String get onboardingGoalTitle => 'ما هو هدفك الأساسي؟';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'اختر الأهم بالنسبة لك، وسنصمم أهدافك اليومية بناءً عليه.';
+
+  @override
+  String get goalLoseFatTitle => 'حرق الدهون';
+
+  @override
+  String get goalLoseFatSubtitle =>
+      'حرق الدهون العنيدة مع الحفاظ على الكتلة العضلية';
+
+  @override
+  String get goalBuildMuscleTitle => 'بناء العضلات';
+
+  @override
+  String get goalBuildMuscleSubtitle =>
+      'تحفيز الضخامة العضلية الصافية ببروتين مثالي وتدرج الأحمال';
+
+  @override
+  String get goalMoreEnergyTitle => 'طاقة ونشاط أعلى';
+
+  @override
+  String get goalMoreEnergySubtitle =>
+      'تخلص من خمول النهار وارفع طاقتك ونشاطك اليومي';
+
+  @override
+  String get goalAllOfAboveTitle => 'جميع ما سبق';
+
+  @override
+  String get goalAllOfAboveSubtitle =>
+      'إعادة تشكيل شاملة للجسم: خسارة الدهون وزيادة القوة والنشاط';
+
+  @override
+  String get onboardingBodyTitle => 'بيانات جسمك';
+
+  @override
+  String get onboardingBodySubtitle =>
+      'البيانات الدقيقة تساعدنا في حساب معدل حرقك واحتياجاتك اليومية بدقة.';
+
+  @override
+  String get sexMale => 'ذكر';
+
+  @override
+  String get sexFemale => 'أنثى';
+
+  @override
+  String get unitMetric => 'متري';
+
+  @override
+  String get unitImperial => 'باوند';
+
+  @override
+  String get bodyMetricAge => 'العمر';
+
+  @override
+  String bodyMetricYears(int age) {
+    return '$age سنة';
+  }
+
+  @override
+  String get selectAgeTitle => 'اختر العمر';
+
+  @override
+  String ageYearsSuffix(int age) {
+    return '$age سنة';
+  }
+
+  @override
+  String get bodyMetricHeight => 'الطول';
+
+  @override
+  String get selectHeightTitle => 'اختر الطول';
+
+  @override
+  String get bodyMetricCurrentWeight => 'الوزن الحالي';
+
+  @override
+  String get selectCurrentWeightTitle => 'اختر الوزن الحالي';
+
+  @override
+  String get bodyMetricTargetWeight => 'الوزن المستهدف';
+
+  @override
+  String get selectTargetWeightTitle => 'اختر الوزن المستهدف';
+
+  @override
+  String get pickerDone => 'تم';
+
+  @override
+  String get onboardingActivityTitle => 'النشاط ومكان التدريب';
+
+  @override
+  String get onboardingActivitySubtitle =>
+      'نحسب معدل حرق السعرات ونقترح أفضل التمارين لك.';
+
+  @override
+  String get dailyActivityLevelHeader => 'مستوى النشاط اليومي';
+
+  @override
+  String get activitySedentaryTitle => 'قليل الحركة / عمل مكتبي';
+
+  @override
+  String get activitySedentarySubtitle =>
+      'مشي يومي قليل، وظيفة مكتبية، أقل من 5,000 خطوة';
+
+  @override
+  String get activityModeratelyActiveTitle => 'نشاط متوسط';
+
+  @override
+  String get activityModeratelyActiveSubtitle =>
+      'حركة منتظمة على مدار اليوم، 6,000 إلى 10,000 خطوة يومياً';
+
+  @override
+  String get activityVeryActiveTitle => 'نشط جداً / عمل بدني';
+
+  @override
+  String get activityVeryActiveSubtitle =>
+      'حركة مستمرة أو أكثر من 12,000 خطوة يومياً';
+
+  @override
+  String get trainingPlaceHeader => 'أين تخطط للتمرن؟';
+
+  @override
+  String get trainingPlaceGymTitle => 'النادي الرياضي';
+
+  @override
+  String get trainingPlaceGymSubtitle => 'توفر كامل للأوزان والبارات والأجهزة';
+
+  @override
+  String get trainingPlaceHomeTitle => 'في المنزل';
+
+  @override
+  String get trainingPlaceHomeSubtitle =>
+      'بوزن الجسم، أحبال المقاومة، أو أوزان خفيفة';
+
+  @override
+  String get trainingPlaceWalkingTitle => 'المشي';
+
+  @override
+  String get trainingPlaceWalkingSubtitle =>
+      'خطوات كارديو ومشي في الهواء الطلق';
+
+  @override
+  String get onboardingHealthSafetyTitle => 'فحص السلامة الصحية';
+
+  @override
+  String get onboardingHealthSafetySubtitle =>
+      'حدد أي حالات تنطبق عليك ليصمم نظامنا خطة آمنة تماماً لصحتك.';
+
+  @override
+  String get healthSafetyNoneApply => 'لا ينطبق عليّ أي مما سبق';
+
+  @override
+  String get healthSafetyOrSelect => 'أو اختر ما ينطبق عليك';
+
+  @override
+  String get onboardingTryScanTitle => 'جرّب المسح الفوري للوجبات';
+
+  @override
+  String get onboardingTryScanSubtitle =>
+      'شاهد كيف يحلل ڤيريو الوجبات إلى سعرات وعناصر غذائية بدقة.';
+
+  @override
+  String get tryScanSamplePlateTitle => 'نموذج وجبة عالية البروتين';
+
+  @override
+  String get tryScanSamplePlateDesc => 'دجاج مشوي، أرز أبيض وسلطة خضراء';
+
+  @override
+  String get tryScanAnalyzing => 'جاري تحليل الوجبة...';
+
+  @override
+  String get tryScanSampleCta => 'امسح الطبق النموذجي (تجربة فورية)';
+
+  @override
+  String get tryScanOrTestLive => 'أو جرّب على طبقك الحقيقي';
+
+  @override
+  String get tryScanOwnMealTitle => 'صوّر وجبتك الحالية';
+
+  @override
+  String get tryScanOwnMealDesc => 'التقط صورة حية للطبق الذي أمامك';
+
+  @override
+  String get onboardingPlanRevealTitle => 'خطتك المصممة خصيصاً لك';
+
+  @override
+  String get onboardingPlanRevealSubtitle =>
+      'مصممة وفقاً لمعدل حرقك وطبيعة جسمك وهدفك الرياضي.';
+
+  @override
+  String get planRevealStartPlan => 'ابدأ خطتي';
+
+  @override
+  String get planRevealProjectedPace => 'المعدل المتوقع';
+
+  @override
+  String get planRevealSteadyRecomp => 'إعادة تشكيل متوازنة للجسم';
+
+  @override
+  String planRevealFatLossPace(String amount) {
+    return 'نزول -$amount كجم دهون أسبوعياً';
+  }
+
+  @override
+  String planRevealLeanMassPace(String amount) {
+    return 'زيادة +$amount كجم عضلات صافية أسبوعياً';
+  }
+
+  @override
+  String get planRevealDailyCalories => 'هدف السعرات اليومي';
+
+  @override
+  String get planRevealPersonalizedBadge => 'مخصص لك';
+
+  @override
+  String get planRevealKcalPerDay => 'سعرة / يوم';
+
+  @override
+  String get planRevealDailyProtein => 'البروتين اليومي';
+
+  @override
+  String get planRevealGramPerDay => 'جم / يوم';
+
+  @override
+  String get planRevealHydration => 'شرب الماء';
+
+  @override
+  String get planRevealDailySteps => 'الخطوات اليومية';
+
+  @override
+  String get planRevealStepsPerDay => 'خطوة / يوم';
+
+  @override
+  String get planRevealDietProtocol => 'نظام التغذية';
+
+  @override
+  String get planRevealOptimalMatch => 'الخطة الأنسب لك';
+
+  @override
+  String get planRevealBalancedPlanDefault => 'خطة العجز المتوازن';
+
+  @override
+  String get onboardingNotificationsTitle => 'لا تفوّت أهدافك اليومية';
+
+  @override
+  String get onboardingNotificationsSubtitle =>
+      'تنبيهات تضمن التزامك بتسجيل الوجبات وشرب الماء والتمارين.';
+
+  @override
+  String get notificationsHeroTitle => 'مصممة للالتزام.. وليس للإزعاج';
+
+  @override
+  String get notificationsHeroBody =>
+      'المستخدمون الذين يفعّلون التنبيهات أكثر نجاحاً بـ 3.4 أضعاف في الوصول لوزنهم المستهدف.';
+
+  @override
+  String get notificationsMealLoggingTitle => 'تسجيل الوجبات';
+
+  @override
+  String get notificationsMealLoggingDesc => 'تذكير في أوقات الغداء والعشاء';
+
+  @override
+  String get notificationsWorkoutSessionTitle => 'التمرين اليومي';
+
+  @override
+  String get notificationsWorkoutSessionDesc =>
+      'حافظ على التزامك بجدول تمارينك';
+
+  @override
+  String get notificationsWeeklyReviewTitle => 'المراجعة الأسبوعية للتقدم';
+
+  @override
+  String get notificationsWeeklyReviewDesc =>
+      'قياس الوزن أسبوعياً وتعديل الأهداف';
+
+  @override
+  String get notificationsEnableButton => 'تفعيل التنبيهات';
+
+  @override
+  String get notificationsMaybeLater => 'ربما لاحقاً';
+
+  @override
+  String get onboardingPaywallTitle => 'سرّع تحقيق نتائجك';
+
+  @override
+  String get onboardingPaywallSubtitle =>
+      'امسح الأطباق بلا حدود، واحصل على جداول تمارين ذكية وتحليلات متقدمة.';
+
+  @override
+  String get paywallProBadge => 'ڤيريو برو';
+
+  @override
+  String get paywallFeatureUnlimitedScansDesc =>
+      'بدون أي قيود يومية على عدد الوجبات';
+
+  @override
+  String get paywallFeatureSmartSub => 'بدائل ذكية للوجبات بالذكاء الاصطناعي';
+
+  @override
+  String get paywallFeatureSmartSubDesc =>
+      'بدائل صحية ومناسبة للماكروز للأطباق المحلية';
+
+  @override
+  String get paywallFeatureAdaptiveSplits => 'جداول تمارين متكيفة مع مستواك';
+
+  @override
+  String get paywallFeatureAdaptiveSplitsDesc =>
+      'تتبع زيادة الأوزان للجيم أو المنزل';
+
+  @override
+  String get paywallPlanAnnualPrice => '\$4.99 / شهرياً';
+
+  @override
+  String get paywallPlanAnnualSubtext => 'اشتراك سنوي (وفّر 50%)';
+
+  @override
+  String get paywallBadgeBestValue => 'أفضل قيمة';
+
+  @override
+  String get paywallPlanMonthlyPrice => '\$9.99 / شهرياً';
+
+  @override
+  String get paywallPlanMonthlySubtext => 'اشتراك شهري';
+
+  @override
+  String get paywallStartTrialCta => 'ابدأ تجربة مجانية لمدة 7 أيام';
+
+  @override
+  String get paywallContinueFreeTier => 'المتابعة بالباقة المجانية';
+
+  @override
+  String get appInitErrorFailed => 'فشل في تهيئة خدمات التطبيق.';
+
+  @override
+  String get appInitRetry => 'إعادة المحاولة';
+
+  @override
+  String get privacyExportTitle => 'تصدير بياناتي';
+
+  @override
+  String get privacyExportReady => 'حزمة بياناتك جاهزة بصيغتي JSON و CSV:';
+
+  @override
+  String get weeklyProgressShareFailed => 'تعذر إنشاء صورة المشاركة';
+
+  @override
+  String get adaptiveCalorieCurrentTarget => 'الهدف الحالي';
+
+  @override
+  String get adaptiveCalorieSuggestedTarget => 'الهدف المقترح';
+
+  @override
+  String get adaptiveCalorieWindowSpan => 'المدة الزمنية';
+
+  @override
+  String get adaptiveCalorieFoodLogsCount => 'عدد أيام تسجيل الوجبات';
+
+  @override
+  String get adaptiveCalorieWeighInsCount => 'مرات قياس الوزن';
+
+  @override
+  String get adaptiveCalorieAverageIntake => 'متوسط السعرات المتناولة';
+
+  @override
+  String get adaptiveCalorieTrendWeightChange => 'تغير اتجاه الوزن';
+
+  @override
+  String get adaptiveCalorieEstimatedMaintenance => 'سعرات الثبات التقديرية';
+
+  @override
+  String get adaptiveCalorieWeeklyChangeCap => 'الحد الأقصى للتغير الأسبوعي';
+
+  @override
+  String get adaptiveCalorieSafetyFloorApplied => 'تطبيق الحد الأدنى الآمن';
+
+  @override
+  String get chartSevenDayTrend => 'اتجاه 7 أيام';
+
+  @override
+  String get chartThirtyDayTrend => 'اتجاه 30 يوماً';
+
+  @override
+  String get chartRawDot => 'قياس فردي';
+
+  @override
+  String get chartTrendLine => 'خط الاتجاه';
+
+  @override
+  String get chartGoalLine => 'خط الهدف';
 }

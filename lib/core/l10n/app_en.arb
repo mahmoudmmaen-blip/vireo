@@ -108,13 +108,17 @@
   "authResendIn": "Resend in {seconds}s",
   "@authResendIn": {
     "placeholders": {
-      "seconds": {"type": "int"}
+      "seconds": {
+        "type": "int"
+      }
     }
   },
   "authOtpSentTo": "We sent a 6-digit code to {email}",
   "@authOtpSentTo": {
     "placeholders": {
-      "email": {"type": "String"}
+      "email": {
+        "type": "String"
+      }
     }
   },
   "authBack": "Back",
@@ -358,7 +362,7 @@
   "paywallPlanMonthly": "Monthly",
   "paywallPlanAnnual": "Annual",
   "paywallPlanLifetime": "Lifetime",
-  "paywallFeatureUnlimitedScans": "Unlimited fridge scans",
+  "paywallFeatureUnlimitedScans": "Unlimited Instant Plate Scans",
   "paywallFeatureFullProgram": "Full program phases & progressive workouts",
   "paywallFeatureCloudSync": "Cloud sync across devices",
   "paywallFeatureProgressAnalytics": "Advanced progress analytics",
@@ -883,7 +887,11 @@
   "aiCoachChipDessert": "Healthy dessert swap",
   "waterAddOneGlass": "+1 glass ({ml} ml)",
   "@waterAddOneGlass": {
-    "placeholders": {"ml": {"type": "int"}}
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
   },
   "waterLongPressHint": "Long-press for more amounts",
   "waterQuickAmountsTitle": "Quick amounts",
@@ -1227,15 +1235,21 @@
   "notificationsQuietHoursSubtitle": "{start} to {end} — no notifications will sound",
   "@notificationsQuietHoursSubtitle": {
     "placeholders": {
-      "start": { "type": "String" },
-      "end": { "type": "String" }
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
     }
   },
   "notificationsMaxDailyTitle": "Daily notification limit",
   "notificationsMaxDailySubtitle": "Up to {count} notifications per day",
   "@notificationsMaxDailySubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "notificationsPermissionDialogTitle": "Stay in your flow with reminders",
@@ -1437,15 +1451,23 @@
   "dietQuizHealthStep": "Health {current} of {total}",
   "@dietQuizHealthStep": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "dietQuizPrefStep": "Preferences {current} of {total}",
   "@dietQuizPrefStep": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "dietPrefBreadRice": "Do you love bread and rice?",
@@ -1460,8 +1482,12 @@
   "dietCardMacros": "{kcal} kcal · {protein}g protein",
   "@dietCardMacros": {
     "placeholders": {
-      "kcal": {"type": "int"},
-      "protein": {"type": "int"}
+      "kcal": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      }
     }
   },
   "dietHowItWorks": "How it works",
@@ -1486,32 +1512,42 @@
   "dietCarbsMax": "Carbs cap: {grams} g",
   "@dietCarbsMax": {
     "placeholders": {
-      "grams": {"type": "int"}
+      "grams": {
+        "type": "int"
+      }
     }
   },
   "dietWeeklyLoss": "Est. weekly loss ≈ {kg} kg",
   "@dietWeeklyLoss": {
     "placeholders": {
-      "kg": {"type": "String"}
+      "kg": {
+        "type": "String"
+      }
     }
   },
   "dietChoosePlanCard": "Choose your diet plan",
   "dietFastingLeft": "Fasting — {time} left",
   "@dietFastingLeft": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "dietEatingWindowLeft": "Eating window — closes in {time}",
   "@dietEatingWindowLeft": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "dietWindowStartsAt": "Eating window starts at {hour}:00",
   "@dietWindowStartsAt": {
     "placeholders": {
-      "hour": {"type": "int"}
+      "hour": {
+        "type": "int"
+      }
     }
   },
   "dietEditWindow": "Edit start hour",
@@ -1519,17 +1555,27 @@
   "dietCarbsLimitProgress": "{current} / {max} g carbs",
   "@dietCarbsLimitProgress": {
     "placeholders": {
-      "current": {"type": "int"},
-      "max": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
     }
   },
   "todayPlanTitle": "TODAY PLAN",
   "todayPlanProgressSummary": "You've completed {percent}% of your day · {done}/{total} items",
   "@todayPlanProgressSummary": {
     "placeholders": {
-      "percent": {"type": "int"},
-      "done": {"type": "int"},
-      "total": {"type": "int"}
+      "percent": {
+        "type": "int"
+      },
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "todayPlanNow": "Now",
@@ -1537,33 +1583,51 @@
   "todayPlanWaterReminder": "Water reminder {index} of {total}",
   "@todayPlanWaterReminder": {
     "placeholders": {
-      "index": {"type": "int"},
-      "total": {"type": "int"}
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "todayPlanWaterGoalLine": "Daily goal {ml} ml",
   "@todayPlanWaterGoalLine": {
     "placeholders": {
-      "ml": {"type": "int"}
+      "ml": {
+        "type": "int"
+      }
     }
   },
   "todayPlanFastingOpen": "Eating window opens",
   "todayPlanFastingOpenSubtitle": "{hours}h eating window begins",
   "@todayPlanFastingOpenSubtitle": {
-    "placeholders": {"hours": {"type": "int"}}
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
   },
   "todayPlanFastingClose": "Eating window closes",
   "todayPlanFastingCloseSubtitle": "{hours}h fast begins",
   "@todayPlanFastingCloseSubtitle": {
-    "placeholders": {"hours": {"type": "int"}}
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
   },
   "todayPlanWorkout": "Today's workout",
   "todayPlanSteps": "Steps goal",
   "todayPlanStepsProgress": "{current} / {goal} steps",
   "@todayPlanStepsProgress": {
     "placeholders": {
-      "current": {"type": "int"},
-      "goal": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
     }
   },
   "todayPlanVitalitySleepSubtitle": "Log 7.5+ hours in Vitality",
@@ -1579,7 +1643,11 @@
   "todayPlanAiSuggestionSubtitle": "Personalized tip for today",
   "waterGoalBasedOnWeight": "Based on your weight ({kg} kg)",
   "@waterGoalBasedOnWeight": {
-    "placeholders": {"kg": {"type": "int"}}
+    "placeholders": {
+      "kg": {
+        "type": "int"
+      }
+    }
   },
   "authErrorEmailRateLimit": "Too many emails, try again in an hour",
   "profileMyBody": "My body",
@@ -1588,7 +1656,11 @@
   "profilePlanFree": "Free",
   "profileMemberSince": "Member since {date}",
   "@profileMemberSince": {
-    "placeholders": {"date": {"type": "String"}}
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "profileSaveProgressCta": "Save your progress",
   "profileMyPlanSection": "My plan",
@@ -1618,17 +1690,29 @@
   "outdoorPaceMinKm": "{min}:{sec} / km",
   "@outdoorPaceMinKm": {
     "placeholders": {
-      "min": {"type": "int"},
-      "sec": {"type": "int"}
+      "min": {
+        "type": "int"
+      },
+      "sec": {
+        "type": "int"
+      }
     }
   },
   "outdoorSpeedKmh": "{speed} km/h",
   "@outdoorSpeedKmh": {
-    "placeholders": {"speed": {"type": "String"}}
+    "placeholders": {
+      "speed": {
+        "type": "String"
+      }
+    }
   },
   "outdoorCalories": "{kcal} kcal burned",
   "@outdoorCalories": {
-    "placeholders": {"kcal": {"type": "int"}}
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
   },
   "outdoorPause": "Pause",
   "outdoorResume": "Resume",
@@ -1645,7 +1729,11 @@
   "outdoorSplitsTitle": "Kilometer splits",
   "outdoorSplitKm": "Km {km}",
   "@outdoorSplitKm": {
-    "placeholders": {"km": {"type": "int"}}
+    "placeholders": {
+      "km": {
+        "type": "int"
+      }
+    }
   },
   "uxQuickOutdoor": "Outdoor workout",
   "uxQuickOutdoorSub": "GPS walk, run, or ride",
@@ -1669,7 +1757,11 @@
   "healthManualSleepHint": "No wearable sleep data — tap to log bedtime and quality",
   "healthSleepScore": "Sleep score {score}",
   "@healthSleepScore": {
-    "placeholders": {"score": {"type": "int"}}
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
   },
   "healthBedtime": "Bedtime",
   "healthWakeTime": "Wake time",
@@ -1681,8 +1773,12 @@
   "healthHrvDetail": "Today {today} ms vs 14-day baseline {baseline} ms",
   "@healthHrvDetail": {
     "placeholders": {
-      "today": {"type": "int"},
-      "baseline": {"type": "int"}
+      "today": {
+        "type": "int"
+      },
+      "baseline": {
+        "type": "int"
+      }
     }
   },
   "breathingHubTitle": "Breathing",
@@ -1693,7 +1789,11 @@
   "breathing478Subtitle": "Calming pattern before sleep",
   "breathingMinutes": "{min} min",
   "@breathingMinutes": {
-    "placeholders": {"min": {"type": "int"}}
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
   },
   "breathingSessionTitle": "Breathing session",
   "breathingInhale": "Inhale",
@@ -1705,7 +1805,11 @@
   "mealReviewSlot": "Meal",
   "mealReviewRemaining": "Remaining budget: {kcal} kcal",
   "@mealReviewRemaining": {
-    "placeholders": {"kcal": {"type": "int"}}
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
   },
   "mealReviewEstimated": "estimated",
   "mealReviewCheckAmount": "check the amount",
@@ -1756,11 +1860,19 @@
   "inbodySyncedLabel": "Synced from Health Connect",
   "inbodySyncResult": "Imported {count} Health Connect reading(s)",
   "@inbodySyncResult": {
-    "placeholders": {"count": {"type": "int"}}
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "inbodyFromDateLabel": "from your InBody on {date}",
   "@inbodyFromDateLabel": {
-    "placeholders": {"date": {"type": "String"}}
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "uxQuickInbody": "InBody report",
   "uxQuickInbodySub": "Scan a result sheet",
@@ -1792,7 +1904,9 @@
   "detectedActivity": "Detected: {activity}",
   "@detectedActivity": {
     "placeholders": {
-      "activity": {"type": "String"}
+      "activity": {
+        "type": "String"
+      }
     }
   },
   "manualOverride": "Override",
@@ -1804,41 +1918,214 @@
   "fatEquivalentApprox": "≈ {amount} of fat",
   "@fatEquivalentApprox": {
     "placeholders": {
-      "amount": {"type": "String"}
+      "amount": {
+        "type": "String"
+      }
     }
   },
   "fatEquivalentBurned": "≈ {amount} of fat",
   "@fatEquivalentBurned": {
     "placeholders": {
-      "amount": {"type": "String"}
+      "amount": {
+        "type": "String"
+      }
     }
   },
   "fatEquivalentTodayDeficit": "Today's deficit ≈ {amount} of fat",
   "@fatEquivalentTodayDeficit": {
     "placeholders": {
-      "amount": {"type": "String"}
+      "amount": {
+        "type": "String"
+      }
     }
   },
   "fatEquivalentTodaySurplus": "Surplus +{kcal} kcal",
   "@fatEquivalentTodaySurplus": {
     "placeholders": {
-      "kcal": {"type": "int"}
+      "kcal": {
+        "type": "int"
+      }
     }
   },
   "fatEquivalentDietPlanRate": "≈ {daily} fat/day • ≈ {weekly}/week",
   "@fatEquivalentDietPlanRate": {
     "placeholders": {
-      "daily": {"type": "String"},
-      "weekly": {"type": "String"}
+      "daily": {
+        "type": "String"
+      },
+      "weekly": {
+        "type": "String"
+      }
     }
   },
   "fatEquivalentThisWeek": "≈ {amount} of fat this week",
   "@fatEquivalentThisWeek": {
     "placeholders": {
-      "amount": {"type": "String"}
+      "amount": {
+        "type": "String"
+      }
     }
   },
   "fatEquivalentInfoTitle": "Fat Equivalent",
   "fatEquivalentInfoBody": "Real scale weight also changes with water and glycogen, so daily weight can move differently. This is the energy equivalent of fat.",
-  "fatEquivalentInfoDismiss": "Got it"
+  "fatEquivalentInfoDismiss": "Got it",
+  "legalTerms": "Terms",
+  "legalPrivacy": "Privacy",
+  "legalMedicalDisclaimer": "Medical Disclaimer",
+  "welcomeTagline": "Smart nutrition & intelligent fitness built specifically for men.",
+  "welcomePillarScannerTitle": "Instant Plate Scanner",
+  "welcomePillarScannerDesc": "Snap your meal, get accurate calories & protein in 2 seconds",
+  "welcomePillarPlanTitle": "Personalized Daily Plan",
+  "welcomePillarPlanDesc": "Evidence-backed targets tailored to your body and goal",
+  "welcomePillarSafetyTitle": "Clinically Safe Nutrition",
+  "welcomePillarSafetyDesc": "Guidance that protects your metabolism and overall health",
+  "onboardingGoalTitle": "What is your primary focus?",
+  "onboardingGoalSubtitle": "Pick what matters most. We will engineer your daily targets around this.",
+  "goalLoseFatTitle": "Lose Fat",
+  "goalLoseFatSubtitle": "Torch stubborn fat while maintaining hard-earned muscle mass",
+  "goalBuildMuscleTitle": "Build Muscle",
+  "goalBuildMuscleSubtitle": "Maximize lean hypertrophy with optimized protein & progressive overload",
+  "goalMoreEnergyTitle": "More Energy",
+  "goalMoreEnergySubtitle": "Eliminate mid-day crashes and elevate everyday stamina & vitality",
+  "goalAllOfAboveTitle": "All of the Above",
+  "goalAllOfAboveSubtitle": "Total body recomposition: drop body fat, gain strength, and feel relentless",
+  "onboardingBodyTitle": "Your Body Profile",
+  "onboardingBodySubtitle": "Accurate metrics allow us to calculate your exact caloric burn & daily targets.",
+  "sexMale": "Male",
+  "sexFemale": "Female",
+  "unitMetric": "Metric",
+  "unitImperial": "US (lb)",
+  "bodyMetricAge": "Age",
+  "bodyMetricYears": "{age} years",
+  "@bodyMetricYears": {
+    "placeholders": {
+      "age": {
+        "type": "int"
+      }
+    }
+  },
+  "selectAgeTitle": "Select Age",
+  "ageYearsSuffix": "{age} yrs",
+  "@ageYearsSuffix": {
+    "placeholders": {
+      "age": {
+        "type": "int"
+      }
+    }
+  },
+  "bodyMetricHeight": "Height",
+  "selectHeightTitle": "Select Height",
+  "bodyMetricCurrentWeight": "Current Weight",
+  "selectCurrentWeightTitle": "Select Current Weight",
+  "bodyMetricTargetWeight": "Target Weight",
+  "selectTargetWeightTitle": "Select Target Weight",
+  "pickerDone": "Done",
+  "onboardingActivityTitle": "Activity & Training Place",
+  "onboardingActivitySubtitle": "We calibrate daily calorie output and recommend optimal workouts.",
+  "dailyActivityLevelHeader": "DAILY ACTIVITY LEVEL",
+  "activitySedentaryTitle": "Sedentary / Desk Work",
+  "activitySedentarySubtitle": "Minimal daily walking, desk job, under 5,000 steps",
+  "activityModeratelyActiveTitle": "Moderately Active",
+  "activityModeratelyActiveSubtitle": "On your feet regularly, 6,000–10,000 daily steps",
+  "activityVeryActiveTitle": "Very Active / Physical Job",
+  "activityVeryActiveSubtitle": "Constantly on the move or 12,000+ daily steps",
+  "trainingPlaceHeader": "WHERE DO YOU PLAN TO TRAIN?",
+  "trainingPlaceGymTitle": "Gym",
+  "trainingPlaceGymSubtitle": "Full access to barbells, machines & dumbbells",
+  "trainingPlaceHomeTitle": "Home",
+  "trainingPlaceHomeSubtitle": "Bodyweight, resistance bands, or light dumbbells",
+  "trainingPlaceWalkingTitle": "Walking",
+  "trainingPlaceWalkingSubtitle": "Cardio steps & outdoor walking routines",
+  "onboardingHealthSafetyTitle": "Health Safety Screening",
+  "onboardingHealthSafetySubtitle": "Select any conditions that apply so our engine can protect your safety.",
+  "healthSafetyNoneApply": "None of these apply to me",
+  "healthSafetyOrSelect": "OR SELECT ANY APPLICABLE",
+  "onboardingTryScanTitle": "Experience Instant Scanning",
+  "onboardingTryScanSubtitle": "See how effortlessly Vireo breaks down real food into macros and calories.",
+  "tryScanSamplePlateTitle": "Sample High-Protein Plate",
+  "tryScanSamplePlateDesc": "Grilled Chicken, Egyptian Rice & Garden Salad",
+  "tryScanAnalyzing": "Analyzing Plate...",
+  "tryScanSampleCta": "Scan Sample Plate (Instant)",
+  "tryScanOrTestLive": "OR TEST LIVE",
+  "tryScanOwnMealTitle": "Scan Your Own Meal",
+  "tryScanOwnMealDesc": "Take a live photo of your current plate",
+  "onboardingPlanRevealTitle": "Your Personalized Blueprint",
+  "onboardingPlanRevealSubtitle": "Engineered specifically for your metabolic profile and fitness goal.",
+  "planRevealStartPlan": "Start My Plan",
+  "planRevealProjectedPace": "PROJECTED PACE",
+  "planRevealSteadyRecomp": "Steady body recomposition",
+  "planRevealFatLossPace": "-{amount} kg / week fat loss",
+  "@planRevealFatLossPace": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "planRevealLeanMassPace": "+{amount} kg / week lean mass",
+  "@planRevealLeanMassPace": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "planRevealDailyCalories": "DAILY CALORIC TARGET",
+  "planRevealPersonalizedBadge": "Personalized",
+  "planRevealKcalPerDay": "kcal / day",
+  "planRevealDailyProtein": "DAILY PROTEIN",
+  "planRevealGramPerDay": "g / day",
+  "planRevealHydration": "HYDRATION",
+  "planRevealDailySteps": "DAILY STEPS",
+  "planRevealStepsPerDay": "steps / day",
+  "planRevealDietProtocol": "DIET PROTOCOL",
+  "planRevealOptimalMatch": "Optimal match",
+  "planRevealBalancedPlanDefault": "Balanced Deficit Plan",
+  "onboardingNotificationsTitle": "Never Miss a Target",
+  "onboardingNotificationsSubtitle": "Gentle nudges keep your nutrition log, hydration, and workouts on track.",
+  "notificationsHeroTitle": "Built For Accountability, Not Spam",
+  "notificationsHeroBody": "Users who enable reminders are 3.4x more likely to reach their target weight and build lasting fitness habits.",
+  "notificationsMealLoggingTitle": "Meal & Plate Logging",
+  "notificationsMealLoggingDesc": "Timely reminders around lunch and dinner",
+  "notificationsWorkoutSessionTitle": "Daily Workout Session",
+  "notificationsWorkoutSessionDesc": "Stay committed to your training schedule",
+  "notificationsWeeklyReviewTitle": "Weekly Progress Review",
+  "notificationsWeeklyReviewDesc": "Sunday weigh-in & weekly adjustment summary",
+  "notificationsEnableButton": "Enable Reminders",
+  "notificationsMaybeLater": "Maybe Later",
+  "onboardingPaywallTitle": "Accelerate Your Results",
+  "onboardingPaywallSubtitle": "Unlock unlimited plate scans, full AI workout generation, and advanced analytics.",
+  "paywallProBadge": "VIREO PRO",
+  "paywallFeatureUnlimitedScansDesc": "Never worry about daily limits or quotas",
+  "paywallFeatureSmartSub": "AI Smart Substitution & Meal Prep",
+  "paywallFeatureSmartSubDesc": "Instant macro-friendly swaps for local dishes",
+  "paywallFeatureAdaptiveSplits": "Custom Adaptive Workout Splits",
+  "paywallFeatureAdaptiveSplitsDesc": "Progressive overload tracking for gym or home",
+  "paywallPlanAnnualPrice": "$4.99 / mo",
+  "paywallPlanAnnualSubtext": "Billed yearly (Save 50%)",
+  "paywallBadgeBestValue": "BEST VALUE",
+  "paywallPlanMonthlyPrice": "$9.99 / mo",
+  "paywallPlanMonthlySubtext": "Billed monthly",
+  "paywallStartTrialCta": "Start 7-Day Free Trial",
+  "paywallContinueFreeTier": "Continue with Free Tier",
+  "appInitErrorFailed": "Failed to initialize app services.",
+  "appInitRetry": "Retry",
+  "privacyExportTitle": "Export My Data",
+  "privacyExportReady": "Your data package is ready in JSON & CSV formats:",
+  "weeklyProgressShareFailed": "Could not generate share image",
+  "adaptiveCalorieCurrentTarget": "Current Target",
+  "adaptiveCalorieSuggestedTarget": "Suggested Target",
+  "adaptiveCalorieWindowSpan": "Window span",
+  "adaptiveCalorieFoodLogsCount": "Food logs count",
+  "adaptiveCalorieWeighInsCount": "Weigh-ins count",
+  "adaptiveCalorieAverageIntake": "Average intake",
+  "adaptiveCalorieTrendWeightChange": "Trend weight change",
+  "adaptiveCalorieEstimatedMaintenance": "Estimated maintenance",
+  "adaptiveCalorieWeeklyChangeCap": "Weekly change cap",
+  "adaptiveCalorieSafetyFloorApplied": "Safety floor applied",
+  "chartSevenDayTrend": "7-Day Trend",
+  "chartThirtyDayTrend": "30-Day Trend",
+  "chartRawDot": "Raw Dot",
+  "chartTrendLine": "Trend Line",
+  "chartGoalLine": "Goal Line"
 }

@@ -876,7 +876,8 @@ class AppLocalizationsId extends AppLocalizations {
   String get paywallPlanLifetime => 'Seumur Hidup';
 
   @override
-  String get paywallFeatureUnlimitedScans => 'Pemindaian kulkas tanpa batas';
+  String get paywallFeatureUnlimitedScans =>
+      'Pemindaian Piring Instan Tanpa Batas';
 
   @override
   String get paywallFeatureFullProgram =>
@@ -3506,4 +3507,438 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get fatEquivalentInfoDismiss => 'Mengerti';
+
+  @override
+  String get legalTerms => 'Ketentuan';
+
+  @override
+  String get legalPrivacy => 'Privasi';
+
+  @override
+  String get legalMedicalDisclaimer => 'Penafian Medis';
+
+  @override
+  String get welcomeTagline =>
+      'Nutrisi pintar dan kebugaran cerdas yang dirancang khusus untuk pria.';
+
+  @override
+  String get welcomePillarScannerTitle => 'Pemindai Piring Instan';
+
+  @override
+  String get welcomePillarScannerDesc =>
+      'Foto makananmu, dapatkan kalori & protein akurat dalam 2 detik';
+
+  @override
+  String get welcomePillarPlanTitle => 'Rencana Harian yang Dipersonalisasi';
+
+  @override
+  String get welcomePillarPlanDesc =>
+      'Target berbasis bukti yang disesuaikan dengan tubuh dan tujuanmu';
+
+  @override
+  String get welcomePillarSafetyTitle => 'Nutrisi yang Aman Secara Klinis';
+
+  @override
+  String get welcomePillarSafetyDesc =>
+      'Panduan yang melindungi metabolisme dan kesehatan menyeluruh';
+
+  @override
+  String get onboardingGoalTitle => 'Apa fokus utama Anda?';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'Pilih yang paling penting. Kami akan menyusun target harian Anda di sekitarnya.';
+
+  @override
+  String get goalLoseFatTitle => 'Membakar Lemak';
+
+  @override
+  String get goalLoseFatSubtitle =>
+      'Bakar lemak membandel sambil menjaga massa otot yang berharga';
+
+  @override
+  String get goalBuildMuscleTitle => 'Membangun Otot';
+
+  @override
+  String get goalBuildMuscleSubtitle =>
+      'Maksimalkan pertumbuhan otot tanpa lemak dengan protein optimal';
+
+  @override
+  String get goalMoreEnergyTitle => 'Lebih Banyak Energi';
+
+  @override
+  String get goalMoreEnergySubtitle =>
+      'Hilangkan rasa lelah di siang hari dan tingkatkan stamina harian';
+
+  @override
+  String get goalAllOfAboveTitle => 'Semua di Atas';
+
+  @override
+  String get goalAllOfAboveSubtitle =>
+      'Rekomposisi tubuh total: kurangi lemak, tambah kekuatan, dan bertenaga';
+
+  @override
+  String get onboardingBodyTitle => 'Profil Tubuh Anda';
+
+  @override
+  String get onboardingBodySubtitle =>
+      'Metrik yang akurat memungkinkan kami menghitung pembakaran kalori harian Anda secara tepat.';
+
+  @override
+  String get sexMale => 'Pria';
+
+  @override
+  String get sexFemale => 'Wanita';
+
+  @override
+  String get unitMetric => 'Metrik';
+
+  @override
+  String get unitImperial => 'Imperial (lb)';
+
+  @override
+  String get bodyMetricAge => 'Usia';
+
+  @override
+  String bodyMetricYears(int age) {
+    return '$age tahun';
+  }
+
+  @override
+  String get selectAgeTitle => 'Pilih Usia';
+
+  @override
+  String ageYearsSuffix(int age) {
+    return '$age thn';
+  }
+
+  @override
+  String get bodyMetricHeight => 'Tinggi Badan';
+
+  @override
+  String get selectHeightTitle => 'Pilih Tinggi Badan';
+
+  @override
+  String get bodyMetricCurrentWeight => 'Berat Badan Saat Ini';
+
+  @override
+  String get selectCurrentWeightTitle => 'Pilih Berat Badan Saat Ini';
+
+  @override
+  String get bodyMetricTargetWeight => 'Target Berat Badan';
+
+  @override
+  String get selectTargetWeightTitle => 'Pilih Target Berat Badan';
+
+  @override
+  String get pickerDone => 'Selesai';
+
+  @override
+  String get onboardingActivityTitle => 'Aktivitas & Tempat Latihan';
+
+  @override
+  String get onboardingActivitySubtitle =>
+      'Kami mengkalibrasi pembakaran kalori harian dan merekomendasikan latihan optimal.';
+
+  @override
+  String get dailyActivityLevelHeader => 'TINGKAT AKTIVITAS HARIAN';
+
+  @override
+  String get activitySedentaryTitle => 'Kurang Bergerak / Kerja Meja';
+
+  @override
+  String get activitySedentarySubtitle =>
+      'Jarang berjalan, kerja di meja, kurang dari 5.000 langkah';
+
+  @override
+  String get activityModeratelyActiveTitle => 'Cukup Aktif';
+
+  @override
+  String get activityModeratelyActiveSubtitle =>
+      'Sering berdiri/bergerak, 6.000–10.000 langkah sehari';
+
+  @override
+  String get activityVeryActiveTitle => 'Sangat Aktif / Kerja Fisik';
+
+  @override
+  String get activityVeryActiveSubtitle =>
+      'Selalu aktif bergerak atau 12.000+ langkah per hari';
+
+  @override
+  String get trainingPlaceHeader => 'DI MANA RENCANA ANDA BERLATIH?';
+
+  @override
+  String get trainingPlaceGymTitle => 'Gym';
+
+  @override
+  String get trainingPlaceGymSubtitle =>
+      'Akses penuh ke barbel, mesin & dumbel';
+
+  @override
+  String get trainingPlaceHomeTitle => 'Di Rumah';
+
+  @override
+  String get trainingPlaceHomeSubtitle =>
+      'Beban tubuh, tali resistensi, atau dumbel ringan';
+
+  @override
+  String get trainingPlaceWalkingTitle => 'Jalan Kaki';
+
+  @override
+  String get trainingPlaceWalkingSubtitle =>
+      'Langkah kardio & rutinitas jalan santai di luar ruangan';
+
+  @override
+  String get onboardingHealthSafetyTitle => 'Pemeriksaan Keamanan Kesehatan';
+
+  @override
+  String get onboardingHealthSafetySubtitle =>
+      'Pilih kondisi yang sesuai agar mesin kami dapat menjaga keselamatan Anda.';
+
+  @override
+  String get healthSafetyNoneApply => 'Tidak ada yang berlaku untuk saya';
+
+  @override
+  String get healthSafetyOrSelect => 'ATAU PILIH YANG SESUAI';
+
+  @override
+  String get onboardingTryScanTitle => 'Rasakan Pemindaian Instan';
+
+  @override
+  String get onboardingTryScanSubtitle =>
+      'Lihat betapa mudahnya Vireo membagi makanan menjadi kalori dan nutrisi.';
+
+  @override
+  String get tryScanSamplePlateTitle => 'Contoh Piring Tinggi Protein';
+
+  @override
+  String get tryScanSamplePlateDesc =>
+      'Ayam Panggang, Nasi Putih & Salad Segar';
+
+  @override
+  String get tryScanAnalyzing => 'Menganalisis Piring...';
+
+  @override
+  String get tryScanSampleCta => 'Pindai Contoh Piring (Instan)';
+
+  @override
+  String get tryScanOrTestLive => 'ATAU COBA LANGSUNG';
+
+  @override
+  String get tryScanOwnMealTitle => 'Pindai Makanan Anda Sendiri';
+
+  @override
+  String get tryScanOwnMealDesc => 'Ambil foto langsung dari piring Anda';
+
+  @override
+  String get onboardingPlanRevealTitle => 'Rencana Khusus Anda';
+
+  @override
+  String get onboardingPlanRevealSubtitle =>
+      'Dirancang khusus untuk profil metabolisme dan target kebugaran Anda.';
+
+  @override
+  String get planRevealStartPlan => 'Mulai Rencana Saya';
+
+  @override
+  String get planRevealProjectedPace => 'KECEPATAN YANG DIPERKIRAKAN';
+
+  @override
+  String get planRevealSteadyRecomp => 'Rekomposisi tubuh bertahap';
+
+  @override
+  String planRevealFatLossPace(String amount) {
+    return '-$amount kg / minggu pembakaran lemak';
+  }
+
+  @override
+  String planRevealLeanMassPace(String amount) {
+    return '+$amount kg / minggu massa otot tanpa lemak';
+  }
+
+  @override
+  String get planRevealDailyCalories => 'TARGET KALORI HARIAN';
+
+  @override
+  String get planRevealPersonalizedBadge => 'Dipersonalisasi';
+
+  @override
+  String get planRevealKcalPerDay => 'kkal / hari';
+
+  @override
+  String get planRevealDailyProtein => 'PROTEIN HARIAN';
+
+  @override
+  String get planRevealGramPerDay => 'g / hari';
+
+  @override
+  String get planRevealHydration => 'HIDRASI';
+
+  @override
+  String get planRevealDailySteps => 'LANGKAH HARIAN';
+
+  @override
+  String get planRevealStepsPerDay => 'langkah / hari';
+
+  @override
+  String get planRevealDietProtocol => 'PROTOKOL DIET';
+
+  @override
+  String get planRevealOptimalMatch => 'Pilihan paling optimal';
+
+  @override
+  String get planRevealBalancedPlanDefault => 'Rencana Defisit Seimbang';
+
+  @override
+  String get onboardingNotificationsTitle => 'Jangan Lewatkan Target';
+
+  @override
+  String get onboardingNotificationsSubtitle =>
+      'Pengingat yang tepat menjaga catatan makanan, hidrasi, dan latihan Anda tetap sesuai jalur.';
+
+  @override
+  String get notificationsHeroTitle => 'Dibuat untuk Disiplin, Bukan Spam';
+
+  @override
+  String get notificationsHeroBody =>
+      'Pengguna yang mengaktifkan pengingat 3,4 kali lebih mungkin mencapai target berat badan mereka.';
+
+  @override
+  String get notificationsMealLoggingTitle => 'Pencatatan Makanan';
+
+  @override
+  String get notificationsMealLoggingDesc =>
+      'Pengingat tepat waktu sekitar makan siang dan malam';
+
+  @override
+  String get notificationsWorkoutSessionTitle => 'Sesi Latihan Harian';
+
+  @override
+  String get notificationsWorkoutSessionDesc =>
+      'Tetap berkomitmen pada jadwal latihan Anda';
+
+  @override
+  String get notificationsWeeklyReviewTitle => 'Tinjauan Kemajuan Mingguan';
+
+  @override
+  String get notificationsWeeklyReviewDesc =>
+      'Timbang badan mingguan & ringkasan penyesuaian';
+
+  @override
+  String get notificationsEnableButton => 'Aktifkan Pengingat';
+
+  @override
+  String get notificationsMaybeLater => 'Mungkin Nanti';
+
+  @override
+  String get onboardingPaywallTitle => 'Percepat Hasil Anda';
+
+  @override
+  String get onboardingPaywallSubtitle =>
+      'Buka pemindaian piring tanpa batas, latihan AI lengkap, dan analitik tingkat lanjut.';
+
+  @override
+  String get paywallProBadge => 'VIREO PRO';
+
+  @override
+  String get paywallFeatureUnlimitedScansDesc =>
+      'Tanpa khawatir tentang batasan harian';
+
+  @override
+  String get paywallFeatureSmartSub =>
+      'Substitusi Cerdas AI & Persiapan Makanan';
+
+  @override
+  String get paywallFeatureSmartSubDesc =>
+      'Pengganti ramah makro instan untuk hidangan lokal';
+
+  @override
+  String get paywallFeatureAdaptiveSplits => 'Program Latihan Adaptif Khusus';
+
+  @override
+  String get paywallFeatureAdaptiveSplitsDesc =>
+      'Pelacakan beban progresif untuk gym atau rumah';
+
+  @override
+  String get paywallPlanAnnualPrice => '\$4.99 / bln';
+
+  @override
+  String get paywallPlanAnnualSubtext => 'Ditagih tahunan (Hemat 50%)';
+
+  @override
+  String get paywallBadgeBestValue => 'PENAWARAN TERBAIK';
+
+  @override
+  String get paywallPlanMonthlyPrice => '\$9.99 / bln';
+
+  @override
+  String get paywallPlanMonthlySubtext => 'Ditagih bulanan';
+
+  @override
+  String get paywallStartTrialCta => 'Mulai Uji Coba Gratis 7 Hari';
+
+  @override
+  String get paywallContinueFreeTier => 'Lanjutkan dengan Paket Gratis';
+
+  @override
+  String get appInitErrorFailed => 'Gagal menginisialisasi layanan aplikasi.';
+
+  @override
+  String get appInitRetry => 'Coba Lagi';
+
+  @override
+  String get privacyExportTitle => 'Ekspor Data Saya';
+
+  @override
+  String get privacyExportReady =>
+      'Paket data Anda siap dalam format JSON & CSV:';
+
+  @override
+  String get weeklyProgressShareFailed =>
+      'Tidak dapat membuat gambar untuk dibagikan';
+
+  @override
+  String get adaptiveCalorieCurrentTarget => 'Target Saat Ini';
+
+  @override
+  String get adaptiveCalorieSuggestedTarget => 'Target yang Disarankan';
+
+  @override
+  String get adaptiveCalorieWindowSpan => 'Rentang waktu';
+
+  @override
+  String get adaptiveCalorieFoodLogsCount => 'Jumlah hari log makanan';
+
+  @override
+  String get adaptiveCalorieWeighInsCount => 'Jumlah penimbangan';
+
+  @override
+  String get adaptiveCalorieAverageIntake => 'Asupan rata-rata';
+
+  @override
+  String get adaptiveCalorieTrendWeightChange => 'Perubahan tren berat badan';
+
+  @override
+  String get adaptiveCalorieEstimatedMaintenance => 'Estimasi pemeliharaan';
+
+  @override
+  String get adaptiveCalorieWeeklyChangeCap => 'Batas perubahan mingguan';
+
+  @override
+  String get adaptiveCalorieSafetyFloorApplied => 'Batas aman diterapkan';
+
+  @override
+  String get chartSevenDayTrend => 'Tren 7 Hari';
+
+  @override
+  String get chartThirtyDayTrend => 'Tren 30 Hari';
+
+  @override
+  String get chartRawDot => 'Titik Mentah';
+
+  @override
+  String get chartTrendLine => 'Garis Tren';
+
+  @override
+  String get chartGoalLine => 'Garis Sasaran';
 }

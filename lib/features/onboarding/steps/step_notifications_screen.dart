@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/analytics_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
@@ -87,13 +88,14 @@ class _StepNotificationsScreenState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
 
     return OnboardingStepShell(
       stepIndex: 7,
       stepCount: OnboardingUiState.stepCount,
-      title: 'Never Miss a Target',
-      subtitle: 'Gentle nudges keep your nutrition log, hydration, and workouts on track.',
+      title: l10n.onboardingNotificationsTitle,
+      subtitle: l10n.onboardingNotificationsSubtitle,
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onSkip: _skip,
       child: Column(
@@ -125,17 +127,17 @@ class _StepNotificationsScreenState
                     ),
                   ),
                   const SizedBox(height: 14),
-                  const Text(
-                    'Built For Accountability, Not Spam',
+                  Text(
+                    l10n.notificationsHeroTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Users who enable reminders are 3.4x more likely to reach their target weight and build lasting fitness habits.',
+                    l10n.notificationsHeroBody,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13,
@@ -153,8 +155,8 @@ class _StepNotificationsScreenState
           FadeSlideIn(
             index: 1,
             child: _ReminderToggleTile(
-              title: 'Meal & Plate Logging',
-              subtitle: 'Timely reminders around lunch and dinner',
+              title: l10n.notificationsMealLoggingTitle,
+              subtitle: l10n.notificationsMealLoggingDesc,
               icon: Icons.restaurant_rounded,
               value: _mealReminders,
               onChanged: (v) => setState(() => _mealReminders = v),
@@ -165,8 +167,8 @@ class _StepNotificationsScreenState
           FadeSlideIn(
             index: 2,
             child: _ReminderToggleTile(
-              title: 'Daily Workout Session',
-              subtitle: 'Stay committed to your training schedule',
+              title: l10n.notificationsWorkoutSessionTitle,
+              subtitle: l10n.notificationsWorkoutSessionDesc,
               icon: Icons.fitness_center_rounded,
               value: _workoutReminders,
               onChanged: (v) => setState(() => _workoutReminders = v),
@@ -177,8 +179,8 @@ class _StepNotificationsScreenState
           FadeSlideIn(
             index: 3,
             child: _ReminderToggleTile(
-              title: 'Weekly Progress Review',
-              subtitle: 'Sunday weigh-in & weekly adjustment summary',
+              title: l10n.notificationsWeeklyReviewTitle,
+              subtitle: l10n.notificationsWeeklyReviewDesc,
               icon: Icons.bar_chart_rounded,
               value: _weeklyCheckin,
               onChanged: (v) => setState(() => _weeklyCheckin = v),
@@ -207,9 +209,9 @@ class _StepNotificationsScreenState
                           color: Colors.white,
                         ),
                       )
-                    : const Text(
-                        'Enable Reminders',
-                        style: TextStyle(
+                    : Text(
+                        l10n.notificationsEnableButton,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
@@ -225,7 +227,7 @@ class _StepNotificationsScreenState
             child: TextButton(
               onPressed: _skip,
               child: Text(
-                'Maybe Later',
+                l10n.notificationsMaybeLater,
                 style: TextStyle(
                   color: colors.textMute,
                   fontWeight: FontWeight.w600,

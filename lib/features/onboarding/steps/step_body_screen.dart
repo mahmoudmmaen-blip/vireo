@@ -42,7 +42,9 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
     _targetWeightKg = (draft.targetWeightKg ?? (_weightKg - 5)).clamp(40, 200);
     _unitPreference = draft.unitPreference;
 
-    _syncDraft();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _syncDraft();
+    });
   }
 
   void _syncDraft() {
@@ -84,8 +86,8 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
     return OnboardingStepShell(
       stepIndex: 2,
       stepCount: OnboardingUiState.stepCount,
-      title: 'Your Body Profile',
-      subtitle: 'Accurate metrics allow us to calculate your exact caloric burn & daily targets.',
+      title: l10n.onboardingBodyTitle,
+      subtitle: l10n.onboardingBodySubtitle,
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onSkip: _onContinue,
       onContinue: _onContinue,
@@ -111,7 +113,7 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
                     child: Row(
                       children: [
                         _SexButton(
-                          label: 'Male',
+                          label: l10n.sexMale,
                           icon: Icons.male_rounded,
                           isSelected: _sex == 'male',
                           onTap: () {
@@ -121,7 +123,7 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
                         ),
                         const SizedBox(width: 4),
                         _SexButton(
-                          label: 'Female',
+                          label: l10n.sexFemale,
                           icon: Icons.female_rounded,
                           isSelected: _sex == 'female',
                           onTap: () {
@@ -147,7 +149,7 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
                     child: Row(
                       children: [
                         _UnitTab(
-                          label: 'Metric',
+                          label: l10n.unitMetric,
                           isSelected: isMetric,
                           onTap: () {
                             setState(() => _unitPreference = UnitPreference.metric);
@@ -155,7 +157,7 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
                           },
                         ),
                         _UnitTab(
-                          label: 'US (lb)',
+                          label: l10n.unitImperial,
                           isSelected: !isMetric,
                           onTap: () {
                             setState(() => _unitPreference = UnitPreference.imperial);
@@ -175,12 +177,12 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
           FadeSlideIn(
             index: 1,
             child: _WheelCard(
-              title: 'Age',
-              displayValue: '$_age years',
+              title: l10n.bodyMetricAge,
+              displayValue: l10n.bodyMetricYears(_age),
               onTapEdit: () => _showPicker(
-                title: 'Select Age',
+                title: l10n.selectAgeTitle,
                 initialIndex: _age - 18,
-                items: List.generate(73, (i) => '${i + 18} yrs'),
+                items: List.generate(73, (i) => l10n.ageYearsSuffix(i + 18)),
                 onSelected: (i) {
                   setState(() => _age = i + 18);
                   _syncDraft();
@@ -193,12 +195,12 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
           FadeSlideIn(
             index: 2,
             child: _WheelCard(
-              title: 'Height',
+              title: l10n.bodyMetricHeight,
               displayValue: isMetric
                   ? '${_heightCm.round()} cm'
                   : '${(_heightCm / 2.54).round() ~/ 12}\' ${((_heightCm / 2.54).round() % 12)}" (${_heightCm.round()} cm)',
               onTapEdit: () => _showPicker(
-                title: 'Select Height',
+                title: l10n.selectHeightTitle,
                 initialIndex: (_heightCm.round() - 140).clamp(0, 75),
                 items: List.generate(76, (i) {
                   final cm = i + 140;
@@ -219,12 +221,12 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
           FadeSlideIn(
             index: 3,
             child: _WheelCard(
-              title: 'Current Weight',
+              title: l10n.bodyMetricCurrentWeight,
               displayValue: isMetric
                   ? '${_weightKg.toStringAsFixed(1)} kg'
                   : '${(_weightKg * 2.20462).round()} lb (${_weightKg.toStringAsFixed(1)} kg)',
               onTapEdit: () => _showPicker(
-                title: 'Select Current Weight',
+                title: l10n.selectCurrentWeightTitle,
                 initialIndex: ((_weightKg - 45) * 2).round().clamp(0, 250),
                 items: List.generate(251, (i) {
                   final kg = 45.0 + (i * 0.5);
@@ -243,13 +245,13 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
           FadeSlideIn(
             index: 4,
             child: _WheelCard(
-              title: 'Target Weight',
+              title: l10n.bodyMetricTargetWeight,
               displayValue: isMetric
                   ? '${_targetWeightKg.toStringAsFixed(1)} kg'
                   : '${(_targetWeightKg * 2.20462).round()} lb (${_targetWeightKg.toStringAsFixed(1)} kg)',
               highlightColor: colors.ember,
               onTapEdit: () => _showPicker(
-                title: 'Select Target Weight',
+                title: l10n.selectTargetWeightTitle,
                 initialIndex: ((_targetWeightKg - 45) * 2).round().clamp(0, 250),
                 items: List.generate(251, (i) {
                   final kg = 45.0 + (i * 0.5);
@@ -274,6 +276,7 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
     required List<String> items,
     required ValueChanged<int> onSelected,
   }) {
+    final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     showModalBottomSheet<void>(
       context: context,
@@ -305,7 +308,7 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
                         Navigator.of(ctx).pop();
                       },
                       child: Text(
-                        'Done',
+                        l10n.pickerDone,
                         style: TextStyle(
                           color: colors.ember,
                           fontWeight: FontWeight.w800,

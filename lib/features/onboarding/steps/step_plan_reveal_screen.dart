@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/analytics_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
@@ -41,6 +42,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final draft = ref.watch(onboardingProvider).draft;
 
@@ -82,10 +84,10 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
     final weeklyChangeKg = (diff * 7 / 7700.0);
     final isLoss = weeklyChangeKg < 0;
     final changeText = weeklyChangeKg.abs() < 0.1
-        ? 'Steady body recomposition'
+        ? l10n.planRevealSteadyRecomp
         : isLoss
-            ? '-${weeklyChangeKg.abs().toStringAsFixed(2)} kg / week fat loss'
-            : '+${weeklyChangeKg.abs().toStringAsFixed(2)} kg / week lean mass';
+            ? l10n.planRevealFatLossPace(weeklyChangeKg.abs().toStringAsFixed(2))
+            : l10n.planRevealLeanMassPace(weeklyChangeKg.abs().toStringAsFixed(2));
 
     // Recommended diet program
     final conditions = DietPlanStorage.readConditions();
@@ -100,13 +102,13 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
       ),
     );
     final topProg = ranked.isNotEmpty ? ranked.first : null;
-    final programName = topProg?.program.name.en ?? 'Balanced Deficit Plan';
+    final programName = topProg?.program.name.en ?? l10n.planRevealBalancedPlanDefault;
 
     return OnboardingStepShell(
       stepIndex: 6,
       stepCount: OnboardingUiState.stepCount,
-      title: 'Your Personalized Blueprint',
-      subtitle: 'Engineered specifically for your metabolic profile and fitness goal.',
+      title: l10n.onboardingPlanRevealTitle,
+      subtitle: l10n.onboardingPlanRevealSubtitle,
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onSkip: _onStartPlan,
       bottomWidget: Pressable(
@@ -125,9 +127,9 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
             ],
           ),
           alignment: Alignment.center,
-          child: const Text(
-            'Start My Plan',
-            style: TextStyle(
+          child: Text(
+            l10n.planRevealStartPlan,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 17,
               fontWeight: FontWeight.w800,
@@ -161,7 +163,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'PROJECTED PACE',
+                          l10n.planRevealProjectedPace,
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w800,
@@ -203,7 +205,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'DAILY CALORIC TARGET',
+                        l10n.planRevealDailyCalories,
                         style: VType.overline(context),
                       ),
                       Container(
@@ -213,7 +215,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                           borderRadius: BorderRadius.circular(VRadius.pill),
                         ),
                         child: Text(
-                          'Personalized',
+                          l10n.planRevealPersonalizedBadge,
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
@@ -238,7 +240,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'kcal / day',
+                        l10n.planRevealKcalPerDay,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -261,9 +263,9 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                 // Protein
                 Expanded(
                   child: _MetricCard(
-                    title: 'DAILY PROTEIN',
+                    title: l10n.planRevealDailyProtein,
                     value: target.proteinG,
-                    unit: 'g / day',
+                    unit: l10n.planRevealGramPerDay,
                     color: VMacro.protein,
                     icon: Icons.fitness_center_rounded,
                   ),
@@ -272,7 +274,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                 // Water
                 Expanded(
                   child: _MetricWaterCard(
-                    title: 'HYDRATION',
+                    title: l10n.planRevealHydration,
                     display: '$waterLiters L',
                     unit: '$waterMl ml',
                     color: VMacro.water,
@@ -291,9 +293,9 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                 // Steps
                 Expanded(
                   child: _MetricCard(
-                    title: 'DAILY STEPS',
+                    title: l10n.planRevealDailySteps,
                     value: stepsTarget,
-                    unit: 'steps / day',
+                    unit: l10n.planRevealStepsPerDay,
                     color: VMacro.steps,
                     icon: Icons.directions_walk_rounded,
                   ),
@@ -318,7 +320,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                             const SizedBox(width: 6),
                             Expanded(
                               child: Text(
-                                'DIET PROTOCOL',
+                                l10n.planRevealDietProtocol,
                                 style: VType.overline(context),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -337,7 +339,7 @@ class _StepPlanRevealScreenState extends ConsumerState<StepPlanRevealScreen> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          'Optimal match',
+                          l10n.planRevealOptimalMatch,
                           style: TextStyle(fontSize: 11, color: colors.textMute),
                         ),
                       ],

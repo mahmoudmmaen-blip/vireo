@@ -880,8 +880,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get paywallPlanLifetime => 'De por vida';
 
   @override
-  String get paywallFeatureUnlimitedScans =>
-      'Escaneos ilimitados de refrigerador';
+  String get paywallFeatureUnlimitedScans => 'Escaneo ilimitado de platos';
 
   @override
   String get paywallFeatureFullProgram =>
@@ -3522,4 +3521,443 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get fatEquivalentInfoDismiss => 'Entendido';
+
+  @override
+  String get legalTerms => 'Términos';
+
+  @override
+  String get legalPrivacy => 'Privacidad';
+
+  @override
+  String get legalMedicalDisclaimer => 'Aviso médico';
+
+  @override
+  String get welcomeTagline =>
+      'Nutrición inteligente y fitness adaptado diseñado especialmente para hombres.';
+
+  @override
+  String get welcomePillarScannerTitle => 'Escáner instantáneo de platos';
+
+  @override
+  String get welcomePillarScannerDesc =>
+      'Foto a tu comida, calorías y proteínas precisas en 2 segundos';
+
+  @override
+  String get welcomePillarPlanTitle => 'Plan diario personalizado';
+
+  @override
+  String get welcomePillarPlanDesc =>
+      'Objetivos científicos adaptados a tu cuerpo y objetivo';
+
+  @override
+  String get welcomePillarSafetyTitle => 'Nutrición clínicamente segura';
+
+  @override
+  String get welcomePillarSafetyDesc =>
+      'Orientación que protege tu metabolismo y salud general';
+
+  @override
+  String get onboardingGoalTitle => '¿Cuál es tu objetivo principal?';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'Elige lo más importante. Diseñaremos tus objetivos diarios en torno a esto.';
+
+  @override
+  String get goalLoseFatTitle => 'Perder grasa';
+
+  @override
+  String get goalLoseFatSubtitle =>
+      'Quema grasa rebelde manteniendo tu masa muscular';
+
+  @override
+  String get goalBuildMuscleTitle => 'Ganar músculo';
+
+  @override
+  String get goalBuildMuscleSubtitle =>
+      'Maximiza la hipertrofia limpia con proteína optimizada y sobrecarga progresiva';
+
+  @override
+  String get goalMoreEnergyTitle => 'Más energía';
+
+  @override
+  String get goalMoreEnergySubtitle =>
+      'Elimina los bajones a mitad del día y eleva tu resistencia y vitalidad';
+
+  @override
+  String get goalAllOfAboveTitle => 'Todo lo anterior';
+
+  @override
+  String get goalAllOfAboveSubtitle =>
+      'Recomposición corporal total: baja grasa, gana fuerza y energía';
+
+  @override
+  String get onboardingBodyTitle => 'Tu perfil corporal';
+
+  @override
+  String get onboardingBodySubtitle =>
+      'Las métricas precisas nos permiten calcular tu gasto calórico exacto.';
+
+  @override
+  String get sexMale => 'Hombre';
+
+  @override
+  String get sexFemale => 'Mujer';
+
+  @override
+  String get unitMetric => 'Métrico';
+
+  @override
+  String get unitImperial => 'Imperial (lb)';
+
+  @override
+  String get bodyMetricAge => 'Edad';
+
+  @override
+  String bodyMetricYears(int age) {
+    return '$age años';
+  }
+
+  @override
+  String get selectAgeTitle => 'Selecciona tu edad';
+
+  @override
+  String ageYearsSuffix(int age) {
+    return '$age años';
+  }
+
+  @override
+  String get bodyMetricHeight => 'Altura';
+
+  @override
+  String get selectHeightTitle => 'Selecciona tu altura';
+
+  @override
+  String get bodyMetricCurrentWeight => 'Peso actual';
+
+  @override
+  String get selectCurrentWeightTitle => 'Selecciona tu peso actual';
+
+  @override
+  String get bodyMetricTargetWeight => 'Peso objetivo';
+
+  @override
+  String get selectTargetWeightTitle => 'Selecciona tu peso objetivo';
+
+  @override
+  String get pickerDone => 'Listo';
+
+  @override
+  String get onboardingActivityTitle => 'Actividad y lugar de entrenamiento';
+
+  @override
+  String get onboardingActivitySubtitle =>
+      'Calibramos el gasto calórico diario y recomendamos entrenamientos óptimos.';
+
+  @override
+  String get dailyActivityLevelHeader => 'NIVEL DE ACTIVIDAD DIARIA';
+
+  @override
+  String get activitySedentaryTitle => 'Sedentario / Trabajo de oficina';
+
+  @override
+  String get activitySedentarySubtitle =>
+      'Caminar poco, trabajo de escritorio, menos de 5,000 pasos';
+
+  @override
+  String get activityModeratelyActiveTitle => 'Moderadamente activo';
+
+  @override
+  String get activityModeratelyActiveSubtitle =>
+      'En movimiento regularmente, 6,000–10,000 pasos diarios';
+
+  @override
+  String get activityVeryActiveTitle => 'Muy activo / Trabajo físico';
+
+  @override
+  String get activityVeryActiveSubtitle =>
+      'En movimiento constante o más de 12,000 pasos diarios';
+
+  @override
+  String get trainingPlaceHeader => '¿DÓNDE TIENES PENSADO ENTRENAR?';
+
+  @override
+  String get trainingPlaceGymTitle => 'Gimnasio';
+
+  @override
+  String get trainingPlaceGymSubtitle =>
+      'Acceso completo a barras, máquinas y mancuernas';
+
+  @override
+  String get trainingPlaceHomeTitle => 'En casa';
+
+  @override
+  String get trainingPlaceHomeSubtitle =>
+      'Peso corporal, bandas elásticas o mancuernas ligeras';
+
+  @override
+  String get trainingPlaceWalkingTitle => 'Caminar';
+
+  @override
+  String get trainingPlaceWalkingSubtitle =>
+      'Pasos de cardio y caminatas al aire libre';
+
+  @override
+  String get onboardingHealthSafetyTitle => 'Evaluación de seguridad médica';
+
+  @override
+  String get onboardingHealthSafetySubtitle =>
+      'Selecciona las condiciones que apliquen para garantizar tu seguridad.';
+
+  @override
+  String get healthSafetyNoneApply => 'Ninguna de estas condiciones me aplica';
+
+  @override
+  String get healthSafetyOrSelect => 'O SELECCIONA LAS QUE APLIQUEN';
+
+  @override
+  String get onboardingTryScanTitle => 'Prueba el escaneo instantáneo';
+
+  @override
+  String get onboardingTryScanSubtitle =>
+      'Mira con qué facilidad Vireo desglosa tu comida en macros y calorías.';
+
+  @override
+  String get tryScanSamplePlateTitle => 'Ejemplo de plato alto en proteínas';
+
+  @override
+  String get tryScanSamplePlateDesc =>
+      'Pollo a la plancha, arroz blanco y ensalada';
+
+  @override
+  String get tryScanAnalyzing => 'Analizando el plato...';
+
+  @override
+  String get tryScanSampleCta => 'Escanear plato de muestra (Instantáneo)';
+
+  @override
+  String get tryScanOrTestLive => 'O PRUEBA EN VIVO';
+
+  @override
+  String get tryScanOwnMealTitle => 'Escanea tu propia comida';
+
+  @override
+  String get tryScanOwnMealDesc => 'Toma una foto en directo de tu plato';
+
+  @override
+  String get onboardingPlanRevealTitle => 'Tu plan personalizado';
+
+  @override
+  String get onboardingPlanRevealSubtitle =>
+      'Diseñado para tu metabolismo y objetivo de acondicionamiento físico.';
+
+  @override
+  String get planRevealStartPlan => 'Comenzar mi plan';
+
+  @override
+  String get planRevealProjectedPace => 'RITMO PROYECTADO';
+
+  @override
+  String get planRevealSteadyRecomp => 'Recomposición corporal constante';
+
+  @override
+  String planRevealFatLossPace(String amount) {
+    return '-$amount kg / semana de pérdida de grasa';
+  }
+
+  @override
+  String planRevealLeanMassPace(String amount) {
+    return '+$amount kg / semana de masa magra';
+  }
+
+  @override
+  String get planRevealDailyCalories => 'OBJETIVO CALÓRICO DIARIO';
+
+  @override
+  String get planRevealPersonalizedBadge => 'Personalizado';
+
+  @override
+  String get planRevealKcalPerDay => 'kcal / día';
+
+  @override
+  String get planRevealDailyProtein => 'PROTEÍNA DIARIA';
+
+  @override
+  String get planRevealGramPerDay => 'g / día';
+
+  @override
+  String get planRevealHydration => 'HIDRATACIÓN';
+
+  @override
+  String get planRevealDailySteps => 'PASOS DIARIOS';
+
+  @override
+  String get planRevealStepsPerDay => 'pasos / día';
+
+  @override
+  String get planRevealDietProtocol => 'PROTOCOLO DIETÉTICO';
+
+  @override
+  String get planRevealOptimalMatch => 'Opción óptima';
+
+  @override
+  String get planRevealBalancedPlanDefault => 'Plan de déficit equilibrado';
+
+  @override
+  String get onboardingNotificationsTitle => 'No te pierdas ningún objetivo';
+
+  @override
+  String get onboardingNotificationsSubtitle =>
+      'Recordatorios oportunos para mantener tu nutrición, agua y entrenamientos al día.';
+
+  @override
+  String get notificationsHeroTitle =>
+      'Diseñado para la constancia, no para molestar';
+
+  @override
+  String get notificationsHeroBody =>
+      'Los usuarios con recordatorios activos tienen 3.4 veces más probabilidades de lograr su peso objetivo.';
+
+  @override
+  String get notificationsMealLoggingTitle => 'Registro de comidas';
+
+  @override
+  String get notificationsMealLoggingDesc =>
+      'Avisos puntuales para almuerzo y cena';
+
+  @override
+  String get notificationsWorkoutSessionTitle =>
+      'Sesión diaria de entrenamiento';
+
+  @override
+  String get notificationsWorkoutSessionDesc =>
+      'Mantén el compromiso con tu rutina';
+
+  @override
+  String get notificationsWeeklyReviewTitle => 'Revisión semanal de progreso';
+
+  @override
+  String get notificationsWeeklyReviewDesc =>
+      'Pesaje dominical y resumen de ajustes semanales';
+
+  @override
+  String get notificationsEnableButton => 'Activar recordatorios';
+
+  @override
+  String get notificationsMaybeLater => 'Quizás más tarde';
+
+  @override
+  String get onboardingPaywallTitle => 'Acelera tus resultados';
+
+  @override
+  String get onboardingPaywallSubtitle =>
+      'Escaneos ilimitados, generación de entrenamientos por IA y analítica avanzada.';
+
+  @override
+  String get paywallProBadge => 'VIREO PRO';
+
+  @override
+  String get paywallFeatureUnlimitedScansDesc =>
+      'Sin preocuparte por límites o cuotas diarias';
+
+  @override
+  String get paywallFeatureSmartSub =>
+      'Sustituciones inteligentes con IA y preparación de comidas';
+
+  @override
+  String get paywallFeatureSmartSubDesc =>
+      'Sustitutos adaptados a tus macros al instante';
+
+  @override
+  String get paywallFeatureAdaptiveSplits =>
+      'Rutinas de entrenamiento adaptativas a medida';
+
+  @override
+  String get paywallFeatureAdaptiveSplitsDesc =>
+      'Sobrecarga progresiva para gimnasio o casa';
+
+  @override
+  String get paywallPlanAnnualPrice => '4,99 \$ / mes';
+
+  @override
+  String get paywallPlanAnnualSubtext => 'Facturado anualmente (Ahorra 50%)';
+
+  @override
+  String get paywallBadgeBestValue => 'MEJOR VALOR';
+
+  @override
+  String get paywallPlanMonthlyPrice => '9,99 \$ / mes';
+
+  @override
+  String get paywallPlanMonthlySubtext => 'Facturado mensualmente';
+
+  @override
+  String get paywallStartTrialCta => 'Prueba gratis de 7 días';
+
+  @override
+  String get paywallContinueFreeTier => 'Continuar con la versión gratuita';
+
+  @override
+  String get appInitErrorFailed =>
+      'Error al inicializar los servicios de la aplicación.';
+
+  @override
+  String get appInitRetry => 'Reintentar';
+
+  @override
+  String get privacyExportTitle => 'Exportar mis datos';
+
+  @override
+  String get privacyExportReady =>
+      'Tu paquete de datos está listo en formatos JSON y CSV:';
+
+  @override
+  String get weeklyProgressShareFailed =>
+      'No se pudo generar la imagen para compartir';
+
+  @override
+  String get adaptiveCalorieCurrentTarget => 'Objetivo actual';
+
+  @override
+  String get adaptiveCalorieSuggestedTarget => 'Objetivo sugerido';
+
+  @override
+  String get adaptiveCalorieWindowSpan => 'Ventana de tiempo';
+
+  @override
+  String get adaptiveCalorieFoodLogsCount => 'Días con comidas registradas';
+
+  @override
+  String get adaptiveCalorieWeighInsCount => 'Veces pesado';
+
+  @override
+  String get adaptiveCalorieAverageIntake => 'Ingesta promedio';
+
+  @override
+  String get adaptiveCalorieTrendWeightChange => 'Tendencia de peso';
+
+  @override
+  String get adaptiveCalorieEstimatedMaintenance => 'Mantenimiento estimado';
+
+  @override
+  String get adaptiveCalorieWeeklyChangeCap => 'Límite de cambio semanal';
+
+  @override
+  String get adaptiveCalorieSafetyFloorApplied =>
+      'Mínimo de seguridad aplicado';
+
+  @override
+  String get chartSevenDayTrend => 'Tendencia 7 días';
+
+  @override
+  String get chartThirtyDayTrend => 'Tendencia 30 días';
+
+  @override
+  String get chartRawDot => 'Dato puntual';
+
+  @override
+  String get chartTrendLine => 'Línea de tendencia';
+
+  @override
+  String get chartGoalLine => 'Línea de objetivo';
 }

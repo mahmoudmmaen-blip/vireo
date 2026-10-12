@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/app_init_provider.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/widgets/app_loading.dart';
@@ -96,16 +97,17 @@ class _InitError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Text('Failed to initialize app services.'),
+            Text(l10n.appInitErrorFailed),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: onRetry,
-              child: const Text('Retry'),
+              child: Text(l10n.appInitRetry),
             ),
           ],
         ),

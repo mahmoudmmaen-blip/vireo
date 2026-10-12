@@ -98,13 +98,17 @@
   "authResendIn": "إعادة الإرسال بعد {seconds} ث",
   "@authResendIn": {
     "placeholders": {
-      "seconds": {"type": "int"}
+      "seconds": {
+        "type": "int"
+      }
     }
   },
   "authOtpSentTo": "بعتنا كود من 6 أرقام على {email}",
   "@authOtpSentTo": {
     "placeholders": {
-      "email": {"type": "String"}
+      "email": {
+        "type": "String"
+      }
     }
   },
   "authBack": "رجوع",
@@ -348,7 +352,7 @@
   "paywallPlanMonthly": "شهري",
   "paywallPlanAnnual": "سنوي",
   "paywallPlanLifetime": "مدى الحياة",
-  "paywallFeatureUnlimitedScans": "مسح تلاجة غير محدود",
+  "paywallFeatureUnlimitedScans": "مسح غير محدود للأطباق",
   "paywallFeatureFullProgram": "مراحل برنامج كاملة وتمارين متقدمة",
   "paywallFeatureCloudSync": "مزامنة سحابية بين الأجهزة",
   "paywallFeatureProgressAnalytics": "تحليلات تقدم متقدمة",
@@ -873,7 +877,11 @@
   "aiCoachChipDessert": "بديل صحي للحلويات",
   "waterAddOneGlass": "+1 كوباية ({ml} مل)",
   "@waterAddOneGlass": {
-    "placeholders": {"ml": {"type": "int"}}
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
   },
   "waterLongPressHint": "اضغط مطوّل لكميات تانية",
   "waterQuickAmountsTitle": "كميات سريعة",
@@ -1168,15 +1176,21 @@
   "notificationsQuietHoursSubtitle": "من {start} إلى {end} — بدون أي إزعاج",
   "@notificationsQuietHoursSubtitle": {
     "placeholders": {
-      "start": { "type": "String" },
-      "end": { "type": "String" }
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
     }
   },
   "notificationsMaxDailyTitle": "الحد الأقصى اليومي",
   "notificationsMaxDailySubtitle": "بحد أقصى {count} تذكيرات يومياً",
   "@notificationsMaxDailySubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "notificationsPermissionDialogTitle": "خلّيك في مسارك مع تذكيرات Vireo",
@@ -1378,15 +1392,23 @@
   "dietQuizHealthStep": "الصحة {current} من {total}",
   "@dietQuizHealthStep": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "dietQuizPrefStep": "التفضيلات {current} من {total}",
   "@dietQuizPrefStep": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "dietPrefBreadRice": "بتحب العيش والرز؟",
@@ -1401,8 +1423,12 @@
   "dietCardMacros": "{kcal} سعرة · {protein}جم بروتين",
   "@dietCardMacros": {
     "placeholders": {
-      "kcal": {"type": "int"},
-      "protein": {"type": "int"}
+      "kcal": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      }
     }
   },
   "dietHowItWorks": "إزاي بيشتغل",
@@ -1427,32 +1453,42 @@
   "dietCarbsMax": "حد الكارب: {grams} جم",
   "@dietCarbsMax": {
     "placeholders": {
-      "grams": {"type": "int"}
+      "grams": {
+        "type": "int"
+      }
     }
   },
   "dietWeeklyLoss": "خسارة أسبوعية متوقعة ≈ {kg} كجم",
   "@dietWeeklyLoss": {
     "placeholders": {
-      "kg": {"type": "String"}
+      "kg": {
+        "type": "String"
+      }
     }
   },
   "dietChoosePlanCard": "اختار خطتك الغذائية",
   "dietFastingLeft": "صيام — باقي {time}",
   "@dietFastingLeft": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "dietEatingWindowLeft": "وقت الأكل — يقفل بعد {time}",
   "@dietEatingWindowLeft": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "dietWindowStartsAt": "وقت الأكل يبدأ الساعة {hour}:00",
   "@dietWindowStartsAt": {
     "placeholders": {
-      "hour": {"type": "int"}
+      "hour": {
+        "type": "int"
+      }
     }
   },
   "dietEditWindow": "عدّل ساعة البداية",
@@ -1460,17 +1496,27 @@
   "dietCarbsLimitProgress": "{current} / {max} جم كارب",
   "@dietCarbsLimitProgress": {
     "placeholders": {
-      "current": {"type": "int"},
-      "max": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
     }
   },
   "todayPlanTitle": "خطة اليوم",
   "todayPlanProgressSummary": "أنجزت {percent}% من يومك · {done}/{total}",
   "@todayPlanProgressSummary": {
     "placeholders": {
-      "percent": {"type": "int"},
-      "done": {"type": "int"},
-      "total": {"type": "int"}
+      "percent": {
+        "type": "int"
+      },
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "todayPlanNow": "الآن",
@@ -1478,33 +1524,51 @@
   "todayPlanWaterReminder": "تذكير ماء {index} من {total}",
   "@todayPlanWaterReminder": {
     "placeholders": {
-      "index": {"type": "int"},
-      "total": {"type": "int"}
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "todayPlanWaterGoalLine": "الهدف اليومي {ml} مل",
   "@todayPlanWaterGoalLine": {
     "placeholders": {
-      "ml": {"type": "int"}
+      "ml": {
+        "type": "int"
+      }
     }
   },
   "todayPlanFastingOpen": "بداية نافذة الأكل",
   "todayPlanFastingOpenSubtitle": "نافذة أكل {hours} ساعة",
   "@todayPlanFastingOpenSubtitle": {
-    "placeholders": {"hours": {"type": "int"}}
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
   },
   "todayPlanFastingClose": "نهاية نافذة الأكل",
   "todayPlanFastingCloseSubtitle": "صيام {hours} ساعة",
   "@todayPlanFastingCloseSubtitle": {
-    "placeholders": {"hours": {"type": "int"}}
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
   },
   "todayPlanWorkout": "تمرين اليوم",
   "todayPlanSteps": "هدف الخطوات",
   "todayPlanStepsProgress": "{current} / {goal} خطوة",
   "@todayPlanStepsProgress": {
     "placeholders": {
-      "current": {"type": "int"},
-      "goal": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
     }
   },
   "todayPlanVitalitySleepSubtitle": "سجّل 7.5+ ساعات في Vitality",
@@ -1520,7 +1584,11 @@
   "todayPlanAiSuggestionSubtitle": "نصيحة مخصصة لليوم",
   "waterGoalBasedOnWeight": "حسب وزنك ({kg} كجم)",
   "@waterGoalBasedOnWeight": {
-    "placeholders": {"kg": {"type": "int"}}
+    "placeholders": {
+      "kg": {
+        "type": "int"
+      }
+    }
   },
   "authErrorEmailRateLimit": "رسائل كثيرة، جرّب بعد ساعة",
   "profileMyBody": "جسمي",
@@ -1529,7 +1597,11 @@
   "profilePlanFree": "مجاني",
   "profileMemberSince": "عضو منذ {date}",
   "@profileMemberSince": {
-    "placeholders": {"date": {"type": "String"}}
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "profileSaveProgressCta": "احفظ تقدّمك",
   "profileMyPlanSection": "خطتي",
@@ -1559,17 +1631,29 @@
   "outdoorPaceMinKm": "{min}:{sec} / كم",
   "@outdoorPaceMinKm": {
     "placeholders": {
-      "min": {"type": "int"},
-      "sec": {"type": "int"}
+      "min": {
+        "type": "int"
+      },
+      "sec": {
+        "type": "int"
+      }
     }
   },
   "outdoorSpeedKmh": "{speed} كم/س",
   "@outdoorSpeedKmh": {
-    "placeholders": {"speed": {"type": "String"}}
+    "placeholders": {
+      "speed": {
+        "type": "String"
+      }
+    }
   },
   "outdoorCalories": "{kcal} سعرة محروقة",
   "@outdoorCalories": {
-    "placeholders": {"kcal": {"type": "int"}}
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
   },
   "outdoorPause": "إيقاف مؤقت",
   "outdoorResume": "استئناف",
@@ -1586,7 +1670,11 @@
   "outdoorSplitsTitle": "Splits لكل كيلومتر",
   "outdoorSplitKm": "كم {km}",
   "@outdoorSplitKm": {
-    "placeholders": {"km": {"type": "int"}}
+    "placeholders": {
+      "km": {
+        "type": "int"
+      }
+    }
   },
   "uxQuickOutdoor": "تمرين خارجي",
   "uxQuickOutdoorSub": "مشي، جري، أو دراجة GPS",
@@ -1610,7 +1698,11 @@
   "healthManualSleepHint": "لا بيانات نوم من الساعة — اضغط للتسجيل",
   "healthSleepScore": "درجة النوم {score}",
   "@healthSleepScore": {
-    "placeholders": {"score": {"type": "int"}}
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
   },
   "healthBedtime": "وقت النوم",
   "healthWakeTime": "وقت الاستيقاظ",
@@ -1622,8 +1714,12 @@
   "healthHrvDetail": "اليوم {today} ms مقابل baseline {baseline} ms",
   "@healthHrvDetail": {
     "placeholders": {
-      "today": {"type": "int"},
-      "baseline": {"type": "int"}
+      "today": {
+        "type": "int"
+      },
+      "baseline": {
+        "type": "int"
+      }
     }
   },
   "breathingHubTitle": "التنفس",
@@ -1634,7 +1730,11 @@
   "breathing478Subtitle": "نمط مهدئ قبل النوم",
   "breathingMinutes": "{min} د",
   "@breathingMinutes": {
-    "placeholders": {"min": {"type": "int"}}
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
   },
   "breathingSessionTitle": "جلسة تنفس",
   "breathingInhale": "شهيق",
@@ -1646,7 +1746,11 @@
   "mealReviewSlot": "الوجبة",
   "mealReviewRemaining": "المتبقي من الميزانية: {kcal} سعرة",
   "@mealReviewRemaining": {
-    "placeholders": {"kcal": {"type": "int"}}
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
   },
   "mealReviewEstimated": "تقديري",
   "mealReviewCheckAmount": "راجع الكمية",
@@ -1697,11 +1801,19 @@
   "inbodySyncedLabel": "متزامن من Health Connect",
   "inbodySyncResult": "اتستورد {count} قراءة من Health Connect",
   "@inbodySyncResult": {
-    "placeholders": {"count": {"type": "int"}}
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "inbodyFromDateLabel": "من InBody بتاعك يوم {date}",
   "@inbodyFromDateLabel": {
-    "placeholders": {"date": {"type": "String"}}
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "uxQuickInbody": "تقرير InBody",
   "uxQuickInbodySub": "امسح ورقة النتيجة",
@@ -1733,7 +1845,9 @@
   "detectedActivity": "تم التعرف: {activity}",
   "@detectedActivity": {
     "placeholders": {
-      "activity": {"type": "String"}
+      "activity": {
+        "type": "String"
+      }
     }
   },
   "manualOverride": "تعديل",
@@ -1750,5 +1864,136 @@
   "fatEquivalentThisWeek": "≈ {amount} دهون هذا الأسبوع",
   "fatEquivalentInfoTitle": "معادل الدهون",
   "fatEquivalentInfoBody": "الوزن على الميزان يتأثر أيضاً بالماء والجليكوجين، لذا قد يتغير وزنك اليومي بشكل مختلف. هذا هو المكافئ الحسابي لطاقة الدهون.",
-  "fatEquivalentInfoDismiss": "فهمت"
+  "fatEquivalentInfoDismiss": "فهمت",
+  "legalTerms": "الشروط",
+  "legalPrivacy": "الخصوصية",
+  "legalMedicalDisclaimer": "إخلاء المسؤولية الطبية",
+  "welcomeTagline": "تغذية ذكية ولياقة متطورة مصممة خصيصاً للرجال.",
+  "welcomePillarScannerTitle": "المسح الفوري للأطباق",
+  "welcomePillarScannerDesc": "صوّر وجبتك، واعرف السعرات والبروتين بدقة في ثانيتين",
+  "welcomePillarPlanTitle": "خطة يومية مخصصة",
+  "welcomePillarPlanDesc": "أهداف علمية مدروسة تناسب طبيعة جسمك وهدفك",
+  "welcomePillarSafetyTitle": "تغذية آمنة سريرياً",
+  "welcomePillarSafetyDesc": "إرشادات تحمي عملية الأيض وصحتك العامة",
+  "onboardingGoalTitle": "ما هو هدفك الأساسي؟",
+  "onboardingGoalSubtitle": "اختر الأهم بالنسبة لك، وسنصمم أهدافك اليومية بناءً عليه.",
+  "goalLoseFatTitle": "خسارة الدهون",
+  "goalLoseFatSubtitle": "حرق الدهون العنيدة مع الحفاظ الكامل على الكتلة العضلية",
+  "goalBuildMuscleTitle": "بناء العضلات",
+  "goalBuildMuscleSubtitle": "تحفيز الضخامة العضلية الصافية بتوزيع مثالي للبروتين وتدرج الأحمال",
+  "goalMoreEnergyTitle": "طاقة ونشاط أعلى",
+  "goalMoreEnergySubtitle": "التخلص من خمول منتصف اليوم ورفع مستوى التحمل والحيوية",
+  "goalAllOfAboveTitle": "كل ما سبق",
+  "goalAllOfAboveSubtitle": "إعادة تشكيل شاملة للجسم: خسارة الدهون، زيادة القوة، وطاقة مستمرة",
+  "onboardingBodyTitle": "بيانات جسمك",
+  "onboardingBodySubtitle": "البيانات الدقيقة تساعدنا في حساب معدل حرقك واحتياجاتك اليومية بدقة.",
+  "sexMale": "ذكر",
+  "sexFemale": "أنثى",
+  "unitMetric": "متري",
+  "unitImperial": "باوند",
+  "bodyMetricAge": "العمر",
+  "bodyMetricYears": "{age} سنة",
+  "selectAgeTitle": "اختر العمر",
+  "ageYearsSuffix": "{age} سنة",
+  "bodyMetricHeight": "الطول",
+  "selectHeightTitle": "اختر الطول",
+  "bodyMetricCurrentWeight": "الوزن الحالي",
+  "selectCurrentWeightTitle": "اختر الوزن الحالي",
+  "bodyMetricTargetWeight": "الوزن المستهدف",
+  "selectTargetWeightTitle": "اختر الوزن المستهدف",
+  "pickerDone": "تم",
+  "onboardingActivityTitle": "النشاط ومكان التدريب",
+  "onboardingActivitySubtitle": "نحسب معدل حرق السعرات ونقترح أفضل التمارين المناسبة لك.",
+  "dailyActivityLevelHeader": "مستوى النشاط اليومي",
+  "activitySedentaryTitle": "قليل الحركة / عمل مكتبي",
+  "activitySedentarySubtitle": "مشي يومي قليل، وظيفة مكتبية، أقل من 5,000 خطوة",
+  "activityModeratelyActiveTitle": "نشاط متوسط",
+  "activityModeratelyActiveSubtitle": "حركة منتظمة على مدار اليوم، 6,000 إلى 10,000 خطوة يومياً",
+  "activityVeryActiveTitle": "نشط جداً / عمل بدني",
+  "activityVeryActiveSubtitle": "حركة مستمرة أو أكثر من 12,000 خطوة يومياً",
+  "trainingPlaceHeader": "أين تخطط للتمرن؟",
+  "trainingPlaceGymTitle": "النادي الرياضي (الجيم)",
+  "trainingPlaceGymSubtitle": "توفر كامل للأوزان والبارات والأجهزة",
+  "trainingPlaceHomeTitle": "في المنزل",
+  "trainingPlaceHomeSubtitle": "بوزن الجسم، أحبال المقاومة، أو أوزان خفيفة",
+  "trainingPlaceWalkingTitle": "المشي",
+  "trainingPlaceWalkingSubtitle": "خطوات كارديو ومشي في الهواء الطلق",
+  "onboardingHealthSafetyTitle": "فحص السلامة الصحية",
+  "onboardingHealthSafetySubtitle": "حدد أي حالات تنطبق عليك ليصمم نظامنا خطة آمنة تماماً لصحتك.",
+  "healthSafetyNoneApply": "لا ينطبق عليّ أي مما سبق",
+  "healthSafetyOrSelect": "أو اختر ما ينطبق عليك",
+  "onboardingTryScanTitle": "جرّب المسح الفوري للوجبات",
+  "onboardingTryScanSubtitle": "شاهد كيف يحلل ڤيريو الوجبات الحقيقية إلى سعرات وعناصر غذائية في لحظات.",
+  "tryScanSamplePlateTitle": "نموذج وجبة غنية بالبروتين",
+  "tryScanSamplePlateDesc": "دجاج مشوي، أرز أبيض وسلطة خضراء",
+  "tryScanAnalyzing": "جاري تحليل الوجبة...",
+  "tryScanSampleCta": "امسح الطبق النموذجي (تجربة فورية)",
+  "tryScanOrTestLive": "أو جرّب على طبقك الحقيقي",
+  "tryScanOwnMealTitle": "صوّر وجبتك الحالية",
+  "tryScanOwnMealDesc": "التقط صورة حية للطبق الذي أمامك",
+  "onboardingPlanRevealTitle": "خطتك المصممة خصيصاً لك",
+  "onboardingPlanRevealSubtitle": "مصممة وفقاً لمعدل حرقك وطبيعة جسمك وهدفك الرياضي.",
+  "planRevealStartPlan": "ابدأ خطتي",
+  "planRevealProjectedPace": "المعدل المتوقع",
+  "planRevealSteadyRecomp": "إعادة تشكيل متوازنة للجسم",
+  "planRevealFatLossPace": "نزول -{amount} كجم دهون أسبوعياً",
+  "planRevealLeanMassPace": "زيادة +{amount} كجم عضلات صافية أسبوعياً",
+  "planRevealDailyCalories": "هدف السعرات اليومي",
+  "planRevealPersonalizedBadge": "مخصص لك",
+  "planRevealKcalPerDay": "سعرة / يوم",
+  "planRevealDailyProtein": "البروتين اليومي",
+  "planRevealGramPerDay": "جم / يوم",
+  "planRevealHydration": "شرب الماء",
+  "planRevealDailySteps": "الخطوات اليومية",
+  "planRevealStepsPerDay": "خطوة / يوم",
+  "planRevealDietProtocol": "نظام التغذية",
+  "planRevealOptimalMatch": "الخطة الأنسب لك",
+  "planRevealBalancedPlanDefault": "خطة العجز المتوازن",
+  "onboardingNotificationsTitle": "لا تفوّت أهدافك اليومية",
+  "onboardingNotificationsSubtitle": "تنبيهات لطيفة تضمن التزامك بتسجيل الوجبات وشرب الماء ومواعيد التمرين.",
+  "notificationsHeroTitle": "مصممة للالتزام.. وليس للإزعاج",
+  "notificationsHeroBody": "المستخدمون الذين يفعّلون التنبيهات أكثر نجاحاً بـ 3.4 أضعاف في الوصول لوزنهم المثالي وبناء عادات مستدامة.",
+  "notificationsMealLoggingTitle": "تسجيل الوجبات والأطباق",
+  "notificationsMealLoggingDesc": "تذكير في أوقات الغداء والعشاء",
+  "notificationsWorkoutSessionTitle": "التمرين اليومي",
+  "notificationsWorkoutSessionDesc": "حافظ على التزامك بجدول تمارينك",
+  "notificationsWeeklyReviewTitle": "المراجعة الأسبوعية للتقدم",
+  "notificationsWeeklyReviewDesc": "قياس الوزن أسبوعياً وملخص التعديلات المقترحة",
+  "notificationsEnableButton": "تفعيل التنبيهات",
+  "notificationsMaybeLater": "ربما لاحقاً",
+  "onboardingPaywallTitle": "سرّع تحقيق نتائجك",
+  "onboardingPaywallSubtitle": "امسح الأطباق بلا حدود، واحصل على جداول تمارين ذكية وتحليلات متقدمة.",
+  "paywallProBadge": "ڤيريو برو",
+  "paywallFeatureUnlimitedScansDesc": "بدون أي حدود أو قيود يومية على عدد الوجبات",
+  "paywallFeatureSmartSub": "بدائل الوجبات الذكية بالذكاء الاصطناعي",
+  "paywallFeatureSmartSubDesc": "بدائل صحية ومناسبة للماكروز للأطباق المحلية",
+  "paywallFeatureAdaptiveSplits": "جداول تمارين ذكية متكيفة",
+  "paywallFeatureAdaptiveSplitsDesc": "تتبع زيادة الأوزان والأحمال للجيم أو المنزل",
+  "paywallPlanAnnualPrice": "$4.99 / شهرياً",
+  "paywallPlanAnnualSubtext": "اشتراك سنوي (وفّر 50%)",
+  "paywallBadgeBestValue": "أفضل قيمة",
+  "paywallPlanMonthlyPrice": "$9.99 / شهرياً",
+  "paywallPlanMonthlySubtext": "اشتراك شهري",
+  "paywallStartTrialCta": "ابدأ تجربة مجانية لمدة 7 أيام",
+  "paywallContinueFreeTier": "المتابعة بالباقة المجانية",
+  "appInitErrorFailed": "فشل في تهيئة خدمات التطبيق.",
+  "appInitRetry": "إعادة المحاولة",
+  "privacyExportTitle": "تصدير بياناتي",
+  "privacyExportReady": "حزمة بياناتك جاهزة بصيغتي JSON و CSV:",
+  "weeklyProgressShareFailed": "تعذر إنشاء صورة المشاركة",
+  "adaptiveCalorieCurrentTarget": "الهدف الحالي",
+  "adaptiveCalorieSuggestedTarget": "الهدف المقترح",
+  "adaptiveCalorieWindowSpan": "المدة الزمنية",
+  "adaptiveCalorieFoodLogsCount": "عدد أيام تسجيل الطعام",
+  "adaptiveCalorieWeighInsCount": "عدد مرات قياس الوزن",
+  "adaptiveCalorieAverageIntake": "متوسط السعرات المتناولة",
+  "adaptiveCalorieTrendWeightChange": "تغير اتجاه الوزن",
+  "adaptiveCalorieEstimatedMaintenance": "سعرات الثبات التقديرية",
+  "adaptiveCalorieWeeklyChangeCap": "الحد الأقصى للتغير الأسبوعي",
+  "adaptiveCalorieSafetyFloorApplied": "تطبيق الحد الأدنى الآمن",
+  "chartSevenDayTrend": "اتجاه 7 أيام",
+  "chartThirtyDayTrend": "اتجاه 30 يوماً",
+  "chartRawDot": "قياس فردي",
+  "chartTrendLine": "خط الاتجاه",
+  "chartGoalLine": "خط الهدف"
 }

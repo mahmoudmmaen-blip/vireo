@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/analytics_service.dart';
 import 'package:vireo/core/services/revenue_cat_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
@@ -90,14 +91,15 @@ class _StepPaywallScreenState extends ConsumerState<StepPaywallScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final state = ref.watch(onboardingProvider);
 
     return OnboardingStepShell(
       stepIndex: 8,
       stepCount: OnboardingUiState.stepCount,
-      title: 'Accelerate Your Results',
-      subtitle: 'Unlock unlimited plate scans, full AI workout generation, and advanced analytics.',
+      title: l10n.onboardingPaywallTitle,
+      subtitle: l10n.onboardingPaywallSubtitle,
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onSkip: _skip,
       child: Column(
@@ -120,7 +122,7 @@ class _StepPaywallScreenState extends ConsumerState<StepPaywallScreen> {
                     Icon(Icons.workspace_premium_rounded, size: 18, color: colors.gold),
                     const SizedBox(width: 6),
                     Text(
-                      'VIREO PRO',
+                      l10n.paywallProBadge,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w800,
@@ -149,20 +151,20 @@ class _StepPaywallScreenState extends ConsumerState<StepPaywallScreen> {
                 children: [
                   _FeatureRow(
                     icon: Icons.all_inclusive_rounded,
-                    title: 'Unlimited Instant Plate Scans',
-                    subtitle: 'Never worry about daily limits or quotas',
+                    title: l10n.paywallFeatureUnlimitedScans,
+                    subtitle: l10n.paywallFeatureUnlimitedScansDesc,
                   ),
                   const Divider(height: 18),
                   _FeatureRow(
                     icon: Icons.auto_awesome_rounded,
-                    title: 'AI Smart Substitution & Meal Prep',
-                    subtitle: 'Instant macro-friendly swaps for Egyptian dishes',
+                    title: l10n.paywallFeatureSmartSub,
+                    subtitle: l10n.paywallFeatureSmartSubDesc,
                   ),
                   const Divider(height: 18),
                   _FeatureRow(
                     icon: Icons.fitness_center_rounded,
-                    title: 'Custom Adaptive Workout Splits',
-                    subtitle: 'Progressive overload tracking for gym or home',
+                    title: l10n.paywallFeatureAdaptiveSplits,
+                    subtitle: l10n.paywallFeatureAdaptiveSplitsDesc,
                   ),
                 ],
               ),
@@ -178,10 +180,10 @@ class _StepPaywallScreenState extends ConsumerState<StepPaywallScreen> {
                 // Annual (Best Value)
                 Expanded(
                   child: _PlanOptionCard(
-                    title: 'Annual',
+                    title: l10n.paywallPlanAnnual,
                     price: '\$4.99 / mo',
-                    subtext: 'Billed yearly (Save 50%)',
-                    badge: 'BEST VALUE',
+                    subtext: l10n.paywallPlanAnnualSubtext,
+                    badge: l10n.paywallBadgeBestValue,
                     isSelected: _selectedPlan == SubscriptionPlanId.annual,
                     onTap: () => setState(() => _selectedPlan = SubscriptionPlanId.annual),
                   ),
@@ -190,9 +192,9 @@ class _StepPaywallScreenState extends ConsumerState<StepPaywallScreen> {
                 // Monthly
                 Expanded(
                   child: _PlanOptionCard(
-                    title: 'Monthly',
+                    title: l10n.paywallPlanMonthly,
                     price: '\$9.99 / mo',
-                    subtext: 'Billed monthly',
+                    subtext: l10n.paywallPlanMonthlySubtext,
                     isSelected: _selectedPlan == SubscriptionPlanId.monthly,
                     onTap: () => setState(() => _selectedPlan = SubscriptionPlanId.monthly),
                   ),
@@ -230,9 +232,9 @@ class _StepPaywallScreenState extends ConsumerState<StepPaywallScreen> {
                           color: Colors.white,
                         ),
                       )
-                    : const Text(
-                        'Start 7-Day Free Trial',
-                        style: TextStyle(
+                    : Text(
+                        l10n.paywallStartTrialCta,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16.5,
                           fontWeight: FontWeight.w800,
@@ -249,7 +251,7 @@ class _StepPaywallScreenState extends ConsumerState<StepPaywallScreen> {
             child: TextButton(
               onPressed: state.isSubmitting ? null : _skip,
               child: Text(
-                'Continue with Free Tier',
+                l10n.paywallContinueFreeTier,
                 style: TextStyle(
                   color: colors.textMute,
                   fontWeight: FontWeight.w600,

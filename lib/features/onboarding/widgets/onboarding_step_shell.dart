@@ -69,7 +69,7 @@ class OnboardingStepShell extends StatelessWidget {
                   children: [
                     if (onBack != null)
                       IconButton(
-                        tooltip: 'Back',
+                        tooltip: l10n.authBack,
                         onPressed: onBack,
                         icon: const Icon(Icons.arrow_back),
                       )

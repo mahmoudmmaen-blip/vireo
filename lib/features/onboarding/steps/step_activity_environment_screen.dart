@@ -65,20 +65,20 @@ class _StepActivityEnvironmentScreenState
     final activityLevels = [
       (
         level: ActivityLevel.sedentary,
-        title: 'Sedentary / Desk Work',
-        subtitle: 'Minimal daily walking, desk job, under 5,000 steps',
+        title: l10n.activitySedentaryTitle,
+        subtitle: l10n.activitySedentarySubtitle,
         icon: Icons.chair_outlined,
       ),
       (
         level: ActivityLevel.moderatelyActive,
-        title: 'Moderately Active',
-        subtitle: 'On your feet regularly, 6,000–10,000 daily steps',
+        title: l10n.activityModeratelyActiveTitle,
+        subtitle: l10n.activityModeratelyActiveSubtitle,
         icon: Icons.directions_walk_rounded,
       ),
       (
         level: ActivityLevel.veryActive,
-        title: 'Very Active / Physical Job',
-        subtitle: 'Constantly on the move or 12,000+ daily steps',
+        title: l10n.activityVeryActiveTitle,
+        subtitle: l10n.activityVeryActiveSubtitle,
         icon: Icons.directions_run_rounded,
       ),
     ];
@@ -86,20 +86,20 @@ class _StepActivityEnvironmentScreenState
     final trainingPlaces = [
       (
         env: TrainingEnvironment.gymFull,
-        title: 'Gym',
-        subtitle: 'Full access to barbells, machines & dumbbells',
+        title: l10n.trainingPlaceGymTitle,
+        subtitle: l10n.trainingPlaceGymSubtitle,
         icon: Icons.fitness_center_rounded,
       ),
       (
         env: TrainingEnvironment.homeLightEquipment,
-        title: 'Home',
-        subtitle: 'Bodyweight, resistance bands, or light dumbbells',
+        title: l10n.trainingPlaceHomeTitle,
+        subtitle: l10n.trainingPlaceHomeSubtitle,
         icon: Icons.home_rounded,
       ),
       (
         env: TrainingEnvironment.walkingOnly,
-        title: 'Walking',
-        subtitle: 'Cardio steps & outdoor walking routines',
+        title: l10n.trainingPlaceWalkingTitle,
+        subtitle: l10n.trainingPlaceWalkingSubtitle,
         icon: Icons.nature_people_rounded,
       ),
     ];
@@ -107,8 +107,8 @@ class _StepActivityEnvironmentScreenState
     return OnboardingStepShell(
       stepIndex: 3,
       stepCount: OnboardingUiState.stepCount,
-      title: 'Activity & Training Place',
-      subtitle: 'We calibrate daily calorie output and recommend optimal workouts.',
+      title: l10n.onboardingActivityTitle,
+      subtitle: l10n.onboardingActivitySubtitle,
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onSkip: _syncAndContinue,
       onContinue: _syncAndContinue,
@@ -120,7 +120,7 @@ class _StepActivityEnvironmentScreenState
           FadeSlideIn(
             index: 0,
             child: Text(
-              'DAILY ACTIVITY LEVEL',
+              l10n.dailyActivityLevelHeader,
               style: VType.overline(context),
             ),
           ),
@@ -152,7 +152,7 @@ class _StepActivityEnvironmentScreenState
           FadeSlideIn(
             index: 4,
             child: Text(
-              'WHERE DO YOU PLAN TO TRAIN?',
+              l10n.trainingPlaceHeader,
               style: VType.overline(context),
             ),
           ),

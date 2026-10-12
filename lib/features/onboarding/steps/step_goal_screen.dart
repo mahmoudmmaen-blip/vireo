@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/analytics_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
@@ -41,35 +42,36 @@ class _StepGoalScreenState extends ConsumerState<StepGoalScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final state = ref.watch(onboardingProvider);
     final draft = state.draft;
 
     final goals = [
       (
         goal: FitnessGoal.weightLoss,
-        title: 'Lose Fat',
-        subtitle: 'Torch stubborn fat while maintaining hard-earned muscle mass',
+        title: l10n.goalLoseFatTitle,
+        subtitle: l10n.goalLoseFatSubtitle,
         icon: Icons.local_fire_department_rounded,
         color: const Color(0xFFFF5252),
       ),
       (
         goal: FitnessGoal.muscleGain,
-        title: 'Build Muscle',
-        subtitle: 'Maximize lean hypertrophy with optimized protein & progressive overload',
+        title: l10n.goalBuildMuscleTitle,
+        subtitle: l10n.goalBuildMuscleSubtitle,
         icon: Icons.fitness_center_rounded,
         color: VMacro.protein,
       ),
       (
         goal: FitnessGoal.generalVitality,
-        title: 'More Energy',
-        subtitle: 'Eliminate mid-day crashes and elevate everyday stamina & vitality',
+        title: l10n.goalMoreEnergyTitle,
+        subtitle: l10n.goalMoreEnergySubtitle,
         icon: Icons.bolt_rounded,
         color: const Color(0xFFF59E0B),
       ),
       (
         goal: FitnessGoal.allOfAbove,
-        title: 'All of the Above',
-        subtitle: 'Total body recomposition: drop body fat, gain strength, and feel relentless',
+        title: l10n.goalAllOfAboveTitle,
+        subtitle: l10n.goalAllOfAboveSubtitle,
         icon: Icons.all_inclusive_rounded,
         color: colorsOf(context).ember,
       ),
@@ -78,8 +80,8 @@ class _StepGoalScreenState extends ConsumerState<StepGoalScreen> {
     return OnboardingStepShell(
       stepIndex: 1,
       stepCount: OnboardingUiState.stepCount,
-      title: 'What is your primary focus?',
-      subtitle: 'Pick what matters most. We will engineer your daily targets around this.',
+      title: l10n.onboardingGoalTitle,
+      subtitle: l10n.onboardingGoalSubtitle,
       onBack: () => ref.read(onboardingProvider.notifier).previousStep(),
       onSkip: () {
         AnalyticsService.onboardingStepCompleted(
