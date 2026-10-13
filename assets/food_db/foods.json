@@ -35,7 +35,21 @@
       "source": {
         "name": "USDA FoodData Central",
         "fdc_id": 790085
-      }
+      },
+      "household_units": [
+        {
+          "unit_id": "baladi_loaf",
+          "grams": 90,
+          "label_ar": "رغيف بلدي",
+          "label_en": "Baladi loaf"
+        },
+        {
+          "unit_id": "half_baladi_loaf",
+          "grams": 45,
+          "label_ar": "نص رغيف",
+          "label_en": "1/2 Baladi loaf"
+        }
+      ]
     },
     {
       "id": "pita_bread",
@@ -98,7 +112,33 @@
       "source": {
         "name": "USDA FoodData Central",
         "fdc_id": 168878
-      }
+      },
+      "household_units": [
+        {
+          "unit_id": "cup",
+          "grams": 160,
+          "label_ar": "كوب رز",
+          "label_en": "Cup cooked rice"
+        },
+        {
+          "unit_id": "half_cup",
+          "grams": 80,
+          "label_ar": "نص كوب",
+          "label_en": "1/2 Cup"
+        },
+        {
+          "unit_id": "fist",
+          "grams": 160,
+          "label_ar": "قد قبضة إيدك",
+          "label_en": "Fist portion"
+        },
+        {
+          "unit_id": "tbsp",
+          "grams": 25,
+          "label_ar": "ملعقة رز",
+          "label_en": "1 Tbsp"
+        }
+      ]
     },
     {
       "id": "brown_rice_cooked",
@@ -546,7 +586,15 @@
       "source": {
         "name": "USDA FoodData Central",
         "fdc_id": 173424
-      }
+      },
+      "household_units": [
+        {
+          "unit_id": "piece",
+          "grams": 50,
+          "label_ar": "بيضة واحدة",
+          "label_en": "1 Egg"
+        }
+      ]
     },
     {
       "id": "egg_fried",
@@ -662,7 +710,21 @@
       "source": {
         "name": "USDA FoodData Central",
         "fdc_id": 171078
-      }
+      },
+      "household_units": [
+        {
+          "unit_id": "palm",
+          "grams": 110,
+          "label_ar": "قد كف إيدك",
+          "label_en": "Palm size"
+        },
+        {
+          "unit_id": "piece",
+          "grams": 180,
+          "label_ar": "صدر كامل",
+          "label_en": "Whole breast"
+        }
+      ]
     },
     {
       "id": "chicken_thigh_cooked",

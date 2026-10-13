@@ -10,6 +10,7 @@ import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/home/providers/daily_score_provider.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/insights/domain/energy_projection.dart';
+import 'package:vireo/features/insights/widgets/next_meal_suggestion_card.dart';
 import 'package:vireo/features/measurements/domain/body_composition_report.dart';
 import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/measurements/screens/body_composition_screen.dart';
@@ -107,6 +108,15 @@ class ScoreInsightsScreen extends ConsumerWidget {
                     projection: projection,
                     l10n: l10n,
                     colors: colors,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // ── Next Meal Suggestions Card ("اقتراح لوجبتك الجاية") ──
+                  NextMealSuggestionCard(
+                    remainingKcal: calorieGoal.calories - nutrition.eatenKcal,
+                    remainingProtein: (nutrition.proteinTarget - nutrition.proteinG).clamp(0.0, 500.0),
+                    remainingCarbs: (nutrition.carbsTarget - nutrition.carbsG).clamp(0.0, 500.0),
+                    remainingFat: (nutrition.fatTarget - nutrition.fatG).clamp(0.0, 500.0),
                   ),
                   const SizedBox(height: 16),
 

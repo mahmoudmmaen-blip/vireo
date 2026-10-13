@@ -6,6 +6,7 @@ import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
+import 'package:vireo/features/subscription/feature_gates.dart';
 
 /// Full-width meal capture card ("سجّل وجبتك") placed right below the Steps hero card.
 class MealCaptureHeroCard extends ConsumerWidget {
@@ -97,6 +98,26 @@ class MealCaptureHeroCard extends ConsumerWidget {
                         ],
                       ),
                     ),
+                    if (!ref.watch(isProUserProvider)) ...[
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.22),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white.withValues(alpha: 0.4)),
+                        ),
+                        child: Text(
+                          isArabic
+                              ? 'فاضلك ${FeatureGates.getDailyFreeMealScansAllowed()} تحليلات النهارده'
+                              : '${FeatureGates.getDailyFreeMealScansAllowed()} free scans left today',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
                 const SizedBox(height: 14),

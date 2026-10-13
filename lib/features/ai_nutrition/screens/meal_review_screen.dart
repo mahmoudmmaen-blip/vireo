@@ -19,6 +19,9 @@ import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart
 import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
 import 'package:vireo/features/insights/domain/meal_advice.dart';
 import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
+import 'package:vireo/features/nutrition/domain/household_measures.dart';
+import 'package:vireo/features/nutrition/providers/cup_size_preference_provider.dart';
+import 'package:vireo/features/nutrition/widgets/portion_picker_sheet.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 
 class MealReviewScreen extends ConsumerStatefulWidget {
@@ -1180,7 +1183,7 @@ class _MfpItemRow extends StatelessWidget {
 }
 
 /// ── ITEM EDITOR (Expanded only) ──
-class _ExpandedItemEditor extends StatelessWidget {
+class _ExpandedItemEditor extends ConsumerWidget {
   const _ExpandedItemEditor({
     required this.line,
     required this.isArabic,
@@ -1194,13 +1197,13 @@ class _ExpandedItemEditor extends StatelessWidget {
   final VoidCallback onDelete;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.vireoColors;
     final oil = FoodDbRepository.instance.byId('sunflower_oil');
     final foodNameLower = '${line.nameEn} ${line.nameAr}'.toLowerCase();
 
     // Specific unit table per food type
-    final unitChips = _getUnitsForFood(foodNameLower, isArabic);
+    final unitChips = _getUnitsForFood(foodNameLower, isArabic, ref);
 
     // Cooking methods relevant only where it matters (chicken, meat, eggs, fish, potatoes)
     final showsCookingMethod = foodNameLower.contains('chicken') ||
@@ -1267,6 +1270,23 @@ class _ExpandedItemEditor extends StatelessWidget {
           spacing: 6,
           runSpacing: 6,
           children: [
+            ActionChip(
+              visualDensity: VisualDensity.compact,
+              avatar: const Text('🥣', style: TextStyle(fontSize: 14)),
+              label: Text(isArabic ? 'مقاييس البيت' : 'Household portion'),
+              onPressed: () async {
+                HapticFeedback.selectionClick();
+                final pickedGrams = await PortionPickerSheet.show(
+                  context,
+                  nameAr: line.nameAr,
+                  nameEn: line.nameEn,
+                  initialGrams: line.grams,
+                );
+                if (pickedGrams != null) {
+                  onChanged(rescaleLine(line, pickedGrams));
+                }
+              },
+            ),
             for (final u in unitChips)
               ActionChip(
                 visualDensity: VisualDensity.compact,
@@ -1333,41 +1353,19 @@ class _ExpandedItemEditor extends StatelessWidget {
     );
   }
 
-  List<({String label, double grams})> _getUnitsForFood(String food, bool isArabic) {
-    if (food.contains('rice') || food.contains('أرز') || food.contains('رز')) {
-      return [
-        (label: isArabic ? 'كوب (150 جم)' : 'Cup (150g)', grams: 150),
-        (label: isArabic ? 'ملعقة (25 جم)' : 'Tbsp (25g)', grams: 25),
-        (label: isArabic ? 'نصف كوب (75 جم)' : '1/2 Cup (75g)', grams: 75),
-      ];
-    } else if (food.contains('chicken') || food.contains('دجاج') || food.contains('فراخ')) {
-      return [
-        (label: isArabic ? 'صدر كامل (180 جم)' : 'Breast (180g)', grams: 180),
-        (label: isArabic ? 'قطعة (120 جم)' : 'Piece (120g)', grams: 120),
-        (label: isArabic ? 'ورك (150 جم)' : 'Thigh (150g)', grams: 150),
-      ];
-    } else if (food.contains('bread') || food.contains('خبز') || food.contains('عيش')) {
-      return [
-        (label: isArabic ? 'رغيف بلدي (100 جم)' : 'Loaf (100g)', grams: 100),
-        (label: isArabic ? 'نصف رغيف (50 جم)' : '1/2 Loaf (50g)', grams: 50),
-        (label: isArabic ? 'شريحة توست (30 جم)' : 'Slice (30g)', grams: 30),
-      ];
-    } else if (food.contains('egg') || food.contains('بيض')) {
-      return [
-        (label: isArabic ? 'بيضة واحدة (50 جم)' : '1 Egg (50g)', grams: 50),
-        (label: isArabic ? 'بيضتان (100 جم)' : '2 Eggs (100g)', grams: 100),
-      ];
-    } else if (food.contains('salad') || food.contains('سلطة') || food.contains('خضار')) {
-      return [
-        (label: isArabic ? 'طبق صغير (100 جم)' : 'Small bowl (100g)', grams: 100),
-        (label: isArabic ? 'طبق كبير (200 جم)' : 'Large bowl (200g)', grams: 200),
-      ];
-    }
+  List<({String label, double grams})> _getUnitsForFood(String food, bool isArabic, WidgetRef ref) {
+    final cupMl = ref.read(userCupSizeProvider);
+    final householdList = HouseholdMeasures.getUnitsForFood(
+      nameAr: food,
+      nameEn: food,
+    );
 
     return [
-      (label: isArabic ? 'حصة صغيرة (50 جم)' : 'Small (50g)', grams: 50),
-      (label: isArabic ? 'حصة متوسطة (100 جم)' : 'Medium (100g)', grams: 100),
-      (label: isArabic ? 'حصة كبيرة (150 جم)' : 'Large (150g)', grams: 150),
+      for (final u in householdList)
+        (
+          label: '${u.label(isArabic)} (${u.gramsWithCupCalibration(cupMl).round()} ${isArabic ? "جم" : "g"})',
+          grams: u.gramsWithCupCalibration(cupMl),
+        ),
     ];
   }
 }

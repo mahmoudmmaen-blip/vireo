@@ -127,18 +127,24 @@ flutter build appbundle --release `
 
 ---
 
-## 5b. Google Play Reviewer Access Grant
+## 5b. Owner & Google Play Reviewer Access Grant (`pro_grants`)
 
-Reviewers need full Pro access without paying. Run the following single SQL command in your Supabase SQL editor or via CLI to grant reviewer access to their email:
+Reviewers and owners need full Pro access without paying or being constrained by free AI scan quotas. Run the following SQL command in your Supabase SQL editor or via CLI to grant Pro access:
 
 ```sql
+-- Grant Pro to reviewer:
 INSERT INTO public.pro_grants (email, note, expires_at)
 VALUES ('reviewer@example.com', 'Google Play App Reviewer', NULL)
 ON CONFLICT (email) DO UPDATE SET expires_at = NULL;
+
+-- Grant Pro to app owner:
+INSERT INTO public.pro_grants (email, note, expires_at)
+VALUES ('owner@vireofit.com', 'App Owner / Admin', NULL)
+ON CONFLICT (email) DO UPDATE SET expires_at = NULL;
 ```
 
-*(Replace `'reviewer@example.com'` with the actual reviewer email provided in Google Play Console credentials)*.
-When the reviewer signs into Vireo, the app automatically grants them Pro access across all features with zero ads.
+*(Replace `'reviewer@example.com'` and `'owner@vireofit.com'` with the actual reviewer and owner emails)*.
+When the granted email signs into Vireo, the app and Edge Functions (`hasPremiumEntitlement`) automatically grant Pro access across all features, no ads, and 50 AI scans/day.
 
 ---
 

@@ -7,6 +7,8 @@ import {
 import { mealVisionPrompt } from '../_shared/prompts/meal-vision.ts';
 import { bodyReportPrompt } from '../_shared/prompts/body-report.ts';
 import {
+  bodyReportLimit,
+  checkDailyQuota,
   consumeDailyQuota,
   hasPremiumEntitlement,
   mealScanLimit,
@@ -20,6 +22,17 @@ const corsHeaders = {
 };
 
 const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
+
+// In-memory cache for 10-minute duplicate image retry (key: "userId:hash", val: {timestamp, result})
+const recentAnalysesCache = new Map<string, { timestamp: number; result: unknown }>();
+
+async function computeImagesHash(images: string[]): Promise<string> {
+  const encoder = new TextEncoder();
+  const joined = images.map((img) => stripDataUrl(img)).join('|');
+  const buffer = await crypto.subtle.digest('SHA-256', encoder.encode(joined));
+  const hashArray = Array.from(new Uint8Array(buffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+}
 
 type AnalyzeMealRequest = {
   mode?: string;
@@ -80,12 +93,26 @@ Deno.serve(async (req) => {
       }
     }
 
+    // Check for 10-minute duplicate retry by image hash
+    const imageHash = await computeImagesHash(rawImages);
+    const cacheKey = `${user.id}:${imageHash}`;
+    const cached = recentAnalysesCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < 10 * 60 * 1000) {
+      console.log(`[analyze-meal] duplicate photo within 10min for user ${user.id}, returning cached result`);
+      return json(cached.result);
+    }
+
     const adminClient = createClient(supabaseUrl, serviceRoleKey);
-    const premium = await hasPremiumEntitlement(adminClient, user.id);
+    const premium = await hasPremiumEntitlement(adminClient, user.id, user.email);
     const isAnonymous = user.is_anonymous === true;
-    const limit = mealScanLimit({ premium, isAnonymous });
-    const quotaBucket = body.mode === 'body_report' ? 'body_report' : 'meal_scan';
-    const allowed = await consumeDailyQuota(
+    const isBodyReport = body.mode === 'body_report';
+    const quotaBucket = isBodyReport ? 'body_report' : 'meal_scan';
+    const limit = isBodyReport
+      ? bodyReportLimit({ premium })
+      : mealScanLimit({ premium, isAnonymous });
+
+    // Pre-check quota without consuming yet
+    const { allowed } = await checkDailyQuota(
       adminClient,
       user.id,
       quotaBucket,
@@ -138,6 +165,10 @@ Deno.serve(async (req) => {
       if (obj.readable === false) {
         return json({ error: 'UNREADABLE', ...obj }, 422);
       }
+
+      // Successful body report analysis: consume quota now
+      await consumeDailyQuota(adminClient, user.id, quotaBucket, limit);
+      recentAnalysesCache.set(cacheKey, { timestamp: Date.now(), result: obj });
       return json(obj);
     }
 
@@ -202,6 +233,17 @@ Deno.serve(async (req) => {
     const parsed = parseItemsJson(raw);
     if (!parsed) {
       return json({ error: 'VISION_PARSE_FAILED', raw }, 502);
+    }
+
+    const hasConfirmedItems = parsed.items && parsed.items.length > 0;
+    const hasUnsureItems = parsed.items_unsure && parsed.items_unsure.length > 0;
+
+    // Consume quota ONLY if there is at least 1 confirmed or unsure item
+    if (hasConfirmedItems || hasUnsureItems) {
+      await consumeDailyQuota(adminClient, user.id, quotaBucket, limit);
+      recentAnalysesCache.set(cacheKey, { timestamp: Date.now(), result: parsed });
+    } else {
+      console.log(`[analyze-meal] 0 items recognized, not consuming daily quota for user ${user.id}`);
     }
 
     return json(parsed);

@@ -6,6 +6,7 @@ import 'package:vireo/features/home/providers/daily_score_provider.dart';
 import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/insights/screens/score_insights_screen.dart';
+import 'package:vireo/features/insights/widgets/next_meal_suggestion_card.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 
@@ -284,6 +285,12 @@ class DailyScoreHeroCard extends ConsumerWidget {
                       ),
                     ],
                   ),
+                ),
+                NextMealSuggestionCard(
+                  remainingKcal: remKcal,
+                  remainingProtein: remProtein.toDouble(),
+                  remainingCarbs: remCarbs.toDouble(),
+                  remainingFat: remFat.toDouble(),
                 ),
                 const SizedBox(height: 12),
 

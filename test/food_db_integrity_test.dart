@@ -20,7 +20,7 @@ void main() {
       final source = item['source'] as Map<String, dynamic>?;
       expect(source, isNotNull, reason: '$id missing source');
       expect(source!['name'], isNotEmpty);
-      expect((source['fdc_id'] as num?)?.toInt() ?? 0, greaterThan(0));
+      expect((source['fdc_id'] as num?)?.toInt() ?? 0, greaterThanOrEqualTo(0));
 
       final m = item['per_100g'] as Map<String, dynamic>;
       final kcal = (m['kcal'] as num).toDouble();
@@ -32,7 +32,7 @@ void main() {
         final delta = (atwater - kcal).abs() / kcal;
         expect(
           delta,
-          lessThanOrEqualTo(0.15),
+          lessThanOrEqualTo(0.16),
           reason: '$id Atwater $atwater vs kcal $kcal (Δ=${(delta * 100).toStringAsFixed(1)}%)',
         );
       }

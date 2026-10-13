@@ -17,6 +17,7 @@ import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/diet_programs/domain/cuisine_type.dart';
 import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
+import 'package:vireo/features/nutrition/providers/cup_size_preference_provider.dart';
 import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
@@ -318,6 +319,55 @@ class SettingsScreen extends ConsumerWidget {
               );
               if (picked != null) {
                 await ref.read(plateSizeProvider.notifier).setSize(picked);
+              }
+            },
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Text('🥣', style: TextStyle(fontSize: 20)),
+            title: Text(isAr ? 'مقاييس بيتك (كوبايتي)' : 'Household Measures (Cup size)'),
+            subtitle: Text(
+              switch (ref.watch(userCupSizeProvider)) {
+                200 => isAr ? 'كوب صغير (200 مل)' : 'Small cup (200 ml)',
+                300 => isAr ? 'مج كبير (300 مل)' : 'Large mug (300 ml)',
+                _ => isAr ? 'كوب قياسي (240 مل)' : 'Standard cup (240 ml)',
+              },
+              style: TextStyle(fontSize: 12, color: colors.textMute),
+            ),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () async {
+              final picked = await showDialog<int>(
+                context: context,
+                builder: (ctx) => SimpleDialog(
+                  title: Text(isAr ? 'مقاس كوبايتك في البيت' : 'Your Cup Size'),
+                  children: [
+                    SimpleDialogOption(
+                      onPressed: () => Navigator.pop(ctx, 200),
+                      child: Text(isAr ? 'كوب شاي صغير (200 مل)' : 'Small cup (200 ml)'),
+                    ),
+                    SimpleDialogOption(
+                      onPressed: () => Navigator.pop(ctx, 240),
+                      child: Text(isAr ? 'كوب معياري قياسي (240 مل)' : 'Standard cup (240 ml)'),
+                    ),
+                    SimpleDialogOption(
+                      onPressed: () => Navigator.pop(ctx, 300),
+                      child: Text(isAr ? 'مج كبير (300 مل)' : 'Large mug (300 ml)'),
+                    ),
+                    const Divider(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Text(
+                        isAr
+                            ? '💡 دليل حصص اليد:\n• كف الإيدك: لحوم ودواجن وأسماك (~100-120 جم)\n• قبضة الإيدك: كوب رز/مكرونة أو فاكهة (~150 جم)\n• إبهامك: ملعقة زيت/زبدة (~14 جم)\n• حفنة اليد: مكسرات (~28 جم)'
+                            : '💡 Hand portion guide:\n• Palm: Meat/chicken/fish (~100-120g)\n• Fist: Cup of rice/pasta or fruit (~150g)\n• Thumb: 1 tbsp oils/butter (~14g)\n• Cupped hand: Handful of nuts (~28g)',
+                        style: TextStyle(fontSize: 11, color: colors.textMute, height: 1.4),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+              if (picked != null) {
+                await ref.read(userCupSizeProvider.notifier).setCupMl(picked);
               }
             },
           ),

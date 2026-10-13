@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:vireo/features/nutrition/domain/household_measures.dart';
 
 @immutable
 class FoodPortion {
@@ -70,6 +71,7 @@ class FoodItem {
     required this.commonPortions,
     required this.source,
     this.barcodes = const [],
+    this.householdUnits = const [],
   });
 
   final String id;
@@ -81,6 +83,7 @@ class FoodItem {
   final List<FoodPortion> commonPortions;
   final FoodSource source;
   final List<String> barcodes;
+  final List<HouseholdUnitPortion> householdUnits;
 
   bool get isAlreadyFried => state == 'fried';
 
@@ -104,6 +107,10 @@ class FoodItem {
         ),
         barcodes: (json['barcodes'] as List? ?? [])
             .map((e) => e.toString())
+            .toList(),
+        householdUnits: (json['household_units'] as List? ?? [])
+            .whereType<Map>()
+            .map((e) => HouseholdUnitPortion.fromJson(Map<String, dynamic>.from(e)))
             .toList(),
       );
 

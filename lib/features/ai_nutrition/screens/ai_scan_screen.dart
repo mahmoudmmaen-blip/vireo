@@ -12,8 +12,7 @@ import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
 import 'package:vireo/features/ai_nutrition/utils/image_compressor.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_scan_loading_overlay.dart';
-import 'package:vireo/core/widgets/rewarded_unlock_sheet.dart';
-import 'package:vireo/features/subscription/feature_gates.dart';
+import 'package:vireo/features/ai_nutrition/widgets/ai_scan_limit_sheet.dart';
 import 'package:vireo/features/ai_nutrition/application/meal_scan_native_file.dart'
     if (dart.library.html) 'package:vireo/features/ai_nutrition/application/meal_scan_native_file_web.dart';
 
@@ -147,33 +146,21 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
           AiScanErrorKind.api => l10n.aiScanFailed,
         };
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(duration: const Duration(seconds: 3), persist: false, 
-            content: Text(message),
-            action: SnackBarAction(
-              label: kind == AiScanErrorKind.dailyLimit
-                  ? l10n.aiUpgradeCta
-                  : l10n.mealReviewLogByText,
-              onPressed: () {
-                if (kind == AiScanErrorKind.dailyLimit) {
-                  final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
-                  showRewardedUnlockSheet(
-                    context: context,
-                    featureTitle: isArabic ? 'إضافة +2 مسح ذكي للوجبات' : '+2 Extra AI Meal Scans',
-                    featureDescription: isArabic
-                        ? 'شاهد إعلان قصير للحصول على مسحين إضافيين للوجبات اليوم، أو اشترك في Pro لمسح غير محدود.'
-                        : 'Watch a short ad to get +2 extra meal scans today, or subscribe to Pro.',
-                    onUnlockGranted: () async {
-                      await FeatureGates.grantRewardedMealScans();
-                    },
-                  );
-                } else {
-                  _openTextLog();
-                }
-              },
+        if (kind == AiScanErrorKind.dailyLimit) {
+          AiScanLimitSheet.show(context);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              duration: const Duration(seconds: 3),
+              persist: false,
+              content: Text(message),
+              action: SnackBarAction(
+                label: l10n.mealReviewLogByText,
+                onPressed: _openTextLog,
+              ),
             ),
-          ),
-        );
+          );
+        }
       }
     });
 

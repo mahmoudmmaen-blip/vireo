@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/features/ai_nutrition/application/ai_scan_state.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_provider.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
+import 'package:vireo/features/ai_nutrition/widgets/ai_scan_limit_sheet.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_scan_loading_overlay.dart';
 
 /// Direct meal analysis screen for photos chosen from the gallery.
@@ -52,6 +53,11 @@ class _MealScanAnalyzeScreenState extends ConsumerState<MealScanAnalyzeScreen> {
       if (mounted) {
         nav.pop(saved == true);
       }
+    } else if (scan.isError && scan.errorKindOrNull == AiScanErrorKind.dailyLimit) {
+      AiScanLimitSheet.show(
+        context,
+        onAdWatched: () => _startAnalysis(),
+      );
     }
   }
 
