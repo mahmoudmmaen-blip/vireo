@@ -15,6 +15,7 @@ import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
 import 'package:vireo/features/progress/widgets/weight_log_sheet.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
+import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 
 import 'package:vireo/features/home/widgets/sleep_log_sheet.dart';
@@ -127,7 +128,9 @@ Future<void> _logWater(
         content: Text(
           added
               ? l10n.uxWaterAdded((ml / 1000).toStringAsFixed(2))
-              : l10n.uxWaterGoalDone,
+              : (ref.read(isFemaleUserProvider) && Localizations.localeOf(context).languageCode.startsWith('ar')
+                  ? 'قفلتِ هدف المية 💧 عاش يا بطلة!'
+                  : l10n.uxWaterGoalDone),
         ),
       ),
     );

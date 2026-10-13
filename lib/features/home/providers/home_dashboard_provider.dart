@@ -112,8 +112,13 @@ final homeDashboardProvider = Provider<HomeDashboardSnapshot>((ref) {
 });
 
 /// Resolves localized display name.
-String homeDisplayName(AppLocalizations l10n, HomeDashboardSnapshot dash, bool isGuest) {
-  if (isGuest) return l10n.homeGuestName;
+String homeDisplayName(AppLocalizations l10n, HomeDashboardSnapshot dash, bool isGuest, [bool isFemale = false]) {
+  if (isGuest) {
+    if (l10n.localeName.startsWith('ar')) {
+      return isFemale ? 'بطلة' : 'بطل';
+    }
+    return l10n.homeGuestName;
+  }
   return dash.displayName;
 }
 

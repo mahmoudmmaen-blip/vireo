@@ -27,6 +27,7 @@ class OnboardingDraft {
     this.preferredWorkoutTime,
     this.walkingReminderEnabled = false,
     this.weeklyCheckInReminderEnabled = false,
+    this.focusGoals = const [],
   });
 
   final String sex;
@@ -50,6 +51,7 @@ class OnboardingDraft {
   final DateTime? preferredWorkoutTime;
   final bool walkingReminderEnabled;
   final bool weeklyCheckInReminderEnabled;
+  final List<String> focusGoals;
 
   bool get medicalFlag =>
       heartDisease ||
@@ -96,6 +98,7 @@ class OnboardingDraft {
     DateTime? preferredWorkoutTime,
     bool? walkingReminderEnabled,
     bool? weeklyCheckInReminderEnabled,
+    List<String>? focusGoals,
   }) {
     return OnboardingDraft(
       sex: sex ?? this.sex,
@@ -121,6 +124,7 @@ class OnboardingDraft {
           walkingReminderEnabled ?? this.walkingReminderEnabled,
       weeklyCheckInReminderEnabled:
           weeklyCheckInReminderEnabled ?? this.weeklyCheckInReminderEnabled,
+      focusGoals: focusGoals ?? this.focusGoals,
     );
   }
 
@@ -131,6 +135,7 @@ class OnboardingDraft {
       'height_cm': heightCm,
       'weight_kg': weightKg,
       'target_weight_kg': targetWeightKg,
+      'focus_goals': focusGoals,
       'activity_level': activityLevel.value,
       'medical_flag': medicalFlag,
       'training_environment': trainingEnvironment.value,
@@ -191,6 +196,9 @@ class OnboardingDraft {
       walkingReminderEnabled: json['walking_reminder_enabled'] as bool? ?? false,
       weeklyCheckInReminderEnabled:
           json['weekly_checkin_reminder_enabled'] as bool? ?? false,
+      focusGoals: (json['focus_goals'] as List? ?? [])
+          .map((e) => e.toString())
+          .toList(),
     );
   }
 

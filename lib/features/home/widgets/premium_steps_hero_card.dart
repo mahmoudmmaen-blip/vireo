@@ -207,7 +207,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: const Color(0xFF162032), // Dark Navy matching leap_step_tracker_home.jpg
+          color: colors.surfaceRaised,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(

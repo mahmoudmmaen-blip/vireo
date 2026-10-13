@@ -20,6 +20,7 @@ import 'package:vireo/data/repositories/workout_repository.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
+import 'package:vireo/features/auth/services/save_progress_prompt.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
@@ -42,8 +43,11 @@ import 'package:vireo/features/home/widgets/today_plan_section.dart';
 import 'package:vireo/features/home/widgets/premium_steps_hero_card.dart';
 import 'package:vireo/features/home/widgets/inbody_plan_update_card.dart';
 import 'package:vireo/features/home/widgets/today_pillars_grid.dart';
-import 'package:vireo/features/auth/services/save_progress_prompt.dart';
+import 'package:vireo/core/services/user_sex_provider.dart';
+import 'package:vireo/features/engagement/widgets/coins_header_pill.dart';
+import 'package:vireo/features/men_health/widgets/men_vitality_hero_card.dart';
 import 'package:vireo/features/ramadan/widgets/ramadan_countdown_card.dart';
+import 'package:vireo/features/women_health/widgets/women_health_hero_card.dart';
 
 const _headerPad = EdgeInsets.fromLTRB(4, VSpace.sm, 4, 0);
 
@@ -67,10 +71,11 @@ class HomeDashboardBody extends ConsumerWidget {
         );
 
     final isAdvancedUnlocked = ref.watch(isAdvancedFeaturesUnlockedProvider);
+    final isFemale = ref.watch(isFemaleUserProvider);
 
     final sections = <Widget>[
       _HomeHeader(
-        name: homeDisplayName(l10n, dash, isGuest),
+        name: homeDisplayName(l10n, dash, isGuest, isFemale),
         streakDays: dash.streakDays,
         subtitle: dash.hasProgram
             ? l10n.homeProgramDay(dash.programDay, dash.programTotalDays)
@@ -91,6 +96,12 @@ class HomeDashboardBody extends ConsumerWidget {
 
       // ── InBody/Smart Scale Plan Recompute Card (One-time with Undo) ──
       const InBodyPlanUpdateCard(),
+
+      // ── Sex-Aware Experience: Women's Health ("صحتك") or Men's Vitality ("صحة الرجل") ──
+      if (isFemale)
+        const WomenHealthHeroCard()
+      else
+        const MenVitalityHeroCard(),
 
       // ── Card 2: Daily Score Card ──
       const DailyScoreHeroCard(),
@@ -310,13 +321,17 @@ class _HomeHeader extends ConsumerWidget {
           ),
           const SizedBox(width: VSpace.xs),
           Tooltip(
-            message: l10n.homeStreakDays(streakDays),
+            message: ref.watch(isFemaleUserProvider) && localeCode.startsWith('ar')
+                ? '$streakDays أيام ورا بعض.. عاش يا بطلة!'
+                : l10n.homeStreakDays(streakDays),
             child: VireoPill(
               icon: Icons.local_fire_department_rounded,
               label: '$streakDays',
               color: colors.ember,
             ),
           ),
+          const SizedBox(width: 6),
+          const CoinsHeaderPill(),
           const SizedBox(width: 6),
           _CircleIconButton(
             icon: Icons.translate_rounded,

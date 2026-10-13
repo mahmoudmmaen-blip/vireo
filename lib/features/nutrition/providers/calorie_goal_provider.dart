@@ -7,6 +7,7 @@ import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/nutrition/providers/daily_nutrition_totals_provider.dart';
+import 'package:vireo/features/women_health/providers/women_health_provider.dart';
 
 const _manualCalorieKey = 'manual_calorie_goal';
 const _manualCalorieUserSetKey = 'manual_calorie_goal_user_set';
@@ -66,6 +67,19 @@ final calorieGoalProvider = Provider<CalorieTarget>((ref) {
       carbsG: computed.carbsG,
       fatG: computed.fatG,
     );
+  }
+
+  // Pregnancy / Breastfeeding mode: disable deficit and add appropriate surplus.
+  final womenAdj = ref.watch(womenCalorieAdjustmentProvider);
+  if (womenAdj.disableDeficit) {
+    final baseKcal = maintenance + womenAdj.surplusKcal;
+    computed = CalorieTarget(
+      calories: baseKcal.round().clamp(1400, 4500),
+      proteinG: computed.proteinG,
+      carbsG: computed.carbsG,
+      fatG: computed.fatG,
+    );
+    return computed;
   }
 
   final manual = HiveService.isInitialized

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
-import 'package:vireo/core/services/accent_palette_provider.dart';
-import 'package:vireo/core/services/app_skin_provider.dart';
 import 'package:vireo/core/services/theme_mode_provider.dart';
+import 'package:vireo/core/theme/app_theme_variant.dart';
+import 'package:vireo/core/theme/app_theme_variant_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 
@@ -15,8 +15,7 @@ class AppearanceScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final mode = ref.watch(themeModeProvider);
-    final accent = ref.watch(accentPaletteProvider);
-    final skin = ref.watch(appSkinProvider);
+    final currentVariant = ref.watch(appThemeVariantProvider);
 
     return Scaffold(
       backgroundColor: colors.background,
@@ -36,10 +35,9 @@ class AppearanceScreen extends ConsumerWidget {
             ),
           ),
           RadioGroup<ThemeMode>(
-            groupValue: skin.isSpecialDark ? ThemeMode.dark : mode,
+            groupValue: mode,
             onChanged: (value) {
               if (value != null) {
-                ref.read(appSkinProvider.notifier).setSkin(AppSkin.standard);
                 ref.read(themeModeProvider.notifier).setThemeMode(value);
               }
             },
@@ -64,7 +62,9 @@ class AppearanceScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: VSpace.md, vertical: VSpace.xs),
             child: Text(
-              l10n.accentThemeTitle,
+              Localizations.localeOf(context).languageCode.startsWith('ar')
+                  ? 'طابع التطبيق (المظهر والألوان)'
+                  : 'App Theme & Color System',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
@@ -72,83 +72,91 @@ class AppearanceScreen extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: VSpace.md, vertical: VSpace.sm),
-            child: Opacity(
-              opacity: skin.isSpecialDark ? 0.45 : 1.0,
-              child: Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: [
-                  AccentPalette.vireoOrange,
-                  AccentPalette.oceanicBlue,
-                  AccentPalette.emeraldHealth,
-                  AccentPalette.deepViolet,
-                ].map((palette) {
-                  final selected = accent == palette && !skin.isSpecialDark;
-                  return InkWell(
-                    onTap: skin.isSpecialDark
-                        ? null
-                        : () => ref
-                            .read(accentPaletteProvider.notifier)
-                            .setPalette(palette),
+            child: Column(
+              children: AppThemeVariant.values.map((variant) {
+                final selected = currentVariant == variant;
+                final isAr = Localizations.localeOf(context).languageCode.startsWith('ar');
+
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  child: InkWell(
+                    onTap: () => ref
+                        .read(appThemeVariantProvider.notifier)
+                        .setThemeVariant(variant),
                     borderRadius: BorderRadius.circular(16),
                     child: Container(
-                      width: 78,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: selected ? palette.color : colors.line,
-                          width: selected ? 2.5 : 1,
+                          color: selected ? variant.primaryAccent : colors.line,
+                          width: selected ? 2 : 1,
                         ),
                         color: selected
-                            ? palette.color.withValues(alpha: 0.12)
+                            ? variant.primaryAccent.withValues(alpha: 0.12)
                             : colors.surfaceRaised,
                       ),
-                      child: Column(
+                      child: Row(
                         children: [
-                          CircleAvatar(
-                            radius: 18,
-                            backgroundColor: palette.color,
+                          Container(
+                            width: 38,
+                            height: 38,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [variant.primaryAccent, variant.secondaryAccent],
+                              ),
+                            ),
                             child: selected
-                                ? const Icon(Icons.check, size: 18, color: Colors.white)
+                                ? const Icon(Icons.check, size: 20, color: Colors.white)
                                 : null,
                           ),
-                          const SizedBox(height: 8),
-                          Text(
-                            _accentName(l10n, palette),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  variant.label(isAr),
+                                  style: TextStyle(
+                                    fontWeight: selected ? FontWeight.w900 : FontWeight.w700,
+                                    fontSize: 14.5,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  switch (variant) {
+                                    AppThemeVariant.ember => isAr
+                                        ? 'البرتقالي الكلاسيكي — الافتراضي للرجال'
+                                        : 'Warm Ember orange — Default for men',
+                                    AppThemeVariant.calmGold => isAr
+                                        ? 'رمادي داكن وفحم مع ذهبي وزيتوني — الافتراضي للنساء'
+                                        : 'Charcoal, warm gold & olive — Default for women',
+                                    AppThemeVariant.ocean => isAr
+                                        ? 'كحلي عميق مع تيل منعش'
+                                        : 'Deep navy + refreshing teal',
+                                    AppThemeVariant.rose => isAr
+                                        ? 'برقوقي ناعم مع روز هادئ وراقي'
+                                        : 'Refined soft plum + muted rose',
+                                  },
+                                  style: TextStyle(
+                                    color: colors.textMute,
+                                    fontSize: 11.5,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                  );
-                }).toList(),
-              ),
+                  ),
+                );
+              }).toList(),
             ),
           ),
-          if (skin.isSpecialDark)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-              child: Text(
-                l10n.settingsAccentLockedHint,
-                style: TextStyle(color: colors.textMute, fontSize: 12),
-              ),
-            ),
         ],
       ),
     );
-  }
-
-  String _accentName(AppLocalizations l10n, AccentPalette palette) {
-    return switch (palette) {
-      AccentPalette.vireoOrange => l10n.accentEmber,
-      AccentPalette.oceanicBlue => l10n.accentOcean,
-      AccentPalette.emeraldHealth => l10n.accentForest,
-      AccentPalette.deepViolet => l10n.accentRoyal,
-    };
   }
 }

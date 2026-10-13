@@ -1,3 +1,4 @@
+import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/notifications/domain/notification_type.dart';
 
@@ -23,6 +24,8 @@ abstract final class NotificationMessages {
     // Standardize Arabic vs Egyptian Arabic
     final isArEg = localeCode == 'ar_EG' || localeCode == 'ar-EG';
     final isAr = localeCode.startsWith('ar');
+    final isFemale = UserSexNotifier.isFemaleSaved();
+    final champWord = isFemale ? 'بطلة' : 'بطل';
 
     return switch (type) {
       NotificationType.waterReminder => NotificationMessage(
@@ -51,7 +54,7 @@ abstract final class NotificationMessages {
 
       NotificationType.mealLunchReminder => NotificationMessage(
           title: isAr
-              ? (isArEg ? '🍛 وقت الغدا يا بطل' : '🍛 وقت وجبة الغداء')
+              ? (isArEg ? '🍛 وقت الغدا يا $champWord' : '🍛 وقت وجبة الغداء')
               : '🍛 Lunchtime fuel',
           body: isAr
               ? (isArEg
@@ -99,7 +102,7 @@ abstract final class NotificationMessages {
 
       NotificationType.workoutReminder => NotificationMessage(
           title: isAr
-              ? (isArEg ? '🏋️ تمرينك قرب يا بطل' : '🏋️ اقترب موعد تمرينك')
+              ? (isArEg ? '🏋️ تمرينك قرب يا $champWord' : '🏋️ اقترب موعد تمرينك')
               : '🏋️ Workout time coming up',
           body: isAr
               ? (isArEg
@@ -137,7 +140,7 @@ abstract final class NotificationMessages {
           title: isAr
               ? (isArEg ? '📊 تقريرك الأسبوعي جاهز' : '📊 تقريرك الأسبوعي')
               : '📊 Your weekly check-in',
-          body: _weeklyBody(isAr, isArEg, weeklyDeficitKcal),
+          body: _weeklyBody(isAr, isArEg, weeklyDeficitKcal, champWord),
           payload: 'vireo://progress/weekly',
         ),
 
@@ -167,7 +170,7 @@ abstract final class NotificationMessages {
     };
   }
 
-  static String _weeklyBody(bool isAr, bool isArEg, int? kcal) {
+  static String _weeklyBody(bool isAr, bool isArEg, int? kcal, [String champWord = 'بطل']) {
     if (kcal == null) {
       if (isAr) {
         return isArEg
@@ -179,7 +182,7 @@ abstract final class NotificationMessages {
     if (kcal >= 0) {
       if (isAr) {
         return isArEg
-            ? 'عجزك الأسبوعي: $kcal سعرة — عاش يا بطل، خطوة رائعة لقدام!'
+            ? 'عجزك الأسبوعي: $kcal سعرة — عاش يا $champWord، خطوة رائعة لقدام!'
             : 'عجزك الأسبوعي: $kcal سعرة حرارية — أسبوع رائع من الالتزام!';
       }
       return 'Weekly deficit: $kcal kcal — fantastic consistency and dedication!';

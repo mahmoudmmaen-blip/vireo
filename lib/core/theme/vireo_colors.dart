@@ -65,6 +65,109 @@ class VireoColors extends ThemeExtension<VireoColors> {
     line: Color(0xFFE5E7EB),
   );
 
+  // ── 1. Ember (Orange) ──
+  static const VireoColors emberDark = dark;
+  static const VireoColors emberLight = light;
+
+  // ── 2. Calm Gold (Charcoal background, warm gold/olive accents, pastel pillars) ──
+  static const VireoColors calmGoldDark = VireoColors(
+    background: Color(0xFF141618), // Deep charcoal
+    surface: Color(0xFF1E2124),
+    surfaceRaised: Color(0xFF282C30),
+    surfaceGradientStart: Color(0xFF282C30),
+    surfaceGradientEnd: Color(0xFF1E2124),
+    ember: Color(0xFFD4AF37), // Warm Gold accent
+    gold: Color(0xFF9E8E62),
+    success: Color(0xFF8F9E8B), // Soft sage/olive
+    danger: Color(0xFFD86969),
+    recovery: Color(0xFF7E9DA8),
+    text: Color(0xFFF7F5F0),
+    textMute: Color(0xFF9C988F),
+    line: Color(0xFF33383E),
+  );
+
+  static const VireoColors calmGoldLight = VireoColors(
+    background: Color(0xFFF9F7F2), // Warm ivory
+    surface: Color(0xFFFFFFFF),
+    surfaceRaised: Color(0xFFF2EFE9),
+    surfaceGradientStart: Color(0xFFFFFFFF),
+    surfaceGradientEnd: Color(0xFFF2EFE9),
+    ember: Color(0xFFC59E27), // Antique gold
+    gold: Color(0xFF8A7740),
+    success: Color(0xFF6B8A68),
+    danger: Color(0xFFC75252),
+    recovery: Color(0xFF5E8592),
+    text: Color(0xFF22201D),
+    textMute: Color(0xFF757067),
+    line: Color(0xFFE2DDD3),
+  );
+
+  // ── 3. Ocean (Deep navy + teal) ──
+  static const VireoColors oceanDark = VireoColors(
+    background: Color(0xFF09131F), // Deep oceanic midnight
+    surface: Color(0xFF0F1E2E),
+    surfaceRaised: Color(0xFF172B40),
+    surfaceGradientStart: Color(0xFF172B40),
+    surfaceGradientEnd: Color(0xFF0F1E2E),
+    ember: Color(0xFF00B4D8), // Electric teal
+    gold: Color(0xFF48CAE4),
+    success: Color(0xFF06D6A0),
+    danger: Color(0xFFEF476F),
+    recovery: Color(0xFF118AB2),
+    text: Color(0xFFEBF6FC),
+    textMute: Color(0xFF7F9DB7),
+    line: Color(0xFF1F3A55),
+  );
+
+  static const VireoColors oceanLight = VireoColors(
+    background: Color(0xFFF0F7FB),
+    surface: Color(0xFFFFFFFF),
+    surfaceRaised: Color(0xFFE5F1F8),
+    surfaceGradientStart: Color(0xFFFFFFFF),
+    surfaceGradientEnd: Color(0xFFE5F1F8),
+    ember: Color(0xFF0077B6),
+    gold: Color(0xFF0096C7),
+    success: Color(0xFF00AF87),
+    danger: Color(0xFFD6335C),
+    recovery: Color(0xFF023E8A),
+    text: Color(0xFF102538),
+    textMute: Color(0xFF5C7994),
+    line: Color(0xFFD0E2EE),
+  );
+
+  // ── 4. Rose (Soft plum + rose, refined look) ──
+  static const VireoColors roseDark = VireoColors(
+    background: Color(0xFF171015), // Deep plum
+    surface: Color(0xFF231821),
+    surfaceRaised: Color(0xFF31222E),
+    surfaceGradientStart: Color(0xFF31222E),
+    surfaceGradientEnd: Color(0xFF231821),
+    ember: Color(0xFFD977A6), // Soft rose
+    gold: Color(0xFFE8A4C8),
+    success: Color(0xFF7FB093),
+    danger: Color(0xFFE05A74),
+    recovery: Color(0xFF9682AA),
+    text: Color(0xFFF9F1F6),
+    textMute: Color(0xFFA18F9C),
+    line: Color(0xFF3F2D3B),
+  );
+
+  static const VireoColors roseLight = VireoColors(
+    background: Color(0xFFFAF2F6),
+    surface: Color(0xFFFFFFFF),
+    surfaceRaised: Color(0xFFF5E4EE),
+    surfaceGradientStart: Color(0xFFFFFFFF),
+    surfaceGradientEnd: Color(0xFFF5E4EE),
+    ember: Color(0xFFB84D81),
+    gold: Color(0xFFC9739F),
+    success: Color(0xFF5B9270),
+    danger: Color(0xFFC73653),
+    recovery: Color(0xFF765F8E),
+    text: Color(0xFF281822),
+    textMute: Color(0xFF826E7C),
+    line: Color(0xFFE8D3E0),
+  );
+
   /// AMOLED pure black with high-contrast gold / cyan accents.
   static const VireoColors amoled = VireoColors(
     background: Color(0xFF000000),
@@ -83,21 +186,7 @@ class VireoColors extends ThemeExtension<VireoColors> {
   );
 
   /// Deep navy (#0B192C) with soft ice blue / electric teal accents.
-  static const VireoColors navy = VireoColors(
-    background: Color(0xFF0B192C),
-    surface: Color(0xFF112240),
-    surfaceRaised: Color(0xFF1A2F4A),
-    surfaceGradientStart: Color(0xFF1A2F4A),
-    surfaceGradientEnd: Color(0xFF0B192C),
-    ember: Color(0xFF26C6DA),
-    gold: Color(0xFF81D4FA),
-    success: Color(0xFF1DE9B6),
-    danger: Color(0xFFEF5350),
-    recovery: Color(0xFF4DD0E1),
-    text: Color(0xFFE8F4FC),
-    textMute: Color(0xFF8BA3B8),
-    line: Color(0xFF243B55),
-  );
+  static const VireoColors navy = oceanDark;
 
   /// Returns a copy with a custom primary accent (ember).
   VireoColors withAccent(Color accent) => copyWith(ember: accent);

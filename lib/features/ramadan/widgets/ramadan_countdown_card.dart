@@ -16,12 +16,15 @@ class RamadanCountdownCard extends ConsumerStatefulWidget {
 class _RamadanCountdownCardState extends ConsumerState<RamadanCountdownCard> {
   Timer? _timer;
 
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 30), (_) {
-      if (mounted) setState(() {});
-    });
+  void _syncTimer(bool enabled) {
+    if (!enabled && _timer != null) {
+      _timer?.cancel();
+      _timer = null;
+    } else if (enabled && _timer == null) {
+      _timer = Timer.periodic(const Duration(seconds: 30), (_) {
+        if (mounted) setState(() {});
+      });
+    }
   }
 
   @override
@@ -33,6 +36,7 @@ class _RamadanCountdownCardState extends ConsumerState<RamadanCountdownCard> {
   @override
   Widget build(BuildContext context) {
     final settings = ref.watch(ramadanSettingsProvider);
+    _syncTimer(settings.isEnabled);
     if (!settings.isEnabled) return const SizedBox.shrink();
 
     final prayer = ref.watch(ramadanPrayerTimesProvider);

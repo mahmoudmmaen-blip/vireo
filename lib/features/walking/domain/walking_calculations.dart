@@ -113,7 +113,7 @@ abstract final class WalkingCalculations {
       if (profile is Map) {
         height = (profile['height_cm'] as num?)?.toDouble() ?? height;
         weight = (profile['weight_kg'] as num?)?.toDouble() ?? weight;
-        final gender = profile['gender'] as String?;
+        final gender = (profile['sex'] as String? ?? profile['gender'] as String?)?.toLowerCase();
         if (gender == 'female' || gender == 'f') isFemale = true;
       }
     }

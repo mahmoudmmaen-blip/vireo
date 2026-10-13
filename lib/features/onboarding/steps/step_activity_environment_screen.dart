@@ -10,6 +10,7 @@ import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/training_environment.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
+import 'package:vireo/features/onboarding/widgets/why_we_ask_box.dart';
 
 class StepActivityEnvironmentScreen extends ConsumerStatefulWidget {
   const StepActivityEnvironmentScreen({super.key});
@@ -177,6 +178,12 @@ class _StepActivityEnvironmentScreenState
               ),
             );
           }),
+          const SizedBox(height: 8),
+          WhyWeAskBox(
+            text: Localizations.localeOf(context).languageCode.startsWith('ar')
+                ? 'لنقدّر استهلاك طاقتك أثناء اليوم ونختار لك تمارين ملائمة لبيئة تدريبك وأدواتك المتاحة.'
+                : 'To estimate your daily energy expenditure and customize workouts for your training space and gear.',
+          ),
         ],
       ),
     );

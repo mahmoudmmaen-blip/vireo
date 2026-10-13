@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vireo/core/services/accent_palette_provider.dart';
 import 'package:vireo/core/services/app_skin_provider.dart';
+import 'package:vireo/core/theme/app_theme_variant.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 
@@ -9,6 +10,24 @@ import 'package:vireo/core/theme/vireo_decorations.dart';
 abstract final class AppTheme {
   static ThemeData get dark => darkWithAccent();
   static ThemeData get light => lightWithAccent();
+
+  static ThemeData buildThemeForVariant({
+    required AppThemeVariant variant,
+    required Brightness brightness,
+    String languageCode = 'ar',
+  }) {
+    final colors = switch ((variant, brightness)) {
+      (AppThemeVariant.ember, Brightness.dark) => VireoColors.emberDark,
+      (AppThemeVariant.ember, Brightness.light) => VireoColors.emberLight,
+      (AppThemeVariant.calmGold, Brightness.dark) => VireoColors.calmGoldDark,
+      (AppThemeVariant.calmGold, Brightness.light) => VireoColors.calmGoldLight,
+      (AppThemeVariant.ocean, Brightness.dark) => VireoColors.oceanDark,
+      (AppThemeVariant.ocean, Brightness.light) => VireoColors.oceanLight,
+      (AppThemeVariant.rose, Brightness.dark) => VireoColors.roseDark,
+      (AppThemeVariant.rose, Brightness.light) => VireoColors.roseLight,
+    };
+    return _build(colors, brightness, languageCode, variant);
+  }
 
   static ThemeData darkWithAccent([
     AccentPalette accent = AccentPalette.vireoOrange,
@@ -29,7 +48,12 @@ abstract final class AppTheme {
   ]) =>
       _build(VireoColors.light.withAccent(accent.color), Brightness.light, languageCode);
 
-  static ThemeData _build(VireoColors colors, Brightness brightness, [String languageCode = 'ar']) {
+  static ThemeData _build(
+    VireoColors colors,
+    Brightness brightness, [
+    String languageCode = 'ar',
+    AppThemeVariant? variant,
+  ]) {
     final isArabic = languageCode.startsWith('ar');
 
     // Arabic locales: IBM Plex Sans Arabic; Latin locales: Inter
@@ -146,6 +170,23 @@ abstract final class AppTheme {
         ),
         hintStyle: TextStyle(color: colors.textMute),
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: variant == AppThemeVariant.calmGold
+              ? (brightness == Brightness.dark ? Colors.white : const Color(0xFF1E2124))
+              : colors.ember,
+          foregroundColor: variant == AppThemeVariant.calmGold
+              ? (brightness == Brightness.dark ? const Color(0xFF141618) : Colors.white)
+              : (brightness == Brightness.dark ? colors.text : Colors.white),
+          minimumSize: const Size(48, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              variant == AppThemeVariant.calmGold ? 999.0 : VireoDecorations.buttonRadius,
+            ),
+          ),
+          elevation: 0,
+        ),
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: colors.ember,
@@ -181,17 +222,6 @@ abstract final class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14),
           side: BorderSide(color: colors.line),
-        ),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          backgroundColor: colors.ember,
-          foregroundColor: Colors.white,
-          minimumSize: const Size(48, 48),
-          textStyle: body(fontTheme.labelLarge).copyWith(fontWeight: FontWeight.w800),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(VireoDecorations.buttonRadius),
-          ),
         ),
       ),
       bottomSheetTheme: BottomSheetThemeData(

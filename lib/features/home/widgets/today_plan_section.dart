@@ -22,6 +22,8 @@ import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
+import 'package:vireo/features/engagement/domain/daily_coin_task.dart';
+import 'package:vireo/features/engagement/providers/coins_provider.dart';
 import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
 
 class TodayPlanSection extends ConsumerStatefulWidget {
@@ -70,7 +72,7 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
       builder: (ctx) => IgnorePointer(
         child: AnimatedBuilder(
           animation: _confettiCtrl,
-          builder: (_, __) => CustomPaint(
+          builder: (context, child) => CustomPaint(
             painter: _ConfettiPainter(_confettiCtrl.value),
             size: MediaQuery.sizeOf(ctx),
           ),
@@ -215,6 +217,17 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
       return;
     }
 
+    if (!complete) {
+      final coinTask = switch (item.kind) {
+        TodayPlanKind.meal => DailyCoinTask.meal,
+        TodayPlanKind.workout => DailyCoinTask.workout,
+        TodayPlanKind.steps => DailyCoinTask.walk,
+        TodayPlanKind.waterReminder => DailyCoinTask.water,
+        _ => DailyCoinTask.moodCheck,
+      };
+      await ref.read(coinsBalanceProvider.notifier).awardTask(coinTask);
+    }
+
     await ref
         .read(todayPlanChecksProvider.notifier)
         .toggle(item.id, value: !complete);
@@ -247,7 +260,7 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
             children: [
               Expanded(
                 child: Text(
-                  l10n.todayPlanTitle,
+                  locale.startsWith('ar') ? 'رحلة اليوم' : 'Daily Journey',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
@@ -470,6 +483,27 @@ class _PlanRow extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            if (item.stepNumber != null) ...[
+              Container(
+                width: 22,
+                height: 22,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: complete ? colors.success.withValues(alpha: 0.15) : colors.surfaceRaised,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: complete ? colors.success : colors.line),
+                ),
+                child: Text(
+                  '${item.stepNumber}',
+                  style: TextStyle(
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.w800,
+                    color: complete ? colors.success : colors.textMute,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+            ],
             Container(
               width: 34,
               height: 34,
@@ -576,6 +610,29 @@ class _PlanRow extends StatelessWidget {
                       ),
                     ),
                   ],
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              margin: const EdgeInsets.only(right: 2, left: 2),
+              decoration: BoxDecoration(
+                color: colors.gold.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.stars_rounded, size: 12, color: colors.gold),
+                  const SizedBox(width: 2),
+                  Text(
+                    '+${item.points}',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w900,
+                      color: colors.gold,
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/analytics_service.dart';
@@ -10,6 +11,7 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/unit_preference.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
+import 'package:vireo/features/onboarding/widgets/why_we_ask_box.dart';
 
 class StepBodyScreen extends ConsumerStatefulWidget {
   const StepBodyScreen({super.key});
@@ -265,6 +267,15 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
               ),
             ),
           ),
+          const SizedBox(height: 12),
+          FadeSlideIn(
+            index: 5,
+            child: WhyWeAskBox(
+              text: Localizations.localeOf(context).languageCode.startsWith('ar')
+                  ? 'نستخدم وزنك وطولك وعمرك لحساب معدل الحرق اليومي (BMR و TDEE) واحتياجك الدقيق من البروتين والسعرات.'
+                  : 'We use your height, weight, and age to compute your BMR, TDEE, and precise protein and calorie targets.',
+            ),
+          ),
         ],
       ),
     );
@@ -326,7 +337,10 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
                   scrollController: FixedExtentScrollController(
                     initialItem: selected,
                   ),
-                  onSelectedItemChanged: (idx) => selected = idx,
+                  onSelectedItemChanged: (idx) {
+                    selected = idx;
+                    HapticFeedback.selectionClick();
+                  },
                   children: items
                       .map((item) => Center(
                             child: Text(

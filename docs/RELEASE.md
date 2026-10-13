@@ -150,3 +150,16 @@ build/app/outputs/bundle/release/app-release.aab
 ```
 
 Upload this `.aab` file to **Google Play Console** under **Internal testing**, **Closed testing**, or **Production**.
+
+---
+
+## 7. Google Play Data-Safety Declaration (Health & Menstrual Data)
+
+When completing or updating the **Data safety form** in Google Play Console:
+
+| Data Type | Collected? | Shared? | Processing / Storage | Purpose | User Control |
+|---|---|---|---|---|---|
+| **Health info – Menstrual / Cycle tracking** (`Health and fitness`) | **No** (Stored locally only) | **No** | Stored strictly in local encrypted on-device storage (Hive). Never uploaded to Supabase or transmitted over network unless explicitly opted into cloud backup. | App functionality / Personalization | User can clear all cycle data on-demand via the "امسحي بيانات الدورة" button in Women's Health settings. |
+| **Fitness info – Workouts, Steps, Weight** (`Health and fitness`) | **Yes** (if logged in) | **No** | Transmitted over HTTPS to Supabase for multi-device sync. | App functionality, analytics | Export/Delete account and all data supported. |
+| **User ID & Email** (`Personal info`) | **Yes** | **No** | Authentication and entitlement tracking (RevenueCat / Supabase). | Account management | Delete account supported. |
+

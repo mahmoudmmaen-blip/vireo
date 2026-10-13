@@ -11,6 +11,7 @@ import 'package:vireo/features/diet_programs/data/diet_programs_catalog.dart';
 import 'package:vireo/features/diet_programs/domain/diet_program.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
+import 'package:vireo/features/onboarding/widgets/why_we_ask_box.dart';
 
 class StepHealthSafetyScreen extends ConsumerStatefulWidget {
   const StepHealthSafetyScreen({super.key});
@@ -243,6 +244,12 @@ class _StepHealthSafetyScreenState
               ),
             );
           }),
+          const SizedBox(height: 8),
+          WhyWeAskBox(
+            text: Localizations.localeOf(context).languageCode.startsWith('ar')
+                ? 'لأمانك أولاً، نتحقق من حالتك الصحية لتعديل شدة التمارين وتقديم تنبيهات وقائية ملائمة لسلامتك.'
+                : 'For your safety first, we check your health conditions to adapt exercise intensity and provide safe guidelines.',
+          ),
         ],
       ),
     );

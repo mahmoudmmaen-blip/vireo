@@ -30,6 +30,7 @@ abstract final class FeatureGates {
   static const _rewardedDietProgramKeyPrefix = 'rewarded_unlock_diet_';
   static const _rewardedAiCoachKey = 'rewarded_unlock_ai_coach';
   static const _rewardedVitalityKey = 'rewarded_unlock_vitality_pro';
+  static const _rewardedCoinProKey = 'rewarded_unlock_coin_pro';
 
   /// Total free meal scans allowed today (base 3 + rewarded scans).
   static int getDailyFreeMealScansAllowed() {
@@ -211,6 +212,22 @@ abstract final class FeatureGates {
     }
   }
 
+  /// Unlocks 1 day of Pro via engagement coins.
+  static Future<void> grantCoinsProDay() async {
+    if (!HiveService.isInitialized) return;
+    final expiry = DateTime.now().add(const Duration(hours: 24)).toIso8601String();
+    await HiveService.settingsBox.put(_rewardedCoinProKey, expiry);
+  }
+
+  /// Checks if 1 day of Pro is unlocked via engagement coins.
+  static bool isCoinProUnlocked() {
+    if (!HiveService.isInitialized) return false;
+    final expiryStr = HiveService.settingsBox.get(_rewardedCoinProKey) as String?;
+    if (expiryStr == null) return false;
+    final expiry = DateTime.tryParse(expiryStr);
+    return expiry != null && expiry.isAfter(DateTime.now());
+  }
+
   static String _todayKey() {
     final now = DateTime.now();
     return '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
@@ -219,6 +236,7 @@ abstract final class FeatureGates {
 
 /// Convenience Riverpod provider for checking PRO access anywhere.
 final isProUserProvider = Provider<bool>((ref) {
+  if (FeatureGates.isCoinProUnlocked()) return true;
   return ref.watch(subscriptionProvider).maybeWhen(
         data: (s) => s.hasPremiumAccess,
         orElse: () => false,

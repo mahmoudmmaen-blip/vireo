@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/core/services/celebration_service.dart';
+import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/workout_session.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
@@ -34,10 +35,14 @@ class _WorkoutFeedbackScreenState extends ConsumerState<WorkoutFeedbackScreen> {
       await ref.read(vitalityDailyLogProvider.notifier).markWorkoutCompleted();
       await StepCounterService.markWorkoutCompleted();
       if (mounted) {
+        final isFemale = ref.read(isFemaleUserProvider);
+        final isAr = Localizations.localeOf(context).languageCode.startsWith('ar');
         await CelebrationService.trigger(
           context,
           type: CelebrationType.workout,
-          message: AppLocalizations.of(context).celebrationWorkoutTitle,
+          message: isFemale && isAr
+              ? 'عاش يا بطلة! خلّصتِ تمرينك النهاردة بنجاح 🔥'
+              : AppLocalizations.of(context).celebrationWorkoutTitle,
         );
       }
       final isPro = ref.read(isProUserProvider);

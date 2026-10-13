@@ -394,18 +394,49 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
 
     items.sort((a, b) => a.minutesOfDay.compareTo(b.minutesOfDay));
 
+    final numberedItems = <TodayPlanItem>[];
+    for (var i = 0; i < items.length; i++) {
+      final it = items[i];
+      final pts = switch (it.kind) {
+        TodayPlanKind.meal => 10,
+        TodayPlanKind.steps => 25,
+        TodayPlanKind.workout => 25,
+        TodayPlanKind.waterReminder => 5,
+        _ => 5,
+      };
+      numberedItems.add(
+        TodayPlanItem(
+          id: it.id,
+          kind: it.kind,
+          minutesOfDay: it.minutesOfDay,
+          icon: it.icon,
+          title: it.title,
+          subtitle: it.subtitle,
+          isPro: it.isPro,
+          mealType: it.mealType,
+          autoComplete: it.autoComplete,
+          section: it.section,
+          progress: it.progress,
+          progressLabel: it.progressLabel,
+          quickActionLabel: it.quickActionLabel,
+          points: pts,
+          stepNumber: i + 1,
+        ),
+      );
+    }
+
     final completedById = <String, bool>{};
-    for (final item in items) {
+    for (final item in numberedItems) {
       completedById[item.id] = isTodayPlanItemComplete(item, ref, manualChecks);
     }
     completedById[waterItem.id] = isTodayPlanItemComplete(waterItem, ref, manualChecks);
 
     final completed = completedById.values.where((v) => v).length;
-    final total = items.length + 1; // including water summary
+    final total = numberedItems.length + 1; // including water summary
 
     final now = _minutesNow();
     String? nowId;
-    for (final item in items) {
+    for (final item in numberedItems) {
       if (completedById[item.id] != true) {
         nowId = item.id;
         if (item.minutesOfDay >= now - 30) break;
@@ -413,7 +444,7 @@ final todayPlanProvider = Provider<TodayPlanBuilder>((ref) {
     }
 
     return TodayPlanSnapshot(
-      items: items,
+      items: numberedItems,
       completedById: completedById,
       completedCount: completed,
       totalCount: total,

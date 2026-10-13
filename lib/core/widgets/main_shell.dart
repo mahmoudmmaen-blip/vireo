@@ -6,6 +6,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/services/sync_engine.dart';
+import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
@@ -179,13 +180,18 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
       }
     });
 
+    final isFemale = ref.watch(isFemaleUserProvider);
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+
     ref.listen(dailyNutritionTotalsProvider, (prev, next) {
       final target = ref.read(calorieGoalProvider).proteinG;
       if (target > 0 && next.protein >= target) {
         CelebrationService.trigger(
           context,
           type: CelebrationType.protein,
-          message: AppLocalizations.of(context).celebrationProteinTitle,
+          message: isFemale && isArabic
+              ? 'عاش يا بطلة! قفلتِ هدف البروتين 💪'
+              : AppLocalizations.of(context).celebrationProteinTitle,
         );
       }
     });
@@ -206,7 +212,9 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
         CelebrationService.trigger(
           context,
           type: CelebrationType.workout,
-          message: AppLocalizations.of(context).celebrationWorkoutTitle,
+          message: isFemale && isArabic
+              ? 'عاش يا بطلة! خلّصتِ تمرينك النهاردة بنجاح 🔥'
+              : AppLocalizations.of(context).celebrationWorkoutTitle,
         );
       }
     });

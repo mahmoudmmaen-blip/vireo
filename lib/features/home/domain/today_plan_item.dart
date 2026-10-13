@@ -40,6 +40,8 @@ class TodayPlanItem {
     this.progress,
     this.progressLabel,
     this.quickActionLabel,
+    this.points = 10,
+    this.stepNumber,
   });
 
   final String id;
@@ -50,6 +52,8 @@ class TodayPlanItem {
   final String subtitle;
   final bool isPro;
   final MealType? mealType;
+  final int points;
+  final int? stepNumber;
 
   /// When true, item completion is synchronized with underlying app state.
   final bool autoComplete;

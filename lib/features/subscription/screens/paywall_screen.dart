@@ -490,6 +490,89 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               }),
               const SizedBox(height: 18),
 
+              // ── CLARITY BOX: "التجربة المجانية تشمل / لا تشمل" (Play Policy & Refund Reduction) ──
+              Builder(
+                builder: (context) {
+                  final activePlan = plans.firstWhere(
+                    (p) => p.id == _selected,
+                    orElse: () => plans.first,
+                  );
+                  final isAnnual = activePlan.id == SubscriptionPlanId.annual;
+                  final renewalText = isAnnual
+                      ? (isAr
+                          ? 'مدة التجربة: 7 أيام مجاناً · سعر التجديد: ${activePlan.priceString} سنوياً'
+                          : 'Trial: 7 days free · Renewal: ${activePlan.priceString}/year')
+                      : (isAr
+                          ? 'تجديد فوري: ${activePlan.priceString} شهرياً'
+                          : 'Billed monthly: ${activePlan.priceString}');
+
+                  return Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: colors.surfaceRaised,
+                      borderRadius: BorderRadius.circular(VRadius.lg),
+                      border: Border.all(color: colors.gold.withValues(alpha: 0.35)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.verified_outlined, color: colors.gold, size: 20),
+                            const SizedBox(width: 8),
+                            Text(
+                              isAr ? 'وضوح تام قبل الاشتراك:' : 'Clear Trial Terms:',
+                              style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: colors.surface,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            renewalText,
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w700,
+                              color: colors.text,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          isAr ? '✅ التجربة المجانية تشمل:' : '✅ Free trial includes:',
+                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          isAr
+                              ? '• مسح الوجبات بالذكاء الاصطناعي (حتى 50 مسح/يوم)\n• محادثة مفتوحة مع المدرب الذكي 24/7\n• كافة برامج التغذية السبعة وسعرات متكيفة\n• تقارير أسبوعية تفصيلية وبدون أي إعلانات'
+                              : '• 50 AI meal scans / day\n• 24/7 personal AI coaching\n• All 7 diet programs & adaptive calories\n• Zero ads and deep weekly reports',
+                          style: TextStyle(fontSize: 12, color: colors.textMute, height: 1.4),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          isAr ? '❌ لا تشمل:' : '❌ Does NOT include:',
+                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          isAr
+                              ? '• أي خصم فوري اليوم (0.00 ج.م حالياً)\n• أي التزام إجباري — تقدر تلغي في أي وقت بضغطة زر من Google Play قبل اليوم السابع ولن يتم خصم أي مليم.'
+                              : '• Any charge today (\$0.00 today)\n• Any forced lock-in — cancel anytime in Google Play before day 7 at no cost.',
+                          style: TextStyle(fontSize: 12, color: colors.textMute, height: 1.4),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 18),
+
               // ── 7-DAY TRIAL TIMELINE (Today / Day 5 reminder / Day 7 billing) ──
               Container(
                 padding: const EdgeInsets.all(16),
