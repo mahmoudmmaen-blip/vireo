@@ -32,7 +32,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
     final lastMeal = nutrition.items.isNotEmpty ? nutrition.items.last : null;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -55,7 +55,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
         child: Material(
           color: Colors.transparent,
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -63,14 +63,14 @@ class MealCaptureHeroCard extends ConsumerWidget {
                 Row(
                   children: [
                     Container(
-                      width: 50,
-                      height: 50,
+                      width: 58,
+                      height: 58,
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white.withValues(alpha: 0.35), width: 1.5),
                       ),
-                      child: const Icon(Icons.camera_alt_rounded, color: Colors.white, size: 26),
+                      child: const Icon(Icons.camera_alt_rounded, color: Colors.white, size: 30),
                     ),
                     const SizedBox(width: 14),
                     Expanded(
@@ -81,7 +81,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
                             isArabic ? 'صوّر وجبتك' : 'Scan Your Meal',
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 21,
                               fontWeight: FontWeight.w900,
                               letterSpacing: -0.2,
                             ),
@@ -91,7 +91,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
                             isArabic ? 'تحليل في ثواني • سعرات وبروتين' : 'Instant analysis • Calories & protein',
                             style: TextStyle(
                               color: Colors.white.withValues(alpha: 0.85),
-                              fontSize: 12,
+                              fontSize: 12.5,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -99,28 +99,35 @@ class MealCaptureHeroCard extends ConsumerWidget {
                       ),
                     ),
                     if (!ref.watch(isProUserProvider)) ...[
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.22),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.4)),
-                        ),
-                        child: Text(
-                          isArabic
-                              ? 'فاضلك ${FeatureGates.getDailyFreeMealScansAllowed()} تحليلات النهارده'
-                              : '${FeatureGates.getDailyFreeMealScansAllowed()} free scans left today',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w800,
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.22),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.white.withValues(alpha: 0.4)),
+                            ),
+                            child: Text(
+                              isArabic
+                                  ? 'فاضلك ${FeatureGates.getDailyFreeMealScansAllowed()} تحليلات النهارده'
+                                  : '${FeatureGates.getDailyFreeMealScansAllowed()} free scans left today',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ],
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 16),
 
                 // Row of 4 quick chips: 📷 تصوير · 🖼 الاستوديو · ✍️ اكتب · 🔎 باركود
                 Row(
@@ -172,11 +179,11 @@ class MealCaptureHeroCard extends ConsumerWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 14),
 
                 // Under it: Today's last logged meal mini row OR "لسه ما سجلتش فطارك"
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   decoration: BoxDecoration(
                     color: Colors.black.withValues(alpha: 0.18),
                     borderRadius: BorderRadius.circular(12),
@@ -185,7 +192,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
                     children: [
                       Icon(
                         lastMeal != null ? Icons.check_circle_rounded : Icons.schedule_rounded,
-                        size: 16,
+                        size: 17,
                         color: Colors.white.withValues(alpha: 0.9),
                       ),
                       const SizedBox(width: 8),
@@ -196,7 +203,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
                               : (isArabic ? 'لسه ما سجلتش $slotName' : 'Haven\'t logged $slotName yet'),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 12.5,
                             fontWeight: FontWeight.w700,
                           ),
                           maxLines: 1,
@@ -208,7 +215,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
                           '${lastMeal.protein.round()}g P',
                           style: TextStyle(
                             color: Colors.white.withValues(alpha: 0.8),
-                            fontSize: 11,
+                            fontSize: 12,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
@@ -249,7 +256,7 @@ class _QuickActionChip extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(10),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.16),
           borderRadius: BorderRadius.circular(10),
@@ -258,7 +265,7 @@ class _QuickActionChip extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: Colors.white, size: 14),
+            Icon(icon, color: Colors.white, size: 15),
             const SizedBox(width: 4),
             Flexible(
               child: Text(
@@ -266,7 +273,7 @@ class _QuickActionChip extends StatelessWidget {
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w800,
-                  fontSize: 11,
+                  fontSize: 12,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

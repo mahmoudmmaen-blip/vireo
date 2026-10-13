@@ -237,8 +237,8 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                         builder: (context, child) {
                           final pulseAlpha = isRunning ? 0.25 + (_pulseController.value * 0.35) : 0.0;
                           return Container(
-                            width: 52,
-                            height: 52,
+                            width: 60,
+                            height: 60,
                             decoration: BoxDecoration(
                               color: isRunning
                                   ? PremiumStepsHeroCard.stepsAccent
@@ -248,13 +248,13 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                                 color: isRunning
                                     ? Colors.white.withValues(alpha: 0.8)
                                     : Colors.white30,
-                                width: isRunning ? 2.0 : 1.5,
+                                width: isRunning ? 2.2 : 1.5,
                               ),
                               boxShadow: isRunning
                                   ? [
                                       BoxShadow(
                                         color: PremiumStepsHeroCard.stepsAccent.withValues(alpha: pulseAlpha),
-                                        blurRadius: 12 + (_pulseController.value * 6),
+                                        blurRadius: 14 + (_pulseController.value * 6),
                                         spreadRadius: 2 + (_pulseController.value * 3),
                                       ),
                                     ]
@@ -263,8 +263,8 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                             child: Center(
                               child: _isSwitching
                                   ? const SizedBox(
-                                      width: 22,
-                                      height: 22,
+                                      width: 24,
+                                      height: 24,
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2.5,
                                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
@@ -273,7 +273,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                                   : Icon(
                                       isRunning ? Icons.pause_rounded : Icons.play_arrow_rounded,
                                       color: isRunning ? const Color(0xFF064E3B) : Colors.white,
-                                      size: 28,
+                                      size: 32,
                                     ),
                             ),
                           );
@@ -285,7 +285,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                       isRunning ? 'شغّال' : 'ابدأ',
                       style: TextStyle(
                         color: isRunning ? PremiumStepsHeroCard.stepsAccent : Colors.white70,
-                        fontSize: 11,
+                        fontSize: 12,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -297,29 +297,34 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.edit, size: 16, color: Colors.white54),
-                          const SizedBox(width: 6),
-                          Text(
-                            NumberFormat.decimalPattern().format(widget.stepsCurrent),
-                            style: const TextStyle(
-                              fontSize: 48,
-                              fontWeight: FontWeight.w900,
-                              color: Colors.white,
-                              letterSpacing: -1,
-                              height: 1.0,
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.edit, size: 16, color: Colors.white54),
+                            const SizedBox(width: 6),
+                            Text(
+                              NumberFormat.decimalPattern().format(widget.stepsCurrent),
+                              style: const TextStyle(
+                                fontSize: 55,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                                letterSpacing: -1.2,
+                                height: 1.0,
+                                fontFeatures: [FontFeature.tabularFigures()],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 6),
                       Text(
                         '/$effectiveGoal خطوة',
                         style: const TextStyle(
                           color: Colors.white70,
-                          fontSize: 15,
+                          fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -334,7 +339,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: SizedBox(
-                height: 16,
+                height: 18,
                 child: LinearProgressIndicator(
                   value: ratio,
                   backgroundColor: const Color(0xFF2C3E55),
@@ -512,23 +517,23 @@ class _DayCircleItem extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: 38,
-          height: 38,
+          width: 40,
+          height: 40,
           child: Stack(
             alignment: Alignment.center,
             children: [
               // Progress Ring around circle
               CircularProgressIndicator(
                 value: progress,
-                strokeWidth: 2.8,
+                strokeWidth: 3.0,
                 backgroundColor: Colors.white12,
                 valueColor: AlwaysStoppedAnimation<Color>(
                   reached ? accent : accent.withValues(alpha: 0.7),
                 ),
               ),
               Container(
-                width: 30,
-                height: 30,
+                width: 32,
+                height: 32,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: reached ? accent : const Color(0xFF223048),
