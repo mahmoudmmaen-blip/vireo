@@ -23,6 +23,7 @@ import 'package:vireo/features/nutrition/domain/household_measures.dart';
 import 'package:vireo/features/nutrition/providers/cup_size_preference_provider.dart';
 import 'package:vireo/features/nutrition/widgets/portion_picker_sheet.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
+import 'package:vireo/features/fasting/providers/fasting_provider.dart';
 
 class MealReviewScreen extends ConsumerStatefulWidget {
   const MealReviewScreen({super.key, required this.draft});
@@ -47,6 +48,104 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   final Set<int> _expandedIndices = {};
   final _scrollController = ScrollController();
   final _resolver = MealResolutionService(FoodDbRepository.instance);
+  bool _clarifyingQuestionDismissed = false;
+
+  int get _currentOilGrams {
+    final idx = _lines.indexWhere((l) =>
+        l.food?.id == 'cooking_oil_estimate' ||
+        l.nameEn.toLowerCase().contains('cooking oil') ||
+        l.nameAr.contains('زيت'));
+    if (idx != -1) return _lines[idx].grams.round();
+    return 0;
+  }
+
+  void _setCookingOilGrams(int grams) {
+    HapticFeedback.selectionClick();
+    setState(() {
+      final idx = _lines.indexWhere((l) =>
+          l.food?.id == 'cooking_oil_estimate' ||
+          l.nameEn.toLowerCase().contains('cooking oil') ||
+          l.nameAr.contains('زيت'));
+      if (grams <= 0) {
+        if (idx != -1) _lines.removeAt(idx);
+      } else {
+        final oilLine = MealResolutionService.createCookingOilLine(oilGrams: grams.toDouble());
+        if (idx != -1) {
+          _lines[idx] = oilLine;
+        } else {
+          _lines.add(oilLine);
+        }
+      }
+    });
+  }
+
+  void _addQuickAddon(String id, String nameAr, String nameEn, double grams) {
+    HapticFeedback.selectionClick();
+    final food = FoodDbRepository.instance.byId(id);
+    final oil = FoodDbRepository.instance.byId('sunflower_oil');
+    setState(() {
+      _lines.add(
+        resolveLine(
+          scanned: ScannedFoodItem(
+            nameAr: nameAr,
+            nameEn: nameEn,
+            foodIdGuess: id,
+            estimatedGrams: grams,
+            cookingMethod: CookingMethod.raw,
+            confidence: 1.0,
+          ),
+          food: food,
+          oilFood: oil,
+        ),
+      );
+    });
+  }
+
+  ResolvedMealLine? _findAmbiguousLine() {
+    if (_clarifyingQuestionDismissed) return null;
+    for (final l in _lines) {
+      final n = '${l.nameEn} ${l.nameAr}'.toLowerCase();
+      final isRelevant = n.contains('chicken') ||
+          n.contains('دجاج') ||
+          n.contains('فراخ') ||
+          n.contains('meat') ||
+          n.contains('لحم') ||
+          n.contains('fish') ||
+          n.contains('سمك') ||
+          n.contains('potato') ||
+          n.contains('بطاطس');
+      if (isRelevant && (l.confidence < 0.6 || l.cookingMethod == CookingMethod.fried || l.cookingMethod == CookingMethod.grilled)) {
+        return l;
+      }
+    }
+    return null;
+  }
+
+  void _answerClarifyingQuestion(ResolvedMealLine targetLine, CookingMethod newMethod) {
+    HapticFeedback.mediumImpact();
+    final oil = FoodDbRepository.instance.byId('sunflower_oil');
+    final updated = resolveLine(
+      scanned: ScannedFoodItem(
+        nameAr: targetLine.nameAr,
+        nameEn: targetLine.nameEn,
+        foodIdGuess: targetLine.food?.id,
+        estimatedGrams: targetLine.grams,
+        cookingMethod: newMethod,
+        confidence: 0.95,
+      ),
+      food: targetLine.food,
+      oilFood: oil,
+      source: targetLine.source,
+      methodOverride: newMethod,
+    );
+    setState(() {
+      _clarifyingQuestionDismissed = true;
+      final idx = _lines.indexOf(targetLine);
+      if (idx != -1) {
+        _lines[idx] = updated;
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -150,6 +249,37 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   }
 
   Future<void> _save(MealAdviceResult advice) async {
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+
+    // Integration: Logging a meal during a fast asks "تنهي الصيام؟"
+    final fastingState = ref.read(fastingProvider);
+    if (fastingState.isFasting) {
+      final shouldEnd = await showDialog<bool>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(isArabic ? 'أنت صائم حالياً — تنهي الصيام؟ ⏱️' : 'Fasting Active — End Fast? ⏱️'),
+          content: Text(
+            isArabic
+                ? 'لديك جلسة صيام نشطة الآن. هل ترغب في إنهائها مع تسجيل هذه الوجبة وبدء نافذة الطعام؟'
+                : 'You have an active fast session. Would you like to end it with this meal?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(isArabic ? 'لا، متابعة الصيام' : 'Keep Fasting'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(isArabic ? 'نعم، إنهاء الصيام' : 'End Fast Now'),
+            ),
+          ],
+        ),
+      );
+      if (shouldEnd == true) {
+        await ref.read(fastingProvider.notifier).endFast(isArabic: isArabic);
+      }
+    }
+
     final result = MealScanDraft(
       lines: _lines,
       imageBytes: _images.isNotEmpty ? _images.first : widget.draft.imageBytes,
@@ -158,14 +288,13 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
 
     await ref.read(aiMealLogProvider.notifier).save(result);
     await recordSuccessfulMealScan();
-    await _resolver.rememberLines(_lines);
+    await _resolver.rememberLines(_lines, originalScanned: widget.draft.originalScanned);
     await ref.read(mealRecentProvider.notifier).push(_lines);
     ref.read(confirmedMealsProvider.notifier).update((s) => {...s, _slot});
     ref.invalidate(todayNutritionProvider);
 
     if (!mounted) return;
     final l10n = AppLocalizations.of(context);
-    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
 
     // Show friendly advice toast with action button
     ScaffoldMessenger.of(context).showSnackBar(
@@ -428,6 +557,174 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                   ),
                   const SizedBox(height: 12),
 
+                  // ── SMART CLARIFYING QUESTION (At most ONE banner) ──
+                  if (_findAmbiguousLine() != null) ...[
+                    Builder(
+                      builder: (context) {
+                        final ambiguous = _findAmbiguousLine()!;
+                        final itemName = isArabic ? ambiguous.nameAr : ambiguous.nameEn;
+                        return Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: colors.ember.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: colors.ember.withValues(alpha: 0.4)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.help_center_rounded, color: colors.ember, size: 18),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      isArabic
+                                          ? 'سؤال سريع لدقة أعلى: $itemName مشوية ولا مقلية؟'
+                                          : 'Quick check: Is $itemName grilled or fried?',
+                                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    visualDensity: VisualDensity.compact,
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(),
+                                    icon: const Icon(Icons.close, size: 16),
+                                    onPressed: () => setState(() => _clarifyingQuestionDismissed = true),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(vertical: 8),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                      ),
+                                      onPressed: () => _answerClarifyingQuestion(ambiguous, CookingMethod.grilled),
+                                      child: Text(isArabic ? 'مشوية 🍗' : 'Grilled 🍗', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(vertical: 8),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                      ),
+                                      onPressed: () => _answerClarifyingQuestion(ambiguous, CookingMethod.fried),
+                                      child: Text(isArabic ? 'مقلية 🍳' : 'Fried 🍳', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                  ],
+
+                  // ── HIDDEN CALORIES & COOKING OIL AUTO ADJUSTMENT ──
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: colors.surface,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(Icons.opacity_rounded, color: Color(0xFFF59E0B), size: 16),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                isArabic ? 'زيت وسمن الطبخ (تقديري)' : 'Cooking Oil / Ghee (Estimate)',
+                                style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                              ),
+                            ),
+                            if (_currentOilGrams > 0)
+                              Text(
+                                '${(_currentOilGrams * 8.84).round()} kcal',
+                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFFF59E0B)),
+                              ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Wrap(
+                          spacing: 6,
+                          runSpacing: 6,
+                          children: [
+                            ChoiceChip(
+                              label: Text(isArabic ? 'لا (0 جم)' : 'None (0g)', style: const TextStyle(fontSize: 11.5)),
+                              selected: _currentOilGrams == 0,
+                              onSelected: (_) => _setCookingOilGrams(0),
+                            ),
+                            ChoiceChip(
+                              label: Text(isArabic ? 'قليل (5 جم)' : 'Low (5g)', style: const TextStyle(fontSize: 11.5)),
+                              selected: _currentOilGrams == 5,
+                              onSelected: (_) => _setCookingOilGrams(5),
+                            ),
+                            ChoiceChip(
+                              label: Text(isArabic ? 'متوسط (10 جم)' : 'Med (10g)', style: const TextStyle(fontSize: 11.5)),
+                              selected: _currentOilGrams == 10,
+                              onSelected: (_) => _setCookingOilGrams(10),
+                            ),
+                            ChoiceChip(
+                              label: Text(isArabic ? 'كتير (20 جم)' : 'High (20g)', style: const TextStyle(fontSize: 11.5)),
+                              selected: _currentOilGrams >= 20,
+                              onSelected: (_) => _setCookingOilGrams(20),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        // Quick Addon Chips (Tahini, Dressing, Sugar)
+                        Row(
+                          children: [
+                            Text(
+                              isArabic ? 'إضافات شائعة:' : 'Common extras:',
+                              style: TextStyle(fontSize: 11, color: colors.textMute, fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    ActionChip(
+                                      visualDensity: VisualDensity.compact,
+                                      label: Text(isArabic ? '+ طحينة (25 جم)' : '+ Tahini (25g)', style: const TextStyle(fontSize: 10.5)),
+                                      onPressed: () => _addQuickAddon('tahini', 'طحينة', 'Tahini dip', 25),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    ActionChip(
+                                      visualDensity: VisualDensity.compact,
+                                      label: Text(isArabic ? '+ صوص/دريسنج (20 جم)' : '+ Dressing (20g)', style: const TextStyle(fontSize: 10.5)),
+                                      onPressed: () => _addQuickAddon('salad_dressing', 'صوص وسلطة', 'Salad dressing', 20),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    ActionChip(
+                                      visualDensity: VisualDensity.compact,
+                                      label: Text(isArabic ? '+ سكر بمشروب (10 جم)' : '+ Drink sugar (10g)', style: const TextStyle(fontSize: 10.5)),
+                                      onPressed: () => _addQuickAddon('sugar_white_granulated', 'سكر أبيض بالمشروب', 'Sugar in drink', 10),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+
                   // Items List Header
                   Row(
                     children: [
@@ -671,23 +968,26 @@ class _StickyTopSummaryCard extends StatelessWidget {
                     fColor: VMacro.fat,
                   ),
                   child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '$kcal',
-                          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
-                        ),
-                        Text(
-                          isArabic ? 'سعرة' : 'kcal',
-                          semanticsLabel: '$kcal kcal',
-                          style: TextStyle(
-                            color: colors.textMute,
-                            fontSize: 9,
-                            fontWeight: FontWeight.bold,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '$kcal',
+                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
                           ),
-                        ),
-                      ],
+                          Text(
+                            isArabic ? 'سعرة' : 'kcal',
+                            semanticsLabel: '$kcal kcal',
+                            style: TextStyle(
+                              color: colors.textMute,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -1111,45 +1411,70 @@ class _MfpItemRow extends StatelessWidget {
                           style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
                         ),
                         const SizedBox(height: 3),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
-                          decoration: BoxDecoration(
-                            color: line.isUnsure
-                                ? const Color(0xFFF59E0B).withValues(alpha: 0.15)
-                                : (line.food != null
-                                    ? const Color(0xFF10B981).withValues(alpha: 0.12)
-                                    : const Color(0xFF6366F1).withValues(alpha: 0.12)),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            line.isUnsure
-                                ? (isArabic ? 'مش متأكدين ⚠️' : 'Unsure ⚠️')
-                                : (line.food != null
-                                    ? (isArabic ? 'من قاعدة البيانات' : 'From Database')
-                                    : (isArabic ? 'تقدير الذكاء الاصطناعي' : 'AI Estimate')),
-                            style: TextStyle(
-                              color: line.isUnsure
-                                  ? const Color(0xFFF59E0B)
-                                  : (line.food != null ? const Color(0xFF10B981) : const Color(0xFF6366F1)),
-                              fontSize: 9.5,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                        Builder(
+                          builder: (context) {
+                            final (sourceLabel, sourceColor) = () {
+                              if (line.isUnsure) {
+                                return (isArabic ? 'مش متأكدين ⚠️' : 'Unsure ⚠️', const Color(0xFFF59E0B));
+                              }
+                              return switch (line.source) {
+                                FoodDatabaseSource.personalCalibrated => (
+                                    isArabic ? 'معدّلة على أكلك 💜' : 'Calibrated 💜',
+                                    const Color(0xFF8B5CF6)
+                                  ),
+                                FoodDatabaseSource.egyptianDb => (
+                                    isArabic ? 'قاعدة بيانات' : 'Database',
+                                    const Color(0xFF10B981)
+                                  ),
+                                FoodDatabaseSource.usda => (
+                                    'USDA',
+                                    const Color(0xFF06B6D4)
+                                  ),
+                                FoodDatabaseSource.estimated => (
+                                    isArabic ? 'تقدير' : 'Estimated',
+                                    const Color(0xFFF59E0B)
+                                  ),
+                              };
+                            }();
+
+                            return Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                              decoration: BoxDecoration(
+                                color: sourceColor.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                sourceLabel,
+                                style: TextStyle(
+                                  color: sourceColor,
+                                  fontSize: 9.5,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(width: 8),
                   Flexible(
-                    child: Text(
-                      '${line.grams.round()} جم  ·  ${line.kcal.round()} سعرة',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: colors.textMute,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    child: Builder(
+                      builder: (context) {
+                        final calRange = (line.kcalLow != null && line.kcalHigh != null && (line.kcalHigh! - line.kcalLow! > 5))
+                            ? '≈ ${line.kcal.round()} (${line.kcalLow!.round()}–${line.kcalHigh!.round()})'
+                            : '${line.kcal.round()} سعرة';
+                        return Text(
+                          '${line.grams.round()} جم  ·  $calRange',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: colors.textMute,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -1441,6 +1766,30 @@ class _ItemMathTable extends StatelessWidget {
             title: locale.startsWith('ar') ? 'المصدر والدقة' : 'Source & Confidence',
             value: '$sourceName (${l10n.mealReviewConfidence(confPct)})',
             colors: colors,
+          ),
+          const Divider(height: 10),
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.verified_rounded, size: 14, color: colors.ember),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    locale.startsWith('ar')
+                        ? 'خطوات الحساب: 1. التعرّف البصري ➔ 2. الجرامات بمعايرة الطبق ➔ 3. مطابقة قاعدة بيانات معتمدة ➔ 4. امتصاص زيوت الطهي ➔ 5. معايرة مخصصة.'
+                        : '5-Step Math: 1. Vision ID ➔ 2. Plate-calibrated grams ➔ 3. Verified DB lookup ➔ 4. Cooking oil absorption ➔ 5. Personal portion learning.',
+                    style: TextStyle(
+                      fontSize: 10.5,
+                      color: colors.textMute,
+                      height: 1.3,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

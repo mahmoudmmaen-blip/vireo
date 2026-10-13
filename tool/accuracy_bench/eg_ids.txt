@@ -1,0 +1,439 @@
+baladi_bread	خبز بلدي	baladi bread	266
+pita_bread	خبز شامي	pita bread	275
+white_rice_cooked	أرز أبيض مطبوخ	white rice cooked	130
+brown_rice_cooked	أرز بني مطبوخ	brown rice cooked	123
+pasta_cooked	مكرونة مطبوخة	pasta cooked	158
+bulgur_cooked	برغل مطبوخ	bulgur cooked	83
+couscous_cooked	كسكس مطبوخ	couscous cooked	112
+oats_dry	شوفان جاف	oats dry	389
+cornflakes	كورن فليكس	corn flakes	357
+foul_medames	فول مدمس	fava beans cooked	110
+falafel	طعمية	falafel	333
+lentils_cooked	عدس مطبوخ	lentils cooked	116
+chickpeas_cooked	حمص مطبوخ	chickpeas cooked	164
+hummus	حمص بالطحينة	hummus	166
+white_beans_cooked	فاصوليا بيضاء مطبوخة	white beans cooked	139
+black_beans_cooked	فاصوليا سوداء مطبوخة	black beans cooked	132
+egg_whole_raw	بيض نيء	egg whole raw	143
+egg_boiled	بيض مسلوق	egg boiled	155
+egg_fried	بيض مقلي	egg fried	196
+egg_omelette	عجة بيض	omelette	154
+chicken_breast_raw	صدر دجاج نيء	chicken breast raw	120
+chicken_breast_grilled	صدر دجاج مشوي	chicken breast grilled	165
+chicken_thigh_cooked	فخدة دجاج مطبوخة	chicken thigh cooked	229
+chicken_fried	دجاج مقلي	chicken fried	246
+whole_chicken_roasted	دجاجة مشوية	chicken roasted	239
+beef_lean_raw	لحم بقري قليل الدهن نيء	beef lean raw	158
+beef_grilled	لحم بقري مشوي	beef grilled	250
+kofta	كفتة	kofta / meatballs	250
+lamb_cooked	لحم ضأن مطبوخ	lamb cooked	294
+liver_beef_cooked	كبدة بقري مطبوخة	beef liver cooked	191
+fish_tilapia_cooked	بلطي مشوي	tilapia cooked	128
+fish_salmon_cooked	سلمون مطبوخ	salmon cooked	206
+fish_tuna_canned	تونة معلبة بالماء	tuna canned in water	116
+shrimp_cooked	جمبري مطبوخ	shrimp cooked	99
+turkey_breast	صدر رومي	turkey breast	135
+milk_whole	حليب كامل الدسم	whole milk	61
+milk_skim	حليب خالي الدسم	skim milk	34
+yogurt_plain	زبادي سادة	plain yogurt	61
+yogurt_greek	زبادي يوناني	Greek yogurt	97
+labneh	لبنة	labneh	146
+cottage_cheese	جبنة قريش	cottage cheese	98
+feta_cheese	جبنة فيتا	feta cheese	264
+cheddar_cheese	جبنة شيدر	cheddar cheese	403
+mozzarella	جبنة موزاريلا	mozzarella	300
+white_cheese_egyptian	جبنة بيضاء	white cheese	264
+butter	زبدة	butter	717
+ghee	سمن بلدي	ghee / clarified butter	876
+olive_oil	زيت زيتون	olive oil	884
+sunflower_oil	زيت عباد الشمس	sunflower oil	884
+corn_oil	زيت ذرة	corn oil	884
+tahini	طحينة	tahini	595
+molokhia_cooked	ملوخية مطبوخة	molokhia cooked	37
+okra_cooked	بامية مطبوخة	okra cooked	27
+tomato_raw	طماطم	tomato raw	21
+cucumber	خيار	cucumber	18
+onion_raw	بصل	onion raw	40
+garlic_raw	ثوم	garlic raw	149
+potato_boiled	بطاطس مسلوقة	potato boiled	87
+potato_fried	بطاطس مقلية	french fries	312
+eggplant_cooked	باذنجان مطبوخ	eggplant cooked	35
+zucchini_cooked	كوسة مطبوخة	zucchini cooked	19
+spinach_cooked	سبانخ مطبوخة	spinach cooked	30
+cabbage_raw	كرنب	cabbage	29
+carrot_raw	جزر	carrot	41
+lettuce	خس	lettuce	19
+pepper_green	فلفل أخضر	green pepper	24
+peas_cooked	بسلة مطبوخة	peas cooked	84
+corn_cooked	ذرة مطبوخة	corn cooked	111
+mahshi_mix	محشي (أرز وخضار)	stuffed vegetables (mahshi)	120
+date_medjool	تمر	dates	277
+banana	موز	banana	89
+apple	تفاح	apple	52
+orange	برتقال	orange	47
+mango	مانجو	mango	60
+watermelon	بطيخ	watermelon	35
+grapes	عنب	grapes	69
+strawberry	فراولة	strawberry	32
+pomegranate	رمان	pomegranate	83
+guava	جوافة	guava	68
+fig_raw	تين	fig	74
+raisins	زبيب	raisins	299
+avocado	أفوكادو	avocado	160
+lemon	ليمون	lemon	44
+cantaloupe	شمام	cantaloupe	34
+almonds	لوز	almonds	579
+peanuts	فول سوداني	peanuts	567
+walnuts	جوز	walnuts	654
+cashews	كاجو	cashews	553
+pistachio	فستق	pistachios	560
+pumpkin_seeds	بذور يقطين	pumpkin seeds	559
+sesame_seeds	سمسم	sesame seeds	573
+basbousa	بسبوسة	basbousa	350
+kunafa	كنافة	kunafa	340
+baklava	بقلاوة	baklava	428
+om_ali	أم علي	om ali	220
+rice_pudding	أرز باللبن	rice pudding	133
+ice_cream_vanilla	آيس كريم فانيليا	vanilla ice cream	207
+chocolate_dark	شوكولاتة داكنة	dark chocolate	546
+honey	عسل	honey	304
+sugar_white	سكر أبيض	white sugar	387
+halawa	حلاوة طحينية	halva	469
+tea_black_brewed	شاي أسود	black tea brewed	1
+coffee_brewed	قهوة	coffee brewed	0
+sugarcane_juice	عصير قصب	sugarcane juice	61
+orange_juice	عصير برتقال	orange juice	45
+cola	كولا	cola soft drink	42
+ayran	عيران	ayran / salted yogurt drink	35
+karkade	كركديه	hibiscus tea	0
+sahlab	سحلب	sahlab drink	90
+koshari	كشري	koshari	150
+foul_sandwich	سندوتش فول	foul sandwich	180
+taameya_sandwich	سندوتش طعمية	falafel sandwich	280
+shawarma_chicken	شاورما فراخ	chicken shawarma	220
+hawawshi	حواوشي	hawawshi	280
+molokhia_with_rice	ملوخية بأرز	molokhia with rice	95
+okara_stew	بامية بصلصة	okra stew	70
+macarona_beshamel	مكرونة بالبشاميل	pasta bechamel	180
+pizza_cheese	بيتزا جبنة	cheese pizza	266
+burger_beef	برجر لحم	beef burger	295
+sardines_canned	سردين معلب	sardines canned	208
+mackerel_cooked	ماكريل مطبوخ	mackerel cooked	262
+duck_cooked	بط مطبوخ	duck cooked	337
+rabbit_cooked	أرنب مطبوخ	rabbit cooked	173
+tofu	توفو	tofu	76
+tempeh	تمبيه	tempeh	192
+cream_cheese	جبنة كريمي	cream cheese	342
+sour_cream	قشطة حامضة	sour cream	193
+ricotta	ريكوتا	ricotta	174
+parmesan	بارميزان	parmesan	392
+sweet_potato_cooked	بطاطا حلوة مطبوخة	sweet potato cooked	90
+broccoli_cooked	بروكلي مطبوخ	broccoli cooked	42
+cauliflower_cooked	قرنبيط مطبوخ	cauliflower cooked	28
+mushroom_raw	مشروم	mushroom	28
+green_beans_cooked	فاصوليا خضراء مطبوخة	green beans cooked	42
+beet_cooked	بنجر مطبوخ	beet cooked	44
+turnip_cooked	لفت مطبوخ	turnip cooked	22
+radish	فجل	radish	16
+parsley	بقدونس	parsley	44
+cilantro	كزبرة خضراء	cilantro	28
+mint	نعناع	mint	53
+ginger_raw	زنجبيل	ginger	80
+pancake	بان كيك	pancake	227
+toast_white	توست أبيض	white toast	265
+croissant	كرواسون	croissant	406
+jam_strawberry	مربى فراولة	strawberry jam	250
+peanut_butter	زبدة فول سوداني	peanut butter	588
+nutella	نوتيلا	chocolate hazelnut spread	539
+mayo	مايونيز	mayonnaise	680
+ketchup	كاتشب	ketchup	112
+mustard	مستردة	mustard	66
+soy_sauce	صلصة صويا	soy sauce	53
+vinegar	خل	vinegar	0
+broth_chicken	مرق دجاج	chicken broth	12
+machboos_rice	مجبوس / كبسة	machboos / kabsa rice	160
+harees	هريس	harees	120
+thareed	ثريد	thareed	140
+luqaimat	لقيمات	luqaimat	380
+samosa	سمبوسة	samosa	308
+kibbeh	كبة	kibbeh	250
+tabbouleh	تبولة	tabbouleh	75
+fattoush	فتوش	fattoush	90
+baba_ganoush	بابا غنوج	baba ganoush	100
+mutabal	متبل	mutabal	110
+warak_enab	ورق عنب	stuffed grape leaves	140
+ful_nabet	فول نابت	sprouted fava	100
+besara	بصارة	besara (fava puree)	120
+keshk	كشك	keshk	150
+freekeh_cooked	فريكة مطبوخة	freekeh cooked	141
+quinoa_cooked	كينوا مطبوخة	quinoa cooked	120
+barley_cooked	شعير مطبوخ	barley cooked	123
+popcorn	فشار	popcorn	387
+chips_potato	شيبسي	potato chips	536
+biscuit_plain	بسكويت سادة	plain biscuit	450
+cake_plain	كيك سادة	plain cake	350
+whey_protein	واي بروتين	whey protein powder	392
+protein_bar	بروتين بار	protein bar	380
+skim_labneh	لبنة قليلة الدسم	low-fat labneh	90
+turkey_pastrami	بسطرمة رومي	turkey pastrami	120
+beef_pastrami	بسطرمة	beef pastrami	150
+mortadella	مرتديلا	mortadella	311
+hotdog	هوت دوج	hot dog	290
+sausage	سجق	sausage	300
+liver_pate	باتيه كبدة	liver pate	250
+dumyati_cheese	جبنة دمياطي	Domiati cheese	250
+karish_cheese	جبنة قريش مصرية	karish cheese	100
+rumi_cheese	جبنة رومي	Rumi cheese	380
+zabadi_flavored	زبادي بالفواكه	fruit yogurt	99
+cream_whipping	كريمة خفق	whipping cream	340
+milk_powder	لبن بودرة	milk powder	496
+evaporated_milk	لبن مكثف	evaporated milk	134
+condensed_milk	لبن محلى مكثف	sweetened condensed milk	321
+bread_whole_wheat	خبز قمح كامل	whole wheat bread	247
+rice_cake	كعكة أرز	rice cake	387
+tortilla_flour	تورتيلا دقيق	flour tortilla	312
+bagel	بيجل	bagel	257
+english_muffin	مافن إنجليزي	English muffin	227
+hash_brown	هاش براون	hash brown	265
+bacon_cooked	بيكون مطبوخ	bacon cooked	541
+ham	لحم خنزير مقدد	ham	145
+salami	سلامي	salami	378
+anchovy	أنشوجة	anchovy	210
+clam_cooked	محار مطبوخ	clam cooked	148
+crab_cooked	كابوريا مطبوخة	crab cooked	97
+lobster_cooked	إستاكوزا مطبوخة	lobster cooked	89
+squid_cooked	كلاماري مطبوخ	squid cooked	92
+octopus_cooked	أخطبوط مطبوخ	octopus cooked	82
+asparagus_cooked	هليون مطبوخ	asparagus cooked	28
+artichoke_cooked	خرشوف مطبوخ	artichoke cooked	62
+celery	كرفس	celery	16
+eggplant_fried	باذنجان مقلي	eggplant fried	180
+onion_fried	بصل مقلي	fried onion	400
+garlic_bread	خبز بالثوم	garlic bread	350
+lasagna	لازانيا	lasagna	160
+pasta_carbonara	مكرونة كاربونارا	pasta carbonara	220
+nasi_rice_spiced	أرز مبهر	spiced rice	145
+vermicelli_rice	أرز بالشعرية	rice with vermicelli	150
+lentil_soup	شوربة عدس	lentil soup	80
+chicken_soup	شوربة فراخ	chicken soup	40
+vegetable_soup	شوربة خضار	vegetable soup	35
+molokhia_soup	شوربة ملوخية	molokhia soup	45
+smoothie_banana	سموذي موز	banana smoothie	80
+energy_drink	مشروب طاقة	energy drink	45
+coconut_water	ماء جوز هند	coconut water	19
+almond_milk	حليب لوز	almond milk	15
+oat_milk	حليب شوفان	oat milk	43
+ful_medames_plain	فول مدمس سادة	ful medames plain	110
+ful_with_tahina	فول بالطحينة والزيت الحار	ful with tahini and flaxseed oil	165
+ful_with_olive_oil	فول بزيت الزيتون والليمون	ful with olive oil and lemon	145
+ful_iskandarani	فول إسكندراني بالطماطم والفلفل	alexandrian ful with tomatoes and peppers	125
+taameya_falafel	طعمية مصرية (فلافل مقلية)	egyptian taameya falafel	285
+taameya_baked_airfryer	طعمية في الفرن أو القلاية الهوائية	baked or airfried taameya	175
+taameya_stuffed	طعمية محشية شطة وبصل	stuffed spicy taameya	295
+gebna_quraish	جبنة قريش مصرية	egyptian quraish cottage cheese	98
+gebna_roumi	جبنة رومي مصرية	egyptian roumi cheese	380
+gebna_beida_baramili	جبنة بيضاء براميلي / إسطنبولي	egyptian aged white feta cheese	260
+gebna_mesh	مش فلاحي مصري قديم	egyptian aged spicy mesh cheese	230
+eish_fino	عيش فينو مصري	egyptian fino bread roll	280
+eish_shami	عيش شامي أبيض	egyptian white shami flatbread	275
+eish_sun_shamsi	عيش شمسي صعيدي	upper egypt shamsi sun bread	255
+feteer_meshaltet	فطير مشلتت فلاحي بالسمن البلدي	egyptian feteer meshaltet with ghee	440
+baleela_egyptian	بليلة قمح مصرية باللبن	egyptian wheat baleela with milk	115
+shakshouka_egyptian	شكشوكة مصرية بالبيض والطماطم والبصل	egyptian egg shakshuka	130
+eggs_pastrami	بيض بالبسطرمة والسمنة	scrambled eggs with pastrami	210
+koshary_egyptian	كشري مصري بالدقة والصلصة	egyptian koshary with lentils and pasta	160
+molokhia_plain	ملوخية خضراء مصرية بالتقلية	egyptian green molokhia soup with garlic	55
+molokhia_with_chicken	ملوخية بشوربة الفراخ	molokhia cooked with chicken broth	68
+molokhia_with_rabbit	ملوخية بالأرانب	molokhia with rabbit	75
+mahshi_kromb	محشي كرنب مصري بالأرز والخلطة	egyptian stuffed cabbage rolls with spiced rice	135
+mahshi_waraq_enab	محشي ورق عنب مصري	egyptian stuffed grape leaves	145
+mahshi_kousa	محشي كوسة بالأرز واللحمة المفرومة	stuffed zucchini courgette with rice and meat	115
+mahshi_betingan	محشي باذنجان أسود وأبيض	stuffed eggplant with rice mixture	120
+mahshi_filfil	محشي فلفل رومي أخضر بالأرز	stuffed green bell pepper	110
+mahshi_moshakal	طبق محشي مشكل مصري	mixed egyptian mahshi platter	128
+bamya_plain	طاجن بامية بالصلصة والثوم	okra stew in tomato sauce and garlic	70
+bamya_with_meat	طاجن بامية باللحمة الضاني أو البقري	okra stew with lamb or beef	135
+mesaqaah_plain	مسقعة مصرية بالباذنجان والصلصة	egyptian moussaka eggplant stew in tomato sauce	140
+mesaqaah_with_minced_meat	مسقعة باللحمة المفرومة والبشاميل	moussaka with minced beef and bechamel	195
+fatta_egyptian	فتة مصرية بالخل والثوم والصلصة واللحمة	egyptian fatta with rice, crispy bread, garlic vinegar sauce and meat	185
+roz_sheereya	أرز مصري بالشعرية والسمن	egyptian white rice with vermicelli	165
+macarona_bechamel	مكرونة بشاميل باللحمة المفرومة	macaroni bechamel baked pasta with minced beef	235
+kofta_mashweya	كفتة حاتي مشوية على الفحم	egyptian grilled kofta beef kebab	265
+kofta_dawood_basha	كفتة داوود باشا بصلصة الطماطم	dawood basha meatballs in rich tomato sauce	185
+hawawshi_baladi	حواوشي مصري في عيش بلدي	egyptian baladi hawawshi baked spiced beef loaf	295
+shawarma_meat_egyptian	شاورما لحمة مصري بالطحينة والبقدونس	egyptian beef shawarma with tahini and parsley	250
+shawarma_chicken_egyptian	شاورما فراخ مصري بالثومية والمخلل	egyptian chicken shawarma with garlic sauce	230
+hamam_mahshi	حمام محشي فريك أو أرز	egyptian stuffed pigeon with freekeh or rice	220
+kebda_iskandarani	كبدة إسكندراني بالفلفل الحامي والثوم	alexandrian beef liver with chili and garlic	175
+kebda_radda	كبدة مقلية بالردة مشوية على الجريل	beef liver coated with bran breaded and grilled	160
+mokh_pane	مخ بانيه مقلي	fried breaded beef brain	240
+mombar	ممبار مصري محشي خلطة أرز	egyptian mombar beef intestines stuffed with seasoned rice	255
+kaware_soup	شوربة كوارع مصرية	egyptian kawaree cow foot bone broth	95
+samak_bolti_mashwi	سمك بلطي مشوي بالردة والليمون	grilled tilapia fish with bran and lemon	120
+samak_bolti_maqly	سمك بلطي مقلي في الزيت	fried tilapia fish	190
+samak_bori_mashwi	سمك بوري سنجاري أو مشوي بالزيت والليمون	grilled mullet bori fish with oil and lemon	155
+gambari_mashwi	جمبري مشوي متبل بالثوم والليمون	grilled seasoned shrimp prawns	110
+gambari_maqly	جمبري مقلي كرسبي بانيه	crispy fried breaded shrimp	240
+shorbat_adas_egyptian	شوربة عدس أصفر مصرية بالشعرية والكمون	egyptian yellow lentil soup with cumin and vermicelli	90
+shorbat_lesan_asfour	شوربة لسان عصفور بمرقة الدجاج	orzo pasta soup in chicken broth	75
+torly_khodhar	طاجن تورلي خضار مشكل باللحمة	mixed vegetable torly casserole with beef	95
+sabanekh_bel_lahma	سبانخ مصرية بالحمص والصلصة واللحمة	egyptian spinach stew with chickpeas and beef	85
+faraaj_mashweya	فراخ مشوية على الفحم تتبيلة مصرية	egyptian charcoal grilled marinated chicken	185
+faraaj_pane	فراخ بانيه مقلية مقرمشة	fried breaded chicken pane breast fillet	260
+basbousa_plain	بسبوسة مصرية سادة بالشربات والسمن البلدي	egyptian basbousa semolina cake with syrup and ghee	385
+basbousa_nuts	بسبوسة بالمكسرات (بندق / لوز)	basbousa with hazelnuts or almonds	415
+kunafa_asfoura	كنافة شعر بالسمن والشربات	classic crispy spun pastry kunafa with syrup	390
+kunafa_cream_ishta	كنافة بالقشطة الكدابة أو الكريمة	kunafa with cream ashta filling	345
+kunafa_cheese_nabulsia	كنافة نابلسية بالجبنة السايحة	nabulsia knafeh with melted sweet cheese	330
+kunafa_mango	كنافة بالمانجو والكريمة	kunafa with fresh mango and whipped cream	280
+qatayef_nuts	قطايف مقلية محشية مكسرات وشربات	fried qatayef stuffed with mixed nuts in syrup	340
+qatayef_ashta	قطايف عصافيري بالقشطة والفستق (نيئة بدون قلي)	asafiri qatayef stuffed with fresh clotted cream and pistachios	220
+roz_be_laban	أرز باللبن مصري كلاسيك	egyptian creamy rice pudding roz bel laban	140
+mehallabiya	مهلبية نشا بالحليب والفانيليا	creamy milk muhallabia pudding with vanilla	125
+zalabya_loukmat_al_qadi	زلابية / لقمة القاضي بالسكر البودرة أو الشربات	zalabia loukoumades fried dough balls in honey syrup	330
+balah_el_sham	بلح الشام المقرمش بالشربات	balah el sham fried choux pastry in sugar syrup	365
+foul_soudani_roasted	فول سوداني مقشر محمص ومملح	roasted salted peanuts	585
+leb_abyad_pumpkin	لب أبيض (بذور قرع محمصة ومملحة)	roasted salted white pumpkin seeds	540
+leb_asmar_watermelon	لب أسمر (بذور بطيخ محمصة ومملحة)	roasted salted black watermelon seeds	560
+leb_souri_sunflower	لب سوري (بذور عباد الشمس محمصة ومملحة)	roasted salted sunflower seeds	580
+shay_masri_sugar	شاي كشري مصري بملعقتين سكر	egyptian black tea with 2 teaspoons of sugar	32
+shay_masri_plain	شاي مصري أحمر بدون سكر	black tea unsweetened zero sugar	1
+ahwa_turki_manzout	قهوة تركي مضبوط (ملعقة سكر واحدة)	turkish coffee with 1 tsp sugar	25
+ahwa_turki_sada	قهوة تركي سادة بدون سكر	black turkish coffee zero sugar	3
+qasab_juice	عصير قصب مصري طازج	fresh sugarcane juice	75
+sobia_egyptian	سوبيا مصرية بجوز الهند والحليب	egyptian sobia coconut milk drink	95
+karkadeh_sweetened	كركديه مصري مثلج محلى بالسكر	sweetened iced hibiscus karkadeh tea	45
+karkadeh_unsweetened	كركديه مغلي أو مثلج بدون سكر	pure unsweetened hibiscus tea zero calories	2
+tamr_hendi_sweetened	تمر هندي مصري رمضاني طبيعي محلى	sweetened tamarind tamr hendi juice	60
+kharroub_juice	عصير خروب مصري مثلج محلى	sweetened carob kharroub juice	55
+amar_al_din	عصير قمر الدين بالمشمش المركز المجفف	qamar al din apricot nectar drink	70
+mango_juice_egyptian	عصير مانجو مصري طبيعي فريش	fresh egyptian mango juice	65
+guava_with_milk	عصير جوافة باللبن	guava smoothie with milk	70
+sahlab_egyptian	سحلب مصري باللبن والمكسرات والسمسم	egyptian sahlab orchid milk drink with nuts and cinnamon	120
+yansoon_hot	مشروب ينسون دافئ عشبي بدون سكر	hot anise herbal tea unsweetened	2
+helba_hot	مشروب حلبة حصى مغلية	hot boiled fenugreek tea with seeds	18
+kabsa_chicken_rice	كبسة دجاج بالأرز البسمتي والتوابل الخليجية	gulf chicken kabsa with spiced basmati rice	170
+kabsa_meat_rice	كبسة لحم ضاني أو حاشي بالأرز	gulf lamb or beef kabsa	195
+mandi_chicken	مندي دجاج مدخن مع أرز مندي	smoked chicken mandi with seasoned rice	180
+mandi_meat	مندي لحم ضاني مدخن في التنور	smoked lamb mandi with rice	210
+madhbi_chicken	مضبي دجاج على الحجر الساخن مع أرز	yemeni madhbi chicken grilled on hot stones	175
+bukhari_rice_chicken	أرز بخاري بالجزر والحمص مع دجاج	bukhari spiced rice with carrots and chicken	175
+saleeg_taifi	سليق طائفي بالدجاج واللبن والمستكة	saudi saleeg white creamy rice with chicken and milk	150
+motabbaq_meat	مطبق سعودي باللحمة المفرومة والبيض والكراث	saudi mutabbaq folded pastry stuffed with minced meat and egg	235
+motabbaq_sweet_cheese	مطبق حلو بالجبنة أو الموز والسكر	sweet mutabbaq pastry with cheese or banana	280
+harees_gulf	هريس خليجي بالقمح ولحم الضأن	gulf harees mashed cracked wheat with lamb	140
+jareesh_saudi	جريش سعودي باللبن والبصل المحمر (المسمنة)	saudi jareesh crushed wheat in buttermilk with caramelized onions	130
+hummus_tahini_dip	حمص بطحينة وزيت الزيتون شامي	levantine hummus chickpea dip with tahini and olive oil	180
+mutabbal_betingan	متبل باذنجان مشوي بالطحينة وزيت الزيتون	mutabbal roasted eggplant dip with tahini	135
+baba_ghanoush_plain	بابا غنوج بالخضار والليمون ودبس الرمان	baba ghanoush grilled eggplant salad with peppers and pomegranate molasses	85
+tabbouleh_salad	تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون	lebanese tabbouleh parsley and bulgur salad with olive oil	115
+fattoush_salad	سلطة فتوش بالخضار والخبز المحمص ودبس الرمان	levantine fattoush salad with toasted pita and sumac	105
+falafel_shami_homs	فلافل شامية بالحمص والكزبرة	levantine chickpea falafel patties	270
+kibbeh_maqleya	كبة مقلية باللحمة المفرومة والمكسرات	fried beef and bulgur kibbeh croquette	260
+kibbeh_nayyeh	كبة نية بالبرغل واللحم الهبرة الطازج وزيت الزيتون	raw lebanese kibbeh nayyeh with bulgur and olive oil	175
+shish_tawook_skewer	شيش طاووق مشوي صدور دجاج متبلة	grilled chicken shish tawook skewers	160
+toum_garlic_sauce	ثومية شامية بالزيت والثوم والليمون	lebanese toum garlic whip sauce	450
+tahini_sauce_prepared	سلطة طحينة متبلة بالخل والكمون والماء	prepared tahini sauce with cumin and vinegar	280
+abou_tarek_koshary_makhsoos	كشري أبو طارق خصوصي بالصلصة والدقة والحمص والبصل	Abou Tarek special koshary box	165
+abou_tarek_tagen_lahma	طاجن كشري أو مكرونة باللحمة المفرومة أبو طارق	Abou Tarek baked pasta casserole with minced beef	185
+tabaei_sand_ful	ساندوتش فول التابعي الدمياطي بالزيت الحار	El Tabaei baladi ful sandwich with flaxseed oil	155
+tabaei_sand_taameya	ساندوتش طعمية التابعي الدمياطي بالسلطة والطحينة	El Tabaei taameya sandwich with tahini and salad	240
+momen_magnum_chicken	ساندوتش ماجنوم فراخ بانيه مؤمن	Mo'men Magnum breaded chicken sandwich	260
+momen_alex_liver	ساندوتش كبدة إسكندراني مؤمن بجرين صوص	Mo'men Alexandrian liver sandwich	190
+momen_crispy_strips_meal	وجبة ستربس دجاج مقلي كرسبي مؤمن (4 قطع مع بطاطس)	Mo'men 4pc crispy chicken strips meal with fries	280
+cook_door_super_crunchy	ساندوتش سوبر كرانشي دجاج كوك دوور	Cook Door Super Crunchy chicken sandwich	275
+cook_door_shish_tawook	ساندوتش شيش طاووق مشوي كوك دوور	Cook Door grilled shish tawook sandwich	210
+cook_door_cordon_bleu	ساندوتش كوردون بلو كوك دوور بالجبنة والتركي	Cook Door Cordon Bleu chicken sandwich	290
+tazaj_farrouj_grilled	فروج الطازج مشوي على الفحم متبل بالثوم والليمون	Al Tazaj whole/half grilled chicken farrouj	175
+tazaj_kabsa_rice	أرز كبسة الطازج الشهير	Al Tazaj spiced kabsa rice	160
+tazaj_taza_burger	برجر دجاج تكا مشوي الطازج	Al Tazaj grilled chicken tikka burger	215
+albaik_broast_chicken_4pc	وجبة بروست دجاج البيك الشهيرة (4 قطع مع بطاطس وثومية)	ALBAIK 4-piece broast chicken meal with fries and garlic sauce	265
+albaik_nuggets_10pc	وجبة مسحب دجاج البيك (10 قطع مسحب مع بطاطس وثوم)	ALBAIK 10-piece chicken nuggets/mosahab meal	270
+albaik_big_baik_sandwich	ساندوتش بيج بيك دجاج حراق/عادي البيك	ALBAIK Big Baik crispy chicken sandwich	260
+albaik_shrimp_meal_10pc	وجبة جمبري مقلي البيك (10 قطع جمبري مع صوص كوكتيل)	ALBAIK 10-piece jumbo fried shrimp meal	235
+albaik_garlic_sauce	صلصة ثوم البيك المميزة	ALBAIK signature garlic sauce dip cup	460
+herfy_super_herfy_burger	ساندوتش سوبر هرفي لحم بقري دبل	Herfy Super Herfy double beef burger	270
+herfy_tortilla_chicken	ساندوتش تورتيلا دجاج مقلي أو مشوي هرفي	Herfy chicken tortilla wrap	235
+kfc_original_chicken_piece	دجاج كنتاكي المقلي بالخلطة السرية الأصلية	KFC Original Recipe fried chicken piece	260
+kfc_spicy_zinger_burger	ساندوتش زنجر سوبريم حار كنتاكي	KFC Spicy Zinger Supreme chicken burger	270
+kfc_twister_wrap	ساندوتش تويستر دجاج كنتاكي بالمايونيز والفلفل	KFC Twister chicken wrap with pepper mayo	240
+kfc_coleslaw_salad	سلطة كول سلو كنتاكي بالكرنب والجزر والمايونيز	KFC sweet coleslaw cabbage salad	145
+mcdonalds_big_mac	ساندوتش بيج ماك ماكدونالدز بشريحتي لحم وصوص خاص	McDonald's Big Mac beef burger	255
+mcdonalds_mcchicken	ساندوتش ماك تشيكن دجاج مقرمش بالمايونيز والخس	McDonald's McChicken burger	260
+mcdonalds_french_fries	بطاطس مقلية ماكدونالدز مقرمشة ومملحة	McDonald's French Fries crispy salted	315
+mcdonalds_cheeseburger	ساندوتش تشيز برجر ماكدونالدز بالجبنة والكاتشب والمخلل	McDonald's single cheeseburger	265
+mcdonalds_quarter_pounder	ساندوتش كوارتر باوندر بالجبنة ماكدونالدز	McDonald's Quarter Pounder with Cheese beef burger	250
+mcdonalds_mcnuggets_6pc	قطع تشيكن ماك ناجتس ماكدونالدز (6 قطع مع صوص)	McDonald's Chicken McNuggets 6-piece	275
+salata_khadra_masri	سلطة خضراء بلدية مصرية بالكمون والليمون	traditional egyptian baladi green salad with cumin and lime	25
+betingan_mekhalel	باذنجان مخلل مصري مسلوق أو مقلي بالثوم والخل	pickled spiced eggplant with garlic and vinegar	65
+tomatem_mekhalela	طماطم مخللة بالدقة والثوم والكزبرة	pickled sliced tomatoes with spiced garlic vinaigrette	35
+toroshy_baladi	طرشي بلدي مشكل مصري (جزر ولفت وخيار وفلفل)	egyptian mixed pickled vegetables torshi	20
+bostor_pastrami_raw	بسطرمة مصرية متبلة بالثوم والحلبة	egyptian beef pastrami cured charcuterie	155
+sogoq_baladi_fried	سجق بلدي مصري بالبصل والطماطم والفلفل	egyptian spiced beef sausage sauteed with onions and peppers	280
+zabadi_baladi_plain	زبادي بلدي مصري كامل الدسم	egyptian baladi whole milk fresh yogurt	68
+zabadi_diet_light	زبادي لايت خالي الدسم مصري	light nonfat yogurt	45
+laban_rayeb_egyptian	لبن رايب مصري مخضوض	egyptian laban rayeb buttermilk	52
+tamr_balah_aswad	بلح أسود رطب مصري طازج	fresh soft black dates balah ratab	145
+tamr_saqei_dry	تمر صعيدي مجفف نصف جاف	egyptian dried sweet dates	280
+gawafa_fresh	جوافة مصرية طازجة بالبذر	fresh egyptian guava fruit	68
+teen_barshoumi	تين برشومي مصري طازج حلو	fresh egyptian purple/green figs	74
+teen_shouki_prickly	تين شوكي مقشر طازج	peeled sweet prickly pear cactus fruit	41
+kantarlob_masri	كانتلوب مصري عسل طازج	fresh sweet egyptian cantaloupe melon	34
+romman_fresh	رمان مصري حب فريش	fresh sweet pomegranate arils	83
+battiq_red	بطيخ أحمر مصري صيفي سكري	fresh sweet red watermelon slices	30
+manga_fons	مانجو فونس / عويس / زبدية مصرية طازجة	fresh egyptian mango fruit	60
+kousa_cooked	كوسة مطبوخة بالصلصة سادة	cooked sliced zucchini stew	45
+foul_akhdar_harati	فول أخضر حراتي طازج مسلوق	boiled fresh green broad beans harati	88
+qolqas_salq_taro	قلقاس مصري بالسلق والشوربة واللحمة	egyptian taro root stew with chard and beef	115
+besella_bel_gazar	بسلة بالجزر مطبوخة بالصلصة واللحم	green peas and carrots stew with beef	110
+fasolia_beida_stew	فاصوليا بيضاء مطبوخة بالصلصة واللحمة	white cannellini beans stew in tomato sauce with beef	125
+fasolia_khadra_stew	فاصوليا خضراء مطبوخة بالصلصة واللحمة	fresh green beans stew in tomato sauce	75
+lahem_kandouz_maslouq	لحم بقري كندوز مسلوق في الشوربة خالي الدهن	boiled lean beef steak in clear broth	180
+lahem_dani_mashwi	لحم ضأن مشوي (ريش أو فخذة)	grilled marinated lamb chops or leg cut	265
+kebab_halah_beef	كباب حلة مصري بالبصل المكرمل والصوص البني	egyptian kebab hala braised beef in caramelized onions	215
+waraq_lahma_oven	ورقة لحمة بالخضار في الفرن ورق فويل	baked beef in parchment/foil pouch with potatoes and onions	175
+batates_fel_forn	صينية بطاطس بالفراخ أو اللحمة في الفرن	baked sliced potatoes casserole in tomato sauce with chicken	135
+batates_mahroosa_spiced	بطاطس مهروسة بالثوم والكمون وزيت الزيتون	mashed boiled potatoes with cumin and olive oil	105
+batates_mohammara_chips	بطاطس صوابع مقلية مقرمشة في الزيت	classic home-style fried potato french fries	295
+chipsy_potato_crisps	شيبسي مقرمشات بطاطس مملحة جاهزة	packaged crispy potato chips salted	535
+halawa_tahiniya_plain	حلاوة طحينية مصرية سادة بالسمسم	egyptian halawa sesame halva plain	515
+halawa_with_nuts	حلاوة طحينية بالمكسرات والشوكولاتة	halawa with pistachios or chocolate marble	535
+morabba_teen_fig	مربى تين مصرية بقطع التين الطبيعي	egyptian fig jam preserve	260
+asal_aswad_black_honey	عسل أسود مصري من قصب السكر	egyptian black sugarcane molasses treacle	285
+asal_nahl_white_honey	عسل نحل طبيعي نقي مصري	pure natural bee honey	305
+goulash_bel_lahma	جلاش باللحمة المفرومة في الفرن	savory baked phyllo pastry stuffed with seasoned minced beef	285
+goulash_sweet_ashta	جلاش حلو بالقشطة والشربات المكسرات	sweet phyllo pastry stuffed with ashta cream and soaked in syrup	350
+kahk_eid_plain	كحك العيد المصري الناعم بالسمن البلدي سادة	egyptian eid kahk crumbly butter cookies plain	470
+kahk_eid_agameya	كحك العيد محشي عجمية بالعسل والمكسرات	eid kahk stuffed with agameya honey and nuts	485
+baskoot_nashader_eid	بسكويت العيد بالنشادر والبرتقال	egyptian eid ammoniac biscuit crisp cookies	435
+petits_fours_eid	بيتي فور العيد المصري بالمربى والشوكولاتة والمكسرات	egyptian petit four butter cookies with jam and chocolate	495
+ghorayeba_eid	غريبة العيد الدايبة بالسمن البلدي والفستق	egyptian ghorayeba soft melting butter cookies	520
+fatta_kawaraa	فتة كوارع مصرية بالصلصة والخل والثوم	egyptian cow trotter fatta casserole with rice and crispy bread	195
+lahmet_raas	لحمة راس مسلوقة أو محمرة بالبصل	braised or boiled beef head meat cheeks	220
+tehal_beef_pan	طحال بقري مسلوق ومحمر بالثوم والكمون	fried sliced beef spleen with garlic and cumin	185
+karsha_stew	كرشة مصرية مطبوخة بالحمص والصلصة (كمونية)	egyptian beef tripe stew with chickpeas and cumin	125
+fashah_pan	فشة محمرة مسلوقة ومقطعة شرائح مقلية	crispy fried sliced beef lung fashah	160
+grilled_kofta_chicken	كفتة فراخ مشوية	grilled chicken kofta	185
+turkey_breast_roasted	ديك رومي محمر بالفرن شرائح	roasted sliced turkey breast	145
+beef_escalope_pane	إسكالوب بانيه لحم بقري مقلي	fried breaded beef escalope pane	275
+beef_liver_grilled_diet	كبدة بقري مشوية دايت بدون زيت	grilled beef liver oil-free	140
+chicken_liver_pan	كبدة وقوانص دجاج مطبوخة بالبصل	sauteed chicken liver and gizzards with onions	170
+duck_maghrabi_roasted	بط بلدي محمر في الفرن	roasted traditional whole duck piece	280
+quail_seman_grilled	سمان مشوي على الفحم (زوج سمان)	pair of grilled charcoal quails	190
+calamari_fried	كاليماري مقلي كرسبي حلقات	crispy fried calamari squid rings	215
+calamari_tagen_oven	طاجن سبيط أو كاليماري بالصلصة والفرن	squid calamari tajin in rich tomato sauce	130
+sea_bass_mashwi_oil_lemon	سمك قاروص مشوي زيت وليمون	grilled sea bass fish with olive oil and lemon	135
+sea_bream_denise_mashwi	سمك دنيس مشوي على الفحم أو سنجاري	grilled sea bream denise fish	145
+crab_kaboria_boiled	كابوريا مصرية مسلوقة بالخلطة والشوربة	boiled seasoned blue sea crab	90
+clams_gandofli_garlic	جندوفلي مسلوق بالثوم والليمون والكمون	steamed sea clams with garlic and cumin broth	75
+mulukhiyah_shrimp	ملوخية بالجمبري الإسكندراني	green molokhia soup cooked with shrimp	75
+koshary_yellow_lentils	كشري إسكندراني بالعدس الأصفر والبيض المدحرج	alexandrian yellow lentil koshary with browned boiled eggs	170
+eggs_medahraj_browned	بيض مسلوق مدحرج في السمن البلدي	boiled egg browned in butter or ghee	175
+omelette_vegetables_egyptian	عجة مصرية بالبيض والخضار والبقدونس والدقيق	egyptian egg ejjah herb frittata with parsley and onions	160
+pickled_lemon_safflower	ليمون معصفر مصري بحبة البركة والعصفر	egyptian pickled preserved lemons with safflower and nigella seeds	40
+olive_pickled_kalamata	زيتون كلاماتا مخلل منزلي	home pickled kalamata black and green olives	145
+gebna_fried_sticks	أصابع جبنة مقلية أو رومي مقلي	fried breaded cheese sticks	360
+feteer_sugar_milk	فطير حلو بالسكر البودرة والحليب الساخن	sweet feteer pastry with powdered sugar and hot milk	380
+feteer_custard	فطير حلو بالكاسترد والسكر البودرة	sweet feteer with custard filling	340
+sobia_powder_shake	مشروب بودرة سوبيا مثلجة محلاة بالماء	sweetened sobia powder drink with water	65
+dom_drink_egyptian	مشروب دوم مصري مثلج خافض للضغط	egyptian doum palm fruit cold drink	48

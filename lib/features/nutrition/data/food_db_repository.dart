@@ -3,53 +3,134 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';
 
-/// Local food composition DB (USDA-sourced) loaded from assets.
+class FoodMatchResult {
+  const FoodMatchResult({
+    required this.food,
+    required this.source,
+  });
+
+  final FoodItem food;
+  final FoodDatabaseSource source;
+}
+
+/// Food composition repository loading both Egyptian/Arab curated foods (439+)
+/// and the USDA FoodData Central subset (~1,500 generic foods) from assets.
 class FoodDbRepository {
   FoodDbRepository._();
   static final FoodDbRepository instance = FoodDbRepository._();
 
   List<FoodItem>? _foods;
+  List<FoodItem>? _egyptianFoods;
+  List<FoodItem>? _usdaFoods;
+
   Map<String, FoodItem>? _byId;
+  Map<String, FoodItem>? _egyptianById;
+  Map<String, FoodItem>? _usdaById;
   Map<String, FoodItem>? _byBarcode;
 
   Future<List<FoodItem>> load() async {
     if (_foods != null) return _foods!;
-    final raw = await rootBundle.loadString('assets/food_db/foods.json');
-    final decoded = Map<String, dynamic>.from(jsonDecode(raw) as Map);
-    final list = (decoded['foods'] as List? ?? [])
+
+    // 1. Load Egyptian/Arab curated DB
+    final rawEg = await rootBundle.loadString('assets/food_db/foods.json');
+    final decodedEg = Map<String, dynamic>.from(jsonDecode(rawEg) as Map);
+    final egList = (decodedEg['foods'] as List? ?? [])
         .whereType<Map>()
         .map((e) => FoodItem.fromJson(Map<String, dynamic>.from(e)))
         .toList();
-    _foods = list;
-    _byId = {for (final f in list) f.id: f};
+    _egyptianFoods = egList;
+    _egyptianById = {for (final f in egList) f.id: f};
+
+    // 2. Load USDA FoodData Central generic subset (~1,500 foods)
+    var usdaList = <FoodItem>[];
+    try {
+      final rawUsda = await rootBundle.loadString('assets/food_db/usda_foods.json');
+      final decodedUsda = Map<String, dynamic>.from(jsonDecode(rawUsda) as Map);
+      usdaList = (decodedUsda['foods'] as List? ?? [])
+          .whereType<Map>()
+          .map((e) => FoodItem.fromJson(Map<String, dynamic>.from(e)))
+          .toList();
+    } catch (_) {
+      // Fallback if asset loading fails in headless test
+      usdaList = [];
+    }
+    _usdaFoods = usdaList;
+    _usdaById = {for (final f in usdaList) f.id: f};
+
+    // 3. Combined pool
+    final combined = [...egList, ...usdaList];
+    _foods = combined;
+    _byId = {for (final f in combined) f.id: f};
     _byBarcode = {};
-    for (final f in list) {
+    for (final f in combined) {
       for (final bc in f.barcodes) {
         _byBarcode![bc] = f;
       }
     }
-    return list;
+    return combined;
   }
 
   FoodItem? byId(String id) => _byId?[id];
   FoodItem? byBarcode(String barcode) => _byBarcode?[barcode];
+
+  /// Look up food with origin tracking:
+  /// 1. Egyptian/Arab DB (highest priority for local cuisine)
+  /// 2. USDA FoodData Central DB (generic foods)
+  /// 3. Returns null (model estimate fallback)
+  Future<FoodMatchResult?> matchWithSource({
+    String? foodIdGuess,
+    required String nameEn,
+    required String nameAr,
+  }) async {
+    await load();
+
+    // 1. Match against Egyptian DB
+    if (foodIdGuess != null && foodIdGuess.isNotEmpty) {
+      final hit = _egyptianById?[foodIdGuess];
+      if (hit != null) {
+        return FoodMatchResult(food: hit, source: FoodDatabaseSource.egyptianDb);
+      }
+    }
+    final egMatch = _findBestMatch(_egyptianFoods ?? const [], nameEn, nameAr);
+    if (egMatch != null) {
+      return FoodMatchResult(food: egMatch, source: FoodDatabaseSource.egyptianDb);
+    }
+
+    // 2. Match against USDA DB
+    if (foodIdGuess != null && foodIdGuess.isNotEmpty) {
+      final hit = _usdaById?[foodIdGuess];
+      if (hit != null) {
+        return FoodMatchResult(food: hit, source: FoodDatabaseSource.usda);
+      }
+    }
+    final usdaMatch = _findBestMatch(_usdaFoods ?? const [], nameEn, nameAr);
+    if (usdaMatch != null) {
+      return FoodMatchResult(food: usdaMatch, source: FoodDatabaseSource.usda);
+    }
+
+    return null;
+  }
 
   Future<FoodItem?> match({
     String? foodIdGuess,
     required String nameEn,
     required String nameAr,
   }) async {
-    await load();
-    if (foodIdGuess != null && foodIdGuess.isNotEmpty) {
-      final hit = _byId?[foodIdGuess];
-      if (hit != null) return hit;
-    }
+    final result = await matchWithSource(
+      foodIdGuess: foodIdGuess,
+      nameEn: nameEn,
+      nameAr: nameAr,
+    );
+    return result?.food;
+  }
 
+  FoodItem? _findBestMatch(List<FoodItem> pool, String nameEn, String nameAr) {
+    if (pool.isEmpty) return null;
     final needle = _norm('$nameEn $nameAr');
     FoodItem? best;
     var bestScore = 0.0;
 
-    for (final food in _foods!) {
+    for (final food in pool) {
       final candidates = [
         food.id,
         food.nameEn,
@@ -67,7 +148,7 @@ class FoodDbRepository {
           }
         } else {
           final score = _fuzzy(needle, c);
-          if (score > 0.72 && score > bestScore) {
+          if (score > 0.68 && score > bestScore) {
             bestScore = score;
             best = food;
           }
@@ -125,7 +206,8 @@ class FoodDbRepository {
   }
 }
 
-/// Scale macros for [grams], optionally adding absorbed frying oil.
+/// Scale macros for [grams], calculating verified DB / USDA / estimate nutrition
+/// and applying exact oil absorption based on cooking method.
 ResolvedMealLine resolveLine({
   required ScannedFoodItem scanned,
   FoodItem? food,
@@ -133,6 +215,7 @@ ResolvedMealLine resolveLine({
   CookingMethod? methodOverride,
   double? gramsOverride,
   FoodItem? oilFood,
+  FoodDatabaseSource source = FoodDatabaseSource.egyptianDb,
 }) {
   final method = methodOverride ?? scanned.cookingMethod;
   final grams = (gramsOverride ?? scanned.estimatedGrams).clamp(1, 2000);
@@ -148,9 +231,10 @@ ResolvedMealLine resolveLine({
     fat = base.fat * f;
   }
 
-  // Fried foods that are not already fried in the DB absorb ~8 g oil / 100 g food.
-  if (method == CookingMethod.fried && food?.isAlreadyFried != true) {
-    final oilG = 8.0 * (grams / 100.0);
+  // Calculate oil absorption according to cooking method table
+  final oilAbsorptionGramsPer100 = method.oilAbsorptionGramsPer100g;
+  if (oilAbsorptionGramsPer100 > 0 && food?.isAlreadyFried != true) {
+    final absorbedOilG = oilAbsorptionGramsPer100 * (grams / 100.0);
     final oil = oilFood?.per100g ??
         const FoodMacros100g(
           kcal: 884,
@@ -159,10 +243,17 @@ ResolvedMealLine resolveLine({
           fat: 100,
           fiber: 0,
         );
-    final of = oilG / 100.0;
+    final of = absorbedOilG / 100.0;
     kcal += oil.kcal * of;
     fat += oil.fat * of;
   }
+
+  // Calculate confidence ± range for grams and calories
+  final gLow = scanned.gramsLow ?? (grams * 0.88);
+  final gHigh = scanned.gramsHigh ?? (grams * 1.12);
+  final kRatio = grams > 0 ? (kcal / grams) : 1.0;
+  final kLow = (gLow * kRatio).roundToDouble();
+  final kHigh = (gHigh * kRatio).roundToDouble();
 
   return ResolvedMealLine(
     nameAr: food?.nameAr ?? scanned.nameAr,
@@ -178,6 +269,12 @@ ResolvedMealLine resolveLine({
     isEstimated: isEstimated,
     portions: food?.commonPortions ?? const [],
     isUnsure: scanned.isUnsure,
+    source: isEstimated ? FoodDatabaseSource.estimated : source,
+    gramsLow: gLow,
+    gramsHigh: gHigh,
+    kcalLow: kLow,
+    kcalHigh: kHigh,
+    hasVisibleOilOrSauce: scanned.visibleOilOrSauce,
   );
 }
 
@@ -190,6 +287,10 @@ ResolvedMealLine rescaleLine(ResolvedMealLine line, double newGrams) {
     protein: line.protein * r,
     carbs: line.carbs * r,
     fat: line.fat * r,
+    kcalLow: (line.displayKcalLow * r).roundToDouble(),
+    kcalHigh: (line.displayKcalHigh * r).roundToDouble(),
+    gramsLow: (line.gramsLow != null) ? line.gramsLow! * r : null,
+    gramsHigh: (line.gramsHigh != null) ? line.gramsHigh! * r : null,
   );
 }
 
@@ -208,6 +309,9 @@ ResolvedMealLine recomputeWithMethod(
     estimatedGrams: line.grams,
     cookingMethod: method,
     confidence: line.confidence,
+    gramsLow: line.gramsLow,
+    gramsHigh: line.gramsHigh,
+    visibleOilOrSauce: line.hasVisibleOilOrSauce,
   );
   return resolveLine(
     scanned: scanned,
@@ -223,5 +327,6 @@ ResolvedMealLine recomputeWithMethod(
         : null,
     methodOverride: method,
     oilFood: oilFood,
+    source: line.source,
   );
 }

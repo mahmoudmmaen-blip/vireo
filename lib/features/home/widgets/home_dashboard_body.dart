@@ -43,6 +43,7 @@ import 'package:vireo/features/home/widgets/today_plan_section.dart';
 import 'package:vireo/features/home/widgets/premium_steps_hero_card.dart';
 import 'package:vireo/features/home/widgets/inbody_plan_update_card.dart';
 import 'package:vireo/features/home/widgets/today_pillars_grid.dart';
+import 'package:vireo/features/home/widgets/home_fasting_card.dart';
 import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/features/engagement/widgets/coins_header_pill.dart';
 import 'package:vireo/features/men_health/widgets/men_vitality_hero_card.dart';
@@ -109,6 +110,9 @@ class HomeDashboardBody extends ConsumerWidget {
 
       // ── Card: Body Composition Card ("تحليل الجسم") ──
       const HomeBodyCompositionCard(),
+
+      // ── Card: Intermittent Fasting Card ──
+      const HomeFastingCard(),
 
       // ── Card 2: "اليوم" 2-Column Pillars Grid (Food, Water, Workout, Sleep) ──
       const TodayPillarsGrid(),

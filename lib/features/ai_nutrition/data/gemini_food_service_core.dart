@@ -17,11 +17,13 @@ class MealScanDraft {
     required this.lines,
     required this.imageBytes,
     this.imagesBytes = const [],
+    this.originalScanned = const [],
   });
 
   final List<ResolvedMealLine> lines;
   final Uint8List imageBytes;
   final List<Uint8List> imagesBytes;
+  final List<ScannedFoodItem> originalScanned;
 
   List<Uint8List> get allImages =>
       imagesBytes.isNotEmpty ? imagesBytes : (imageBytes.isNotEmpty ? [imageBytes] : []);

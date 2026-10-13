@@ -117,6 +117,23 @@ class FoodItem {
   String displayName(String locale) => locale == 'ar' ? nameAr : nameEn;
 }
 
+enum FoodDatabaseSource {
+  egyptianDb,
+  usda,
+  estimated,
+  personalCalibrated;
+
+  String label(String locale) {
+    final isAr = locale.startsWith('ar');
+    return switch (this) {
+      FoodDatabaseSource.egyptianDb => isAr ? 'قاعدة بيانات' : 'Verified DB',
+      FoodDatabaseSource.usda => 'USDA',
+      FoodDatabaseSource.estimated => isAr ? 'تقدير' : 'Estimate',
+      FoodDatabaseSource.personalCalibrated => isAr ? 'معدّلة على أكلك' : 'Personalized',
+    };
+  }
+}
+
 enum CookingMethod {
   boiled,
   grilled,
@@ -124,13 +141,60 @@ enum CookingMethod {
   baked,
   raw,
   steamed,
+  sauteed,
+  oven,
+  mahshi,
+  airFried,
   other;
 
   static CookingMethod fromString(String? v) {
-    return CookingMethod.values.firstWhere(
-      (e) => e.name == v,
-      orElse: () => CookingMethod.other,
-    );
+    if (v == null) return CookingMethod.other;
+    final normalized = v.toLowerCase().replaceAll('-', '_');
+    return switch (normalized) {
+      'boiled' || 'مسلوق' => CookingMethod.boiled,
+      'grilled' || 'مشوي' => CookingMethod.grilled,
+      'fried' || 'مقلي' => CookingMethod.fried,
+      'baked' || 'مخبوز' => CookingMethod.baked,
+      'raw' || 'نيء' => CookingMethod.raw,
+      'steamed' || 'بخار' => CookingMethod.steamed,
+      'sauteed' || 'sautéed' || 'سوتيه' => CookingMethod.sauteed,
+      'oven' || 'بالفرن' => CookingMethod.oven,
+      'mahshi' || 'محشي' || 'مسبك' => CookingMethod.mahshi,
+      'air_fried' || 'airfried' || 'قلاية_هوائية' => CookingMethod.airFried,
+      _ => CookingMethod.other,
+    };
+  }
+
+  /// Estimated oil absorption grams per 100g of food cooked
+  double get oilAbsorptionGramsPer100g => switch (this) {
+        CookingMethod.fried => 14.0,
+        CookingMethod.sauteed => 5.0,
+        CookingMethod.mahshi => 8.0,
+        CookingMethod.baked || CookingMethod.oven => 3.0,
+        CookingMethod.grilled => 2.0,
+        CookingMethod.airFried => 1.5,
+        CookingMethod.boiled ||
+        CookingMethod.steamed ||
+        CookingMethod.raw ||
+        CookingMethod.other =>
+          0.0,
+      };
+
+  String displayName(String locale) {
+    final isAr = locale.startsWith('ar');
+    return switch (this) {
+      CookingMethod.boiled => isAr ? 'مسلوق' : 'Boiled',
+      CookingMethod.grilled => isAr ? 'مشوي' : 'Grilled',
+      CookingMethod.fried => isAr ? 'مقلي' : 'Fried',
+      CookingMethod.baked => isAr ? 'مخبوز' : 'Baked',
+      CookingMethod.raw => isAr ? 'طازج نيء' : 'Raw',
+      CookingMethod.steamed => isAr ? 'على البخار' : 'Steamed',
+      CookingMethod.sauteed => isAr ? 'سوتيه' : 'Sautéed',
+      CookingMethod.oven => isAr ? 'بالفرن' : 'Oven',
+      CookingMethod.mahshi => isAr ? 'محشي' : 'Mahshi',
+      CookingMethod.airFried => isAr ? 'قلاية هوائية' : 'Air-fried',
+      CookingMethod.other => isAr ? 'أخرى' : 'Other',
+    };
   }
 }
 
@@ -144,6 +208,9 @@ class ScannedFoodItem {
     required this.cookingMethod,
     required this.confidence,
     this.isUnsure = false,
+    this.gramsLow,
+    this.gramsHigh,
+    this.visibleOilOrSauce = false,
   });
 
   final String nameAr;
@@ -153,19 +220,33 @@ class ScannedFoodItem {
   final CookingMethod cookingMethod;
   final double confidence;
   final bool isUnsure;
+  final double? gramsLow;
+  final double? gramsHigh;
+  final bool visibleOilOrSauce;
 
-  factory ScannedFoodItem.fromJson(Map<String, dynamic> json, {bool isUnsure = false}) =>
-      ScannedFoodItem(
-        nameAr: json['name_ar']?.toString() ?? '',
-        nameEn: json['name_en']?.toString() ?? '',
-        foodIdGuess: json['food_id_guess']?.toString(),
-        estimatedGrams: (json['estimated_grams'] as num?)?.toDouble() ?? 100,
-        cookingMethod: CookingMethod.fromString(
-          json['cooking_method']?.toString(),
-        ),
-        confidence: (json['confidence'] as num?)?.toDouble() ?? (isUnsure ? 0.4 : 0.5),
-        isUnsure: isUnsure,
-      );
+  factory ScannedFoodItem.fromJson(Map<String, dynamic> json, {bool isUnsure = false}) {
+    final estGrams = (json['estimated_grams'] as num?)?.toDouble() ??
+        (json['grams_estimate'] as num?)?.toDouble() ??
+        100;
+    final low = (json['grams_low'] as num?)?.toDouble() ?? (estGrams * 0.85);
+    final high = (json['grams_high'] as num?)?.toDouble() ?? (estGrams * 1.15);
+    final oilOrSauce = json['visible_oil_or_sauce'] == true;
+
+    return ScannedFoodItem(
+      nameAr: json['name_ar']?.toString() ?? '',
+      nameEn: json['name_en']?.toString() ?? '',
+      foodIdGuess: json['food_id_guess']?.toString() ?? json['food_db_id']?.toString(),
+      estimatedGrams: estGrams,
+      cookingMethod: CookingMethod.fromString(
+        json['cooking_method']?.toString(),
+      ),
+      confidence: (json['confidence'] as num?)?.toDouble() ?? (isUnsure ? 0.4 : 0.5),
+      isUnsure: isUnsure,
+      gramsLow: low,
+      gramsHigh: high,
+      visibleOilOrSauce: oilOrSauce,
+    );
+  }
 }
 
 @immutable
@@ -184,6 +265,12 @@ class ResolvedMealLine {
     this.isEstimated = false,
     this.portions = const [],
     this.isUnsure = false,
+    this.source = FoodDatabaseSource.egyptianDb,
+    this.gramsLow,
+    this.gramsHigh,
+    this.kcalLow,
+    this.kcalHigh,
+    this.hasVisibleOilOrSauce = false,
   });
 
   final String nameAr;
@@ -199,6 +286,15 @@ class ResolvedMealLine {
   final bool isEstimated;
   final List<FoodPortion> portions;
   final bool isUnsure;
+  final FoodDatabaseSource source;
+  final double? gramsLow;
+  final double? gramsHigh;
+  final double? kcalLow;
+  final double? kcalHigh;
+  final bool hasVisibleOilOrSauce;
+
+  double get displayKcalLow => kcalLow ?? (kcal * 0.88).roundToDouble();
+  double get displayKcalHigh => kcalHigh ?? (kcal * 1.12).roundToDouble();
 
   ResolvedMealLine copyWith({
     String? nameAr,
@@ -214,6 +310,12 @@ class ResolvedMealLine {
     bool? isEstimated,
     List<FoodPortion>? portions,
     bool? isUnsure,
+    FoodDatabaseSource? source,
+    double? gramsLow,
+    double? gramsHigh,
+    double? kcalLow,
+    double? kcalHigh,
+    bool? hasVisibleOilOrSauce,
   }) =>
       ResolvedMealLine(
         nameAr: nameAr ?? this.nameAr,
@@ -229,5 +331,11 @@ class ResolvedMealLine {
         isEstimated: isEstimated ?? this.isEstimated,
         portions: portions ?? this.portions,
         isUnsure: isUnsure ?? this.isUnsure,
+        source: source ?? this.source,
+        gramsLow: gramsLow ?? this.gramsLow,
+        gramsHigh: gramsHigh ?? this.gramsHigh,
+        kcalLow: kcalLow ?? this.kcalLow,
+        kcalHigh: kcalHigh ?? this.kcalHigh,
+        hasVisibleOilOrSauce: hasVisibleOilOrSauce ?? this.hasVisibleOilOrSauce,
       );
 }

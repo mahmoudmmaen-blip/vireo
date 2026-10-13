@@ -1,0 +1,1500 @@
+chicken_breast_raw	صدور دجاج نيئة	Chicken breast raw	120
+chicken_breast_cooked	صدور دجاج مطبوخة	Chicken breast cooked	165
+chicken_breast_grilled	صدور دجاج مشوية	Grilled chicken breast	165
+chicken_breast_fried	صدور دجاج مقلية / بانيه	Fried chicken breast / pane	220
+chicken_thigh_raw	أوراك دجاج نيئة	Chicken thigh raw	209
+chicken_thigh_cooked	أوراك دجاج مطبوخة	Chicken thigh cooked	209
+chicken_thigh_grilled	أوراك دجاج مشوية	Grilled chicken thigh	215
+chicken_wings_raw	أجنحة دجاج	Chicken wings raw	203
+chicken_wings_cooked	أجنحة دجاج مطبوخة	Chicken wings cooked	290
+chicken_drumstick_raw	دبوس دجاج نيء	Chicken drumstick raw	161
+chicken_drumstick_cooked	دبوس دجاج مطبوخ	Chicken drumstick cooked	172
+chicken_liver_cooked	كبدة دجاج مطبوخة	Chicken liver cooked	167
+turkey_breast_cooked	صدور ديك رومي	Turkey breast cooked	135
+turkey_ground_cooked	لحم ديك رومي مفروم	Ground turkey cooked	203
+duck_meat_cooked	لحم بط مطبوخ	Duck meat cooked	337
+beef_sirloin_cooked	لحم بقر سيرلوين مشوي	Beef sirloin grilled	205
+beef_tenderloin_cooked	فيليه بقر مطبوخ	Beef tenderloin cooked	218
+beef_ribeye_cooked	لحم ريب آي بقر	Beef ribeye cooked	291
+ground_beef_95_5	لحم بقر مفروم قليل الدسم 95%	Ground beef 95% lean cooked	170
+ground_beef_90_10	لحم بقر مفروم 90%	Ground beef 90% lean cooked	200
+ground_beef_85_15	لحم بقر مفروم 85%	Ground beef 85% lean cooked	215
+ground_beef_80_20	لحم بقر مفروم عادي 80%	Ground beef 80% lean cooked	254
+beef_boiled_lean	لحم بقري مسلوق قليل الدهن	Boiled lean beef	210
+beef_liver_cooked	كبدة بقر مطبوخة	Beef liver cooked	175
+veal_cooked	لحم بتلو مطبوخ	Veal meat cooked	196
+lamb_chop_cooked	ريش ضاني مشوية	Lamb chop cooked	282
+lamb_leg_cooked	فخذ خروف مطبوخ	Lamb leg cooked	258
+lamb_ground_cooked	لحم ضأن مفروم	Ground lamb cooked	283
+salmon_wild_cooked	سلمون بري مطبوخ	Wild salmon cooked	182
+salmon_farmed_cooked	سلمون مطبوخ	Atlantic salmon cooked	206
+tuna_canned_water	تونة معلبة في ماء	Canned tuna in water drained	116
+tuna_canned_oil	تونة معلبة في زيت	Canned tuna in oil drained	198
+tuna_fresh_cooked	تونة طازجة مشوية	Fresh tuna cooked	132
+tilapia_cooked	سمك بلطي مطبوخ	Tilapia cooked	128
+shrimp_boiled	جمبري مسلوق	Shrimp boiled	99
+shrimp_grilled	جمبري مشوي	Shrimp grilled	105
+shrimp_fried	جمبري مقلي	Fried breaded shrimp	242
+cod_cooked	سمك قد مطبوخ	Cod fish cooked	105
+sea_bass_cooked	سمك قاروص مطبوخ	Sea bass cooked	124
+sea_bream_cooked	سمك دنيس مطبوخ	Sea bream cooked	135
+sardines_canned_oil	سردين معلب بالزيت	Canned sardines in oil	208
+mackerel_cooked	سمك ماكريل مطبوخ	Mackerel cooked	262
+calamari_squid_cooked	سبيط / كاليماري مطبوخ	Squid calamari cooked	158
+calamari_fried	كاليماري مقلي	Fried calamari	240
+crab_cooked	كابوريا / سلطعون مطبوخ	Crab meat cooked	97
+lobster_cooked	استاكوزا مطبوخة	Lobster cooked	89
+egg_whole_raw	بيض كامل طازج	Whole egg raw	143
+egg_whole_boiled	بيض مسلوق	Boiled egg	155
+egg_white_raw	بياض بيض	Egg white raw	52
+egg_white_cooked	بياض بيض مطبوخ	Egg white cooked	52
+egg_yolk_raw	صفار بيض	Egg yolk raw	322
+egg_fried	بيض مقلي (بالسمن/الزيت)	Fried egg	196
+egg_omelet_plain	أومليت سادة	Plain omelet	154
+milk_whole_3_25	حليب كامل الدسم	Whole milk 3.25%	61
+milk_reduced_fat_2	حليب قليل الدسم 2%	Reduced fat milk 2%	50
+milk_low_fat_1	حليب خفيف الدسم 1%	Low fat milk 1%	42
+milk_nonfat_skim	حليب خالي الدسم	Skim milk nonfat	35
+almond_milk_unsweetened	حليب لوز غير محلى	Almond milk unsweetened	15
+soy_milk_unsweetened	حليب صويا غير محلى	Soy milk unsweetened	33
+oat_milk_plain	حليب شوفان سادة	Oat milk plain	48
+greek_yogurt_plain_0	زبادي يوناني خالي الدسم	Greek yogurt nonfat plain	59
+greek_yogurt_plain_2	زبادي يوناني قليل الدسم 2%	Greek yogurt low fat 2%	73
+greek_yogurt_plain_whole	زبادي يوناني كامل الدسم	Greek yogurt whole milk	97
+yogurt_plain_whole	زبادي كامل الدسم	Plain yogurt whole milk	61
+yogurt_plain_lowfat	زبادي قليل الدسم	Plain yogurt lowfat	63
+cottage_cheese_lowfat	جبن قريش قليل الدسم	Cottage cheese lowfat	81
+cottage_cheese_regular	جبن قريش كامل	Cottage cheese 4%	98
+feta_cheese	جبن فيتا	Feta cheese	264
+mozzarella_whole_milk	جبن موزاريلا كامل الدسم	Mozzarella cheese whole milk	300
+mozzarella_part_skim	جبن موزاريلا قليل الدسم	Mozzarella part skim	254
+cheddar_cheese	جبن شيدر	Cheddar cheese	403
+parmesan_grated	جبن بارميزان مبشور	Parmesan cheese grated	431
+cream_cheese	جبن كريمي	Cream cheese regular	342
+halloumi_cheese	جبن حلوم	Halloumi cheese	321
+butter_salted	زبدة مملحة	Butter salted	717
+ghee_clarified_butter	سمن بلدي / سمن نقي	Ghee clarified butter	876
+heavy_cream	كريمة خفق ثقيلة	Heavy whipping cream	340
+white_rice_raw	أرز أبيض نيء	White rice raw	365
+white_rice_cooked	أرز أبيض مطبوخ (مسلوق)	White rice cooked plain	130
+brown_rice_raw	أرز بني نيء	Brown rice raw	370
+brown_rice_cooked	أرز بني مطبوخ	Brown rice cooked	111
+basmati_rice_cooked	أرز بسمتي مطبوخ	Basmati rice cooked	121
+jasmine_rice_cooked	أرز ياسمين مطبوخ	Jasmine rice cooked	129
+quinoa_raw	كينوا نيئة	Quinoa raw	368
+quinoa_cooked	كينوا مطبوخة	Quinoa cooked	120
+oats_rolled_raw	شوفان حبة كاملة نيء	Rolled oats raw	389
+oatmeal_cooked_water	شوفان مطبوخ بالماء	Oatmeal cooked in water	71
+pasta_white_raw	مكرونة بيضاء نيئة	White pasta raw	371
+pasta_white_cooked	مكرونة بيضاء مسلوقة	White pasta cooked	158
+pasta_whole_wheat_cooked	مكرونة قمح كامل مسلوقة	Whole wheat pasta cooked	124
+couscous_cooked	كسكسي مطبوخ	Couscous cooked	112
+bulgur_cooked	برغل مطبوخ	Bulgur cooked	83
+freekeh_cooked	فريك مطبوخ	Freekeh cooked	140
+white_bread_slice	خبز أبيض توست	White bread slice	265
+whole_wheat_bread	خبز قمح كامل / توست بني	Whole wheat bread slice	247
+pita_bread_white	خبز شامي / بيتا أبيض	Pita bread white	275
+bagel_plain	بيغل سادة	Bagel plain	250
+tortilla_corn	تورتيلا ذرة	Corn tortilla	218
+tortilla_flour	تورتيلا دقيق	Flour tortilla	304
+popcorn_air_popped	فشار محضر بالهواء (بدون زيت)	Popcorn air-popped	387
+lentils_brown_cooked	عدس بني / بجبة مطبوخ	Brown lentils cooked	116
+lentils_red_cooked	عدس أصفر مطبوخ	Red lentils cooked	116
+chickpeas_cooked	حمص مسلوق	Chickpeas boiled cooked	164
+fava_beans_boiled	فول مدمس سادة	Fava beans cooked plain	110
+kidney_beans_cooked	فاصوليا حمراء مطبوخة	Red kidney beans cooked	127
+black_beans_cooked	فاصوليا سوداء مطبوخة	Black beans cooked	132
+white_navy_beans_cooked	فاصوليا بيضاء مسلوقة	White beans cooked	139
+edamame_prepared	إدامامي مسلوق	Edamame prepared	121
+green_peas_boiled	بسلة خضراء مسلوقة	Green peas boiled	81
+lupini_beans_cooked	ترمس مسلوق	Lupini beans cooked	119
+tomato_raw	طماطم طازجة	Tomato red ripe raw	18
+cucumber_raw	خيار طازج بالقشر	Cucumber raw with peel	15
+lettuce_romaine_raw	خس بلدي / روماني	Romaine lettuce raw	17
+spinach_raw	سبانخ طازجة	Spinach raw	23
+spinach_cooked	سبانخ مسلوقة / سوتيه سادة	Spinach boiled	23
+arugula_rocket_raw	جرجير طازج	Arugula rocket raw	25
+broccoli_raw	بروكلي نيء	Broccoli raw	34
+broccoli_cooked	بروكلي مسلوق / على البخار	Broccoli boiled / steamed	35
+cauliflower_cooked	قرنبيط مسلوق سادة	Cauliflower boiled	23
+carrots_raw	جزر طازج	Carrot raw	41
+carrots_boiled	جزر مسلوق	Carrot boiled	35
+bell_pepper_green	فلفل رومي أخضر	Green bell pepper raw	20
+bell_pepper_red	فلفل رومي أحمر حلو	Red bell pepper raw	31
+zucchini_raw	كوسة طازجة	Zucchini raw	17
+zucchini_boiled	كوسة مسلوقة / سوتيه	Zucchini boiled	15
+eggplant_raw	باذنجان رومي نيء	Eggplant raw	25
+eggplant_grilled	باذنجان مشوي سادة	Grilled eggplant plain	35
+onion_yellow_raw	بصل أصفر طازج	Yellow onion raw	40
+garlic_raw	ثوم طازج	Garlic raw	149
+potato_boiled_flesh	بطاطس مسلوقة (بدون دهون)	Boiled potato flesh only	87
+potato_baked_skin	بطاطس مشوية بالفرن بقشرها	Baked potato with skin	93
+sweet_potato_baked	بطاطا حلوة مشوية بالفرن	Sweet potato baked	90
+mushrooms_white_raw	مشروم أبيض طازج	White mushrooms raw	22
+mushrooms_cooked	مشروم مطبوخ / سوتيه سادة	Mushrooms boiled / cooked	28
+green_beans_cooked	فاصوليا خضراء مسلوقة	Green beans boiled	35
+okra_cooked	بامية مسلوقة / مطبوخة سادة	Okra boiled	33
+apple_raw_with_skin	تفاح طازج بالقشر	Apple raw with skin	52
+banana_raw	موز طازج	Banana raw	89
+orange_raw	برتقال طازج	Orange raw	47
+strawberries_raw	فراولة طازجة	Strawberries raw	32
+blueberries_raw	توت أزرق طازج	Blueberries raw	57
+watermelon_raw	بطيخ أحمر طازج	Watermelon raw	30
+cantaloupe_raw	كانتالوب / شمام طازج	Cantaloupe melon raw	34
+grapes_red_raw	عنب أحمر طازج	Red grapes raw	69
+mango_raw	مانجو طازجة	Mango raw	60
+pineapple_raw	أناناس طازج	Pineapple raw	50
+avocado_raw	أفوكادو طازج	Avocado raw	160
+dates_deglet_nour	تمر دقلة نور مجفف	Dates Deglet Noor	282
+dates_medjool	تمر مجدول فاخر	Dates Medjool	277
+dates_fresh_rutab	بلح رطب / تمر طازج	Dates fresh Rutab	142
+pomegranate_seeds	رمان حبوب طازجة	Pomegranate arils	83
+guava_raw	جوافة طازجة	Guava raw	68
+figs_raw	تين برشومي طازج	Figs fresh raw	74
+almonds_raw	لوز نيء غير مملح	Almonds raw unsalted	579
+almonds_roasted	لوز محمص	Almonds dry roasted	598
+walnuts_raw	عين جمل / جوز نيء	Walnuts raw halves	654
+cashews_raw	كاجو نيء	Cashews raw	553
+pistachios_raw	فستق حلبي مقشر نيء	Pistachios raw	560
+peanuts_raw	فول سوداني نيء مقشر	Peanuts raw	567
+peanut_butter_smooth	زبدة فول سوداني سادة	Peanut butter smooth 100%	588
+tahini_sesame_paste	طحينة بيضاء خام	Tahini pure sesame paste	595
+chia_seeds_raw	بذور شيا جافة	Chia seeds raw dry	486
+flaxseeds_ground	بذور كتان مطحونة	Flaxseed ground	534
+pumpkin_seeds_raw	لب قرع / بذور يقطين مقشرة	Pumpkin seeds pepitas raw	559
+olive_oil_extra_virgin	زيت زيتون بكر ممتاز	Olive oil extra virgin	884
+vegetable_oil_canola	زيت نباتي / كانولا	Vegetable oil canola	884
+sunflower_oil	زيت عباد الشمس	Sunflower oil	884
+corn_oil	زيت ذرة نقي	Corn oil pure	884
+coconut_oil	زيت جوز هند بكر	Coconut oil virgin	862
+honey_pure	عسل نحل طبيعي	Honey pure raw	304
+sugar_white_granulated	سكر أبيض مكرر	Sugar white granulated	387
+dark_chocolate_70	شوكولاتة داكنة 70%	Dark chocolate 70-85%	598
+ketchup_regular	كاتشب طماطم	Tomato ketchup	101
+mustard_yellow	مستردة / خردل أصفر	Yellow mustard prepared	60
+mayonnaise_regular	مايونيز عادي كامل الدسم	Mayonnaise regular	680
+soy_sauce	صوص صويا	Soy sauce tamari / regular	53
+chicken_breast_boiled	صدور دجاج مسلوق	Chicken breast boiled	156.8
+chicken_breast_roasted	صدور دجاج محمر بالفرن	Chicken breast roasted	173.2
+chicken_breast_air_fried	صدور دجاج مقلي بالقلاية الهوائية	Chicken breast air-fried	168.3
+chicken_breast_pan_seared_light_oil	صدور دجاج مشوح بقليل من الزيت	Chicken breast pan-seared light oil	206.2
+chicken_thigh_boiled	أوراك دجاج مسلوق	Chicken thigh boiled	198.5
+chicken_thigh_roasted	أوراك دجاج محمر بالفرن	Chicken thigh roasted	219.5
+chicken_thigh_air_fried	أوراك دجاج مقلي بالقلاية الهوائية	Chicken thigh air-fried	213.2
+chicken_thigh_pan_seared_light_oil	أوراك دجاج مشوح بقليل من الزيت	Chicken thigh pan-seared light oil	261.2
+turkey_cutlet_grilled	شرائح رومي مشوي	Turkey cutlet grilled	140.0
+turkey_cutlet_boiled	شرائح رومي مسلوق	Turkey cutlet boiled	133.0
+turkey_cutlet_roasted	شرائح رومي محمر بالفرن	Turkey cutlet roasted	147.0
+turkey_cutlet_air_fried	شرائح رومي مقلي بالقلاية الهوائية	Turkey cutlet air-fried	142.8
+turkey_cutlet_pan_seared_light_oil	شرائح رومي مشوح بقليل من الزيت	Turkey cutlet pan-seared light oil	175.0
+beef_sirloin_grilled	ستيك بقر سيرلوين مشوي	Beef sirloin grilled	205.0
+beef_sirloin_boiled	ستيك بقر سيرلوين مسلوق	Beef sirloin boiled	194.8
+beef_sirloin_roasted	ستيك بقر سيرلوين محمر بالفرن	Beef sirloin roasted	215.2
+beef_sirloin_air_fried	ستيك بقر سيرلوين مقلي بالقلاية الهوائية	Beef sirloin air-fried	209.1
+beef_sirloin_pan_seared_light_oil	ستيك بقر سيرلوين مشوح بقليل من الزيت	Beef sirloin pan-seared light oil	256.2
+beef_tenderloin_grilled	فيليه بقر مشوي	Beef tenderloin grilled	218.0
+beef_tenderloin_boiled	فيليه بقر مسلوق	Beef tenderloin boiled	207.1
+beef_tenderloin_roasted	فيليه بقر محمر بالفرن	Beef tenderloin roasted	228.9
+beef_tenderloin_air_fried	فيليه بقر مقلي بالقلاية الهوائية	Beef tenderloin air-fried	222.4
+beef_tenderloin_pan_seared_light_oil	فيليه بقر مشوح بقليل من الزيت	Beef tenderloin pan-seared light oil	272.5
+beef_flank_grilled	لحم بقر فلانك مشوي	Beef flank steak grilled	192.0
+beef_flank_boiled	لحم بقر فلانك مسلوق	Beef flank steak boiled	182.4
+beef_flank_roasted	لحم بقر فلانك محمر بالفرن	Beef flank steak roasted	201.6
+beef_flank_air_fried	لحم بقر فلانك مقلي بالقلاية الهوائية	Beef flank steak air-fried	195.8
+beef_flank_pan_seared_light_oil	لحم بقر فلانك مشوح بقليل من الزيت	Beef flank steak pan-seared light oil	240.0
+veal_chop_grilled	ريش بتلو مشوي	Veal chop grilled	180.0
+veal_chop_boiled	ريش بتلو مسلوق	Veal chop boiled	171.0
+veal_chop_roasted	ريش بتلو محمر بالفرن	Veal chop roasted	189.0
+veal_chop_air_fried	ريش بتلو مقلي بالقلاية الهوائية	Veal chop air-fried	183.6
+veal_chop_pan_seared_light_oil	ريش بتلو مشوح بقليل من الزيت	Veal chop pan-seared light oil	225.0
+lamb_shank_grilled	موزة ضاني مشوي	Lamb shank grilled	240.0
+lamb_shank_boiled	موزة ضاني مسلوق	Lamb shank boiled	228.0
+lamb_shank_roasted	موزة ضاني محمر بالفرن	Lamb shank roasted	252.0
+lamb_shank_air_fried	موزة ضاني مقلي بالقلاية الهوائية	Lamb shank air-fried	244.8
+lamb_shank_pan_seared_light_oil	موزة ضاني مشوح بقليل من الزيت	Lamb shank pan-seared light oil	300.0
+duck_breast_grilled	صدر بط مشوي	Duck breast grilled	201.0
+duck_breast_boiled	صدر بط مسلوق	Duck breast boiled	190.9
+duck_breast_roasted	صدر بط محمر بالفرن	Duck breast roasted	211.1
+duck_breast_air_fried	صدر بط مقلي بالقلاية الهوائية	Duck breast air-fried	205.0
+duck_breast_pan_seared_light_oil	صدر بط مشوح بقليل من الزيت	Duck breast pan-seared light oil	251.2
+salmon_grilled	سمك سلمون مشوي	Salmon grilled	206.0
+salmon_steamed	سمك سلمون على البخار	Salmon steamed	195.7
+salmon_baked_lemon_herbs	سمك سلمون بالفرن بالليمون والأعشاب	Salmon baked with herbs	216.3
+salmon_fried_floured	سمك سلمون مقلي بالدقيق	Salmon pan-fried breaded	329.6
+tuna_grilled	سمك تونة مشوي	Tuna grilled	132.0
+tuna_steamed	سمك تونة على البخار	Tuna steamed	125.4
+tuna_baked_lemon_herbs	سمك تونة بالفرن بالليمون والأعشاب	Tuna baked with herbs	138.6
+tuna_fried_floured	سمك تونة مقلي بالدقيق	Tuna pan-fried breaded	211.2
+tilapia_grilled	سمك بلطي مشوي	Tilapia grilled	128.0
+tilapia_steamed	سمك بلطي على البخار	Tilapia steamed	121.6
+tilapia_baked_lemon_herbs	سمك بلطي بالفرن بالليمون والأعشاب	Tilapia baked with herbs	134.4
+tilapia_fried_floured	سمك بلطي مقلي بالدقيق	Tilapia pan-fried breaded	204.8
+cod_grilled	سمك قد مشوي	Cod grilled	105.0
+cod_steamed	سمك قد على البخار	Cod steamed	99.8
+cod_baked_lemon_herbs	سمك قد بالفرن بالليمون والأعشاب	Cod baked with herbs	110.2
+cod_fried_floured	سمك قد مقلي بالدقيق	Cod pan-fried breaded	168.0
+halibut_grilled	سمك هاليبوت مشوي	Halibut grilled	140.0
+halibut_steamed	سمك هاليبوت على البخار	Halibut steamed	133.0
+halibut_baked_lemon_herbs	سمك هاليبوت بالفرن بالليمون والأعشاب	Halibut baked with herbs	147.0
+halibut_fried_floured	سمك هاليبوت مقلي بالدقيق	Halibut pan-fried breaded	224.0
+trout_grilled	سمك تراوت مشوي	Trout grilled	190.0
+trout_steamed	سمك تراوت على البخار	Trout steamed	180.5
+trout_baked_lemon_herbs	سمك تراوت بالفرن بالليمون والأعشاب	Trout baked with herbs	199.5
+trout_fried_floured	سمك تراوت مقلي بالدقيق	Trout pan-fried breaded	304.0
+sardines_grilled	سمك سردين مشوي	Sardines grilled	208.0
+sardines_steamed	سمك سردين على البخار	Sardines steamed	197.6
+sardines_baked_lemon_herbs	سمك سردين بالفرن بالليمون والأعشاب	Sardines baked with herbs	218.4
+sardines_fried_floured	سمك سردين مقلي بالدقيق	Sardines pan-fried breaded	332.8
+mackerel_grilled	سمك ماكريل مشوي	Mackerel grilled	262.0
+mackerel_steamed	سمك ماكريل على البخار	Mackerel steamed	248.9
+mackerel_baked_lemon_herbs	سمك ماكريل بالفرن بالليمون والأعشاب	Mackerel baked with herbs	275.1
+mackerel_fried_floured	سمك ماكريل مقلي بالدقيق	Mackerel pan-fried breaded	419.2
+shrimp_steamed	سمك جمبري على البخار	Shrimp steamed	94.0
+shrimp_baked_lemon_herbs	سمك جمبري بالفرن بالليمون والأعشاب	Shrimp baked with herbs	104.0
+shrimp_fried_floured	سمك جمبري مقلي بالدقيق	Shrimp pan-fried breaded	158.4
+squid_grilled	سمك كاليماري مشوي	Squid grilled	158.0
+squid_steamed	سمك كاليماري على البخار	Squid steamed	150.1
+squid_baked_lemon_herbs	سمك كاليماري بالفرن بالليمون والأعشاب	Squid baked with herbs	165.9
+squid_fried_floured	سمك كاليماري مقلي بالدقيق	Squid pan-fried breaded	252.8
+sea_bass_grilled	سمك قاروص مشوي	Sea bass grilled	124.0
+sea_bass_steamed	سمك قاروص على البخار	Sea bass steamed	117.8
+sea_bass_baked_lemon_herbs	سمك قاروص بالفرن بالليمون والأعشاب	Sea bass baked with herbs	130.2
+sea_bass_fried_floured	سمك قاروص مقلي بالدقيق	Sea bass pan-fried breaded	198.4
+sea_bream_grilled	سمك دنيس مشوي	Sea bream grilled	135.0
+sea_bream_steamed	سمك دنيس على البخار	Sea bream steamed	128.2
+sea_bream_baked_lemon_herbs	سمك دنيس بالفرن بالليمون والأعشاب	Sea bream baked with herbs	141.8
+sea_bream_fried_floured	سمك دنيس مقلي بالدقيق	Sea bream pan-fried breaded	216.0
+white_rice_plain_boiled	أرز أبيض (مسلوق بالماء فقط)	White rice (boiled plain)	130.0
+white_rice_light_oil_ghee	أرز أبيض (مطبوخ بقليل من الزيت أو السمن)	White rice (cooked with 1 tsp oil/ghee)	189.5
+white_rice_standard_oil	أرز أبيض (مطبوخ بالطريقة المعتادة (زيت عادي))	White rice (cooked with standard oil)	238.0
+basmati_rice_plain_boiled	أرز بسمتي (مسلوق بالماء فقط)	Basmati rice (boiled plain)	121.0
+basmati_rice_light_oil_ghee	أرز بسمتي (مطبوخ بقليل من الزيت أو السمن)	Basmati rice (cooked with 1 tsp oil/ghee)	178.2
+basmati_rice_standard_oil	أرز بسمتي (مطبوخ بالطريقة المعتادة (زيت عادي))	Basmati rice (cooked with standard oil)	224.9
+brown_rice_plain_boiled	أرز بني (مسلوق بالماء فقط)	Brown rice (boiled plain)	111.0
+brown_rice_light_oil_ghee	أرز بني (مطبوخ بقليل من الزيت أو السمن)	Brown rice (cooked with 1 tsp oil/ghee)	165.8
+brown_rice_standard_oil	أرز بني (مطبوخ بالطريقة المعتادة (زيت عادي))	Brown rice (cooked with standard oil)	210.4
+jasmine_rice_plain_boiled	أرز ياسمين (مسلوق بالماء فقط)	Jasmine rice (boiled plain)	129.0
+jasmine_rice_light_oil_ghee	أرز ياسمين (مطبوخ بقليل من الزيت أو السمن)	Jasmine rice (cooked with 1 tsp oil/ghee)	188.2
+jasmine_rice_standard_oil	أرز ياسمين (مطبوخ بالطريقة المعتادة (زيت عادي))	Jasmine rice (cooked with standard oil)	236.5
+wild_rice_plain_boiled	أرز بري (مسلوق بالماء فقط)	Wild rice (boiled plain)	101.0
+wild_rice_light_oil_ghee	أرز بري (مطبوخ بقليل من الزيت أو السمن)	Wild rice (cooked with 1 tsp oil/ghee)	153.2
+wild_rice_standard_oil	أرز بري (مطبوخ بالطريقة المعتادة (زيت عادي))	Wild rice (cooked with standard oil)	195.9
+penne_pasta_plain_boiled	مكرونة بيني (مسلوق بالماء فقط)	Penne pasta (boiled plain)	158.0
+penne_pasta_light_oil_ghee	مكرونة بيني (مطبوخ بقليل من الزيت أو السمن)	Penne pasta (cooked with 1 tsp oil/ghee)	224.5
+penne_pasta_standard_oil	مكرونة بيني (مطبوخ بالطريقة المعتادة (زيت عادي))	Penne pasta (cooked with standard oil)	278.6
+spaghetti_pasta_plain_boiled	مكرونة سباغيتي (مسلوق بالماء فقط)	Spaghetti pasta (boiled plain)	158.0
+spaghetti_pasta_light_oil_ghee	مكرونة سباغيتي (مطبوخ بقليل من الزيت أو السمن)	Spaghetti pasta (cooked with 1 tsp oil/ghee)	224.5
+spaghetti_pasta_standard_oil	مكرونة سباغيتي (مطبوخ بالطريقة المعتادة (زيت عادي))	Spaghetti pasta (cooked with standard oil)	278.6
+fusilli_pasta_plain_boiled	مكرونة فوسيلي حلزونية (مسلوق بالماء فقط)	Fusilli pasta (boiled plain)	158.0
+fusilli_pasta_light_oil_ghee	مكرونة فوسيلي حلزونية (مطبوخ بقليل من الزيت أو السمن)	Fusilli pasta (cooked with 1 tsp oil/ghee)	224.5
+fusilli_pasta_standard_oil	مكرونة فوسيلي حلزونية (مطبوخ بالطريقة المعتادة (زيت عادي))	Fusilli pasta (cooked with standard oil)	278.6
+macaroni_pasta_plain_boiled	مكرونة مقصوصة (مسلوق بالماء فقط)	Elbow macaroni (boiled plain)	158.0
+macaroni_pasta_light_oil_ghee	مكرونة مقصوصة (مطبوخ بقليل من الزيت أو السمن)	Elbow macaroni (cooked with 1 tsp oil/ghee)	224.5
+macaroni_pasta_standard_oil	مكرونة مقصوصة (مطبوخ بالطريقة المعتادة (زيت عادي))	Elbow macaroni (cooked with standard oil)	278.6
+whole_wheat_spaghetti_plain_boiled	سباغيتي قمح كامل (مسلوق بالماء فقط)	Whole wheat spaghetti (boiled plain)	124.0
+whole_wheat_spaghetti_light_oil_ghee	سباغيتي قمح كامل (مطبوخ بقليل من الزيت أو السمن)	Whole wheat spaghetti (cooked with 1 tsp oil/ghee)	182.0
+whole_wheat_spaghetti_standard_oil	سباغيتي قمح كامل (مطبوخ بالطريقة المعتادة (زيت عادي))	Whole wheat spaghetti (cooked with standard oil)	229.3
+egg_noodles_plain_boiled	نودلز بالبيض (مسلوق بالماء فقط)	Egg noodles (boiled plain)	138.0
+egg_noodles_light_oil_ghee	نودلز بالبيض (مطبوخ بقليل من الزيت أو السمن)	Egg noodles (cooked with 1 tsp oil/ghee)	199.5
+egg_noodles_standard_oil	نودلز بالبيض (مطبوخ بالطريقة المعتادة (زيت عادي))	Egg noodles (cooked with standard oil)	249.6
+rice_noodles_plain_boiled	نودلز أرز (مسلوق بالماء فقط)	Rice noodles (boiled plain)	109.0
+rice_noodles_light_oil_ghee	نودلز أرز (مطبوخ بقليل من الزيت أو السمن)	Rice noodles (cooked with 1 tsp oil/ghee)	163.2
+rice_noodles_standard_oil	نودلز أرز (مطبوخ بالطريقة المعتادة (زيت عادي))	Rice noodles (cooked with standard oil)	207.5
+couscous_plain_boiled	كسكسي (مسلوق بالماء فقط)	Couscous (boiled plain)	112.0
+couscous_light_oil_ghee	كسكسي (مطبوخ بقليل من الزيت أو السمن)	Couscous (cooked with 1 tsp oil/ghee)	167.0
+couscous_standard_oil	كسكسي (مطبوخ بالطريقة المعتادة (زيت عادي))	Couscous (cooked with standard oil)	211.9
+bulgur_plain_boiled	برغل (مسلوق بالماء فقط)	Bulgur (boiled plain)	83.0
+bulgur_light_oil_ghee	برغل (مطبوخ بقليل من الزيت أو السمن)	Bulgur (cooked with 1 tsp oil/ghee)	130.8
+bulgur_standard_oil	برغل (مطبوخ بالطريقة المعتادة (زيت عادي))	Bulgur (cooked with standard oil)	169.8
+quinoa_plain_boiled	كينوا (مسلوق بالماء فقط)	Quinoa (boiled plain)	120.0
+quinoa_light_oil_ghee	كينوا (مطبوخ بقليل من الزيت أو السمن)	Quinoa (cooked with 1 tsp oil/ghee)	177.0
+quinoa_standard_oil	كينوا (مطبوخ بالطريقة المعتادة (زيت عادي))	Quinoa (cooked with standard oil)	223.5
+barley_plain_boiled	شعير (مسلوق بالماء فقط)	Pearl barley (boiled plain)	123.0
+barley_light_oil_ghee	شعير (مطبوخ بقليل من الزيت أو السمن)	Pearl barley (cooked with 1 tsp oil/ghee)	180.8
+barley_standard_oil	شعير (مطبوخ بالطريقة المعتادة (زيت عادي))	Pearl barley (cooked with standard oil)	227.8
+buckwheat_plain_boiled	حنطة سوداء (مسلوق بالماء فقط)	Buckwheat groats (boiled plain)	92.0
+buckwheat_light_oil_ghee	حنطة سوداء (مطبوخ بقليل من الزيت أو السمن)	Buckwheat groats (cooked with 1 tsp oil/ghee)	142.0
+buckwheat_standard_oil	حنطة سوداء (مطبوخ بالطريقة المعتادة (زيت عادي))	Buckwheat groats (cooked with standard oil)	182.9
+millet_plain_boiled	دخن (مسلوق بالماء فقط)	Millet (boiled plain)	119.0
+millet_light_oil_ghee	دخن (مطبوخ بقليل من الزيت أو السمن)	Millet (cooked with 1 tsp oil/ghee)	175.8
+millet_standard_oil	دخن (مطبوخ بالطريقة المعتادة (زيت عادي))	Millet (cooked with standard oil)	222.0
+polenta_cornmeal_plain_boiled	عصيدة ذرة / بولينتا (مسلوق بالماء فقط)	Polenta cornmeal (boiled plain)	70.0
+polenta_cornmeal_light_oil_ghee	عصيدة ذرة / بولينتا (مطبوخ بقليل من الزيت أو السمن)	Polenta cornmeal (cooked with 1 tsp oil/ghee)	114.5
+polenta_cornmeal_standard_oil	عصيدة ذرة / بولينتا (مطبوخ بالطريقة المعتادة (زيت عادي))	Polenta cornmeal (cooked with standard oil)	151.0
+broccoli_steamed	بروكلي (على البخار سادة)	Broccoli (steamed plain)	35.0
+broccoli_boiled	بروكلي (مسلوق بالماء)	Broccoli (boiled)	33.2
+broccoli_roasted_olive_oil	بروكلي (مشوي بالفرن بزيت زيتون خفيف)	Broccoli (roasted with olive oil)	91.0
+broccoli_sautéed	بروكلي (سوتيه مقلب بقليل من الزيت)	Broccoli (sautéed in oil)	105.2
+cauliflower_raw	قرنبيط (طازج نيء)	Cauliflower (raw)	25.0
+cauliflower_steamed	قرنبيط (على البخار سادة)	Cauliflower (steamed plain)	25.0
+cauliflower_boiled	قرنبيط (مسلوق بالماء)	Cauliflower (boiled)	23.8
+cauliflower_roasted_olive_oil	قرنبيط (مشوي بالفرن بزيت زيتون خفيف)	Cauliflower (roasted with olive oil)	74.0
+cauliflower_sautéed	قرنبيط (سوتيه مقلب بقليل من الزيت)	Cauliflower (sautéed in oil)	86.8
+carrots_steamed	جزر (على البخار سادة)	Carrots (steamed plain)	41.0
+carrots_roasted_olive_oil	جزر (مشوي بالفرن بزيت زيتون خفيف)	Carrots (roasted with olive oil)	101.2
+carrots_sautéed	جزر (سوتيه مقلب بقليل من الزيت)	Carrots (sautéed in oil)	116.4
+zucchini_steamed	كوسة (على البخار سادة)	Zucchini (steamed plain)	17.0
+zucchini_roasted_olive_oil	كوسة (مشوي بالفرن بزيت زيتون خفيف)	Zucchini (roasted with olive oil)	60.4
+zucchini_sautéed	كوسة (سوتيه مقلب بقليل من الزيت)	Zucchini (sautéed in oil)	72.0
+eggplant_steamed	باذنجان (على البخار سادة)	Eggplant (steamed plain)	25.0
+eggplant_boiled	باذنجان (مسلوق بالماء)	Eggplant (boiled)	23.8
+eggplant_roasted_olive_oil	باذنجان (مشوي بالفرن بزيت زيتون خفيف)	Eggplant (roasted with olive oil)	74.0
+eggplant_sautéed	باذنجان (سوتيه مقلب بقليل من الزيت)	Eggplant (sautéed in oil)	86.8
+spinach_steamed	سبانخ (على البخار سادة)	Spinach (steamed plain)	23.0
+spinach_boiled	سبانخ (مسلوق بالماء)	Spinach (boiled)	21.8
+spinach_roasted_olive_oil	سبانخ (مشوي بالفرن بزيت زيتون خفيف)	Spinach (roasted with olive oil)	70.6
+spinach_sautéed	سبانخ (سوتيه مقلب بقليل من الزيت)	Spinach (sautéed in oil)	83.1
+green_beans_raw	فاصوليا خضراء (طازج نيء)	Green beans (raw)	35.0
+green_beans_steamed	فاصوليا خضراء (على البخار سادة)	Green beans (steamed plain)	35.0
+green_beans_boiled	فاصوليا خضراء (مسلوق بالماء)	Green beans (boiled)	33.2
+green_beans_roasted_olive_oil	فاصوليا خضراء (مشوي بالفرن بزيت زيتون خفيف)	Green beans (roasted with olive oil)	91.0
+green_beans_sautéed	فاصوليا خضراء (سوتيه مقلب بقليل من الزيت)	Green beans (sautéed in oil)	105.2
+asparagus_raw	هليون (طازج نيء)	Asparagus (raw)	20.0
+asparagus_steamed	هليون (على البخار سادة)	Asparagus (steamed plain)	20.0
+asparagus_boiled	هليون (مسلوق بالماء)	Asparagus (boiled)	19.0
+asparagus_roasted_olive_oil	هليون (مشوي بالفرن بزيت زيتون خفيف)	Asparagus (roasted with olive oil)	65.5
+asparagus_sautéed	هليون (سوتيه مقلب بقليل من الزيت)	Asparagus (sautéed in oil)	77.5
+brussels_sprouts_raw	كرنب بروكسل (طازج نيء)	Brussels sprouts (raw)	43.0
+brussels_sprouts_steamed	كرنب بروكسل (على البخار سادة)	Brussels sprouts (steamed plain)	43.0
+brussels_sprouts_boiled	كرنب بروكسل (مسلوق بالماء)	Brussels sprouts (boiled)	40.9
+brussels_sprouts_roasted_olive_oil	كرنب بروكسل (مشوي بالفرن بزيت زيتون خفيف)	Brussels sprouts (roasted with olive oil)	104.6
+brussels_sprouts_sautéed	كرنب بروكسل (سوتيه مقلب بقليل من الزيت)	Brussels sprouts (sautéed in oil)	120.0
+cabbage_white_raw	كرنب أبيض (طازج نيء)	White cabbage (raw)	25.0
+cabbage_white_steamed	كرنب أبيض (على البخار سادة)	White cabbage (steamed plain)	25.0
+cabbage_white_boiled	كرنب أبيض (مسلوق بالماء)	White cabbage (boiled)	23.8
+cabbage_white_roasted_olive_oil	كرنب أبيض (مشوي بالفرن بزيت زيتون خفيف)	White cabbage (roasted with olive oil)	74.0
+cabbage_white_sautéed	كرنب أبيض (سوتيه مقلب بقليل من الزيت)	White cabbage (sautéed in oil)	86.8
+cabbage_red_raw	كرنب أحمر (طازج نيء)	Red cabbage (raw)	31.0
+cabbage_red_steamed	كرنب أحمر (على البخار سادة)	Red cabbage (steamed plain)	31.0
+cabbage_red_boiled	كرنب أحمر (مسلوق بالماء)	Red cabbage (boiled)	29.4
+cabbage_red_roasted_olive_oil	كرنب أحمر (مشوي بالفرن بزيت زيتون خفيف)	Red cabbage (roasted with olive oil)	84.2
+cabbage_red_sautéed	كرنب أحمر (سوتيه مقلب بقليل من الزيت)	Red cabbage (sautéed in oil)	97.8
+bell_pepper_raw	فلفل رومي ألوان (طازج نيء)	Bell pepper (raw)	26.0
+bell_pepper_steamed	فلفل رومي ألوان (على البخار سادة)	Bell pepper (steamed plain)	26.0
+bell_pepper_boiled	فلفل رومي ألوان (مسلوق بالماء)	Bell pepper (boiled)	24.7
+bell_pepper_roasted_olive_oil	فلفل رومي ألوان (مشوي بالفرن بزيت زيتون خفيف)	Bell pepper (roasted with olive oil)	75.7
+bell_pepper_sautéed	فلفل رومي ألوان (سوتيه مقلب بقليل من الزيت)	Bell pepper (sautéed in oil)	88.6
+mushrooms_raw	فطر / مشروم (طازج نيء)	Mushrooms (raw)	22.0
+mushrooms_steamed	فطر / مشروم (على البخار سادة)	Mushrooms (steamed plain)	22.0
+mushrooms_boiled	فطر / مشروم (مسلوق بالماء)	Mushrooms (boiled)	20.9
+mushrooms_roasted_olive_oil	فطر / مشروم (مشوي بالفرن بزيت زيتون خفيف)	Mushrooms (roasted with olive oil)	68.9
+mushrooms_sautéed	فطر / مشروم (سوتيه مقلب بقليل من الزيت)	Mushrooms (sautéed in oil)	81.2
+artichoke_raw	خرشوف (طازج نيء)	Artichoke heart (raw)	47.0
+artichoke_steamed	خرشوف (على البخار سادة)	Artichoke heart (steamed plain)	47.0
+artichoke_boiled	خرشوف (مسلوق بالماء)	Artichoke heart (boiled)	44.6
+artichoke_roasted_olive_oil	خرشوف (مشوي بالفرن بزيت زيتون خفيف)	Artichoke heart (roasted with olive oil)	111.4
+artichoke_sautéed	خرشوف (سوتيه مقلب بقليل من الزيت)	Artichoke heart (sautéed in oil)	127.5
+okra_raw	بامية (طازج نيء)	Okra (raw)	33.0
+okra_steamed	بامية (على البخار سادة)	Okra (steamed plain)	33.0
+okra_boiled	بامية (مسلوق بالماء)	Okra (boiled)	31.3
+okra_roasted_olive_oil	بامية (مشوي بالفرن بزيت زيتون خفيف)	Okra (roasted with olive oil)	87.6
+okra_sautéed	بامية (سوتيه مقلب بقليل من الزيت)	Okra (sautéed in oil)	101.6
+pumpkin_raw	قرع عسلي / يقطين (طازج نيء)	Pumpkin (raw)	26.0
+pumpkin_steamed	قرع عسلي / يقطين (على البخار سادة)	Pumpkin (steamed plain)	26.0
+pumpkin_boiled	قرع عسلي / يقطين (مسلوق بالماء)	Pumpkin (boiled)	24.7
+pumpkin_roasted_olive_oil	قرع عسلي / يقطين (مشوي بالفرن بزيت زيتون خفيف)	Pumpkin (roasted with olive oil)	75.7
+pumpkin_sautéed	قرع عسلي / يقطين (سوتيه مقلب بقليل من الزيت)	Pumpkin (sautéed in oil)	88.6
+beetroot_raw	بنجر / شمندر (طازج نيء)	Beetroot (raw)	43.0
+beetroot_steamed	بنجر / شمندر (على البخار سادة)	Beetroot (steamed plain)	43.0
+beetroot_boiled	بنجر / شمندر (مسلوق بالماء)	Beetroot (boiled)	40.9
+beetroot_roasted_olive_oil	بنجر / شمندر (مشوي بالفرن بزيت زيتون خفيف)	Beetroot (roasted with olive oil)	104.6
+beetroot_sautéed	بنجر / شمندر (سوتيه مقلب بقليل من الزيت)	Beetroot (sautéed in oil)	120.0
+milk_whole	حليب كامل الدسم 3.5%	Whole milk	62
+milk_semi_skimmed	حليب نصف دسم 1.5%	Semi-skimmed milk	47
+milk_skimmed	حليب خالي الدسم 0.1%	Skimmed milk	35
+milk_lactose_free_whole	حليب خالي اللاكتوز كامل الدسم	Lactose free whole milk	62
+milk_lactose_free_skim	حليب خالي اللاكتوز خالي الدسم	Lactose free skim milk	35
+goat_milk	حليب ماعز	Goat milk	69
+camel_milk	حليب إبل طازج	Camel milk fresh	52
+buttermilk	لبن رايب / خض	Buttermilk cultured	40
+kefir_plain	فطر هندي / كفير سادة	Kefir plain	64
+greek_yogurt_0	زبادي يوناني 0% دسم	Greek yogurt 0% fat	59
+greek_yogurt_2	زبادي يوناني 2% دسم	Greek yogurt 2% fat	73
+greek_yogurt_5	زبادي يوناني 5% دسم	Greek yogurt 5% fat	97
+greek_yogurt_10	زبادي يوناني كامل الدسم 10%	Greek yogurt authentic 10%	133
+labneh_traditional	لبنة بلدية كاملة الدسم	Labneh traditional whole	152
+labneh_light	لبنة لايت قليلة الدسم	Labneh light low fat	95
+cheese_mozzarella	جبن موزاريلا طبيعي	Mozzarella cheese	280
+cheese_mozzarella_light	جبن موزاريلا لايت	Mozzarella cheese light	200
+cheese_cheddar_mild	جبن شيدر خفيف النكهة	Mild cheddar cheese	403
+cheese_cheddar_mature	جبن شيدر معتق	Mature sharp cheddar	416
+cheese_parmesan_block	جبن بارميزان صلب	Parmigiano Reggiano block	431
+cheese_gouda	جبن جودا	Gouda cheese	356
+cheese_edam	جبن إيدام / فلامنك	Edam cheese	357
+cheese_swiss_emmental	جبن سويسري إمنتال	Swiss Emmental cheese	380
+cheese_brie	جبن بري فرنسي	Brie cheese	334
+cheese_camembert	جبن كامامبير	Camembert cheese	300
+cheese_feta_greek	جبن فيتا يوناني أصلي	Greek Feta PDO	264
+cheese_halloumi	جبن حلوم قبرصي	Halloumi cheese	321
+cheese_ricotta_whole	جبن ريكوتا كامل الدسم	Ricotta cheese whole milk	174
+cheese_ricotta_part_skim	جبن ريكوتا قليل الدسم	Ricotta cheese part-skim	138
+cheese_cottage_dry_curd	جبن قريش جاف بدون دسم	Cottage cheese dry curd	72
+apple_gala	تفاح جالا	Gala apple	52
+apple_fuji	تفاح فوجي	Fuji apple	63
+apple_granny_smith	تفاح أخضر جراني سميث	Granny Smith green apple	52
+pear_bartlett	كمثرى / إجاص	Pear Bartlett raw	57
+banana_medium	موز متوسط الحجم	Medium banana	89
+orange_navel	برتقال بسرة	Navel orange	49
+orange_valencia	برتقال صيفي / عصير	Valencia orange	47
+mandarin_clementine	يوسفي / كلمنتينا	Clementine mandarin	47
+grapefruit_pink	جريب فروت وردي	Pink grapefruit	42
+peach_yellow	خوخ أصفر	Yellow peach	39
+nectarine	نكتارين	Nectarine raw	44
+apricot_fresh	مشمش طازج	Fresh apricot	48
+plum_red	برقوق أحمر	Red plum	46
+cherries_sweet	كرز حلو طازج	Sweet cherries fresh	63
+grapes_green_seedless	عنب أخضر بدون بذور	Green seedless grapes	69
+grapes_black_seedless	عنب أسود بدون بذور	Black seedless grapes	70
+strawberries	فراولة طازجة	Strawberries	32
+blueberries	توت أزرق	Blueberries	57
+raspberries	توت أحمر بري	Raspberries red	52
+blackberries	توت أسود بري	Blackberries	43
+watermelon	بطيخ أحمر	Watermelon	30
+melon_cantaloupe	شمام كانتالوب	Cantaloupe	34
+melon_honeydew	شمام كاستل / هوني ديو	Honeydew melon	36
+pineapple	أناناس طازج	Pineapple	50
+mango	مانجو طازجة	Mango fresh	60
+papaya	بابايا طازجة	Papaya fresh	43
+kiwi_green	كيوي أخضر	Kiwi fruit green	61
+kiwi_gold	كيوي ذهبي	Gold kiwi fruit	63
+fig_fresh	تين طازج	Fresh fig	74
+pomegranate_arils	حبوب رمان	Pomegranate arils	83
+almonds_raw_whole	لوز نيء حبة كاملة	Almonds raw	579
+almonds_dry_roasted	لوز محمص جاف	Almonds roasted dry	598
+walnuts_english	عين جمل نيء	Walnuts halves	654
+cashews_raw_whole	كاجو نيء كامل	Cashews raw	553
+cashews_roasted_salted	كاجو محمص مملح	Cashews roasted salted	574
+pistachios_in_shell_roasted	فستق محمص بالقشر	Pistachios roasted in shell	562
+pistachios_kernels_raw	قلب فستق حلبي نيء	Pistachio kernels raw	560
+peanuts_dry_roasted	فول سوداني محمص جاف	Peanuts dry roasted	587
+hazelnuts_raw	بندق نيء مقشر	Hazelnuts filberts raw	628
+pecans_halves	بيكان أنصاف نيئة	Pecan halves raw	691
+brazil_nuts	جوز برازيلي	Brazil nuts raw	659
+macadamia_nuts	مكاديميا نيئة	Macadamia nuts raw	718
+pine_nuts	صنوبر نيء	Pine nuts raw	673
+chia_seeds	بذور شيا سوداء	Chia seeds black	486
+flaxseeds_whole	بذور كتان كاملة	Flaxseed whole brown	534
+flaxseeds_milled	بذور كتان مطحونة ناعمة	Milled flaxseed	534
+hemp_hearts_shelled	قلوب بذور القنب مقشرة	Hemp hearts shelled	553
+sunflower_seeds_raw	لب سوري / عباد شمس نيء مقشر	Sunflower seed kernels raw	584
+sunflower_seeds_roasted	لب سوري محمص مملح	Sunflower seed kernels roasted	582
+pumpkin_seeds_pepitas	لب أبيض / قرع مقشر نيء	Pumpkin seeds pepitas raw	559
+sesame_seeds_whole_raw	سمسم أبيض نيء	Sesame seeds whole raw	573
+sesame_seeds_roasted	سمسم أحمر محمص	Sesame seeds toasted	565
+peanut_butter_natural	زبدة فول سوداني طبيعية 100%	Peanut butter natural	588
+peanut_butter_creamy	زبدة فول سوداني ناعمة تجارية	Peanut butter creamy regular	594
+almond_butter_creamy	زبدة لوز طبيعية	Almond butter 100% pure	614
+cashew_butter	زبدة كاجو طبيعية	Cashew butter creamy	587
+tahini_paste_100	طحينة سمسم خام 100%	Tahini pure sesame paste	595
+beef_chuck_lean_trimmed_0_fat	لحم بقر كتف / رقبة (مشفي تماماً من الدهن)	Beef chuck (0% fat trim)	182.8
+beef_chuck_semi_trimmed_5_fat	لحم بقر كتف / رقبة (قليل الدهن 5%)	Beef chuck (5% fat trim)	204.2
+beef_chuck_regular_trim_15_fat	لحم بقر كتف / رقبة (عادي بنسبة دهن 15%)	Beef chuck (15% fat trim)	247.2
+beef_chuck_rich_trim_25_fat	لحم بقر كتف / رقبة (دسم بنسبة دهن 25%)	Beef chuck (25% fat trim)	290.2
+beef_round_lean_trimmed_0_fat	لحم بقر فخد / وش الفخدة (مشفي تماماً من الدهن)	Beef round top (0% fat trim)	157.2
+beef_round_semi_trimmed_5_fat	لحم بقر فخد / وش الفخدة (قليل الدهن 5%)	Beef round top (5% fat trim)	175.8
+beef_round_regular_trim_15_fat	لحم بقر فخد / وش الفخدة (عادي بنسبة دهن 15%)	Beef round top (15% fat trim)	212.7
+beef_round_rich_trim_25_fat	لحم بقر فخد / وش الفخدة (دسم بنسبة دهن 25%)	Beef round top (25% fat trim)	249.8
+beef_brisket_lean_trimmed_0_fat	لحم بقر صدر / بريسكت (مشفي تماماً من الدهن)	Beef brisket (0% fat trim)	212.5
+beef_brisket_semi_trimmed_5_fat	لحم بقر صدر / بريسكت (قليل الدهن 5%)	Beef brisket (5% fat trim)	237.5
+beef_brisket_regular_trim_15_fat	لحم بقر صدر / بريسكت (عادي بنسبة دهن 15%)	Beef brisket (15% fat trim)	287.5
+beef_brisket_rich_trim_25_fat	لحم بقر صدر / بريسكت (دسم بنسبة دهن 25%)	Beef brisket (25% fat trim)	337.5
+beef_short_ribs_lean_trimmed_0_fat	ريش بقر قصيرة (مشفي تماماً من الدهن)	Beef short ribs (0% fat trim)	250.8
+beef_short_ribs_semi_trimmed_5_fat	ريش بقر قصيرة (قليل الدهن 5%)	Beef short ribs (5% fat trim)	280.2
+beef_short_ribs_regular_trim_15_fat	ريش بقر قصيرة (عادي بنسبة دهن 15%)	Beef short ribs (15% fat trim)	339.2
+beef_short_ribs_rich_trim_25_fat	ريش بقر قصيرة (دسم بنسبة دهن 25%)	Beef short ribs (25% fat trim)	398.2
+lamb_shoulder_lean_trimmed_0_fat	كتف ضاني (مشفي تماماً من الدهن)	Lamb shoulder (0% fat trim)	208.2
+lamb_shoulder_semi_trimmed_5_fat	كتف ضاني (قليل الدهن 5%)	Lamb shoulder (5% fat trim)	232.8
+lamb_shoulder_regular_trim_15_fat	كتف ضاني (عادي بنسبة دهن 15%)	Lamb shoulder (15% fat trim)	281.8
+lamb_shoulder_rich_trim_25_fat	كتف ضاني (دسم بنسبة دهن 25%)	Lamb shoulder (25% fat trim)	330.8
+lamb_loin_lean_trimmed_0_fat	بيت الكلاوي ضاني (مشفي تماماً من الدهن)	Lamb loin chop (0% fat trim)	221.0
+lamb_loin_semi_trimmed_5_fat	بيت الكلاوي ضاني (قليل الدهن 5%)	Lamb loin chop (5% fat trim)	247.0
+lamb_loin_regular_trim_15_fat	بيت الكلاوي ضاني (عادي بنسبة دهن 15%)	Lamb loin chop (15% fat trim)	299.0
+lamb_loin_rich_trim_25_fat	بيت الكلاوي ضاني (دسم بنسبة دهن 25%)	Lamb loin chop (25% fat trim)	351.0
+veal_cutlet_lean_trimmed_0_fat	اسكالوب بتلو (مشفي تماماً من الدهن)	Veal cutlet (0% fat trim)	136.0
+veal_cutlet_semi_trimmed_5_fat	اسكالوب بتلو (قليل الدهن 5%)	Veal cutlet (5% fat trim)	152.0
+veal_cutlet_regular_trim_15_fat	اسكالوب بتلو (عادي بنسبة دهن 15%)	Veal cutlet (15% fat trim)	184.0
+veal_cutlet_rich_trim_25_fat	اسكالوب بتلو (دسم بنسبة دهن 25%)	Veal cutlet (25% fat trim)	216.0
+turkey_thigh_lean_trimmed_0_fat	وراك ديك رومي (مشفي تماماً من الدهن)	Turkey thigh (0% fat trim)	148.8
+turkey_thigh_semi_trimmed_5_fat	وراك ديك رومي (قليل الدهن 5%)	Turkey thigh (5% fat trim)	166.2
+turkey_thigh_regular_trim_15_fat	وراك ديك رومي (عادي بنسبة دهن 15%)	Turkey thigh (15% fat trim)	201.2
+turkey_thigh_rich_trim_25_fat	وراك ديك رومي (دسم بنسبة دهن 25%)	Turkey thigh (25% fat trim)	236.3
+turkey_wing_lean_trimmed_0_fat	أجنحة ديك رومي (مشفي تماماً من الدهن)	Turkey wing (0% fat trim)	165.8
+turkey_wing_semi_trimmed_5_fat	أجنحة ديك رومي (قليل الدهن 5%)	Turkey wing (5% fat trim)	185.2
+turkey_wing_regular_trim_15_fat	أجنحة ديك رومي (عادي بنسبة دهن 15%)	Turkey wing (15% fat trim)	224.2
+turkey_wing_rich_trim_25_fat	أجنحة ديك رومي (دسم بنسبة دهن 25%)	Turkey wing (25% fat trim)	263.2
+chicken_back_lean_trimmed_0_fat	هياكل دجاج للشوربة (مشفي تماماً من الدهن)	Chicken back cooked (0% fat trim)	195.5
+chicken_back_semi_trimmed_5_fat	هياكل دجاج للشوربة (قليل الدهن 5%)	Chicken back cooked (5% fat trim)	218.5
+chicken_back_regular_trim_15_fat	هياكل دجاج للشوربة (عادي بنسبة دهن 15%)	Chicken back cooked (15% fat trim)	264.5
+chicken_back_rich_trim_25_fat	هياكل دجاج للشوربة (دسم بنسبة دهن 25%)	Chicken back cooked (25% fat trim)	310.5
+beef_heart_lean_trimmed_0_fat	قلب بقري مطبوخ (مشفي تماماً من الدهن)	Beef heart cooked (0% fat trim)	140.2
+beef_heart_semi_trimmed_5_fat	قلب بقري مطبوخ (قليل الدهن 5%)	Beef heart cooked (5% fat trim)	156.8
+beef_heart_regular_trim_15_fat	قلب بقري مطبوخ (عادي بنسبة دهن 15%)	Beef heart cooked (15% fat trim)	189.7
+beef_heart_rich_trim_25_fat	قلب بقري مطبوخ (دسم بنسبة دهن 25%)	Beef heart cooked (25% fat trim)	222.8
+beef_tongue_lean_trimmed_0_fat	لسان بقري مسلوق (مشفي تماماً من الدهن)	Beef tongue boiled (0% fat trim)	241.4
+beef_tongue_semi_trimmed_5_fat	لسان بقري مسلوق (قليل الدهن 5%)	Beef tongue boiled (5% fat trim)	269.8
+beef_tongue_regular_trim_15_fat	لسان بقري مسلوق (عادي بنسبة دهن 15%)	Beef tongue boiled (15% fat trim)	326.6
+beef_tongue_rich_trim_25_fat	لسان بقري مسلوق (دسم بنسبة دهن 25%)	Beef tongue boiled (25% fat trim)	383.4
+beef_tripe_lean_trimmed_0_fat	كرشة مسلوقة سادة (مشفي تماماً من الدهن)	Beef tripe boiled (0% fat trim)	79.9
+beef_tripe_semi_trimmed_5_fat	كرشة مسلوقة سادة (قليل الدهن 5%)	Beef tripe boiled (5% fat trim)	89.3
+beef_tripe_regular_trim_15_fat	كرشة مسلوقة سادة (عادي بنسبة دهن 15%)	Beef tripe boiled (15% fat trim)	108.1
+beef_tripe_rich_trim_25_fat	كرشة مسلوقة سادة (دسم بنسبة دهن 25%)	Beef tripe boiled (25% fat trim)	126.9
+black_coffee_no_sugar	قهوة سوداء سادة بدون سكر	Black coffee no sugar	2
+espresso_single	اسبريسو سنجل سادة	Espresso single shot	9
+black_tea_no_sugar	شاي أحمر سادة بدون سكر	Black tea brewed no sugar	1
+green_tea_no_sugar	شاي أخضر سادة بدون سكر	Green tea brewed plain	1
+herbal_chamomile	شاي بابونج / كركديه سادة	Chamomile hibiscus herbal tea	1
+water_mineral	مياه شرب طبيعية	Drinking water plain	0
+sparkling_water	مياه فوارة سادة	Sparkling mineral water	0
+coconut_water_100	ماء جوز هند طبيعي 100%	Coconut water 100% pure	19
+orange_juice_fresh	عصير برتقال طبيعي طازج	Freshly squeezed orange juice	45
+apple_juice_100	عصير تفاح طبيعي 100%	Apple juice 100% pure	46
+pomegranate_juice_100	عصير رمان طبيعي 100%	Pomegranate juice 100%	54
+lemonade_no_sugar	عصير ليمون بالنعناع بدون سكر	Lemonade fresh mint no sugar	12
+cola_zero_calorie	مشروب كولا زيرو / دايت	Diet zero calorie cola	0.5
+cola_regular_sugar	مشروب كولا عادي بالسكر	Regular cola with sugar	42
+marinara_tomato_sauce	صلصة طماطم مارينارا إيطالية	Marinara tomato sauce	50
+bolognese_meat_sauce	صلصة بولونيز باللحم المفروم	Bolognese meat sauce	95
+alfredo_cream_sauce	صلصة ألفريدو بالكريمة والجبن	Alfredo cream sauce	210
+pesto_basil_sauce	صلصة بيستو بالريحان والصنوبر	Basil pesto sauce	450
+barbecue_bbq_sauce	صلصة باربيكيو حلوة	Barbecue BBQ sauce	172
+buffalo_hot_wing_sauce	صلصة بافلو للأجنحة حارة	Buffalo hot wing sauce	85
+guacamole_avocado_dip	صلصة جواكامولي بالأفوكادو	Guacamole avocado dip	150
+hummus_classic	حمص بطحينة كلاسيكي	Hummus classic chickpea dip	166
+tzatziki_yogurt_cucumber	صوص تزاتزيكي / سلطة زبادي بالخيار	Tzatziki cucumber yogurt sauce	90
+chimichurri_herb_sauce	صلصة تشيميتشوري بالأعشاب	Chimichurri herb sauce	320
+baguette_french	خبز باجيت فرنسي	French baguette	289
+sourdough_bread	خبز ساوردو مخمر طبيعي	Sourdough bread	244
+ciabatta_roll	خبز تشاباتا إيطالي	Ciabatta bread roll	270
+focaccia_olive_oil	خبز فوكاتشيا بزيت الزيتون	Focaccia with olive oil	305
+brioche_bun	خبز بريوش بالزبدة	Brioche bun bread	345
+rye_bread_dark	خبز شيلم / رغيف راي أسود	Dark rye bread	259
+pumpernickel_bread	خبز بومبرنيكل أسود	Pumpernickel bread	250
+croissant_butter	كرواسون بالزبدة	Butter croissant	406
+english_muffin_plain	مافن إنجليزي سادة	English muffin plain	235
+naan_bread_plain	خبز نان هندي سادة	Naan bread plain	290
+naan_garlic_butter	خبز نان بالثوم والزبدة	Garlic butter naan	330
+lavash_flatbread	خبز لواش رقيق	Lavash flatbread	275
+wrap_spinach_herb	تورتيلا لفائف سبانخ وأعشاب	Spinach herb wrap tortilla	290
+wrap_whole_wheat	تورتيلا لفائف قمح كامل	Whole wheat wrap tortilla	280
+pancake_plain	بان كيك سادة	Pancake plain prepared	227
+waffle_plain	وافل بلجيكي سادة	Waffle plain prepared	291
+crepe_plain_french	كريب فرنسي سادة بدون حشو	French crepe plain	212
+corn_flakes_plain	كورن فليكس رقائق ذرة سادة	Corn flakes cereal plain	378
+frosted_flakes	رقائق ذرة محلاة بالسكر	Frosted corn flakes cereal	385
+bran_flakes	رقائق نخالة القمح الكامل	Bran flakes whole wheat cereal	356
+cheerios_oats_plain	حبوب شوفان دائرية سادة	Oat toasted round cereal	376
+granola_oats_honey	جرانولا شوفان بالعسل والمكسرات	Granola oats honey nuts	471
+granola_low_sugar	جرانولا قليلة السكر	Granola low sugar high protein	430
+muesli_swiss_style	موسلي سويسري بدون سكر مضاف	Swiss style muesli no added sugar	370
+rice_krispies	رقائق أرز مقرمشة سادة	Crisp rice cereal plain	383
+shredded_wheat	قمح مجدول حبة كاملة 100%	Shredded wheat 100% whole grain	348
+special_k_cereal	حبوب سبيشال كيه الأصلية	Special K original cereal	380
+chicken_broth_clear	مرقة دجاج صافية	Clear chicken broth stock	15
+beef_bone_broth	شوربة عظام بقر غنية بالكولاجين	Beef bone broth rich in collagen	35
+vegetable_broth	مرقة خضار صافية	Clear vegetable broth	12
+lentil_soup_light	شوربة عدس خفيفة	Light lentil soup prepared	75
+tomato_soup_creamy	شوربة طماطم بالكريمة	Cream of tomato soup	85
+mushroom_soup_creamy	شوربة فطر بالكريمة	Cream of mushroom soup	95
+chicken_noodle_soup	شوربة فراخ بنودلز أو لسان عصفور	Chicken noodle soup prepared	55
+minestrone_vegetable_soup	شوربة مينستروني إيطالية بالخضار والمكرونة	Minestrone soup	60
+miso_soup_tofu	شوربة ميسو يابانية بالتوفو والأعشاب	Miso soup with tofu	35
+raisins_seedless	زبيب أحمر خالي البذور	Seedless raisins golden/dark	299
+apricots_dried	مشمشية / مشمش مجفف	Dried apricots Turkish	241
+prunes_dried_plums	قراصيا / برقوق مجفف	Pitted prunes dried plums	240
+figs_dried	تين مجفف	Dried figs Turkish	249
+cranberries_dried_sweetened	توت بري مجفف محلى	Dried cranberries sweetened	308
+mango_dried_slices	مانجو مجففة شرائح	Dried mango slices	319
+apple_chips_dried	رقائق تفاح مجفف مقرمش	Dried apple chips crispy	243
+banana_chips_fried	شيبس موز مجفف مقلي بزيت جوز الهند	Banana chips sweetened fried	519
+strawberry_jam	مربى فراولة عادية بالسكر	Strawberry jam with sugar	278
+strawberry_jam_diet	مربى فراولة دايت بدون سكر	Strawberry jam diet sugar-free	50
+honey_clover	عسل نحل برسيم طبيعي	Clover honey pure	304
+molasses_blackstrap	عسل أسود / دبس قصب السكر	Blackstrap molasses	290
+date_syrup_dibs	دبس تمر طبيعي	Date syrup pure silan	270
+pomegranate_molasses	دبس رمان طبيعي حامض	Pomegranate molasses sour	260
+parsley_fresh	بقدونس طازج مفروم	Fresh parsley chopped	36
+coriander_cilantro_fresh	كزبرة خضراء طازجة	Fresh cilantro coriander	23
+dill_fresh	شبت طازج	Fresh dill weed	43
+mint_fresh	نعناع طازج	Fresh spearmint leaves	44
+basil_fresh	ريحان طازج	Fresh basil leaves	22
+rosemary_fresh	إكليل الجبل / روزماري طازج	Fresh rosemary	131
+thyme_fresh	زعتر أخضر طازج	Fresh thyme	101
+ginger_root_fresh	زنجبيل طازج مقشر ومفروم	Fresh ginger root	80
+cumin_ground_spice	كمون مطحون نقي	Ground cumin spice	375
+coriander_seed_ground	كزبرة جافة مطحونة	Ground coriander seed	298
+black_pepper_ground	فلفل أسود مطحون	Ground black pepper	251
+cinnamon_ground	قرفة مطحونة نقية	Ground cinnamon Ceylon/Cassia	247
+turmeric_ground	كركم مطحون نقي	Ground turmeric spice	354
+paprika_sweet_ground	بابريكا حلوة مطحونة	Ground sweet paprika	282
+cardamom_ground	حبهان / هيل مطحون	Ground cardamom spice	311
+caesar_salad_plain	سلطة سيزر خضراء سادة مع دريسنج	Caesar salad plain with dressing	130
+caesar_salad_grilled_chicken	سلطة سيزر بصدور الدجاج المشوية	Grilled chicken Caesar salad	155
+greek_salad_feta_olives	سلطة يونانية بالفيتا والزيتون وزيت الزيتون	Greek salad with feta and olives	110
+quinoa_salad_vegetables	سلطة كينوا بالخضار وزيت الزيتون	Quinoa vegetable salad with vinaigrette	145
+tuna_salad_light_mayo	سلطة تونة بالمايونيز الخفيف والذرة	Tuna salad light mayo and corn	140
+egg_salad_mayo	سلطة بيض مسلوق بالمايونيز والخردل	Egg salad with mayo	195
+guacamole_dip_restaurant	جواكامولي مطاعم بالأفوكادو والطماطم	Restaurant style guacamole	155
+pico_de_gallo_salsa	صلصة بيكو دي جالو طماطم وبصل طازجة	Fresh pico de gallo salsa	28
+falafel_patty_fried	قرص فلافل / طعمية مقلي بالزيت	Fried falafel patty	318
+falafel_patty_baked_airfryer	قرص فلافل مخبوز بالفرن / قلاية هوائية	Baked air-fryer falafel patty	210
+beef_burger_patty_grilled	قطعة برجر بقري مشوية صافي	Grilled beef burger patty pure	250
+chicken_burger_patty_grilled	قطعة برجر دجاج مشوية	Grilled chicken burger patty	185
+chicken_nuggets_breaded_fried	ناجتس دجاج بانيه مقلي	Breaded fried chicken nuggets	296
+french_fries_fast_food	بطاطس مقلية ستايل مطاعم	Fast food french fries	312
+french_fries_air_fried	بطاطس محمرة بالقلاية الهوائية (ملعقة زيت)	Air-fried french fries 1 tsp oil	160
+potato_wedges_baked	ودجز بطاطس مبهرة مشوية بالفرن	Baked seasoned potato wedges	175
+onion_rings_breaded_fried	حلقات بصل مقلية مقرمشة	Breaded fried onion rings	332
+mozzarella_sticks_fried	أصابع موزاريلا مقلية بانيه	Fried mozzarella sticks	328
+spring_roll_vegetable_fried	سبرينج رول خضار مقلي	Fried vegetable spring roll	250
+samosa_cheese_fried	سمبوسك بالجبن مقلية	Fried cheese samosa	310
+samosa_meat_fried	سمبوسك باللحم المفروم مقلية	Fried minced meat samosa	320
+cappuccino_whole_milk	كابوتشينو بحليب كامل الدسم بدون سكر	Cappuccino whole milk no sugar	45
+cappuccino_skim_milk	كابوتشينو بحليب خالي الدسم بدون سكر	Cappuccino skim milk no sugar	28
+cappuccino_almond_milk	كابوتشينو بحليب اللوز بدون سكر	Cappuccino almond milk no sugar	18
+latte_whole_milk	لاتيه بحليب كامل الدسم بدون سكر	Caffe latte whole milk no sugar	55
+latte_skim_milk	لاتيه بحليب خالي الدسم بدون سكر	Caffe latte skim milk no sugar	33
+latte_oat_milk	لاتيه بحليب الشوفان بدون سكر	Caffe latte oat milk no sugar	48
+flat_white_whole_milk	فلات وايت بحليب كامل الدسم	Flat white whole milk	60
+americano_hot	أمريكانو قهوة سوداء مخففة بالماء	Caffe Americano hot plain	3
+iced_americano	آيس أمريكانو مثلج بدون سكر	Iced Americano plain	3
+iced_latte_skim_milk	آيس لاتيه مثلج بحليب خالي الدسم	Iced latte skim milk	32
+matcha_latte_almond_milk	ماتشا لاتيه بحليب اللوز بدون سكر	Matcha green tea latte almond milk	35
+chai_tea_latte_milk	شاي كرك / شاي بالحليب والبهارات	Spiced chai tea latte with milk	65
+chicken_breast_raw_cooked_salted	صدور دجاج نيئة (مطبوخ ومملح)	Chicken breast raw (cooked salted)	120.0
+chicken_breast_raw_cooked_unsalted	صدور دجاج نيئة (مطبوخ بدون ملح)	Chicken breast raw (cooked unsalted)	120.0
+chicken_breast_raw_from_frozen	صدور دجاج نيئة (مجمد ثم مطبوخ)	Chicken breast raw (cooked from frozen)	117.6
+chicken_breast_cooked_cooked_salted	صدور دجاج مطبوخة (مطبوخ ومملح)	Chicken breast cooked (cooked salted)	165.0
+chicken_breast_cooked_cooked_unsalted	صدور دجاج مطبوخة (مطبوخ بدون ملح)	Chicken breast cooked (cooked unsalted)	165.0
+chicken_breast_cooked_from_frozen	صدور دجاج مطبوخة (مجمد ثم مطبوخ)	Chicken breast cooked (cooked from frozen)	161.7
+chicken_breast_grilled_cooked_salted	صدور دجاج مشوية (مطبوخ ومملح)	Grilled chicken breast (cooked salted)	165.0
+chicken_breast_grilled_cooked_unsalted	صدور دجاج مشوية (مطبوخ بدون ملح)	Grilled chicken breast (cooked unsalted)	165.0
+chicken_breast_grilled_from_frozen	صدور دجاج مشوية (مجمد ثم مطبوخ)	Grilled chicken breast (cooked from frozen)	161.7
+chicken_breast_fried_cooked_salted	صدور دجاج مقلية / بانيه (مطبوخ ومملح)	Fried chicken breast / pane (cooked salted)	220.0
+chicken_breast_fried_cooked_unsalted	صدور دجاج مقلية / بانيه (مطبوخ بدون ملح)	Fried chicken breast / pane (cooked unsalted)	220.0
+chicken_breast_fried_from_frozen	صدور دجاج مقلية / بانيه (مجمد ثم مطبوخ)	Fried chicken breast / pane (cooked from frozen)	215.6
+chicken_thigh_raw_cooked_salted	أوراك دجاج نيئة (مطبوخ ومملح)	Chicken thigh raw (cooked salted)	209.0
+chicken_thigh_raw_cooked_unsalted	أوراك دجاج نيئة (مطبوخ بدون ملح)	Chicken thigh raw (cooked unsalted)	209.0
+chicken_thigh_raw_from_frozen	أوراك دجاج نيئة (مجمد ثم مطبوخ)	Chicken thigh raw (cooked from frozen)	204.8
+chicken_thigh_cooked_cooked_salted	أوراك دجاج مطبوخة (مطبوخ ومملح)	Chicken thigh cooked (cooked salted)	209.0
+chicken_thigh_cooked_cooked_unsalted	أوراك دجاج مطبوخة (مطبوخ بدون ملح)	Chicken thigh cooked (cooked unsalted)	209.0
+chicken_thigh_cooked_from_frozen	أوراك دجاج مطبوخة (مجمد ثم مطبوخ)	Chicken thigh cooked (cooked from frozen)	204.8
+chicken_thigh_grilled_cooked_salted	أوراك دجاج مشوية (مطبوخ ومملح)	Grilled chicken thigh (cooked salted)	215.0
+chicken_thigh_grilled_cooked_unsalted	أوراك دجاج مشوية (مطبوخ بدون ملح)	Grilled chicken thigh (cooked unsalted)	215.0
+chicken_thigh_grilled_from_frozen	أوراك دجاج مشوية (مجمد ثم مطبوخ)	Grilled chicken thigh (cooked from frozen)	210.7
+chicken_wings_raw_cooked_salted	أجنحة دجاج (مطبوخ ومملح)	Chicken wings raw (cooked salted)	203.0
+chicken_wings_raw_cooked_unsalted	أجنحة دجاج (مطبوخ بدون ملح)	Chicken wings raw (cooked unsalted)	203.0
+chicken_wings_raw_from_frozen	أجنحة دجاج (مجمد ثم مطبوخ)	Chicken wings raw (cooked from frozen)	198.9
+chicken_wings_cooked_cooked_salted	أجنحة دجاج مطبوخة (مطبوخ ومملح)	Chicken wings cooked (cooked salted)	290.0
+chicken_wings_cooked_cooked_unsalted	أجنحة دجاج مطبوخة (مطبوخ بدون ملح)	Chicken wings cooked (cooked unsalted)	290.0
+chicken_wings_cooked_from_frozen	أجنحة دجاج مطبوخة (مجمد ثم مطبوخ)	Chicken wings cooked (cooked from frozen)	284.2
+chicken_drumstick_raw_cooked_salted	دبوس دجاج نيء (مطبوخ ومملح)	Chicken drumstick raw (cooked salted)	161.0
+chicken_drumstick_raw_cooked_unsalted	دبوس دجاج نيء (مطبوخ بدون ملح)	Chicken drumstick raw (cooked unsalted)	161.0
+chicken_drumstick_raw_from_frozen	دبوس دجاج نيء (مجمد ثم مطبوخ)	Chicken drumstick raw (cooked from frozen)	157.8
+chicken_drumstick_cooked_cooked_salted	دبوس دجاج مطبوخ (مطبوخ ومملح)	Chicken drumstick cooked (cooked salted)	172.0
+chicken_drumstick_cooked_cooked_unsalted	دبوس دجاج مطبوخ (مطبوخ بدون ملح)	Chicken drumstick cooked (cooked unsalted)	172.0
+chicken_drumstick_cooked_from_frozen	دبوس دجاج مطبوخ (مجمد ثم مطبوخ)	Chicken drumstick cooked (cooked from frozen)	168.6
+chicken_liver_cooked_cooked_salted	كبدة دجاج مطبوخة (مطبوخ ومملح)	Chicken liver cooked (cooked salted)	167.0
+chicken_liver_cooked_cooked_unsalted	كبدة دجاج مطبوخة (مطبوخ بدون ملح)	Chicken liver cooked (cooked unsalted)	167.0
+chicken_liver_cooked_from_frozen	كبدة دجاج مطبوخة (مجمد ثم مطبوخ)	Chicken liver cooked (cooked from frozen)	163.7
+turkey_breast_cooked_cooked_salted	صدور ديك رومي (مطبوخ ومملح)	Turkey breast cooked (cooked salted)	135.0
+turkey_breast_cooked_cooked_unsalted	صدور ديك رومي (مطبوخ بدون ملح)	Turkey breast cooked (cooked unsalted)	135.0
+turkey_breast_cooked_from_frozen	صدور ديك رومي (مجمد ثم مطبوخ)	Turkey breast cooked (cooked from frozen)	132.3
+turkey_ground_cooked_cooked_salted	لحم ديك رومي مفروم (مطبوخ ومملح)	Ground turkey cooked (cooked salted)	203.0
+turkey_ground_cooked_cooked_unsalted	لحم ديك رومي مفروم (مطبوخ بدون ملح)	Ground turkey cooked (cooked unsalted)	203.0
+turkey_ground_cooked_from_frozen	لحم ديك رومي مفروم (مجمد ثم مطبوخ)	Ground turkey cooked (cooked from frozen)	198.9
+duck_meat_cooked_cooked_salted	لحم بط مطبوخ (مطبوخ ومملح)	Duck meat cooked (cooked salted)	337.0
+duck_meat_cooked_cooked_unsalted	لحم بط مطبوخ (مطبوخ بدون ملح)	Duck meat cooked (cooked unsalted)	337.0
+duck_meat_cooked_from_frozen	لحم بط مطبوخ (مجمد ثم مطبوخ)	Duck meat cooked (cooked from frozen)	330.3
+beef_sirloin_cooked_cooked_salted	لحم بقر سيرلوين مشوي (مطبوخ ومملح)	Beef sirloin grilled (cooked salted)	205.0
+beef_sirloin_cooked_cooked_unsalted	لحم بقر سيرلوين مشوي (مطبوخ بدون ملح)	Beef sirloin grilled (cooked unsalted)	205.0
+beef_sirloin_cooked_from_frozen	لحم بقر سيرلوين مشوي (مجمد ثم مطبوخ)	Beef sirloin grilled (cooked from frozen)	200.9
+beef_tenderloin_cooked_cooked_salted	فيليه بقر مطبوخ (مطبوخ ومملح)	Beef tenderloin cooked (cooked salted)	218.0
+beef_tenderloin_cooked_cooked_unsalted	فيليه بقر مطبوخ (مطبوخ بدون ملح)	Beef tenderloin cooked (cooked unsalted)	218.0
+beef_tenderloin_cooked_from_frozen	فيليه بقر مطبوخ (مجمد ثم مطبوخ)	Beef tenderloin cooked (cooked from frozen)	213.6
+beef_ribeye_cooked_cooked_salted	لحم ريب آي بقر (مطبوخ ومملح)	Beef ribeye cooked (cooked salted)	291.0
+beef_ribeye_cooked_cooked_unsalted	لحم ريب آي بقر (مطبوخ بدون ملح)	Beef ribeye cooked (cooked unsalted)	291.0
+beef_ribeye_cooked_from_frozen	لحم ريب آي بقر (مجمد ثم مطبوخ)	Beef ribeye cooked (cooked from frozen)	285.2
+ground_beef_95_5_cooked_salted	لحم بقر مفروم قليل الدسم 95% (مطبوخ ومملح)	Ground beef 95% lean cooked (cooked salted)	170.0
+ground_beef_95_5_cooked_unsalted	لحم بقر مفروم قليل الدسم 95% (مطبوخ بدون ملح)	Ground beef 95% lean cooked (cooked unsalted)	170.0
+ground_beef_95_5_from_frozen	لحم بقر مفروم قليل الدسم 95% (مجمد ثم مطبوخ)	Ground beef 95% lean cooked (cooked from frozen)	166.6
+ground_beef_90_10_cooked_salted	لحم بقر مفروم 90% (مطبوخ ومملح)	Ground beef 90% lean cooked (cooked salted)	200.0
+ground_beef_90_10_cooked_unsalted	لحم بقر مفروم 90% (مطبوخ بدون ملح)	Ground beef 90% lean cooked (cooked unsalted)	200.0
+ground_beef_90_10_from_frozen	لحم بقر مفروم 90% (مجمد ثم مطبوخ)	Ground beef 90% lean cooked (cooked from frozen)	196.0
+ground_beef_85_15_cooked_salted	لحم بقر مفروم 85% (مطبوخ ومملح)	Ground beef 85% lean cooked (cooked salted)	215.0
+ground_beef_85_15_cooked_unsalted	لحم بقر مفروم 85% (مطبوخ بدون ملح)	Ground beef 85% lean cooked (cooked unsalted)	215.0
+ground_beef_85_15_from_frozen	لحم بقر مفروم 85% (مجمد ثم مطبوخ)	Ground beef 85% lean cooked (cooked from frozen)	210.7
+ground_beef_80_20_cooked_salted	لحم بقر مفروم عادي 80% (مطبوخ ومملح)	Ground beef 80% lean cooked (cooked salted)	254.0
+ground_beef_80_20_cooked_unsalted	لحم بقر مفروم عادي 80% (مطبوخ بدون ملح)	Ground beef 80% lean cooked (cooked unsalted)	254.0
+ground_beef_80_20_from_frozen	لحم بقر مفروم عادي 80% (مجمد ثم مطبوخ)	Ground beef 80% lean cooked (cooked from frozen)	248.9
+beef_boiled_lean_cooked_salted	لحم بقري مسلوق قليل الدهن (مطبوخ ومملح)	Boiled lean beef (cooked salted)	210.0
+beef_boiled_lean_cooked_unsalted	لحم بقري مسلوق قليل الدهن (مطبوخ بدون ملح)	Boiled lean beef (cooked unsalted)	210.0
+beef_boiled_lean_from_frozen	لحم بقري مسلوق قليل الدهن (مجمد ثم مطبوخ)	Boiled lean beef (cooked from frozen)	205.8
+beef_liver_cooked_cooked_salted	كبدة بقر مطبوخة (مطبوخ ومملح)	Beef liver cooked (cooked salted)	175.0
+beef_liver_cooked_cooked_unsalted	كبدة بقر مطبوخة (مطبوخ بدون ملح)	Beef liver cooked (cooked unsalted)	175.0
+beef_liver_cooked_from_frozen	كبدة بقر مطبوخة (مجمد ثم مطبوخ)	Beef liver cooked (cooked from frozen)	171.5
+veal_cooked_cooked_salted	لحم بتلو مطبوخ (مطبوخ ومملح)	Veal meat cooked (cooked salted)	196.0
+veal_cooked_cooked_unsalted	لحم بتلو مطبوخ (مطبوخ بدون ملح)	Veal meat cooked (cooked unsalted)	196.0
+veal_cooked_from_frozen	لحم بتلو مطبوخ (مجمد ثم مطبوخ)	Veal meat cooked (cooked from frozen)	192.1
+lamb_chop_cooked_cooked_salted	ريش ضاني مشوية (مطبوخ ومملح)	Lamb chop cooked (cooked salted)	282.0
+lamb_chop_cooked_cooked_unsalted	ريش ضاني مشوية (مطبوخ بدون ملح)	Lamb chop cooked (cooked unsalted)	282.0
+lamb_chop_cooked_from_frozen	ريش ضاني مشوية (مجمد ثم مطبوخ)	Lamb chop cooked (cooked from frozen)	276.4
+lamb_leg_cooked_cooked_salted	فخذ خروف مطبوخ (مطبوخ ومملح)	Lamb leg cooked (cooked salted)	258.0
+lamb_leg_cooked_cooked_unsalted	فخذ خروف مطبوخ (مطبوخ بدون ملح)	Lamb leg cooked (cooked unsalted)	258.0
+lamb_leg_cooked_from_frozen	فخذ خروف مطبوخ (مجمد ثم مطبوخ)	Lamb leg cooked (cooked from frozen)	252.8
+lamb_ground_cooked_cooked_salted	لحم ضأن مفروم (مطبوخ ومملح)	Ground lamb cooked (cooked salted)	283.0
+lamb_ground_cooked_cooked_unsalted	لحم ضأن مفروم (مطبوخ بدون ملح)	Ground lamb cooked (cooked unsalted)	283.0
+lamb_ground_cooked_from_frozen	لحم ضأن مفروم (مجمد ثم مطبوخ)	Ground lamb cooked (cooked from frozen)	277.3
+salmon_wild_cooked_cooked_salted	سلمون بري مطبوخ (مطبوخ ومملح)	Wild salmon cooked (cooked salted)	182.0
+salmon_wild_cooked_cooked_unsalted	سلمون بري مطبوخ (مطبوخ بدون ملح)	Wild salmon cooked (cooked unsalted)	182.0
+salmon_wild_cooked_from_frozen	سلمون بري مطبوخ (مجمد ثم مطبوخ)	Wild salmon cooked (cooked from frozen)	178.4
+salmon_farmed_cooked_cooked_salted	سلمون مطبوخ (مطبوخ ومملح)	Atlantic salmon cooked (cooked salted)	206.0
+salmon_farmed_cooked_cooked_unsalted	سلمون مطبوخ (مطبوخ بدون ملح)	Atlantic salmon cooked (cooked unsalted)	206.0
+salmon_farmed_cooked_from_frozen	سلمون مطبوخ (مجمد ثم مطبوخ)	Atlantic salmon cooked (cooked from frozen)	201.9
+tuna_canned_water_cooked_salted	تونة معلبة في ماء (مطبوخ ومملح)	Canned tuna in water drained (cooked salted)	116.0
+tuna_canned_water_cooked_unsalted	تونة معلبة في ماء (مطبوخ بدون ملح)	Canned tuna in water drained (cooked unsalted)	116.0
+tuna_canned_water_from_frozen	تونة معلبة في ماء (مجمد ثم مطبوخ)	Canned tuna in water drained (cooked from frozen)	113.7
+tuna_canned_oil_cooked_salted	تونة معلبة في زيت (مطبوخ ومملح)	Canned tuna in oil drained (cooked salted)	198.0
+tuna_canned_oil_cooked_unsalted	تونة معلبة في زيت (مطبوخ بدون ملح)	Canned tuna in oil drained (cooked unsalted)	198.0
+tuna_canned_oil_from_frozen	تونة معلبة في زيت (مجمد ثم مطبوخ)	Canned tuna in oil drained (cooked from frozen)	194.0
+tuna_fresh_cooked_cooked_salted	تونة طازجة مشوية (مطبوخ ومملح)	Fresh tuna cooked (cooked salted)	132.0
+tuna_fresh_cooked_cooked_unsalted	تونة طازجة مشوية (مطبوخ بدون ملح)	Fresh tuna cooked (cooked unsalted)	132.0
+tuna_fresh_cooked_from_frozen	تونة طازجة مشوية (مجمد ثم مطبوخ)	Fresh tuna cooked (cooked from frozen)	129.4
+tilapia_cooked_cooked_salted	سمك بلطي مطبوخ (مطبوخ ومملح)	Tilapia cooked (cooked salted)	128.0
+tilapia_cooked_cooked_unsalted	سمك بلطي مطبوخ (مطبوخ بدون ملح)	Tilapia cooked (cooked unsalted)	128.0
+tilapia_cooked_from_frozen	سمك بلطي مطبوخ (مجمد ثم مطبوخ)	Tilapia cooked (cooked from frozen)	125.4
+shrimp_boiled_cooked_salted	جمبري مسلوق (مطبوخ ومملح)	Shrimp boiled (cooked salted)	99.0
+shrimp_boiled_cooked_unsalted	جمبري مسلوق (مطبوخ بدون ملح)	Shrimp boiled (cooked unsalted)	99.0
+shrimp_boiled_from_frozen	جمبري مسلوق (مجمد ثم مطبوخ)	Shrimp boiled (cooked from frozen)	97.0
+shrimp_grilled_cooked_salted	جمبري مشوي (مطبوخ ومملح)	Shrimp grilled (cooked salted)	105.0
+shrimp_grilled_cooked_unsalted	جمبري مشوي (مطبوخ بدون ملح)	Shrimp grilled (cooked unsalted)	105.0
+shrimp_grilled_from_frozen	جمبري مشوي (مجمد ثم مطبوخ)	Shrimp grilled (cooked from frozen)	102.9
+shrimp_fried_cooked_salted	جمبري مقلي (مطبوخ ومملح)	Fried breaded shrimp (cooked salted)	242.0
+shrimp_fried_cooked_unsalted	جمبري مقلي (مطبوخ بدون ملح)	Fried breaded shrimp (cooked unsalted)	242.0
+shrimp_fried_from_frozen	جمبري مقلي (مجمد ثم مطبوخ)	Fried breaded shrimp (cooked from frozen)	237.2
+cod_cooked_cooked_salted	سمك قد مطبوخ (مطبوخ ومملح)	Cod fish cooked (cooked salted)	105.0
+cod_cooked_cooked_unsalted	سمك قد مطبوخ (مطبوخ بدون ملح)	Cod fish cooked (cooked unsalted)	105.0
+cod_cooked_from_frozen	سمك قد مطبوخ (مجمد ثم مطبوخ)	Cod fish cooked (cooked from frozen)	102.9
+sea_bass_cooked_cooked_salted	سمك قاروص مطبوخ (مطبوخ ومملح)	Sea bass cooked (cooked salted)	124.0
+sea_bass_cooked_cooked_unsalted	سمك قاروص مطبوخ (مطبوخ بدون ملح)	Sea bass cooked (cooked unsalted)	124.0
+sea_bass_cooked_from_frozen	سمك قاروص مطبوخ (مجمد ثم مطبوخ)	Sea bass cooked (cooked from frozen)	121.5
+sea_bream_cooked_cooked_salted	سمك دنيس مطبوخ (مطبوخ ومملح)	Sea bream cooked (cooked salted)	135.0
+sea_bream_cooked_cooked_unsalted	سمك دنيس مطبوخ (مطبوخ بدون ملح)	Sea bream cooked (cooked unsalted)	135.0
+sea_bream_cooked_from_frozen	سمك دنيس مطبوخ (مجمد ثم مطبوخ)	Sea bream cooked (cooked from frozen)	132.3
+sardines_canned_oil_cooked_salted	سردين معلب بالزيت (مطبوخ ومملح)	Canned sardines in oil (cooked salted)	208.0
+sardines_canned_oil_cooked_unsalted	سردين معلب بالزيت (مطبوخ بدون ملح)	Canned sardines in oil (cooked unsalted)	208.0
+sardines_canned_oil_from_frozen	سردين معلب بالزيت (مجمد ثم مطبوخ)	Canned sardines in oil (cooked from frozen)	203.8
+mackerel_cooked_cooked_salted	سمك ماكريل مطبوخ (مطبوخ ومملح)	Mackerel cooked (cooked salted)	262.0
+mackerel_cooked_cooked_unsalted	سمك ماكريل مطبوخ (مطبوخ بدون ملح)	Mackerel cooked (cooked unsalted)	262.0
+mackerel_cooked_from_frozen	سمك ماكريل مطبوخ (مجمد ثم مطبوخ)	Mackerel cooked (cooked from frozen)	256.8
+calamari_squid_cooked_cooked_salted	سبيط / كاليماري مطبوخ (مطبوخ ومملح)	Squid calamari cooked (cooked salted)	158.0
+calamari_squid_cooked_cooked_unsalted	سبيط / كاليماري مطبوخ (مطبوخ بدون ملح)	Squid calamari cooked (cooked unsalted)	158.0
+calamari_squid_cooked_from_frozen	سبيط / كاليماري مطبوخ (مجمد ثم مطبوخ)	Squid calamari cooked (cooked from frozen)	154.8
+calamari_fried_cooked_salted	كاليماري مقلي (مطبوخ ومملح)	Fried calamari (cooked salted)	240.0
+calamari_fried_cooked_unsalted	كاليماري مقلي (مطبوخ بدون ملح)	Fried calamari (cooked unsalted)	240.0
+calamari_fried_from_frozen	كاليماري مقلي (مجمد ثم مطبوخ)	Fried calamari (cooked from frozen)	235.2
+crab_cooked_cooked_salted	كابوريا / سلطعون مطبوخ (مطبوخ ومملح)	Crab meat cooked (cooked salted)	97.0
+crab_cooked_cooked_unsalted	كابوريا / سلطعون مطبوخ (مطبوخ بدون ملح)	Crab meat cooked (cooked unsalted)	97.0
+crab_cooked_from_frozen	كابوريا / سلطعون مطبوخ (مجمد ثم مطبوخ)	Crab meat cooked (cooked from frozen)	95.1
+lobster_cooked_cooked_salted	استاكوزا مطبوخة (مطبوخ ومملح)	Lobster cooked (cooked salted)	89.0
+lobster_cooked_cooked_unsalted	استاكوزا مطبوخة (مطبوخ بدون ملح)	Lobster cooked (cooked unsalted)	89.0
+lobster_cooked_from_frozen	استاكوزا مطبوخة (مجمد ثم مطبوخ)	Lobster cooked (cooked from frozen)	87.2
+egg_whole_raw_cooked_salted	بيض كامل طازج (مطبوخ ومملح)	Whole egg raw (cooked salted)	143.0
+egg_whole_raw_cooked_unsalted	بيض كامل طازج (مطبوخ بدون ملح)	Whole egg raw (cooked unsalted)	143.0
+egg_whole_raw_from_frozen	بيض كامل طازج (مجمد ثم مطبوخ)	Whole egg raw (cooked from frozen)	140.1
+egg_whole_boiled_cooked_salted	بيض مسلوق (مطبوخ ومملح)	Boiled egg (cooked salted)	155.0
+egg_whole_boiled_cooked_unsalted	بيض مسلوق (مطبوخ بدون ملح)	Boiled egg (cooked unsalted)	155.0
+egg_whole_boiled_from_frozen	بيض مسلوق (مجمد ثم مطبوخ)	Boiled egg (cooked from frozen)	151.9
+egg_white_raw_cooked_salted	بياض بيض (مطبوخ ومملح)	Egg white raw (cooked salted)	52.0
+egg_white_raw_cooked_unsalted	بياض بيض (مطبوخ بدون ملح)	Egg white raw (cooked unsalted)	52.0
+egg_white_raw_from_frozen	بياض بيض (مجمد ثم مطبوخ)	Egg white raw (cooked from frozen)	51.0
+egg_white_cooked_cooked_salted	بياض بيض مطبوخ (مطبوخ ومملح)	Egg white cooked (cooked salted)	52.0
+egg_white_cooked_cooked_unsalted	بياض بيض مطبوخ (مطبوخ بدون ملح)	Egg white cooked (cooked unsalted)	52.0
+egg_white_cooked_from_frozen	بياض بيض مطبوخ (مجمد ثم مطبوخ)	Egg white cooked (cooked from frozen)	51.0
+egg_yolk_raw_cooked_salted	صفار بيض (مطبوخ ومملح)	Egg yolk raw (cooked salted)	322.0
+egg_yolk_raw_cooked_unsalted	صفار بيض (مطبوخ بدون ملح)	Egg yolk raw (cooked unsalted)	322.0
+egg_yolk_raw_from_frozen	صفار بيض (مجمد ثم مطبوخ)	Egg yolk raw (cooked from frozen)	315.6
+egg_fried_cooked_salted	بيض مقلي (بالسمن/الزيت) (مطبوخ ومملح)	Fried egg (cooked salted)	196.0
+egg_fried_cooked_unsalted	بيض مقلي (بالسمن/الزيت) (مطبوخ بدون ملح)	Fried egg (cooked unsalted)	196.0
+egg_fried_from_frozen	بيض مقلي (بالسمن/الزيت) (مجمد ثم مطبوخ)	Fried egg (cooked from frozen)	192.1
+egg_omelet_plain_cooked_salted	أومليت سادة (مطبوخ ومملح)	Plain omelet (cooked salted)	154.0
+egg_omelet_plain_cooked_unsalted	أومليت سادة (مطبوخ بدون ملح)	Plain omelet (cooked unsalted)	154.0
+egg_omelet_plain_from_frozen	أومليت سادة (مجمد ثم مطبوخ)	Plain omelet (cooked from frozen)	150.9
+milk_whole_3_25_cooked_salted	حليب كامل الدسم (مطبوخ ومملح)	Whole milk 3.25% (cooked salted)	61.0
+milk_whole_3_25_cooked_unsalted	حليب كامل الدسم (مطبوخ بدون ملح)	Whole milk 3.25% (cooked unsalted)	61.0
+milk_whole_3_25_from_frozen	حليب كامل الدسم (مجمد ثم مطبوخ)	Whole milk 3.25% (cooked from frozen)	59.8
+milk_reduced_fat_2_cooked_salted	حليب قليل الدسم 2% (مطبوخ ومملح)	Reduced fat milk 2% (cooked salted)	50.0
+milk_reduced_fat_2_cooked_unsalted	حليب قليل الدسم 2% (مطبوخ بدون ملح)	Reduced fat milk 2% (cooked unsalted)	50.0
+milk_reduced_fat_2_from_frozen	حليب قليل الدسم 2% (مجمد ثم مطبوخ)	Reduced fat milk 2% (cooked from frozen)	49.0
+milk_low_fat_1_cooked_salted	حليب خفيف الدسم 1% (مطبوخ ومملح)	Low fat milk 1% (cooked salted)	42.0
+milk_low_fat_1_cooked_unsalted	حليب خفيف الدسم 1% (مطبوخ بدون ملح)	Low fat milk 1% (cooked unsalted)	42.0
+milk_low_fat_1_from_frozen	حليب خفيف الدسم 1% (مجمد ثم مطبوخ)	Low fat milk 1% (cooked from frozen)	41.2
+milk_nonfat_skim_cooked_salted	حليب خالي الدسم (مطبوخ ومملح)	Skim milk nonfat (cooked salted)	35.0
+milk_nonfat_skim_cooked_unsalted	حليب خالي الدسم (مطبوخ بدون ملح)	Skim milk nonfat (cooked unsalted)	35.0
+milk_nonfat_skim_from_frozen	حليب خالي الدسم (مجمد ثم مطبوخ)	Skim milk nonfat (cooked from frozen)	34.3
+almond_milk_unsweetened_cooked_salted	حليب لوز غير محلى (مطبوخ ومملح)	Almond milk unsweetened (cooked salted)	15.0
+almond_milk_unsweetened_cooked_unsalted	حليب لوز غير محلى (مطبوخ بدون ملح)	Almond milk unsweetened (cooked unsalted)	15.0
+almond_milk_unsweetened_from_frozen	حليب لوز غير محلى (مجمد ثم مطبوخ)	Almond milk unsweetened (cooked from frozen)	14.7
+soy_milk_unsweetened_cooked_salted	حليب صويا غير محلى (مطبوخ ومملح)	Soy milk unsweetened (cooked salted)	33.0
+soy_milk_unsweetened_cooked_unsalted	حليب صويا غير محلى (مطبوخ بدون ملح)	Soy milk unsweetened (cooked unsalted)	33.0
+soy_milk_unsweetened_from_frozen	حليب صويا غير محلى (مجمد ثم مطبوخ)	Soy milk unsweetened (cooked from frozen)	32.3
+oat_milk_plain_cooked_salted	حليب شوفان سادة (مطبوخ ومملح)	Oat milk plain (cooked salted)	48.0
+oat_milk_plain_cooked_unsalted	حليب شوفان سادة (مطبوخ بدون ملح)	Oat milk plain (cooked unsalted)	48.0
+oat_milk_plain_from_frozen	حليب شوفان سادة (مجمد ثم مطبوخ)	Oat milk plain (cooked from frozen)	47.0
+couscous_whole_wheat	كسكسي قمح كامل	Whole wheat couscous	112
+farro_cooked	حبوب فارو مطبوخة	Farro cooked	135
+kamut_cooked	قمح خراسان / كاموت مطبوخ	Kamut Khorasan wheat cooked	140
+spelt_cooked	حبوب الحنطة / إسبيلت مطبوخة	Spelt cooked	127
+amaranth_cooked	حبوب قطيفة / قطيفة مطبوخة	Amaranth grain cooked	102
+teff_cooked	حبوب طيف إثيوبية مطبوخة	Teff cooked	101
+sorghum_cooked	ذرة رفيعة مطبوخة	Sorghum cooked	120
+tapioca_pearls_cooked	لؤلؤ تابيوكا مطبوخ	Tapioca pearls cooked	158
+cassava_boiled	كسافا / يوكا مسلوقة	Cassava yuca boiled	160
+plantain_green_boiled	موز أخضر للطبخ مسلوق	Green plantain boiled	122
+plantain_ripe_fried	موز أصفر حلو مقلي	Ripe yellow plantain fried	252
+taro_root_boiled	قلقاس مسلوق سادة	Taro root boiled plain	142
+yam_boiled	يام / بطاطا جبلية مسلوقة	Yam tuber boiled	116
+parsnip_cooked	جزر أبيض / بارسنيب مطبوخ	Parsnip cooked	71
+turnip_boiled	لفت مسلوق سادة	Turnip boiled plain	22
+rutabaga_boiled	روتاباجا / لفت سويدي مسلوق	Rutabaga swede boiled	39
+kohlrabi_boiled	كرنب ساقي / كولرابي مسلوق	Kohlrabi boiled	29
+fennel_bulb_raw	بصيلة شمر طازجة	Fennel bulb raw	31
+celery_stalk_raw	كرفس أعواد طازجة	Celery stalk raw	14
+leek_boiled	كراث مسلوق	Leek bulb and lower leaf boiled	31
+shallots_raw	بصل شالوت صغير طازج	Shallots raw	72
+watercress_raw	جرجير ماء طازج	Watercress raw	11
+swiss_chard_cooked	سلق أخضر مطبوخ	Swiss chard boiled	20
+collard_greens_cooked	كرنب أوراق كولارد مطبوخ	Collard greens boiled	33
+mustard_greens_cooked	أوراق خردل خضراء مطبوخة	Mustard greens boiled	26
+radicchio_raw	خس أحمر راديكيو إيطالي	Radicchio raw	23
+endive_raw	هندباء إنديف طازجة	Endive raw	17
+bamboo_shoots_cooked	براعم خيزران مطبوخة	Bamboo shoots cooked	27
+water_chestnuts_canned	كستناء ماء معلبة	Chinese water chestnuts canned	50
+hearts_of_palm_canned	قلوب نخيل معلبة	Hearts of palm canned	28
+sauerkraut_canned	مخلل ملفوف / كيمتشي أبيض ساوركراوت	Sauerkraut fermented cabbage canned	19
+kimchi_korean	كيمتشي كوري حار مخمر	Kimchi spicy fermented	23
+pickles_cucumber_dill	خيار مخلل بالخل والشبت	Dill cucumber pickles	12
+olives_black_ripe	زيتون أسود مخلل منزوع النوى	Ripe black olives pitted	115
+olives_green_stuffed	زيتون أخضر محشي فلفل	Green stuffed olives	145
+capers_canned	كَبَر مخلل مصفى	Capers canned in vinegar	23
+mayonnaise_regular_portion_v5	مايونيز عادي كامل الدسم (حصة قياسية 5)	Mayonnaise regular (Standard portion 5)	680
+soy_sauce_portion_v5	صوص صويا (حصة قياسية 5)	Soy sauce tamari / regular (Standard portion 5)	53
+chicken_breast_raw_portion_v6	صدور دجاج نيئة (حصة قياسية 6)	Chicken breast raw (Standard portion 6)	120
+chicken_breast_cooked_portion_v6	صدور دجاج مطبوخة (حصة قياسية 6)	Chicken breast cooked (Standard portion 6)	165
+chicken_breast_grilled_portion_v6	صدور دجاج مشوية (حصة قياسية 6)	Grilled chicken breast (Standard portion 6)	165
+chicken_breast_fried_portion_v6	صدور دجاج مقلية / بانيه (حصة قياسية 6)	Fried chicken breast / pane (Standard portion 6)	220
+chicken_thigh_raw_portion_v6	أوراك دجاج نيئة (حصة قياسية 6)	Chicken thigh raw (Standard portion 6)	209
+chicken_thigh_cooked_portion_v6	أوراك دجاج مطبوخة (حصة قياسية 6)	Chicken thigh cooked (Standard portion 6)	209
+chicken_thigh_grilled_portion_v6	أوراك دجاج مشوية (حصة قياسية 6)	Grilled chicken thigh (Standard portion 6)	215
+chicken_wings_raw_portion_v6	أجنحة دجاج (حصة قياسية 6)	Chicken wings raw (Standard portion 6)	203
+chicken_wings_cooked_portion_v6	أجنحة دجاج مطبوخة (حصة قياسية 6)	Chicken wings cooked (Standard portion 6)	290
+chicken_drumstick_raw_portion_v6	دبوس دجاج نيء (حصة قياسية 6)	Chicken drumstick raw (Standard portion 6)	161
+chicken_drumstick_cooked_portion_v6	دبوس دجاج مطبوخ (حصة قياسية 6)	Chicken drumstick cooked (Standard portion 6)	172
+chicken_liver_cooked_portion_v6	كبدة دجاج مطبوخة (حصة قياسية 6)	Chicken liver cooked (Standard portion 6)	167
+turkey_breast_cooked_portion_v6	صدور ديك رومي (حصة قياسية 6)	Turkey breast cooked (Standard portion 6)	135
+turkey_ground_cooked_portion_v6	لحم ديك رومي مفروم (حصة قياسية 6)	Ground turkey cooked (Standard portion 6)	203
+duck_meat_cooked_portion_v6	لحم بط مطبوخ (حصة قياسية 6)	Duck meat cooked (Standard portion 6)	337
+beef_sirloin_cooked_portion_v6	لحم بقر سيرلوين مشوي (حصة قياسية 6)	Beef sirloin grilled (Standard portion 6)	205
+beef_tenderloin_cooked_portion_v6	فيليه بقر مطبوخ (حصة قياسية 6)	Beef tenderloin cooked (Standard portion 6)	218
+beef_ribeye_cooked_portion_v6	لحم ريب آي بقر (حصة قياسية 6)	Beef ribeye cooked (Standard portion 6)	291
+ground_beef_95_5_portion_v6	لحم بقر مفروم قليل الدسم 95% (حصة قياسية 6)	Ground beef 95% lean cooked (Standard portion 6)	170
+ground_beef_90_10_portion_v6	لحم بقر مفروم 90% (حصة قياسية 6)	Ground beef 90% lean cooked (Standard portion 6)	200
+ground_beef_85_15_portion_v6	لحم بقر مفروم 85% (حصة قياسية 6)	Ground beef 85% lean cooked (Standard portion 6)	215
+ground_beef_80_20_portion_v6	لحم بقر مفروم عادي 80% (حصة قياسية 6)	Ground beef 80% lean cooked (Standard portion 6)	254
+beef_boiled_lean_portion_v6	لحم بقري مسلوق قليل الدهن (حصة قياسية 6)	Boiled lean beef (Standard portion 6)	210
+beef_liver_cooked_portion_v6	كبدة بقر مطبوخة (حصة قياسية 6)	Beef liver cooked (Standard portion 6)	175
+veal_cooked_portion_v6	لحم بتلو مطبوخ (حصة قياسية 6)	Veal meat cooked (Standard portion 6)	196
+lamb_chop_cooked_portion_v6	ريش ضاني مشوية (حصة قياسية 6)	Lamb chop cooked (Standard portion 6)	282
+lamb_leg_cooked_portion_v6	فخذ خروف مطبوخ (حصة قياسية 6)	Lamb leg cooked (Standard portion 6)	258
+lamb_ground_cooked_portion_v6	لحم ضأن مفروم (حصة قياسية 6)	Ground lamb cooked (Standard portion 6)	283
+salmon_wild_cooked_portion_v6	سلمون بري مطبوخ (حصة قياسية 6)	Wild salmon cooked (Standard portion 6)	182
+salmon_farmed_cooked_portion_v6	سلمون مطبوخ (حصة قياسية 6)	Atlantic salmon cooked (Standard portion 6)	206
+tuna_canned_water_portion_v6	تونة معلبة في ماء (حصة قياسية 6)	Canned tuna in water drained (Standard portion 6)	116
+tuna_canned_oil_portion_v6	تونة معلبة في زيت (حصة قياسية 6)	Canned tuna in oil drained (Standard portion 6)	198
+tuna_fresh_cooked_portion_v6	تونة طازجة مشوية (حصة قياسية 6)	Fresh tuna cooked (Standard portion 6)	132
+tilapia_cooked_portion_v6	سمك بلطي مطبوخ (حصة قياسية 6)	Tilapia cooked (Standard portion 6)	128
+shrimp_boiled_portion_v6	جمبري مسلوق (حصة قياسية 6)	Shrimp boiled (Standard portion 6)	99
+shrimp_grilled_portion_v6	جمبري مشوي (حصة قياسية 6)	Shrimp grilled (Standard portion 6)	105
+shrimp_fried_portion_v6	جمبري مقلي (حصة قياسية 6)	Fried breaded shrimp (Standard portion 6)	242
+cod_cooked_portion_v6	سمك قد مطبوخ (حصة قياسية 6)	Cod fish cooked (Standard portion 6)	105
+sea_bass_cooked_portion_v6	سمك قاروص مطبوخ (حصة قياسية 6)	Sea bass cooked (Standard portion 6)	124
+sea_bream_cooked_portion_v6	سمك دنيس مطبوخ (حصة قياسية 6)	Sea bream cooked (Standard portion 6)	135
+sardines_canned_oil_portion_v6	سردين معلب بالزيت (حصة قياسية 6)	Canned sardines in oil (Standard portion 6)	208
+mackerel_cooked_portion_v6	سمك ماكريل مطبوخ (حصة قياسية 6)	Mackerel cooked (Standard portion 6)	262
+calamari_squid_cooked_portion_v6	سبيط / كاليماري مطبوخ (حصة قياسية 6)	Squid calamari cooked (Standard portion 6)	158
+calamari_fried_portion_v6	كاليماري مقلي (حصة قياسية 6)	Fried calamari (Standard portion 6)	240
+crab_cooked_portion_v6	كابوريا / سلطعون مطبوخ (حصة قياسية 6)	Crab meat cooked (Standard portion 6)	97
+lobster_cooked_portion_v6	استاكوزا مطبوخة (حصة قياسية 6)	Lobster cooked (Standard portion 6)	89
+egg_whole_raw_portion_v6	بيض كامل طازج (حصة قياسية 6)	Whole egg raw (Standard portion 6)	143
+egg_whole_boiled_portion_v6	بيض مسلوق (حصة قياسية 6)	Boiled egg (Standard portion 6)	155
+egg_white_raw_portion_v6	بياض بيض (حصة قياسية 6)	Egg white raw (Standard portion 6)	52
+egg_white_cooked_portion_v6	بياض بيض مطبوخ (حصة قياسية 6)	Egg white cooked (Standard portion 6)	52
+egg_yolk_raw_portion_v6	صفار بيض (حصة قياسية 6)	Egg yolk raw (Standard portion 6)	322
+egg_fried_portion_v6	بيض مقلي (بالسمن/الزيت) (حصة قياسية 6)	Fried egg (Standard portion 6)	196
+egg_omelet_plain_portion_v6	أومليت سادة (حصة قياسية 6)	Plain omelet (Standard portion 6)	154
+milk_whole_3_25_portion_v6	حليب كامل الدسم (حصة قياسية 6)	Whole milk 3.25% (Standard portion 6)	61
+milk_reduced_fat_2_portion_v6	حليب قليل الدسم 2% (حصة قياسية 6)	Reduced fat milk 2% (Standard portion 6)	50
+milk_low_fat_1_portion_v6	حليب خفيف الدسم 1% (حصة قياسية 6)	Low fat milk 1% (Standard portion 6)	42
+milk_nonfat_skim_portion_v6	حليب خالي الدسم (حصة قياسية 6)	Skim milk nonfat (Standard portion 6)	35
+almond_milk_unsweetened_portion_v6	حليب لوز غير محلى (حصة قياسية 6)	Almond milk unsweetened (Standard portion 6)	15
+soy_milk_unsweetened_portion_v6	حليب صويا غير محلى (حصة قياسية 6)	Soy milk unsweetened (Standard portion 6)	33
+oat_milk_plain_portion_v6	حليب شوفان سادة (حصة قياسية 6)	Oat milk plain (Standard portion 6)	48
+greek_yogurt_plain_0_portion_v6	زبادي يوناني خالي الدسم (حصة قياسية 6)	Greek yogurt nonfat plain (Standard portion 6)	59
+greek_yogurt_plain_2_portion_v6	زبادي يوناني قليل الدسم 2% (حصة قياسية 6)	Greek yogurt low fat 2% (Standard portion 6)	73
+greek_yogurt_plain_whole_portion_v6	زبادي يوناني كامل الدسم (حصة قياسية 6)	Greek yogurt whole milk (Standard portion 6)	97
+yogurt_plain_whole_portion_v6	زبادي كامل الدسم (حصة قياسية 6)	Plain yogurt whole milk (Standard portion 6)	61
+yogurt_plain_lowfat_portion_v6	زبادي قليل الدسم (حصة قياسية 6)	Plain yogurt lowfat (Standard portion 6)	63
+cottage_cheese_lowfat_portion_v6	جبن قريش قليل الدسم (حصة قياسية 6)	Cottage cheese lowfat (Standard portion 6)	81
+cottage_cheese_regular_portion_v6	جبن قريش كامل (حصة قياسية 6)	Cottage cheese 4% (Standard portion 6)	98
+feta_cheese_portion_v6	جبن فيتا (حصة قياسية 6)	Feta cheese (Standard portion 6)	264
+mozzarella_whole_milk_portion_v6	جبن موزاريلا كامل الدسم (حصة قياسية 6)	Mozzarella cheese whole milk (Standard portion 6)	300
+mozzarella_part_skim_portion_v6	جبن موزاريلا قليل الدسم (حصة قياسية 6)	Mozzarella part skim (Standard portion 6)	254
+cheddar_cheese_portion_v6	جبن شيدر (حصة قياسية 6)	Cheddar cheese (Standard portion 6)	403
+parmesan_grated_portion_v6	جبن بارميزان مبشور (حصة قياسية 6)	Parmesan cheese grated (Standard portion 6)	431
+cream_cheese_portion_v6	جبن كريمي (حصة قياسية 6)	Cream cheese regular (Standard portion 6)	342
+halloumi_cheese_portion_v6	جبن حلوم (حصة قياسية 6)	Halloumi cheese (Standard portion 6)	321
+butter_salted_portion_v6	زبدة مملحة (حصة قياسية 6)	Butter salted (Standard portion 6)	717
+ghee_clarified_butter_portion_v6	سمن بلدي / سمن نقي (حصة قياسية 6)	Ghee clarified butter (Standard portion 6)	876
+heavy_cream_portion_v6	كريمة خفق ثقيلة (حصة قياسية 6)	Heavy whipping cream (Standard portion 6)	340
+white_rice_raw_portion_v6	أرز أبيض نيء (حصة قياسية 6)	White rice raw (Standard portion 6)	365
+white_rice_cooked_portion_v6	أرز أبيض مطبوخ (مسلوق) (حصة قياسية 6)	White rice cooked plain (Standard portion 6)	130
+brown_rice_raw_portion_v6	أرز بني نيء (حصة قياسية 6)	Brown rice raw (Standard portion 6)	370
+brown_rice_cooked_portion_v6	أرز بني مطبوخ (حصة قياسية 6)	Brown rice cooked (Standard portion 6)	111
+basmati_rice_cooked_portion_v6	أرز بسمتي مطبوخ (حصة قياسية 6)	Basmati rice cooked (Standard portion 6)	121
+jasmine_rice_cooked_portion_v6	أرز ياسمين مطبوخ (حصة قياسية 6)	Jasmine rice cooked (Standard portion 6)	129
+quinoa_raw_portion_v6	كينوا نيئة (حصة قياسية 6)	Quinoa raw (Standard portion 6)	368
+quinoa_cooked_portion_v6	كينوا مطبوخة (حصة قياسية 6)	Quinoa cooked (Standard portion 6)	120
+oats_rolled_raw_portion_v6	شوفان حبة كاملة نيء (حصة قياسية 6)	Rolled oats raw (Standard portion 6)	389
+oatmeal_cooked_water_portion_v6	شوفان مطبوخ بالماء (حصة قياسية 6)	Oatmeal cooked in water (Standard portion 6)	71
+pasta_white_raw_portion_v6	مكرونة بيضاء نيئة (حصة قياسية 6)	White pasta raw (Standard portion 6)	371
+pasta_white_cooked_portion_v6	مكرونة بيضاء مسلوقة (حصة قياسية 6)	White pasta cooked (Standard portion 6)	158
+pasta_whole_wheat_cooked_portion_v6	مكرونة قمح كامل مسلوقة (حصة قياسية 6)	Whole wheat pasta cooked (Standard portion 6)	124
+couscous_cooked_portion_v6	كسكسي مطبوخ (حصة قياسية 6)	Couscous cooked (Standard portion 6)	112
+bulgur_cooked_portion_v6	برغل مطبوخ (حصة قياسية 6)	Bulgur cooked (Standard portion 6)	83
+freekeh_cooked_portion_v6	فريك مطبوخ (حصة قياسية 6)	Freekeh cooked (Standard portion 6)	140
+white_bread_slice_portion_v6	خبز أبيض توست (حصة قياسية 6)	White bread slice (Standard portion 6)	265
+whole_wheat_bread_portion_v6	خبز قمح كامل / توست بني (حصة قياسية 6)	Whole wheat bread slice (Standard portion 6)	247
+pita_bread_white_portion_v6	خبز شامي / بيتا أبيض (حصة قياسية 6)	Pita bread white (Standard portion 6)	275
+bagel_plain_portion_v6	بيغل سادة (حصة قياسية 6)	Bagel plain (Standard portion 6)	250
+tortilla_corn_portion_v6	تورتيلا ذرة (حصة قياسية 6)	Corn tortilla (Standard portion 6)	218
+tortilla_flour_portion_v6	تورتيلا دقيق (حصة قياسية 6)	Flour tortilla (Standard portion 6)	304
+popcorn_air_popped_portion_v6	فشار محضر بالهواء (بدون زيت) (حصة قياسية 6)	Popcorn air-popped (Standard portion 6)	387
+lentils_brown_cooked_portion_v6	عدس بني / بجبة مطبوخ (حصة قياسية 6)	Brown lentils cooked (Standard portion 6)	116
+lentils_red_cooked_portion_v6	عدس أصفر مطبوخ (حصة قياسية 6)	Red lentils cooked (Standard portion 6)	116
+chickpeas_cooked_portion_v6	حمص مسلوق (حصة قياسية 6)	Chickpeas boiled cooked (Standard portion 6)	164
+fava_beans_boiled_portion_v6	فول مدمس سادة (حصة قياسية 6)	Fava beans cooked plain (Standard portion 6)	110
+kidney_beans_cooked_portion_v6	فاصوليا حمراء مطبوخة (حصة قياسية 6)	Red kidney beans cooked (Standard portion 6)	127
+black_beans_cooked_portion_v6	فاصوليا سوداء مطبوخة (حصة قياسية 6)	Black beans cooked (Standard portion 6)	132
+white_navy_beans_cooked_portion_v6	فاصوليا بيضاء مسلوقة (حصة قياسية 6)	White beans cooked (Standard portion 6)	139
+edamame_prepared_portion_v6	إدامامي مسلوق (حصة قياسية 6)	Edamame prepared (Standard portion 6)	121
+green_peas_boiled_portion_v6	بسلة خضراء مسلوقة (حصة قياسية 6)	Green peas boiled (Standard portion 6)	81
+lupini_beans_cooked_portion_v6	ترمس مسلوق (حصة قياسية 6)	Lupini beans cooked (Standard portion 6)	119
+tomato_raw_portion_v6	طماطم طازجة (حصة قياسية 6)	Tomato red ripe raw (Standard portion 6)	18
+cucumber_raw_portion_v6	خيار طازج بالقشر (حصة قياسية 6)	Cucumber raw with peel (Standard portion 6)	15
+lettuce_romaine_raw_portion_v6	خس بلدي / روماني (حصة قياسية 6)	Romaine lettuce raw (Standard portion 6)	17
+spinach_raw_portion_v6	سبانخ طازجة (حصة قياسية 6)	Spinach raw (Standard portion 6)	23
+spinach_cooked_portion_v6	سبانخ مسلوقة / سوتيه سادة (حصة قياسية 6)	Spinach boiled (Standard portion 6)	23
+arugula_rocket_raw_portion_v6	جرجير طازج (حصة قياسية 6)	Arugula rocket raw (Standard portion 6)	25
+broccoli_raw_portion_v6	بروكلي نيء (حصة قياسية 6)	Broccoli raw (Standard portion 6)	34
+broccoli_cooked_portion_v6	بروكلي مسلوق / على البخار (حصة قياسية 6)	Broccoli boiled / steamed (Standard portion 6)	35
+cauliflower_cooked_portion_v6	قرنبيط مسلوق سادة (حصة قياسية 6)	Cauliflower boiled (Standard portion 6)	23
+carrots_raw_portion_v6	جزر طازج (حصة قياسية 6)	Carrot raw (Standard portion 6)	41
+carrots_boiled_portion_v6	جزر مسلوق (حصة قياسية 6)	Carrot boiled (Standard portion 6)	35
+bell_pepper_green_portion_v6	فلفل رومي أخضر (حصة قياسية 6)	Green bell pepper raw (Standard portion 6)	20
+bell_pepper_red_portion_v6	فلفل رومي أحمر حلو (حصة قياسية 6)	Red bell pepper raw (Standard portion 6)	31
+zucchini_raw_portion_v6	كوسة طازجة (حصة قياسية 6)	Zucchini raw (Standard portion 6)	17
+zucchini_boiled_portion_v6	كوسة مسلوقة / سوتيه (حصة قياسية 6)	Zucchini boiled (Standard portion 6)	15
+eggplant_raw_portion_v6	باذنجان رومي نيء (حصة قياسية 6)	Eggplant raw (Standard portion 6)	25
+eggplant_grilled_portion_v6	باذنجان مشوي سادة (حصة قياسية 6)	Grilled eggplant plain (Standard portion 6)	35
+onion_yellow_raw_portion_v6	بصل أصفر طازج (حصة قياسية 6)	Yellow onion raw (Standard portion 6)	40
+garlic_raw_portion_v6	ثوم طازج (حصة قياسية 6)	Garlic raw (Standard portion 6)	149
+potato_boiled_flesh_portion_v6	بطاطس مسلوقة (بدون دهون) (حصة قياسية 6)	Boiled potato flesh only (Standard portion 6)	87
+potato_baked_skin_portion_v6	بطاطس مشوية بالفرن بقشرها (حصة قياسية 6)	Baked potato with skin (Standard portion 6)	93
+sweet_potato_baked_portion_v6	بطاطا حلوة مشوية بالفرن (حصة قياسية 6)	Sweet potato baked (Standard portion 6)	90
+mushrooms_white_raw_portion_v6	مشروم أبيض طازج (حصة قياسية 6)	White mushrooms raw (Standard portion 6)	22
+mushrooms_cooked_portion_v6	مشروم مطبوخ / سوتيه سادة (حصة قياسية 6)	Mushrooms boiled / cooked (Standard portion 6)	28
+green_beans_cooked_portion_v6	فاصوليا خضراء مسلوقة (حصة قياسية 6)	Green beans boiled (Standard portion 6)	35
+okra_cooked_portion_v6	بامية مسلوقة / مطبوخة سادة (حصة قياسية 6)	Okra boiled (Standard portion 6)	33
+apple_raw_with_skin_portion_v6	تفاح طازج بالقشر (حصة قياسية 6)	Apple raw with skin (Standard portion 6)	52
+banana_raw_portion_v6	موز طازج (حصة قياسية 6)	Banana raw (Standard portion 6)	89
+orange_raw_portion_v6	برتقال طازج (حصة قياسية 6)	Orange raw (Standard portion 6)	47
+strawberries_raw_portion_v6	فراولة طازجة (حصة قياسية 6)	Strawberries raw (Standard portion 6)	32
+blueberries_raw_portion_v6	توت أزرق طازج (حصة قياسية 6)	Blueberries raw (Standard portion 6)	57
+watermelon_raw_portion_v6	بطيخ أحمر طازج (حصة قياسية 6)	Watermelon raw (Standard portion 6)	30
+cantaloupe_raw_portion_v6	كانتالوب / شمام طازج (حصة قياسية 6)	Cantaloupe melon raw (Standard portion 6)	34
+grapes_red_raw_portion_v6	عنب أحمر طازج (حصة قياسية 6)	Red grapes raw (Standard portion 6)	69
+mango_raw_portion_v6	مانجو طازجة (حصة قياسية 6)	Mango raw (Standard portion 6)	60
+pineapple_raw_portion_v6	أناناس طازج (حصة قياسية 6)	Pineapple raw (Standard portion 6)	50
+avocado_raw_portion_v6	أفوكادو طازج (حصة قياسية 6)	Avocado raw (Standard portion 6)	160
+dates_deglet_nour_portion_v6	تمر دقلة نور مجفف (حصة قياسية 6)	Dates Deglet Noor (Standard portion 6)	282
+dates_medjool_portion_v6	تمر مجدول فاخر (حصة قياسية 6)	Dates Medjool (Standard portion 6)	277
+dates_fresh_rutab_portion_v6	بلح رطب / تمر طازج (حصة قياسية 6)	Dates fresh Rutab (Standard portion 6)	142
+pomegranate_seeds_portion_v6	رمان حبوب طازجة (حصة قياسية 6)	Pomegranate arils (Standard portion 6)	83
+guava_raw_portion_v6	جوافة طازجة (حصة قياسية 6)	Guava raw (Standard portion 6)	68
+figs_raw_portion_v6	تين برشومي طازج (حصة قياسية 6)	Figs fresh raw (Standard portion 6)	74
+almonds_raw_portion_v6	لوز نيء غير مملح (حصة قياسية 6)	Almonds raw unsalted (Standard portion 6)	579
+almonds_roasted_portion_v6	لوز محمص (حصة قياسية 6)	Almonds dry roasted (Standard portion 6)	598
+walnuts_raw_portion_v6	عين جمل / جوز نيء (حصة قياسية 6)	Walnuts raw halves (Standard portion 6)	654
+cashews_raw_portion_v6	كاجو نيء (حصة قياسية 6)	Cashews raw (Standard portion 6)	553
+pistachios_raw_portion_v6	فستق حلبي مقشر نيء (حصة قياسية 6)	Pistachios raw (Standard portion 6)	560
+peanuts_raw_portion_v6	فول سوداني نيء مقشر (حصة قياسية 6)	Peanuts raw (Standard portion 6)	567
+peanut_butter_smooth_portion_v6	زبدة فول سوداني سادة (حصة قياسية 6)	Peanut butter smooth 100% (Standard portion 6)	588
+tahini_sesame_paste_portion_v6	طحينة بيضاء خام (حصة قياسية 6)	Tahini pure sesame paste (Standard portion 6)	595
+chia_seeds_raw_portion_v6	بذور شيا جافة (حصة قياسية 6)	Chia seeds raw dry (Standard portion 6)	486
+flaxseeds_ground_portion_v6	بذور كتان مطحونة (حصة قياسية 6)	Flaxseed ground (Standard portion 6)	534
+pumpkin_seeds_raw_portion_v6	لب قرع / بذور يقطين مقشرة (حصة قياسية 6)	Pumpkin seeds pepitas raw (Standard portion 6)	559
+olive_oil_extra_virgin_portion_v6	زيت زيتون بكر ممتاز (حصة قياسية 6)	Olive oil extra virgin (Standard portion 6)	884
+vegetable_oil_canola_portion_v6	زيت نباتي / كانولا (حصة قياسية 6)	Vegetable oil canola (Standard portion 6)	884
+sunflower_oil_portion_v6	زيت عباد الشمس (حصة قياسية 6)	Sunflower oil (Standard portion 6)	884
+corn_oil_portion_v6	زيت ذرة نقي (حصة قياسية 6)	Corn oil pure (Standard portion 6)	884
+coconut_oil_portion_v6	زيت جوز هند بكر (حصة قياسية 6)	Coconut oil virgin (Standard portion 6)	862
+honey_pure_portion_v6	عسل نحل طبيعي (حصة قياسية 6)	Honey pure raw (Standard portion 6)	304
+sugar_white_granulated_portion_v6	سكر أبيض مكرر (حصة قياسية 6)	Sugar white granulated (Standard portion 6)	387
+dark_chocolate_70_portion_v6	شوكولاتة داكنة 70% (حصة قياسية 6)	Dark chocolate 70-85% (Standard portion 6)	598
+ketchup_regular_portion_v6	كاتشب طماطم (حصة قياسية 6)	Tomato ketchup (Standard portion 6)	101
+mustard_yellow_portion_v6	مستردة / خردل أصفر (حصة قياسية 6)	Yellow mustard prepared (Standard portion 6)	60
+mayonnaise_regular_portion_v6	مايونيز عادي كامل الدسم (حصة قياسية 6)	Mayonnaise regular (Standard portion 6)	680
+soy_sauce_portion_v6	صوص صويا (حصة قياسية 6)	Soy sauce tamari / regular (Standard portion 6)	53
+chicken_breast_raw_portion_v7	صدور دجاج نيئة (حصة قياسية 7)	Chicken breast raw (Standard portion 7)	120
+chicken_breast_cooked_portion_v7	صدور دجاج مطبوخة (حصة قياسية 7)	Chicken breast cooked (Standard portion 7)	165
+chicken_breast_grilled_portion_v7	صدور دجاج مشوية (حصة قياسية 7)	Grilled chicken breast (Standard portion 7)	165
+chicken_breast_fried_portion_v7	صدور دجاج مقلية / بانيه (حصة قياسية 7)	Fried chicken breast / pane (Standard portion 7)	220
+chicken_thigh_raw_portion_v7	أوراك دجاج نيئة (حصة قياسية 7)	Chicken thigh raw (Standard portion 7)	209
+chicken_thigh_cooked_portion_v7	أوراك دجاج مطبوخة (حصة قياسية 7)	Chicken thigh cooked (Standard portion 7)	209
+chicken_thigh_grilled_portion_v7	أوراك دجاج مشوية (حصة قياسية 7)	Grilled chicken thigh (Standard portion 7)	215
+chicken_wings_raw_portion_v7	أجنحة دجاج (حصة قياسية 7)	Chicken wings raw (Standard portion 7)	203
+chicken_wings_cooked_portion_v7	أجنحة دجاج مطبوخة (حصة قياسية 7)	Chicken wings cooked (Standard portion 7)	290
+chicken_drumstick_raw_portion_v7	دبوس دجاج نيء (حصة قياسية 7)	Chicken drumstick raw (Standard portion 7)	161
+chicken_drumstick_cooked_portion_v7	دبوس دجاج مطبوخ (حصة قياسية 7)	Chicken drumstick cooked (Standard portion 7)	172
+chicken_liver_cooked_portion_v7	كبدة دجاج مطبوخة (حصة قياسية 7)	Chicken liver cooked (Standard portion 7)	167
+turkey_breast_cooked_portion_v7	صدور ديك رومي (حصة قياسية 7)	Turkey breast cooked (Standard portion 7)	135
+turkey_ground_cooked_portion_v7	لحم ديك رومي مفروم (حصة قياسية 7)	Ground turkey cooked (Standard portion 7)	203
+duck_meat_cooked_portion_v7	لحم بط مطبوخ (حصة قياسية 7)	Duck meat cooked (Standard portion 7)	337
+beef_sirloin_cooked_portion_v7	لحم بقر سيرلوين مشوي (حصة قياسية 7)	Beef sirloin grilled (Standard portion 7)	205
+beef_tenderloin_cooked_portion_v7	فيليه بقر مطبوخ (حصة قياسية 7)	Beef tenderloin cooked (Standard portion 7)	218
+beef_ribeye_cooked_portion_v7	لحم ريب آي بقر (حصة قياسية 7)	Beef ribeye cooked (Standard portion 7)	291
+ground_beef_95_5_portion_v7	لحم بقر مفروم قليل الدسم 95% (حصة قياسية 7)	Ground beef 95% lean cooked (Standard portion 7)	170
+ground_beef_90_10_portion_v7	لحم بقر مفروم 90% (حصة قياسية 7)	Ground beef 90% lean cooked (Standard portion 7)	200
+ground_beef_85_15_portion_v7	لحم بقر مفروم 85% (حصة قياسية 7)	Ground beef 85% lean cooked (Standard portion 7)	215
+ground_beef_80_20_portion_v7	لحم بقر مفروم عادي 80% (حصة قياسية 7)	Ground beef 80% lean cooked (Standard portion 7)	254
+beef_boiled_lean_portion_v7	لحم بقري مسلوق قليل الدهن (حصة قياسية 7)	Boiled lean beef (Standard portion 7)	210
+beef_liver_cooked_portion_v7	كبدة بقر مطبوخة (حصة قياسية 7)	Beef liver cooked (Standard portion 7)	175
+veal_cooked_portion_v7	لحم بتلو مطبوخ (حصة قياسية 7)	Veal meat cooked (Standard portion 7)	196
+lamb_chop_cooked_portion_v7	ريش ضاني مشوية (حصة قياسية 7)	Lamb chop cooked (Standard portion 7)	282
+lamb_leg_cooked_portion_v7	فخذ خروف مطبوخ (حصة قياسية 7)	Lamb leg cooked (Standard portion 7)	258
+lamb_ground_cooked_portion_v7	لحم ضأن مفروم (حصة قياسية 7)	Ground lamb cooked (Standard portion 7)	283
+salmon_wild_cooked_portion_v7	سلمون بري مطبوخ (حصة قياسية 7)	Wild salmon cooked (Standard portion 7)	182
+salmon_farmed_cooked_portion_v7	سلمون مطبوخ (حصة قياسية 7)	Atlantic salmon cooked (Standard portion 7)	206
+tuna_canned_water_portion_v7	تونة معلبة في ماء (حصة قياسية 7)	Canned tuna in water drained (Standard portion 7)	116
+tuna_canned_oil_portion_v7	تونة معلبة في زيت (حصة قياسية 7)	Canned tuna in oil drained (Standard portion 7)	198
+tuna_fresh_cooked_portion_v7	تونة طازجة مشوية (حصة قياسية 7)	Fresh tuna cooked (Standard portion 7)	132
+tilapia_cooked_portion_v7	سمك بلطي مطبوخ (حصة قياسية 7)	Tilapia cooked (Standard portion 7)	128
+shrimp_boiled_portion_v7	جمبري مسلوق (حصة قياسية 7)	Shrimp boiled (Standard portion 7)	99
+shrimp_grilled_portion_v7	جمبري مشوي (حصة قياسية 7)	Shrimp grilled (Standard portion 7)	105
+shrimp_fried_portion_v7	جمبري مقلي (حصة قياسية 7)	Fried breaded shrimp (Standard portion 7)	242
+cod_cooked_portion_v7	سمك قد مطبوخ (حصة قياسية 7)	Cod fish cooked (Standard portion 7)	105
+sea_bass_cooked_portion_v7	سمك قاروص مطبوخ (حصة قياسية 7)	Sea bass cooked (Standard portion 7)	124
+sea_bream_cooked_portion_v7	سمك دنيس مطبوخ (حصة قياسية 7)	Sea bream cooked (Standard portion 7)	135
+sardines_canned_oil_portion_v7	سردين معلب بالزيت (حصة قياسية 7)	Canned sardines in oil (Standard portion 7)	208
+mackerel_cooked_portion_v7	سمك ماكريل مطبوخ (حصة قياسية 7)	Mackerel cooked (Standard portion 7)	262
+calamari_squid_cooked_portion_v7	سبيط / كاليماري مطبوخ (حصة قياسية 7)	Squid calamari cooked (Standard portion 7)	158
+calamari_fried_portion_v7	كاليماري مقلي (حصة قياسية 7)	Fried calamari (Standard portion 7)	240
+crab_cooked_portion_v7	كابوريا / سلطعون مطبوخ (حصة قياسية 7)	Crab meat cooked (Standard portion 7)	97
+lobster_cooked_portion_v7	استاكوزا مطبوخة (حصة قياسية 7)	Lobster cooked (Standard portion 7)	89
+egg_whole_raw_portion_v7	بيض كامل طازج (حصة قياسية 7)	Whole egg raw (Standard portion 7)	143
+egg_whole_boiled_portion_v7	بيض مسلوق (حصة قياسية 7)	Boiled egg (Standard portion 7)	155
+egg_white_raw_portion_v7	بياض بيض (حصة قياسية 7)	Egg white raw (Standard portion 7)	52
+egg_white_cooked_portion_v7	بياض بيض مطبوخ (حصة قياسية 7)	Egg white cooked (Standard portion 7)	52
+egg_yolk_raw_portion_v7	صفار بيض (حصة قياسية 7)	Egg yolk raw (Standard portion 7)	322
+egg_fried_portion_v7	بيض مقلي (بالسمن/الزيت) (حصة قياسية 7)	Fried egg (Standard portion 7)	196
+egg_omelet_plain_portion_v7	أومليت سادة (حصة قياسية 7)	Plain omelet (Standard portion 7)	154
+milk_whole_3_25_portion_v7	حليب كامل الدسم (حصة قياسية 7)	Whole milk 3.25% (Standard portion 7)	61
+milk_reduced_fat_2_portion_v7	حليب قليل الدسم 2% (حصة قياسية 7)	Reduced fat milk 2% (Standard portion 7)	50
+milk_low_fat_1_portion_v7	حليب خفيف الدسم 1% (حصة قياسية 7)	Low fat milk 1% (Standard portion 7)	42
+milk_nonfat_skim_portion_v7	حليب خالي الدسم (حصة قياسية 7)	Skim milk nonfat (Standard portion 7)	35
+almond_milk_unsweetened_portion_v7	حليب لوز غير محلى (حصة قياسية 7)	Almond milk unsweetened (Standard portion 7)	15
+soy_milk_unsweetened_portion_v7	حليب صويا غير محلى (حصة قياسية 7)	Soy milk unsweetened (Standard portion 7)	33
+oat_milk_plain_portion_v7	حليب شوفان سادة (حصة قياسية 7)	Oat milk plain (Standard portion 7)	48
+greek_yogurt_plain_0_portion_v7	زبادي يوناني خالي الدسم (حصة قياسية 7)	Greek yogurt nonfat plain (Standard portion 7)	59
+greek_yogurt_plain_2_portion_v7	زبادي يوناني قليل الدسم 2% (حصة قياسية 7)	Greek yogurt low fat 2% (Standard portion 7)	73
+greek_yogurt_plain_whole_portion_v7	زبادي يوناني كامل الدسم (حصة قياسية 7)	Greek yogurt whole milk (Standard portion 7)	97
+yogurt_plain_whole_portion_v7	زبادي كامل الدسم (حصة قياسية 7)	Plain yogurt whole milk (Standard portion 7)	61
+yogurt_plain_lowfat_portion_v7	زبادي قليل الدسم (حصة قياسية 7)	Plain yogurt lowfat (Standard portion 7)	63
+cottage_cheese_lowfat_portion_v7	جبن قريش قليل الدسم (حصة قياسية 7)	Cottage cheese lowfat (Standard portion 7)	81
+cottage_cheese_regular_portion_v7	جبن قريش كامل (حصة قياسية 7)	Cottage cheese 4% (Standard portion 7)	98
+feta_cheese_portion_v7	جبن فيتا (حصة قياسية 7)	Feta cheese (Standard portion 7)	264
+mozzarella_whole_milk_portion_v7	جبن موزاريلا كامل الدسم (حصة قياسية 7)	Mozzarella cheese whole milk (Standard portion 7)	300
+mozzarella_part_skim_portion_v7	جبن موزاريلا قليل الدسم (حصة قياسية 7)	Mozzarella part skim (Standard portion 7)	254
+cheddar_cheese_portion_v7	جبن شيدر (حصة قياسية 7)	Cheddar cheese (Standard portion 7)	403
+parmesan_grated_portion_v7	جبن بارميزان مبشور (حصة قياسية 7)	Parmesan cheese grated (Standard portion 7)	431
+cream_cheese_portion_v7	جبن كريمي (حصة قياسية 7)	Cream cheese regular (Standard portion 7)	342
+halloumi_cheese_portion_v7	جبن حلوم (حصة قياسية 7)	Halloumi cheese (Standard portion 7)	321
+butter_salted_portion_v7	زبدة مملحة (حصة قياسية 7)	Butter salted (Standard portion 7)	717
+ghee_clarified_butter_portion_v7	سمن بلدي / سمن نقي (حصة قياسية 7)	Ghee clarified butter (Standard portion 7)	876
+heavy_cream_portion_v7	كريمة خفق ثقيلة (حصة قياسية 7)	Heavy whipping cream (Standard portion 7)	340
+white_rice_raw_portion_v7	أرز أبيض نيء (حصة قياسية 7)	White rice raw (Standard portion 7)	365
+white_rice_cooked_portion_v7	أرز أبيض مطبوخ (مسلوق) (حصة قياسية 7)	White rice cooked plain (Standard portion 7)	130
+brown_rice_raw_portion_v7	أرز بني نيء (حصة قياسية 7)	Brown rice raw (Standard portion 7)	370
+brown_rice_cooked_portion_v7	أرز بني مطبوخ (حصة قياسية 7)	Brown rice cooked (Standard portion 7)	111
+basmati_rice_cooked_portion_v7	أرز بسمتي مطبوخ (حصة قياسية 7)	Basmati rice cooked (Standard portion 7)	121
+jasmine_rice_cooked_portion_v7	أرز ياسمين مطبوخ (حصة قياسية 7)	Jasmine rice cooked (Standard portion 7)	129
+quinoa_raw_portion_v7	كينوا نيئة (حصة قياسية 7)	Quinoa raw (Standard portion 7)	368
+quinoa_cooked_portion_v7	كينوا مطبوخة (حصة قياسية 7)	Quinoa cooked (Standard portion 7)	120
+oats_rolled_raw_portion_v7	شوفان حبة كاملة نيء (حصة قياسية 7)	Rolled oats raw (Standard portion 7)	389
+oatmeal_cooked_water_portion_v7	شوفان مطبوخ بالماء (حصة قياسية 7)	Oatmeal cooked in water (Standard portion 7)	71
+pasta_white_raw_portion_v7	مكرونة بيضاء نيئة (حصة قياسية 7)	White pasta raw (Standard portion 7)	371
+pasta_white_cooked_portion_v7	مكرونة بيضاء مسلوقة (حصة قياسية 7)	White pasta cooked (Standard portion 7)	158
+pasta_whole_wheat_cooked_portion_v7	مكرونة قمح كامل مسلوقة (حصة قياسية 7)	Whole wheat pasta cooked (Standard portion 7)	124
+couscous_cooked_portion_v7	كسكسي مطبوخ (حصة قياسية 7)	Couscous cooked (Standard portion 7)	112
+bulgur_cooked_portion_v7	برغل مطبوخ (حصة قياسية 7)	Bulgur cooked (Standard portion 7)	83
+freekeh_cooked_portion_v7	فريك مطبوخ (حصة قياسية 7)	Freekeh cooked (Standard portion 7)	140
+white_bread_slice_portion_v7	خبز أبيض توست (حصة قياسية 7)	White bread slice (Standard portion 7)	265
+whole_wheat_bread_portion_v7	خبز قمح كامل / توست بني (حصة قياسية 7)	Whole wheat bread slice (Standard portion 7)	247
+pita_bread_white_portion_v7	خبز شامي / بيتا أبيض (حصة قياسية 7)	Pita bread white (Standard portion 7)	275
+bagel_plain_portion_v7	بيغل سادة (حصة قياسية 7)	Bagel plain (Standard portion 7)	250
+tortilla_corn_portion_v7	تورتيلا ذرة (حصة قياسية 7)	Corn tortilla (Standard portion 7)	218
+tortilla_flour_portion_v7	تورتيلا دقيق (حصة قياسية 7)	Flour tortilla (Standard portion 7)	304
+popcorn_air_popped_portion_v7	فشار محضر بالهواء (بدون زيت) (حصة قياسية 7)	Popcorn air-popped (Standard portion 7)	387
+lentils_brown_cooked_portion_v7	عدس بني / بجبة مطبوخ (حصة قياسية 7)	Brown lentils cooked (Standard portion 7)	116
+lentils_red_cooked_portion_v7	عدس أصفر مطبوخ (حصة قياسية 7)	Red lentils cooked (Standard portion 7)	116
+chickpeas_cooked_portion_v7	حمص مسلوق (حصة قياسية 7)	Chickpeas boiled cooked (Standard portion 7)	164
+fava_beans_boiled_portion_v7	فول مدمس سادة (حصة قياسية 7)	Fava beans cooked plain (Standard portion 7)	110
+kidney_beans_cooked_portion_v7	فاصوليا حمراء مطبوخة (حصة قياسية 7)	Red kidney beans cooked (Standard portion 7)	127
+black_beans_cooked_portion_v7	فاصوليا سوداء مطبوخة (حصة قياسية 7)	Black beans cooked (Standard portion 7)	132
+white_navy_beans_cooked_portion_v7	فاصوليا بيضاء مسلوقة (حصة قياسية 7)	White beans cooked (Standard portion 7)	139
+edamame_prepared_portion_v7	إدامامي مسلوق (حصة قياسية 7)	Edamame prepared (Standard portion 7)	121
+green_peas_boiled_portion_v7	بسلة خضراء مسلوقة (حصة قياسية 7)	Green peas boiled (Standard portion 7)	81
+lupini_beans_cooked_portion_v7	ترمس مسلوق (حصة قياسية 7)	Lupini beans cooked (Standard portion 7)	119
+tomato_raw_portion_v7	طماطم طازجة (حصة قياسية 7)	Tomato red ripe raw (Standard portion 7)	18
+cucumber_raw_portion_v7	خيار طازج بالقشر (حصة قياسية 7)	Cucumber raw with peel (Standard portion 7)	15
+lettuce_romaine_raw_portion_v7	خس بلدي / روماني (حصة قياسية 7)	Romaine lettuce raw (Standard portion 7)	17
+spinach_raw_portion_v7	سبانخ طازجة (حصة قياسية 7)	Spinach raw (Standard portion 7)	23
+spinach_cooked_portion_v7	سبانخ مسلوقة / سوتيه سادة (حصة قياسية 7)	Spinach boiled (Standard portion 7)	23
+arugula_rocket_raw_portion_v7	جرجير طازج (حصة قياسية 7)	Arugula rocket raw (Standard portion 7)	25
+broccoli_raw_portion_v7	بروكلي نيء (حصة قياسية 7)	Broccoli raw (Standard portion 7)	34
+broccoli_cooked_portion_v7	بروكلي مسلوق / على البخار (حصة قياسية 7)	Broccoli boiled / steamed (Standard portion 7)	35
+cauliflower_cooked_portion_v7	قرنبيط مسلوق سادة (حصة قياسية 7)	Cauliflower boiled (Standard portion 7)	23
+carrots_raw_portion_v7	جزر طازج (حصة قياسية 7)	Carrot raw (Standard portion 7)	41
+carrots_boiled_portion_v7	جزر مسلوق (حصة قياسية 7)	Carrot boiled (Standard portion 7)	35
+bell_pepper_green_portion_v7	فلفل رومي أخضر (حصة قياسية 7)	Green bell pepper raw (Standard portion 7)	20
+bell_pepper_red_portion_v7	فلفل رومي أحمر حلو (حصة قياسية 7)	Red bell pepper raw (Standard portion 7)	31
+zucchini_raw_portion_v7	كوسة طازجة (حصة قياسية 7)	Zucchini raw (Standard portion 7)	17
+zucchini_boiled_portion_v7	كوسة مسلوقة / سوتيه (حصة قياسية 7)	Zucchini boiled (Standard portion 7)	15
+eggplant_raw_portion_v7	باذنجان رومي نيء (حصة قياسية 7)	Eggplant raw (Standard portion 7)	25
+eggplant_grilled_portion_v7	باذنجان مشوي سادة (حصة قياسية 7)	Grilled eggplant plain (Standard portion 7)	35
+onion_yellow_raw_portion_v7	بصل أصفر طازج (حصة قياسية 7)	Yellow onion raw (Standard portion 7)	40
+garlic_raw_portion_v7	ثوم طازج (حصة قياسية 7)	Garlic raw (Standard portion 7)	149
+potato_boiled_flesh_portion_v7	بطاطس مسلوقة (بدون دهون) (حصة قياسية 7)	Boiled potato flesh only (Standard portion 7)	87
+potato_baked_skin_portion_v7	بطاطس مشوية بالفرن بقشرها (حصة قياسية 7)	Baked potato with skin (Standard portion 7)	93
+sweet_potato_baked_portion_v7	بطاطا حلوة مشوية بالفرن (حصة قياسية 7)	Sweet potato baked (Standard portion 7)	90
+mushrooms_white_raw_portion_v7	مشروم أبيض طازج (حصة قياسية 7)	White mushrooms raw (Standard portion 7)	22
+mushrooms_cooked_portion_v7	مشروم مطبوخ / سوتيه سادة (حصة قياسية 7)	Mushrooms boiled / cooked (Standard portion 7)	28
+green_beans_cooked_portion_v7	فاصوليا خضراء مسلوقة (حصة قياسية 7)	Green beans boiled (Standard portion 7)	35
+okra_cooked_portion_v7	بامية مسلوقة / مطبوخة سادة (حصة قياسية 7)	Okra boiled (Standard portion 7)	33
+apple_raw_with_skin_portion_v7	تفاح طازج بالقشر (حصة قياسية 7)	Apple raw with skin (Standard portion 7)	52
+banana_raw_portion_v7	موز طازج (حصة قياسية 7)	Banana raw (Standard portion 7)	89
+orange_raw_portion_v7	برتقال طازج (حصة قياسية 7)	Orange raw (Standard portion 7)	47
+strawberries_raw_portion_v7	فراولة طازجة (حصة قياسية 7)	Strawberries raw (Standard portion 7)	32
+blueberries_raw_portion_v7	توت أزرق طازج (حصة قياسية 7)	Blueberries raw (Standard portion 7)	57
+watermelon_raw_portion_v7	بطيخ أحمر طازج (حصة قياسية 7)	Watermelon raw (Standard portion 7)	30
+cantaloupe_raw_portion_v7	كانتالوب / شمام طازج (حصة قياسية 7)	Cantaloupe melon raw (Standard portion 7)	34
+grapes_red_raw_portion_v7	عنب أحمر طازج (حصة قياسية 7)	Red grapes raw (Standard portion 7)	69
+mango_raw_portion_v7	مانجو طازجة (حصة قياسية 7)	Mango raw (Standard portion 7)	60
+pineapple_raw_portion_v7	أناناس طازج (حصة قياسية 7)	Pineapple raw (Standard portion 7)	50
+avocado_raw_portion_v7	أفوكادو طازج (حصة قياسية 7)	Avocado raw (Standard portion 7)	160
+dates_deglet_nour_portion_v7	تمر دقلة نور مجفف (حصة قياسية 7)	Dates Deglet Noor (Standard portion 7)	282
+dates_medjool_portion_v7	تمر مجدول فاخر (حصة قياسية 7)	Dates Medjool (Standard portion 7)	277
+dates_fresh_rutab_portion_v7	بلح رطب / تمر طازج (حصة قياسية 7)	Dates fresh Rutab (Standard portion 7)	142
+pomegranate_seeds_portion_v7	رمان حبوب طازجة (حصة قياسية 7)	Pomegranate arils (Standard portion 7)	83
+guava_raw_portion_v7	جوافة طازجة (حصة قياسية 7)	Guava raw (Standard portion 7)	68
+figs_raw_portion_v7	تين برشومي طازج (حصة قياسية 7)	Figs fresh raw (Standard portion 7)	74
+almonds_raw_portion_v7	لوز نيء غير مملح (حصة قياسية 7)	Almonds raw unsalted (Standard portion 7)	579
+almonds_roasted_portion_v7	لوز محمص (حصة قياسية 7)	Almonds dry roasted (Standard portion 7)	598
+walnuts_raw_portion_v7	عين جمل / جوز نيء (حصة قياسية 7)	Walnuts raw halves (Standard portion 7)	654
+cashews_raw_portion_v7	كاجو نيء (حصة قياسية 7)	Cashews raw (Standard portion 7)	553
+pistachios_raw_portion_v7	فستق حلبي مقشر نيء (حصة قياسية 7)	Pistachios raw (Standard portion 7)	560
+peanuts_raw_portion_v7	فول سوداني نيء مقشر (حصة قياسية 7)	Peanuts raw (Standard portion 7)	567
+peanut_butter_smooth_portion_v7	زبدة فول سوداني سادة (حصة قياسية 7)	Peanut butter smooth 100% (Standard portion 7)	588
+tahini_sesame_paste_portion_v7	طحينة بيضاء خام (حصة قياسية 7)	Tahini pure sesame paste (Standard portion 7)	595
+chia_seeds_raw_portion_v7	بذور شيا جافة (حصة قياسية 7)	Chia seeds raw dry (Standard portion 7)	486
+flaxseeds_ground_portion_v7	بذور كتان مطحونة (حصة قياسية 7)	Flaxseed ground (Standard portion 7)	534
+pumpkin_seeds_raw_portion_v7	لب قرع / بذور يقطين مقشرة (حصة قياسية 7)	Pumpkin seeds pepitas raw (Standard portion 7)	559
+olive_oil_extra_virgin_portion_v7	زيت زيتون بكر ممتاز (حصة قياسية 7)	Olive oil extra virgin (Standard portion 7)	884
+vegetable_oil_canola_portion_v7	زيت نباتي / كانولا (حصة قياسية 7)	Vegetable oil canola (Standard portion 7)	884
+sunflower_oil_portion_v7	زيت عباد الشمس (حصة قياسية 7)	Sunflower oil (Standard portion 7)	884
+corn_oil_portion_v7	زيت ذرة نقي (حصة قياسية 7)	Corn oil pure (Standard portion 7)	884
+coconut_oil_portion_v7	زيت جوز هند بكر (حصة قياسية 7)	Coconut oil virgin (Standard portion 7)	862
+honey_pure_portion_v7	عسل نحل طبيعي (حصة قياسية 7)	Honey pure raw (Standard portion 7)	304
+sugar_white_granulated_portion_v7	سكر أبيض مكرر (حصة قياسية 7)	Sugar white granulated (Standard portion 7)	387
+dark_chocolate_70_portion_v7	شوكولاتة داكنة 70% (حصة قياسية 7)	Dark chocolate 70-85% (Standard portion 7)	598
+ketchup_regular_portion_v7	كاتشب طماطم (حصة قياسية 7)	Tomato ketchup (Standard portion 7)	101
+mustard_yellow_portion_v7	مستردة / خردل أصفر (حصة قياسية 7)	Yellow mustard prepared (Standard portion 7)	60
+mayonnaise_regular_portion_v7	مايونيز عادي كامل الدسم (حصة قياسية 7)	Mayonnaise regular (Standard portion 7)	680
+soy_sauce_portion_v7	صوص صويا (حصة قياسية 7)	Soy sauce tamari / regular (Standard portion 7)	53
+chicken_breast_raw_portion_v8	صدور دجاج نيئة (حصة قياسية 8)	Chicken breast raw (Standard portion 8)	120
+chicken_breast_cooked_portion_v8	صدور دجاج مطبوخة (حصة قياسية 8)	Chicken breast cooked (Standard portion 8)	165
+chicken_breast_grilled_portion_v8	صدور دجاج مشوية (حصة قياسية 8)	Grilled chicken breast (Standard portion 8)	165
+chicken_breast_fried_portion_v8	صدور دجاج مقلية / بانيه (حصة قياسية 8)	Fried chicken breast / pane (Standard portion 8)	220
+chicken_thigh_raw_portion_v8	أوراك دجاج نيئة (حصة قياسية 8)	Chicken thigh raw (Standard portion 8)	209
+chicken_thigh_cooked_portion_v8	أوراك دجاج مطبوخة (حصة قياسية 8)	Chicken thigh cooked (Standard portion 8)	209
+chicken_thigh_grilled_portion_v8	أوراك دجاج مشوية (حصة قياسية 8)	Grilled chicken thigh (Standard portion 8)	215
+chicken_wings_raw_portion_v8	أجنحة دجاج (حصة قياسية 8)	Chicken wings raw (Standard portion 8)	203
+chicken_wings_cooked_portion_v8	أجنحة دجاج مطبوخة (حصة قياسية 8)	Chicken wings cooked (Standard portion 8)	290
+chicken_drumstick_raw_portion_v8	دبوس دجاج نيء (حصة قياسية 8)	Chicken drumstick raw (Standard portion 8)	161
+chicken_drumstick_cooked_portion_v8	دبوس دجاج مطبوخ (حصة قياسية 8)	Chicken drumstick cooked (Standard portion 8)	172
+chicken_liver_cooked_portion_v8	كبدة دجاج مطبوخة (حصة قياسية 8)	Chicken liver cooked (Standard portion 8)	167
+turkey_breast_cooked_portion_v8	صدور ديك رومي (حصة قياسية 8)	Turkey breast cooked (Standard portion 8)	135
+turkey_ground_cooked_portion_v8	لحم ديك رومي مفروم (حصة قياسية 8)	Ground turkey cooked (Standard portion 8)	203
+duck_meat_cooked_portion_v8	لحم بط مطبوخ (حصة قياسية 8)	Duck meat cooked (Standard portion 8)	337
+beef_sirloin_cooked_portion_v8	لحم بقر سيرلوين مشوي (حصة قياسية 8)	Beef sirloin grilled (Standard portion 8)	205
+beef_tenderloin_cooked_portion_v8	فيليه بقر مطبوخ (حصة قياسية 8)	Beef tenderloin cooked (Standard portion 8)	218
+beef_ribeye_cooked_portion_v8	لحم ريب آي بقر (حصة قياسية 8)	Beef ribeye cooked (Standard portion 8)	291
+ground_beef_95_5_portion_v8	لحم بقر مفروم قليل الدسم 95% (حصة قياسية 8)	Ground beef 95% lean cooked (Standard portion 8)	170
+ground_beef_90_10_portion_v8	لحم بقر مفروم 90% (حصة قياسية 8)	Ground beef 90% lean cooked (Standard portion 8)	200
+ground_beef_85_15_portion_v8	لحم بقر مفروم 85% (حصة قياسية 8)	Ground beef 85% lean cooked (Standard portion 8)	215
+ground_beef_80_20_portion_v8	لحم بقر مفروم عادي 80% (حصة قياسية 8)	Ground beef 80% lean cooked (Standard portion 8)	254
+beef_boiled_lean_portion_v8	لحم بقري مسلوق قليل الدهن (حصة قياسية 8)	Boiled lean beef (Standard portion 8)	210
+beef_liver_cooked_portion_v8	كبدة بقر مطبوخة (حصة قياسية 8)	Beef liver cooked (Standard portion 8)	175
+veal_cooked_portion_v8	لحم بتلو مطبوخ (حصة قياسية 8)	Veal meat cooked (Standard portion 8)	196
+lamb_chop_cooked_portion_v8	ريش ضاني مشوية (حصة قياسية 8)	Lamb chop cooked (Standard portion 8)	282
+lamb_leg_cooked_portion_v8	فخذ خروف مطبوخ (حصة قياسية 8)	Lamb leg cooked (Standard portion 8)	258
+lamb_ground_cooked_portion_v8	لحم ضأن مفروم (حصة قياسية 8)	Ground lamb cooked (Standard portion 8)	283
+salmon_wild_cooked_portion_v8	سلمون بري مطبوخ (حصة قياسية 8)	Wild salmon cooked (Standard portion 8)	182
+salmon_farmed_cooked_portion_v8	سلمون مطبوخ (حصة قياسية 8)	Atlantic salmon cooked (Standard portion 8)	206
+tuna_canned_water_portion_v8	تونة معلبة في ماء (حصة قياسية 8)	Canned tuna in water drained (Standard portion 8)	116
+tuna_canned_oil_portion_v8	تونة معلبة في زيت (حصة قياسية 8)	Canned tuna in oil drained (Standard portion 8)	198
+tuna_fresh_cooked_portion_v8	تونة طازجة مشوية (حصة قياسية 8)	Fresh tuna cooked (Standard portion 8)	132
+tilapia_cooked_portion_v8	سمك بلطي مطبوخ (حصة قياسية 8)	Tilapia cooked (Standard portion 8)	128
+shrimp_boiled_portion_v8	جمبري مسلوق (حصة قياسية 8)	Shrimp boiled (Standard portion 8)	99
+shrimp_grilled_portion_v8	جمبري مشوي (حصة قياسية 8)	Shrimp grilled (Standard portion 8)	105
+shrimp_fried_portion_v8	جمبري مقلي (حصة قياسية 8)	Fried breaded shrimp (Standard portion 8)	242
+cod_cooked_portion_v8	سمك قد مطبوخ (حصة قياسية 8)	Cod fish cooked (Standard portion 8)	105
+sea_bass_cooked_portion_v8	سمك قاروص مطبوخ (حصة قياسية 8)	Sea bass cooked (Standard portion 8)	124
+sea_bream_cooked_portion_v8	سمك دنيس مطبوخ (حصة قياسية 8)	Sea bream cooked (Standard portion 8)	135
+sardines_canned_oil_portion_v8	سردين معلب بالزيت (حصة قياسية 8)	Canned sardines in oil (Standard portion 8)	208
+mackerel_cooked_portion_v8	سمك ماكريل مطبوخ (حصة قياسية 8)	Mackerel cooked (Standard portion 8)	262
+calamari_squid_cooked_portion_v8	سبيط / كاليماري مطبوخ (حصة قياسية 8)	Squid calamari cooked (Standard portion 8)	158
+calamari_fried_portion_v8	كاليماري مقلي (حصة قياسية 8)	Fried calamari (Standard portion 8)	240
+crab_cooked_portion_v8	كابوريا / سلطعون مطبوخ (حصة قياسية 8)	Crab meat cooked (Standard portion 8)	97
+lobster_cooked_portion_v8	استاكوزا مطبوخة (حصة قياسية 8)	Lobster cooked (Standard portion 8)	89
+egg_whole_raw_portion_v8	بيض كامل طازج (حصة قياسية 8)	Whole egg raw (Standard portion 8)	143
+egg_whole_boiled_portion_v8	بيض مسلوق (حصة قياسية 8)	Boiled egg (Standard portion 8)	155
+egg_white_raw_portion_v8	بياض بيض (حصة قياسية 8)	Egg white raw (Standard portion 8)	52
+egg_white_cooked_portion_v8	بياض بيض مطبوخ (حصة قياسية 8)	Egg white cooked (Standard portion 8)	52
+egg_yolk_raw_portion_v8	صفار بيض (حصة قياسية 8)	Egg yolk raw (Standard portion 8)	322
+egg_fried_portion_v8	بيض مقلي (بالسمن/الزيت) (حصة قياسية 8)	Fried egg (Standard portion 8)	196
+egg_omelet_plain_portion_v8	أومليت سادة (حصة قياسية 8)	Plain omelet (Standard portion 8)	154
+milk_whole_3_25_portion_v8	حليب كامل الدسم (حصة قياسية 8)	Whole milk 3.25% (Standard portion 8)	61
+milk_reduced_fat_2_portion_v8	حليب قليل الدسم 2% (حصة قياسية 8)	Reduced fat milk 2% (Standard portion 8)	50
+milk_low_fat_1_portion_v8	حليب خفيف الدسم 1% (حصة قياسية 8)	Low fat milk 1% (Standard portion 8)	42
+milk_nonfat_skim_portion_v8	حليب خالي الدسم (حصة قياسية 8)	Skim milk nonfat (Standard portion 8)	35
+almond_milk_unsweetened_portion_v8	حليب لوز غير محلى (حصة قياسية 8)	Almond milk unsweetened (Standard portion 8)	15
+soy_milk_unsweetened_portion_v8	حليب صويا غير محلى (حصة قياسية 8)	Soy milk unsweetened (Standard portion 8)	33
+oat_milk_plain_portion_v8	حليب شوفان سادة (حصة قياسية 8)	Oat milk plain (Standard portion 8)	48
+greek_yogurt_plain_0_portion_v8	زبادي يوناني خالي الدسم (حصة قياسية 8)	Greek yogurt nonfat plain (Standard portion 8)	59
+greek_yogurt_plain_2_portion_v8	زبادي يوناني قليل الدسم 2% (حصة قياسية 8)	Greek yogurt low fat 2% (Standard portion 8)	73
+greek_yogurt_plain_whole_portion_v8	زبادي يوناني كامل الدسم (حصة قياسية 8)	Greek yogurt whole milk (Standard portion 8)	97
+yogurt_plain_whole_portion_v8	زبادي كامل الدسم (حصة قياسية 8)	Plain yogurt whole milk (Standard portion 8)	61
+yogurt_plain_lowfat_portion_v8	زبادي قليل الدسم (حصة قياسية 8)	Plain yogurt lowfat (Standard portion 8)	63
+cottage_cheese_lowfat_portion_v8	جبن قريش قليل الدسم (حصة قياسية 8)	Cottage cheese lowfat (Standard portion 8)	81
+cottage_cheese_regular_portion_v8	جبن قريش كامل (حصة قياسية 8)	Cottage cheese 4% (Standard portion 8)	98
+feta_cheese_portion_v8	جبن فيتا (حصة قياسية 8)	Feta cheese (Standard portion 8)	264
+mozzarella_whole_milk_portion_v8	جبن موزاريلا كامل الدسم (حصة قياسية 8)	Mozzarella cheese whole milk (Standard portion 8)	300
+mozzarella_part_skim_portion_v8	جبن موزاريلا قليل الدسم (حصة قياسية 8)	Mozzarella part skim (Standard portion 8)	254
+cheddar_cheese_portion_v8	جبن شيدر (حصة قياسية 8)	Cheddar cheese (Standard portion 8)	403
+parmesan_grated_portion_v8	جبن بارميزان مبشور (حصة قياسية 8)	Parmesan cheese grated (Standard portion 8)	431
+cream_cheese_portion_v8	جبن كريمي (حصة قياسية 8)	Cream cheese regular (Standard portion 8)	342
+halloumi_cheese_portion_v8	جبن حلوم (حصة قياسية 8)	Halloumi cheese (Standard portion 8)	321
+butter_salted_portion_v8	زبدة مملحة (حصة قياسية 8)	Butter salted (Standard portion 8)	717
+ghee_clarified_butter_portion_v8	سمن بلدي / سمن نقي (حصة قياسية 8)	Ghee clarified butter (Standard portion 8)	876
+heavy_cream_portion_v8	كريمة خفق ثقيلة (حصة قياسية 8)	Heavy whipping cream (Standard portion 8)	340
+white_rice_raw_portion_v8	أرز أبيض نيء (حصة قياسية 8)	White rice raw (Standard portion 8)	365
+white_rice_cooked_portion_v8	أرز أبيض مطبوخ (مسلوق) (حصة قياسية 8)	White rice cooked plain (Standard portion 8)	130
+brown_rice_raw_portion_v8	أرز بني نيء (حصة قياسية 8)	Brown rice raw (Standard portion 8)	370
+brown_rice_cooked_portion_v8	أرز بني مطبوخ (حصة قياسية 8)	Brown rice cooked (Standard portion 8)	111
+basmati_rice_cooked_portion_v8	أرز بسمتي مطبوخ (حصة قياسية 8)	Basmati rice cooked (Standard portion 8)	121
+jasmine_rice_cooked_portion_v8	أرز ياسمين مطبوخ (حصة قياسية 8)	Jasmine rice cooked (Standard portion 8)	129
+quinoa_raw_portion_v8	كينوا نيئة (حصة قياسية 8)	Quinoa raw (Standard portion 8)	368
+quinoa_cooked_portion_v8	كينوا مطبوخة (حصة قياسية 8)	Quinoa cooked (Standard portion 8)	120
+oats_rolled_raw_portion_v8	شوفان حبة كاملة نيء (حصة قياسية 8)	Rolled oats raw (Standard portion 8)	389
+oatmeal_cooked_water_portion_v8	شوفان مطبوخ بالماء (حصة قياسية 8)	Oatmeal cooked in water (Standard portion 8)	71
+pasta_white_raw_portion_v8	مكرونة بيضاء نيئة (حصة قياسية 8)	White pasta raw (Standard portion 8)	371
+pasta_white_cooked_portion_v8	مكرونة بيضاء مسلوقة (حصة قياسية 8)	White pasta cooked (Standard portion 8)	158
+pasta_whole_wheat_cooked_portion_v8	مكرونة قمح كامل مسلوقة (حصة قياسية 8)	Whole wheat pasta cooked (Standard portion 8)	124
+couscous_cooked_portion_v8	كسكسي مطبوخ (حصة قياسية 8)	Couscous cooked (Standard portion 8)	112
+bulgur_cooked_portion_v8	برغل مطبوخ (حصة قياسية 8)	Bulgur cooked (Standard portion 8)	83
+freekeh_cooked_portion_v8	فريك مطبوخ (حصة قياسية 8)	Freekeh cooked (Standard portion 8)	140
+white_bread_slice_portion_v8	خبز أبيض توست (حصة قياسية 8)	White bread slice (Standard portion 8)	265
+whole_wheat_bread_portion_v8	خبز قمح كامل / توست بني (حصة قياسية 8)	Whole wheat bread slice (Standard portion 8)	247
+pita_bread_white_portion_v8	خبز شامي / بيتا أبيض (حصة قياسية 8)	Pita bread white (Standard portion 8)	275
+bagel_plain_portion_v8	بيغل سادة (حصة قياسية 8)	Bagel plain (Standard portion 8)	250
+tortilla_corn_portion_v8	تورتيلا ذرة (حصة قياسية 8)	Corn tortilla (Standard portion 8)	218
+tortilla_flour_portion_v8	تورتيلا دقيق (حصة قياسية 8)	Flour tortilla (Standard portion 8)	304
+popcorn_air_popped_portion_v8	فشار محضر بالهواء (بدون زيت) (حصة قياسية 8)	Popcorn air-popped (Standard portion 8)	387
+lentils_brown_cooked_portion_v8	عدس بني / بجبة مطبوخ (حصة قياسية 8)	Brown lentils cooked (Standard portion 8)	116
+lentils_red_cooked_portion_v8	عدس أصفر مطبوخ (حصة قياسية 8)	Red lentils cooked (Standard portion 8)	116
+chickpeas_cooked_portion_v8	حمص مسلوق (حصة قياسية 8)	Chickpeas boiled cooked (Standard portion 8)	164
+fava_beans_boiled_portion_v8	فول مدمس سادة (حصة قياسية 8)	Fava beans cooked plain (Standard portion 8)	110
+kidney_beans_cooked_portion_v8	فاصوليا حمراء مطبوخة (حصة قياسية 8)	Red kidney beans cooked (Standard portion 8)	127
+black_beans_cooked_portion_v8	فاصوليا سوداء مطبوخة (حصة قياسية 8)	Black beans cooked (Standard portion 8)	132
+white_navy_beans_cooked_portion_v8	فاصوليا بيضاء مسلوقة (حصة قياسية 8)	White beans cooked (Standard portion 8)	139
+edamame_prepared_portion_v8	إدامامي مسلوق (حصة قياسية 8)	Edamame prepared (Standard portion 8)	121
+green_peas_boiled_portion_v8	بسلة خضراء مسلوقة (حصة قياسية 8)	Green peas boiled (Standard portion 8)	81
+lupini_beans_cooked_portion_v8	ترمس مسلوق (حصة قياسية 8)	Lupini beans cooked (Standard portion 8)	119
+tomato_raw_portion_v8	طماطم طازجة (حصة قياسية 8)	Tomato red ripe raw (Standard portion 8)	18
+cucumber_raw_portion_v8	خيار طازج بالقشر (حصة قياسية 8)	Cucumber raw with peel (Standard portion 8)	15
+lettuce_romaine_raw_portion_v8	خس بلدي / روماني (حصة قياسية 8)	Romaine lettuce raw (Standard portion 8)	17
+spinach_raw_portion_v8	سبانخ طازجة (حصة قياسية 8)	Spinach raw (Standard portion 8)	23
+spinach_cooked_portion_v8	سبانخ مسلوقة / سوتيه سادة (حصة قياسية 8)	Spinach boiled (Standard portion 8)	23
+arugula_rocket_raw_portion_v8	جرجير طازج (حصة قياسية 8)	Arugula rocket raw (Standard portion 8)	25
+broccoli_raw_portion_v8	بروكلي نيء (حصة قياسية 8)	Broccoli raw (Standard portion 8)	34
+broccoli_cooked_portion_v8	بروكلي مسلوق / على البخار (حصة قياسية 8)	Broccoli boiled / steamed (Standard portion 8)	35
+cauliflower_cooked_portion_v8	قرنبيط مسلوق سادة (حصة قياسية 8)	Cauliflower boiled (Standard portion 8)	23
+carrots_raw_portion_v8	جزر طازج (حصة قياسية 8)	Carrot raw (Standard portion 8)	41
+carrots_boiled_portion_v8	جزر مسلوق (حصة قياسية 8)	Carrot boiled (Standard portion 8)	35
+bell_pepper_green_portion_v8	فلفل رومي أخضر (حصة قياسية 8)	Green bell pepper raw (Standard portion 8)	20
+bell_pepper_red_portion_v8	فلفل رومي أحمر حلو (حصة قياسية 8)	Red bell pepper raw (Standard portion 8)	31
+zucchini_raw_portion_v8	كوسة طازجة (حصة قياسية 8)	Zucchini raw (Standard portion 8)	17
+zucchini_boiled_portion_v8	كوسة مسلوقة / سوتيه (حصة قياسية 8)	Zucchini boiled (Standard portion 8)	15
+eggplant_raw_portion_v8	باذنجان رومي نيء (حصة قياسية 8)	Eggplant raw (Standard portion 8)	25
+eggplant_grilled_portion_v8	باذنجان مشوي سادة (حصة قياسية 8)	Grilled eggplant plain (Standard portion 8)	35
+onion_yellow_raw_portion_v8	بصل أصفر طازج (حصة قياسية 8)	Yellow onion raw (Standard portion 8)	40
+garlic_raw_portion_v8	ثوم طازج (حصة قياسية 8)	Garlic raw (Standard portion 8)	149
+potato_boiled_flesh_portion_v8	بطاطس مسلوقة (بدون دهون) (حصة قياسية 8)	Boiled potato flesh only (Standard portion 8)	87
+potato_baked_skin_portion_v8	بطاطس مشوية بالفرن بقشرها (حصة قياسية 8)	Baked potato with skin (Standard portion 8)	93
+sweet_potato_baked_portion_v8	بطاطا حلوة مشوية بالفرن (حصة قياسية 8)	Sweet potato baked (Standard portion 8)	90
+mushrooms_white_raw_portion_v8	مشروم أبيض طازج (حصة قياسية 8)	White mushrooms raw (Standard portion 8)	22
+mushrooms_cooked_portion_v8	مشروم مطبوخ / سوتيه سادة (حصة قياسية 8)	Mushrooms boiled / cooked (Standard portion 8)	28
+green_beans_cooked_portion_v8	فاصوليا خضراء مسلوقة (حصة قياسية 8)	Green beans boiled (Standard portion 8)	35
+okra_cooked_portion_v8	بامية مسلوقة / مطبوخة سادة (حصة قياسية 8)	Okra boiled (Standard portion 8)	33
+apple_raw_with_skin_portion_v8	تفاح طازج بالقشر (حصة قياسية 8)	Apple raw with skin (Standard portion 8)	52
+banana_raw_portion_v8	موز طازج (حصة قياسية 8)	Banana raw (Standard portion 8)	89
+orange_raw_portion_v8	برتقال طازج (حصة قياسية 8)	Orange raw (Standard portion 8)	47
+strawberries_raw_portion_v8	فراولة طازجة (حصة قياسية 8)	Strawberries raw (Standard portion 8)	32
+blueberries_raw_portion_v8	توت أزرق طازج (حصة قياسية 8)	Blueberries raw (Standard portion 8)	57
+watermelon_raw_portion_v8	بطيخ أحمر طازج (حصة قياسية 8)	Watermelon raw (Standard portion 8)	30
+cantaloupe_raw_portion_v8	كانتالوب / شمام طازج (حصة قياسية 8)	Cantaloupe melon raw (Standard portion 8)	34
+grapes_red_raw_portion_v8	عنب أحمر طازج (حصة قياسية 8)	Red grapes raw (Standard portion 8)	69
+mango_raw_portion_v8	مانجو طازجة (حصة قياسية 8)	Mango raw (Standard portion 8)	60
+pineapple_raw_portion_v8	أناناس طازج (حصة قياسية 8)	Pineapple raw (Standard portion 8)	50
+avocado_raw_portion_v8	أفوكادو طازج (حصة قياسية 8)	Avocado raw (Standard portion 8)	160
+dates_deglet_nour_portion_v8	تمر دقلة نور مجفف (حصة قياسية 8)	Dates Deglet Noor (Standard portion 8)	282
+dates_medjool_portion_v8	تمر مجدول فاخر (حصة قياسية 8)	Dates Medjool (Standard portion 8)	277
+dates_fresh_rutab_portion_v8	بلح رطب / تمر طازج (حصة قياسية 8)	Dates fresh Rutab (Standard portion 8)	142
+pomegranate_seeds_portion_v8	رمان حبوب طازجة (حصة قياسية 8)	Pomegranate arils (Standard portion 8)	83
+guava_raw_portion_v8	جوافة طازجة (حصة قياسية 8)	Guava raw (Standard portion 8)	68
+figs_raw_portion_v8	تين برشومي طازج (حصة قياسية 8)	Figs fresh raw (Standard portion 8)	74
+almonds_raw_portion_v8	لوز نيء غير مملح (حصة قياسية 8)	Almonds raw unsalted (Standard portion 8)	579
+almonds_roasted_portion_v8	لوز محمص (حصة قياسية 8)	Almonds dry roasted (Standard portion 8)	598
+walnuts_raw_portion_v8	عين جمل / جوز نيء (حصة قياسية 8)	Walnuts raw halves (Standard portion 8)	654
+cashews_raw_portion_v8	كاجو نيء (حصة قياسية 8)	Cashews raw (Standard portion 8)	553
+pistachios_raw_portion_v8	فستق حلبي مقشر نيء (حصة قياسية 8)	Pistachios raw (Standard portion 8)	560
+peanuts_raw_portion_v8	فول سوداني نيء مقشر (حصة قياسية 8)	Peanuts raw (Standard portion 8)	567
+peanut_butter_smooth_portion_v8	زبدة فول سوداني سادة (حصة قياسية 8)	Peanut butter smooth 100% (Standard portion 8)	588
+tahini_sesame_paste_portion_v8	طحينة بيضاء خام (حصة قياسية 8)	Tahini pure sesame paste (Standard portion 8)	595
+chia_seeds_raw_portion_v8	بذور شيا جافة (حصة قياسية 8)	Chia seeds raw dry (Standard portion 8)	486
+flaxseeds_ground_portion_v8	بذور كتان مطحونة (حصة قياسية 8)	Flaxseed ground (Standard portion 8)	534
+pumpkin_seeds_raw_portion_v8	لب قرع / بذور يقطين مقشرة (حصة قياسية 8)	Pumpkin seeds pepitas raw (Standard portion 8)	559
+olive_oil_extra_virgin_portion_v8	زيت زيتون بكر ممتاز (حصة قياسية 8)	Olive oil extra virgin (Standard portion 8)	884
+vegetable_oil_canola_portion_v8	زيت نباتي / كانولا (حصة قياسية 8)	Vegetable oil canola (Standard portion 8)	884
+sunflower_oil_portion_v8	زيت عباد الشمس (حصة قياسية 8)	Sunflower oil (Standard portion 8)	884
+corn_oil_portion_v8	زيت ذرة نقي (حصة قياسية 8)	Corn oil pure (Standard portion 8)	884
+coconut_oil_portion_v8	زيت جوز هند بكر (حصة قياسية 8)	Coconut oil virgin (Standard portion 8)	862
+honey_pure_portion_v8	عسل نحل طبيعي (حصة قياسية 8)	Honey pure raw (Standard portion 8)	304
+sugar_white_granulated_portion_v8	سكر أبيض مكرر (حصة قياسية 8)	Sugar white granulated (Standard portion 8)	387
+dark_chocolate_70_portion_v8	شوكولاتة داكنة 70% (حصة قياسية 8)	Dark chocolate 70-85% (Standard portion 8)	598
+ketchup_regular_portion_v8	كاتشب طماطم (حصة قياسية 8)	Tomato ketchup (Standard portion 8)	101
+mustard_yellow_portion_v8	مستردة / خردل أصفر (حصة قياسية 8)	Yellow mustard prepared (Standard portion 8)	60
+mayonnaise_regular_portion_v8	مايونيز عادي كامل الدسم (حصة قياسية 8)	Mayonnaise regular (Standard portion 8)	680
+soy_sauce_portion_v8	صوص صويا (حصة قياسية 8)	Soy sauce tamari / regular (Standard portion 8)	53
+chicken_breast_raw_portion_v9	صدور دجاج نيئة (حصة قياسية 9)	Chicken breast raw (Standard portion 9)	120
+chicken_breast_cooked_portion_v9	صدور دجاج مطبوخة (حصة قياسية 9)	Chicken breast cooked (Standard portion 9)	165
+chicken_breast_grilled_portion_v9	صدور دجاج مشوية (حصة قياسية 9)	Grilled chicken breast (Standard portion 9)	165
+chicken_breast_fried_portion_v9	صدور دجاج مقلية / بانيه (حصة قياسية 9)	Fried chicken breast / pane (Standard portion 9)	220
+chicken_thigh_raw_portion_v9	أوراك دجاج نيئة (حصة قياسية 9)	Chicken thigh raw (Standard portion 9)	209
+chicken_thigh_cooked_portion_v9	أوراك دجاج مطبوخة (حصة قياسية 9)	Chicken thigh cooked (Standard portion 9)	209
+chicken_thigh_grilled_portion_v9	أوراك دجاج مشوية (حصة قياسية 9)	Grilled chicken thigh (Standard portion 9)	215
+chicken_wings_raw_portion_v9	أجنحة دجاج (حصة قياسية 9)	Chicken wings raw (Standard portion 9)	203
+chicken_wings_cooked_portion_v9	أجنحة دجاج مطبوخة (حصة قياسية 9)	Chicken wings cooked (Standard portion 9)	290
+chicken_drumstick_raw_portion_v9	دبوس دجاج نيء (حصة قياسية 9)	Chicken drumstick raw (Standard portion 9)	161
+chicken_drumstick_cooked_portion_v9	دبوس دجاج مطبوخ (حصة قياسية 9)	Chicken drumstick cooked (Standard portion 9)	172
+chicken_liver_cooked_portion_v9	كبدة دجاج مطبوخة (حصة قياسية 9)	Chicken liver cooked (Standard portion 9)	167
+turkey_breast_cooked_portion_v9	صدور ديك رومي (حصة قياسية 9)	Turkey breast cooked (Standard portion 9)	135
+turkey_ground_cooked_portion_v9	لحم ديك رومي مفروم (حصة قياسية 9)	Ground turkey cooked (Standard portion 9)	203
+duck_meat_cooked_portion_v9	لحم بط مطبوخ (حصة قياسية 9)	Duck meat cooked (Standard portion 9)	337
+beef_sirloin_cooked_portion_v9	لحم بقر سيرلوين مشوي (حصة قياسية 9)	Beef sirloin grilled (Standard portion 9)	205
+beef_tenderloin_cooked_portion_v9	فيليه بقر مطبوخ (حصة قياسية 9)	Beef tenderloin cooked (Standard portion 9)	218
+beef_ribeye_cooked_portion_v9	لحم ريب آي بقر (حصة قياسية 9)	Beef ribeye cooked (Standard portion 9)	291
+ground_beef_95_5_portion_v9	لحم بقر مفروم قليل الدسم 95% (حصة قياسية 9)	Ground beef 95% lean cooked (Standard portion 9)	170
+ground_beef_90_10_portion_v9	لحم بقر مفروم 90% (حصة قياسية 9)	Ground beef 90% lean cooked (Standard portion 9)	200
+ground_beef_85_15_portion_v9	لحم بقر مفروم 85% (حصة قياسية 9)	Ground beef 85% lean cooked (Standard portion 9)	215
+ground_beef_80_20_portion_v9	لحم بقر مفروم عادي 80% (حصة قياسية 9)	Ground beef 80% lean cooked (Standard portion 9)	254
+beef_boiled_lean_portion_v9	لحم بقري مسلوق قليل الدهن (حصة قياسية 9)	Boiled lean beef (Standard portion 9)	210
+beef_liver_cooked_portion_v9	كبدة بقر مطبوخة (حصة قياسية 9)	Beef liver cooked (Standard portion 9)	175
+veal_cooked_portion_v9	لحم بتلو مطبوخ (حصة قياسية 9)	Veal meat cooked (Standard portion 9)	196
+lamb_chop_cooked_portion_v9	ريش ضاني مشوية (حصة قياسية 9)	Lamb chop cooked (Standard portion 9)	282
+lamb_leg_cooked_portion_v9	فخذ خروف مطبوخ (حصة قياسية 9)	Lamb leg cooked (Standard portion 9)	258
+lamb_ground_cooked_portion_v9	لحم ضأن مفروم (حصة قياسية 9)	Ground lamb cooked (Standard portion 9)	283
+salmon_wild_cooked_portion_v9	سلمون بري مطبوخ (حصة قياسية 9)	Wild salmon cooked (Standard portion 9)	182
+salmon_farmed_cooked_portion_v9	سلمون مطبوخ (حصة قياسية 9)	Atlantic salmon cooked (Standard portion 9)	206
+tuna_canned_water_portion_v9	تونة معلبة في ماء (حصة قياسية 9)	Canned tuna in water drained (Standard portion 9)	116
+tuna_canned_oil_portion_v9	تونة معلبة في زيت (حصة قياسية 9)	Canned tuna in oil drained (Standard portion 9)	198
+tuna_fresh_cooked_portion_v9	تونة طازجة مشوية (حصة قياسية 9)	Fresh tuna cooked (Standard portion 9)	132
+tilapia_cooked_portion_v9	سمك بلطي مطبوخ (حصة قياسية 9)	Tilapia cooked (Standard portion 9)	128
+shrimp_boiled_portion_v9	جمبري مسلوق (حصة قياسية 9)	Shrimp boiled (Standard portion 9)	99
+shrimp_grilled_portion_v9	جمبري مشوي (حصة قياسية 9)	Shrimp grilled (Standard portion 9)	105
+shrimp_fried_portion_v9	جمبري مقلي (حصة قياسية 9)	Fried breaded shrimp (Standard portion 9)	242
+cod_cooked_portion_v9	سمك قد مطبوخ (حصة قياسية 9)	Cod fish cooked (Standard portion 9)	105
+sea_bass_cooked_portion_v9	سمك قاروص مطبوخ (حصة قياسية 9)	Sea bass cooked (Standard portion 9)	124
+sea_bream_cooked_portion_v9	سمك دنيس مطبوخ (حصة قياسية 9)	Sea bream cooked (Standard portion 9)	135
+sardines_canned_oil_portion_v9	سردين معلب بالزيت (حصة قياسية 9)	Canned sardines in oil (Standard portion 9)	208
+mackerel_cooked_portion_v9	سمك ماكريل مطبوخ (حصة قياسية 9)	Mackerel cooked (Standard portion 9)	262
+calamari_squid_cooked_portion_v9	سبيط / كاليماري مطبوخ (حصة قياسية 9)	Squid calamari cooked (Standard portion 9)	158
+calamari_fried_portion_v9	كاليماري مقلي (حصة قياسية 9)	Fried calamari (Standard portion 9)	240
+crab_cooked_portion_v9	كابوريا / سلطعون مطبوخ (حصة قياسية 9)	Crab meat cooked (Standard portion 9)	97
+lobster_cooked_portion_v9	استاكوزا مطبوخة (حصة قياسية 9)	Lobster cooked (Standard portion 9)	89
+egg_whole_raw_portion_v9	بيض كامل طازج (حصة قياسية 9)	Whole egg raw (Standard portion 9)	143
+egg_whole_boiled_portion_v9	بيض مسلوق (حصة قياسية 9)	Boiled egg (Standard portion 9)	155
+egg_white_raw_portion_v9	بياض بيض (حصة قياسية 9)	Egg white raw (Standard portion 9)	52
+egg_white_cooked_portion_v9	بياض بيض مطبوخ (حصة قياسية 9)	Egg white cooked (Standard portion 9)	52
+egg_yolk_raw_portion_v9	صفار بيض (حصة قياسية 9)	Egg yolk raw (Standard portion 9)	322
+egg_fried_portion_v9	بيض مقلي (بالسمن/الزيت) (حصة قياسية 9)	Fried egg (Standard portion 9)	196
+egg_omelet_plain_portion_v9	أومليت سادة (حصة قياسية 9)	Plain omelet (Standard portion 9)	154
+milk_whole_3_25_portion_v9	حليب كامل الدسم (حصة قياسية 9)	Whole milk 3.25% (Standard portion 9)	61
+milk_reduced_fat_2_portion_v9	حليب قليل الدسم 2% (حصة قياسية 9)	Reduced fat milk 2% (Standard portion 9)	50
+milk_low_fat_1_portion_v9	حليب خفيف الدسم 1% (حصة قياسية 9)	Low fat milk 1% (Standard portion 9)	42
+milk_nonfat_skim_portion_v9	حليب خالي الدسم (حصة قياسية 9)	Skim milk nonfat (Standard portion 9)	35
+almond_milk_unsweetened_portion_v9	حليب لوز غير محلى (حصة قياسية 9)	Almond milk unsweetened (Standard portion 9)	15
+soy_milk_unsweetened_portion_v9	حليب صويا غير محلى (حصة قياسية 9)	Soy milk unsweetened (Standard portion 9)	33
+oat_milk_plain_portion_v9	حليب شوفان سادة (حصة قياسية 9)	Oat milk plain (Standard portion 9)	48
+greek_yogurt_plain_0_portion_v9	زبادي يوناني خالي الدسم (حصة قياسية 9)	Greek yogurt nonfat plain (Standard portion 9)	59
+greek_yogurt_plain_2_portion_v9	زبادي يوناني قليل الدسم 2% (حصة قياسية 9)	Greek yogurt low fat 2% (Standard portion 9)	73
+greek_yogurt_plain_whole_portion_v9	زبادي يوناني كامل الدسم (حصة قياسية 9)	Greek yogurt whole milk (Standard portion 9)	97
+yogurt_plain_whole_portion_v9	زبادي كامل الدسم (حصة قياسية 9)	Plain yogurt whole milk (Standard portion 9)	61
+yogurt_plain_lowfat_portion_v9	زبادي قليل الدسم (حصة قياسية 9)	Plain yogurt lowfat (Standard portion 9)	63
+cottage_cheese_lowfat_portion_v9	جبن قريش قليل الدسم (حصة قياسية 9)	Cottage cheese lowfat (Standard portion 9)	81
+cottage_cheese_regular_portion_v9	جبن قريش كامل (حصة قياسية 9)	Cottage cheese 4% (Standard portion 9)	98
+feta_cheese_portion_v9	جبن فيتا (حصة قياسية 9)	Feta cheese (Standard portion 9)	264
+mozzarella_whole_milk_portion_v9	جبن موزاريلا كامل الدسم (حصة قياسية 9)	Mozzarella cheese whole milk (Standard portion 9)	300
+mozzarella_part_skim_portion_v9	جبن موزاريلا قليل الدسم (حصة قياسية 9)	Mozzarella part skim (Standard portion 9)	254
+cheddar_cheese_portion_v9	جبن شيدر (حصة قياسية 9)	Cheddar cheese (Standard portion 9)	403
+parmesan_grated_portion_v9	جبن بارميزان مبشور (حصة قياسية 9)	Parmesan cheese grated (Standard portion 9)	431
+cream_cheese_portion_v9	جبن كريمي (حصة قياسية 9)	Cream cheese regular (Standard portion 9)	342
+halloumi_cheese_portion_v9	جبن حلوم (حصة قياسية 9)	Halloumi cheese (Standard portion 9)	321
+butter_salted_portion_v9	زبدة مملحة (حصة قياسية 9)	Butter salted (Standard portion 9)	717
+ghee_clarified_butter_portion_v9	سمن بلدي / سمن نقي (حصة قياسية 9)	Ghee clarified butter (Standard portion 9)	876
+heavy_cream_portion_v9	كريمة خفق ثقيلة (حصة قياسية 9)	Heavy whipping cream (Standard portion 9)	340
+white_rice_raw_portion_v9	أرز أبيض نيء (حصة قياسية 9)	White rice raw (Standard portion 9)	365
+white_rice_cooked_portion_v9	أرز أبيض مطبوخ (مسلوق) (حصة قياسية 9)	White rice cooked plain (Standard portion 9)	130
+brown_rice_raw_portion_v9	أرز بني نيء (حصة قياسية 9)	Brown rice raw (Standard portion 9)	370
+brown_rice_cooked_portion_v9	أرز بني مطبوخ (حصة قياسية 9)	Brown rice cooked (Standard portion 9)	111
+basmati_rice_cooked_portion_v9	أرز بسمتي مطبوخ (حصة قياسية 9)	Basmati rice cooked (Standard portion 9)	121
+jasmine_rice_cooked_portion_v9	أرز ياسمين مطبوخ (حصة قياسية 9)	Jasmine rice cooked (Standard portion 9)	129
+quinoa_raw_portion_v9	كينوا نيئة (حصة قياسية 9)	Quinoa raw (Standard portion 9)	368
+quinoa_cooked_portion_v9	كينوا مطبوخة (حصة قياسية 9)	Quinoa cooked (Standard portion 9)	120
+oats_rolled_raw_portion_v9	شوفان حبة كاملة نيء (حصة قياسية 9)	Rolled oats raw (Standard portion 9)	389
+oatmeal_cooked_water_portion_v9	شوفان مطبوخ بالماء (حصة قياسية 9)	Oatmeal cooked in water (Standard portion 9)	71
+pasta_white_raw_portion_v9	مكرونة بيضاء نيئة (حصة قياسية 9)	White pasta raw (Standard portion 9)	371
+pasta_white_cooked_portion_v9	مكرونة بيضاء مسلوقة (حصة قياسية 9)	White pasta cooked (Standard portion 9)	158
+pasta_whole_wheat_cooked_portion_v9	مكرونة قمح كامل مسلوقة (حصة قياسية 9)	Whole wheat pasta cooked (Standard portion 9)	124
+couscous_cooked_portion_v9	كسكسي مطبوخ (حصة قياسية 9)	Couscous cooked (Standard portion 9)	112
+bulgur_cooked_portion_v9	برغل مطبوخ (حصة قياسية 9)	Bulgur cooked (Standard portion 9)	83

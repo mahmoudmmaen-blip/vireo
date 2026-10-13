@@ -130,11 +130,13 @@ Deno.serve(async (req) => {
       ? '\nNOTE: These photos show the SAME meal from different angles; do not double count.\n'
       : '';
 
+    const plateDiameterCm = body.plate_diameter_cm ? Number(body.plate_diameter_cm) : undefined;
     const prompt = mealVisionPrompt({
       remainingCalories,
       remainingProtein,
       language: body.language,
       userHint: (body.user_hint ?? '') + multiPhotoInstruction,
+      plateDiameterCm,
     });
 
     const imageParts = rawImages.map((img) => ({
@@ -143,6 +145,8 @@ Deno.serve(async (req) => {
 
     const fastVisionModel =
       Deno.env.get('FAST_VISION_MODEL') ?? 'gemini-2.5-flash';
+    const strongVisionModel =
+      Deno.env.get('STRONG_VISION_MODEL') ?? 'gemini-2.5-pro';
 
     if (body.mode === 'body_report') {
       const prompt = bodyReportPrompt({ language: body.language });
@@ -191,11 +195,26 @@ Deno.serve(async (req) => {
         name_en: { type: 'STRING' },
         food_id_guess: { type: 'STRING', nullable: true },
         estimated_grams: { type: 'NUMBER' },
+        grams_low: { type: 'NUMBER' },
+        grams_high: { type: 'NUMBER' },
         cooking_method: {
           type: 'STRING',
-          enum: ['boiled', 'grilled', 'fried', 'baked', 'raw', 'steamed', 'other'],
+          enum: [
+            'boiled',
+            'grilled',
+            'fried',
+            'baked',
+            'raw',
+            'steamed',
+            'sauteed',
+            'oven',
+            'mahshi',
+            'air_fried',
+            'other',
+          ],
         },
         confidence: { type: 'NUMBER' },
+        visible_oil_or_sauce: { type: 'BOOLEAN' },
       },
       required: ['name_ar', 'name_en', 'estimated_grams', 'cooking_method', 'confidence'],
     };
@@ -231,17 +250,62 @@ Deno.serve(async (req) => {
       ],
       responseJson: true,
       thinkingBudget: 0,
-      maxOutputTokens: 1200,
+      maxOutputTokens: 1400,
       responseSchema: mealSchema,
       temperature: 0.1,
     });
 
     const elapsedMs = Date.now() - startTime;
-    console.log(`[analyze-meal] completed in ${elapsedMs}ms`);
+    console.log(`[analyze-meal] pass 1 (${fastVisionModel}) completed in ${elapsedMs}ms`);
 
-    const parsed = parseItemsJson(raw);
+    let parsed = parseItemsJson(raw);
     if (!parsed) {
       return json({ error: 'VISION_PARSE_FAILED', raw }, 502);
+    }
+
+    // Evaluate overall confidence across recognized items
+    const allItems = [...(parsed.items ?? []), ...(parsed.items_unsure ?? [])];
+    const avgConfidence = allItems.length > 0
+      ? allItems.reduce((sum, item) => sum + (Number(item.confidence) || 0), 0) / allItems.length
+      : 0;
+
+    // Escalation (P34 section 1.6):
+    // If overall confidence < 0.5, re-run once with a stronger model with thinking budget enabled
+    if (avgConfidence < 0.5 || allItems.length === 0) {
+      console.log(`[analyze-meal] avg confidence ${avgConfidence.toFixed(2)} < 0.5, escalating to ${strongVisionModel} with thinking budget`);
+      const escalateStart = Date.now();
+      try {
+        const strongRaw = await generateContent({
+          modelOverride: strongVisionModel,
+          contents: [
+            {
+              role: 'user',
+              parts: [
+                {
+                  text: prompt +
+                    '\nNOTE: Initial visual pass had low confidence (<0.5). Re-examine plate carefully with deep reasoning, verifying all ingredients, portion sizes and cooking methods.',
+                },
+                ...imageParts,
+              ],
+            },
+          ],
+          responseJson: true,
+          thinkingBudget: 1024,
+          maxOutputTokens: 2048,
+          responseSchema: mealSchema,
+          temperature: 0.1,
+        });
+        const strongElapsed = Date.now() - escalateStart;
+        console.log(`[analyze-meal] escalation pass completed in ${strongElapsed}ms`);
+        const strongParsed = parseItemsJson(strongRaw);
+        if (strongParsed && (strongParsed.items.length > 0 || strongParsed.items_unsure.length > 0)) {
+          parsed = strongParsed;
+          (parsed as Record<string, unknown>).escalated = true;
+          (parsed as Record<string, unknown>).escalated_model = strongVisionModel;
+        }
+      } catch (escErr) {
+        console.warn('[analyze-meal] escalation failed, falling back to pass 1 result', escErr);
+      }
     }
 
     const hasConfirmedItems = parsed.items && parsed.items.length > 0;

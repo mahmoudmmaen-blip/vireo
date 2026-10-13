@@ -4,7 +4,8 @@ enum DailyCoinTask {
   water(points: 5, titleAr: 'شرب الماء', titleEn: 'Hydration'),
   workout(points: 25, titleAr: 'إكمال التمرين', titleEn: 'Workout'),
   weighIn(points: 5, titleAr: 'تسجيل الوزن', titleEn: 'Weigh-in'),
-  moodCheck(points: 5, titleAr: 'فحص المزاج/الراحة', titleEn: 'Mood Check');
+  moodCheck(points: 5, titleAr: 'فحص المزاج/الراحة', titleEn: 'Mood Check'),
+  fasting(points: 15, titleAr: 'إكمال الصيام', titleEn: 'Complete Fast');
 
   const DailyCoinTask({
     required this.points,

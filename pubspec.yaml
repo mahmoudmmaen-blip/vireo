@@ -97,3 +97,4 @@ flutter:
     - assets/exercises/lottie/
     - assets/exercises/svg/
     - assets/food_db/foods.json
+    - assets/food_db/usda_foods.json
