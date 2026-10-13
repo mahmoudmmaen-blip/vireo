@@ -40,6 +40,7 @@ import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
 import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/features/home/widgets/today_plan_section.dart';
 import 'package:vireo/features/home/widgets/premium_steps_hero_card.dart';
+import 'package:vireo/features/home/widgets/inbody_plan_update_card.dart';
 import 'package:vireo/features/home/widgets/today_pillars_grid.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
 import 'package:vireo/features/ramadan/widgets/ramadan_countdown_card.dart';
@@ -87,6 +88,9 @@ class HomeDashboardBody extends ConsumerWidget {
 
       // ── Card 1: Meal capture card ("سجّل وجبتك") ──
       const MealCaptureHeroCard(),
+
+      // ── InBody/Smart Scale Plan Recompute Card (One-time with Undo) ──
+      const InBodyPlanUpdateCard(),
 
       // ── Card 2: Daily Score Card ──
       const DailyScoreHeroCard(),

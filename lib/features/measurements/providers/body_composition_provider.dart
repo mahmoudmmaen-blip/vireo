@@ -35,8 +35,24 @@ class BodyCompositionListNotifier
   }
 }
 
+int _sourcePriority(BodyCompositionSource s) => switch (s) {
+      BodyCompositionSource.inbodyScan => 4,
+      BodyCompositionSource.healthConnect => 3,
+      BodyCompositionSource.navyTape => 2,
+      BodyCompositionSource.manual => 1,
+    };
+
 final latestBodyCompositionProvider = Provider<BodyCompositionReport?>((ref) {
   final list = ref.watch(bodyCompositionListProvider).valueOrNull ?? const [];
   if (list.isEmpty) return null;
-  return list.first;
+
+  // Pick highest source priority, breaking ties by newest testDate.
+  final sorted = List.of(list)
+    ..sort((a, b) {
+      final pA = _sourcePriority(a.source);
+      final pB = _sourcePriority(b.source);
+      if (pA != pB) return pB.compareTo(pA);
+      return b.testDate.compareTo(a.testDate);
+    });
+  return sorted.first;
 });

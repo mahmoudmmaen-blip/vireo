@@ -1111,17 +1111,23 @@ class _MfpItemRow extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
                           decoration: BoxDecoration(
-                            color: line.food != null
-                                ? const Color(0xFF10B981).withValues(alpha: 0.12)
-                                : const Color(0xFF6366F1).withValues(alpha: 0.12),
+                            color: line.isUnsure
+                                ? const Color(0xFFF59E0B).withValues(alpha: 0.15)
+                                : (line.food != null
+                                    ? const Color(0xFF10B981).withValues(alpha: 0.12)
+                                    : const Color(0xFF6366F1).withValues(alpha: 0.12)),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            line.food != null
-                                ? (isArabic ? 'من قاعدة البيانات' : 'From Database')
-                                : (isArabic ? 'تقدير الذكاء الاصطناعي' : 'AI Estimate'),
+                            line.isUnsure
+                                ? (isArabic ? 'مش متأكدين ⚠️' : 'Unsure ⚠️')
+                                : (line.food != null
+                                    ? (isArabic ? 'من قاعدة البيانات' : 'From Database')
+                                    : (isArabic ? 'تقدير الذكاء الاصطناعي' : 'AI Estimate')),
                             style: TextStyle(
-                              color: line.food != null ? const Color(0xFF10B981) : const Color(0xFF6366F1),
+                              color: line.isUnsure
+                                  ? const Color(0xFFF59E0B)
+                                  : (line.food != null ? const Color(0xFF10B981) : const Color(0xFF6366F1)),
                               fontSize: 9.5,
                               fontWeight: FontWeight.w700,
                             ),

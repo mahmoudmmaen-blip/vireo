@@ -97,6 +97,11 @@ final calorieGoalProvider = Provider<CalorieTarget>((ref) {
     );
   }
 
+  // If InBody/body composition measurement is present, use newly computed targets directly
+  if (inbody?.leanMassKg != null || inbody?.weightKg != null) {
+    return computed;
+  }
+
   // Prefer fully persisted onboarding macros when present.
   final cached = OnboardingCalorieSync.readCached();
   if (cached != null && cached.calories > 0) {
