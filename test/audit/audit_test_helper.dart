@@ -17,6 +17,8 @@ import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
+import 'package:vireo/features/ramadan/services/ramadan_schedule_service.dart';
 
 class MockPlateSizeNotifier extends PlateSizeNotifier {
   @override
@@ -33,6 +35,18 @@ class FakeAuthNotifier extends AuthNotifier {
   Future<AppAuthState> build() async => const AppAuthGuest();
 }
 
+class FakeRamadanSettingsNotifier extends RamadanSettingsNotifier {
+  @override
+  RamadanSettingsState get state => const RamadanSettingsState(
+        isEnabled: false,
+        calculationMethod: RamadanCalculationMethod.egyptian,
+        cityName: 'Cairo',
+        latitude: 30.0444,
+        longitude: 31.2357,
+        isAutoSuggested: false,
+      );
+}
+
 Widget wrapAuditScreen(
   Widget child, {
   required Locale locale,
@@ -45,6 +59,7 @@ Widget wrapAuditScreen(
       plateSizeProvider.overrideWith(() => MockPlateSizeNotifier()),
       confirmedMealsProvider.overrideWith((ref) => <MealType>{}),
       effectiveTodayMealsProvider.overrideWith((ref) => Future.value(<MealPlanEntry>[])),
+      ramadanSettingsProvider.overrideWith((ref) => FakeRamadanSettingsNotifier()),
     ],
     child: MaterialApp(
       theme: AppTheme.dark,

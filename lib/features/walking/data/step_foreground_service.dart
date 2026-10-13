@@ -125,6 +125,9 @@ abstract final class StepForegroundService {
       FlutterForegroundTask.addTaskDataCallback(_handleTaskData);
     }
 
+    // Resync actual running state
+    await syncRunningState();
+
     FlutterForegroundTask.init(
       androidNotificationOptions: AndroidNotificationOptions(
         channelId: 'vireo_steps_channel',
@@ -154,6 +157,24 @@ abstract final class StepForegroundService {
     }
   }
 
+  static void Function(bool isRunning)? onRunningStateChanged;
+
+  static Future<bool> syncRunningState() async {
+    if (!PlatformUtils.isMobileNative || kIsWeb) return _isActive;
+    try {
+      final isRunning = await FlutterForegroundTask.isRunningService
+          .timeout(const Duration(seconds: 3), onTimeout: () => _isActive);
+      _isActive = isRunning;
+      if (HiveService.isInitialized) {
+        await HiveService.settingsBox.put(_activeKey, isRunning);
+      }
+      onRunningStateChanged?.call(isRunning);
+      return isRunning;
+    } catch (_) {
+      return _isActive;
+    }
+  }
+
   static void _handleTaskData(Object data) {
     if (data is Map) {
       final type = data['type'];
@@ -162,12 +183,17 @@ abstract final class StepForegroundService {
         if (todaySteps != null) {
           StepCounterService.refresh(pedoSteps: todaySteps);
         }
+        if (!_isActive) {
+          _isActive = true;
+          onRunningStateChanged?.call(true);
+        }
       }
     }
   }
 
   static Future<void> start() async {
     _isActive = true;
+    onRunningStateChanged?.call(true);
     if (HiveService.isInitialized) {
       await HiveService.settingsBox.put(_activeKey, true);
     }
@@ -183,10 +209,15 @@ abstract final class StepForegroundService {
 
     final steps = StepCounterService.latest.todaySteps;
     try {
-      if (await FlutterForegroundTask.isRunningService) {
+      final isRunning = await FlutterForegroundTask.isRunningService
+          .timeout(const Duration(seconds: 3), onTimeout: () => false);
+      if (isRunning) {
         await FlutterForegroundTask.updateService(
           notificationTitle: 'Vireo · عداد الخطوات شغال',
           notificationText: '$steps خطوة اليوم',
+        ).timeout(
+          const Duration(seconds: 5),
+          onTimeout: () => throw TimeoutException('updateService timeout'),
         );
       } else {
         await FlutterForegroundTask.startService(
@@ -194,13 +225,20 @@ abstract final class StepForegroundService {
           notificationTitle: 'Vireo · عداد الخطوات شغال',
           notificationText: '$steps خطوة اليوم',
           callback: startForegroundCallback,
+        ).timeout(
+          const Duration(seconds: 5),
+          onTimeout: () => throw TimeoutException('startService timeout'),
         );
       }
-    } catch (_) {}
+    } catch (e) {
+      debugPrint('[StepForegroundService] start error: $e');
+      rethrow;
+    }
   }
 
   static Future<void> stop() async {
     _isActive = false;
+    onRunningStateChanged?.call(false);
     if (HiveService.isInitialized) {
       await HiveService.settingsBox.put(_activeKey, false);
     }
@@ -209,10 +247,18 @@ abstract final class StepForegroundService {
     if (!PlatformUtils.isMobileNative || kIsWeb) return;
 
     try {
-      if (await FlutterForegroundTask.isRunningService) {
-        await FlutterForegroundTask.stopService();
+      final isRunning = await FlutterForegroundTask.isRunningService
+          .timeout(const Duration(seconds: 3), onTimeout: () => false);
+      if (isRunning) {
+        await FlutterForegroundTask.stopService().timeout(
+          const Duration(seconds: 5),
+          onTimeout: () => throw TimeoutException('stopService timeout'),
+        );
       }
-    } catch (_) {}
+    } catch (e) {
+      debugPrint('[StepForegroundService] stop error: $e');
+      rethrow;
+    }
   }
 
   static Future<void> toggle() async {
@@ -226,10 +272,15 @@ abstract final class StepForegroundService {
   static Future<void> updateNotification(int steps) async {
     if (!_isActive || !PlatformUtils.isMobileNative || kIsWeb) return;
     try {
-      if (await FlutterForegroundTask.isRunningService) {
+      final isRunning = await FlutterForegroundTask.isRunningService
+          .timeout(const Duration(seconds: 2), onTimeout: () => false);
+      if (isRunning) {
         await FlutterForegroundTask.updateService(
           notificationTitle: 'Vireo · عداد الخطوات شغال',
           notificationText: '$steps خطوة اليوم',
+        ).timeout(
+          const Duration(seconds: 3),
+          onTimeout: () => throw TimeoutException('updateNotification timeout'),
         );
       }
     } catch (_) {}

@@ -33,6 +33,7 @@ import 'package:vireo/features/home/widgets/recovery_breakdown_sheet.dart';
 import 'package:vireo/features/progress/providers/weekly_checkin_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/activity/screens/health_hub_screen.dart';
+import 'package:vireo/features/home/widgets/meal_capture_hero_card.dart';
 import 'package:vireo/features/home/widgets/daily_score_hero_card.dart';
 import 'package:vireo/features/home/widgets/smart_next_action_card.dart';
 import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
@@ -84,7 +85,10 @@ class HomeDashboardBody extends ConsumerWidget {
         onTap: () => ref.read(shellTabIndexProvider.notifier).goWalk(),
       ),
 
-      // ── Card 1: Daily Score Chip Card ──
+      // ── Card 1: Meal capture card ("سجّل وجبتك") ──
+      const MealCaptureHeroCard(),
+
+      // ── Card 2: Daily Score Card ──
       const DailyScoreHeroCard(),
 
       // ── Card 2: "اليوم" 2-Column Pillars Grid (Food, Water, Workout, Sleep) ──

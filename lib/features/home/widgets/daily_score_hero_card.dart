@@ -4,10 +4,17 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/home/providers/daily_score_provider.dart';
 import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
-import 'package:vireo/features/walking/walking_tracker_screen.dart';
+import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
+import 'package:vireo/features/insights/screens/score_insights_screen.dart';
+import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
+import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 
-/// Hero card on Home displaying the 0-100 Daily Score ("سكور اليوم"),
-/// animated circular progress ring, and streak badge.
+/// Redesigned Daily Score Hero Card (Section 3):
+/// - Big 120dp score ring with large bold type, "/100", and state label
+/// - 2×2 grid of "what you still need today" rectangles (protein, carbs, fat, calories)
+/// - Optional fifth chip: water remaining cups
+/// - Smart insight line at the bottom
+/// - Tap opens ScoreInsightsScreen
 class DailyScoreHeroCard extends ConsumerWidget {
   const DailyScoreHeroCard({super.key});
 
@@ -16,162 +23,280 @@ class DailyScoreHeroCard extends ConsumerWidget {
     final breakdown = ref.watch(dailyScoreProvider);
     final streak = ref.watch(dailyScoreStreakProvider);
     final colors = context.vireoColors;
-    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final locale = Localizations.localeOf(context).languageCode;
+    final isArabic = locale.startsWith('ar');
+
+    final nutrition = ref.watch(todayNutritionProvider(locale));
+    final waterMl = ref.watch(waterTrackerProvider);
+    final waterGoalMl = ref.watch(waterDailyGoalMlProvider);
+    final remainingWaterGlasses = ((waterGoalMl - waterMl) / 250).ceil().clamp(0, 20);
+
+    // Remaining targets
+    final remProtein = (nutrition.proteinTarget - nutrition.proteinG).round();
+    final remCarbs = (nutrition.carbsTarget - nutrition.carbsG).round();
+    final remFat = (nutrition.fatTarget - nutrition.fatG).round();
+    final remKcal = (nutrition.goalKcal - nutrition.eatenKcal);
+
+    // Smart insight line
+    final dash = ref.watch(homeDashboardProvider);
+    final remSteps = (dash.stepsGoal - dash.stepsToday).clamp(0, 50000);
+    final smartInsight = (breakdown.totalScore < 75 && remSteps > 0 && remProtein > 0)
+        ? (isArabic
+            ? 'لو مشيت $remSteps خطوة كمان وأكلت $remProtein جم بروتين هتوصل 75/100 🎯'
+            : 'Walk $remSteps more steps and eat $remProtein g protein to hit 75/100 🎯')
+        : (isArabic
+            ? 'أداءك قوي اليوم! استمر في المحافظة على التوازن والنشاط 💪'
+            : 'Strong performance today! Keep up the momentum 💪');
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Material(
         color: colors.surfaceRaised,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(22),
         child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: () => _showBreakdownSheet(context, breakdown, streak, isArabic),
+          borderRadius: BorderRadius.circular(22),
+          onTap: () => ScoreInsightsScreen.open(context),
           child: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(22),
               border: Border.all(
                 color: breakdown.scoreColor.withValues(alpha: 0.35),
                 width: 1.5,
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.18),
+                  blurRadius: 14,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Animated Ring
-                SizedBox(
-                  width: 64,
-                  height: 64,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        value: breakdown.totalScore / 100.0,
-                        strokeWidth: 6.5,
-                        backgroundColor: colors.line,
-                        valueColor: AlwaysStoppedAnimation<Color>(breakdown.scoreColor),
-                        strokeCap: StrokeCap.round,
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
+                // Top Row: Big 120dp Score Ring on Left/Start, Score Tier & Streak
+                Row(
+                  children: [
+                    // Big 120dp Ring
+                    SizedBox(
+                      width: 110,
+                      height: 110,
+                      child: Stack(
+                        alignment: Alignment.center,
                         children: [
-                          Text(
-                            '${breakdown.totalScore}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900,
-                              height: 1.1,
-                            ),
+                          CircularProgressIndicator(
+                            value: breakdown.totalScore / 100.0,
+                            strokeWidth: 9.5,
+                            backgroundColor: colors.line,
+                            valueColor: AlwaysStoppedAnimation<Color>(breakdown.scoreColor),
+                            strokeCap: StrokeCap.round,
                           ),
-                          Text(
-                            '/100',
-                            style: TextStyle(
-                              fontSize: 9,
-                              color: colors.textMute,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                '${breakdown.totalScore}',
+                                style: const TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w900,
+                                  height: 1.0,
+                                ),
+                              ),
+                              Text(
+                                '/100',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: colors.textMute,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+                    ),
+                    const SizedBox(width: 18),
+
+                    // Right Side: Title, Tier, Streak badge, Chevron
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  isArabic ? 'سكور اليوم' : 'Daily Score',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 18,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Icon(Icons.chevron_right_rounded, color: colors.textMute),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: breakdown.scoreColor.withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                             child: Text(
-                              isArabic ? 'سكور اليوم' : 'Daily Score',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
+                              breakdown.scoreTierLabel,
+                              style: TextStyle(
+                                color: breakdown.scoreColor,
                                 fontWeight: FontWeight.w900,
-                                fontSize: 16,
+                                fontSize: 13,
                               ),
                             ),
                           ),
                           if (streak > 0) ...[
-                            const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: colors.ember.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text('🔥', style: TextStyle(fontSize: 12)),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    isArabic ? '$streak أيام' : '$streak days',
-                                    style: TextStyle(
-                                      color: colors.ember,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 11,
-                                    ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                const Text('🔥', style: TextStyle(fontSize: 13)),
+                                const SizedBox(width: 4),
+                                Text(
+                                  isArabic ? '$streak أيام متتالية' : '$streak day streak',
+                                  style: TextStyle(
+                                    color: colors.ember,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 12,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ],
                         ],
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        breakdown.scoreTierLabel,
-                        style: TextStyle(
-                          color: breakdown.scoreColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                const Divider(height: 1),
+                const SizedBox(height: 14),
+
+                // 2×2 Grid of "What you still need today" rectangles
+                Row(
+                  children: [
+                    Expanded(
+                      child: _RemainingTargetRect(
+                        label: isArabic ? 'بروتين' : 'Protein',
+                        remainingVal: remProtein,
+                        unit: 'جم',
+                        actual: nutrition.proteinG,
+                        target: nutrition.proteinTarget.toDouble(),
+                        color: VMacro.protein,
+                        isArabic: isArabic,
                       ),
-                      const SizedBox(height: 6),
-                      Consumer(
-                        builder: (context, ref, _) {
-                          final dash = ref.watch(homeDashboardProvider);
-                          return InkWell(
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute<void>(builder: (_) => const WalkingTrackerScreen()),
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF10B981).withValues(alpha: 0.12),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(Icons.directions_walk_rounded, size: 14, color: Color(0xFF10B981)),
-                                  const SizedBox(width: 4),
-                                  Flexible(
-                                    child: Text(
-                                      '${dash.stepsToday} / ${dash.stepsGoal}',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        color: Color(0xFF10B981),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 11.5,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _RemainingTargetRect(
+                        label: isArabic ? 'كارب' : 'Carbs',
+                        remainingVal: remCarbs,
+                        unit: 'جم',
+                        actual: nutrition.carbsG,
+                        target: nutrition.carbsTarget.toDouble(),
+                        color: VMacro.carbs,
+                        isArabic: isArabic,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _RemainingTargetRect(
+                        label: isArabic ? 'دهون' : 'Fat',
+                        remainingVal: remFat,
+                        unit: 'جم',
+                        actual: nutrition.fatG,
+                        target: nutrition.fatTarget.toDouble(),
+                        color: VMacro.fat,
+                        isArabic: isArabic,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _RemainingTargetRect(
+                        label: isArabic ? 'سعرات' : 'Calories',
+                        remainingVal: remKcal,
+                        unit: '',
+                        actual: nutrition.eatenKcal.toDouble(),
+                        target: nutrition.goalKcal.toDouble(),
+                        color: colors.ember,
+                        isArabic: isArabic,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+
+                // Optional fifth chip: Water remaining
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: VMacro.water.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: VMacro.water.withValues(alpha: 0.3)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.water_drop_rounded, size: 16, color: VMacro.water),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          remainingWaterGlasses <= 0
+                              ? (isArabic ? 'الماء: تمام ✓ حققت هدف الترطيب' : 'Water: Hydration goal met ✓')
+                              : (isArabic ? 'مية: باقي $remainingWaterGlasses أكواب' : 'Water: $remainingWaterGlasses cups left'),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 8),
-                Icon(Icons.chevron_right_rounded, color: colors.textMute),
+                const SizedBox(height: 12),
+
+                // One smart insight line at the bottom
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: colors.background,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.lightbulb_rounded, size: 16, color: Color(0xFFF59E0B)),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          smartInsight,
+                          style: TextStyle(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w700,
+                            color: colors.text,
+                            height: 1.25,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -179,124 +304,98 @@ class DailyScoreHeroCard extends ConsumerWidget {
       ),
     );
   }
+}
 
-  void _showBreakdownSheet(
-    BuildContext context,
-    DailyScoreBreakdown breakdown,
-    int streak,
-    bool isArabic,
-  ) {
+class _RemainingTargetRect extends StatelessWidget {
+  const _RemainingTargetRect({
+    required this.label,
+    required this.remainingVal,
+    required this.unit,
+    required this.actual,
+    required this.target,
+    required this.color,
+    required this.isArabic,
+  });
+
+  final String label;
+  final int remainingVal;
+  final String unit;
+  final double actual;
+  final double target;
+  final Color color;
+  final bool isArabic;
+
+  @override
+  Widget build(BuildContext context) {
     final colors = context.vireoColors;
+    final isReached = remainingVal == 0;
+    final isExceeded = remainingVal < 0;
 
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: colors.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(VRadius.xl)),
+    String statusText;
+    Color statusColor;
+
+    if (isReached) {
+      statusText = isArabic ? 'تمام ✓' : 'Done ✓';
+      statusColor = const Color(0xFF10B981);
+    } else if (isExceeded) {
+      statusText = isArabic ? 'زيادة ${remainingVal.abs()} $unit'.trim() : '+${remainingVal.abs()} $unit'.trim();
+      statusColor = const Color(0xFFF59E0B);
+    } else {
+      statusText = isArabic ? 'باقي $remainingVal $unit'.trim() : '$remainingVal $unit left'.trim();
+      statusColor = colors.text;
+    }
+
+    final frac = target > 0 ? (actual / target).clamp(0.0, 1.0) : 0.0;
+
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: colors.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: colors.line.withValues(alpha: 0.6)),
       ),
-      builder: (ctx) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                Center(
-                  child: Container(
-                    width: 36,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: colors.line,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      isArabic ? 'تفاصيل سكور اليوم 🎯' : 'Daily Score Breakdown 🎯',
-                      style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
-                    ),
-                    Text(
-                      '${breakdown.totalScore}/100',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                        color: breakdown.scoreColor,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-
-                // Factor bars
-                _factorRow('الخطوات والنشاط (25)', breakdown.stepsScore, 25, colors),
-                _factorRow('البروتين المكتمل (20)', breakdown.proteinScore, 20, colors),
-                _factorRow('توازن السعرات ±10% (15)', breakdown.caloriesScore, 15, colors),
-                _factorRow('شرب الماء (15)', breakdown.waterScore, 15, colors),
-                _factorRow('التمرين اليومي (15)', breakdown.workoutScore, 15, colors),
-                _factorRow('النوم والتعافي (10)', breakdown.sleepScore, 10, colors),
-
-                if (breakdown.tips.isNotEmpty) ...[
-                  const Divider(height: 28),
-                  Text(
-                    isArabic ? 'نصائح لرفع السكور اليوم:' : 'How to boost your score today:',
-                    style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
-                  ),
-                  const SizedBox(height: 8),
-                  ...breakdown.tips.map(
-                    (tip) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(Icons.arrow_right_rounded, color: colors.ember, size: 20),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              tip,
-                              style: TextStyle(fontSize: 12.5, color: colors.textMute),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _factorRow(String label, double val, double max, VireoColors colors) {
-    final frac = (val / max).clamp(0.0, 1.0);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600)),
-              Text('${val.round()}/$max', style: TextStyle(fontSize: 12, color: colors.textMute)),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: colors.textMute,
+                ),
+              ),
+              Container(
+                width: 7,
+                height: 7,
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+              ),
             ],
           ),
           const SizedBox(height: 4),
+          Text(
+            statusText,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w900,
+              color: statusColor,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 6),
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(3),
             child: LinearProgressIndicator(
               value: frac,
-              backgroundColor: colors.line,
+              minHeight: 4,
+              backgroundColor: colors.line.withValues(alpha: 0.5),
               valueColor: AlwaysStoppedAnimation<Color>(
-                frac >= 1.0 ? colors.success : (frac >= 0.5 ? colors.gold : colors.ember),
+                isExceeded ? const Color(0xFFF59E0B) : (isReached ? const Color(0xFF10B981) : color),
               ),
-              minHeight: 6,
             ),
           ),
         ],
@@ -304,3 +403,4 @@ class DailyScoreHeroCard extends ConsumerWidget {
     );
   }
 }
+

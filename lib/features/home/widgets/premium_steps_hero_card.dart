@@ -6,6 +6,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
+import 'package:vireo/features/walking/data/step_counter_service.dart';
 import 'package:vireo/features/walking/data/step_foreground_service.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
@@ -18,7 +19,7 @@ import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 /// - Thick progress bar
 /// - 3 stats: كم (Distance), سعرات (Calories), الوقت (Time)
 /// - 7-day circular row with stars on goal reached + daily average
-class PremiumStepsHeroCard extends ConsumerWidget {
+class PremiumStepsHeroCard extends ConsumerStatefulWidget {
   const PremiumStepsHeroCard({
     super.key,
     required this.stepsCurrent,
@@ -34,14 +35,96 @@ class PremiumStepsHeroCard extends ConsumerWidget {
   static const stepsCardBg = Color(0xFF1E293B); // Deep slate blue / Leap style
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PremiumStepsHeroCard> createState() => _PremiumStepsHeroCardState();
+}
+
+class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+  bool _isSwitching = false;
+  DateTime _lastToggleTime = DateTime.fromMillisecondsSinceEpoch(0);
+  late AnimationController _pulseController;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1400),
+    );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      ref.read(isStepCounterRunningProvider.notifier).resync();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _pulseController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleToggle() async {
+    final now = DateTime.now();
+    if (_isSwitching || now.difference(_lastToggleTime).inMilliseconds < 600) {
+      return;
+    }
+    _lastToggleTime = now;
+    HapticFeedback.heavyImpact();
+
+    final runningNotifier = ref.read(isStepCounterRunningProvider.notifier);
+    final previousState = ref.read(isStepCounterRunningProvider);
+    final targetState = !previousState;
+
+    setState(() => _isSwitching = true);
+    // Optimistic UI update
+    runningNotifier.setOptimistic(targetState);
+
+    try {
+      if (previousState) {
+        await StepForegroundService.stop().timeout(const Duration(seconds: 5));
+      } else {
+        await StepForegroundService.start().timeout(const Duration(seconds: 5));
+      }
+      // Re-verify real state
+      await runningNotifier.resync();
+    } catch (e) {
+      // Rollback on failure
+      runningNotifier.setOptimistic(previousState);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('تعذر تغيير حالة عداد الخطوات، يرجى المحاولة مرة أخرى'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isSwitching = false);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final live = ref.watch(liveStepsProvider).valueOrNull;
     final isRunning = ref.watch(isStepCounterRunningProvider);
+    if (isRunning && !_pulseController.isAnimating) {
+      _pulseController.repeat(reverse: true);
+    } else if (!isRunning && _pulseController.isAnimating) {
+      _pulseController.stop();
+      _pulseController.value = 0.0;
+    }
     final permissionGranted = live?.permissionGranted ?? true;
 
-    if (!permissionGranted && stepsCurrent == 0) {
+    if (!permissionGranted && widget.stepsCurrent == 0) {
       return Container(
         padding: const EdgeInsets.all(VSpace.lg),
         decoration: BoxDecoration(
@@ -55,10 +138,10 @@ class PremiumStepsHeroCard extends ConsumerWidget {
               width: 56,
               height: 56,
               decoration: BoxDecoration(
-                color: stepsAccent.withValues(alpha: 0.15),
+                color: PremiumStepsHeroCard.stepsAccent.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.directions_walk_rounded, color: stepsAccent, size: 30),
+              child: const Icon(Icons.directions_walk_rounded, color: PremiumStepsHeroCard.stepsAccent, size: 30),
             ),
             const SizedBox(height: 12),
             Text(
@@ -74,7 +157,7 @@ class PremiumStepsHeroCard extends ConsumerWidget {
             const SizedBox(height: 16),
             FilledButton.icon(
               style: FilledButton.styleFrom(
-                backgroundColor: stepsAccent,
+                backgroundColor: PremiumStepsHeroCard.stepsAccent,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(VRadius.pill)),
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -97,21 +180,28 @@ class PremiumStepsHeroCard extends ConsumerWidget {
 
     final profile = WalkingCalculations.readProfileMetrics();
     final metrics = WalkingCalculations.compute(
-      steps: stepsCurrent,
+      steps: widget.stepsCurrent,
       heightCm: profile.heightCm,
       weightKg: profile.weightKg,
       isFemale: profile.isFemale,
     );
-    final effectiveGoal = stepsGoal > 0 ? stepsGoal : 7000;
-    final ratio = (stepsCurrent / effectiveGoal).clamp(0.0, 1.0);
-    final last7 = live?.last7Days ?? const <DailyStepCount>[];
+    final effectiveGoal = widget.stepsGoal > 0 ? widget.stepsGoal : 7000;
+    final ratio = (widget.stepsCurrent / effectiveGoal).clamp(0.0, 1.0);
+    final last7 = (live?.last7Days != null && live!.last7Days.isNotEmpty)
+        ? live.last7Days
+        : StepCounterService.last7DaysFromHistory(todaySteps: widget.stepsCurrent);
 
     // Compute weekly daily average
     final totalSteps7 = last7.fold<int>(0, (s, d) => s + d.steps);
-    final dailyAvg = last7.isNotEmpty ? (totalSteps7 / last7.length).round() : stepsCurrent;
+    final dailyAvg = last7.isNotEmpty ? (totalSteps7 / last7.length).round() : widget.stepsCurrent;
+
+    // Active minutes calculation: 100 steps ≈ 1 active minute
+    final activeMinutes = metrics.activeMinutes > 0
+        ? metrics.activeMinutes
+        : (widget.stepsCurrent / 100.0).round();
 
     return InkWell(
-      onTap: onTap,
+      onTap: widget.onTap,
       borderRadius: BorderRadius.circular(20),
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -129,36 +219,76 @@ class PremiumStepsHeroCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Row 1: Big steps number, goal, Play/Pause button
+            // Row 1: Big steps number, goal, Distinctive Play/Pause button
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Play / Pause Circle Button
-                InkWell(
-                  onTap: () async {
-                    HapticFeedback.heavyImpact();
-                    await StepForegroundService.toggle();
-                    ref.read(isStepCounterRunningProvider.notifier).state = StepForegroundService.isActive;
-                  },
-                  borderRadius: BorderRadius.circular(999),
-                  child: Container(
-                    width: 52,
-                    height: 52,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF2C3E55),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: isRunning ? stepsAccent : Colors.white24,
-                        width: 1.5,
+                // Distinctive Play / Pause Circle Button with Label
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: _handleToggle,
+                      borderRadius: BorderRadius.circular(999),
+                      child: AnimatedBuilder(
+                        animation: _pulseController,
+                        builder: (context, child) {
+                          final pulseAlpha = isRunning ? 0.25 + (_pulseController.value * 0.35) : 0.0;
+                          return Container(
+                            width: 52,
+                            height: 52,
+                            decoration: BoxDecoration(
+                              color: isRunning
+                                  ? PremiumStepsHeroCard.stepsAccent
+                                  : const Color(0xFF1E293B),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isRunning
+                                    ? Colors.white.withValues(alpha: 0.8)
+                                    : Colors.white30,
+                                width: isRunning ? 2.0 : 1.5,
+                              ),
+                              boxShadow: isRunning
+                                  ? [
+                                      BoxShadow(
+                                        color: PremiumStepsHeroCard.stepsAccent.withValues(alpha: pulseAlpha),
+                                        blurRadius: 12 + (_pulseController.value * 6),
+                                        spreadRadius: 2 + (_pulseController.value * 3),
+                                      ),
+                                    ]
+                                  : null,
+                            ),
+                            child: Center(
+                              child: _isSwitching
+                                  ? const SizedBox(
+                                      width: 22,
+                                      height: 22,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2.5,
+                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                      ),
+                                    )
+                                  : Icon(
+                                      isRunning ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                                      color: isRunning ? const Color(0xFF064E3B) : Colors.white,
+                                      size: 28,
+                                    ),
+                            ),
+                          );
+                        },
                       ),
                     ),
-                    child: Icon(
-                      isRunning ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                      color: isRunning ? stepsAccent : Colors.white,
-                      size: 28,
+                    const SizedBox(height: 5),
+                    Text(
+                      isRunning ? 'شغّال' : 'ابدأ',
+                      style: TextStyle(
+                        color: isRunning ? PremiumStepsHeroCard.stepsAccent : Colors.white70,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
 
                 // Center / Right: Big step number + goal
@@ -172,7 +302,7 @@ class PremiumStepsHeroCard extends ConsumerWidget {
                           const Icon(Icons.edit, size: 16, color: Colors.white54),
                           const SizedBox(width: 6),
                           Text(
-                            NumberFormat.decimalPattern().format(stepsCurrent),
+                            NumberFormat.decimalPattern().format(widget.stepsCurrent),
                             style: const TextStyle(
                               fontSize: 48,
                               fontWeight: FontWeight.w900,
@@ -197,7 +327,7 @@ class PremiumStepsHeroCard extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 14),
 
             // Row 2: Thick progress bar
             ClipRRect(
@@ -207,11 +337,11 @@ class PremiumStepsHeroCard extends ConsumerWidget {
                 child: LinearProgressIndicator(
                   value: ratio,
                   backgroundColor: const Color(0xFF2C3E55),
-                  valueColor: const AlwaysStoppedAnimation<Color>(stepsAccent),
+                  valueColor: const AlwaysStoppedAnimation<Color>(PremiumStepsHeroCard.stepsAccent),
                 ),
               ),
             ),
-            const SizedBox(height: 22),
+            const SizedBox(height: 20),
 
             // Row 3: 3 Stats Columns (كم, سعرات, الوقت)
             Row(
@@ -234,12 +364,12 @@ class PremiumStepsHeroCard extends ConsumerWidget {
                     label: 'السعرات',
                   ),
                 ),
-                // Time
+                // Time (Active Minutes)
                 Expanded(
                   child: _LeapStatColumn(
                     icon: Icons.access_time_filled_rounded,
                     iconColor: const Color(0xFF38BDF8), // Cyan
-                    value: '${(metrics.activeMinutes ~/ 60)}س ${(metrics.activeMinutes % 60)}د',
+                    value: '${(activeMinutes ~/ 60)}س ${(activeMinutes % 60)}د',
                     label: 'الوقت',
                   ),
                 ),
@@ -265,11 +395,11 @@ class PremiumStepsHeroCard extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
 
-            // 7 Days Circles with Star when goal hit
+            // 7 Days Circles with Star when goal hit + progress ring + Arabic initials
             _Leap7DayRow(
               days: last7,
               goal: effectiveGoal,
-              accent: stepsAccent,
+              accent: PremiumStepsHeroCard.stepsAccent,
             ),
           ],
         ),
@@ -334,6 +464,7 @@ class _Leap7DayRow extends StatelessWidget {
   Widget build(BuildContext context) {
     // Generate 7 days ending today
     final list = days.isNotEmpty ? days : _generateFallbackDays();
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -343,6 +474,7 @@ class _Leap7DayRow extends StatelessWidget {
             day: list[i],
             goal: goal,
             accent: accent,
+            isArabic: isArabic,
           ),
       ],
     );
@@ -362,41 +494,67 @@ class _DayCircleItem extends StatelessWidget {
     required this.day,
     required this.goal,
     required this.accent,
+    required this.isArabic,
   });
 
   final DailyStepCount day;
   final int goal;
   final Color accent;
+  final bool isArabic;
 
   @override
   Widget build(BuildContext context) {
     final reached = goal > 0 && day.steps >= goal;
-    final initial = _dayInitial(day.date);
+    final progress = goal > 0 ? (day.steps / goal).clamp(0.0, 1.0) : 0.0;
+    final initial = _dayInitial(day.date, isArabic);
 
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: 38,
           height: 38,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: reached ? accent : const Color(0xFF223048),
-            border: Border.all(
-              color: reached ? accent : Colors.white12,
-              width: 1.5,
-            ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Progress Ring around circle
+              CircularProgressIndicator(
+                value: progress,
+                strokeWidth: 2.8,
+                backgroundColor: Colors.white12,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  reached ? accent : accent.withValues(alpha: 0.7),
+                ),
+              ),
+              Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: reached ? accent : const Color(0xFF223048),
+                ),
+                alignment: Alignment.center,
+                child: reached
+                    ? const Icon(Icons.star_rounded, color: Colors.white, size: 20)
+                    : (progress > 0.1
+                        ? Text(
+                            '${(progress * 100).round()}%',
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : null),
+              ),
+            ],
           ),
-          alignment: Alignment.center,
-          child: reached
-              ? const Icon(Icons.star_rounded, color: Colors.white, size: 22)
-              : null,
         ),
         const SizedBox(height: 6),
         Text(
           initial,
           style: const TextStyle(
             color: Colors.white60,
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -404,7 +562,21 @@ class _DayCircleItem extends StatelessWidget {
     );
   }
 
-  String _dayInitial(DateTime dt) {
+  String _dayInitial(DateTime dt, bool arabic) {
+    if (arabic) {
+      // Arabic weekday initials: السبت س، الأحد ح، الإثنين ن، الثلاثاء ث، الأربعاء ر، الخميس خ، الجمعة ج
+      // dt.weekday: 1=Mon(ن), 2=Tue(ث), 3=Wed(ر), 4=Thu(خ), 5=Fri(ج), 6=Sat(س), 7=Sun(ح)
+      const arInitials = {
+        DateTime.monday: 'ن',
+        DateTime.tuesday: 'ث',
+        DateTime.wednesday: 'ر',
+        DateTime.thursday: 'خ',
+        DateTime.friday: 'ج',
+        DateTime.saturday: 'س',
+        DateTime.sunday: 'ح',
+      };
+      return arInitials[dt.weekday] ?? 'ي';
+    }
     final days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     return days[(dt.weekday - 1) % 7];
   }

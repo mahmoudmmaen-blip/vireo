@@ -183,7 +183,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                           onTap: () async {
                             HapticFeedback.heavyImpact();
                             await StepForegroundService.toggle();
-                            ref.read(isStepCounterRunningProvider.notifier).state = StepForegroundService.isActive;
+                            await ref.read(isStepCounterRunningProvider.notifier).resync();
                           },
                           borderRadius: BorderRadius.circular(999),
                           child: Container(

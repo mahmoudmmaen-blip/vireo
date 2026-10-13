@@ -17,6 +17,7 @@ import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/ai_nutrition/application/meal_scan_native_file.dart'
     if (dart.library.html) 'package:vireo/features/ai_nutrition/application/meal_scan_native_file_web.dart';
 
+import 'package:vireo/features/ai_nutrition/screens/cal_ai_camera_screen.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_scan_source_sheet.dart';
 
 class AiScanScreen extends ConsumerStatefulWidget {
@@ -31,6 +32,36 @@ class AiScanScreen extends ConsumerStatefulWidget {
     bool? fromCamera,
   }) {
     return showMealScanSourceSheet(context, ref);
+  }
+
+  static Future<void> openCamera(BuildContext context, WidgetRef ref) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const CalAiCameraScreen()),
+    );
+  }
+
+  static Future<void> openGallery(BuildContext context, WidgetRef ref) async {
+    final picker = ImagePicker();
+    final pickedFiles = await picker.pickMultiImage(limit: 5);
+    if (pickedFiles.isNotEmpty && context.mounted) {
+      final bytesList = <Uint8List>[];
+      for (final pf in pickedFiles.take(5)) {
+        bytesList.add(await pf.readAsBytes());
+      }
+      if (context.mounted) {
+        await Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => CalAiCameraScreen(initialPhotos: bytesList),
+          ),
+        );
+      }
+    }
+  }
+
+  static Future<void> openText(BuildContext context, WidgetRef ref) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const MealLogTextScreen()),
+    );
   }
 
   @override

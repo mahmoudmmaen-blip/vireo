@@ -16,6 +16,8 @@ import 'package:vireo/features/nutrition/data/food_db_repository.dart';
 import 'package:vireo/features/nutrition/data/meal_resolution_service.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
+import 'package:vireo/features/insights/domain/meal_advice.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 
 class MealReviewScreen extends ConsumerStatefulWidget {
@@ -35,6 +37,7 @@ class MealReviewScreen extends ConsumerStatefulWidget {
 
 class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   late List<ResolvedMealLine> _lines;
+  late List<ResolvedMealLine> _unsureLines;
   late MealType _slot;
   final Set<int> _expandedIndices = {};
   final _scrollController = ScrollController();
@@ -43,9 +46,14 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   @override
   void initState() {
     super.initState();
-    _lines = List.of(widget.draft.lines);
+    // Filter items: high confidence (>= 0.5 and !isUnsure) go to active lines
+    _lines = widget.draft.lines.where((l) => !l.isUnsure && l.confidence >= 0.5).toList();
+    _unsureLines = widget.draft.lines.where((l) => l.isUnsure || l.confidence < 0.5).toList();
+    if (_lines.isEmpty && widget.draft.lines.isNotEmpty) {
+      _lines = List.of(widget.draft.lines);
+      _unsureLines = [];
+    }
     _slot = _mealSlotForNow();
-    // No interrupting popup: Plate size is configured in Settings
   }
 
   @override
@@ -94,7 +102,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     }
   }
 
-  Future<void> _save() async {
+  Future<void> _save(MealAdviceResult advice) async {
     final result = MealScanDraft(
       lines: _lines,
       imageBytes: widget.draft.imageBytes,
@@ -110,10 +118,29 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
 
     if (!mounted) return;
     final l10n = AppLocalizations.of(context);
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+
+    // Show friendly advice toast with action button
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: const Duration(seconds: 3),
-        content: Text(l10n.aiScanSavedSnack),
+        duration: const Duration(seconds: 4),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.aiScanSavedSnack, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 2),
+            Text(advice.adviceText, style: const TextStyle(fontSize: 12)),
+          ],
+        ),
+        action: advice.suggestedItems.isNotEmpty
+            ? SnackBarAction(
+                label: isArabic ? 'خطة الوجبة القادمة' : 'Next meal plan',
+                onPressed: () {
+                  // Pre-load suggested meal
+                },
+              )
+            : null,
       ),
     );
     final isPro = ref.read(isProUserProvider);
@@ -169,10 +196,37 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     final locale = Localizations.localeOf(context).languageCode;
     final isArabic = locale.startsWith('ar');
     final nutrition = ref.watch(todayNutritionProvider(locale));
-    final remainingAfter = (nutrition.remainingKcal - _kcal.round());
+    final confirmed = ref.watch(confirmedMealsProvider);
+    final isRamadan = ref.watch(ramadanSettingsProvider).isEnabled;
 
     final mealName = _suggestedMealName(isArabic);
     final (healthScore, healthVerdict) = _evaluateHealth(isArabic);
+
+    // Compute rule-based MealAdvice
+    final advice = MealAdviceEngine.computeAdvice(
+      dailyGoalKcal: nutrition.goalKcal,
+      dailyGoalProteinG: nutrition.proteinTarget.toDouble(),
+      dailyGoalCarbsG: nutrition.carbsTarget.toDouble(),
+      dailyGoalFatG: nutrition.fatTarget.toDouble(),
+      eatenKcalBefore: nutrition.eatenKcal,
+      eatenProteinBefore: nutrition.proteinG,
+      eatenCarbsBefore: nutrition.carbsG,
+      eatenFatBefore: nutrition.fatG,
+      mealKcal: _kcal.round(),
+      mealProteinG: _p,
+      mealCarbsG: _c,
+      mealFatG: _f,
+      currentSlot: _slot,
+      confirmedSlots: confirmed,
+      isRamadan: isRamadan,
+      availableFoods: FoodDbRepository.instance.byId('white_rice_cooked') != null
+          ? [
+              FoodDbRepository.instance.byId('grilled_chicken_breast')!,
+              FoodDbRepository.instance.byId('white_rice_cooked')!,
+            ]
+          : [],
+      isArabic: isArabic,
+    );
 
     return Scaffold(
       backgroundColor: colors.background,
@@ -193,18 +247,19 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
             // ── TOP STICKY SUMMARY CARD (MFP-Style, always visible) ──
             _StickyTopSummaryCard(
               mealName: mealName,
+              thumbnailBytes: widget.draft.allImages.firstOrNull,
               kcal: _kcal.round(),
               proteinG: _p,
               carbsG: _c,
               fatG: _f,
               fatEquivalentG: (_kcal / 8.84).round(),
-              remainingAfter: remainingAfter,
+              advice: advice,
               healthScore: healthScore,
               healthVerdict: healthVerdict,
               slot: _slot,
               slotLabel: _slotLabel(l10n, _slot),
               onSlotChanged: (next) => setState(() => _slot = next),
-              onSave: _lines.isEmpty ? null : _save,
+              onSave: _lines.isEmpty ? null : () => _save(advice),
               onEditDetails: () {
                 setState(() {
                   if (_expandedIndices.length == _lines.length) {
@@ -229,6 +284,51 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                 controller: _scrollController,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 children: [
+                  // If AI returned unsure items (< 0.5 confidence), show suggestion chip row
+                  if (_unsureLines.isNotEmpty) ...[
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: colors.surface,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(Icons.help_outline_rounded, size: 16, color: Color(0xFFF59E0B)),
+                              const SizedBox(width: 6),
+                              Text(
+                                isArabic ? 'ممكن يكون فيه كمان في الوجبة؟' : 'Possible extra items found?',
+                                style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 6,
+                            children: [
+                              for (final unsure in _unsureLines)
+                                ActionChip(
+                                  avatar: const Icon(Icons.add, size: 14),
+                                  label: Text('${unsure.nameAr} (${unsure.grams.round()} جم)'),
+                                  onPressed: () {
+                                    setState(() {
+                                      _unsureLines.remove(unsure);
+                                      _lines.add(unsure.copyWith(isUnsure: false, confidence: 0.8));
+                                    });
+                                  },
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                   // Photo thumbnails if available
                   if (widget.draft.allImages.isNotEmpty) ...[
                     SizedBox(
@@ -354,12 +454,13 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
 class _StickyTopSummaryCard extends StatelessWidget {
   const _StickyTopSummaryCard({
     required this.mealName,
+    this.thumbnailBytes,
     required this.kcal,
     required this.proteinG,
     required this.carbsG,
     required this.fatG,
     required this.fatEquivalentG,
-    required this.remainingAfter,
+    required this.advice,
     required this.healthScore,
     required this.healthVerdict,
     required this.slot,
@@ -370,12 +471,13 @@ class _StickyTopSummaryCard extends StatelessWidget {
   });
 
   final String mealName;
+  final Uint8List? thumbnailBytes;
   final int kcal;
   final double proteinG;
   final double carbsG;
   final double fatG;
   final int fatEquivalentG;
-  final int remainingAfter;
+  final MealAdviceResult advice;
   final int healthScore;
   final String healthVerdict;
   final MealType slot;
@@ -413,15 +515,27 @@ class _StickyTopSummaryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Header: Meal Name & Meal Slot Dropdown
+          // Header: Thumbnail + Meal Name (max 2 lines) & Meal Slot Dropdown
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (thumbnailBytes != null && thumbnailBytes!.isNotEmpty) ...[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.memory(
+                    thumbnailBytes!,
+                    width: 46,
+                    height: 46,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 10),
+              ],
               Expanded(
                 child: Text(
                   mealName,
-                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
-                  maxLines: 1,
+                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15, height: 1.25),
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -539,36 +653,97 @@ class _StickyTopSummaryCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    // Fat equivalent & Remaining calories
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            '≈ $fatEquivalentG جم دهون',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: colors.textMute, fontSize: 11, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        const SizedBox(width: 6),
-                        Flexible(
-                          child: Text(
-                            isArabic ? 'المتبقي: $remainingAfter سعرة' : 'Remaining: $remainingAfter kcal',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: remainingAfter >= 0 ? colors.ember : colors.danger,
-                              fontSize: 10.5,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ),
-                      ],
+                    // Fat equivalent
+                    Text(
+                      '≈ $fatEquivalentG جم دهون مخزنة أو محروقة',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: colors.textMute, fontSize: 11, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 10),
+
+          // ── "After this meal" Smart Block ──
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: colors.background,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  isArabic ? 'بعد تسجيل هذه الوجبة:' : 'After this meal today:',
+                  style: TextStyle(fontSize: 11, color: colors.textMute, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(height: 6),
+                // 4 mini chips for remaining calories, protein, carbs, and fat
+                Row(
+                  children: [
+                    Expanded(
+                      child: _RemainingChip(
+                        label: isArabic ? 'سعرات' : 'Kcal',
+                        value: advice.remainingKcalAfter,
+                        unit: '',
+                        color: colors.ember,
+                        isArabic: isArabic,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: _RemainingChip(
+                        label: isArabic ? 'بروتين' : 'Protein',
+                        value: advice.remainingProteinAfter.round(),
+                        unit: 'جم',
+                        color: VMacro.protein,
+                        isArabic: isArabic,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: _RemainingChip(
+                        label: isArabic ? 'كارب' : 'Carbs',
+                        value: advice.remainingCarbsAfter.round(),
+                        unit: 'جم',
+                        color: VMacro.carbs,
+                        isArabic: isArabic,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: _RemainingChip(
+                        label: isArabic ? 'دهون' : 'Fat',
+                        value: advice.remainingFatAfter.round(),
+                        unit: 'جم',
+                        color: VMacro.fat,
+                        isArabic: isArabic,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                // Smart Advice Line
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.tips_and_updates_rounded, size: 14, color: Color(0xFFF59E0B)),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        advice.adviceText,
+                        style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, height: 1.3),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 10),
 
@@ -638,6 +813,67 @@ class _StickyTopSummaryCard extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RemainingChip extends StatelessWidget {
+  const _RemainingChip({
+    required this.label,
+    required this.value,
+    required this.unit,
+    required this.color,
+    required this.isArabic,
+  });
+
+  final String label;
+  final int value;
+  final String unit;
+  final Color color;
+  final bool isArabic;
+
+  @override
+  Widget build(BuildContext context) {
+    final isOver = value < 0;
+    final text = isOver
+        ? (isArabic ? 'زيادة ${value.abs()}' : '+${value.abs()}')
+        : (isArabic ? 'باقي $value' : '$value left');
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      decoration: BoxDecoration(
+        color: isOver ? const Color(0xFFF59E0B).withValues(alpha: 0.15) : color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: isOver ? const Color(0xFFF59E0B) : color.withValues(alpha: 0.3),
+          width: 0.8,
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 9.5,
+              fontWeight: FontWeight.w600,
+              color: isOver ? const Color(0xFFF59E0B) : color,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 2),
+          Text(
+            '$text $unit'.trim(),
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w800,
+              color: isOver ? const Color(0xFFF59E0B) : Colors.white,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

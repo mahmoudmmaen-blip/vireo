@@ -27,8 +27,8 @@ User context (awareness only — do NOT compute calories):
 ${catalog}${hint}
 Rules:
 1. Return ONLY a JSON object with "items" and "items_unsure" arrays. No markdown, no commentary, no calorie fields.
-2. List EVERY visible food, including small sides and food partially covered (e.g. rice under chicken if you can see rice).
-3. NEVER invent hidden items you cannot see.
+2. List ONLY foods that are CLEARLY VISIBLE on the plate. NEVER guess or hallucinate secondary meats, hidden ingredients, or invisible items (e.g., if there is chicken and rice, DO NOT add duck, lamb, or hidden meat unless unmistakably visible).
+3. If an item might be present but you are not completely sure, DO NOT add it to "items"; place it in "items_unsure" with confidence < 0.5.
 4. Spices, sumac, dry herbs, garnishes, and decorative leaves are NOT foods — omit them.
 5. Prefer Egyptian/Gulf dish names (foul, ta'ameya, koshari, baladi bread, molokhia, etc.) when they fit.
 6. Each item:
@@ -36,8 +36,8 @@ Rules:
    - food_id_guess: catalog id or null
    - estimated_grams: number > 0
    - cooking_method: boiled | grilled | fried | baked | raw | steamed | other
-   - confidence: 0 to 1
-7. Put low-confidence or ambiguous items in items_unsure (same shape). High-confidence in items.
+   - confidence: accurate number between 0.0 and 1.0 representing visual certainty
+7. Put items with confidence >= 0.5 in "items". Items with confidence < 0.5 MUST go into "items_unsure".
 8. Split mixed dishes into components when possible.
 9. Never invent calories, protein, carbs, or fat.
 

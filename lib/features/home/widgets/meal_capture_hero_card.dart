@@ -1,0 +1,254 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/data/models/meal_type.dart';
+import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
+import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
+import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
+
+/// Full-width meal capture card ("سجّل وجبتك") placed right below the Steps hero card.
+class MealCaptureHeroCard extends ConsumerWidget {
+  const MealCaptureHeroCard({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = Localizations.localeOf(context).languageCode;
+    final isArabic = locale.startsWith('ar');
+    final nutrition = ref.watch(todayNutritionProvider(locale));
+
+    // Determine current time-based meal slot name
+    final currentSlot = _currentMealSlot();
+    final slotName = switch (currentSlot) {
+      MealType.breakfast => isArabic ? 'فطارك' : 'your breakfast',
+      MealType.lunch => isArabic ? 'غداك' : 'your lunch',
+      MealType.dinner => isArabic ? 'عشاك' : 'your dinner',
+      MealType.snack => isArabic ? 'سناكك' : 'your snack',
+    };
+
+    // Last logged meal
+    final lastMeal = nutrition.items.isNotEmpty ? nutrition.items.last : null;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFEA580C), Color(0xFFC2410C)], // Vibrant Ember Orange
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFFEA580C).withValues(alpha: 0.35),
+              blurRadius: 16,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Top Row: Big camera circle + Title + Subtitle
+                Row(
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.2),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white.withValues(alpha: 0.35), width: 1.5),
+                      ),
+                      child: const Icon(Icons.camera_alt_rounded, color: Colors.white, size: 26),
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            isArabic ? 'صوّر وجبتك' : 'Scan Your Meal',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: -0.2,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            isArabic ? 'تحليل في ثواني • سعرات وبروتين' : 'Instant analysis • Calories & protein',
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.85),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+
+                // Row of 4 quick chips: 📷 تصوير · 🖼 الاستوديو · ✍️ اكتب · 🔎 باركود
+                Row(
+                  children: [
+                    Expanded(
+                      child: _QuickActionChip(
+                        icon: Icons.photo_camera_rounded,
+                        label: isArabic ? 'تصوير' : 'Camera',
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          AiScanScreen.openCamera(context, ref);
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: _QuickActionChip(
+                        icon: Icons.photo_library_rounded,
+                        label: isArabic ? 'الاستوديو' : 'Gallery',
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          AiScanScreen.openGallery(context, ref);
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: _QuickActionChip(
+                        icon: Icons.edit_note_rounded,
+                        label: isArabic ? 'اكتب' : 'Text',
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          AiScanScreen.openText(context, ref);
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: _QuickActionChip(
+                        icon: Icons.qr_code_scanner_rounded,
+                        label: isArabic ? 'باركود' : 'Barcode',
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(builder: (_) => const MealBarcodeScreen()),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+
+                // Under it: Today's last logged meal mini row OR "لسه ما سجلتش فطارك"
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.18),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        lastMeal != null ? Icons.check_circle_rounded : Icons.schedule_rounded,
+                        size: 16,
+                        color: Colors.white.withValues(alpha: 0.9),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          lastMeal != null
+                              ? '${isArabic ? 'آخر وجبة:' : 'Last meal:'} ${lastMeal.title} • ${lastMeal.calories} ${isArabic ? 'سعرة' : 'kcal'}'
+                              : (isArabic ? 'لسه ما سجلتش $slotName' : 'Haven\'t logged $slotName yet'),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      if (lastMeal != null)
+                        Text(
+                          '${lastMeal.protein.round()}g P',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.8),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static MealType _currentMealSlot() {
+    final h = DateTime.now().hour;
+    if (h < 11) return MealType.breakfast;
+    if (h < 16) return MealType.lunch;
+    if (h < 21) return MealType.dinner;
+    return MealType.snack;
+  }
+}
+
+class _QuickActionChip extends StatelessWidget {
+  const _QuickActionChip({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.16),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.white, size: 14),
+            const SizedBox(width: 4),
+            Flexible(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 11,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

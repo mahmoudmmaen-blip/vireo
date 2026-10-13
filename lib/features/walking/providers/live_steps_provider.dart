@@ -18,9 +18,34 @@ final todayStepsProvider = Provider<int>((ref) {
       StepCounterService.latest.todaySteps;
 });
 
-/// State of whether foreground step counting is active (running / paused).
-final isStepCounterRunningProvider = StateProvider<bool>((ref) {
-  return StepForegroundService.isActive;
+/// StateNotifier for foreground step counting status.
+/// Single source of truth synchronized with FlutterForegroundTask and lifecycle.
+class StepCounterRunningNotifier extends StateNotifier<bool> {
+  StepCounterRunningNotifier() : super(StepForegroundService.isActive) {
+    StepForegroundService.onRunningStateChanged = (isRunning) {
+      if (mounted && state != isRunning) {
+        state = isRunning;
+      }
+    };
+    // Sync on creation
+    resync();
+  }
+
+  Future<void> resync() async {
+    final real = await StepForegroundService.syncRunningState();
+    if (mounted && state != real) {
+      state = real;
+    }
+  }
+
+  void setOptimistic(bool value) {
+    state = value;
+  }
+}
+
+final isStepCounterRunningProvider =
+    StateNotifierProvider<StepCounterRunningNotifier, bool>((ref) {
+  return StepCounterRunningNotifier();
 });
 
 /// Request permission, start the sensor stream, and push a snapshot.
@@ -31,7 +56,7 @@ final enableStepCountingProvider =
     if (granted) {
       await StepForegroundService.init();
       await StepForegroundService.start();
-      ref.read(isStepCounterRunningProvider.notifier).state = true;
+      ref.read(isStepCounterRunningProvider.notifier).setOptimistic(true);
     }
     await StepCounterService.refresh();
     return granted;
