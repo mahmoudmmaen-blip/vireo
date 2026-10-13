@@ -141,6 +141,9 @@ Deno.serve(async (req) => {
       inline_data: { mime_type: mime, data: stripDataUrl(img) },
     }));
 
+    const fastVisionModel =
+      Deno.env.get('FAST_VISION_MODEL') ?? 'gemini-2.5-flash';
+
     if (body.mode === 'body_report') {
       const prompt = bodyReportPrompt({ language: body.language });
       const raw = await generateContent({
@@ -153,6 +156,7 @@ Deno.serve(async (req) => {
             ],
           },
         ],
+        modelOverride: fastVisionModel,
         responseJson: true,
         temperature: 0.1,
       });
@@ -166,14 +170,19 @@ Deno.serve(async (req) => {
         return json({ error: 'UNREADABLE', ...obj }, 422);
       }
 
+      // Strip any personal identifiers server-side
+      delete (obj as Record<string, unknown>).id_number;
+      delete (obj as Record<string, unknown>).national_id;
+      delete (obj as Record<string, unknown>).name;
+      delete (obj as Record<string, unknown>).phone;
+      delete (obj as Record<string, unknown>).patient_name;
+      delete (obj as Record<string, unknown>).user_name;
+
       // Successful body report analysis: consume quota now
       await consumeDailyQuota(adminClient, user.id, quotaBucket, limit);
       recentAnalysesCache.set(cacheKey, { timestamp: Date.now(), result: obj });
       return json(obj);
     }
-
-    const fastVisionModel =
-      Deno.env.get('FAST_VISION_MODEL') ?? 'gemini-2.5-flash';
 
     const itemSchema = {
       type: 'OBJECT',

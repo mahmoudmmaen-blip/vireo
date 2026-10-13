@@ -1,0 +1,191 @@
+{
+  "readable": true,
+  "device_brand": {
+    "value": "InBody",
+    "confidence": 0.95
+  },
+  "device_model": {
+    "value": null,
+    "confidence": 0
+  },
+  "test_date": {
+    "value": "2026-09-22",
+    "confidence": 0.95
+  },
+  "height_cm": {
+    "value": 180,
+    "confidence": 0.95
+  },
+  "age": {
+    "value": 32,
+    "confidence": 0.95
+  },
+  "sex": {
+    "value": "male",
+    "confidence": 0.95
+  },
+  "weight_kg": {
+    "value": 94.7,
+    "confidence": 0.95
+  },
+  "skeletal_muscle_mass_kg": {
+    "value": 37.4,
+    "confidence": 0.95
+  },
+  "body_fat_mass_kg": {
+    "value": 28.6,
+    "confidence": 0.95
+  },
+  "percent_body_fat": {
+    "value": 30.2,
+    "confidence": 0.95
+  },
+  "bmi": {
+    "value": 29.2,
+    "confidence": 0.95
+  },
+  "bmr_kcal": {
+    "value": 1797,
+    "confidence": 0.95
+  },
+  "waist_hip_ratio": {
+    "value": 0.96,
+    "confidence": 0.95
+  },
+  "visceral_fat_level": {
+    "value": 12,
+    "confidence": 0.95
+  },
+  "inbody_score": {
+    "value": 69,
+    "confidence": 0.95
+  },
+  "fat_control_kg": {
+    "value": -17,
+    "confidence": 0.95
+  },
+  "muscle_control_kg": {
+    "value": 0,
+    "confidence": 0.95
+  },
+  "phase_angle": {
+    "value": 5.9,
+    "confidence": 0.95
+  },
+  "total_body_water_l": {
+    "value": null,
+    "confidence": 0
+  },
+  "protein_kg": {
+    "value": null,
+    "confidence": 0
+  },
+  "minerals_kg": {
+    "value": null,
+    "confidence": 0
+  },
+  "segmental_lean": {
+    "right_arm": {
+      "kg": {
+        "value": 3.65,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 98.8,
+        "confidence": 0.95
+      }
+    },
+    "left_arm": {
+      "kg": {
+        "value": 3.66,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 99.2,
+        "confidence": 0.95
+      }
+    },
+    "trunk": {
+      "kg": {
+        "value": 28.6,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 97.3,
+        "confidence": 0.95
+      }
+    },
+    "right_leg": {
+      "kg": {
+        "value": 10.5,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 102.3,
+        "confidence": 0.95
+      }
+    },
+    "left_leg": {
+      "kg": {
+        "value": 10.38,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 101.1,
+        "confidence": 0.95
+      }
+    }
+  },
+  "segmental_fat": {
+    "right_arm": {
+      "kg": {
+        "value": 2,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 319.1,
+        "confidence": 0.95
+      }
+    },
+    "left_arm": {
+      "kg": {
+        "value": 2.1,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 321.3,
+        "confidence": 0.95
+      }
+    },
+    "trunk": {
+      "kg": {
+        "value": 15.2,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 336,
+        "confidence": 0.95
+      }
+    },
+    "right_leg": {
+      "kg": {
+        "value": 4,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 218.1,
+        "confidence": 0.95
+      }
+    },
+    "left_leg": {
+      "kg": {
+        "value": 4,
+        "confidence": 0.95
+      },
+      "percent": {
+        "value": 218.8,
+        "confidence": 0.95
+      }
+    }
+  }
+}

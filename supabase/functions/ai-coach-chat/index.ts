@@ -26,6 +26,13 @@ type CoachRequest = {
     currentWeight?: number;
     goal?: string;
     inbodySummary?: string;
+    sex?: string;
+    isPregnancy?: boolean;
+    isUnder18?: boolean;
+    stepGoal?: number;
+    recentSummary?: string;
+    activePlan?: string;
+    fastingState?: string;
   };
   language?: string;
 };
@@ -65,7 +72,7 @@ Deno.serve(async (req) => {
     }
 
     const adminClient = createClient(supabaseUrl, serviceRoleKey);
-    const premium = await hasPremiumEntitlement(adminClient, user.id);
+    const premium = await hasPremiumEntitlement(adminClient, user.id, user.email);
     const isAnonymous = user.is_anonymous === true;
     const limit = coachChatLimit({ premium, isAnonymous });
     const allowed = await consumeDailyQuota(
@@ -88,6 +95,13 @@ Deno.serve(async (req) => {
       goal: String(ctx.goal ?? ''),
       inbodySummary:
         typeof ctx.inbodySummary === 'string' ? ctx.inbodySummary : undefined,
+      sex: typeof ctx.sex === 'string' ? ctx.sex : undefined,
+      isPregnancy: Boolean(ctx.isPregnancy),
+      isUnder18: Boolean(ctx.isUnder18),
+      stepGoal: ctx.stepGoal ? Number(ctx.stepGoal) : undefined,
+      recentSummary: typeof ctx.recentSummary === 'string' ? ctx.recentSummary : undefined,
+      activePlan: typeof ctx.activePlan === 'string' ? ctx.activePlan : undefined,
+      fastingState: typeof ctx.fastingState === 'string' ? ctx.fastingState : undefined,
       language: body.language,
     });
 

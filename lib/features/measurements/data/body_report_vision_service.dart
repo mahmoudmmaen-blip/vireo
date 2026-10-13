@@ -20,16 +20,32 @@ abstract final class BodyReportVisionService {
     Uint8List imageBytes, {
     String language = 'ar',
   }) async {
+    return analyzeMultiple([imageBytes], language: language);
+  }
+
+  static Future<BodyCompositionReport> analyzeMultiple(
+    List<Uint8List> imagesBytes, {
+    String language = 'ar',
+  }) async {
     if (!SupabaseService.isInitialized) {
       throw const BodyReportVisionException('OFFLINE');
     }
+    if (imagesBytes.isEmpty) {
+      throw const BodyReportVisionException('EMPTY_IMAGES');
+    }
     try {
-      final bytes = await MealImageCompressor.compress(imageBytes);
+      final compressedImages = <String>[];
+      for (final raw in imagesBytes.take(3)) {
+        final compressed = await MealImageCompressor.compress(raw);
+        compressedImages.add(base64Encode(compressed));
+      }
+
       final response = await SupabaseService.client.functions.invoke(
         AppConfig.analyzeMealFunctionName,
         body: {
           'mode': 'body_report',
-          'image_base64': base64Encode(bytes),
+          'images': compressedImages,
+          'image_base64': compressedImages.first,
           'mime_type': 'image/jpeg',
           'language': language,
         },

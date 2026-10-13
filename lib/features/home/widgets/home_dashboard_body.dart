@@ -47,6 +47,7 @@ import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/features/engagement/widgets/coins_header_pill.dart';
 import 'package:vireo/features/men_health/widgets/men_vitality_hero_card.dart';
 import 'package:vireo/features/ramadan/widgets/ramadan_countdown_card.dart';
+import 'package:vireo/features/home/widgets/home_body_composition_card.dart';
 import 'package:vireo/features/women_health/widgets/women_health_hero_card.dart';
 
 const _headerPad = EdgeInsets.fromLTRB(4, VSpace.sm, 4, 0);
@@ -105,6 +106,9 @@ class HomeDashboardBody extends ConsumerWidget {
 
       // ── Card 2: Daily Score Card ──
       const DailyScoreHeroCard(),
+
+      // ── Card: Body Composition Card ("تحليل الجسم") ──
+      const HomeBodyCompositionCard(),
 
       // ── Card 2: "اليوم" 2-Column Pillars Grid (Food, Water, Workout, Sleep) ──
       const TodayPillarsGrid(),

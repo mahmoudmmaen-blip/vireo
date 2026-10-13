@@ -5,6 +5,8 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_coach/domain/chat_message.dart';
+import 'package:vireo/features/ai_coach/domain/plan_action.dart';
+import 'package:vireo/features/ai_coach/widgets/plan_action_confirmation_card.dart';
 
 class ChatMessageBubble extends StatelessWidget {
   const ChatMessageBubble({
@@ -22,6 +24,10 @@ class ChatMessageBubble extends StatelessWidget {
     final colors = context.vireoColors;
     final isUser = message.role == ChatMessageRole.user;
     final isWarning = message.type == ChatMessageType.warning;
+
+    final (displayText, planAction) = isUser
+        ? (message.content, null)
+        : PlanAction.extractFromMessage(message.content);
 
     const r = Radius.circular(20);
     const tail = Radius.circular(6);
@@ -67,7 +73,7 @@ class ChatMessageBubble extends StatelessWidget {
               child: Icon(Icons.insights_rounded, size: 16, color: colors.ember),
             ),
           Text(
-            message.content,
+            displayText,
             style: TextStyle(
               color: isUser ? Colors.white : colors.text,
               height: 1.45,
@@ -115,16 +121,24 @@ class ChatMessageBubble extends StatelessWidget {
               const SizedBox(width: 8),
             ],
             Flexible(
-              child: GestureDetector(
-                onTap: message.failed ? onRetry : null,
-                onLongPress: () {
-                  HapticFeedback.mediumImpact();
-                  Clipboard.setData(ClipboardData(text: message.content));
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.uxCopied)));
-                },
-                child: bubble,
+              child: Column(
+                crossAxisAlignment: isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GestureDetector(
+                    onTap: message.failed ? onRetry : null,
+                    onLongPress: () {
+                      HapticFeedback.mediumImpact();
+                      Clipboard.setData(ClipboardData(text: displayText));
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(SnackBar(duration: const Duration(seconds: 3), persist: false, content: Text(l10n.uxCopied)));
+                    },
+                    child: bubble,
+                  ),
+                  if (planAction != null)
+                    PlanActionConfirmationCard(action: planAction),
+                ],
               ),
             ),
           ],

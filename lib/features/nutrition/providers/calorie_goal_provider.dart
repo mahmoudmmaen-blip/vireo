@@ -11,6 +11,7 @@ import 'package:vireo/features/women_health/providers/women_health_provider.dart
 
 const _manualCalorieKey = 'manual_calorie_goal';
 const _manualCalorieUserSetKey = 'manual_calorie_goal_user_set';
+const _manualProteinKey = 'manual_protein_goal';
 
 final calorieGoalProvider = Provider<CalorieTarget>((ref) {
   ref.watch(dietPlanRevisionProvider);
@@ -85,16 +86,19 @@ final calorieGoalProvider = Provider<CalorieTarget>((ref) {
   final manual = HiveService.isInitialized
       ? HiveService.settingsBox.get(_manualCalorieKey) as int?
       : null;
+  final manualProtein = HiveService.isInitialized
+      ? HiveService.settingsBox.get(_manualProteinKey) as int?
+      : null;
   final userSet = HiveService.isInitialized &&
       HiveService.settingsBox.get(_manualCalorieUserSetKey, defaultValue: false) ==
           true;
 
-  // Explicit user override (Nutrition edit) always wins.
+  // Explicit user override (Nutrition edit / AI coach plan action) always wins.
   if (userSet && manual != null && manual > 0) {
     final ratio = manual / computed.calories;
     return CalorieTarget(
       calories: manual,
-      proteinG: (computed.proteinG * ratio).round(),
+      proteinG: manualProtein ?? (computed.proteinG * ratio).round(),
       carbsG: (computed.carbsG * ratio).round(),
       fatG: (computed.fatG * ratio).round(),
     );
@@ -126,7 +130,7 @@ final calorieGoalProvider = Provider<CalorieTarget>((ref) {
     final ratio = manual / computed.calories;
     return CalorieTarget(
       calories: manual,
-      proteinG: (computed.proteinG * ratio).round(),
+      proteinG: manualProtein ?? (computed.proteinG * ratio).round(),
       carbsG: (computed.carbsG * ratio).round(),
       fatG: (computed.fatG * ratio).round(),
     );
@@ -140,11 +144,21 @@ final dailyCaloriesConsumedProvider = Provider<int>((ref) {
 });
 
 Future<void> setManualCalorieGoal(int? calories) async {
+  await setManualTargets(calories: calories);
+}
+
+Future<void> setManualTargets({required int? calories, int? proteinG}) async {
   if (calories == null || calories <= 0) {
     await HiveService.settingsBox.delete(_manualCalorieKey);
     await HiveService.settingsBox.delete(_manualCalorieUserSetKey);
+    await HiveService.settingsBox.delete(_manualProteinKey);
   } else {
     await HiveService.settingsBox.put(_manualCalorieKey, calories);
     await HiveService.settingsBox.put(_manualCalorieUserSetKey, true);
+    if (proteinG != null && proteinG > 0) {
+      await HiveService.settingsBox.put(_manualProteinKey, proteinG);
+    } else {
+      await HiveService.settingsBox.delete(_manualProteinKey);
+    }
   }
 }

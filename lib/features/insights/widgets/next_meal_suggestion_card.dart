@@ -10,6 +10,7 @@ import 'package:vireo/features/nutrition/data/food_db_models.dart';
 import 'package:vireo/features/nutrition/providers/cup_size_preference_provider.dart';
 import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
 import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
+import 'package:vireo/features/ai_coach/screens/ai_coach_screen.dart';
 import 'package:vireo/features/women_health/models/cycle_data.dart';
 import 'package:vireo/features/women_health/providers/women_health_provider.dart';
 
@@ -259,6 +260,32 @@ class _NextMealSuggestionCardState extends ConsumerState<NextMealSuggestionCard>
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 8),
+          Center(
+            child: TextButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => AiCoachScreen(
+                      initialPrompt: isArabic
+                          ? 'إيه رأيك في وجبة "${suggestion.displayName(true)}" كوجبة جاية ليا اليوم؟ وممكن أبدل فيها إيه؟'
+                          : 'What do you think of "${suggestion.displayName(false)}" for my next meal, and how can I customize it?',
+                      autoSendInitialPrompt: true,
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.auto_awesome_rounded, size: 14),
+              label: Text(
+                isArabic ? 'ناقش الاقتراح مع كوتش Vireo' : 'Discuss with Vireo Coach',
+                style: TextStyle(fontSize: 12, color: colors.ember, fontWeight: FontWeight.w700),
+              ),
+              style: TextButton.styleFrom(
+                visualDensity: VisualDensity.compact,
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              ),
+            ),
           ),
         ],
       ),

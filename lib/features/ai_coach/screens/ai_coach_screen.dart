@@ -16,7 +16,14 @@ import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
 class AiCoachScreen extends ConsumerStatefulWidget {
-  const AiCoachScreen({super.key});
+  const AiCoachScreen({
+    super.key,
+    this.initialPrompt,
+    this.autoSendInitialPrompt = false,
+  });
+
+  final String? initialPrompt;
+  final bool autoSendInitialPrompt;
 
   @override
   ConsumerState<AiCoachScreen> createState() => _AiCoachScreenState();
@@ -31,6 +38,15 @@ class _AiCoachScreenState extends ConsumerState<AiCoachScreen> {
   @override
   void initState() {
     super.initState();
+    if (widget.initialPrompt != null && widget.initialPrompt!.trim().isNotEmpty) {
+      _controller.text = widget.initialPrompt!.trim();
+      _hasText = true;
+      if (widget.autoSendInitialPrompt) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _send(widget.initialPrompt);
+        });
+      }
+    }
     _controller.addListener(() {
       final has = _controller.text.trim().isNotEmpty;
       if (has != _hasText) setState(() => _hasText = has);
@@ -98,10 +114,13 @@ class _AiCoachScreenState extends ConsumerState<AiCoachScreen> {
 
     ref.listen(aiCoachProvider, (_, _) => _scrollToBottom());
 
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
     final suggestions = <(IconData, String)>[
-      (Icons.dinner_dining_rounded, l10n.aiCoachChipDinner),
+      (Icons.dinner_dining_rounded, isArabic ? 'اقترح عشا' : l10n.aiCoachChipDinner),
+      (Icons.help_outline_rounded, isArabic ? 'ليه السعرات دي؟' : 'Why these calories?'),
+      (Icons.tune_rounded, isArabic ? 'عدّل خطتي' : 'Adjust my plan'),
+      (Icons.monitor_weight_outlined, isArabic ? 'فسّرلي InBody' : 'Explain my InBody'),
       (Icons.egg_alt_rounded, l10n.aiCoachChipProtein),
-      (Icons.icecream_rounded, l10n.aiCoachChipDessert),
       (Icons.fitness_center_rounded, l10n.uxCoachChipWorkout),
     ];
 

@@ -9,6 +9,8 @@ import 'package:vireo/core/ui/motion.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/unit_preference.dart';
+import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
+import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
 import 'package:vireo/features/onboarding/widgets/why_we_ask_box.dart';
@@ -97,9 +99,109 @@ class _StepBodyScreenState extends ConsumerState<StepBodyScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Metric / Imperial toggle & Sex selection
+          // ── InBody Shortcut Hero Card ("عندي تقرير InBody — وفّر الأسئلة") ──
           FadeSlideIn(
             index: 0,
+            child: Container(
+              margin: const EdgeInsets.only(bottom: VSpace.md),
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    colors.ember.withValues(alpha: 0.15),
+                    colors.surfaceRaised,
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(VRadius.lg),
+                border: Border.all(color: colors.ember.withValues(alpha: 0.5)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: colors.ember.withValues(alpha: 0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Text('📸', style: TextStyle(fontSize: 20)),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              Localizations.localeOf(context).languageCode.startsWith('ar')
+                                  ? 'عندي تقرير InBody — وفّر الأسئلة'
+                                  : 'I Have an InBody — Skip Questions',
+                              style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13.5),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              Localizations.localeOf(context).languageCode.startsWith('ar')
+                                  ? 'صوّر تقريرك ونحن نملأ الطول، الوزن، العمر، ونسبة الدهون تلقائياً!'
+                                  : 'Scan report to auto-fill height, weight, age, and body fat!',
+                              style: TextStyle(color: colors.textMute, fontSize: 11.5, height: 1.3),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  FilledButton.icon(
+                    onPressed: () async {
+                      HapticFeedback.mediumImpact();
+                      await InBodyScanScreen.open(context);
+                      if (!context.mounted) return;
+                      final latest = ref.read(latestBodyCompositionProvider);
+                      if (latest != null) {
+                        setState(() {
+                          if (latest.weightKg != null) _weightKg = latest.weightKg!;
+                          if (latest.heightCm != null) _heightCm = latest.heightCm!;
+                          if (latest.age != null) _age = latest.age!;
+                          if (latest.sex != null) _sex = latest.sex!;
+                        });
+                        _syncDraft();
+                        final isAr = Localizations.localeOf(context).languageCode.startsWith('ar');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: const Duration(seconds: 3),
+                            content: Text(
+                              isAr
+                                  ? 'وفّرنا عليك 5 أسئلة ✓ ضبطنا بياناتك من InBody!'
+                                  : 'Saved you 5 questions ✓ InBody data filled!',
+                            ),
+                          ),
+                        );
+                        // Advance to Activity & Environment screen!
+                        ref.read(onboardingProvider.notifier).goToStep(3);
+                      }
+                    },
+                    icon: const Icon(Icons.bolt_rounded, size: 16),
+                    label: Text(
+                      Localizations.localeOf(context).languageCode.startsWith('ar')
+                          ? 'صوّر InBody (وفّر الأسئلة ⚡)'
+                          : 'Scan & Skip Questions ⚡',
+                    ),
+                    style: FilledButton.styleFrom(
+                      backgroundColor: colors.ember,
+                      minimumSize: const Size.fromHeight(38),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Metric / Imperial toggle & Sex selection
+          FadeSlideIn(
+            index: 1,
             child: Row(
               children: [
                 // Sex Selector (Male default, targeted at men)

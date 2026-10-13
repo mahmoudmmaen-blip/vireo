@@ -46,12 +46,49 @@ void main() {
       final json = {
         'weight_kg': 80.0,
         'percent_body_fat': 20.0,
+        'height_cm': 175.0,
+        'age': 28,
+        'sex': 'male',
+        'fat_control_kg': -12.0,
+        'muscle_control_kg': 2.0,
+        'phase_angle': 6.2,
       };
 
       final report = BodyCompositionParser.parse(json);
       expect(report, isNotNull);
       expect(report!.weightKg, equals(80.0));
       expect(report.percentBodyFat, equals(20.0));
+      expect(report.heightCm, equals(175.0));
+      expect(report.age, equals(28));
+      expect(report.sex, equals('male'));
+      expect(report.fatControlKg, equals(-12.0));
+      expect(report.muscleControlKg, equals(2.0));
+      expect(report.phaseAngle, equals(6.2));
+    });
+
+    test('merges multiple reports by picking higher confidence fields', () {
+      final r1 = BodyCompositionParser.parse({
+        'weight_kg': {'value': 80.0, 'confidence': 0.95},
+        'percent_body_fat': {'value': 22.0, 'confidence': 0.60},
+        'visceral_fat_level': {'value': 8.0, 'confidence': 0.90},
+      })!;
+
+      final r2 = BodyCompositionParser.parse({
+        'weight_kg': {'value': 81.0, 'confidence': 0.70},
+        'percent_body_fat': {'value': 21.5, 'confidence': 0.92},
+        'skeletal_muscle_mass_kg': {'value': 36.0, 'confidence': 0.88},
+      })!;
+
+      final merged = BodyCompositionParser.merge([r1, r2]);
+      expect(merged, isNotNull);
+      // weight_kg from r1 (0.95 > 0.70)
+      expect(merged.weightKg, equals(80.0));
+      // percent_body_fat from r2 (0.92 > 0.60)
+      expect(merged.percentBodyFat, equals(21.5));
+      // visceral_fat_level from r1
+      expect(merged.visceralFatLevel, equals(8.0));
+      // skeletal_muscle_mass_kg from r2
+      expect(merged.skeletalMuscleMassKg, equals(36.0));
     });
   });
 }
