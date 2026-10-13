@@ -173,16 +173,44 @@ class _CalAiCameraScreenState extends ConsumerState<CalAiCameraScreen> {
     }
   }
 
+  String _errorMessage(BuildContext context, AiScanErrorKind kind) {
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    if (isArabic) {
+      return switch (kind) {
+        AiScanErrorKind.offline => 'مفيش اتصال بالنت.. اتأكد من شبكة الإنترنت وحاول تاني',
+        AiScanErrorKind.timeout => 'التحليل أخد وقت أطول من المتوقع.. حاول تاني',
+        AiScanErrorKind.noFood || AiScanErrorKind.parse =>
+          'مش قادرين نتعرف على الأكل في الصورة.. حاول تصوّر الوجبة بوضوح أكتر',
+        AiScanErrorKind.dailyLimit =>
+          'وصلت للحد الأقصى للتحليل بالذكاء الاصطناعي اليوم.. جرب بكرة أو اشترك في Pro',
+        AiScanErrorKind.config || AiScanErrorKind.api =>
+          'حصلت مشكلة في السيرفر.. حاول مرة تانية كمان شوية',
+      };
+    }
+    return switch (kind) {
+      AiScanErrorKind.offline => 'No internet connection. Please check your network and try again.',
+      AiScanErrorKind.timeout => 'Analysis timed out. Please try again.',
+      AiScanErrorKind.noFood || AiScanErrorKind.parse =>
+        'Couldn\'t recognize food in the photo. Please take a clearer photo.',
+      AiScanErrorKind.dailyLimit => 'Daily AI meal scan limit reached. Try tomorrow or upgrade to Pro.',
+      AiScanErrorKind.config || AiScanErrorKind.api => 'Server error occurred. Please try again later.',
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
     final scanState = ref.watch(aiScanPhaseProvider);
 
-    if (scanState.isScanning) {
+    if (scanState.isScanning || scanState.isError) {
+      final errorKind = scanState.errorKindOrNull;
+      final errorMsg = errorKind != null ? _errorMessage(context, errorKind) : null;
       return Scaffold(
         backgroundColor: Colors.black,
         body: MealScanLoadingOverlay(
           imageBytes: _photos.isNotEmpty ? _photos.first : null,
+          isError: scanState.isError,
+          errorMessage: errorMsg,
           onRetry: _analyze,
           onCancel: () => ref.read(aiScanProvider.notifier).reset(),
         ),
@@ -285,7 +313,7 @@ class _CalAiCameraScreenState extends ConsumerState<CalAiCameraScreen> {
                               child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: _photos.length,
-                                separatorBuilder: (_, __) => const SizedBox(width: 8),
+                                separatorBuilder: (_, _) => const SizedBox(width: 8),
                                 itemBuilder: (ctx, i) {
                                   return Stack(
                                     children: [

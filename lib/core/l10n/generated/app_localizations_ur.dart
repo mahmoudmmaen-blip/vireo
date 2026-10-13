@@ -4208,4 +4208,115 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get walkingAchievementsTitle => 'Achievements & Records 🏆';
+
+  @override
+  String get stepToggleError =>
+      'قدموں کے کاؤنٹر کی حالت تبدیل کرنے میں ناکامی، دوبارہ کوشش کریں';
+
+  @override
+  String get scoreInsightsTitle => 'اسکور اور اسمارٹ معلومات 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'آج: $target میں سے $eaten کلوکیلوری لی';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'اس ہفتے: ≈ $grams گرام چربی کم ہوئی';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return '≈ $weeks ہفتوں میں ہدف حاصل کریں';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein => 'پروٹین سے بھرپور کھانا درج کریں';
+
+  @override
+  String get scoreInsightsActionWalk => 'ہدف کی طرف چلنا شروع کریں';
+
+  @override
+  String get scoreInsightsActionWater => 'ابھی ایک گلاس پانی پئیں';
+
+  @override
+  String get scoreInsightsPredictionsTitle => 'اسمارٹ پیشین گوئیاں (تخمینہ 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'کیلوری کی کمی اور میٹابولک ریٹ پر مبنی';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'درست تخمینے کے لیے کم از کم 3 مکمل دن درکار ہیں ($days درج)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'ہفتہ وار چربی کی کمی';
+
+  @override
+  String get scoreInsightsIn4Weeks => '4 ہفتوں میں';
+
+  @override
+  String get scoreInsightsIn8Weeks => '8 ہفتوں میں';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'ہدف تک رسائی';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ پٹھوں کے تحفظ کے لیے وزن میں کمی کو ہفتہ وار ≤1% تک محدود کیا گیا ہے۔';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ خسارہ 1,000 کلوکیلوری/دن سے زیادہ ہے۔ میٹابولزم کو بچانے کے لیے کچھ زیادہ کھائیں۔';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      'یہ کیسے حساب کیا گیا؟ (Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• بنیادی میٹابولک ریٹ (BMR): $bmr کلوکیلوری';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• کل روزانہ توانائی کا اخراج (TDEE): $tdee کلوکیلوری';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• 7,700 کلوکیلوری خسارہ ≈ 1 کلو چربی کا نقصان۔';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'جسمانی ساخت';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'نیا ماپ';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'انچ ٹیپ یا InBody سے چربی اور پٹھے ٹریک کریں';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'توانائی کا توازن (کھائی گئی بمقابلہ جلائی گئی)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'کھائی گئی';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'جلائی گئی';
+
+  @override
+  String get scoreInsightsMacrosTitle => 'آج کے میکروس (ہدف بمقابلہ اصل)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle => '7 دن کے اسکور کا رجحان';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'اسکور بڑھانے کے فوری اقدامات:';
 }

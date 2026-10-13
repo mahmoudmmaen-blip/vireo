@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 
-enum AiScanErrorKind { offline, api, parse, config, dailyLimit, timeout }
+enum AiScanErrorKind { offline, api, parse, config, dailyLimit, timeout, noFood }
 
 /// Meal scan state machine: idle → scanning → success | error.
 sealed class AiScanState {

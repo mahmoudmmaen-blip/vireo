@@ -1193,5 +1193,80 @@
   "exerciseSafetyNote": "सुरक्षा नोट",
   "exerciseWarmUpHeader": "वार्म-अप मूव्स",
   "reassessmentLaterSnooze": "बाद में (3 दिन बाद याद दिलाएं)",
-  "measurementsAddEntry": "नया माप जोड़ें"
+  "measurementsAddEntry": "नया माप जोड़ें",
+  "stepToggleError": "कदम काउंटर की स्थिति बदलने में विफल, कृपया पुनः प्रयास करें",
+  "scoreInsightsTitle": "स्कोर और स्मार्ट अंतर्दृष्टि 🎯",
+  "scoreInsightsTodaySummary": "आज: {target} में से {eaten} किलोकैलोरी ली",
+  "@scoreInsightsTodaySummary": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeekFatSummary": "इस सप्ताह: ≈ {grams} ग्राम वसा कम हुई",
+  "@scoreInsightsWeekFatSummary": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsGoalWeeksSummary": "≈ {weeks} हफ्तों में लक्ष्य तक पहुंचें",
+  "@scoreInsightsGoalWeeksSummary": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsActionLogProtein": "प्रोटीन युक्त भोजन दर्ज करें",
+  "scoreInsightsActionWalk": "लक्ष्य की ओर चलना शुरू करें",
+  "scoreInsightsActionWater": "अब एक गिलास पानी पिएं",
+  "scoreInsightsPredictionsTitle": "स्मार्ट भविष्यवाणियां (अनुमानित 🔮)",
+  "scoreInsightsPredictionsSubtitle": "कैलोरी घाटे और चयापचय दर पर आधारित",
+  "scoreInsightsNeedData": "सटीक अनुमान के लिए कम से कम 3 पूरे दिन आवश्यक हैं ({days} दर्ज)",
+  "@scoreInsightsNeedData": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeeklyFatLoss": "साप्ताहिक वसा हानि",
+  "scoreInsightsIn4Weeks": "4 हफ्तों में",
+  "scoreInsightsIn8Weeks": "8 हफ्तों में",
+  "scoreInsightsGoalHitIn": "लक्ष्य प्राप्त होगा",
+  "scoreInsightsClampWarning": "⚠️ मांसपेशियों की सुरक्षा के लिए प्रति सप्ताह वजन घटाने को ≤1% तक सीमित किया गया है।",
+  "scoreInsightsAggressiveDeficitWarning": "⚠️ घाटा 1,000 किलोकैलोरी/दिन से अधिक है। चयापचय बनाए रखने के लिए थोड़ा और खाएं।",
+  "scoreInsightsHowCalculatedTitle": "इसकी गणना कैसे की गई? (Mifflin-St Jeor)",
+  "scoreInsightsHowCalculatedBmr": "• बेसल मेटाबोलिक दर (BMR): {bmr} किलोकैलोरी",
+  "@scoreInsightsHowCalculatedBmr": {
+    "placeholders": {
+      "bmr": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedTdee": "• कुल दैनिक ऊर्जा व्यय (TDEE): {tdee} किलोकैलोरी",
+  "@scoreInsightsHowCalculatedTdee": {
+    "placeholders": {
+      "tdee": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedFat": "• 7,700 किलोकैलोरी घाटा ≈ 1 किलो वसा हानि।",
+  "scoreInsightsBodyCompTitle": "शरीर की संरचना",
+  "scoreInsightsBodyCompNewMeasure": "नया माप",
+  "scoreInsightsBodyCompPrompt": "टेप या InBody से वसा और मांसपेशियों को ट्रैक करें",
+  "scoreInsightsEnergyBalanceTitle": "ऊर्जा संतुलन (खाई गई बनाम जलाई गई)",
+  "scoreInsightsEatenKcal": "खाई गई",
+  "scoreInsightsBurnedKcal": "जलाई गई",
+  "scoreInsightsMacrosTitle": "आज के मैक्रोज़ (लक्ष्य बनाम वास्तविक)",
+  "scoreInsightsScoreTrendTitle": "7-दिवसीय स्कोर रुझान",
+  "scoreInsightsImmediateActionsTitle": "स्कोर बढ़ाने के त्वरित सुझाव:"
 }

@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';

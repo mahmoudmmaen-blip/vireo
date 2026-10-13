@@ -14,6 +14,7 @@ import 'package:vireo/features/progress/screens/weekly_wrapped_story_screen.dart
 import 'package:vireo/features/progress/widgets/achievements_grid_card.dart';
 import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
 import 'package:vireo/features/progress/widgets/adaptive_calorie_suggestion_card.dart';
+import 'package:vireo/features/progress/widgets/body_composition_progress_section.dart';
 import 'package:vireo/features/progress/widgets/body_measurements_section.dart';
 import 'package:vireo/features/progress/widgets/energy_line_chart.dart';
 import 'package:vireo/features/progress/widgets/progress_photos_section.dart';
@@ -279,6 +280,10 @@ class ProgressScreen extends ConsumerWidget {
 
               // ── 5. ACHIEVEMENTS & BADGES ──
               const AchievementsGridCard(),
+              const SizedBox(height: 16),
+
+              // ── BODY COMPOSITION ("تحليل الجسم") ──
+              const BodyCompositionProgressSection(),
               const SizedBox(height: 16),
 
               // ── 4. BODY: Circumference Charts (waist, chest, arms, thighs) ──

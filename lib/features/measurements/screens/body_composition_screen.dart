@@ -9,6 +9,7 @@ import 'package:vireo/core/utils/platform_utils.dart';
 import 'package:vireo/features/measurements/domain/body_composition_report.dart';
 import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
+import 'package:vireo/features/measurements/screens/navy_tape_measure_screen.dart';
 import 'package:vireo/features/measurements/services/body_comp_health_sync.dart';
 import 'package:vireo/features/measurements/widgets/segmental_body_figure.dart';
 
@@ -30,10 +31,20 @@ class _BodyCompositionScreenState extends ConsumerState<BodyCompositionScreen> {
   BodyCompositionReport? _compareA;
   BodyCompositionReport? _compareB;
 
+  static String _sourceLabel(BodyCompositionSource source, bool isArabic) {
+    return switch (source) {
+      BodyCompositionSource.inbodyScan => isArabic ? 'تقرير InBody' : 'InBody Scan',
+      BodyCompositionSource.navyTape => isArabic ? 'قياس المازورة (Navy)' : 'Tape Measure',
+      BodyCompositionSource.healthConnect => 'Health Connect',
+      BodyCompositionSource.manual => isArabic ? 'يدوي' : 'Manual',
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
     final async = ref.watch(bodyCompositionListProvider);
 
     return Scaffold(
@@ -41,6 +52,11 @@ class _BodyCompositionScreenState extends ConsumerState<BodyCompositionScreen> {
       appBar: AppBar(
         title: Text(l10n.inbodyBodyTitle),
         actions: [
+          IconButton(
+            tooltip: isArabic ? 'قياس المازورة (Navy)' : 'Tape Measure',
+            icon: const Icon(Icons.straighten),
+            onPressed: () => NavyTapeMeasureScreen.open(context),
+          ),
           if (PlatformUtils.isAndroid)
             IconButton(
               tooltip: l10n.inbodySyncHealth,
@@ -61,6 +77,7 @@ class _BodyCompositionScreenState extends ConsumerState<BodyCompositionScreen> {
               },
             ),
           IconButton(
+            tooltip: l10n.inbodyAddResult,
             icon: const Icon(Icons.add_a_photo_outlined),
             onPressed: () => InBodyScanScreen.open(context),
           ),
@@ -79,9 +96,16 @@ class _BodyCompositionScreenState extends ConsumerState<BodyCompositionScreen> {
                   children: [
                     Text(l10n.inbodyEmpty, textAlign: TextAlign.center),
                     const SizedBox(height: 16),
-                    FilledButton(
+                    FilledButton.icon(
+                      onPressed: () => NavyTapeMeasureScreen.open(context),
+                      icon: const Icon(Icons.straighten),
+                      label: Text(isArabic ? 'قياس المازورة (طريقة البحرية)' : 'Tape Measure (Navy)'),
+                    ),
+                    const SizedBox(height: 8),
+                    OutlinedButton.icon(
                       onPressed: () => InBodyScanScreen.open(context),
-                      child: Text(l10n.inbodyAddResult),
+                      icon: const Icon(Icons.add_a_photo_outlined),
+                      label: Text(l10n.inbodyAddResult),
                     ),
                     const SizedBox(height: 12),
                     Text(
@@ -104,49 +128,79 @@ class _BodyCompositionScreenState extends ConsumerState<BodyCompositionScreen> {
             children: [
               Text(l10n.inbodyMedicalNote,
                   style: TextStyle(color: colors.textMute, fontSize: 12)),
-              if (latest.syncedFromHealth)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    l10n.inbodySyncedLabel,
-                    style: TextStyle(color: colors.ember, fontWeight: FontWeight.w700),
-                  ),
-                ),
               const SizedBox(height: 12),
-              FilledButton.icon(
-                onPressed: () => InBodyScanScreen.open(context),
-                icon: const Icon(Icons.add_a_photo_outlined),
-                label: Text(l10n.inbodyAddResult),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () => NavyTapeMeasureScreen.open(context),
+                      icon: const Icon(Icons.straighten, size: 18),
+                      label: Text(isArabic ? 'قياس المازورة' : 'Tape Measure'),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: () => InBodyScanScreen.open(context),
+                      icon: const Icon(Icons.add_a_photo_outlined, size: 18),
+                      label: Text(l10n.inbodyAddResult),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
-              Text(l10n.inbodyLatestTitle,
-                  style: Theme.of(context).textTheme.titleMedium),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(l10n.inbodyLatestTitle,
+                      style: Theme.of(context).textTheme.titleMedium),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: colors.ember.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: colors.ember.withValues(alpha: 0.3)),
+                    ),
+                    child: Text(
+                      _sourceLabel(latest.source, isArabic),
+                      style: TextStyle(
+                        color: colors.ember,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Text(
                 DateFormat.yMMMd().format(latest.testDate),
                 style: TextStyle(color: colors.textMute),
               ),
               const SizedBox(height: 8),
-              SegmentalBodyFigure(lean: latest.segmentalLean),
-              const SizedBox(height: 16),
+              if (latest.segmentalLean.trunk.kg?.hasValue == true) ...[
+                SegmentalBodyFigure(lean: latest.segmentalLean),
+                const SizedBox(height: 16),
+              ],
+              // Primary Body Comp Charts: BF% & Lean Mass
+              _MetricChart(
+                title: isArabic ? 'نسبة الدهون (%BF)' : 'Body Fat %',
+                reports: list,
+                valueOf: (r) => r.percentBodyFat,
+              ),
+              _MetricChart(
+                title: isArabic ? 'الكتلة العضلية / الصافية (كجم)' : 'Lean Mass (kg)',
+                reports: list,
+                valueOf: (r) => r.leanMassKg ?? r.skeletalMuscleMassKg,
+              ),
               _MetricChart(
                 title: l10n.inbodyWeight,
                 reports: list,
                 valueOf: (r) => r.weightKg,
               ),
               _MetricChart(
-                title: l10n.inbodySmm,
-                reports: list,
-                valueOf: (r) => r.skeletalMuscleMassKg,
-              ),
-              _MetricChart(
                 title: l10n.inbodyFatMass,
                 reports: list,
                 valueOf: (r) => r.bodyFatMassKg,
-              ),
-              _MetricChart(
-                title: l10n.inbodyPbf,
-                reports: list,
-                valueOf: (r) => r.percentBodyFat,
               ),
               _MetricChart(
                 title: l10n.inbodyVisceral,

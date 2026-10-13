@@ -133,7 +133,7 @@ abstract final class GeminiFoodServiceCore {
       final scanned = parseScannedItems(data);
       BootLog.step('analyze-meal items=${scanned.length}');
       if (scanned.isEmpty) {
-        throw const FoodVisionParseException();
+        throw const FoodVisionNoFoodException();
       }
       try {
         final lines =

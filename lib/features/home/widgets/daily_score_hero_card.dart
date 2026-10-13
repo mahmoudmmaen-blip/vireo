@@ -78,40 +78,57 @@ class DailyScoreHeroCard extends ConsumerWidget {
                 // Top Row: Big 120dp Score Ring on Left/Start, Score Tier & Streak
                 Row(
                   children: [
-                    // Big 120dp Ring
+                    // Big 116dp Ring
                     SizedBox(
-                      width: 110,
-                      height: 110,
+                      width: 116,
+                      height: 116,
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
-                          CircularProgressIndicator(
-                            value: breakdown.totalScore / 100.0,
-                            strokeWidth: 9.5,
-                            backgroundColor: colors.line,
-                            valueColor: AlwaysStoppedAnimation<Color>(breakdown.scoreColor),
-                            strokeCap: StrokeCap.round,
+                          SizedBox(
+                            width: 116,
+                            height: 116,
+                            child: CircularProgressIndicator(
+                              value: (breakdown.totalScore / 100.0).clamp(0.0, 1.0),
+                              strokeWidth: 9.0,
+                              backgroundColor: colors.line,
+                              valueColor: AlwaysStoppedAnimation<Color>(breakdown.scoreColor),
+                              strokeCap: StrokeCap.round,
+                            ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '${breakdown.totalScore}',
-                                style: const TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w900,
-                                  height: 1.0,
+                          Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    '${breakdown.totalScore}',
+                                    style: const TextStyle(
+                                      fontSize: 34,
+                                      fontWeight: FontWeight.w900,
+                                      height: 1.0,
+                                      fontFeatures: [FontFeature.tabularFigures()],
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '/100',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: colors.textMute,
-                                  fontWeight: FontWeight.bold,
+                                const SizedBox(height: 2),
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    '/100',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: colors.textMute,
+                                      fontWeight: FontWeight.w800,
+                                      fontFeatures: const [FontFeature.tabularFigures()],
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),

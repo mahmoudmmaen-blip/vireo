@@ -5,6 +5,7 @@ import {
   stripDataUrl,
 } from '../_shared/gemini-client.ts';
 import { mealVisionPrompt } from '../_shared/prompts/meal-vision.ts';
+import { bodyReportPrompt } from '../_shared/prompts/body-report.ts';
 import {
   consumeDailyQuota,
   hasPremiumEntitlement,
@@ -21,6 +22,7 @@ const corsHeaders = {
 const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
 
 type AnalyzeMealRequest = {
+  mode?: string;
   image_base64?: string;
   images?: string[];
   mime_type?: string;
@@ -82,10 +84,11 @@ Deno.serve(async (req) => {
     const premium = await hasPremiumEntitlement(adminClient, user.id);
     const isAnonymous = user.is_anonymous === true;
     const limit = mealScanLimit({ premium, isAnonymous });
+    const quotaBucket = body.mode === 'body_report' ? 'body_report' : 'meal_scan';
     const allowed = await consumeDailyQuota(
       adminClient,
       user.id,
-      'meal_scan',
+      quotaBucket,
       limit,
     );
     if (!allowed) {
@@ -110,6 +113,33 @@ Deno.serve(async (req) => {
     const imageParts = rawImages.map((img) => ({
       inline_data: { mime_type: mime, data: stripDataUrl(img) },
     }));
+
+    if (body.mode === 'body_report') {
+      const prompt = bodyReportPrompt({ language: body.language });
+      const raw = await generateContent({
+        contents: [
+          {
+            role: 'user',
+            parts: [
+              { text: prompt },
+              ...imageParts,
+            ],
+          },
+        ],
+        responseJson: true,
+        temperature: 0.1,
+      });
+
+      const parsed = safeJson(raw);
+      if (!parsed || typeof parsed !== 'object') {
+        return json({ error: 'VISION_PARSE_FAILED', raw }, 502);
+      }
+      const obj = parsed as Record<string, unknown>;
+      if (obj.readable === false) {
+        return json({ error: 'UNREADABLE', ...obj }, 422);
+      }
+      return json(obj);
+    }
 
     const fastVisionModel =
       Deno.env.get('FAST_VISION_MODEL') ?? 'gemini-2.5-flash';
@@ -220,8 +250,10 @@ function parseItemsJson(
     )
       ? (decoded as { items_unsure: unknown[] }).items_unsure
       : [];
-    const items = (decoded as { items?: unknown }).items;
-    if (!Array.isArray(items) || items.length === 0) {
+    const rawItems = (decoded as { items?: unknown }).items;
+    const items = Array.isArray(rawItems) ? rawItems : [];
+
+    if (items.length === 0 && unsure.length === 0) {
       const legacy = decoded as Record<string, unknown>;
       if (legacy.food_name) {
         return {
@@ -239,12 +271,28 @@ function parseItemsJson(
               _legacy_fats: legacy.fats,
             },
           ],
-          items_unsure: unsure,
+          items_unsure: [],
         };
       }
-      return null;
     }
+
     return { items, items_unsure: unsure };
+  } catch {
+    return null;
+  }
+}
+
+function safeJson(raw: string): unknown {
+  try {
+    let text = raw.trim();
+    const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (fenced?.[1]) text = fenced[1].trim();
+    const start = text.indexOf('{');
+    const end = text.lastIndexOf('}');
+    if (start >= 0 && end > start) {
+      text = text.slice(start, end + 1);
+    }
+    return JSON.parse(text);
   } catch {
     return null;
   }

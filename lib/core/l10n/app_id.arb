@@ -1193,5 +1193,80 @@
   "exerciseSafetyNote": "Catatan Keselamatan",
   "exerciseWarmUpHeader": "Gerakan Pemanasan",
   "reassessmentLaterSnooze": "Nanti (ingatkan dalam 3 hari)",
-  "measurementsAddEntry": "Tambah Pengukuran Baru"
+  "measurementsAddEntry": "Tambah Pengukuran Baru",
+  "stepToggleError": "Gagal mengubah status penghitung langkah, silakan coba lagi",
+  "scoreInsightsTitle": "Skor & Wawasan Pintar 🎯",
+  "scoreInsightsTodaySummary": "Hari ini: mengonsumsi {eaten} dari {target} kkal",
+  "@scoreInsightsTodaySummary": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeekFatSummary": "Minggu ini: turun ≈ {grams}g lemak",
+  "@scoreInsightsWeekFatSummary": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsGoalWeeksSummary": "Capai target dalam ≈ {weeks} minggu",
+  "@scoreInsightsGoalWeeksSummary": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsActionLogProtein": "Catat makanan tinggi protein",
+  "scoreInsightsActionWalk": "Mulai berjalan menuju target",
+  "scoreInsightsActionWater": "Minum segelas air sekarang",
+  "scoreInsightsPredictionsTitle": "Prediksi Pintar (Perkiraan 🔮)",
+  "scoreInsightsPredictionsSubtitle": "Berdasarkan defisit kalori dan laju metabolisme",
+  "scoreInsightsNeedData": "Perlu minimal 3 hari lengkap ({days} tercatat)",
+  "@scoreInsightsNeedData": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeeklyFatLoss": "Penurunan Lemak Mingguan",
+  "scoreInsightsIn4Weeks": "Dalam 4 Minggu",
+  "scoreInsightsIn8Weeks": "Dalam 8 Minggu",
+  "scoreInsightsGoalHitIn": "Capai Target Dalam",
+  "scoreInsightsClampWarning": "⚠️ Penurunan dibatasi hingga ≤1% berat badan per minggu untuk menjaga otot.",
+  "scoreInsightsAggressiveDeficitWarning": "⚠️ Defisit melebihi 1.000 kkal/hari. Makan sedikit lebih banyak untuk menjaga metabolisme.",
+  "scoreInsightsHowCalculatedTitle": "Bagaimana ini dihitung? (Mifflin-St Jeor)",
+  "scoreInsightsHowCalculatedBmr": "• Laju Metabolisme Basal (BMR): {bmr} kkal",
+  "@scoreInsightsHowCalculatedBmr": {
+    "placeholders": {
+      "bmr": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedTdee": "• Pengeluaran Energi Harian Total (TDEE): {tdee} kkal",
+  "@scoreInsightsHowCalculatedTdee": {
+    "placeholders": {
+      "tdee": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedFat": "• Defisit 7.700 kkal ≈ 1 kg lemak tubuh.",
+  "scoreInsightsBodyCompTitle": "Komposisi Tubuh",
+  "scoreInsightsBodyCompNewMeasure": "Pengukuran Baru",
+  "scoreInsightsBodyCompPrompt": "Pantau lemak dan otot dengan pita ukur atau InBody",
+  "scoreInsightsEnergyBalanceTitle": "Keseimbangan Energi (Masuk vs Terbakar)",
+  "scoreInsightsEatenKcal": "Masuk",
+  "scoreInsightsBurnedKcal": "Terbakar",
+  "scoreInsightsMacrosTitle": "Makro Hari Ini (Target vs Aktual)",
+  "scoreInsightsScoreTrendTitle": "Tren Skor 7 Hari",
+  "scoreInsightsImmediateActionsTitle": "Langkah cepat tingkatkan skor:"
 }

@@ -6,6 +6,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/cal_ai_camera_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
@@ -73,25 +74,9 @@ Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
                 icon: Icons.photo_library_rounded,
                 iconColor: const Color(0xFF38BDF8), // sky blue
                 title: 'من الاستوديو',
-                onTap: () async {
+                onTap: () {
                   Navigator.of(sheetCtx).pop();
-                  final picker = ImagePicker();
-                  final pickedFiles = await picker.pickMultiImage(limit: 5);
-                  if (pickedFiles.isNotEmpty && context.mounted) {
-                    final bytesList = <Uint8List>[];
-                    for (final pf in pickedFiles.take(5)) {
-                      bytesList.add(await pf.readAsBytes());
-                    }
-                    if (context.mounted) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => CalAiCameraScreen(
-                            initialPhotos: bytesList,
-                          ),
-                        ),
-                      );
-                    }
-                  }
+                  AiScanScreen.openGallery(context, ref);
                 },
               ),
               const SizedBox(height: 10),

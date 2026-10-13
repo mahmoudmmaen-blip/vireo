@@ -7614,6 +7614,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Achievements & Records 🏆'**
   String get walkingAchievementsTitle;
+
+  /// No description provided for @stepToggleError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not toggle step counter, please try again'**
+  String get stepToggleError;
+
+  /// No description provided for @scoreInsightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Score & Smart Insights 🎯'**
+  String get scoreInsightsTitle;
+
+  /// No description provided for @scoreInsightsTodaySummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Today: ate {eaten} of {target} kcal'**
+  String scoreInsightsTodaySummary(int eaten, int target);
+
+  /// No description provided for @scoreInsightsWeekFatSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'This week: lost ≈ {grams}g fat'**
+  String scoreInsightsWeekFatSummary(int grams);
+
+  /// No description provided for @scoreInsightsGoalWeeksSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Reach goal in ≈ {weeks} weeks'**
+  String scoreInsightsGoalWeeksSummary(String weeks);
+
+  /// No description provided for @scoreInsightsActionLogProtein.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a high-protein meal'**
+  String get scoreInsightsActionLogProtein;
+
+  /// No description provided for @scoreInsightsActionWalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Start walking towards goal'**
+  String get scoreInsightsActionWalk;
+
+  /// No description provided for @scoreInsightsActionWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Log water glass now'**
+  String get scoreInsightsActionWater;
+
+  /// No description provided for @scoreInsightsPredictionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart Predictions (Estimated 🔮)'**
+  String get scoreInsightsPredictionsTitle;
+
+  /// No description provided for @scoreInsightsPredictionsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on calorie deficit and metabolic rate'**
+  String get scoreInsightsPredictionsSubtitle;
+
+  /// No description provided for @scoreInsightsNeedData.
+  ///
+  /// In en, this message translates to:
+  /// **'Need at least 3 completed days for accurate prediction ({days} logged)'**
+  String scoreInsightsNeedData(int days);
+
+  /// No description provided for @scoreInsightsWeeklyFatLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Fat Loss'**
+  String get scoreInsightsWeeklyFatLoss;
+
+  /// No description provided for @scoreInsightsIn4Weeks.
+  ///
+  /// In en, this message translates to:
+  /// **'In 4 Weeks'**
+  String get scoreInsightsIn4Weeks;
+
+  /// No description provided for @scoreInsightsIn8Weeks.
+  ///
+  /// In en, this message translates to:
+  /// **'In 8 Weeks'**
+  String get scoreInsightsIn8Weeks;
+
+  /// No description provided for @scoreInsightsGoalHitIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal Hit In'**
+  String get scoreInsightsGoalHitIn;
+
+  /// No description provided for @scoreInsightsClampWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'⚠️ Projected loss clamped to ≤1% body weight per week for muscle safety.'**
+  String get scoreInsightsClampWarning;
+
+  /// No description provided for @scoreInsightsAggressiveDeficitWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'⚠️ Deficit exceeds 1,000 kcal/day. Consider eating slightly more to preserve BMR.'**
+  String get scoreInsightsAggressiveDeficitWarning;
+
+  /// No description provided for @scoreInsightsHowCalculatedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How was this calculated? (Mifflin-St Jeor)'**
+  String get scoreInsightsHowCalculatedTitle;
+
+  /// No description provided for @scoreInsightsHowCalculatedBmr.
+  ///
+  /// In en, this message translates to:
+  /// **'• Basal Metabolic Rate (BMR): {bmr} kcal'**
+  String scoreInsightsHowCalculatedBmr(String bmr);
+
+  /// No description provided for @scoreInsightsHowCalculatedTdee.
+  ///
+  /// In en, this message translates to:
+  /// **'• Total Daily Energy Expenditure (TDEE): {tdee} kcal'**
+  String scoreInsightsHowCalculatedTdee(String tdee);
+
+  /// No description provided for @scoreInsightsHowCalculatedFat.
+  ///
+  /// In en, this message translates to:
+  /// **'• 7,700 kcal deficit ≈ 1 kg fat loss.'**
+  String get scoreInsightsHowCalculatedFat;
+
+  /// No description provided for @scoreInsightsBodyCompTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Body Composition'**
+  String get scoreInsightsBodyCompTitle;
+
+  /// No description provided for @scoreInsightsBodyCompNewMeasure.
+  ///
+  /// In en, this message translates to:
+  /// **'New Measure'**
+  String get scoreInsightsBodyCompNewMeasure;
+
+  /// No description provided for @scoreInsightsBodyCompPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Track body fat and muscle accurately with tape or InBody'**
+  String get scoreInsightsBodyCompPrompt;
+
+  /// No description provided for @scoreInsightsEnergyBalanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy Balance (Eaten vs Burned)'**
+  String get scoreInsightsEnergyBalanceTitle;
+
+  /// No description provided for @scoreInsightsEatenKcal.
+  ///
+  /// In en, this message translates to:
+  /// **'Eaten'**
+  String get scoreInsightsEatenKcal;
+
+  /// No description provided for @scoreInsightsBurnedKcal.
+  ///
+  /// In en, this message translates to:
+  /// **'Burned'**
+  String get scoreInsightsBurnedKcal;
+
+  /// No description provided for @scoreInsightsMacrosTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Macros (Target vs Actual)'**
+  String get scoreInsightsMacrosTitle;
+
+  /// No description provided for @scoreInsightsScoreTrendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'7-Day Score Trend'**
+  String get scoreInsightsScoreTrendTitle;
+
+  /// No description provided for @scoreInsightsImmediateActionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Actionable Tips to Boost Score:'**
+  String get scoreInsightsImmediateActionsTitle;
 }
 
 class _AppLocalizationsDelegate

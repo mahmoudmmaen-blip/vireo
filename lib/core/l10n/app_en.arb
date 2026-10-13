@@ -2143,15 +2143,21 @@
   "todayPlanWaterProgress": "{current} / {goal} L",
   "@todayPlanWaterProgress": {
     "placeholders": {
-      "current": { "type": "String" },
-      "goal": { "type": "String" }
+      "current": {
+        "type": "String"
+      },
+      "goal": {
+        "type": "String"
+      }
     }
   },
   "todayPlanSleepLogTitle": "Quality Sleep Log",
   "todayPlanSleepDuration": "{hours} hrs slept",
   "@todayPlanSleepDuration": {
     "placeholders": {
-      "hours": { "type": "String" }
+      "hours": {
+        "type": "String"
+      }
     }
   },
   "todayPlanSleepLogSave": "Save Sleep",
@@ -2168,13 +2174,17 @@
   "stepsFatBurned": "≈ {grams}g Fat",
   "@stepsFatBurned": {
     "placeholders": {
-      "grams": { "type": "String" }
+      "grams": {
+        "type": "String"
+      }
     }
   },
   "stepsKm": "{km} km",
   "@stepsKm": {
     "placeholders": {
-      "km": { "type": "String" }
+      "km": {
+        "type": "String"
+      }
     }
   },
   "stepsDetailTitle": "Steps & Walking",
@@ -2182,13 +2192,17 @@
   "stepsStreakDays": "{days}-Day Streak",
   "@stepsStreakDays": {
     "placeholders": {
-      "days": { "type": "int" }
+      "days": {
+        "type": "int"
+      }
     }
   },
   "stepsBestDay": "Best Day: {steps} steps",
   "@stepsBestDay": {
     "placeholders": {
-      "steps": { "type": "String" }
+      "steps": {
+        "type": "String"
+      }
     }
   },
   "stepsWeekTab": "Week",
@@ -2197,7 +2211,9 @@
   "mealReviewConfidence": "{pct}% confidence",
   "@mealReviewConfidence": {
     "placeholders": {
-      "pct": { "type": "int" }
+      "pct": {
+        "type": "int"
+      }
     }
   },
   "mealReviewSourceUsda": "USDA Database",
@@ -2214,25 +2230,33 @@
   "mealReviewCaloriesFormat": "{count} kcal",
   "@mealReviewCaloriesFormat": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "mealReviewProteinFormat": "{count}g protein",
   "@mealReviewProteinFormat": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "mealReviewCarbsFormat": "{count}g carbs",
   "@mealReviewCarbsFormat": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "mealReviewFatFormat": "{count}g fat",
   "@mealReviewFatFormat": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "cuisineSettingTitle": "Cuisine",
@@ -2247,7 +2271,9 @@
   "dietProgramFitReason": "Fits your goal: {reason}",
   "@dietProgramFitReason": {
     "placeholders": {
-      "reason": { "type": "String" }
+      "reason": {
+        "type": "String"
+      }
     }
   },
   "exerciseMusclesTargeted": "Target Muscles",
@@ -2275,5 +2301,80 @@
   "walkingFilterDay": "Day",
   "walkingFilterWeek": "Week",
   "walkingFilterMonth": "Month",
-  "walkingAchievementsTitle": "Achievements & Records 🏆"
+  "walkingAchievementsTitle": "Achievements & Records 🏆",
+  "stepToggleError": "Could not toggle step counter, please try again",
+  "scoreInsightsTitle": "Score & Smart Insights 🎯",
+  "scoreInsightsTodaySummary": "Today: ate {eaten} of {target} kcal",
+  "@scoreInsightsTodaySummary": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeekFatSummary": "This week: lost ≈ {grams}g fat",
+  "@scoreInsightsWeekFatSummary": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsGoalWeeksSummary": "Reach goal in ≈ {weeks} weeks",
+  "@scoreInsightsGoalWeeksSummary": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsActionLogProtein": "Log a high-protein meal",
+  "scoreInsightsActionWalk": "Start walking towards goal",
+  "scoreInsightsActionWater": "Log water glass now",
+  "scoreInsightsPredictionsTitle": "Smart Predictions (Estimated 🔮)",
+  "scoreInsightsPredictionsSubtitle": "Based on calorie deficit and metabolic rate",
+  "scoreInsightsNeedData": "Need at least 3 completed days for accurate prediction ({days} logged)",
+  "@scoreInsightsNeedData": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeeklyFatLoss": "Weekly Fat Loss",
+  "scoreInsightsIn4Weeks": "In 4 Weeks",
+  "scoreInsightsIn8Weeks": "In 8 Weeks",
+  "scoreInsightsGoalHitIn": "Goal Hit In",
+  "scoreInsightsClampWarning": "⚠️ Projected loss clamped to ≤1% body weight per week for muscle safety.",
+  "scoreInsightsAggressiveDeficitWarning": "⚠️ Deficit exceeds 1,000 kcal/day. Consider eating slightly more to preserve BMR.",
+  "scoreInsightsHowCalculatedTitle": "How was this calculated? (Mifflin-St Jeor)",
+  "scoreInsightsHowCalculatedBmr": "• Basal Metabolic Rate (BMR): {bmr} kcal",
+  "@scoreInsightsHowCalculatedBmr": {
+    "placeholders": {
+      "bmr": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedTdee": "• Total Daily Energy Expenditure (TDEE): {tdee} kcal",
+  "@scoreInsightsHowCalculatedTdee": {
+    "placeholders": {
+      "tdee": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedFat": "• 7,700 kcal deficit ≈ 1 kg fat loss.",
+  "scoreInsightsBodyCompTitle": "Body Composition",
+  "scoreInsightsBodyCompNewMeasure": "New Measure",
+  "scoreInsightsBodyCompPrompt": "Track body fat and muscle accurately with tape or InBody",
+  "scoreInsightsEnergyBalanceTitle": "Energy Balance (Eaten vs Burned)",
+  "scoreInsightsEatenKcal": "Eaten",
+  "scoreInsightsBurnedKcal": "Burned",
+  "scoreInsightsMacrosTitle": "Today's Macros (Target vs Actual)",
+  "scoreInsightsScoreTrendTitle": "7-Day Score Trend",
+  "scoreInsightsImmediateActionsTitle": "Actionable Tips to Boost Score:"
 }

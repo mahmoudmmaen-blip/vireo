@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,7 @@ final foodVisionServiceProvider = Provider<IFoodVisionService>(
 
 class AiScanNotifier extends AsyncNotifier<AiScanState> {
   @override
-  Future<AiScanState> build() async => const AiScanIdle();
+  FutureOr<AiScanState> build() => const AiScanIdle();
 
   void reset() {
     state = const AsyncValue.data(AiScanIdle());
@@ -49,6 +50,10 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
     } on FoodVisionOfflineException {
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.offline, previewBytes: preview),
+      );
+    } on FoodVisionNoFoodException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.noFood, previewBytes: preview),
       );
     } on FoodVisionParseException {
       state = AsyncValue.data(
@@ -101,6 +106,10 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
     } on FoodVisionOfflineException {
       state = AsyncValue.data(
         AiScanError(AiScanErrorKind.offline, previewBytes: preview),
+      );
+    } on FoodVisionNoFoodException {
+      state = AsyncValue.data(
+        AiScanError(AiScanErrorKind.noFood, previewBytes: preview),
       );
     } on FoodVisionParseException {
       state = AsyncValue.data(

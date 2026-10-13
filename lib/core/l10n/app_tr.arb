@@ -1193,5 +1193,80 @@
   "exerciseSafetyNote": "Güvenlik Notu",
   "exerciseWarmUpHeader": "Isınma Hareketleri",
   "reassessmentLaterSnooze": "Daha Sonra (3 gün sonra hatırlat)",
-  "measurementsAddEntry": "Yeni Ölçüm Ekle"
+  "measurementsAddEntry": "Yeni Ölçüm Ekle",
+  "stepToggleError": "Adım sayar durumu değiştirilemedi, lütfen tekrar deneyin",
+  "scoreInsightsTitle": "Skor ve Akıllı Öngörüler 🎯",
+  "scoreInsightsTodaySummary": "Bugün: {target} kcal hedeften {eaten} alındı",
+  "@scoreInsightsTodaySummary": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeekFatSummary": "Bu hafta: ≈ {grams}g yağ kaybedildi",
+  "@scoreInsightsWeekFatSummary": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsGoalWeeksSummary": "Hedeften ≈ {weeks} hafta uzaktasınız",
+  "@scoreInsightsGoalWeeksSummary": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsActionLogProtein": "Yüksek proteinli öğün kaydet",
+  "scoreInsightsActionWalk": "Hedefe doğru yürümeye başla",
+  "scoreInsightsActionWater": "Şimdi bir bardak su kaydet",
+  "scoreInsightsPredictionsTitle": "Akıllı Tahminler (Tahmini 🔮)",
+  "scoreInsightsPredictionsSubtitle": "Kalori açığı ve metabolizma hızına dayalı",
+  "scoreInsightsNeedData": "Doğru tahmin için en az 3 tam gün gerekli ({days} kaydedildi)",
+  "@scoreInsightsNeedData": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeeklyFatLoss": "Haftalık Yağ Kaybı",
+  "scoreInsightsIn4Weeks": "4 Hafta Sonra",
+  "scoreInsightsIn8Weeks": "8 Hafta Sonra",
+  "scoreInsightsGoalHitIn": "Hedefe Ulaşma",
+  "scoreInsightsClampWarning": "⚠️ Kas koruması için haftalık kayıp vücut ağırlığının ≤%1'i ile sınırlandırıldı.",
+  "scoreInsightsAggressiveDeficitWarning": "⚠️ Kalori açığı 1.000 kcal/gün üzerinde. Metabolizmayı korumak için biraz daha yiyin.",
+  "scoreInsightsHowCalculatedTitle": "Nasıl hesaplandı? (Mifflin-St Jeor)",
+  "scoreInsightsHowCalculatedBmr": "• Bazal Metabolizma Hızı (BMR): {bmr} kcal",
+  "@scoreInsightsHowCalculatedBmr": {
+    "placeholders": {
+      "bmr": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedTdee": "• Toplam Günlük Enerji Harcaması (TDEE): {tdee} kcal",
+  "@scoreInsightsHowCalculatedTdee": {
+    "placeholders": {
+      "tdee": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedFat": "• 7.700 kcal açık ≈ 1 kg yağ kaybı.",
+  "scoreInsightsBodyCompTitle": "Vücut Kompozisyonu",
+  "scoreInsightsBodyCompNewMeasure": "Yeni Ölçüm",
+  "scoreInsightsBodyCompPrompt": "Mezura veya InBody ile yağ ve kas takibi yapın",
+  "scoreInsightsEnergyBalanceTitle": "Enerji Dengesi (Alınan vs Yakılan)",
+  "scoreInsightsEatenKcal": "Alınan",
+  "scoreInsightsBurnedKcal": "Yakılan",
+  "scoreInsightsMacrosTitle": "Bugünün Makroları (Hedef vs Gerçek)",
+  "scoreInsightsScoreTrendTitle": "7 Günlük Skor Eğilimi",
+  "scoreInsightsImmediateActionsTitle": "Skoru artırmak için ipuçları:"
 }

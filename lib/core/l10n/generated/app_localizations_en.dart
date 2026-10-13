@@ -4194,4 +4194,116 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get walkingAchievementsTitle => 'Achievements & Records 🏆';
+
+  @override
+  String get stepToggleError =>
+      'Could not toggle step counter, please try again';
+
+  @override
+  String get scoreInsightsTitle => 'Score & Smart Insights 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'Today: ate $eaten of $target kcal';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'This week: lost ≈ ${grams}g fat';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return 'Reach goal in ≈ $weeks weeks';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein => 'Log a high-protein meal';
+
+  @override
+  String get scoreInsightsActionWalk => 'Start walking towards goal';
+
+  @override
+  String get scoreInsightsActionWater => 'Log water glass now';
+
+  @override
+  String get scoreInsightsPredictionsTitle =>
+      'Smart Predictions (Estimated 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'Based on calorie deficit and metabolic rate';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'Need at least 3 completed days for accurate prediction ($days logged)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'Weekly Fat Loss';
+
+  @override
+  String get scoreInsightsIn4Weeks => 'In 4 Weeks';
+
+  @override
+  String get scoreInsightsIn8Weeks => 'In 8 Weeks';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'Goal Hit In';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ Projected loss clamped to ≤1% body weight per week for muscle safety.';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ Deficit exceeds 1,000 kcal/day. Consider eating slightly more to preserve BMR.';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      'How was this calculated? (Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• Basal Metabolic Rate (BMR): $bmr kcal';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• Total Daily Energy Expenditure (TDEE): $tdee kcal';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• 7,700 kcal deficit ≈ 1 kg fat loss.';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'Body Composition';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'New Measure';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'Track body fat and muscle accurately with tape or InBody';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'Energy Balance (Eaten vs Burned)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'Eaten';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'Burned';
+
+  @override
+  String get scoreInsightsMacrosTitle => 'Today\'s Macros (Target vs Actual)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle => '7-Day Score Trend';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'Actionable Tips to Boost Score:';
 }

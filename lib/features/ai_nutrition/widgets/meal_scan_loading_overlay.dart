@@ -10,11 +10,15 @@ class MealScanLoadingOverlay extends StatefulWidget {
   const MealScanLoadingOverlay({
     super.key,
     this.imageBytes,
+    this.errorMessage,
+    this.isError = false,
     this.onRetry,
     this.onCancel,
   });
 
   final Uint8List? imageBytes;
+  final String? errorMessage;
+  final bool isError;
   final VoidCallback? onRetry;
   final VoidCallback? onCancel;
 
@@ -104,7 +108,7 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
         Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: _timedOut
+            child: (widget.isError || widget.errorMessage != null || _timedOut)
                 ? Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -115,18 +119,19 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.timer_outlined, size: 48, color: colors.ember),
-                        const SizedBox(height: 12),
-                        const Text(
-                          'استغرق التحليل وقتاً أطول من المتوقع',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                        Icon(
+                          Icons.warning_amber_rounded,
+                          size: 48,
+                          color: colors.ember,
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 12),
                         Text(
-                          'تأكد من الاتصال بالإنترنت وحاول مرة ثانية',
+                          widget.errorMessage ??
+                              (Localizations.localeOf(context).languageCode.startsWith('ar')
+                                  ? 'التحليل أخد وقت أطول من المتوقع.. حاول تاني'
+                                  : 'Analysis timed out. Please try again.'),
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: colors.textMute, fontSize: 13),
+                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
                         ),
                         const SizedBox(height: 18),
                         Row(
@@ -135,7 +140,11 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
                               Expanded(
                                 child: OutlinedButton(
                                   onPressed: widget.onCancel,
-                                  child: const Text('إلغاء'),
+                                  child: Text(
+                                    Localizations.localeOf(context).languageCode.startsWith('ar')
+                                        ? 'إلغاء'
+                                        : 'Cancel',
+                                  ),
                                 ),
                               ),
                             if (widget.onCancel != null && widget.onRetry != null)
@@ -152,7 +161,11 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
                                     });
                                     widget.onRetry!();
                                   },
-                                  child: const Text('إعادة المحاولة'),
+                                  child: Text(
+                                    Localizations.localeOf(context).languageCode.startsWith('ar')
+                                        ? 'حاول تاني'
+                                        : 'Try again',
+                                  ),
                                 ),
                               ),
                           ],

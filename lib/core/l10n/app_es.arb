@@ -1193,5 +1193,80 @@
   "exerciseSafetyNote": "Nota de seguridad",
   "exerciseWarmUpHeader": "Movimientos de calentamiento",
   "reassessmentLaterSnooze": "Más tarde (recordar en 3 días)",
-  "measurementsAddEntry": "Registrar nueva medida"
+  "measurementsAddEntry": "Registrar nueva medida",
+  "stepToggleError": "No se pudo cambiar el estado del podómetro, inténtalo de nuevo",
+  "scoreInsightsTitle": "Puntuación y Predicciones Inteligentes 🎯",
+  "scoreInsightsTodaySummary": "Hoy: consumiste {eaten} de {target} kcal",
+  "@scoreInsightsTodaySummary": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeekFatSummary": "Esta semana: perdiste ≈ {grams}g de grasa",
+  "@scoreInsightsWeekFatSummary": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsGoalWeeksSummary": "Alcanza tu meta en ≈ {weeks} semanas",
+  "@scoreInsightsGoalWeeksSummary": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsActionLogProtein": "Registra una comida rica en proteínas",
+  "scoreInsightsActionWalk": "Comienza a caminar hacia tu meta",
+  "scoreInsightsActionWater": "Registra un vaso de agua ahora",
+  "scoreInsightsPredictionsTitle": "Predicciones Inteligentes (Estimado 🔮)",
+  "scoreInsightsPredictionsSubtitle": "Basado en déficit calórico y tasa metabólica",
+  "scoreInsightsNeedData": "Se necesitan al menos 3 días completos ({days} registrados)",
+  "@scoreInsightsNeedData": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeeklyFatLoss": "Pérdida semanal de grasa",
+  "scoreInsightsIn4Weeks": "En 4 Semanas",
+  "scoreInsightsIn8Weeks": "En 8 Semanas",
+  "scoreInsightsGoalHitIn": "Meta en",
+  "scoreInsightsClampWarning": "⚠️ Pérdida limitada a ≤1% de peso por semana para proteger masa muscular.",
+  "scoreInsightsAggressiveDeficitWarning": "⚠️ El déficit supera 1,000 kcal/día. Consume un poco más para preservar el metabolismo.",
+  "scoreInsightsHowCalculatedTitle": "¿Cómo se calculó? (Mifflin-St Jeor)",
+  "scoreInsightsHowCalculatedBmr": "• Tasa Metabólica Basal (TMB): {bmr} kcal",
+  "@scoreInsightsHowCalculatedBmr": {
+    "placeholders": {
+      "bmr": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedTdee": "• Gasto Energético Diario Total (TDEE): {tdee} kcal",
+  "@scoreInsightsHowCalculatedTdee": {
+    "placeholders": {
+      "tdee": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedFat": "• Déficit de 7,700 kcal ≈ 1 kg de grasa corporal.",
+  "scoreInsightsBodyCompTitle": "Composición Corporal",
+  "scoreInsightsBodyCompNewMeasure": "Nueva Medida",
+  "scoreInsightsBodyCompPrompt": "Evalúa grasa y masa muscular con cinta o InBody",
+  "scoreInsightsEnergyBalanceTitle": "Balance Energético (Consumido vs Quemado)",
+  "scoreInsightsEatenKcal": "Consumido",
+  "scoreInsightsBurnedKcal": "Quemado",
+  "scoreInsightsMacrosTitle": "Macros de Hoy (Objetivo vs Real)",
+  "scoreInsightsScoreTrendTitle": "Tendencia de Puntuación de 7 Días",
+  "scoreInsightsImmediateActionsTitle": "Consejos inmediatos para mejorar:"
 }

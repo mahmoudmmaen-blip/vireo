@@ -1193,5 +1193,80 @@
   "exerciseSafetyNote": "Consigne de sécurité",
   "exerciseWarmUpHeader": "Mouvements d'échauffement",
   "reassessmentLaterSnooze": "Plus tard (rappeler dans 3 jours)",
-  "measurementsAddEntry": "Nouvelle mesure"
+  "measurementsAddEntry": "Nouvelle mesure",
+  "stepToggleError": "Impossible de modifier l'état du podomètre, veuillez réessayer",
+  "scoreInsightsTitle": "Score & Prédictions Intelligentes 🎯",
+  "scoreInsightsTodaySummary": "Aujourd'hui : {eaten} sur {target} kcal consommées",
+  "@scoreInsightsTodaySummary": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeekFatSummary": "Cette semaine : ≈ {grams}g de gras perdus",
+  "@scoreInsightsWeekFatSummary": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsGoalWeeksSummary": "Objectif atteint dans ≈ {weeks} semaines",
+  "@scoreInsightsGoalWeeksSummary": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsActionLogProtein": "Enregistrer un repas riche en protéines",
+  "scoreInsightsActionWalk": "Commencer à marcher vers l'objectif",
+  "scoreInsightsActionWater": "Enregistrer un verre d'eau maintenant",
+  "scoreInsightsPredictionsTitle": "Prédictions Intelligentes (Estimé 🔮)",
+  "scoreInsightsPredictionsSubtitle": "Basé sur le déficit calorique et le métabolisme",
+  "scoreInsightsNeedData": "Nécessite au moins 3 jours complets ({days} enregistrés)",
+  "@scoreInsightsNeedData": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeeklyFatLoss": "Perte de gras hebdomadaire",
+  "scoreInsightsIn4Weeks": "Dans 4 Semaines",
+  "scoreInsightsIn8Weeks": "Dans 8 Semaines",
+  "scoreInsightsGoalHitIn": "Objectif atteint dans",
+  "scoreInsightsClampWarning": "⚠️ Perte limitée à ≤1% du poids par semaine pour protéger les muscles.",
+  "scoreInsightsAggressiveDeficitWarning": "⚠️ Déficit supérieur à 1000 kcal/jour. Mangez un peu plus pour préserver le métabolisme.",
+  "scoreInsightsHowCalculatedTitle": "Comment cela a-t-il été calculé ? (Mifflin-St Jeor)",
+  "scoreInsightsHowCalculatedBmr": "• Métabolisme de base (BMR) : {bmr} kcal",
+  "@scoreInsightsHowCalculatedBmr": {
+    "placeholders": {
+      "bmr": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedTdee": "• Dépense énergétique journalière (TDEE) : {tdee} kcal",
+  "@scoreInsightsHowCalculatedTdee": {
+    "placeholders": {
+      "tdee": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedFat": "• 7700 kcal de déficit ≈ 1 kg de graisse.",
+  "scoreInsightsBodyCompTitle": "Composition Corporelle",
+  "scoreInsightsBodyCompNewMeasure": "Nouvelle mesure",
+  "scoreInsightsBodyCompPrompt": "Mesurez graisse et muscles par ruban ou InBody",
+  "scoreInsightsEnergyBalanceTitle": "Équilibre Énergétique (Consommé vs Brûlé)",
+  "scoreInsightsEatenKcal": "Consommé",
+  "scoreInsightsBurnedKcal": "Brûlé",
+  "scoreInsightsMacrosTitle": "Macros du jour (Cible vs Réel)",
+  "scoreInsightsScoreTrendTitle": "Tendance du score sur 7 jours",
+  "scoreInsightsImmediateActionsTitle": "Conseils pour améliorer le score :"
 }

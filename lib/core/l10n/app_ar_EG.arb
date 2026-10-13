@@ -282,5 +282,80 @@
   "walkingFilterDay": "النهارده",
   "walkingFilterWeek": "أسبوع",
   "walkingFilterMonth": "شهر",
-  "walkingAchievementsTitle": "الإنجازات والأرقام القياسية 🏆"
+  "walkingAchievementsTitle": "الإنجازات والأرقام القياسية 🏆",
+  "stepToggleError": "مقدرناش نغيّر حالة عداد الخطوات، حاول تاني",
+  "scoreInsightsTitle": "السكور والتوقعات الذكية 🎯",
+  "scoreInsightsTodaySummary": "النهارده: أكلت {eaten} من {target} سعرة",
+  "@scoreInsightsTodaySummary": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeekFatSummary": "الأسبوع ده: خسرت ≈ {grams} جم دهون",
+  "@scoreInsightsWeekFatSummary": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsGoalWeeksSummary": "هتوصل لهدفك في ≈ {weeks} أسابيع",
+  "@scoreInsightsGoalWeeksSummary": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsActionLogProtein": "سجّل وجبة غنية بالبروتين",
+  "scoreInsightsActionWalk": "ابدأ مشي وكمّل خطواتك",
+  "scoreInsightsActionWater": "اشرب كوباية ماية دلوقتي",
+  "scoreInsightsPredictionsTitle": "توقعات ذكية (تقديري 🔮)",
+  "scoreInsightsPredictionsSubtitle": "مبنية على عجز السعرات ومعدل الحرق",
+  "scoreInsightsNeedData": "محتاجين 3 أيام بيانات عشان التوقع يبقى دقيق (سجلت {days} يوم)",
+  "@scoreInsightsNeedData": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeeklyFatLoss": "دهون مفقودة أسبوعياً",
+  "scoreInsightsIn4Weeks": "بعد 4 أسابيع",
+  "scoreInsightsIn8Weeks": "بعد 8 أسابيع",
+  "scoreInsightsGoalHitIn": "الوصول للهدف في",
+  "scoreInsightsClampWarning": "⚠️ تم ضبط معدل النزول بما لا يتعدى 1% من وزن الجسم أسبوعياً لحماية صحتك وعضلاتك.",
+  "scoreInsightsAggressiveDeficitWarning": "⚠️ عجز السعرات أعلى من 1,000 سعرة/يوم. ننصح بزيادة السعرات قليلاً لتجنب تباطؤ الحرق.",
+  "scoreInsightsHowCalculatedTitle": "إزاي حسبناها؟ (معادلة Mifflin-St Jeor)",
+  "scoreInsightsHowCalculatedBmr": "• معدل الأيض الأساسي (BMR): {bmr} سعرة",
+  "@scoreInsightsHowCalculatedBmr": {
+    "placeholders": {
+      "bmr": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedTdee": "• معدل الحرق اليومي الكامل (TDEE): {tdee} سعرة",
+  "@scoreInsightsHowCalculatedTdee": {
+    "placeholders": {
+      "tdee": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedFat": "• كل 7,700 سعرة عجز تساوي حرق 1 كجم من دهون الجسم تقريباً.",
+  "scoreInsightsBodyCompTitle": "تحليل وتركيب الجسم",
+  "scoreInsightsBodyCompNewMeasure": "قياس جديد",
+  "scoreInsightsBodyCompPrompt": "اعرف نسبة الدهون وعضلاتك بالمازورة أو InBody",
+  "scoreInsightsEnergyBalanceTitle": "توازن الطاقة (المأكول مقابل المحروق)",
+  "scoreInsightsEatenKcal": "سعرات أكل",
+  "scoreInsightsBurnedKcal": "حرق ونشاط",
+  "scoreInsightsMacrosTitle": "توزيع الماكروز اليوم (الهدف vs المأكول)",
+  "scoreInsightsScoreTrendTitle": "مسار السكور خلال 7 أيام",
+  "scoreInsightsImmediateActionsTitle": "نصائح وإجراءات فورية لرفع السكور:"
 }

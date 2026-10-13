@@ -4228,4 +4228,115 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get walkingAchievementsTitle => 'Achievements & Records 🏆';
+
+  @override
+  String get stepToggleError =>
+      'Gagal mengubah status penghitung langkah, silakan coba lagi';
+
+  @override
+  String get scoreInsightsTitle => 'Skor & Wawasan Pintar 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'Hari ini: mengonsumsi $eaten dari $target kkal';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'Minggu ini: turun ≈ ${grams}g lemak';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return 'Capai target dalam ≈ $weeks minggu';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein => 'Catat makanan tinggi protein';
+
+  @override
+  String get scoreInsightsActionWalk => 'Mulai berjalan menuju target';
+
+  @override
+  String get scoreInsightsActionWater => 'Minum segelas air sekarang';
+
+  @override
+  String get scoreInsightsPredictionsTitle => 'Prediksi Pintar (Perkiraan 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'Berdasarkan defisit kalori dan laju metabolisme';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'Perlu minimal 3 hari lengkap ($days tercatat)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'Penurunan Lemak Mingguan';
+
+  @override
+  String get scoreInsightsIn4Weeks => 'Dalam 4 Minggu';
+
+  @override
+  String get scoreInsightsIn8Weeks => 'Dalam 8 Minggu';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'Capai Target Dalam';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ Penurunan dibatasi hingga ≤1% berat badan per minggu untuk menjaga otot.';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ Defisit melebihi 1.000 kkal/hari. Makan sedikit lebih banyak untuk menjaga metabolisme.';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      'Bagaimana ini dihitung? (Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• Laju Metabolisme Basal (BMR): $bmr kkal';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• Pengeluaran Energi Harian Total (TDEE): $tdee kkal';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• Defisit 7.700 kkal ≈ 1 kg lemak tubuh.';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'Komposisi Tubuh';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'Pengukuran Baru';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'Pantau lemak dan otot dengan pita ukur atau InBody';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'Keseimbangan Energi (Masuk vs Terbakar)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'Masuk';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'Terbakar';
+
+  @override
+  String get scoreInsightsMacrosTitle => 'Makro Hari Ini (Target vs Aktual)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle => 'Tren Skor 7 Hari';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'Langkah cepat tingkatkan skor:';
 }

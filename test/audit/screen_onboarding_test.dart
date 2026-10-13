@@ -1,4 +1,3 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:vireo/features/onboarding/steps/step_welcome_screen.dart';
 import 'package:vireo/features/onboarding/steps/step_goal_screen.dart';
 import 'package:vireo/features/onboarding/steps/step_body_screen.dart';

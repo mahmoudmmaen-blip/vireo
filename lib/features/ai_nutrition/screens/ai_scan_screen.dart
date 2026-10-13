@@ -18,6 +18,7 @@ import 'package:vireo/features/ai_nutrition/application/meal_scan_native_file.da
     if (dart.library.html) 'package:vireo/features/ai_nutrition/application/meal_scan_native_file_web.dart';
 
 import 'package:vireo/features/ai_nutrition/screens/cal_ai_camera_screen.dart';
+import 'package:vireo/features/ai_nutrition/screens/meal_scan_analyze_screen.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_scan_source_sheet.dart';
 
 class AiScanScreen extends ConsumerStatefulWidget {
@@ -48,12 +49,8 @@ class AiScanScreen extends ConsumerStatefulWidget {
       for (final pf in pickedFiles.take(5)) {
         bytesList.add(await pf.readAsBytes());
       }
-      if (context.mounted) {
-        await Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            builder: (_) => CalAiCameraScreen(initialPhotos: bytesList),
-          ),
-        );
+      if (bytesList.isNotEmpty && context.mounted) {
+        await MealScanAnalyzeScreen.open(context, bytesList);
       }
     }
   }
@@ -141,7 +138,7 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
         final kind = next.errorKindOrNull!;
         final message = switch (kind) {
           AiScanErrorKind.offline => l10n.aiScanOffline,
-          AiScanErrorKind.parse => l10n.aiScanParseError,
+          AiScanErrorKind.noFood || AiScanErrorKind.parse => l10n.aiScanParseError,
           AiScanErrorKind.config => l10n.aiScanConfigError,
           AiScanErrorKind.dailyLimit => l10n.aiDailyLimitReached,
           AiScanErrorKind.timeout => (Localizations.localeOf(context).languageCode.startsWith('ar')

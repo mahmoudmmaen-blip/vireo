@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
@@ -38,6 +39,7 @@ class MealReviewScreen extends ConsumerStatefulWidget {
 class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   late List<ResolvedMealLine> _lines;
   late List<ResolvedMealLine> _unsureLines;
+  late List<Uint8List> _images;
   late MealType _slot;
   final Set<int> _expandedIndices = {};
   final _scrollController = ScrollController();
@@ -53,6 +55,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
       _lines = List.of(widget.draft.lines);
       _unsureLines = [];
     }
+    _images = List.of(widget.draft.allImages);
     _slot = _mealSlotForNow();
   }
 
@@ -102,11 +105,52 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     }
   }
 
+  Future<void> _addPhoto() async {
+    final colors = context.vireoColors;
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final source = await showModalBottomSheet<ImageSource>(
+      context: context,
+      backgroundColor: colors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library_rounded),
+                title: Text(isArabic ? 'من المعرض' : 'From Gallery'),
+                onTap: () => Navigator.of(ctx).pop(ImageSource.gallery),
+              ),
+              ListTile(
+                leading: const Icon(Icons.camera_alt_rounded),
+                title: Text(isArabic ? 'التقاط صورة بالكاميرا' : 'Take Photo'),
+                onTap: () => Navigator.of(ctx).pop(ImageSource.camera),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    if (source == null) return;
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: source, imageQuality: 85);
+    if (picked != null) {
+      final bytes = await picked.readAsBytes();
+      if (mounted) {
+        setState(() => _images.add(bytes));
+      }
+    }
+  }
+
   Future<void> _save(MealAdviceResult advice) async {
     final result = MealScanDraft(
       lines: _lines,
-      imageBytes: widget.draft.imageBytes,
-      imagesBytes: widget.draft.imagesBytes,
+      imageBytes: _images.isNotEmpty ? _images.first : widget.draft.imageBytes,
+      imagesBytes: _images,
     ).toAnalysisResult();
 
     await ref.read(aiMealLogProvider.notifier).save(result);
@@ -329,27 +373,57 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                     ),
                     const SizedBox(height: 12),
                   ],
-                  // Photo thumbnails if available
-                  if (widget.draft.allImages.isNotEmpty) ...[
-                    SizedBox(
-                      height: 100,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: widget.draft.allImages.length,
-                        separatorBuilder: (_, _) => const SizedBox(width: 8),
-                        itemBuilder: (ctx, idx) => ClipRRect(
+                  // Photo thumbnails with "+ صورة" option
+                  SizedBox(
+                    height: 100,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _images.length + 1,
+                      separatorBuilder: (_, _) => const SizedBox(width: 8),
+                      itemBuilder: (ctx, idx) {
+                        if (idx < _images.length) {
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.memory(
+                              _images[idx],
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        }
+                        return InkWell(
+                          onTap: _addPhoto,
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.memory(
-                            widget.draft.allImages[idx],
+                          child: Container(
                             width: 100,
                             height: 100,
-                            fit: BoxFit.cover,
+                            decoration: BoxDecoration(
+                              color: colors.surfaceRaised,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: colors.line),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.add_a_photo_outlined, color: colors.ember, size: 24),
+                                const SizedBox(height: 6),
+                                Text(
+                                  isArabic ? '+ صورة' : '+ Photo',
+                                  style: TextStyle(
+                                    color: colors.textMute,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
-                    const SizedBox(height: 12),
-                  ],
+                  ),
+                  const SizedBox(height: 12),
 
                   // Items List Header
                   Row(

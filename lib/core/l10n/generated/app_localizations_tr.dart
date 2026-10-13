@@ -4222,4 +4222,115 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get walkingAchievementsTitle => 'Achievements & Records 🏆';
+
+  @override
+  String get stepToggleError =>
+      'Adım sayar durumu değiştirilemedi, lütfen tekrar deneyin';
+
+  @override
+  String get scoreInsightsTitle => 'Skor ve Akıllı Öngörüler 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'Bugün: $target kcal hedeften $eaten alındı';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'Bu hafta: ≈ ${grams}g yağ kaybedildi';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return 'Hedeften ≈ $weeks hafta uzaktasınız';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein => 'Yüksek proteinli öğün kaydet';
+
+  @override
+  String get scoreInsightsActionWalk => 'Hedefe doğru yürümeye başla';
+
+  @override
+  String get scoreInsightsActionWater => 'Şimdi bir bardak su kaydet';
+
+  @override
+  String get scoreInsightsPredictionsTitle => 'Akıllı Tahminler (Tahmini 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'Kalori açığı ve metabolizma hızına dayalı';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'Doğru tahmin için en az 3 tam gün gerekli ($days kaydedildi)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'Haftalık Yağ Kaybı';
+
+  @override
+  String get scoreInsightsIn4Weeks => '4 Hafta Sonra';
+
+  @override
+  String get scoreInsightsIn8Weeks => '8 Hafta Sonra';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'Hedefe Ulaşma';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ Kas koruması için haftalık kayıp vücut ağırlığının ≤%1\'i ile sınırlandırıldı.';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ Kalori açığı 1.000 kcal/gün üzerinde. Metabolizmayı korumak için biraz daha yiyin.';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      'Nasıl hesaplandı? (Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• Bazal Metabolizma Hızı (BMR): $bmr kcal';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• Toplam Günlük Enerji Harcaması (TDEE): $tdee kcal';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• 7.700 kcal açık ≈ 1 kg yağ kaybı.';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'Vücut Kompozisyonu';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'Yeni Ölçüm';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'Mezura veya InBody ile yağ ve kas takibi yapın';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'Enerji Dengesi (Alınan vs Yakılan)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'Alınan';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'Yakılan';
+
+  @override
+  String get scoreInsightsMacrosTitle => 'Bugünün Makroları (Hedef vs Gerçek)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle => '7 Günlük Skor Eğilimi';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'Skoru artırmak için ipuçları:';
 }

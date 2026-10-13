@@ -77,7 +77,7 @@ class SegmentalMap {
   }
 }
 
-enum BodyCompositionSource { inbodyScan, healthConnect, manual }
+enum BodyCompositionSource { inbodyScan, healthConnect, manual, navyTape }
 
 @immutable
 class BodyCompositionReport {
@@ -141,6 +141,7 @@ class BodyCompositionReport {
   BodyCompositionReport copyWith({
     DateTime? testDate,
     String? deviceModel,
+    BodyCompositionSource? source,
     double? weightKg,
     double? skeletalMuscleMassKg,
     double? bodyFatMassKg,
@@ -161,7 +162,7 @@ class BodyCompositionReport {
       id: id,
       testDate: testDate ?? this.testDate,
       deviceModel: deviceModel ?? this.deviceModel,
-      source: source,
+      source: source ?? this.source,
       weightKg: weightKg ?? this.weightKg,
       skeletalMuscleMassKg: skeletalMuscleMassKg ?? this.skeletalMuscleMassKg,
       bodyFatMassKg: bodyFatMassKg ?? this.bodyFatMassKg,
@@ -189,6 +190,7 @@ class BodyCompositionReport {
           BodyCompositionSource.inbodyScan => 'inbody_scan',
           BodyCompositionSource.healthConnect => 'health_connect',
           BodyCompositionSource.manual => 'manual',
+          BodyCompositionSource.navyTape => 'navy_tape',
         },
         'weight_kg': weightKg,
         'skeletal_muscle_mass_kg': skeletalMuscleMassKg,
@@ -218,6 +220,7 @@ class BodyCompositionReport {
       source: switch (sourceRaw) {
         'health_connect' => BodyCompositionSource.healthConnect,
         'manual' => BodyCompositionSource.manual,
+        'navy_tape' => BodyCompositionSource.navyTape,
         _ => BodyCompositionSource.inbodyScan,
       },
       weightKg: (json['weight_kg'] as num?)?.toDouble(),

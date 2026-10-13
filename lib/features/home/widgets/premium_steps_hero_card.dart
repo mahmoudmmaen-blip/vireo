@@ -96,10 +96,11 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
       // Rollback on failure
       runningNotifier.setOptimistic(previousState);
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('تعذر تغيير حالة عداد الخطوات، يرجى المحاولة مرة أخرى'),
-            duration: Duration(seconds: 3),
+          SnackBar(
+            content: Text(l10n.stepToggleError),
+            duration: const Duration(seconds: 3),
           ),
         );
       }

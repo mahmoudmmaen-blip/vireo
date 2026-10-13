@@ -26,8 +26,9 @@ abstract final class BodyReportVisionService {
     try {
       final bytes = await MealImageCompressor.compress(imageBytes);
       final response = await SupabaseService.client.functions.invoke(
-        AppConfig.analyzeBodyReportFunctionName,
+        AppConfig.analyzeMealFunctionName,
         body: {
+          'mode': 'body_report',
           'image_base64': base64Encode(bytes),
           'mime_type': 'image/jpeg',
           'language': language,

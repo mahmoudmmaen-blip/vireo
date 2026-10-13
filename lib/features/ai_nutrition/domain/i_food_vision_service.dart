@@ -46,6 +46,10 @@ final class FoodVisionTimeoutException extends FoodVisionException {
   const FoodVisionTimeoutException() : super('TIMEOUT');
 }
 
+final class FoodVisionNoFoodException extends FoodVisionException {
+  const FoodVisionNoFoodException() : super('NO_FOOD_DETECTED');
+}
+
 /// File-based scan entry (native [File] or web [Uint8List]).
 Future<FoodAnalysisResult> analyzeImageFile(
   IFoodVisionService service,

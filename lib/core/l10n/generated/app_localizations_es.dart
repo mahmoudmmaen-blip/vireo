@@ -4247,4 +4247,118 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get walkingAchievementsTitle => 'Achievements & Records 🏆';
+
+  @override
+  String get stepToggleError =>
+      'No se pudo cambiar el estado del podómetro, inténtalo de nuevo';
+
+  @override
+  String get scoreInsightsTitle => 'Puntuación y Predicciones Inteligentes 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'Hoy: consumiste $eaten de $target kcal';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'Esta semana: perdiste ≈ ${grams}g de grasa';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return 'Alcanza tu meta en ≈ $weeks semanas';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein =>
+      'Registra una comida rica en proteínas';
+
+  @override
+  String get scoreInsightsActionWalk => 'Comienza a caminar hacia tu meta';
+
+  @override
+  String get scoreInsightsActionWater => 'Registra un vaso de agua ahora';
+
+  @override
+  String get scoreInsightsPredictionsTitle =>
+      'Predicciones Inteligentes (Estimado 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'Basado en déficit calórico y tasa metabólica';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'Se necesitan al menos 3 días completos ($days registrados)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'Pérdida semanal de grasa';
+
+  @override
+  String get scoreInsightsIn4Weeks => 'En 4 Semanas';
+
+  @override
+  String get scoreInsightsIn8Weeks => 'En 8 Semanas';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'Meta en';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ Pérdida limitada a ≤1% de peso por semana para proteger masa muscular.';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ El déficit supera 1,000 kcal/día. Consume un poco más para preservar el metabolismo.';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      '¿Cómo se calculó? (Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• Tasa Metabólica Basal (TMB): $bmr kcal';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• Gasto Energético Diario Total (TDEE): $tdee kcal';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• Déficit de 7,700 kcal ≈ 1 kg de grasa corporal.';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'Composición Corporal';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'Nueva Medida';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'Evalúa grasa y masa muscular con cinta o InBody';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'Balance Energético (Consumido vs Quemado)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'Consumido';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'Quemado';
+
+  @override
+  String get scoreInsightsMacrosTitle => 'Macros de Hoy (Objetivo vs Real)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle =>
+      'Tendencia de Puntuación de 7 Días';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'Consejos inmediatos para mejorar:';
 }

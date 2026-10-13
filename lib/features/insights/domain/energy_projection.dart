@@ -85,7 +85,9 @@ class EnergyProjectionCalculator {
     required bool isFemale,
     double? customBmr,
   }) {
-    final count = dailyRecords.length;
+    // Filter completed days (days with >= 800 kcal logged). Incomplete days (< 800 kcal) are excluded.
+    final completedDays = dailyRecords.where((r) => r.eatenKcal >= 800).toList();
+    final count = completedDays.length;
     final bmr = customBmr ??
         calculateBmr(
           weightKg: currentWeightKg,
@@ -95,11 +97,11 @@ class EnergyProjectionCalculator {
         );
 
     final avgActivity = count > 0
-        ? dailyRecords.fold<double>(0.0, (s, r) => s + r.burnedKcal) / count
+        ? completedDays.fold<double>(0.0, (s, r) => s + r.burnedKcal) / count
         : 350.0;
     final tdee = calculateTdee(bmr: bmr, activityKcal: avgActivity);
 
-    // Guard against low data (minimum 3 days)
+    // Guard against low data (minimum 3 completed days required)
     if (count < 3) {
       return EnergyProjectionResult(
         hasSufficientData: false,
@@ -117,14 +119,14 @@ class EnergyProjectionCalculator {
       );
     }
 
-    // Daily deficit = TDEE - eaten
+    // Daily deficit = TDEE - eaten across completed days
     double totalDeficit = 0.0;
-    for (final r in dailyRecords) {
+    for (final r in completedDays) {
       final dayTdee = bmr + r.burnedKcal;
       totalDeficit += (dayTdee - r.eatenKcal);
     }
     final rawAvgDailyDeficit = totalDeficit / count;
-    final isDeficitTooAggressive = rawAvgDailyDeficit > 1000.0;
+    final isDeficitTooAggressive = count >= 3 && rawAvgDailyDeficit > 1000.0;
 
     // Safe weekly rate: clamp to ≤ 1.0% of body weight per week
     // 1% weight in kg * 7700 kcal / 7 days = max safe daily deficit

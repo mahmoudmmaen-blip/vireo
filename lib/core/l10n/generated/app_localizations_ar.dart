@@ -4164,6 +4164,118 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get walkingAchievementsTitle => 'الإنجازات والأرقام القياسية 🏆';
+
+  @override
+  String get stepToggleError =>
+      'تعذر تغيير حالة عداد الخطوات، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get scoreInsightsTitle => 'السكور والتوقعات الذكية 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'اليوم: تناولت $eaten من $target سعرة';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'هذا الأسبوع: خسرت ≈ $grams جم دهون';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return 'ستصل لهدفك خلال ≈ $weeks أسابيع';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein => 'سجّل وجبة غنية بالبروتين';
+
+  @override
+  String get scoreInsightsActionWalk => 'ابدأ المشي وأكمل خطواتك';
+
+  @override
+  String get scoreInsightsActionWater => 'اشرب كوب ماء الآن';
+
+  @override
+  String get scoreInsightsPredictionsTitle => 'توقعات ذكية (تقديري 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'مبنية على عجز السعرات ومعدل الحرق';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'نحتاج إلى 3 أيام من البيانات لدقة التوقع (سجلت $days يوم)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'دهون مفقودة أسبوعياً';
+
+  @override
+  String get scoreInsightsIn4Weeks => 'بعد 4 أسابيع';
+
+  @override
+  String get scoreInsightsIn8Weeks => 'بعد 8 أسابيع';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'الوصول للهدف في';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ تم ضبط معدل النزول بما لا يتعدى 1% من وزن الجسم أسبوعياً لحماية صحتك وعضلاتك.';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ عجز السعرات أعلى من 1,000 سعرة/يوم. ننصح بزيادة السعرات قليلاً لتجنب تباطؤ الحرق.';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      'كيف تم الحساب؟ (معادلة Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• معدل الأيض الأساسي (BMR): $bmr سعرة';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• معدل الحرق اليومي الكامل (TDEE): $tdee سعرة';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• كل 7,700 سعرة عجز تساوي حرق 1 كجم من دهون الجسم تقريباً.';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'تحليل وتركيب الجسم';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'قياس جديد';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'اعرف نسبة الدهون وعضلاتك بالمازورة أو InBody';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'توازن الطاقة (المأكول مقابل المحروق)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'سعرات أكل';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'حرق ونشاط';
+
+  @override
+  String get scoreInsightsMacrosTitle =>
+      'توزيع الماكروز اليوم (الهدف vs المأكول)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle => 'مسار السكور خلال 7 أيام';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'نصائح وإجراءات فورية لرفع السكور:';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -5049,6 +5161,117 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String get walkingAchievementsTitle => 'الإنجازات والأرقام القياسية 🏆';
+
+  @override
+  String get stepToggleError => 'مقدرناش نغيّر حالة عداد الخطوات، حاول تاني';
+
+  @override
+  String get scoreInsightsTitle => 'السكور والتوقعات الذكية 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'النهارده: أكلت $eaten من $target سعرة';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'الأسبوع ده: خسرت ≈ $grams جم دهون';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return 'هتوصل لهدفك في ≈ $weeks أسابيع';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein => 'سجّل وجبة غنية بالبروتين';
+
+  @override
+  String get scoreInsightsActionWalk => 'ابدأ مشي وكمّل خطواتك';
+
+  @override
+  String get scoreInsightsActionWater => 'اشرب كوباية ماية دلوقتي';
+
+  @override
+  String get scoreInsightsPredictionsTitle => 'توقعات ذكية (تقديري 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'مبنية على عجز السعرات ومعدل الحرق';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'محتاجين 3 أيام بيانات عشان التوقع يبقى دقيق (سجلت $days يوم)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'دهون مفقودة أسبوعياً';
+
+  @override
+  String get scoreInsightsIn4Weeks => 'بعد 4 أسابيع';
+
+  @override
+  String get scoreInsightsIn8Weeks => 'بعد 8 أسابيع';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'الوصول للهدف في';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ تم ضبط معدل النزول بما لا يتعدى 1% من وزن الجسم أسبوعياً لحماية صحتك وعضلاتك.';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ عجز السعرات أعلى من 1,000 سعرة/يوم. ننصح بزيادة السعرات قليلاً لتجنب تباطؤ الحرق.';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      'إزاي حسبناها؟ (معادلة Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• معدل الأيض الأساسي (BMR): $bmr سعرة';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• معدل الحرق اليومي الكامل (TDEE): $tdee سعرة';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• كل 7,700 سعرة عجز تساوي حرق 1 كجم من دهون الجسم تقريباً.';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'تحليل وتركيب الجسم';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'قياس جديد';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'اعرف نسبة الدهون وعضلاتك بالمازورة أو InBody';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'توازن الطاقة (المأكول مقابل المحروق)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'سعرات أكل';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'حرق ونشاط';
+
+  @override
+  String get scoreInsightsMacrosTitle =>
+      'توزيع الماكروز اليوم (الهدف vs المأكول)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle => 'مسار السكور خلال 7 أيام';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'نصائح وإجراءات فورية لرفع السكور:';
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -5887,4 +6110,116 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String get measurementsAddEntry => 'سجّل قياس جديد';
+
+  @override
+  String get stepToggleError =>
+      'تعذر تغيير حالة عداد الخطوات، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get scoreInsightsTitle => 'السكور والتوقعات الذكية 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'اليوم: تناولت $eaten من $target سعرة';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'هذا الأسبوع: خسرت ≈ $grams جم دهون';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return 'ستصل لهدفك خلال ≈ $weeks أسابيع';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein => 'سجّل وجبة غنية بالبروتين';
+
+  @override
+  String get scoreInsightsActionWalk => 'ابدأ المشي وأكمل خطواتك';
+
+  @override
+  String get scoreInsightsActionWater => 'اشرب كوب ماء الآن';
+
+  @override
+  String get scoreInsightsPredictionsTitle => 'توقعات ذكية (تقديري 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'مبنية على عجز السعرات ومعدل الحرق';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'نحتاج إلى 3 أيام من البيانات لدقة التوقع (سجلت $days يوم)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'دهون مفقودة أسبوعياً';
+
+  @override
+  String get scoreInsightsIn4Weeks => 'بعد 4 أسابيع';
+
+  @override
+  String get scoreInsightsIn8Weeks => 'بعد 8 أسابيع';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'الوصول للهدف في';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ تم ضبط معدل النزول بما لا يتعدى 1% من وزن الجسم أسبوعياً لحماية صحتك وعضلاتك.';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ عجز السعرات أعلى من 1,000 سعرة/يوم. ننصح بزيادة السعرات قليلاً لتجنب تباطؤ الحرق.';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      'كيف تم الحساب؟ (معادلة Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• معدل الأيض الأساسي (BMR): $bmr سعرة';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• معدل الحرق اليومي الكامل (TDEE): $tdee سعرة';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• كل 7,700 سعرة عجز تساوي حرق 1 كجم من دهون الجسم تقريباً.';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'تحليل وتركيب الجسم';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'قياس جديد';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'اعرف نسبة الدهون وعضلاتك بالمازورة أو InBody';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'توازن الطاقة (المأكول مقابل المحروق)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'سعرات أكل';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'حرق ونشاط';
+
+  @override
+  String get scoreInsightsMacrosTitle =>
+      'توزيع الماكروز اليوم (الهدف vs المأكول)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle => 'مسار السكور خلال 7 أيام';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'نصائح وإجراءات فورية لرفع السكور:';
 }

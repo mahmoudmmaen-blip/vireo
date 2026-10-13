@@ -4206,4 +4206,117 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get walkingAchievementsTitle => 'Achievements & Records 🏆';
+
+  @override
+  String get stepToggleError =>
+      'कदम काउंटर की स्थिति बदलने में विफल, कृपया पुनः प्रयास करें';
+
+  @override
+  String get scoreInsightsTitle => 'स्कोर और स्मार्ट अंतर्दृष्टि 🎯';
+
+  @override
+  String scoreInsightsTodaySummary(int eaten, int target) {
+    return 'आज: $target में से $eaten किलोकैलोरी ली';
+  }
+
+  @override
+  String scoreInsightsWeekFatSummary(int grams) {
+    return 'इस सप्ताह: ≈ $grams ग्राम वसा कम हुई';
+  }
+
+  @override
+  String scoreInsightsGoalWeeksSummary(String weeks) {
+    return '≈ $weeks हफ्तों में लक्ष्य तक पहुंचें';
+  }
+
+  @override
+  String get scoreInsightsActionLogProtein => 'प्रोटीन युक्त भोजन दर्ज करें';
+
+  @override
+  String get scoreInsightsActionWalk => 'लक्ष्य की ओर चलना शुरू करें';
+
+  @override
+  String get scoreInsightsActionWater => 'अब एक गिलास पानी पिएं';
+
+  @override
+  String get scoreInsightsPredictionsTitle =>
+      'स्मार्ट भविष्यवाणियां (अनुमानित 🔮)';
+
+  @override
+  String get scoreInsightsPredictionsSubtitle =>
+      'कैलोरी घाटे और चयापचय दर पर आधारित';
+
+  @override
+  String scoreInsightsNeedData(int days) {
+    return 'सटीक अनुमान के लिए कम से कम 3 पूरे दिन आवश्यक हैं ($days दर्ज)';
+  }
+
+  @override
+  String get scoreInsightsWeeklyFatLoss => 'साप्ताहिक वसा हानि';
+
+  @override
+  String get scoreInsightsIn4Weeks => '4 हफ्तों में';
+
+  @override
+  String get scoreInsightsIn8Weeks => '8 हफ्तों में';
+
+  @override
+  String get scoreInsightsGoalHitIn => 'लक्ष्य प्राप्त होगा';
+
+  @override
+  String get scoreInsightsClampWarning =>
+      '⚠️ मांसपेशियों की सुरक्षा के लिए प्रति सप्ताह वजन घटाने को ≤1% तक सीमित किया गया है।';
+
+  @override
+  String get scoreInsightsAggressiveDeficitWarning =>
+      '⚠️ घाटा 1,000 किलोकैलोरी/दिन से अधिक है। चयापचय बनाए रखने के लिए थोड़ा और खाएं।';
+
+  @override
+  String get scoreInsightsHowCalculatedTitle =>
+      'इसकी गणना कैसे की गई? (Mifflin-St Jeor)';
+
+  @override
+  String scoreInsightsHowCalculatedBmr(String bmr) {
+    return '• बेसल मेटाबोलिक दर (BMR): $bmr किलोकैलोरी';
+  }
+
+  @override
+  String scoreInsightsHowCalculatedTdee(String tdee) {
+    return '• कुल दैनिक ऊर्जा व्यय (TDEE): $tdee किलोकैलोरी';
+  }
+
+  @override
+  String get scoreInsightsHowCalculatedFat =>
+      '• 7,700 किलोकैलोरी घाटा ≈ 1 किलो वसा हानि।';
+
+  @override
+  String get scoreInsightsBodyCompTitle => 'शरीर की संरचना';
+
+  @override
+  String get scoreInsightsBodyCompNewMeasure => 'नया माप';
+
+  @override
+  String get scoreInsightsBodyCompPrompt =>
+      'टेप या InBody से वसा और मांसपेशियों को ट्रैक करें';
+
+  @override
+  String get scoreInsightsEnergyBalanceTitle =>
+      'ऊर्जा संतुलन (खाई गई बनाम जलाई गई)';
+
+  @override
+  String get scoreInsightsEatenKcal => 'खाई गई';
+
+  @override
+  String get scoreInsightsBurnedKcal => 'जलाई गई';
+
+  @override
+  String get scoreInsightsMacrosTitle =>
+      'आज के मैक्रोज़ (लक्ष्य बनाम वास्तविक)';
+
+  @override
+  String get scoreInsightsScoreTrendTitle => '7-दिवसीय स्कोर रुझान';
+
+  @override
+  String get scoreInsightsImmediateActionsTitle =>
+      'स्कोर बढ़ाने के त्वरित सुझाव:';
 }

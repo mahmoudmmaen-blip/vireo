@@ -64,8 +64,9 @@ Future<void> _run(
   final l10n = AppLocalizations.of(context);
   switch (action) {
     case QuickLogAction.scanCamera:
+      await AiScanScreen.openCamera(context, ref);
     case QuickLogAction.scanGallery:
-      await AiScanScreen.open(context, ref);
+      await AiScanScreen.openGallery(context, ref);
     case QuickLogAction.mealVoice:
       await Navigator.of(context).push(
         MaterialPageRoute<void>(

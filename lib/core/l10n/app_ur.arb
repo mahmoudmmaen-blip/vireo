@@ -1193,5 +1193,80 @@
   "exerciseSafetyNote": "حفاظتی ہدایات",
   "exerciseWarmUpHeader": "وارم اپ حرکات",
   "reassessmentLaterSnooze": "بعد میں (3 دن بعد یاد دلائیں)",
-  "measurementsAddEntry": "نیا اندراج شامل کریں"
+  "measurementsAddEntry": "نیا اندراج شامل کریں",
+  "stepToggleError": "قدموں کے کاؤنٹر کی حالت تبدیل کرنے میں ناکامی، دوبارہ کوشش کریں",
+  "scoreInsightsTitle": "اسکور اور اسمارٹ معلومات 🎯",
+  "scoreInsightsTodaySummary": "آج: {target} میں سے {eaten} کلوکیلوری لی",
+  "@scoreInsightsTodaySummary": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeekFatSummary": "اس ہفتے: ≈ {grams} گرام چربی کم ہوئی",
+  "@scoreInsightsWeekFatSummary": {
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsGoalWeeksSummary": "≈ {weeks} ہفتوں میں ہدف حاصل کریں",
+  "@scoreInsightsGoalWeeksSummary": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsActionLogProtein": "پروٹین سے بھرپور کھانا درج کریں",
+  "scoreInsightsActionWalk": "ہدف کی طرف چلنا شروع کریں",
+  "scoreInsightsActionWater": "ابھی ایک گلاس پانی پئیں",
+  "scoreInsightsPredictionsTitle": "اسمارٹ پیشین گوئیاں (تخمینہ 🔮)",
+  "scoreInsightsPredictionsSubtitle": "کیلوری کی کمی اور میٹابولک ریٹ پر مبنی",
+  "scoreInsightsNeedData": "درست تخمینے کے لیے کم از کم 3 مکمل دن درکار ہیں ({days} درج)",
+  "@scoreInsightsNeedData": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreInsightsWeeklyFatLoss": "ہفتہ وار چربی کی کمی",
+  "scoreInsightsIn4Weeks": "4 ہفتوں میں",
+  "scoreInsightsIn8Weeks": "8 ہفتوں میں",
+  "scoreInsightsGoalHitIn": "ہدف تک رسائی",
+  "scoreInsightsClampWarning": "⚠️ پٹھوں کے تحفظ کے لیے وزن میں کمی کو ہفتہ وار ≤1% تک محدود کیا گیا ہے۔",
+  "scoreInsightsAggressiveDeficitWarning": "⚠️ خسارہ 1,000 کلوکیلوری/دن سے زیادہ ہے۔ میٹابولزم کو بچانے کے لیے کچھ زیادہ کھائیں۔",
+  "scoreInsightsHowCalculatedTitle": "یہ کیسے حساب کیا گیا؟ (Mifflin-St Jeor)",
+  "scoreInsightsHowCalculatedBmr": "• بنیادی میٹابولک ریٹ (BMR): {bmr} کلوکیلوری",
+  "@scoreInsightsHowCalculatedBmr": {
+    "placeholders": {
+      "bmr": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedTdee": "• کل روزانہ توانائی کا اخراج (TDEE): {tdee} کلوکیلوری",
+  "@scoreInsightsHowCalculatedTdee": {
+    "placeholders": {
+      "tdee": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreInsightsHowCalculatedFat": "• 7,700 کلوکیلوری خسارہ ≈ 1 کلو چربی کا نقصان۔",
+  "scoreInsightsBodyCompTitle": "جسمانی ساخت",
+  "scoreInsightsBodyCompNewMeasure": "نیا ماپ",
+  "scoreInsightsBodyCompPrompt": "انچ ٹیپ یا InBody سے چربی اور پٹھے ٹریک کریں",
+  "scoreInsightsEnergyBalanceTitle": "توانائی کا توازن (کھائی گئی بمقابلہ جلائی گئی)",
+  "scoreInsightsEatenKcal": "کھائی گئی",
+  "scoreInsightsBurnedKcal": "جلائی گئی",
+  "scoreInsightsMacrosTitle": "آج کے میکروس (ہدف بمقابلہ اصل)",
+  "scoreInsightsScoreTrendTitle": "7 دن کے اسکور کا رجحان",
+  "scoreInsightsImmediateActionsTitle": "اسکور بڑھانے کے فوری اقدامات:"
 }
