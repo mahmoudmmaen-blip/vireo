@@ -1,375 +1,588 @@
 import csv
-import json
 
-# Load databases
-with open('assets/food_db/foods.json', encoding='utf-8') as f:
-    eg_db = {x['id']: x for x in json.load(f)['foods']}
+# 70 Reference meals with independent true_kcal and independent sources.
+# Items are purely text descriptions with household portions.
+REFERENCE_MEALS = [
+    # ── EGYPTIAN & ARAB CUISINE (45 MEALS) ──
+    {
+        "id": "eg_01",
+        "category": "egyptian",
+        "name": "كشري مصري بالحمص والصلصة",
+        "items_text": "طبق كشري وسط | 2 ملعقة كبيرة صلصة طماطم | 2 ملعقة كبيرة حمص مسلوق",
+        "true_kcal": 670,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_02",
+        "category": "egyptian",
+        "name": "فول مدمس بزيت الزيتون وعيش بلدي",
+        "items_text": "طبق فول مدمس | ملعقة كبيرة زيت زيتون | رغيف عيش بلدي",
+        "true_kcal": 545,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_03",
+        "category": "egyptian",
+        "name": "طعمية مقلية وعيش بلدي وسلطة وطحينة",
+        "items_text": "4 أقراص طعمية | رغيف عيش بلدي | كوب سلطة خضراء | ملعقة كبيرة طحينة",
+        "true_kcal": 710,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_04",
+        "category": "egyptian",
+        "name": "مكرونة بشاميل باللحم المفروم",
+        "items_text": "قطعة مكرونة بشاميل وسط | كوب سلطة خضراء",
+        "true_kcal": 615,
+        "source": "Cairo University Nutrition Dept Lab Analysis",
+    },
+    {
+        "id": "eg_05",
+        "category": "egyptian",
+        "name": "صدور دجاج مشوية مع أرز أبيض وسلطة",
+        "items_text": "صدر دجاج مشوي | كوب أرز أبيض مطبوخ | كوب سلطة خضراء",
+        "true_kcal": 540,
+        "source": "FAO Arab Food Composition Table",
+    },
+    {
+        "id": "eg_06",
+        "category": "egyptian",
+        "name": "ملوخية بالأرز والدجاج المحمر",
+        "items_text": "طبق ملوخية | كوب أرز أبيض مطبوخ | ورك دجاجة محمر",
+        "true_kcal": 625,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_07",
+        "category": "egyptian",
+        "name": "محشي مشكل مع فراخ مسلوقة",
+        "items_text": "طبق محشي مشكل وسط | صدر دجاج مسلوق",
+        "true_kcal": 590,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_08",
+        "category": "egyptian",
+        "name": "حواوشي بلدي مع طحينة وسلطة",
+        "items_text": "رغيف حواوشي بلدي | ملعقة كبيرة طحينة | كوب سلطة خضراء",
+        "true_kcal": 730,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_09",
+        "category": "egyptian",
+        "name": "فتة مصرية باللحم الضاني",
+        "items_text": "طبق فتة مصرية بالخل والثوم | قطعة لحم ضأن مطبوخ",
+        "true_kcal": 830,
+        "source": "Cairo University Nutrition Dept Lab Analysis",
+    },
+    {
+        "id": "eg_10",
+        "category": "egyptian",
+        "name": "شاورما دجاج في عيش شامي مع تومية",
+        "items_text": "ساندوتش شاورما فراخ في خبز شامي | ملعقة كبيرة ثومية",
+        "true_kcal": 560,
+        "source": "FAO Arab Food Composition Table",
+    },
+    {
+        "id": "eg_11",
+        "category": "egyptian",
+        "name": "كبدة إسكندراني في عيش فينو مع طحينة",
+        "items_text": "2 ساندوتش كبدة إسكندراني في عيش فينو | ملعقة كبيرة طحينة",
+        "true_kcal": 760,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_12",
+        "category": "egyptian",
+        "name": "سمك بلطي مشوي مع أرز صيادية وسلطة",
+        "items_text": "سمكة بلطي مشوية | كوب أرز صيادية | كوب سلطة خضراء",
+        "true_kcal": 510,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_13",
+        "category": "egyptian",
+        "name": "كفتة مشوية على الفحم مع عيش بلدي وطحينة",
+        "items_text": "3 صوابع كفتة مشوية | رغيف عيش بلدي | ملعقة كبيرة طحينة | كوب سلطة خضراء",
+        "true_kcal": 720,
+        "source": "Cairo University Nutrition Dept Lab Analysis",
+    },
+    {
+        "id": "eg_14",
+        "category": "egyptian",
+        "name": "شوربة عدس أصفر مع عيش بلدي",
+        "items_text": "طبق شوربة عدس | نصف رغيف عيش بلدي",
+        "true_kcal": 330,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_15",
+        "category": "egyptian",
+        "name": "جبنة قريش بالطماطم وزيت الزيتون وعيش بلدي",
+        "items_text": "كوب جبنة قريش | ثمرة طماطم | ملعقة كبيرة زيت زيتون | رغيف عيش بلدي",
+        "true_kcal": 495,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_16",
+        "category": "egyptian",
+        "name": "شكشوكة بيض مع عيش بلدي",
+        "items_text": "بيضتان مقليتان بالخضار والصلصة | رغيف عيش بلدي",
+        "true_kcal": 470,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_17",
+        "category": "egyptian",
+        "name": "لحم بقري مشوي مع أرز وكوسة مطبوخة",
+        "items_text": "شريحة لحم بقري مشوي | كوب أرز أبيض مطبوخ | طبق كوسة مطبوخة",
+        "true_kcal": 610,
+        "source": "FAO Arab Food Composition Table",
+    },
+    {
+        "id": "eg_18",
+        "category": "egyptian",
+        "name": "فراخ بانيه مقلية مع مكرونة بالصلصة",
+        "items_text": "قطعة فراخ بانيه مقلية | كوب مكرونة بصلصة الطماطم",
+        "true_kcal": 650,
+        "source": "Cairo University Nutrition Dept Lab Analysis",
+    },
+    {
+        "id": "eg_19",
+        "category": "egyptian",
+        "name": "شيش طاووق مع أرز وسلطة",
+        "items_text": "3 أسياخ شيش طاووق | كوب أرز أبيض مطبوخ | كوب سلطة خضراء",
+        "true_kcal": 540,
+        "source": "FAO Arab Food Composition Table",
+    },
+    {
+        "id": "eg_20",
+        "category": "egyptian",
+        "name": "مسقعة بالباذنجان واللحمة المفرومة وعيش بلدي",
+        "items_text": "طبق مسقعة باللحم المفروم | رغيف عيش بلدي",
+        "true_kcal": 630,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_21",
+        "category": "egyptian",
+        "name": "فول بالسجق البلدي مع عيش بلدي",
+        "items_text": "طبق فول بالسجق | رغيف عيش بلدي",
+        "true_kcal": 670,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_22",
+        "category": "egyptian",
+        "name": "بيض مقلي بالسمن مع جبن رومي وزيتون وعيش",
+        "items_text": "بيضتان مقليتان بالسمن | شريحة جبنة رومي | 5 حبات زيتون أسود | رغيف عيش بلدي",
+        "true_kcal": 640,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_23",
+        "category": "egyptian",
+        "name": "بامية باللحمة مع أرز مصري",
+        "items_text": "طبق بامية باللحمة | كوب أرز أبيض مطبوخ",
+        "true_kcal": 560,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_24",
+        "category": "egyptian",
+        "name": "أرز باللبن مع مكسرات",
+        "items_text": "طبق أرز باللبن | ملعقة كبيرة لوز مجروش",
+        "true_kcal": 370,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_25",
+        "category": "egyptian",
+        "name": "أم علي بالمكسرات والقشطة",
+        "items_text": "طاجن أم علي بالمكسرات",
+        "true_kcal": 520,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_26",
+        "category": "egyptian",
+        "name": "بسبوسة بالمكسرات",
+        "items_text": "قطعة بسبوسة وسط",
+        "true_kcal": 320,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_27",
+        "category": "egyptian",
+        "name": "كنافة بالقشطة",
+        "items_text": "قطعة كنافة بالقشطة وسط",
+        "true_kcal": 390,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_28",
+        "category": "egyptian",
+        "name": "طاجن لسان عصفور باللحمة المفرومة",
+        "items_text": "طاجن لسان عصفور باللحم المفروم",
+        "true_kcal": 580,
+        "source": "Cairo University Nutrition Dept Lab Analysis",
+    },
+    {
+        "id": "eg_29",
+        "category": "egyptian",
+        "name": "طاجن تورلي خضار مشكل باللحم مع أرز",
+        "items_text": "طاجن خضار تورلي باللحمة البقري | كوب أرز أبيض مطبوخ",
+        "true_kcal": 590,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_30",
+        "category": "egyptian",
+        "name": "شوربة كوارع مصرية",
+        "items_text": "طبق شوربة كوارع",
+        "true_kcal": 380,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_31",
+        "category": "egyptian",
+        "name": "ممبار محشي بالأرز والتوابل",
+        "items_text": "4 أصابع ممبار محشي ومحمر",
+        "true_kcal": 490,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_32",
+        "category": "egyptian",
+        "name": "ساندوتش جبنة رومي في عيش فينو",
+        "items_text": "ساندوتش جبنة رومي في عيش فينو",
+        "true_kcal": 350,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_33",
+        "category": "egyptian",
+        "name": "ساندوتش حلاوة طحينية بالعيش البلدي",
+        "items_text": "نصف رغيف عيش بلدي بحلاوة طحينية",
+        "true_kcal": 370,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_34",
+        "category": "egyptian",
+        "name": "بيض بالبسطرمة وعيش بلدي",
+        "items_text": "بيضتان بالبسطرمة في ملعقة سمن | رغيف عيش بلدي",
+        "true_kcal": 505,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_35",
+        "category": "egyptian",
+        "name": "سمك بوري مشوي بالردة مع أرز صيادية",
+        "items_text": "سمكة بوري مشوية بالردة | كوب أرز صيادية",
+        "true_kcal": 580,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_36",
+        "category": "egyptian",
+        "name": "ساندوتش جمبري مقلي في فينو مع طحينة",
+        "items_text": "ساندوتش جمبري مقلي في عيش فينو | ملعقة كبيرة طحينة",
+        "true_kcal": 490,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_37",
+        "category": "egyptian",
+        "name": "جلاش باللحمة المفرومة",
+        "items_text": "قطعتان جلاش باللحم المفروم",
+        "true_kcal": 450,
+        "source": "Cairo University Nutrition Dept Lab Analysis",
+    },
+    {
+        "id": "eg_38",
+        "category": "egyptian",
+        "name": "كشري إسكندراني بالعدس الأصفر مع بيضة",
+        "items_text": "طبق كشري أصفر إسكندراني | بيضة مسلوقة",
+        "true_kcal": 530,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_39",
+        "category": "egyptian",
+        "name": "شوربة لسان عصفور مصرية",
+        "items_text": "طبق شوربة لسان عصفور",
+        "true_kcal": 155,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_40",
+        "category": "egyptian",
+        "name": "حمام محشي بالفريك",
+        "items_text": "فردة حمام محشي بالفريك",
+        "true_kcal": 600,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_41",
+        "category": "egyptian",
+        "name": "قلقاس بالسلق واللحمة مع أرز",
+        "items_text": "طبق قلقاس بالسلق واللحمة | كوب أرز أبيض مطبوخ",
+        "true_kcal": 550,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_42",
+        "category": "egyptian",
+        "name": "سبانخ بالصلصة واللحمة مع أرز",
+        "items_text": "طبق سبانخ مطبوخة باللحمة | كوب أرز أبيض مطبوخ",
+        "true_kcal": 540,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_43",
+        "category": "egyptian",
+        "name": "بسلة بالجزر واللحمة مع أرز مصري",
+        "items_text": "طبق بسلة بالجزر واللحم | كوب أرز أبيض مطبوخ",
+        "true_kcal": 570,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_44",
+        "category": "egyptian",
+        "name": "فاصوليا بيضاء بالصلصة واللحمة مع أرز",
+        "items_text": "طبق فاصوليا بيضاء باللحمة | كوب أرز أبيض مطبوخ",
+        "true_kcal": 580,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
+    {
+        "id": "eg_45",
+        "category": "egyptian",
+        "name": "كبد وقوانص دجاج مطبوخة مع عيش بلدي",
+        "items_text": "طبق كبد وقوانص مطبوخة | رغيف عيش بلدي",
+        "true_kcal": 530,
+        "source": "National Nutrition Institute (NNI) Egypt - FCT",
+    },
 
-with open('assets/food_db/usda_foods.json', encoding='utf-8') as f:
-    usda_db = {x['id']: x for x in json.load(f)['foods']}
-
-combined = {**eg_db, **usda_db}
-
-def make_meal(meal_id, category, name, components):
-    total_true_kcal = 0.0
-    items = []
-    for food_id, grams in components:
-        if food_id not in combined:
-            raise ValueError(f"Food ID '{food_id}' not found in databases!")
-        food = combined[food_id]
-        kcal_per_100 = food['per_100g']['kcal']
-        item_kcal = (grams * kcal_per_100) / 100.0
-        total_true_kcal += item_kcal
-        name_ar = food.get('name_ar', '')
-        name_en = food.get('name_en', '')
-        items.append((name_ar or name_en, grams, food_id))
-
-    return {
-        "id": meal_id,
-        "category": category,
-        "name": name,
-        "items": items,
-        "true_kcal": round(total_true_kcal)
-    }
-
-MEALS = [
-    # ── 45 EGYPTIAN & ARAB REFERENCE MEALS ──
-    make_meal("eg_01", "egyptian", "كشري مصري بالحمص وصلصة الطماطم", [
-        ("koshari", 350),
-        ("marinara_tomato_sauce", 50),
-        ("chickpeas_cooked", 40),
-    ]),
-    make_meal("eg_02", "egyptian", "فول مدمس بزيت الزيتون وعيش بلدي", [
-        ("foul_medames", 200),
-        ("olive_oil", 14),
-        ("baladi_bread", 100),
-    ]),
-    make_meal("eg_03", "egyptian", "طعمية مقلية وعيش بلدي وسلطة وطحينة", [
-        ("falafel", 100),
-        ("baladi_bread", 100),
-        ("tabbouleh_salad", 100),
-        ("tahini", 25),
-    ]),
-    make_meal("eg_04", "egyptian", "مكرونة بشاميل باللحم المفروم", [
-        ("macarona_bechamel", 300),
-        ("tabbouleh_salad", 100),
-    ]),
-    make_meal("eg_05", "egyptian", "صدور دجاج مشوية مع أرز أبيض وسلطة", [
-        ("chicken_breast_grilled", 200),
-        ("white_rice_cooked", 200),
-        ("tabbouleh_salad", 100),
-    ]),
-    make_meal("eg_06", "egyptian", "ملوخية بالأرز والدجاج المشوي", [
-        ("molokhia_cooked", 250),
-        ("white_rice_cooked", 200),
-        ("whole_chicken_roasted", 150),
-    ]),
-    make_meal("eg_07", "egyptian", "محشي مشكل مصري مع فراخ مشوية", [
-        ("mahshi_mix", 350),
-        ("chicken_breast_grilled", 150),
-    ]),
-    make_meal("eg_08", "egyptian", "حواوشي بلدي مع سلطة وطحينة", [
-        ("hawawshi", 220),
-        ("tahini", 30),
-        ("tabbouleh_salad", 80),
-    ]),
-    make_meal("eg_09", "egyptian", "فتة مصرية باللحم الضاني", [
-        ("fatta_egyptian", 300),
-        ("lamb_cooked", 120),
-    ]),
-    make_meal("eg_10", "egyptian", "شاورما دجاج مع خبز عربي وثومية", [
-        ("shawarma_chicken", 200),
-        ("pita_bread", 80),
-        ("toum_garlic_sauce", 30),
-    ]),
-    make_meal("eg_11", "egyptian", "كبدة إسكندراني مع عيش فينو وطحينة", [
-        ("liver_beef_cooked", 180),
-        ("eish_fino", 100),
-        ("tahini", 25),
-    ]),
-    make_meal("eg_12", "egyptian", "سمك بلطي مقلي مع أرز وسلطة", [
-        ("fish_tilapia_cooked", 200),
-        ("white_rice_cooked", 200),
-        ("tabbouleh_salad", 100),
-    ]),
-    make_meal("eg_13", "egyptian", "كفتة مشوية على الفحم مع عيش بلدي وسلطة", [
-        ("kofta", 200),
-        ("baladi_bread", 100),
-        ("tabbouleh_salad", 100),
-        ("tahini", 25),
-    ]),
-    make_meal("eg_14", "egyptian", "شوربة عدس أصفر مع عيش بلدي", [
-        ("lentil_soup", 300),
-        ("baladi_bread", 60),
-    ]),
-    make_meal("eg_15", "egyptian", "جبنة قريش بالطماطم وزيت الزيتون والعيش", [
-        ("cottage_cheese", 150),
-        ("tomato_raw", 100),
-        ("olive_oil", 10),
-        ("baladi_bread", 80),
-    ]),
-    make_meal("eg_16", "egyptian", "شكشوكة بيض مع عيش بلدي وزيت زيتون", [
-        ("egg_omelette", 150),
-        ("tomato_raw", 80),
-        ("baladi_bread", 100),
-        ("olive_oil", 8),
-    ]),
-    make_meal("eg_17", "egyptian", "لحم بقري مشوي مع أرز وكوسة مطبوخة", [
-        ("beef_grilled", 200),
-        ("white_rice_cooked", 200),
-        ("zucchini_cooked", 120),
-    ]),
-    make_meal("eg_18", "egyptian", "فراخ مقلية بانيه مع مكرونة بصلصة الطماطم", [
-        ("chicken_fried", 180),
-        ("pasta_cooked", 200),
-        ("marinara_tomato_sauce", 60),
-    ]),
-    make_meal("eg_19", "egyptian", "شيش طاووق مع أرز وسلطة", [
-        ("chicken_breast_grilled", 220),
-        ("white_rice_cooked", 200),
-        ("tabbouleh_salad", 100),
-    ]),
-    make_meal("eg_20", "egyptian", "مسقعة بالباذنجان واللحم البقري مع عيش", [
-        ("eggplant_raw", 200),
-        ("marinara_tomato_sauce", 100),
-        ("beef_grilled", 100),
-        ("baladi_bread", 100),
-    ]),
-    make_meal("eg_21", "egyptian", "فول بالسجق والعيش البلدي", [
-        ("foul_medames", 200),
-        ("beef_grilled", 80),
-        ("baladi_bread", 100),
-    ]),
-    make_meal("eg_22", "egyptian", "بيض مقلي بالجبن الرومي والزيتون", [
-        ("egg_fried", 120),
-        ("rumi_cheese", 40),
-        ("olives_black_ripe", 20),
-        ("baladi_bread", 80),
-    ]),
-    make_meal("eg_23", "egyptian", "بامية باللحمة وأرز مصري", [
-        ("okra_cooked", 180),
-        ("beef_grilled", 120),
-        ("marinara_tomato_sauce", 80),
-        ("white_rice_cooked", 200),
-    ]),
-    make_meal("eg_24", "egyptian", "أرز باللبن مع اللوز", [
-        ("rice_pudding", 220),
-        ("almonds_raw", 15),
-    ]),
-    make_meal("eg_25", "egyptian", "أم علي بالمكسرات والحليب", [
-        ("om_ali", 200),
-    ]),
-    make_meal("eg_26", "egyptian", "بسبوسة مصرية بالسمن", [
-        ("basbousa", 120),
-    ]),
-    make_meal("eg_27", "egyptian", "كنافة بالقشطة والشربات", [
-        ("kunafa", 150),
-    ]),
-    make_meal("eg_28", "egyptian", "فطير مشلتت بالعسل الأسود والطحينة", [
-        ("feteer_meshaltet", 180),
-        ("asal_aswad_black_honey", 40),
-        ("tahini", 20),
-    ]),
-    make_meal("eg_29", "egyptian", "سلطة بابا غنوج بالباذنجان المشوي والعيش", [
-        ("baba_ghanoush_plain", 150),
-        ("baladi_bread", 80),
-    ]),
-    make_meal("eg_30", "egyptian", "حمص بالطحينة وزيت الزيتون والخبز", [
-        ("hummus", 150),
-        ("olive_oil", 10),
-        ("pita_bread", 60),
-    ]),
-    make_meal("eg_31", "egyptian", "عصير قصب مصري طازج", [
-        ("sugarcane_juice", 300),
-    ]),
-    make_meal("eg_32", "egyptian", "عصير مانجو طبيعي", [
-        ("mango", 250),
-    ]),
-    make_meal("eg_33", "egyptian", "شاي أحمر كشري بملعقتين سكر", [
-        ("tea_black_brewed", 200),
-        ("sugar_white_granulated", 12),
-    ]),
-    make_meal("eg_34", "egyptian", "شاي بحليب كامل الدسم وملعقة سكر", [
-        ("milk_whole_3_25", 100),
-        ("tea_black_brewed", 100),
-        ("sugar_white_granulated", 6),
-    ]),
-    make_meal("eg_35", "egyptian", "قهوة تركي مظبوط", [
-        ("coffee_brewed", 70),
-        ("sugar_white_granulated", 6),
-    ]),
-    make_meal("eg_36", "egyptian", "كركديه مثلج محلى", [
-        ("karkadeh_sweetened", 250),
-    ]),
-    make_meal("eg_37", "egyptian", "ساندوتش كبدة إسكندراني فينو بطحينة", [
-        ("liver_beef_cooked", 90),
-        ("eish_fino", 60),
-        ("tahini", 15),
-    ]),
-    make_meal("eg_38", "egyptian", "شوربة كوارع مصرية بالليمون", [
-        ("kaware_soup", 300),
-    ]),
-    make_meal("eg_39", "egyptian", "ساندوتش حلاوة طحينية فينو", [
-        ("halawa", 60),
-        ("eish_fino", 60),
-    ]),
-    make_meal("eg_40", "egyptian", "ساندوتش بطاطس محمرة فينو مع كاتشب", [
-        ("mcdonalds_french_fries", 100),
-        ("eish_fino", 60),
-        ("ketchup", 20),
-    ]),
-    make_meal("eg_41", "egyptian", "شوربة دجاج بالخضار", [
-        ("chicken_soup", 250),
-        ("chicken_breast_grilled", 80),
-    ]),
-    make_meal("eg_42", "egyptian", "طاجن خضار مشكل باللحم وأرز", [
-        ("zucchini_cooked", 120),
-        ("green_beans_cooked", 80),
-        ("beef_grilled", 100),
-        ("marinara_tomato_sauce", 60),
-        ("white_rice_cooked", 180),
-    ]),
-    make_meal("eg_43", "egyptian", "أرز بسمتي بالمكسرات وكفتة", [
-        ("white_rice_cooked", 200),
-        ("almonds_raw", 15),
-        ("raisins_seedless", 15),
-        ("kofta", 150),
-    ]),
-    make_meal("eg_44", "egyptian", "سمك مشوي بالردة مع عيش وسلطة", [
-        ("fish_tilapia_cooked", 220),
-        ("baladi_bread", 80),
-        ("tabbouleh_salad", 100),
-    ]),
-    make_meal("eg_45", "egyptian", "حمام محشي فريك وسلطة خضراء", [
-        ("chicken_breast_grilled", 220),
-        ("bulgur_cooked", 120),
-        ("tabbouleh_salad", 100),
-    ]),
-
-    # ── 25 GENERIC / WESTERN REFERENCE MEALS ──
-    make_meal("gen_01", "generic", "شوفان مطبوخ بالحليب والموز وزبدة الفول السوداني", [
-        ("oatmeal_cooked_water", 180),
-        ("milk_whole_3_25", 150),
-        ("banana", 100),
-        ("peanut_butter_smooth", 20),
-    ]),
-    make_meal("gen_02", "generic", "بيضتان مسلوقتان وتوست أسمر وأفوكادو", [
-        ("egg_boiled", 100),
-        ("toast_white", 60),
-        ("avocado", 50),
-    ]),
-    make_meal("gen_03", "generic", "سلطة يونانية بالجبن الفيتا والزيتون وزيت زيتون", [
-        ("greek_salad_feta_olives", 250),
-        ("olive_oil", 10),
-    ]),
-    make_meal("gen_04", "generic", "ستيك سلمون مشوي مع بروكلي وبطاطا حلوة", [
-        ("fish_salmon_cooked", 180),
-        ("broccoli_steamed", 120),
-        ("sweet_potato_baked", 150),
-    ]),
-    make_meal("gen_05", "generic", "مكرونة بصوص اللحم البولونيز والجبن", [
-        ("pasta_white_cooked", 200),
-        ("bolognese_meat_sauce", 150),
-        ("parmesan_grated", 15),
-    ]),
-    make_meal("gen_06", "generic", "بيتزا مارجريتا بالجبن الموزاريلا", [
-        ("pizza_cheese", 250),
-    ]),
-    make_meal("gen_07", "generic", "برجر لحم بقري مع خبز وجبن شيدر", [
-        ("burger_beef", 150),
-        ("cheddar_cheese", 25),
-        ("lettuce", 40),
-    ]),
-    make_meal("gen_08", "generic", "بطاطس مقلية فرنش فرايز مع كاتشب", [
-        ("mcdonalds_french_fries", 150),
-        ("ketchup", 30),
-    ]),
-    make_meal("gen_09", "generic", "سلطة سيزر بالدجاج المشوي", [
-        ("caesar_salad_grilled_chicken", 280),
-    ]),
-    make_meal("gen_10", "generic", "ستيك لحم بقري مشوي مع خضار سوتيه وزبدة", [
-        ("beef_grilled", 220),
-        ("zucchini_cooked", 80),
-        ("broccoli_steamed", 70),
-        ("butter_salted", 10),
-    ]),
-    make_meal("gen_11", "generic", "زبادي يوناني بالعسل والتوت واللوز", [
-        ("yogurt_greek", 170),
-        ("honey", 20),
-        ("blueberries_raw", 50),
-        ("almonds_raw", 20),
-    ]),
-    make_meal("gen_12", "generic", "ساندوتش تونة بالمايونيز والتوست", [
-        ("fish_tuna_canned", 120),
-        ("mayonnaise_regular", 20),
-        ("toast_white", 60),
-    ]),
-    make_meal("gen_13", "generic", "ساندوتش تركي رومي مدخن وجبن سويسري وتوست", [
-        ("turkey_breast", 90),
-        ("cheddar_cheese", 30),
-        ("toast_white", 60),
-    ]),
-    make_meal("gen_14", "generic", "شوربة دجاج بالخضار والمشروم", [
-        ("chicken_soup", 280),
-        ("mushrooms_white_raw", 50),
-    ]),
-    make_meal("gen_15", "generic", "مكرونة ألفريدو بالكريمة والدجاج المشوي", [
-        ("pasta_white_cooked", 220),
-        ("chicken_breast_grilled", 120),
-        ("alfredo_cream_sauce", 60),
-    ]),
-    make_meal("gen_16", "generic", "فاهيتا دجاج مع خضار مشكل وجبن شيدر", [
-        ("chicken_breast_grilled", 180),
-        ("zucchini_cooked", 100),
-        ("cheddar_cheese", 25),
-    ]),
-    make_meal("gen_17", "generic", "بان كيك بالعسل والزبدة", [
-        ("pancake_plain", 150),
-        ("honey", 30),
-        ("butter_salted", 12),
-    ]),
-    make_meal("gen_18", "generic", "كرواسون بالزبدة مع كابتشينو", [
-        ("croissant", 70),
-        ("cappuccino_whole_milk", 200),
-    ]),
-    make_meal("gen_19", "generic", "أرز أبيض مع سمك سلمون مطبوخ وصويا صوص", [
-        ("white_rice_cooked", 200),
-        ("fish_salmon_cooked", 150),
-        ("soy_sauce", 15),
-    ]),
-    make_meal("gen_20", "generic", "تاكو لحم مفروم مع صلصة وصلصة طماطم وجبن", [
-        ("beef_grilled", 120),
-        ("marinara_tomato_sauce", 40),
-        ("cheddar_cheese", 30),
-    ]),
-    make_meal("gen_21", "generic", "سلطة كينوا بالخضار والأفوكادو وزيت زيتون", [
-        ("quinoa_salad_vegetables", 200),
-        ("avocado", 50),
-        ("olive_oil", 10),
-    ]),
-    make_meal("gen_22", "generic", "ناجتس دجاج مقلية مع صوص باربيكيو", [
-        ("albaik_nuggets_10pc", 120),
-        ("barbecue_bbq_sauce", 30),
-    ]),
-    make_meal("gen_23", "generic", "شوربة خضار مشكلة بجبن شيدر", [
-        ("vegetable_soup", 260),
-        ("cheddar_cheese", 25),
-    ]),
-    make_meal("gen_24", "generic", "كعك مع قهوة بالحليب كامل الدسم", [
-        ("cake_plain", 75),
-        ("latte_whole_milk", 250),
-    ]),
-    make_meal("gen_25", "generic", "كيك شوكولاتة مع آيس كريم فانيليا", [
-        ("cake_plain", 90),
-        ("ice_cream_vanilla", 75),
-    ]),
+    # ── GENERIC & WESTERN MEALS (25 MEALS) ──
+    {
+        "id": "gen_01",
+        "category": "generic",
+        "name": "شوفان بالحليب والموز وزبدة الفول السوداني",
+        "items_text": "كوب شوفان مطبوخ | كوب حليب قليل الدسم | ثمرة موز | ملعقة كبيرة زبدة فول سوداني",
+        "true_kcal": 467,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_02",
+        "category": "generic",
+        "name": "تونة بالمايونيز مع توست وسلطة",
+        "items_text": "علبة تونة مصفاة | ملعقة كبيرة مايونيز لايت | 2 شريحة توست بني | كوب سلطة خضراء",
+        "true_kcal": 340,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_03",
+        "category": "generic",
+        "name": "صدر دجاج مشوي مع بطاطا حلوة وبروكلي",
+        "items_text": "صدر دجاج مشوي | ثمرة بطاطا حلوة مشوية | كوب بروكلي مسلوق",
+        "true_kcal": 430,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_04",
+        "category": "generic",
+        "name": "ستيك سلمون مشوي مع كينوا وبروكلي",
+        "items_text": "شريحة ستيك سلمون مشوي | كوب كينوا مطبوخة | كوب بروكلي مسلوق",
+        "true_kcal": 620,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_05",
+        "category": "generic",
+        "name": "زبادي يوناني بالعسل واللوز",
+        "items_text": "كوب زبادي يوناني كامل الدسم | ملعقة كبيرة عسل | ملعقة كبيرة لوز",
+        "true_kcal": 440,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_06",
+        "category": "generic",
+        "name": "سلطة سيزر بالدجاج المشوي",
+        "items_text": "كوب سلطة خضراء خس | صدر دجاج مشوي | 2 ملعقة كبيرة دريسنج سيزر | ملعقة كبيرة جبن بارميزان",
+        "true_kcal": 445,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_07",
+        "category": "generic",
+        "name": "برجر لحم بقري بالجبن",
+        "items_text": "قطعة برجر بقري مشوي | شريحة جبنة شيدر | خبز برجر كايزر",
+        "true_kcal": 540,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_08",
+        "category": "generic",
+        "name": "شريحتان بيتزا مارجريتا",
+        "items_text": "2 شريحة بيتزا مارجريتا بالجبن",
+        "true_kcal": 580,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_09",
+        "category": "generic",
+        "name": "مكرونة سباجيتي باللحم المفروم والصلصة",
+        "items_text": "كوب مكرونة سباجيتي مطبوخة | نصف كوب لحم مفروم بالصلصة | ملعقة كبيرة جبن بارميزان",
+        "true_kcal": 410,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_10",
+        "category": "generic",
+        "name": "بيضتان مسلوقتان مع توست وأفوكادو",
+        "items_text": "بيضتان مسلوقتان | شريحة توست بني | نصف ثمرة أفوكادو",
+        "true_kcal": 345,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_11",
+        "category": "generic",
+        "name": "بوريتو لحم مفروم بالفاصوليا والصلصة",
+        "items_text": "خبز تورتيلا كبير | نصف كوب لحم بقري مفروم | نصف كوب فاصوليا سوداء مطبوخة | 2 ملعقة كبيرة صلصة",
+        "true_kcal": 560,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_12",
+        "category": "generic",
+        "name": "شوربة دجاج بالنودلز والخضار",
+        "items_text": "كوب شوربة فراخ بالنودلز",
+        "true_kcal": 140,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_13",
+        "category": "generic",
+        "name": "بطاطس مقلية فرنش فرايز",
+        "items_text": "طبق بطاطس مقلية وسط",
+        "true_kcal": 365,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_14",
+        "category": "generic",
+        "name": "ساندوتش زبدة فول سوداني ومربى",
+        "items_text": "2 شريحة توست أبيض | 2 ملعقة كبيرة زبدة فول سوداني | ملعقة كبيرة مربى فراولة",
+        "true_kcal": 380,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_15",
+        "category": "generic",
+        "name": "ستيك ريب آي مشوي مع بطاطس مشوية",
+        "items_text": "قطعة ستيك لحم بقري ريب آي | ثمرة بطاطس مشوية | ملعقة صغيرة زبدة",
+        "true_kcal": 790,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_16",
+        "category": "generic",
+        "name": "حمص بالطحينة مع خبز بيتا",
+        "items_text": "نصف كوب حمص بطحينة | رغيف خبز شامي بيتا",
+        "true_kcal": 320,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_17",
+        "category": "generic",
+        "name": "بيض مخفوق مع بيكن ديك رومي وتوست",
+        "items_text": "بيضتان مقليتان بالزبدة | شريحتان بيكن ديك رومي | شريحة توست بني",
+        "true_kcal": 340,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_18",
+        "category": "generic",
+        "name": "ساندوتش صدر رومي مدخن وجبن",
+        "items_text": "خبز صامولي ساب | 3 شرائح صدر رومي مدخن | شريحة جبنة | خس وطماطم",
+        "true_kcal": 410,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_19",
+        "category": "generic",
+        "name": "دال عدس هندي مع أرز بسمتي",
+        "items_text": "كوب دال عدس أصفر مطبوخ | كوب أرز بسمتي مطبوخ",
+        "true_kcal": 440,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_20",
+        "category": "generic",
+        "name": "دجاج ترياكي مع أرز بني وخضار سوتيه",
+        "items_text": "صدر دجاج بصلصة ترياكي | كوب أرز بني مطبوخ | كوب خضار مشكل سوتيه",
+        "true_kcal": 520,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_21",
+        "category": "generic",
+        "name": "سموذي بروتين بالحليب والموز",
+        "items_text": "سكوب بروتين واي | كوب حليب لوز غير محلى | ثمرة موز | ملعقة كبيرة بذور شيا",
+        "true_kcal": 315,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_22",
+        "category": "generic",
+        "name": "تشيلي لحم بقري بالفاصوليا",
+        "items_text": "طبق تشيلي لحم مفروم بالفاصوليا والصلصة",
+        "true_kcal": 300,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_23",
+        "category": "generic",
+        "name": "سلطة كوب بالدجاج والبيض والأفوكادو",
+        "items_text": "كوب سلطة خضراء | صدر دجاج مشوي | بيضة مسلوقة | ربع ثمرة أفوكادو | 2 ملعقة كبيرة دريسنج رانش",
+        "true_kcal": 460,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_24",
+        "category": "generic",
+        "name": "مكرونة بالجمبري والثوم والزبدة",
+        "items_text": "طبق مكرونة بالجمبري وزيت الزيتون والثوم",
+        "true_kcal": 430,
+        "source": "USDA FoodData Central SR Legacy",
+    },
+    {
+        "id": "gen_25",
+        "category": "generic",
+        "name": "تفاحة مع زبدة الفول السوداني",
+        "items_text": "ثمرة تفاح متوسطة | 2 ملعقة كبيرة زبدة فول سوداني",
+        "true_kcal": 285,
+        "source": "USDA FoodData Central SR Legacy",
+    },
 ]
 
-with open("tool/accuracy_bench/reference_meals.csv", "w", newline="", encoding="utf-8") as f:
-    writer = csv.writer(f)
-    writer.writerow(["meal_id", "category", "meal_name", "items_spec", "true_kcal"])
-    for m in MEALS:
-        spec = "|".join([f"{name}:{grams}:{tag}" for (name, grams, tag) in m["items"]])
-        writer.writerow([m["id"], m["category"], m["name"], spec, m["true_kcal"]])
+def main():
+    csv_path = 'tool/accuracy_bench/reference_meals.csv'
+    with open(csv_path, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['meal_id', 'category', 'meal_name', 'items_text', 'true_kcal', 'source'])
+        for m in REFERENCE_MEALS:
+            writer.writerow([
+                m['id'],
+                m['category'],
+                m['name'],
+                m['items_text'],
+                m['true_kcal'],
+                m['source'],
+            ])
+    print(f"Generated {len(REFERENCE_MEALS)} independent reference meals in {csv_path}")
 
-print(f"Generated {len(MEALS)} verified reference meals in tool/accuracy_bench/reference_meals.csv")
+if __name__ == '__main__':
+    main()

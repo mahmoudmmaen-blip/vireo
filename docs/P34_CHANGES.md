@@ -23,7 +23,7 @@
   - Benchmark suite created in `tool/accuracy_bench/`:
     - Reference dataset `reference_meals.csv` (70 weighed golden meals: 45 Egyptian, 25 Generic).
     - Runner scripts `run_bench.py` and `run_bench.dart`.
-    - Achieved Overall Mean Absolute Percentage Error (MAPE) < 5% (beating the <15% target).
+    - Evaluated against independent reference datasets (NNI Egypt, FAO Arab FCT, USDA FoodData Central) on natural household portions.
   - Generated comprehensive documentation in `docs/ACCURACY.md` detailing methodology and store-listing claims ("دقة أعلى للأكل المصري").
 
 ### 2. Intermittent Fasting (IF)

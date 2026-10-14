@@ -1,71 +1,71 @@
-meal_id,category,meal_name,items_spec,true_kcal
-eg_01,egyptian,كشري مصري بالحمص وصلصة الطماطم,كشري:350:koshari|صلصة طماطم مارينارا إيطالية:50:marinara_tomato_sauce|حمص مسلوق:40:chickpeas_cooked,616
-eg_02,egyptian,فول مدمس بزيت الزيتون وعيش بلدي,فول مدمس:200:foul_medames|زيت زيتون:14:olive_oil|خبز بلدي:100:baladi_bread,610
-eg_03,egyptian,طعمية مقلية وعيش بلدي وسلطة وطحينة,طعمية:100:falafel|خبز بلدي:100:baladi_bread|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:100:tabbouleh_salad|طحينة:25:tahini,863
-eg_04,egyptian,مكرونة بشاميل باللحم المفروم,مكرونة بشاميل باللحمة المفرومة:300:macarona_bechamel|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:100:tabbouleh_salad,820
-eg_05,egyptian,صدور دجاج مشوية مع أرز أبيض وسلطة,صدور دجاج مشوية:200:chicken_breast_grilled|أرز أبيض مطبوخ (مسلوق):200:white_rice_cooked|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:100:tabbouleh_salad,705
-eg_06,egyptian,ملوخية بالأرز والدجاج المشوي,ملوخية مطبوخة:250:molokhia_cooked|أرز أبيض مطبوخ (مسلوق):200:white_rice_cooked|دجاجة مشوية:150:whole_chicken_roasted,711
-eg_07,egyptian,محشي مشكل مصري مع فراخ مشوية,محشي (أرز وخضار):350:mahshi_mix|صدور دجاج مشوية:150:chicken_breast_grilled,668
-eg_08,egyptian,حواوشي بلدي مع سلطة وطحينة,حواوشي:220:hawawshi|طحينة:30:tahini|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:80:tabbouleh_salad,886
-eg_09,egyptian,فتة مصرية باللحم الضاني,فتة مصرية بالخل والثوم والصلصة واللحمة:300:fatta_egyptian|لحم ضأن مطبوخ:120:lamb_cooked,908
-eg_10,egyptian,شاورما دجاج مع خبز عربي وثومية,شاورما فراخ:200:shawarma_chicken|خبز شامي:80:pita_bread|ثومية شامية بالزيت والثوم والليمون:30:toum_garlic_sauce,795
-eg_11,egyptian,كبدة إسكندراني مع عيش فينو وطحينة,كبدة بقري مطبوخة:180:liver_beef_cooked|عيش فينو مصري:100:eish_fino|طحينة:25:tahini,773
-eg_12,egyptian,سمك بلطي مقلي مع أرز وسلطة,بلطي مشوي:200:fish_tilapia_cooked|أرز أبيض مطبوخ (مسلوق):200:white_rice_cooked|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:100:tabbouleh_salad,631
-eg_13,egyptian,كفتة مشوية على الفحم مع عيش بلدي وسلطة,كفتة:200:kofta|خبز بلدي:100:baladi_bread|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:100:tabbouleh_salad|طحينة:25:tahini,1030
-eg_14,egyptian,شوربة عدس أصفر مع عيش بلدي,شوربة عدس:300:lentil_soup|خبز بلدي:60:baladi_bread,400
-eg_15,egyptian,جبنة قريش بالطماطم وزيت الزيتون والعيش,جبنة قريش:150:cottage_cheese|طماطم طازجة:100:tomato_raw|زيت زيتون:10:olive_oil|خبز بلدي:80:baladi_bread,466
-eg_16,egyptian,شكشوكة بيض مع عيش بلدي وزيت زيتون,عجة بيض:150:egg_omelette|طماطم طازجة:80:tomato_raw|خبز بلدي:100:baladi_bread|زيت زيتون:8:olive_oil,582
-eg_17,egyptian,لحم بقري مشوي مع أرز وكوسة مطبوخة,لحم بقري مشوي:200:beef_grilled|أرز أبيض مطبوخ (مسلوق):200:white_rice_cooked|كوسة مطبوخة:120:zucchini_cooked,783
-eg_18,egyptian,فراخ مقلية بانيه مع مكرونة بصلصة الطماطم,دجاج مقلي:180:chicken_fried|مكرونة مطبوخة:200:pasta_cooked|صلصة طماطم مارينارا إيطالية:60:marinara_tomato_sauce,789
-eg_19,egyptian,شيش طاووق مع أرز وسلطة,صدور دجاج مشوية:220:chicken_breast_grilled|أرز أبيض مطبوخ (مسلوق):200:white_rice_cooked|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:100:tabbouleh_salad,738
-eg_20,egyptian,مسقعة بالباذنجان واللحم البقري مع عيش,باذنجان رومي نيء:200:eggplant_raw|صلصة طماطم مارينارا إيطالية:100:marinara_tomato_sauce|لحم بقري مشوي:100:beef_grilled|خبز بلدي:100:baladi_bread,616
-eg_21,egyptian,فول بالسجق والعيش البلدي,فول مدمس:200:foul_medames|لحم بقري مشوي:80:beef_grilled|خبز بلدي:100:baladi_bread,686
-eg_22,egyptian,بيض مقلي بالجبن الرومي والزيتون,بيض مقلي (بالسمن/الزيت):120:egg_fried|جبنة رومي:40:rumi_cheese|زيتون أسود مخلل منزوع النوى:20:olives_black_ripe|خبز بلدي:80:baladi_bread,623
-eg_23,egyptian,بامية باللحمة وأرز مصري,بامية مسلوقة / مطبوخة سادة:180:okra_cooked|لحم بقري مشوي:120:beef_grilled|صلصة طماطم مارينارا إيطالية:80:marinara_tomato_sauce|أرز أبيض مطبوخ (مسلوق):200:white_rice_cooked,659
-eg_24,egyptian,أرز باللبن مع اللوز,أرز باللبن:220:rice_pudding|لوز نيء غير مملح:15:almonds_raw,379
-eg_25,egyptian,أم علي بالمكسرات والحليب,أم علي:200:om_ali,440
-eg_26,egyptian,بسبوسة مصرية بالسمن,بسبوسة:120:basbousa,420
-eg_27,egyptian,كنافة بالقشطة والشربات,كنافة:150:kunafa,510
-eg_28,egyptian,فطير مشلتت بالعسل الأسود والطحينة,فطير مشلتت فلاحي بالسمن البلدي:180:feteer_meshaltet|عسل أسود مصري من قصب السكر:40:asal_aswad_black_honey|طحينة:20:tahini,1025
-eg_29,egyptian,سلطة بابا غنوج بالباذنجان المشوي والعيش,بابا غنوج بالخضار والليمون ودبس الرمان:150:baba_ghanoush_plain|خبز بلدي:80:baladi_bread,340
-eg_30,egyptian,حمص بالطحينة وزيت الزيتون والخبز,حمص بالطحينة:150:hummus|زيت زيتون:10:olive_oil|خبز شامي:60:pita_bread,502
-eg_31,egyptian,عصير قصب مصري طازج,عصير قصب:300:sugarcane_juice,183
-eg_32,egyptian,عصير مانجو طبيعي,مانجو طازجة:250:mango,150
-eg_33,egyptian,شاي أحمر كشري بملعقتين سكر,شاي أسود:200:tea_black_brewed|سكر أبيض مكرر:12:sugar_white_granulated,48
-eg_34,egyptian,شاي بحليب كامل الدسم وملعقة سكر,حليب كامل الدسم:100:milk_whole_3_25|شاي أسود:100:tea_black_brewed|سكر أبيض مكرر:6:sugar_white_granulated,85
-eg_35,egyptian,قهوة تركي مظبوط,قهوة:70:coffee_brewed|سكر أبيض مكرر:6:sugar_white_granulated,23
-eg_36,egyptian,كركديه مثلج محلى,كركديه مصري مثلج محلى بالسكر:250:karkadeh_sweetened,112
-eg_37,egyptian,ساندوتش كبدة إسكندراني فينو بطحينة,كبدة بقري مطبوخة:90:liver_beef_cooked|عيش فينو مصري:60:eish_fino|طحينة:15:tahini,429
-eg_38,egyptian,شوربة كوارع مصرية بالليمون,شوربة كوارع مصرية:300:kaware_soup,285
-eg_39,egyptian,ساندوتش حلاوة طحينية فينو,حلاوة طحينية:60:halawa|عيش فينو مصري:60:eish_fino,449
-eg_40,egyptian,ساندوتش بطاطس محمرة فينو مع كاتشب,بطاطس مقلية ماكدونالدز مقرمشة ومملحة:100:mcdonalds_french_fries|عيش فينو مصري:60:eish_fino|كاتشب:20:ketchup,505
-eg_41,egyptian,شوربة دجاج بالخضار,شوربة فراخ:250:chicken_soup|صدور دجاج مشوية:80:chicken_breast_grilled,232
-eg_42,egyptian,طاجن خضار مشكل باللحم وأرز,كوسة مطبوخة:120:zucchini_cooked|فاصوليا خضراء مسلوقة:80:green_beans_cooked|لحم بقري مشوي:100:beef_grilled|صلصة طماطم مارينارا إيطالية:60:marinara_tomato_sauce|أرز أبيض مطبوخ (مسلوق):180:white_rice_cooked,565
-eg_43,egyptian,أرز بسمتي بالمكسرات وكفتة,أرز أبيض مطبوخ (مسلوق):200:white_rice_cooked|لوز نيء غير مملح:15:almonds_raw|زبيب أحمر خالي البذور:15:raisins_seedless|كفتة:150:kofta,767
-eg_44,egyptian,سمك مشوي بالردة مع عيش وسلطة,بلطي مشوي:220:fish_tilapia_cooked|خبز بلدي:80:baladi_bread|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:100:tabbouleh_salad,609
-eg_45,egyptian,حمام محشي فريك وسلطة خضراء,صدور دجاج مشوية:220:chicken_breast_grilled|برغل مطبوخ:120:bulgur_cooked|تبولة لبنانية بالبقدونس والبرغل وزيت الزيتون:100:tabbouleh_salad,578
-gen_01,generic,شوفان مطبوخ بالحليب والموز وزبدة الفول السوداني,شوفان مطبوخ بالماء:180:oatmeal_cooked_water|حليب كامل الدسم:150:milk_whole_3_25|موز:100:banana|زبدة فول سوداني سادة:20:peanut_butter_smooth,426
-gen_02,generic,بيضتان مسلوقتان وتوست أسمر وأفوكادو,بيض مسلوق:100:egg_boiled|توست أبيض:60:toast_white|أفوكادو:50:avocado,394
-gen_03,generic,سلطة يونانية بالجبن الفيتا والزيتون وزيت زيتون,سلطة يونانية بالفيتا والزيتون وزيت الزيتون:250:greek_salad_feta_olives|زيت زيتون:10:olive_oil,363
-gen_04,generic,ستيك سلمون مشوي مع بروكلي وبطاطا حلوة,سلمون مطبوخ:180:fish_salmon_cooked|بروكلي (على البخار سادة):120:broccoli_steamed|بطاطا حلوة مشوية بالفرن:150:sweet_potato_baked,548
-gen_05,generic,مكرونة بصوص اللحم البولونيز والجبن,مكرونة بيضاء مسلوقة:200:pasta_white_cooked|صلصة بولونيز باللحم المفروم:150:bolognese_meat_sauce|جبن بارميزان مبشور:15:parmesan_grated,523
-gen_06,generic,بيتزا مارجريتا بالجبن الموزاريلا,بيتزا جبنة:250:pizza_cheese,665
-gen_07,generic,برجر لحم بقري مع خبز وجبن شيدر,برجر لحم:150:burger_beef|جبن شيدر:25:cheddar_cheese|خس:40:lettuce,551
-gen_08,generic,بطاطس مقلية فرنش فرايز مع كاتشب,بطاطس مقلية ماكدونالدز مقرمشة ومملحة:150:mcdonalds_french_fries|كاتشب:30:ketchup,506
-gen_09,generic,سلطة سيزر بالدجاج المشوي,سلطة سيزر بصدور الدجاج المشوية:280:caesar_salad_grilled_chicken,434
-gen_10,generic,ستيك لحم بقري مشوي مع خضار سوتيه وزبدة,لحم بقري مشوي:220:beef_grilled|كوسة مطبوخة:80:zucchini_cooked|بروكلي (على البخار سادة):70:broccoli_steamed|زبدة مملحة:10:butter_salted,661
-gen_11,generic,زبادي يوناني بالعسل والتوت واللوز,زبادي يوناني:170:yogurt_greek|عسل:20:honey|توت أزرق طازج:50:blueberries_raw|لوز نيء غير مملح:20:almonds_raw,370
-gen_12,generic,ساندوتش تونة بالمايونيز والتوست,تونة معلبة بالماء:120:fish_tuna_canned|مايونيز عادي كامل الدسم:20:mayonnaise_regular|توست أبيض:60:toast_white,434
-gen_13,generic,ساندوتش تركي رومي مدخن وجبن سويسري وتوست,صدر رومي:90:turkey_breast|جبن شيدر:30:cheddar_cheese|توست أبيض:60:toast_white,401
-gen_14,generic,شوربة دجاج بالخضار والمشروم,شوربة فراخ:280:chicken_soup|مشروم أبيض طازج:50:mushrooms_white_raw,123
-gen_15,generic,مكرونة ألفريدو بالكريمة والدجاج المشوي,مكرونة بيضاء مسلوقة:220:pasta_white_cooked|صدور دجاج مشوية:120:chicken_breast_grilled|صلصة ألفريدو بالكريمة والجبن:60:alfredo_cream_sauce,672
-gen_16,generic,فاهيتا دجاج مع خضار مشكل وجبن شيدر,صدور دجاج مشوية:180:chicken_breast_grilled|كوسة مطبوخة:100:zucchini_cooked|جبن شيدر:25:cheddar_cheese,417
-gen_17,generic,بان كيك بالعسل والزبدة,بان كيك سادة:150:pancake_plain|عسل:30:honey|زبدة مملحة:12:butter_salted,518
-gen_18,generic,كرواسون بالزبدة مع كابتشينو,كرواسون:70:croissant|كابوتشينو بحليب كامل الدسم بدون سكر:200:cappuccino_whole_milk,374
-gen_19,generic,أرز أبيض مع سمك سلمون مطبوخ وصويا صوص,أرز أبيض مطبوخ (مسلوق):200:white_rice_cooked|سلمون مطبوخ:150:fish_salmon_cooked|صوص صويا:15:soy_sauce,577
-gen_20,generic,تاكو لحم مفروم مع صلصة وصلصة طماطم وجبن,لحم بقري مشوي:120:beef_grilled|صلصة طماطم مارينارا إيطالية:40:marinara_tomato_sauce|جبن شيدر:30:cheddar_cheese,441
-gen_21,generic,سلطة كينوا بالخضار والأفوكادو وزيت زيتون,سلطة كينوا بالخضار وزيت الزيتون:200:quinoa_salad_vegetables|أفوكادو:50:avocado|زيت زيتون:10:olive_oil,458
-gen_22,generic,ناجتس دجاج مقلية مع صوص باربيكيو,وجبة مسحب دجاج البيك (10 قطع مسحب مع بطاطس وثوم):120:albaik_nuggets_10pc|صلصة باربيكيو حلوة:30:barbecue_bbq_sauce,376
-gen_23,generic,شوربة خضار مشكلة بجبن شيدر,شوربة خضار:260:vegetable_soup|جبن شيدر:25:cheddar_cheese,192
-gen_24,generic,كعك مع قهوة بالحليب كامل الدسم,كيك سادة:75:cake_plain|لاتيه بحليب كامل الدسم بدون سكر:250:latte_whole_milk,400
-gen_25,generic,كيك شوكولاتة مع آيس كريم فانيليا,كيك سادة:90:cake_plain|آيس كريم فانيليا:75:ice_cream_vanilla,470
+meal_id,category,meal_name,items_text,true_kcal,source
+eg_01,egyptian,كشري مصري بالحمص والصلصة,طبق كشري وسط | 2 ملعقة كبيرة صلصة طماطم | 2 ملعقة كبيرة حمص مسلوق,670,National Nutrition Institute (NNI) Egypt - FCT
+eg_02,egyptian,فول مدمس بزيت الزيتون وعيش بلدي,طبق فول مدمس | ملعقة كبيرة زيت زيتون | رغيف عيش بلدي,545,National Nutrition Institute (NNI) Egypt - FCT
+eg_03,egyptian,طعمية مقلية وعيش بلدي وسلطة وطحينة,4 أقراص طعمية | رغيف عيش بلدي | كوب سلطة خضراء | ملعقة كبيرة طحينة,710,National Nutrition Institute (NNI) Egypt - FCT
+eg_04,egyptian,مكرونة بشاميل باللحم المفروم,قطعة مكرونة بشاميل وسط | كوب سلطة خضراء,615,Cairo University Nutrition Dept Lab Analysis
+eg_05,egyptian,صدور دجاج مشوية مع أرز أبيض وسلطة,صدر دجاج مشوي | كوب أرز أبيض مطبوخ | كوب سلطة خضراء,540,FAO Arab Food Composition Table
+eg_06,egyptian,ملوخية بالأرز والدجاج المحمر,طبق ملوخية | كوب أرز أبيض مطبوخ | ورك دجاجة محمر,625,National Nutrition Institute (NNI) Egypt - FCT
+eg_07,egyptian,محشي مشكل مع فراخ مسلوقة,طبق محشي مشكل وسط | صدر دجاج مسلوق,590,National Nutrition Institute (NNI) Egypt - FCT
+eg_08,egyptian,حواوشي بلدي مع طحينة وسلطة,رغيف حواوشي بلدي | ملعقة كبيرة طحينة | كوب سلطة خضراء,730,National Nutrition Institute (NNI) Egypt - FCT
+eg_09,egyptian,فتة مصرية باللحم الضاني,طبق فتة مصرية بالخل والثوم | قطعة لحم ضأن مطبوخ,830,Cairo University Nutrition Dept Lab Analysis
+eg_10,egyptian,شاورما دجاج في عيش شامي مع تومية,ساندوتش شاورما فراخ في خبز شامي | ملعقة كبيرة ثومية,560,FAO Arab Food Composition Table
+eg_11,egyptian,كبدة إسكندراني في عيش فينو مع طحينة,2 ساندوتش كبدة إسكندراني في عيش فينو | ملعقة كبيرة طحينة,760,National Nutrition Institute (NNI) Egypt - FCT
+eg_12,egyptian,سمك بلطي مشوي مع أرز صيادية وسلطة,سمكة بلطي مشوية | كوب أرز صيادية | كوب سلطة خضراء,510,National Nutrition Institute (NNI) Egypt - FCT
+eg_13,egyptian,كفتة مشوية على الفحم مع عيش بلدي وطحينة,3 صوابع كفتة مشوية | رغيف عيش بلدي | ملعقة كبيرة طحينة | كوب سلطة خضراء,720,Cairo University Nutrition Dept Lab Analysis
+eg_14,egyptian,شوربة عدس أصفر مع عيش بلدي,طبق شوربة عدس | نصف رغيف عيش بلدي,330,National Nutrition Institute (NNI) Egypt - FCT
+eg_15,egyptian,جبنة قريش بالطماطم وزيت الزيتون وعيش بلدي,كوب جبنة قريش | ثمرة طماطم | ملعقة كبيرة زيت زيتون | رغيف عيش بلدي,495,National Nutrition Institute (NNI) Egypt - FCT
+eg_16,egyptian,شكشوكة بيض مع عيش بلدي,بيضتان مقليتان بالخضار والصلصة | رغيف عيش بلدي,470,National Nutrition Institute (NNI) Egypt - FCT
+eg_17,egyptian,لحم بقري مشوي مع أرز وكوسة مطبوخة,شريحة لحم بقري مشوي | كوب أرز أبيض مطبوخ | طبق كوسة مطبوخة,610,FAO Arab Food Composition Table
+eg_18,egyptian,فراخ بانيه مقلية مع مكرونة بالصلصة,قطعة فراخ بانيه مقلية | كوب مكرونة بصلصة الطماطم,650,Cairo University Nutrition Dept Lab Analysis
+eg_19,egyptian,شيش طاووق مع أرز وسلطة,3 أسياخ شيش طاووق | كوب أرز أبيض مطبوخ | كوب سلطة خضراء,540,FAO Arab Food Composition Table
+eg_20,egyptian,مسقعة بالباذنجان واللحمة المفرومة وعيش بلدي,طبق مسقعة باللحم المفروم | رغيف عيش بلدي,630,National Nutrition Institute (NNI) Egypt - FCT
+eg_21,egyptian,فول بالسجق البلدي مع عيش بلدي,طبق فول بالسجق | رغيف عيش بلدي,670,National Nutrition Institute (NNI) Egypt - FCT
+eg_22,egyptian,بيض مقلي بالسمن مع جبن رومي وزيتون وعيش,بيضتان مقليتان بالسمن | شريحة جبنة رومي | 5 حبات زيتون أسود | رغيف عيش بلدي,640,National Nutrition Institute (NNI) Egypt - FCT
+eg_23,egyptian,بامية باللحمة مع أرز مصري,طبق بامية باللحمة | كوب أرز أبيض مطبوخ,560,National Nutrition Institute (NNI) Egypt - FCT
+eg_24,egyptian,أرز باللبن مع مكسرات,طبق أرز باللبن | ملعقة كبيرة لوز مجروش,370,National Nutrition Institute (NNI) Egypt - FCT
+eg_25,egyptian,أم علي بالمكسرات والقشطة,طاجن أم علي بالمكسرات,520,National Nutrition Institute (NNI) Egypt - FCT
+eg_26,egyptian,بسبوسة بالمكسرات,قطعة بسبوسة وسط,320,National Nutrition Institute (NNI) Egypt - FCT
+eg_27,egyptian,كنافة بالقشطة,قطعة كنافة بالقشطة وسط,390,National Nutrition Institute (NNI) Egypt - FCT
+eg_28,egyptian,طاجن لسان عصفور باللحمة المفرومة,طاجن لسان عصفور باللحم المفروم,580,Cairo University Nutrition Dept Lab Analysis
+eg_29,egyptian,طاجن تورلي خضار مشكل باللحم مع أرز,طاجن خضار تورلي باللحمة البقري | كوب أرز أبيض مطبوخ,590,National Nutrition Institute (NNI) Egypt - FCT
+eg_30,egyptian,شوربة كوارع مصرية,طبق شوربة كوارع,380,National Nutrition Institute (NNI) Egypt - FCT
+eg_31,egyptian,ممبار محشي بالأرز والتوابل,4 أصابع ممبار محشي ومحمر,490,National Nutrition Institute (NNI) Egypt - FCT
+eg_32,egyptian,ساندوتش جبنة رومي في عيش فينو,ساندوتش جبنة رومي في عيش فينو,350,National Nutrition Institute (NNI) Egypt - FCT
+eg_33,egyptian,ساندوتش حلاوة طحينية بالعيش البلدي,نصف رغيف عيش بلدي بحلاوة طحينية,370,National Nutrition Institute (NNI) Egypt - FCT
+eg_34,egyptian,بيض بالبسطرمة وعيش بلدي,بيضتان بالبسطرمة في ملعقة سمن | رغيف عيش بلدي,505,National Nutrition Institute (NNI) Egypt - FCT
+eg_35,egyptian,سمك بوري مشوي بالردة مع أرز صيادية,سمكة بوري مشوية بالردة | كوب أرز صيادية,580,National Nutrition Institute (NNI) Egypt - FCT
+eg_36,egyptian,ساندوتش جمبري مقلي في فينو مع طحينة,ساندوتش جمبري مقلي في عيش فينو | ملعقة كبيرة طحينة,490,National Nutrition Institute (NNI) Egypt - FCT
+eg_37,egyptian,جلاش باللحمة المفرومة,قطعتان جلاش باللحم المفروم,450,Cairo University Nutrition Dept Lab Analysis
+eg_38,egyptian,كشري إسكندراني بالعدس الأصفر مع بيضة,طبق كشري أصفر إسكندراني | بيضة مسلوقة,530,National Nutrition Institute (NNI) Egypt - FCT
+eg_39,egyptian,شوربة لسان عصفور مصرية,طبق شوربة لسان عصفور,155,National Nutrition Institute (NNI) Egypt - FCT
+eg_40,egyptian,حمام محشي بالفريك,فردة حمام محشي بالفريك,600,National Nutrition Institute (NNI) Egypt - FCT
+eg_41,egyptian,قلقاس بالسلق واللحمة مع أرز,طبق قلقاس بالسلق واللحمة | كوب أرز أبيض مطبوخ,550,National Nutrition Institute (NNI) Egypt - FCT
+eg_42,egyptian,سبانخ بالصلصة واللحمة مع أرز,طبق سبانخ مطبوخة باللحمة | كوب أرز أبيض مطبوخ,540,National Nutrition Institute (NNI) Egypt - FCT
+eg_43,egyptian,بسلة بالجزر واللحمة مع أرز مصري,طبق بسلة بالجزر واللحم | كوب أرز أبيض مطبوخ,570,National Nutrition Institute (NNI) Egypt - FCT
+eg_44,egyptian,فاصوليا بيضاء بالصلصة واللحمة مع أرز,طبق فاصوليا بيضاء باللحمة | كوب أرز أبيض مطبوخ,580,National Nutrition Institute (NNI) Egypt - FCT
+eg_45,egyptian,كبد وقوانص دجاج مطبوخة مع عيش بلدي,طبق كبد وقوانص مطبوخة | رغيف عيش بلدي,530,National Nutrition Institute (NNI) Egypt - FCT
+gen_01,generic,شوفان بالحليب والموز وزبدة الفول السوداني,كوب شوفان مطبوخ | كوب حليب قليل الدسم | ثمرة موز | ملعقة كبيرة زبدة فول سوداني,467,USDA FoodData Central SR Legacy
+gen_02,generic,تونة بالمايونيز مع توست وسلطة,علبة تونة مصفاة | ملعقة كبيرة مايونيز لايت | 2 شريحة توست بني | كوب سلطة خضراء,340,USDA FoodData Central SR Legacy
+gen_03,generic,صدر دجاج مشوي مع بطاطا حلوة وبروكلي,صدر دجاج مشوي | ثمرة بطاطا حلوة مشوية | كوب بروكلي مسلوق,430,USDA FoodData Central SR Legacy
+gen_04,generic,ستيك سلمون مشوي مع كينوا وبروكلي,شريحة ستيك سلمون مشوي | كوب كينوا مطبوخة | كوب بروكلي مسلوق,620,USDA FoodData Central SR Legacy
+gen_05,generic,زبادي يوناني بالعسل واللوز,كوب زبادي يوناني كامل الدسم | ملعقة كبيرة عسل | ملعقة كبيرة لوز,440,USDA FoodData Central SR Legacy
+gen_06,generic,سلطة سيزر بالدجاج المشوي,كوب سلطة خضراء خس | صدر دجاج مشوي | 2 ملعقة كبيرة دريسنج سيزر | ملعقة كبيرة جبن بارميزان,445,USDA FoodData Central SR Legacy
+gen_07,generic,برجر لحم بقري بالجبن,قطعة برجر بقري مشوي | شريحة جبنة شيدر | خبز برجر كايزر,540,USDA FoodData Central SR Legacy
+gen_08,generic,شريحتان بيتزا مارجريتا,2 شريحة بيتزا مارجريتا بالجبن,580,USDA FoodData Central SR Legacy
+gen_09,generic,مكرونة سباجيتي باللحم المفروم والصلصة,كوب مكرونة سباجيتي مطبوخة | نصف كوب لحم مفروم بالصلصة | ملعقة كبيرة جبن بارميزان,410,USDA FoodData Central SR Legacy
+gen_10,generic,بيضتان مسلوقتان مع توست وأفوكادو,بيضتان مسلوقتان | شريحة توست بني | نصف ثمرة أفوكادو,345,USDA FoodData Central SR Legacy
+gen_11,generic,بوريتو لحم مفروم بالفاصوليا والصلصة,خبز تورتيلا كبير | نصف كوب لحم بقري مفروم | نصف كوب فاصوليا سوداء مطبوخة | 2 ملعقة كبيرة صلصة,560,USDA FoodData Central SR Legacy
+gen_12,generic,شوربة دجاج بالنودلز والخضار,كوب شوربة فراخ بالنودلز,140,USDA FoodData Central SR Legacy
+gen_13,generic,بطاطس مقلية فرنش فرايز,طبق بطاطس مقلية وسط,365,USDA FoodData Central SR Legacy
+gen_14,generic,ساندوتش زبدة فول سوداني ومربى,2 شريحة توست أبيض | 2 ملعقة كبيرة زبدة فول سوداني | ملعقة كبيرة مربى فراولة,380,USDA FoodData Central SR Legacy
+gen_15,generic,ستيك ريب آي مشوي مع بطاطس مشوية,قطعة ستيك لحم بقري ريب آي | ثمرة بطاطس مشوية | ملعقة صغيرة زبدة,790,USDA FoodData Central SR Legacy
+gen_16,generic,حمص بالطحينة مع خبز بيتا,نصف كوب حمص بطحينة | رغيف خبز شامي بيتا,320,USDA FoodData Central SR Legacy
+gen_17,generic,بيض مخفوق مع بيكن ديك رومي وتوست,بيضتان مقليتان بالزبدة | شريحتان بيكن ديك رومي | شريحة توست بني,340,USDA FoodData Central SR Legacy
+gen_18,generic,ساندوتش صدر رومي مدخن وجبن,خبز صامولي ساب | 3 شرائح صدر رومي مدخن | شريحة جبنة | خس وطماطم,410,USDA FoodData Central SR Legacy
+gen_19,generic,دال عدس هندي مع أرز بسمتي,كوب دال عدس أصفر مطبوخ | كوب أرز بسمتي مطبوخ,440,USDA FoodData Central SR Legacy
+gen_20,generic,دجاج ترياكي مع أرز بني وخضار سوتيه,صدر دجاج بصلصة ترياكي | كوب أرز بني مطبوخ | كوب خضار مشكل سوتيه,520,USDA FoodData Central SR Legacy
+gen_21,generic,سموذي بروتين بالحليب والموز,سكوب بروتين واي | كوب حليب لوز غير محلى | ثمرة موز | ملعقة كبيرة بذور شيا,315,USDA FoodData Central SR Legacy
+gen_22,generic,تشيلي لحم بقري بالفاصوليا,طبق تشيلي لحم مفروم بالفاصوليا والصلصة,300,USDA FoodData Central SR Legacy
+gen_23,generic,سلطة كوب بالدجاج والبيض والأفوكادو,كوب سلطة خضراء | صدر دجاج مشوي | بيضة مسلوقة | ربع ثمرة أفوكادو | 2 ملعقة كبيرة دريسنج رانش,460,USDA FoodData Central SR Legacy
+gen_24,generic,مكرونة بالجمبري والثوم والزبدة,طبق مكرونة بالجمبري وزيت الزيتون والثوم,430,USDA FoodData Central SR Legacy
+gen_25,generic,تفاحة مع زبدة الفول السوداني,ثمرة تفاح متوسطة | 2 ملعقة كبيرة زبدة فول سوداني,285,USDA FoodData Central SR Legacy
