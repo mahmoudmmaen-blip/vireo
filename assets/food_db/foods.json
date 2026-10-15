@@ -962,7 +962,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169451
+        "fdc_id": 168626
       }
     },
     {
@@ -1217,7 +1217,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170904
+        "fdc_id": 171304
       }
     },
     {
@@ -1761,7 +1761,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170030
+        "fdc_id": 170440
       }
     },
     {
@@ -2515,7 +2515,9 @@
       "name_en": "almonds",
       "aliases": [
         "لوز",
-        "almonds"
+        "almonds",
+        "لوز مجروش",
+        "لوز مطحون"
       ],
       "per_100g": {
         "kcal": 579,
@@ -5260,7 +5262,8 @@
       "name_ar": "باتيه كبدة",
       "name_en": "liver pate",
       "aliases": [
-        "كبدة اسكندراني"
+        "باتيه",
+        "liver pate"
       ],
       "per_100g": {
         "kcal": 250,
@@ -5582,7 +5585,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 790179
+        "fdc_id": 167535
       }
     },
     {

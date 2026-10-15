@@ -47,6 +47,19 @@ Act as a senior Flutter engineer and product/motion designer on Vireo (branch ux
 4. **Target mismatch.** The score card shows a goal of 2,786 kcal while the programs show 2,230. Use one source of truth for the active target, and show which program/plan set it.
 5. **Progress tab theme mismatch.** It uses a green accent and a green "+" button while the other tabs are orange. All tabs must use the active theme tokens.
 
+## 3b. HOME ORDER (owner request 2026-10-15)
+The "المزيد والتحليلات" calories card (remaining kcal ring + P/C/F bars + الهدف/أكلت/حرقت) sits too low, below the ad. New Home order:
+1. Ramadan card (when active)
+2. Steps hero card
+3. Meal capture card
+4. **Calories card**, renamed "سعراتك النهارده". In P36 it becomes the mascot wave card (section 1), so it must NOT duplicate the Daily Score's remaining-macros rectangles. Show the mascot + remaining kcal + P/C/F here, and keep the Daily Score focused on the score, tips and next-meal suggestion.
+5. Daily Score card
+6. Weekly check-in banner (حان وقت التقييم الأسبوعي), only when due
+7. Pillars grid / today plan
+8. The rest ("اختار خطتك الغذائية", "النشاط والصحة"…) under a "المزيد" header
+9. Ad slot: never between items 1–6; first ad at earliest after item 7.
+- Update the audit test for the new order. Use one source of truth for the target (the card currently shows 2,157 while the programs show 2,230; see section 3.4).
+
 ## 4. VERIFY & DELIVER
 - Run `flutter gen-l10n` (10 locales) and `flutter analyze` (0 errors).
 - Run the unit tests and the audit tests: Home with the mascot in 4 themes, the meal result, Today Plan with water collapsed, and the programs list. All at 360×640 ar_EG with textScale 1.3, each with `--timeout 2m`, using pump(Duration).

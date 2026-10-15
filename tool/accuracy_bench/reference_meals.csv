@@ -1,71 +1,71 @@
-meal_id,category,meal_name,items_text,true_kcal,source
-eg_01,egyptian,كشري مصري بالحمص والصلصة,طبق كشري وسط | 2 ملعقة كبيرة صلصة طماطم | 2 ملعقة كبيرة حمص مسلوق,670,National Nutrition Institute (NNI) Egypt - FCT
-eg_02,egyptian,فول مدمس بزيت الزيتون وعيش بلدي,طبق فول مدمس | ملعقة كبيرة زيت زيتون | رغيف عيش بلدي,545,National Nutrition Institute (NNI) Egypt - FCT
-eg_03,egyptian,طعمية مقلية وعيش بلدي وسلطة وطحينة,4 أقراص طعمية | رغيف عيش بلدي | كوب سلطة خضراء | ملعقة كبيرة طحينة,710,National Nutrition Institute (NNI) Egypt - FCT
-eg_04,egyptian,مكرونة بشاميل باللحم المفروم,قطعة مكرونة بشاميل وسط | كوب سلطة خضراء,615,Cairo University Nutrition Dept Lab Analysis
-eg_05,egyptian,صدور دجاج مشوية مع أرز أبيض وسلطة,صدر دجاج مشوي | كوب أرز أبيض مطبوخ | كوب سلطة خضراء,540,FAO Arab Food Composition Table
-eg_06,egyptian,ملوخية بالأرز والدجاج المحمر,طبق ملوخية | كوب أرز أبيض مطبوخ | ورك دجاجة محمر,625,National Nutrition Institute (NNI) Egypt - FCT
-eg_07,egyptian,محشي مشكل مع فراخ مسلوقة,طبق محشي مشكل وسط | صدر دجاج مسلوق,590,National Nutrition Institute (NNI) Egypt - FCT
-eg_08,egyptian,حواوشي بلدي مع طحينة وسلطة,رغيف حواوشي بلدي | ملعقة كبيرة طحينة | كوب سلطة خضراء,730,National Nutrition Institute (NNI) Egypt - FCT
-eg_09,egyptian,فتة مصرية باللحم الضاني,طبق فتة مصرية بالخل والثوم | قطعة لحم ضأن مطبوخ,830,Cairo University Nutrition Dept Lab Analysis
-eg_10,egyptian,شاورما دجاج في عيش شامي مع تومية,ساندوتش شاورما فراخ في خبز شامي | ملعقة كبيرة ثومية,560,FAO Arab Food Composition Table
-eg_11,egyptian,كبدة إسكندراني في عيش فينو مع طحينة,2 ساندوتش كبدة إسكندراني في عيش فينو | ملعقة كبيرة طحينة,760,National Nutrition Institute (NNI) Egypt - FCT
-eg_12,egyptian,سمك بلطي مشوي مع أرز صيادية وسلطة,سمكة بلطي مشوية | كوب أرز صيادية | كوب سلطة خضراء,510,National Nutrition Institute (NNI) Egypt - FCT
-eg_13,egyptian,كفتة مشوية على الفحم مع عيش بلدي وطحينة,3 صوابع كفتة مشوية | رغيف عيش بلدي | ملعقة كبيرة طحينة | كوب سلطة خضراء,720,Cairo University Nutrition Dept Lab Analysis
-eg_14,egyptian,شوربة عدس أصفر مع عيش بلدي,طبق شوربة عدس | نصف رغيف عيش بلدي,330,National Nutrition Institute (NNI) Egypt - FCT
-eg_15,egyptian,جبنة قريش بالطماطم وزيت الزيتون وعيش بلدي,كوب جبنة قريش | ثمرة طماطم | ملعقة كبيرة زيت زيتون | رغيف عيش بلدي,495,National Nutrition Institute (NNI) Egypt - FCT
-eg_16,egyptian,شكشوكة بيض مع عيش بلدي,بيضتان مقليتان بالخضار والصلصة | رغيف عيش بلدي,470,National Nutrition Institute (NNI) Egypt - FCT
-eg_17,egyptian,لحم بقري مشوي مع أرز وكوسة مطبوخة,شريحة لحم بقري مشوي | كوب أرز أبيض مطبوخ | طبق كوسة مطبوخة,610,FAO Arab Food Composition Table
-eg_18,egyptian,فراخ بانيه مقلية مع مكرونة بالصلصة,قطعة فراخ بانيه مقلية | كوب مكرونة بصلصة الطماطم,650,Cairo University Nutrition Dept Lab Analysis
-eg_19,egyptian,شيش طاووق مع أرز وسلطة,3 أسياخ شيش طاووق | كوب أرز أبيض مطبوخ | كوب سلطة خضراء,540,FAO Arab Food Composition Table
-eg_20,egyptian,مسقعة بالباذنجان واللحمة المفرومة وعيش بلدي,طبق مسقعة باللحم المفروم | رغيف عيش بلدي,630,National Nutrition Institute (NNI) Egypt - FCT
-eg_21,egyptian,فول بالسجق البلدي مع عيش بلدي,طبق فول بالسجق | رغيف عيش بلدي,670,National Nutrition Institute (NNI) Egypt - FCT
-eg_22,egyptian,بيض مقلي بالسمن مع جبن رومي وزيتون وعيش,بيضتان مقليتان بالسمن | شريحة جبنة رومي | 5 حبات زيتون أسود | رغيف عيش بلدي,640,National Nutrition Institute (NNI) Egypt - FCT
-eg_23,egyptian,بامية باللحمة مع أرز مصري,طبق بامية باللحمة | كوب أرز أبيض مطبوخ,560,National Nutrition Institute (NNI) Egypt - FCT
-eg_24,egyptian,أرز باللبن مع مكسرات,طبق أرز باللبن | ملعقة كبيرة لوز مجروش,370,National Nutrition Institute (NNI) Egypt - FCT
-eg_25,egyptian,أم علي بالمكسرات والقشطة,طاجن أم علي بالمكسرات,520,National Nutrition Institute (NNI) Egypt - FCT
-eg_26,egyptian,بسبوسة بالمكسرات,قطعة بسبوسة وسط,320,National Nutrition Institute (NNI) Egypt - FCT
-eg_27,egyptian,كنافة بالقشطة,قطعة كنافة بالقشطة وسط,390,National Nutrition Institute (NNI) Egypt - FCT
-eg_28,egyptian,طاجن لسان عصفور باللحمة المفرومة,طاجن لسان عصفور باللحم المفروم,580,Cairo University Nutrition Dept Lab Analysis
-eg_29,egyptian,طاجن تورلي خضار مشكل باللحم مع أرز,طاجن خضار تورلي باللحمة البقري | كوب أرز أبيض مطبوخ,590,National Nutrition Institute (NNI) Egypt - FCT
-eg_30,egyptian,شوربة كوارع مصرية,طبق شوربة كوارع,380,National Nutrition Institute (NNI) Egypt - FCT
-eg_31,egyptian,ممبار محشي بالأرز والتوابل,4 أصابع ممبار محشي ومحمر,490,National Nutrition Institute (NNI) Egypt - FCT
-eg_32,egyptian,ساندوتش جبنة رومي في عيش فينو,ساندوتش جبنة رومي في عيش فينو,350,National Nutrition Institute (NNI) Egypt - FCT
-eg_33,egyptian,ساندوتش حلاوة طحينية بالعيش البلدي,نصف رغيف عيش بلدي بحلاوة طحينية,370,National Nutrition Institute (NNI) Egypt - FCT
-eg_34,egyptian,بيض بالبسطرمة وعيش بلدي,بيضتان بالبسطرمة في ملعقة سمن | رغيف عيش بلدي,505,National Nutrition Institute (NNI) Egypt - FCT
-eg_35,egyptian,سمك بوري مشوي بالردة مع أرز صيادية,سمكة بوري مشوية بالردة | كوب أرز صيادية,580,National Nutrition Institute (NNI) Egypt - FCT
-eg_36,egyptian,ساندوتش جمبري مقلي في فينو مع طحينة,ساندوتش جمبري مقلي في عيش فينو | ملعقة كبيرة طحينة,490,National Nutrition Institute (NNI) Egypt - FCT
-eg_37,egyptian,جلاش باللحمة المفرومة,قطعتان جلاش باللحم المفروم,450,Cairo University Nutrition Dept Lab Analysis
-eg_38,egyptian,كشري إسكندراني بالعدس الأصفر مع بيضة,طبق كشري أصفر إسكندراني | بيضة مسلوقة,530,National Nutrition Institute (NNI) Egypt - FCT
-eg_39,egyptian,شوربة لسان عصفور مصرية,طبق شوربة لسان عصفور,155,National Nutrition Institute (NNI) Egypt - FCT
-eg_40,egyptian,حمام محشي بالفريك,فردة حمام محشي بالفريك,600,National Nutrition Institute (NNI) Egypt - FCT
-eg_41,egyptian,قلقاس بالسلق واللحمة مع أرز,طبق قلقاس بالسلق واللحمة | كوب أرز أبيض مطبوخ,550,National Nutrition Institute (NNI) Egypt - FCT
-eg_42,egyptian,سبانخ بالصلصة واللحمة مع أرز,طبق سبانخ مطبوخة باللحمة | كوب أرز أبيض مطبوخ,540,National Nutrition Institute (NNI) Egypt - FCT
-eg_43,egyptian,بسلة بالجزر واللحمة مع أرز مصري,طبق بسلة بالجزر واللحم | كوب أرز أبيض مطبوخ,570,National Nutrition Institute (NNI) Egypt - FCT
-eg_44,egyptian,فاصوليا بيضاء بالصلصة واللحمة مع أرز,طبق فاصوليا بيضاء باللحمة | كوب أرز أبيض مطبوخ,580,National Nutrition Institute (NNI) Egypt - FCT
-eg_45,egyptian,كبد وقوانص دجاج مطبوخة مع عيش بلدي,طبق كبد وقوانص مطبوخة | رغيف عيش بلدي,530,National Nutrition Institute (NNI) Egypt - FCT
-gen_01,generic,شوفان بالحليب والموز وزبدة الفول السوداني,كوب شوفان مطبوخ | كوب حليب قليل الدسم | ثمرة موز | ملعقة كبيرة زبدة فول سوداني,467,USDA FoodData Central SR Legacy
-gen_02,generic,تونة بالمايونيز مع توست وسلطة,علبة تونة مصفاة | ملعقة كبيرة مايونيز لايت | 2 شريحة توست بني | كوب سلطة خضراء,340,USDA FoodData Central SR Legacy
-gen_03,generic,صدر دجاج مشوي مع بطاطا حلوة وبروكلي,صدر دجاج مشوي | ثمرة بطاطا حلوة مشوية | كوب بروكلي مسلوق,430,USDA FoodData Central SR Legacy
-gen_04,generic,ستيك سلمون مشوي مع كينوا وبروكلي,شريحة ستيك سلمون مشوي | كوب كينوا مطبوخة | كوب بروكلي مسلوق,620,USDA FoodData Central SR Legacy
-gen_05,generic,زبادي يوناني بالعسل واللوز,كوب زبادي يوناني كامل الدسم | ملعقة كبيرة عسل | ملعقة كبيرة لوز,440,USDA FoodData Central SR Legacy
-gen_06,generic,سلطة سيزر بالدجاج المشوي,كوب سلطة خضراء خس | صدر دجاج مشوي | 2 ملعقة كبيرة دريسنج سيزر | ملعقة كبيرة جبن بارميزان,445,USDA FoodData Central SR Legacy
-gen_07,generic,برجر لحم بقري بالجبن,قطعة برجر بقري مشوي | شريحة جبنة شيدر | خبز برجر كايزر,540,USDA FoodData Central SR Legacy
-gen_08,generic,شريحتان بيتزا مارجريتا,2 شريحة بيتزا مارجريتا بالجبن,580,USDA FoodData Central SR Legacy
-gen_09,generic,مكرونة سباجيتي باللحم المفروم والصلصة,كوب مكرونة سباجيتي مطبوخة | نصف كوب لحم مفروم بالصلصة | ملعقة كبيرة جبن بارميزان,410,USDA FoodData Central SR Legacy
-gen_10,generic,بيضتان مسلوقتان مع توست وأفوكادو,بيضتان مسلوقتان | شريحة توست بني | نصف ثمرة أفوكادو,345,USDA FoodData Central SR Legacy
-gen_11,generic,بوريتو لحم مفروم بالفاصوليا والصلصة,خبز تورتيلا كبير | نصف كوب لحم بقري مفروم | نصف كوب فاصوليا سوداء مطبوخة | 2 ملعقة كبيرة صلصة,560,USDA FoodData Central SR Legacy
-gen_12,generic,شوربة دجاج بالنودلز والخضار,كوب شوربة فراخ بالنودلز,140,USDA FoodData Central SR Legacy
-gen_13,generic,بطاطس مقلية فرنش فرايز,طبق بطاطس مقلية وسط,365,USDA FoodData Central SR Legacy
-gen_14,generic,ساندوتش زبدة فول سوداني ومربى,2 شريحة توست أبيض | 2 ملعقة كبيرة زبدة فول سوداني | ملعقة كبيرة مربى فراولة,380,USDA FoodData Central SR Legacy
-gen_15,generic,ستيك ريب آي مشوي مع بطاطس مشوية,قطعة ستيك لحم بقري ريب آي | ثمرة بطاطس مشوية | ملعقة صغيرة زبدة,790,USDA FoodData Central SR Legacy
-gen_16,generic,حمص بالطحينة مع خبز بيتا,نصف كوب حمص بطحينة | رغيف خبز شامي بيتا,320,USDA FoodData Central SR Legacy
-gen_17,generic,بيض مخفوق مع بيكن ديك رومي وتوست,بيضتان مقليتان بالزبدة | شريحتان بيكن ديك رومي | شريحة توست بني,340,USDA FoodData Central SR Legacy
-gen_18,generic,ساندوتش صدر رومي مدخن وجبن,خبز صامولي ساب | 3 شرائح صدر رومي مدخن | شريحة جبنة | خس وطماطم,410,USDA FoodData Central SR Legacy
-gen_19,generic,دال عدس هندي مع أرز بسمتي,كوب دال عدس أصفر مطبوخ | كوب أرز بسمتي مطبوخ,440,USDA FoodData Central SR Legacy
-gen_20,generic,دجاج ترياكي مع أرز بني وخضار سوتيه,صدر دجاج بصلصة ترياكي | كوب أرز بني مطبوخ | كوب خضار مشكل سوتيه,520,USDA FoodData Central SR Legacy
-gen_21,generic,سموذي بروتين بالحليب والموز,سكوب بروتين واي | كوب حليب لوز غير محلى | ثمرة موز | ملعقة كبيرة بذور شيا,315,USDA FoodData Central SR Legacy
-gen_22,generic,تشيلي لحم بقري بالفاصوليا,طبق تشيلي لحم مفروم بالفاصوليا والصلصة,300,USDA FoodData Central SR Legacy
-gen_23,generic,سلطة كوب بالدجاج والبيض والأفوكادو,كوب سلطة خضراء | صدر دجاج مشوي | بيضة مسلوقة | ربع ثمرة أفوكادو | 2 ملعقة كبيرة دريسنج رانش,460,USDA FoodData Central SR Legacy
-gen_24,generic,مكرونة بالجمبري والثوم والزبدة,طبق مكرونة بالجمبري وزيت الزيتون والثوم,430,USDA FoodData Central SR Legacy
-gen_25,generic,تفاحة مع زبدة الفول السوداني,ثمرة تفاح متوسطة | 2 ملعقة كبيرة زبدة فول سوداني,285,USDA FoodData Central SR Legacy
+meal_id,category,meal_name,items_text,true_kcal,source,source_confidence
+eg_01,egyptian,كشري مصري بالحمص والصلصة,طبق كشري وسط | 2 ملعقة كبيرة صلصة طماطم | 2 ملعقة كبيرة حمص مسلوق,670,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_02,egyptian,فول مدمس بزيت الزيتون وعيش بلدي,طبق فول مدمس | ملعقة كبيرة زيت زيتون | رغيف عيش بلدي,545,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_03,egyptian,طعمية مقلية وعيش بلدي وسلطة وطحينة,4 أقراص طعمية | رغيف عيش بلدي | كوب سلطة خضراء | ملعقة كبيرة طحينة,710,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_04,egyptian,مكرونة بشاميل باللحم المفروم,قطعة مكرونة بشاميل وسط | كوب سلطة خضراء,615,Cairo University Nutrition Dept Lab Analysis,low
+eg_05,egyptian,صدور دجاج مشوية مع أرز أبيض وسلطة,صدر دجاج مشوي | كوب أرز أبيض مطبوخ | كوب سلطة خضراء,540,FAO Arab Food Composition Table,high
+eg_06,egyptian,ملوخية بالأرز والدجاج المحمر,طبق ملوخية | كوب أرز أبيض مطبوخ | ورك دجاجة محمر,625,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_07,egyptian,محشي مشكل مع فراخ مسلوقة,طبق محشي مشكل وسط | صدر دجاج مسلوق,590,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_08,egyptian,حواوشي بلدي مع طحينة وسلطة,رغيف حواوشي بلدي | ملعقة كبيرة طحينة | كوب سلطة خضراء,730,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_09,egyptian,فتة مصرية باللحم الضاني,طبق فتة مصرية بالخل والثوم | قطعة لحم ضأن مطبوخ,830,Cairo University Nutrition Dept Lab Analysis,low
+eg_10,egyptian,شاورما دجاج في عيش شامي مع تومية,ساندوتش شاورما فراخ في خبز شامي | ملعقة كبيرة ثومية,560,FAO Arab Food Composition Table,high
+eg_11,egyptian,كبدة إسكندراني في عيش فينو مع طحينة,2 ساندوتش كبدة إسكندراني في عيش فينو | ملعقة كبيرة طحينة,760,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_12,egyptian,سمك بلطي مشوي مع أرز صيادية وسلطة,سمكة بلطي مشوية | كوب أرز صيادية | كوب سلطة خضراء,510,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_13,egyptian,كفتة مشوية على الفحم مع عيش بلدي وطحينة,3 صوابع كفتة مشوية | رغيف عيش بلدي | ملعقة كبيرة طحينة | كوب سلطة خضراء,720,Cairo University Nutrition Dept Lab Analysis,low
+eg_14,egyptian,شوربة عدس أصفر مع عيش بلدي,طبق شوربة عدس | نصف رغيف عيش بلدي,330,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_15,egyptian,جبنة قريش بالطماطم وزيت الزيتون وعيش بلدي,كوب جبنة قريش | ثمرة طماطم | ملعقة كبيرة زيت زيتون | رغيف عيش بلدي,495,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_16,egyptian,شكشوكة بيض مع عيش بلدي,بيضتان مقليتان بالخضار والصلصة | رغيف عيش بلدي,470,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_17,egyptian,لحم بقري مشوي مع أرز وكوسة مطبوخة,شريحة لحم بقري مشوي | كوب أرز أبيض مطبوخ | طبق كوسة مطبوخة,610,FAO Arab Food Composition Table,high
+eg_18,egyptian,فراخ بانيه مقلية مع مكرونة بالصلصة,قطعة فراخ بانيه مقلية | كوب مكرونة بصلصة الطماطم,650,Cairo University Nutrition Dept Lab Analysis,high
+eg_19,egyptian,شيش طاووق مع أرز وسلطة,3 أسياخ شيش طاووق | كوب أرز أبيض مطبوخ | كوب سلطة خضراء,540,FAO Arab Food Composition Table,high
+eg_20,egyptian,مسقعة بالباذنجان واللحمة المفرومة وعيش بلدي,طبق مسقعة باللحم المفروم | رغيف عيش بلدي,630,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_21,egyptian,فول بالسجق البلدي مع عيش بلدي,طبق فول بالسجق | رغيف عيش بلدي,670,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_22,egyptian,بيض مقلي بالسمن مع جبن رومي وزيتون وعيش,بيضتان مقليتان بالسمن | شريحة جبنة رومي | 5 حبات زيتون أسود | رغيف عيش بلدي,640,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_23,egyptian,بامية باللحمة مع أرز مصري,طبق بامية باللحمة | كوب أرز أبيض مطبوخ,560,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_24,egyptian,أرز باللبن مع مكسرات,طبق أرز باللبن | ملعقة كبيرة لوز مجروش,370,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_25,egyptian,أم علي بالمكسرات والقشطة,طاجن أم علي بالمكسرات,520,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_26,egyptian,بسبوسة بالمكسرات,قطعة بسبوسة وسط,320,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_27,egyptian,كنافة بالقشطة,قطعة كنافة بالقشطة وسط,390,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_28,egyptian,طاجن لسان عصفور باللحمة المفرومة,طاجن لسان عصفور باللحم المفروم,580,Cairo University Nutrition Dept Lab Analysis,low
+eg_29,egyptian,طاجن تورلي خضار مشكل باللحم مع أرز,طاجن خضار تورلي باللحمة البقري | كوب أرز أبيض مطبوخ,590,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_30,egyptian,شوربة كوارع مصرية,طبق شوربة كوارع,380,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_31,egyptian,ممبار محشي بالأرز والتوابل,4 أصابع ممبار محشي ومحمر,490,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_32,egyptian,ساندوتش جبنة رومي في عيش فينو,ساندوتش جبنة رومي في عيش فينو,350,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_33,egyptian,ساندوتش حلاوة طحينية بالعيش البلدي,نصف رغيف عيش بلدي بحلاوة طحينية,370,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_34,egyptian,بيض بالبسطرمة وعيش بلدي,بيضتان بالبسطرمة في ملعقة سمن | رغيف عيش بلدي,505,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_35,egyptian,سمك بوري مشوي بالردة مع أرز صيادية,سمكة بوري مشوية بالردة | كوب أرز صيادية,580,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_36,egyptian,ساندوتش جمبري مقلي في فينو مع طحينة,ساندوتش جمبري مقلي في عيش فينو | ملعقة كبيرة طحينة,490,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_37,egyptian,جلاش باللحمة المفرومة,قطعتان جلاش باللحم المفروم,450,Cairo University Nutrition Dept Lab Analysis,low
+eg_38,egyptian,كشري إسكندراني بالعدس الأصفر مع بيضة,طبق كشري أصفر إسكندراني | بيضة مسلوقة,530,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_39,egyptian,شوربة لسان عصفور مصرية,طبق شوربة لسان عصفور,155,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_40,egyptian,حمام محشي بالفريك,فردة حمام محشي بالفريك,600,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_41,egyptian,قلقاس بالسلق واللحمة مع أرز,طبق قلقاس بالسلق واللحمة | كوب أرز أبيض مطبوخ,550,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_42,egyptian,سبانخ بالصلصة واللحمة مع أرز,طبق سبانخ مطبوخة باللحمة | كوب أرز أبيض مطبوخ,540,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_43,egyptian,بسلة بالجزر واللحمة مع أرز مصري,طبق بسلة بالجزر واللحم | كوب أرز أبيض مطبوخ,570,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_44,egyptian,فاصوليا بيضاء بالصلصة واللحمة مع أرز,طبق فاصوليا بيضاء باللحمة | كوب أرز أبيض مطبوخ,580,National Nutrition Institute (NNI) Egypt - FCT,high
+eg_45,egyptian,كبد وقوانص دجاج مطبوخة مع عيش بلدي,طبق كبد وقوانص مطبوخة | رغيف عيش بلدي,530,National Nutrition Institute (NNI) Egypt - FCT,high
+gen_01,generic,شوفان بالحليب والموز وزبدة الفول السوداني,كوب شوفان مطبوخ | كوب حليب قليل الدسم | ثمرة موز | ملعقة كبيرة زبدة فول سوداني,467,USDA FoodData Central SR Legacy,high
+gen_02,generic,تونة بالمايونيز مع توست وسلطة,علبة تونة مصفاة | ملعقة كبيرة مايونيز لايت | 2 شريحة توست بني | كوب سلطة خضراء,340,USDA FoodData Central SR Legacy,high
+gen_03,generic,صدر دجاج مشوي مع بطاطا حلوة وبروكلي,صدر دجاج مشوي | ثمرة بطاطا حلوة مشوية | كوب بروكلي مسلوق,430,USDA FoodData Central SR Legacy,high
+gen_04,generic,ستيك سلمون مشوي مع كينوا وبروكلي,شريحة ستيك سلمون مشوي | كوب كينوا مطبوخة | كوب بروكلي مسلوق,620,USDA FoodData Central SR Legacy,high
+gen_05,generic,زبادي يوناني بالعسل واللوز,كوب زبادي يوناني كامل الدسم | ملعقة كبيرة عسل | ملعقة كبيرة لوز,440,USDA FoodData Central SR Legacy,high
+gen_06,generic,سلطة سيزر بالدجاج المشوي,كوب سلطة خضراء خس | صدر دجاج مشوي | 2 ملعقة كبيرة دريسنج سيزر | ملعقة كبيرة جبن بارميزان,445,USDA FoodData Central SR Legacy,high
+gen_07,generic,برجر لحم بقري بالجبن,قطعة برجر بقري مشوي | شريحة جبنة شيدر | خبز برجر كايزر,540,USDA FoodData Central SR Legacy,high
+gen_08,generic,شريحتان بيتزا مارجريتا,2 شريحة بيتزا مارجريتا بالجبن,580,USDA FoodData Central SR Legacy,high
+gen_09,generic,مكرونة سباجيتي باللحم المفروم والصلصة,كوب مكرونة سباجيتي مطبوخة | نصف كوب لحم مفروم بالصلصة | ملعقة كبيرة جبن بارميزان,410,USDA FoodData Central SR Legacy,high
+gen_10,generic,بيضتان مسلوقتان مع توست وأفوكادو,بيضتان مسلوقتان | شريحة توست بني | نصف ثمرة أفوكادو,345,USDA FoodData Central SR Legacy,high
+gen_11,generic,بوريتو لحم مفروم بالفاصوليا والصلصة,خبز تورتيلا كبير | نصف كوب لحم بقري مفروم | نصف كوب فاصوليا سوداء مطبوخة | 2 ملعقة كبيرة صلصة,560,USDA FoodData Central SR Legacy,high
+gen_12,generic,شوربة دجاج بالنودلز والخضار,كوب شوربة فراخ بالنودلز,140,USDA FoodData Central SR Legacy,high
+gen_13,generic,بطاطس مقلية فرنش فرايز,طبق بطاطس مقلية وسط,365,USDA FoodData Central SR Legacy,high
+gen_14,generic,ساندوتش زبدة فول سوداني ومربى,2 شريحة توست أبيض | 2 ملعقة كبيرة زبدة فول سوداني | ملعقة كبيرة مربى فراولة,380,USDA FoodData Central SR Legacy,high
+gen_15,generic,ستيك ريب آي مشوي مع بطاطس مشوية,قطعة ستيك لحم بقري ريب آي | ثمرة بطاطس مشوية | ملعقة صغيرة زبدة,790,USDA FoodData Central SR Legacy,high
+gen_16,generic,حمص بالطحينة مع خبز بيتا,نصف كوب حمص بطحينة | رغيف خبز شامي بيتا,320,USDA FoodData Central SR Legacy,high
+gen_17,generic,بيض مخفوق مع بيكن ديك رومي وتوست,بيضتان مقليتان بالزبدة | شريحتان بيكن ديك رومي | شريحة توست بني,340,USDA FoodData Central SR Legacy,high
+gen_18,generic,ساندوتش صدر رومي مدخن وجبن,خبز صامولي ساب | 3 شرائح صدر رومي مدخن | شريحة جبنة | خس وطماطم,410,USDA FoodData Central SR Legacy,high
+gen_19,generic,دال عدس هندي مع أرز بسمتي,كوب دال عدس أصفر مطبوخ | كوب أرز بسمتي مطبوخ,440,USDA FoodData Central SR Legacy,high
+gen_20,generic,دجاج ترياكي مع أرز بني وخضار سوتيه,صدر دجاج بصلصة ترياكي | كوب أرز بني مطبوخ | كوب خضار مشكل سوتيه,520,USDA FoodData Central SR Legacy,high
+gen_21,generic,سموذي بروتين بالحليب والموز,سكوب بروتين واي | كوب حليب لوز غير محلى | ثمرة موز | ملعقة كبيرة بذور شيا,315,USDA FoodData Central SR Legacy,high
+gen_22,generic,تشيلي لحم بقري بالفاصوليا,طبق تشيلي لحم مفروم بالفاصوليا والصلصة,300,USDA FoodData Central SR Legacy,high
+gen_23,generic,سلطة كوب بالدجاج والبيض والأفوكادو,كوب سلطة خضراء | صدر دجاج مشوي | بيضة مسلوقة | ربع ثمرة أفوكادو | 2 ملعقة كبيرة دريسنج رانش,460,USDA FoodData Central SR Legacy,high
+gen_24,generic,مكرونة بالجمبري والثوم والزبدة,طبق مكرونة بالجمبري وزيت الزيتون والثوم,430,USDA FoodData Central SR Legacy,high
+gen_25,generic,تفاحة مع زبدة الفول السوداني,ثمرة تفاح متوسطة | 2 ملعقة كبيرة زبدة فول سوداني,285,USDA FoodData Central SR Legacy,high

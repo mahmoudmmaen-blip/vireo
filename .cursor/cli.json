@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(flutter)",
+      "Shell(dart)",
+      "Shell(git:status*)",
+      "Shell(git:diff*)",
+      "Shell(git:log*)",
+      "Shell(git:add*)",
+      "Shell(git:commit*)",
+      "Shell(git:show*)",
+      "Shell(npx:supabase*)",
+      "Shell(python)",
+      "Shell(ls)",
+      "Shell(dir)",
+      "Shell(cat)",
+      "Shell(type)",
+      "Shell(findstr)",
+      "Shell(grep)"
+    ],
+    "deny": [
+      "Shell(git:push*)",
+      "Shell(git:reset*)",
+      "Shell(git:clean*)",
+      "Shell(git:checkout*)",
+      "Shell(git:rebase*)",
+      "Shell(git:branch:-D*)",
+      "Shell(rm)",
+      "Shell(rmdir)",
+      "Shell(del)",
+      "Shell(rd)",
+      "Shell(Remove-Item)",
+      "Shell(format)",
+      "Read(**/key.properties)",
+      "Read(**/*.jks)",
+      "Read(**/*.keystore)",
+      "Read(.env*)",
+      "Read(**/.env*)",
+      "Write(**/key.properties)",
+      "Write(.git/**)"
+    ]
+  }
+}

@@ -50,3 +50,6 @@ android/key.properties
 *.keystore
 **/*.jks
 **/*.keystore
+
+# Vireo Runner (local task queue, logs)
+.runner/
