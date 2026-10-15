@@ -1,234 +1,87 @@
 # Vireo — Privacy Policy
 
-**Last updated:** August 22, 2026  
-**Effective date:** August 22, 2026
+**Last updated:** October 14, 2026
 
-This Privacy Policy explains how **[COMPANY LEGAL NAME]** (“**Vireo**,” “**we**,” “**us**,” or “**our**”) collects, uses, shares, and protects information when you use the Vireo mobile application and related services (the “**Service**”).
+This policy explains what information the Vireo app (“Vireo”, “we”, “us”) collects, why, and the choices you have. Vireo is a fitness and lifestyle app, not a medical service.
 
-By using Vireo, you agree to the practices described here. If you do not agree, please do not use the Service.
-
-For terms governing your use of Vireo, see our **[Terms of Service]**.
+**Developer:** [DEVELOPER LEGAL NAME]
+**Contact:** mahmoud.mma.en@gmail.com
 
 ---
 
-## 1. Who we are
+## 1. Information we collect
 
-**Data controller:** [COMPANY LEGAL NAME]  
-**Contact:** [LEGAL EMAIL]  
-**Address:** [COMPANY ADDRESS]
+### 1.1 Account
+- Email address and an account ID when you sign in (Google sign-in or email), or an anonymous ID if you use Vireo without an account.
 
-If you have questions or wish to exercise your privacy rights, contact us at the email above.
+### 1.2 Profile and goals
+- Sex, age, height, weight, goal weight, activity level, goals, and diet preferences you enter.
+- Safety answers you choose to give (for example pregnancy, breastfeeding, diabetes medication, or a history of eating disorders). We use them only to turn off unsafe suggestions such as calorie deficits or long fasts.
 
----
+### 1.3 Food and nutrition
+- Meals you log, portions, and corrections you make.
+- **Meal photos** you take or pick from your gallery. A photo is sent over an encrypted connection to our server and analyzed by an AI model (Google Gemini) to identify foods and estimate portions. **We do not store meal photos on our servers** after analysis. The resulting meal entry, meaning names, grams and nutrients, is saved to your log.
+- Voice logging: speech is converted to text **on your device**. Only the text is sent for analysis, and no audio is recorded or stored.
 
-## 2. Information we collect
+### 1.4 Activity, fasting and body data
+- Steps, workouts, outdoor walk routes (precise location **only while you record an outdoor session**; never in the background), and fasting sessions.
+- With your permission, data from **Health Connect** such as steps, weight, body fat and other data types you approve. You can revoke this at any time in Health Connect.
+- Body measurements and **body composition reports** (for example InBody or smart-scale reports). A report photo is analyzed by the same AI service to read the numbers. **We do not store the report photo**, and we remove names and ID numbers from the extracted data. Only the numbers you confirm are saved.
 
-We collect information you provide, information generated through your use of the Service, and limited information from connected devices and third-party platforms.
+### 1.5 Women's health
+- Cycle tracking is optional. Cycle dates, symptoms and predictions are stored **only on your device in encrypted storage**. They are **not uploaded** to our servers and **not used for ads**. You can delete them at any time from Women's health settings.
 
-### 2.1 Account and profile information
+### 1.6 Vireo Coach (AI chat)
+- Messages you send to the coach, along with a minimal summary of your plan (targets, today's totals and recent averages), are sent to our server and the AI service to generate a reply. **We do not store chat messages on our servers.** We keep only a usage counter for daily limits. Plan changes are applied only after you confirm them.
 
-- Email address and authentication identifiers (when you create an account)  
-- Age, height, weight, activity level, training environment, fitness goals  
-- Dietary preferences and restrictions  
-- Unit preferences (e.g., metric or imperial)  
-- Language and locale settings  
+### 1.7 Purchases
+- Subscription status and transaction IDs from Google Play through RevenueCat. We never receive your card details.
 
-### 2.2 Health-adjacent and wellness information
+### 1.8 Device, diagnostics and ads
+- Crash logs and performance diagnostics (Sentry).
+- In the free version, Google AdMob may collect your device's advertising ID and approximate location to show ads. Ads are restricted to family-safe (G-rated) content. Pro users see no ads.
 
-Vireo is a wellness app, not a medical provider. Still, you may choose to provide or generate data that relates to your health and fitness, including:
+## 2. How we use information
+- To provide the app: calorie and nutrient calculations, suggestions, step and fasting tracking, plans and progress charts.
+- To personalize targets and tips (for example phase-aware tips if you use cycle tracking, which is processed on your device).
+- To keep the service safe, fix bugs and prevent abuse (for example scan limits).
+- To show ads in the free version and manage subscriptions.
 
-- **Weight logs** and related timestamps  
-- **Activity level** and workout adherence  
-- **Health screening answers** (yes/no responses to questions such as heart conditions, diabetes, blood pressure, joint injuries, and medications)  
-- **Progress photos** you upload  
-- Workout completion data, energy check-in scores, and walking/step counts (where enabled)  
+We do **not** sell your personal information, and we do **not** use health data for advertising.
 
-We use this information to personalize workouts, nutrition suggestions, progress tracking, and in-app warnings (for example, when a health screening answer indicates you should consult a professional).
+## 3. Sharing
+We share data only with service providers who process it for us:
+- **Supabase**: database, sign-in and server functions.
+- **Google (Gemini API)**: AI analysis of meal photos, body reports and coach messages, processed to produce a result.
+- **RevenueCat / Google Play**: subscriptions.
+- **Google AdMob**: ads, free version only.
+- **Sentry**: crash diagnostics.
 
-**We do not use health-adjacent data to diagnose, treat, or make clinical decisions.**
+We may also disclose information if the law requires it.
 
-### 2.3 Content you create
+## 4. Storage, sync and retention
+- Vireo stores your data on your device first. If you have an account, your logs sync to our database over HTTPS so you can use multiple devices.
+- We keep synced data while your account is active. When you delete your account, your synced data is permanently deleted.
+- Progress photos stay on your device unless you turn on photo backup.
 
-- Progress photos and associated metadata (date, privacy settings where available)  
-- Meal and ingredient confirmations, fridge scan images (if you use those features)  
-- Feedback you submit about workouts or app features  
+## 5. Your choices and rights
+- Edit or delete entries at any time in the app.
+- **Delete your account and all synced data** from Settings → Delete account, or email us at the contact above.
+- Revoke camera, location, microphone, notification and Health Connect permissions in your phone settings.
+- Reset your advertising ID or limit ad personalization in your phone settings, or subscribe to Pro.
+- Depending on where you live, you may have rights to access, correct or export your data. Contact us and we will respond within 30 days.
 
-### 2.4 Device and usage information
-
-- Device type, operating system, app version  
-- Crash logs and performance diagnostics  
-- General usage events (e.g., features used, session duration) — typically in aggregated or pseudonymous form  
-
-### 2.5 Information from third-party services you connect
-
-With your permission, Vireo may read:
-
-- **Step count and related activity data** from **Apple Health** (iOS) or **Health Connect** (Android)  
-
-We use native health APIs for accuracy. You can revoke access at any time in your device’s health/privacy settings. Vireo does not operate its own pedometer when native health access is the designated source.
-
-### 2.6 Payment information
-
-Subscriptions are processed by **Apple App Store** or **Google Play**. We do not receive or store your full payment card number. We may receive subscription status, product identifiers, and transaction metadata through **RevenueCat** to manage entitlements (e.g., premium features).
-
----
-
-## 3. How we use your information
-
-We use information to:
-
-- Provide and personalize the Service (workouts, meal plans, progress charts)  
-- Operate **AI-assisted coaching and vision features** (e.g., program generation, fridge ingredient detection, recipe suggestions)  
-- Sync your data across devices when you use an account  
-- Process subscriptions and enforce free vs. premium feature access  
-- Send service-related messages (e.g., account or security notices)  
-- Improve reliability, safety, and product quality  
-- Comply with legal obligations  
-
-We do **not** sell your personal information.
-
----
-
-## 4. AI features and automated processing
-
-Certain features use automated systems and third-party AI providers to generate or interpret content based on inputs you provide (profile data, photos, activity history).
-
-- AI outputs are **wellness suggestions only**, not medical advice.  
-- Photos submitted for fridge scanning are processed to detect ingredients; we store scan records as described below.  
-- You may contact us if you have questions about automated processing in your region.
-
-Where required by law, you may have the right to object to or request information about certain automated decisions.
-
----
-
-## 5. How we share information
-
-We share information only as needed to operate the Service:
-
-| Recipient | Purpose |
-|-----------|---------|
-| **Supabase** | Authentication, database, file storage, and serverless functions (hosting your profile, logs, photos, and app data) |
-| **RevenueCat** | Subscription management and entitlement verification |
-| **AI provider(s)** | Coaching, vision, and content-generation features (inputs you submit are sent for processing to return app functionality) |
-| **Apple / Google** | In-app purchases and, when you authorize, health/step data via platform APIs |
-| **Analytics / crash reporting** (if enabled) | App stability and performance |
-
-We may also disclose information:
-
-- To comply with law, regulation, legal process, or governmental request  
-- To protect the rights, safety, and security of Vireo, our users, or others  
-- In connection with a merger, acquisition, or sale of assets (with notice where required)  
-
-Service providers are authorized to process data **only on our instructions** and subject to appropriate contractual safeguards.
-
----
-
-## 6. Data retention
-
-We retain personal information for as long as your account is active or as needed to provide the Service, unless a longer period is required by law.
-
-Typical retention practices:
-
-- **Account and profile data:** retained while your account exists  
-- **Weight logs, workout history, check-ins, meal plans:** retained while your account exists so you can view historical progress  
-- **Progress photos:** retained while your account exists (or until you delete them where deletion is supported)  
-- **Fridge scan images/records:** retained per feature requirements and scan history limits  
-- **Server logs and diagnostics:** retained for a limited period for security and troubleshooting  
-
-When you delete your account, we aim to **permanently delete** your personal data from our active systems — see Section 8.
-
----
+## 6. Children
+Vireo is intended for users **18 and older**. We do not knowingly collect data from children. If you believe a child has used Vireo, contact us and we will delete the data.
 
 ## 7. Security
+We use encryption in transit, encrypted local storage for sensitive data such as cycle data, and access controls on our database. No system is 100% secure.
 
-We implement administrative, technical, and organizational measures designed to protect your information, including encryption in transit (HTTPS/TLS) and access controls on our infrastructure.
+## 8. International processing
+Our service providers may process data in countries other than yours, with appropriate safeguards.
 
-No method of transmission or storage is 100% secure. You are responsible for safeguarding your login credentials.
+## 9. Changes
+We will update this page and change the date above when this policy changes. For significant changes we will notify you in the app.
 
----
-
-## 8. Account deletion and “hard delete”
-
-You may delete your account through in-app settings (**Settings → Delete Account**), subject to confirmation steps designed to prevent accidental deletion.
-
-When you confirm account deletion:
-
-1. We call a secure server function that **permanently removes** your user-owned records from our database, including profile data, weight logs, workout/check-in history, progress photos metadata, meal plans, fridge scans, and related entries.  
-2. We **revoke your authentication session** so you can no longer access the account.  
-3. Stored files (such as progress photos) linked to your account are **deleted** from our storage systems as part of this process.  
-
-**What “hard delete” means:** Your data is **not** merely hidden or flagged inactive — it is **removed** from production databases and storage, subject to:
-
-- **Backup retention:** residual copies may persist in encrypted backups for a limited time before being overwritten.  
-- **Legal retention:** we may retain minimal records where required by law (e.g., billing records held by Apple/Google, or compliance logs).  
-- **Anonymized/aggregated data:** data that can no longer identify you may be retained for analytics.  
-
-Deletion is **irreversible**. If you use the Service again, you will need a new account.
-
-**Guest mode:** If you use Vireo without an account, data may be stored locally on your device. Removing the app or clearing app data may delete local guest data; it is not synced to our servers until you create an account.
-
----
-
-## 9. Your privacy rights
-
-Depending on where you live, you may have rights regarding your personal information. We extend the following rights to all Vireo users where feasible, even if not strictly required in your primary market — consistent with common App Store expectations.
-
-You may have the right to:
-
-- **Access** — request a copy of personal information we hold about you  
-- **Correction** — request correction of inaccurate information (you can also update many fields in-app)  
-- **Deletion** — request deletion of your account and associated data (see Section 8)  
-- **Portability** — request export of certain data in a usable format, where technically feasible  
-- **Restriction / objection** — object to or ask us to limit certain processing, where applicable  
-- **Withdraw consent** — where processing is based on consent (e.g., health data access), you may withdraw permission in device settings or by contacting us  
-
-### 9.1 GDPR (EEA, UK, and similar regions)
-
-If you are in the European Economic Area or United Kingdom:
-
-- **Legal bases** may include contract (providing the Service), consent (e.g., health integrations), and legitimate interests (security, improvement) balanced against your rights.  
-- You may lodge a complaint with your local supervisory authority.  
-- Our contact for GDPR requests: **[LEGAL EMAIL]**
-
-### 9.2 CCPA / CPRA (California)
-
-If you are a California resident:
-
-- We **do not sell** personal information.  
-- You may request to **know**, **delete**, or **correct** personal information, and to **limit use of sensitive personal information** where applicable.  
-- We will not discriminate against you for exercising privacy rights.  
-- Authorized agents may submit requests with appropriate verification.  
-
-To submit a request, email **[LEGAL EMAIL]** with the subject line “Privacy Request” and describe your request. We will verify your identity before processing.
-
-We aim to respond within **30 days** (or as required by applicable law).
-
----
-
-## 10. Children’s privacy
-
-Vireo is not intended for users under **18**. We do not knowingly collect personal information from children. If you believe a child has provided us data, contact us and we will delete it.
-
----
-
-## 11. International data transfers
-
-Your information may be processed in countries other than your own, including where our service providers operate. Where required, we use appropriate safeguards (such as standard contractual clauses) for cross-border transfers.
-
----
-
-## 12. Changes to this Privacy Policy
-
-We may update this Privacy Policy from time to time. Material changes will be notified through the app or other reasonable means. The “Last updated” date at the top reflects the latest revision.
-
----
-
-## 13. Contact us
-
-**[COMPANY LEGAL NAME]**  
-Email: **[LEGAL EMAIL]**  
-Address: **[COMPANY ADDRESS]**
-
----
-
-*This Privacy Policy should be read together with our Terms of Service.*
+## 10. Contact
+mahmoud.mma.en@gmail.com

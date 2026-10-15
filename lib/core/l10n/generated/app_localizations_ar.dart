@@ -4276,6 +4276,69 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get scoreInsightsImmediateActionsTitle =>
       'نصائح وإجراءات فورية لرفع السكور:';
+
+  @override
+  String stepMilestoneToast25(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'بداية قوية يا بطلة 👏',
+      'other': 'بداية قوية يا بطل 👏',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String stepMilestoneToast50(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'نص المشوار يا بطلة 💪',
+      'other': 'نص المشوار يا بطل 💪',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String stepMilestoneToast75(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'قرّبتِ توصلي يا بطلة 🔥',
+      'other': 'قرّبت توصل يا بطل 🔥',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String stepMilestoneToast100(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'عاش يا بطلة! كملتي هدفك 🏆',
+      'other': 'عاش يا وحش! كملت هدفك 🏆',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get livingBackgroundsTitle => 'خلفيات متغيرة';
+
+  @override
+  String get livingBackgroundsSubtitle =>
+      'مشاهد تتطور مع خطواتك وتتغير كل 3 أيام';
+
+  @override
+  String get livingBackgroundsEnable => 'تفعيل الخلفيات التفاعلية';
+
+  @override
+  String get livingBackgroundsSceneLock => 'تثبيت المشهد';
+
+  @override
+  String get livingBackgroundsAutoRotate => 'تغيير تلقائي كل 3 أيام';
+
+  @override
+  String get livingBackgroundsPreview => 'معاينة حية للمشهد';
+
+  @override
+  String livingBackgroundsUnlockForCoins(int coins) {
+    return 'فتح بـ $coins نقطة';
+  }
+
+  @override
+  String get livingBackgroundsUnlocked => 'تم الفتح';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).

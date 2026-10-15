@@ -2157,5 +2157,56 @@
   "scoreInsightsBurnedKcal": "حرق ونشاط",
   "scoreInsightsMacrosTitle": "توزيع الماكروز اليوم (الهدف vs المأكول)",
   "scoreInsightsScoreTrendTitle": "مسار السكور خلال 7 أيام",
-  "scoreInsightsImmediateActionsTitle": "نصائح وإجراءات فورية لرفع السكور:"
+  "scoreInsightsImmediateActionsTitle": "نصائح وإجراءات فورية لرفع السكور:",
+  "stepMilestoneToast25": "{gender, select, female{بداية قوية يا بطلة 👏} other{بداية قوية يا بطل 👏}}",
+  "@stepMilestoneToast25": {
+    "description": "Toast at 25% step milestone",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "stepMilestoneToast50": "{gender, select, female{نص المشوار يا بطلة 💪} other{نص المشوار يا بطل 💪}}",
+  "@stepMilestoneToast50": {
+    "description": "Toast at 50% step milestone",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "stepMilestoneToast75": "{gender, select, female{قرّبتِ توصلي يا بطلة 🔥} other{قرّبت توصل يا بطل 🔥}}",
+  "@stepMilestoneToast75": {
+    "description": "Toast at 75% step milestone",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "stepMilestoneToast100": "{gender, select, female{عاش يا بطلة! كملتي هدفك 🏆} other{عاش يا وحش! كملت هدفك 🏆}}",
+  "@stepMilestoneToast100": {
+    "description": "Toast at 100% step milestone",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "livingBackgroundsTitle": "خلفيات متغيرة",
+  "livingBackgroundsSubtitle": "مشاهد تتطور مع خطواتك وتتغير كل 3 أيام",
+  "livingBackgroundsEnable": "تفعيل الخلفيات التفاعلية",
+  "livingBackgroundsSceneLock": "تثبيت المشهد",
+  "livingBackgroundsAutoRotate": "تغيير تلقائي كل 3 أيام",
+  "livingBackgroundsPreview": "معاينة حية للمشهد",
+  "livingBackgroundsUnlockForCoins": "فتح بـ {coins} نقطة",
+  "@livingBackgroundsUnlockForCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "livingBackgroundsUnlocked": "تم الفتح"
 }

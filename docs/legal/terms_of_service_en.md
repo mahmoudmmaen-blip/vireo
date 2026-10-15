@@ -1,9 +1,9 @@
 # Vireo — Terms of Service
 
-**Last updated:** August 22, 2026  
-**Effective date:** August 22, 2026
+**Last updated:** October 14, 2026  
+**Effective date:** October 14, 2026
 
-These Terms of Service (“**Terms**”) govern your access to and use of the Vireo mobile application and related services (collectively, the “**Service**”), operated by **[COMPANY LEGAL NAME]** (“**Vireo**,” “**we**,” “**us**,” or “**our**”).
+These Terms of Service (“**Terms**”) govern your access to and use of the Vireo mobile application and related services (collectively, the “**Service**”), operated by **[DEVELOPER LEGAL NAME]** (“**Vireo**,” “**we**,” “**us**,” or “**our**”).
 
 By creating an account, subscribing, or using the Service, you agree to these Terms. If you do not agree, do not use the Service.
 
@@ -19,13 +19,15 @@ You are responsible for maintaining the confidentiality of your login credential
 
 ## 2. What Vireo provides
 
-Vireo is a **fitness, nutrition, and lifestyle coaching app** designed to help men build healthier routines, including:
+Vireo is a **fitness, nutrition, and lifestyle coaching app** designed to help adults, men and women, build healthier routines, including:
 
 - Workout programs and exercise guidance  
 - Nutrition and meal-planning tools  
 - Progress tracking (e.g., weight logs, adherence, energy check-ins)  
 - Optional integrations with device health data (where supported)  
 - **AI-assisted** workout and nutrition suggestions based on information you provide  
+- AI meal-photo analysis and body-report reading (e.g., InBody), with estimated values  
+- Intermittent-fasting timer, Ramadan fasting windows, and optional women's health / cycle tracking  
 
 We may update, add, or remove features at any time.
 
@@ -57,6 +59,13 @@ You understand that:
 
 AI content is provided **“as is”** for wellness support only, not as professional coaching, medical, or dietary advice.
 
+### 4.1 Estimates, fasting and plan changes
+
+- Calorie, nutrient, portion and body-composition values are **estimates** and may differ from real values. Always review them before saving.
+- Fasting features are for healthy adults. **Do not fast** if you are pregnant or breastfeeding, under 18, take diabetes medication, or have a history of eating disorders, unless a doctor approves. Vireo limits fasts to a maximum of 72 hours and asks you to consult a doctor for fasts longer than 24 hours.
+- Vireo Coach can suggest changes to your plan. **No change is applied without your confirmation**, and you can undo changes from plan history. Vireo will not set calorie targets below safe minimums.
+- Cycle predictions are estimates and **must not be used as contraception or for medical decisions**.
+
 ---
 
 ## 5. Your information and health screening answers
@@ -67,7 +76,7 @@ You agree that:
 
 - Information you submit is **accurate to the best of your knowledge**.  
 - You will **update** your profile if your circumstances change materially.  
-- We may use this information to personalize the Service, as described in our **[Privacy Policy]**.
+- We may use this information to personalize the Service, as described in our **Privacy Policy**.
 
 Health screening answers may trigger in-app warnings or program adjustments. These are **wellness features only**, not clinical assessments.
 
@@ -194,9 +203,9 @@ If you are a consumer in the European Union or another region with mandatory loc
 
 Questions about these Terms:
 
-**[COMPANY LEGAL NAME]**  
-Email: **[LEGAL EMAIL]**  
-Address: **[COMPANY ADDRESS]**
+**[DEVELOPER LEGAL NAME]**  
+Email: **mahmoud.mma.en@gmail.com**  
+Address: **[DEVELOPER ADDRESS]**
 
 ---
 

@@ -4333,4 +4333,67 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get scoreInsightsImmediateActionsTitle =>
       'Skoru artırmak için ipuçları:';
+
+  @override
+  String stepMilestoneToast25(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'Strong start, champion! 👏',
+      'other': 'Strong start, champion! 👏',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String stepMilestoneToast50(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'Halfway there, champion! 💪',
+      'other': 'Halfway there, champion! 💪',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String stepMilestoneToast75(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'Almost there, champion! 🔥',
+      'other': 'Almost there, champion! 🔥',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String stepMilestoneToast100(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'Incredible job! Daily goal crushed 🏆',
+      'other': 'Incredible job! Daily goal crushed 🏆',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get livingBackgroundsTitle => 'Living Backgrounds';
+
+  @override
+  String get livingBackgroundsSubtitle =>
+      'Dynamic scenes evolving with your steps & rotating every 3 days';
+
+  @override
+  String get livingBackgroundsEnable => 'Enable Living Backgrounds';
+
+  @override
+  String get livingBackgroundsSceneLock => 'Lock Scene';
+
+  @override
+  String get livingBackgroundsAutoRotate => 'Rotate every 3 days';
+
+  @override
+  String get livingBackgroundsPreview => 'Live Scene Preview';
+
+  @override
+  String livingBackgroundsUnlockForCoins(int coins) {
+    return 'Unlock for $coins coins';
+  }
+
+  @override
+  String get livingBackgroundsUnlocked => 'Unlocked';
 }

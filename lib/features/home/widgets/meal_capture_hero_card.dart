@@ -5,6 +5,7 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
+import 'package:vireo/features/home/living_backgrounds/widgets/living_meal_capture_background.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 
@@ -35,14 +36,6 @@ class MealCaptureHeroCard extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              colors.ember,
-              HSLColor.fromColor(colors.ember).withLightness((HSLColor.fromColor(colors.ember).lightness * 0.85).clamp(0.0, 1.0)).toColor(),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -52,13 +45,16 @@ class MealCaptureHeroCard extends ConsumerWidget {
             ),
           ],
         ),
-        child: Material(
-          color: Colors.transparent,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+        child: LivingMealCaptureBackground(
+          mealSlot: currentSlot,
+          borderRadius: 20,
+          child: Material(
+            color: Colors.transparent,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
                 // Top Row: Big camera circle + Title + Subtitle
                 Row(
                   children: [
@@ -227,7 +223,8 @@ class MealCaptureHeroCard extends ConsumerWidget {
           ),
         ),
       ),
-    );
+    ),
+  );
   }
 
   static MealType _currentMealSlot() {

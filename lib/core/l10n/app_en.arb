@@ -2376,5 +2376,56 @@
   "scoreInsightsBurnedKcal": "Burned",
   "scoreInsightsMacrosTitle": "Today's Macros (Target vs Actual)",
   "scoreInsightsScoreTrendTitle": "7-Day Score Trend",
-  "scoreInsightsImmediateActionsTitle": "Actionable Tips to Boost Score:"
+  "scoreInsightsImmediateActionsTitle": "Actionable Tips to Boost Score:",
+  "stepMilestoneToast25": "{gender, select, female{Strong start, champion! 👏} other{Strong start, champion! 👏}}",
+  "@stepMilestoneToast25": {
+    "description": "Toast at 25% step milestone",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "stepMilestoneToast50": "{gender, select, female{Halfway there, champion! 💪} other{Halfway there, champion! 💪}}",
+  "@stepMilestoneToast50": {
+    "description": "Toast at 50% step milestone",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "stepMilestoneToast75": "{gender, select, female{Almost there, champion! 🔥} other{Almost there, champion! 🔥}}",
+  "@stepMilestoneToast75": {
+    "description": "Toast at 75% step milestone",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "stepMilestoneToast100": "{gender, select, female{Incredible job! Daily goal crushed 🏆} other{Incredible job! Daily goal crushed 🏆}}",
+  "@stepMilestoneToast100": {
+    "description": "Toast at 100% step milestone",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "livingBackgroundsTitle": "Living Backgrounds",
+  "livingBackgroundsSubtitle": "Dynamic scenes evolving with your steps & rotating every 3 days",
+  "livingBackgroundsEnable": "Enable Living Backgrounds",
+  "livingBackgroundsSceneLock": "Lock Scene",
+  "livingBackgroundsAutoRotate": "Rotate every 3 days",
+  "livingBackgroundsPreview": "Live Scene Preview",
+  "livingBackgroundsUnlockForCoins": "Unlock for {coins} coins",
+  "@livingBackgroundsUnlockForCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "livingBackgroundsUnlocked": "Unlocked"
 }

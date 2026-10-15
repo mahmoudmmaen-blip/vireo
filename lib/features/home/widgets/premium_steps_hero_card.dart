@@ -3,9 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/theme/app_theme_variant_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
+import 'package:vireo/features/home/living_backgrounds/domain/journey_stage.dart';
+import 'package:vireo/features/home/living_backgrounds/widgets/living_steps_background.dart';
 import 'package:vireo/features/walking/data/step_counter_service.dart';
 import 'package:vireo/features/walking/data/step_foreground_service.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
@@ -25,11 +28,13 @@ class PremiumStepsHeroCard extends ConsumerStatefulWidget {
     required this.stepsCurrent,
     required this.stepsGoal,
     required this.onTap,
+    this.overrideStage,
   });
 
   final int stepsCurrent;
   final int stepsGoal;
   final VoidCallback onTap;
+  final int? overrideStage;
 
   static const stepsAccent = Color(0xFF10B981); // Bright Emerald Green
   static const stepsCardBg = Color(0xFF1E293B); // Deep slate blue / Leap style
@@ -201,11 +206,16 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
         ? metrics.activeMinutes
         : (widget.stepsCurrent / 100.0).round();
 
+    final stage = widget.overrideStage != null
+        ? JourneyStage.fromSteps(widget.overrideStage! * 1000)
+        : JourneyStage.fromSteps(widget.stepsCurrent);
+    final variant = ref.watch(appThemeVariantProvider);
+    final rampColor = stage.ringAccent(variant);
+
     return InkWell(
       onTap: widget.onTap,
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: colors.surfaceRaised,
           borderRadius: BorderRadius.circular(20),
@@ -217,10 +227,17 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
             ),
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Row 1: Big steps number, goal, Distinctive Play/Pause button
+        child: LivingStepsBackground(
+          stepsCurrent: widget.stepsCurrent,
+          stepsGoal: effectiveGoal,
+          overrideStage: widget.overrideStage,
+          borderRadius: 20,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Row 1: Big steps number, goal, Distinctive Play/Pause button
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -316,6 +333,10 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                                 fontFeatures: [FontFeature.tabularFigures()],
                               ),
                             ),
+                            if (stage.hasStarBadge) ...[
+                              const SizedBox(width: 6),
+                              const Icon(Icons.star_rounded, color: Color(0xFFFFD700), size: 30),
+                            ],
                           ],
                         ),
                       ),
@@ -343,7 +364,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                 child: LinearProgressIndicator(
                   value: ratio,
                   backgroundColor: const Color(0xFF2C3E55),
-                  valueColor: const AlwaysStoppedAnimation<Color>(PremiumStepsHeroCard.stepsAccent),
+                  valueColor: AlwaysStoppedAnimation<Color>(rampColor),
                 ),
               ),
             ),
@@ -405,12 +426,14 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
             _Leap7DayRow(
               days: last7,
               goal: effectiveGoal,
-              accent: PremiumStepsHeroCard.stepsAccent,
+              accent: rampColor,
             ),
           ],
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 }
 

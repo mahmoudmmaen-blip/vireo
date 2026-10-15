@@ -7794,6 +7794,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Actionable Tips to Boost Score:'**
   String get scoreInsightsImmediateActionsTitle;
+
+  /// Toast at 25% step milestone
+  ///
+  /// In en, this message translates to:
+  /// **'{gender, select, female{Strong start, champion! 👏} other{Strong start, champion! 👏}}'**
+  String stepMilestoneToast25(String gender);
+
+  /// Toast at 50% step milestone
+  ///
+  /// In en, this message translates to:
+  /// **'{gender, select, female{Halfway there, champion! 💪} other{Halfway there, champion! 💪}}'**
+  String stepMilestoneToast50(String gender);
+
+  /// Toast at 75% step milestone
+  ///
+  /// In en, this message translates to:
+  /// **'{gender, select, female{Almost there, champion! 🔥} other{Almost there, champion! 🔥}}'**
+  String stepMilestoneToast75(String gender);
+
+  /// Toast at 100% step milestone
+  ///
+  /// In en, this message translates to:
+  /// **'{gender, select, female{Incredible job! Daily goal crushed 🏆} other{Incredible job! Daily goal crushed 🏆}}'**
+  String stepMilestoneToast100(String gender);
+
+  /// No description provided for @livingBackgroundsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Living Backgrounds'**
+  String get livingBackgroundsTitle;
+
+  /// No description provided for @livingBackgroundsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic scenes evolving with your steps & rotating every 3 days'**
+  String get livingBackgroundsSubtitle;
+
+  /// No description provided for @livingBackgroundsEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Living Backgrounds'**
+  String get livingBackgroundsEnable;
+
+  /// No description provided for @livingBackgroundsSceneLock.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock Scene'**
+  String get livingBackgroundsSceneLock;
+
+  /// No description provided for @livingBackgroundsAutoRotate.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate every 3 days'**
+  String get livingBackgroundsAutoRotate;
+
+  /// No description provided for @livingBackgroundsPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Live Scene Preview'**
+  String get livingBackgroundsPreview;
+
+  /// No description provided for @livingBackgroundsUnlockForCoins.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock for {coins} coins'**
+  String livingBackgroundsUnlockForCoins(int coins);
+
+  /// No description provided for @livingBackgroundsUnlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocked'**
+  String get livingBackgroundsUnlocked;
 }
 
 class _AppLocalizationsDelegate

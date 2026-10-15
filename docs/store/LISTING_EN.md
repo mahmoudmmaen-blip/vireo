@@ -1,52 +1,60 @@
-# Google Play Listing: English (en-US)
+# Google Play Listing — English (en-US) — v2 (2026-10-14)
 
-## App Name (≤ 30 characters)
-**Vireo: Calorie & Steps Tracker**  *(29 chars)*
+> Every claim here matches a shipped feature. No accuracy percentages or weight-loss results.
 
-## Short Description (≤ 80 characters)
-**Smart AI meal scanner, daily step counter, and wellness habits tracker.**  *(74 chars)*
+## App name (≤ 30 chars)
+**Vireo: Calories Steps Fasting**  *(29 chars)*
 
-## Full Description (≤ 4000 characters)
-Welcome to Vireo — your personalized companion for sustainable energy, balanced nutrition, and daily vitality.
+## Short description (≤ 80 chars)
+**Snap meals for calories, count steps, track fasting and your body — smartly.**  *(76 chars)*
 
-Vireo makes healthy living effortless with intelligent AI tools designed for real everyday lifestyles. Whether you want to maintain a balanced energy deficit, count your daily walking steps, or follow proven wellness habits, Vireo guides you with warmth and clarity.
+## Full description (≤ 4000 chars)
+Vireo is your everyday companion for eating well, walking more and staying fit, built with Egyptian and Arab food in mind and designed for both men and women.
 
-### 🌟 Key Features
+📸 Snap your meal, get the numbers
+Take a photo or pick one from your gallery. Vireo identifies the food and estimates portions, then calculates calories, protein, carbs and fat from real food databases (an Egyptian/Arab food table plus USDA FoodData Central), not a guess. Adjust portions with household measures: cups, spoons, a loaf of bread, a palm-sized piece.
 
-📸 Instant AI Food & Fridge Scanner
-Simply snap a photo of your meal or ingredients in your kitchen. Vireo instantly estimates calories and macros (protein, carbs, fats) with localized culinary understanding.
+🍽️ Smart next-meal suggestions
+After each meal, see what's left for the day and get a home-food suggestion that fits.
 
-🚶 Step Counter & Walking Activity
-Stay active with effortless step tracking and daily walking targets. Set realistic goals, view 7-day trends, and celebrate streak milestones.
+🚶 Simple, clear step counter
+Daily goal, weekly trends, and Health Connect support.
 
-🥗 7 Tailored Nutrition Programs
-Explore balanced approaches suited to your lifestyle:
-- Balanced Calorie Deficit
-- Egyptian & Middle Eastern Clean Eating
-- High Protein Nutrition
-- Intermittent Fasting (16:8 Window Tracker)
-- Mindful Low-Carb & Ketogenic Protocols
+⏱️ Intermittent fasting & Ramadan
+Fasting timer with 12:12, 14:10, 16:8, 18:6, 20:4 and 5:2 plans, honest fasting stages, and automatic Ramadan Fajr-to-Maghrib windows. Safety limits for pregnancy, breastfeeding and diabetes medication.
 
-⚡ Daily Vitality & Mindful Habits
-Support your natural rhythm with morning sunlight tracking, hydration reminders, guided breathing sessions, and optimal bedtime prompts.
+📊 Body analysis & InBody
+Snap an InBody or smart-scale report and Vireo reads the numbers and updates your plan. Or estimate body fat with a tape measure.
 
-🏆 Privacy-First Community & Challenges
-Create friendly step challenges with friends or your family group (up to 6 members). Compete on weekly leaderboards while keeping your food, weight, and private health data completely confidential.
+👩 Made for you
+For women: optional cycle tracking stored only on your phone, phase-aware tips, and pregnancy/breastfeeding mode.
+For men: vitality habits for sleep, training and energy.
 
-🔒 Privacy First & Offline-Ready
-Your data is stored locally on your device and synced with bank-grade encryption via Supabase. We never sell your personal data or display intrusive advertisements.
+💬 Vireo Coach
+Ask about your meals and plan. When you agree on a change, the coach adds it to your plan, only after you confirm.
 
-### ⚠️ Wellness Notice
-Vireo is intended for general wellness, fitness, and lifestyle educational purposes only. It is not a medical device and does not diagnose, treat, or prevent any medical condition. Always consult a healthcare professional before making significant dietary or exercise changes.
+🎯 Daily journey & coins
+Small daily steps; every win earns coins you can use to unlock Pro perks.
+
+🎨 Themes
+4 themes, each with dark and light modes.
+
+🔒 Privacy matters
+Your data is stored on your device first and encrypted in transit. Cycle data never leaves your phone. Delete your account and all data from inside the app.
+
+📢 The free version shows strictly filtered, family-safe ads. Vireo Pro removes ads and unlocks every feature.
+
+⚠️ Wellness notice
+Vireo is a fitness and lifestyle app, not a medical device. It does not diagnose or treat any condition, and all numbers are estimates. Consult your doctor before starting a diet or extended fasting, especially if you have a chronic condition or are pregnant.
 
 ---
 
-## 8 Screenshots to Capture with Captions
-1. **Home Today Plan:** "Your Daily Blueprint: Meals, Steps & Vitality Habits"
-2. **AI Food Scanner:** "Snap Your Meal — Instant Calories & Macro Analysis"
-3. **Step Ring & Walking:** "Track Your Steps & Reach Daily Walking Goals"
-4. **Nutrition Programs:** "7 Programs Tailored to Your Culture & Routine"
-5. **AI Coach:** "Your Warm, Knowledgeable 24/7 Wellness Companion"
-6. **Smart Reminders:** "Timely Water, Meal & Fasting Reminders"
-7. **Social Challenges:** "Fun Steps Competitions with Friends & Family"
-8. **Weekly Progress Card:** "Shareable Milestones & Long-Term Trend Insights"
+## Screenshots (8) with captions
+1. Home: "Your whole day on one screen"
+2. Meal scan: "Snap your meal, get the calories"
+3. Household measures: "Cups, spoons, bread. No scale needed"
+4. Next-meal suggestion: "What's left today, and what to eat next"
+5. Fasting timer: "Intermittent fasting and Ramadan in one place"
+6. Body / InBody: "Snap your InBody report, update your plan"
+7. Women's health / Men's vitality: "An experience that fits you"
+8. Vireo Coach: "Ask, agree, add it to your plan"
