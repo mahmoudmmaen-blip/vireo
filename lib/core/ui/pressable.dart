@@ -204,29 +204,37 @@ class VireoPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
     final c = color ?? colors.ember;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: filled ? c : c.withValues(alpha: 0.14),
-        borderRadius: BorderRadius.circular(VRadius.pill),
-        border: Border.all(color: c.withValues(alpha: filled ? 0 : 0.35)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (icon != null) ...[
-            Icon(icon, size: 15, color: filled ? Colors.white : c),
-            const SizedBox(width: 4),
-          ],
-          Text(
-            label,
-            style: TextStyle(
-              color: filled ? Colors.white : c,
-              fontWeight: FontWeight.w800,
-              fontSize: 12.5,
+    final maxW = MediaQuery.sizeOf(context).width - 48;
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: maxW > 80 ? maxW : 80),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: filled ? c : c.withValues(alpha: 0.14),
+          borderRadius: BorderRadius.circular(VRadius.pill),
+          border: Border.all(color: c.withValues(alpha: filled ? 0 : 0.35)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) ...[
+              Icon(icon, size: 15, color: filled ? Colors.white : c),
+              const SizedBox(width: 4),
+            ],
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: filled ? Colors.white : c,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 12.5,
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

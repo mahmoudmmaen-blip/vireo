@@ -119,12 +119,12 @@ class _BadgeItem extends StatelessWidget {
                 ] else
                   Row(
                     children: [
-                      const Icon(Icons.check_circle, color: Color(0xFF22C55E), size: 18),
+                      Icon(Icons.check_circle, color: colors.success, size: 18),
                       const SizedBox(width: 6),
-                      const Text(
+                      Text(
                         'Unlocked!',
                         style: TextStyle(
-                          color: Color(0xFF22C55E),
+                          color: colors.success,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

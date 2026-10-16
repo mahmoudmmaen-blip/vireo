@@ -273,7 +273,7 @@
   "nutritionChoosePhoto": "اختيار من المعرض",
   "nutritionScanning": "جاري مسح المكونات…",
   "nutritionScanFailed": "فشل المسح. حاول تاني أو أدخل المكونات يدوي.",
-  "nutritionScanLimitReached": "وصلت للimit الشهري. ترقّى للمسح غير المlimited.",
+  "nutritionScanLimitReached": "وصلت للحد الشهري. ترقّى للمسح غير المحدود.",
   "nutritionConfirmIngredients": "تأكيد المكونات",
   "nutritionIngredientsHint": "احذف اللي غلط وأضف اللي ناقص.",
   "nutritionAddIngredient": "إضافة مكون",
@@ -907,7 +907,7 @@
   },
   "weeklyDeficitChartTitle": "رصيد السعرات الأسبوعي",
   "weeklyDeficitSubtitle": "TDEE − الوجبات + حرق الكارديو (آخر 7 أيام)",
-  "weeklyDeficitTotal": "إجمالي العجز الأسبوعي: {kcal} kcal",
+  "weeklyDeficitTotal": "إجمالي العجز الأسبوعي: {kcal} سعرة",
   "@weeklyDeficitTotal": {
     "placeholders": {
       "kcal": {
@@ -944,7 +944,7 @@
   "cookMethodBaked": "في الفرن",
   "cookMethodSteamed": "على البخار",
   "cookMethodOther": "أخرى",
-  "weeklyDeficitTooltip": "{net} kcal\nداخل: {consumed} · خارج: {burned}",
+  "weeklyDeficitTooltip": "{net} سعرة\nداخل: {consumed} · خارج: {burned}",
   "@weeklyDeficitTooltip": {
     "placeholders": {
       "net": {
@@ -1039,7 +1039,7 @@
       }
     }
   },
-  "diaryMealCalories": "{calories} kcal",
+  "diaryMealCalories": "{calories} سعرة",
   "diaryNetBalance": "العجز اليومي",
   "diaryNoEntries": "لا توجد سجلات لهذا اليوم",
   "diaryProtein": "البروتين",
@@ -1089,7 +1089,7 @@
       }
     }
   },
-  "diaryWorkoutSubtitle": "{minutes} min · {calories} kcal",
+  "diaryWorkoutSubtitle": "{minutes} دقيقة · {calories} سعرة",
   "exerciseAdvanced": "متقدم",
   "exerciseBeginner": "مبتدئ",
   "exerciseComplete": "تم المجموعة",
@@ -1105,18 +1105,18 @@
   "exerciseTips": "نصائح احترافية",
   "exerciseViewBack": "خلفي",
   "exerciseViewFront": "أمامي",
-  "measurements30Days": "30 days",
-  "measurements3Months": "3 months",
-  "measurements7Days": "7 days",
+  "measurements30Days": "30 يوم",
+  "measurements3Months": "3 شهور",
+  "measurements7Days": "7 أيام",
   "measurementsAdd": "إضافة قياس",
-  "measurementsAddFirst": "Log your first measurement",
-  "measurementsAll": "All",
+  "measurementsAddFirst": "سجّل أول قياس",
+  "measurementsAll": "الكل",
   "measurementsArms": "الذراعين",
   "measurementsBodyFat": "نسبة الدهون",
   "measurementsChest": "الصدر",
-  "measurementsDate": "Date",
+  "measurementsDate": "التاريخ",
   "measurementsDelete": "حذف",
-  "measurementsDeleteConfirm": "Delete this measurement?",
+  "measurementsDeleteConfirm": "تمسح القياس ده؟",
   "measurementsHistory": "السجل",
   "@measurementsLastUpdated": {
     "placeholders": {
@@ -1125,19 +1125,19 @@
       }
     }
   },
-  "measurementsLastUpdated": "Updated {date}",
+  "measurementsLastUpdated": "اتحدّث {date}",
   "measurementsNeedMoreData": "سجّل المزيد من القياسات لمتابعة التطور والرسوم البيانية",
-  "measurementsNoData": "No measurements yet",
+  "measurementsNoData": "لسه مفيش قياسات",
   "measurementsNotes": "ملاحظات",
   "measurementsSave": "حفظ",
   "measurementsThighs": "الفخذين",
   "measurementsTitle": "القياسات",
-  "measurementsTrendDeclining": "Needs attention",
-  "measurementsTrendImproving": "Improving",
-  "measurementsTrendStable": "Stable",
+  "measurementsTrendDeclining": "محتاج متابعة",
+  "measurementsTrendImproving": "بيتحسّن",
+  "measurementsTrendStable": "ثابت",
   "measurementsWaist": "الخصر",
   "measurementsWeight": "الوزن",
-  "measurementsWeightInvalid": "Enter a valid weight",
+  "measurementsWeightInvalid": "اكتب وزن صحيح",
   "muscleBack": "الظهر",
   "muscleBiceps": "البايسبس",
   "muscleCalves": "السمانة",
@@ -1199,7 +1199,7 @@
   "notificationsPermissionDialogBody": "هنبعتلك تذكيرات لطيفة ودافية للماء، والتمارين، والوجبات في وقتها. بنحترم ساعات هدوئك تماماً ومش هنزعجك أبداً.",
   "notificationsPermissionAllow": "تفعيل التذكيرات",
   "notificationsPermissionNotNow": "ليس الآن",
-  "vitality12WeekProgram": "12-Week Program",
+  "vitality12WeekProgram": "برنامج الـ 12 أسبوع",
   "@vitalityArticleCount": {
     "placeholders": {
       "count": {
@@ -1207,10 +1207,10 @@
       }
     }
   },
-  "vitalityArticleCount": "{count} articles",
-  "vitalityArticleDisclaimer": "For education only. Consult a professional for personal advice.",
-  "vitalityArticlesSection": "Articles",
-  "vitalityBadgesTitle": "Badges",
+  "vitalityArticleCount": "{count, plural, =1{مقال واحد} =2{مقالين} few{{count} مقالات} other{{count} مقال}}",
+  "vitalityArticleDisclaimer": "للتثقيف فقط. اسأل مختص قبل أي قرار يخص صحتك.",
+  "vitalityArticlesSection": "مقالات",
+  "vitalityBadgesTitle": "الأوسمة",
   "@vitalityBreathingCount": {
     "placeholders": {
       "count": {
@@ -1240,20 +1240,20 @@
       }
     }
   },
-  "vitalityDailyChecklistProgress": "{done}/{total} done",
-  "vitalityDailyChecklistTitle": "Today's checklist",
-  "vitalityDailyTipLabel": "Daily tip",
-  "vitalityHubSubtitle": "Science-backed habits for energy and recovery",
+  "vitalityDailyChecklistProgress": "{done} من {total} تمّت",
+  "vitalityDailyChecklistTitle": "قايمة النهاردة",
+  "vitalityDailyTipLabel": "نصيحة اليوم",
+  "vitalityHubSubtitle": "عادات مبنية على العلم لطاقة وتعافي أحسن",
   "vitalityHubTitle": "مركز الحيوية",
-  "vitalityLegendBadge": "Legend",
-  "vitalityLinkCopied": "Link copied",
-  "vitalityLogSection": "Log",
-  "vitalityMarkRead": "Mark as read",
-  "vitalityMarkReadDone": "Read",
-  "vitalityMarkReadSuccess": "Marked as read",
-  "vitalityMedicalDisclaimer": "Educational content only — not medical advice.",
-  "vitalityMetricsEmpty": "No metrics yet",
-  "vitalityMetricsLast7Days": "Last 7 days",
+  "vitalityLegendBadge": "أسطورة",
+  "vitalityLinkCopied": "اتنسخ الرابط",
+  "vitalityLogSection": "السجل",
+  "vitalityMarkRead": "علّم كمقروء",
+  "vitalityMarkReadDone": "اتقرا",
+  "vitalityMarkReadSuccess": "اتعلّم كمقروء",
+  "vitalityMedicalDisclaimer": "محتوى تثقيفي فقط — مش نصيحة طبية.",
+  "vitalityMetricsEmpty": "لسه مفيش قياسات",
+  "vitalityMetricsLast7Days": "آخر 7 أيام",
   "@vitalityMetricsLastEntry": {
     "placeholders": {
       "score": {
@@ -1262,27 +1262,27 @@
     }
   },
   "vitalityMetricsLastEntry": "آخر تسجيل · طاقة {score}/10",
-  "vitalityMetricsSave": "Save metrics",
-  "vitalityMetricsSaved": "Saved",
-  "vitalityMetricsTapToLog": "Tap to log",
-  "vitalityMetricsTitle": "Daily metrics",
-  "vitalityMorningEnergy": "Morning energy",
+  "vitalityMetricsSave": "احفظ القياسات",
+  "vitalityMetricsSaved": "اتحفظت",
+  "vitalityMetricsTapToLog": "اضغط عشان تسجّل",
+  "vitalityMetricsTitle": "قياسات يومك",
+  "vitalityMorningEnergy": "طاقة الصبح",
   "vitalityMyProgram": "برنامجي",
-  "vitalityNotLogged": "Not logged",
-  "vitalityPhaseFoundation": "Foundation",
-  "vitalityPhaseOptimization": "Optimization",
-  "vitalityPhasePeak": "Peak",
-  "vitalityProgramAllWeeks": "All weeks",
-  "vitalityProgramComplete": "Program complete",
-  "vitalityProgramContinue": "Continue",
-  "vitalityProgramDisclaimer": "Educational program — not a medical treatment.",
-  "vitalityProgramDone": "Completed",
-  "vitalityProgramOverallProgress": "Overall progress",
-  "vitalityProgramStartCta": "Start program",
-  "vitalityProgramSubtitle": "12 weeks to better energy, sleep and recovery",
+  "vitalityNotLogged": "لسه متسجّلش",
+  "vitalityPhaseFoundation": "التأسيس",
+  "vitalityPhaseOptimization": "التحسين",
+  "vitalityPhasePeak": "القمة",
+  "vitalityProgramAllWeeks": "كل الأسابيع",
+  "vitalityProgramComplete": "خلص البرنامج 🎉",
+  "vitalityProgramContinue": "كمّل",
+  "vitalityProgramDisclaimer": "برنامج تثقيفي — مش علاج طبي.",
+  "vitalityProgramDone": "تمّ",
+  "vitalityProgramOverallProgress": "تقدّمك الكلي",
+  "vitalityProgramStartCta": "يلا نبدأ البرنامج",
+  "vitalityProgramSubtitle": "12 أسبوع لطاقة ونوم وتعافي أحسن",
   "vitalityProgramTitle": "تحول الحيوية",
-  "vitalityProtocolBadgeEarned": "Badge unlocked!",
-  "vitalityProtocolCompleteDay": "Complete day",
+  "vitalityProtocolBadgeEarned": "اتفتح وسام جديد!",
+  "vitalityProtocolCompleteDay": "كمّل اليوم",
   "@vitalityProtocolStreak": {
     "placeholders": {
       "days": {
@@ -1290,8 +1290,8 @@
       }
     }
   },
-  "vitalityProtocolStreak": "{days}-day streak",
-  "vitalityProtocolTitle": "Protocols",
+  "vitalityProtocolStreak": "{days} يوم متتالي",
+  "vitalityProtocolTitle": "البروتوكولات",
   "@vitalityReadingTime": {
     "placeholders": {
       "minutes": {
@@ -1299,11 +1299,11 @@
       }
     }
   },
-  "vitalityReadingTime": "{minutes} min read",
+  "vitalityReadingTime": "قراءة {minutes} دقيقة",
   "vitalityReportCompletion": "الإنجاز",
-  "vitalityReportImproving": "You're improving — keep the streak going.",
-  "vitalityReportKeepGoing": "Small steps still count. Finish a couple tasks today.",
-  "vitalityScientificSources": "Sources",
+  "vitalityReportImproving": "إنت بتتحسّن — كمّل على نفس الخط.",
+  "vitalityReportKeepGoing": "الخطوات الصغيرة بتفرق. جرّب تخلّص مهمتين النهاردة.",
+  "vitalityScientificSources": "المصادر العلمية",
   "@vitalityScoreBreakdown": {
     "placeholders": {
       "sleep": {
@@ -1340,9 +1340,9 @@
       }
     }
   },
-  "vitalityStreak": "{days}-day streak",
-  "vitalityStressLevel": "Stress",
-  "vitalityUnlockNextWeek": "Unlock next week",
+  "vitalityStreak": "{days} يوم متتالي",
+  "vitalityStressLevel": "التوتر",
+  "vitalityUnlockNextWeek": "افتح الأسبوع الجاي",
   "@vitalityWeekProgress": {
     "placeholders": {
       "percent": {
@@ -1351,7 +1351,7 @@
     }
   },
   "vitalityWeekProgress": "{percent}%",
-  "vitalityWeekReport": "Week report",
+  "vitalityWeekReport": "تقرير الأسبوع",
   "@vitalityWeekX": {
     "placeholders": {
       "week": {
@@ -1359,7 +1359,7 @@
       }
     }
   },
-  "vitalityWeekX": "Week {week}",
+  "vitalityWeekX": "الأسبوع {week}",
   "@vitalityWeekXOf12": {
     "placeholders": {
       "week": {
@@ -1367,11 +1367,11 @@
       }
     }
   },
-  "vitalityWeekXOf12": "Week {week} of 12",
-  "vitalityWorkoutDone": "Trained",
-  "vitalityWorkoutLog": "Workout",
-  "vitalityWorkoutPending": "Rest / not yet",
-  "vitalityWorkoutPerformance": "Performance",
+  "vitalityWeekXOf12": "الأسبوع {week} من 12",
+  "vitalityWorkoutDone": "تمّ التمرين",
+  "vitalityWorkoutLog": "التمرين",
+  "vitalityWorkoutPending": "راحة / لسه",
+  "vitalityWorkoutPerformance": "الأداء",
   "@walkingEstimatedMinutes": {
     "placeholders": {
       "minutes": {
@@ -1379,11 +1379,11 @@
       }
     }
   },
-  "walkingEstimatedMinutes": "~{minutes} min",
+  "walkingEstimatedMinutes": "~{minutes} دقيقة",
   "walkingHealthBanner": "خطوات لايف من عدّاد الموبايل",
-  "walkingManualStepsLabel": "Steps today",
-  "walkingUpdateSteps": "Update steps",
-  "walkingWebManualBanner": "On web, enter steps manually",
+  "walkingManualStepsLabel": "خطوات النهاردة",
+  "walkingUpdateSteps": "حدّث الخطوات",
+  "walkingWebManualBanner": "على الويب، اكتب خطواتك يدوي",
   "vitalityKeyTakeaway": "الخلاصة",
   "dietMyPlan": "خطتي الغذائية",
   "dietProgramsTitle": "برامج الدايت",
@@ -1573,7 +1573,7 @@
       }
     }
   },
-  "todayPlanVitalitySleepSubtitle": "سجّل 7.5+ ساعات في Vitality",
+  "todayPlanVitalitySleepSubtitle": "سجّل 7.5+ ساعات في الحيوية",
   "todayPlanVitalityProteinSubtitle": "حقّق هدف البروتين",
   "todayPlanVitalitySunSubtitle": "ضوء الشمس الصباحي",
   "todayPlanVitalityStress": "تخفيف التوتر",
@@ -1581,7 +1581,7 @@
   "todayPlanVitalityZincSubtitle": "زنك وفيتامين D من الغذاء",
   "todayPlanSleepTarget": "هدف النوم",
   "todayPlanSleepTargetSubtitle": "استعد للنوم",
-  "todayPlanProtocolItem": "بروتوكول Vitality",
+  "todayPlanProtocolItem": "بروتوكول الحيوية",
   "todayPlanAiSuggestion": "اقتراح المدرب",
   "todayPlanAiSuggestionSubtitle": "نصيحة مخصصة لليوم",
   "waterGoalBasedOnWeight": "حسب وزنك ({kg} كجم)",
@@ -2208,5 +2208,22 @@
       }
     }
   },
-  "livingBackgroundsUnlocked": "تم الفتح"
+  "livingBackgroundsUnlocked": "تم الفتح",
+  "workoutRpeSubtitle": "حسّيت بالمجهود قد إيه؟ من 1 (سهل جداً) لـ 10 (صعب جداً)",
+  "workoutRpeLabel": "{level, select, 1{سهل جداً} 2{سهل} 3{سهل نسبياً} 4{خفيف} 5{متوسط} 6{شوية صعب} 7{تقيل} 8{صعب} 9{صعب أوي} other{صعب جداً}}",
+  "workoutRpeFeelingsTitle": "إحساسك بعد التمرين إيه؟",
+  "workoutFeelTired": "تعب",
+  "workoutFeelJointPain": "ألم في مفصل",
+  "workoutFeelHappy": "{gender, select, female{مبسوطة} other{مبسوط}}",
+  "workoutFeelEnergized": "طاقة عالية",
+  "workoutRpeNoteHint": "اكتب ملاحظة (اختياري)",
+  "workoutRpeSave": "احفظ",
+  "workoutRpeDone": "تمام",
+  "workoutRpeSavedTitle": "اتحفظ ✅",
+  "workoutRpeCommentJoint": "ألم المفصل إشارة لازم نحترمها. خفّف الحمل في الجلسة الجاية وركّز على سلامة الحركة.",
+  "workoutRpeCommentHard": "التمرين كان تقيل النهاردة. هنخفّف الحمل شوية المرة الجاية عشان جسمك يتعافى كويس.",
+  "workoutRpeCommentBetter": "أداءك أحسن! نفس التمرين حسّيته أخف من المرة اللي فاتت 💪",
+  "workoutRpeCommentEasy": "حسّيته سهل. الجلسة الجاية هنزوّد الحمل شوية.",
+  "workoutRpeCommentSteady": "مجهود مظبوط. كمّل على نفس الإيقاع.",
+  "workoutRpeCommentPartial": "اللي عملته من المجموعات محسوب وبيفرق. هنرجع أقوى في الجلسة الجاية."
 }

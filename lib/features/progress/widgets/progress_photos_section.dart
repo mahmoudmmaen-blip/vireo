@@ -148,7 +148,7 @@ class _ProgressPhotosSectionState extends ConsumerState<ProgressPhotosSection> {
             ),
             child: Row(
               children: [
-                const Icon(Icons.lock_outline, size: 16, color: Color(0xFF22C55E)),
+                Icon(Icons.lock_outline, size: 16, color: colors.success),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(

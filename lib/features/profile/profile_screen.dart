@@ -22,6 +22,7 @@ import 'package:vireo/features/notifications/screens/notification_settings_scree
 import 'package:vireo/features/profile/appearance_screen.dart';
 import 'package:vireo/features/profile/privacy_settings_screen.dart';
 import 'package:vireo/features/profile/settings_screen.dart';
+import 'package:vireo/features/profile/widgets/profile_body_composition_card.dart';
 import 'package:vireo/features/profile/widgets/profile_body_metrics_sheet.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
@@ -97,6 +98,9 @@ class ProfileScreen extends ConsumerWidget {
               _MyBodyCard(
                 onEdit: () => showProfileBodyMetricsSheet(context, ref),
               ),
+              // InBody / tape measure + latest body-composition values.
+              const SizedBox(height: VSpace.sm),
+              const ProfileBodyCompositionCard(),
               const SizedBox(height: VSpace.lg),
               Text(
                 l10n.profileMyPlanSection,

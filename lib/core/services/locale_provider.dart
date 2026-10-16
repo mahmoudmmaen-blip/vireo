@@ -10,7 +10,7 @@ const _initialLanguageSelectedKey = 'initial_language_selected';
 enum AppLanguage {
   en(Locale('en'), 'English', 'English', false, 'EN'),
   ar(Locale('ar'), 'العربية (فصحى)', 'Arabic (Fusha)', true, 'عر'),
-  arEG(Locale('ar', 'EG'), 'العربية (لهجة مصرية)', 'Egyptian Arabic', true, 'مصر'),
+  arEG(Locale('ar', 'EG'), 'العربية (مصري)', 'Egyptian Arabic', true, 'مصر'),
   arSA(Locale('ar', 'SA'), 'العربية (لهجة خليجية)', 'Gulf Arabic', true, 'خل'),
   fr(Locale('fr'), 'Français', 'French', false, 'FR'),
   es(Locale('es'), 'Español', 'Spanish', false, 'ES'),
@@ -82,11 +82,20 @@ enum AppLanguage {
 /// Resolves default locale: device language if supported, else English.
 Locale resolveDefaultDeviceLocale() {
   try {
-    final device = WidgetsBinding.instance.platformDispatcher.locale;
+    final dispatcher = WidgetsBinding.instance.platformDispatcher;
+    final device = dispatcher.locale;
     final langCode = device.languageCode.toLowerCase();
-    final country = device.countryCode?.toUpperCase();
+    var country = device.countryCode?.toUpperCase();
 
     if (langCode == 'ar') {
+      // Some Egyptian devices report plain "ar" as the primary locale while
+      // listing ar_EG (or any *_EG locale) further down the preference list.
+      if (country == null || country.isEmpty) {
+        final hasEgypt = dispatcher.locales.any(
+          (l) => l.countryCode?.toUpperCase() == 'EG',
+        );
+        if (hasEgypt) country = 'EG';
+      }
       if (country == 'EG') return const Locale('ar', 'EG');
       if (const {'SA', 'AE', 'KW', 'QA', 'BH', 'OM'}.contains(country)) {
         return const Locale('ar', 'SA');

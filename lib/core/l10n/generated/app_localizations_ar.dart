@@ -698,7 +698,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get nutritionScanLimitReached =>
-      'وصلت للimit الشهري. ترقّى للمسح غير المlimited.';
+      'وصلت للحد الشهري. ترقّى للمسح غير المحدود.';
 
   @override
   String get nutritionConfirmIngredients => 'تأكيد المكونات';
@@ -1706,7 +1706,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String weeklyDeficitTotal(int kcal) {
-    return 'إجمالي العجز الأسبوعي: $kcal kcal';
+    return 'إجمالي العجز الأسبوعي: $kcal سعرة';
   }
 
   @override
@@ -1801,7 +1801,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String weeklyDeficitTooltip(int net, int consumed, int burned) {
-    return '$net kcal\nداخل: $consumed · خارج: $burned';
+    return '$net سعرة\nداخل: $consumed · خارج: $burned';
   }
 
   @override
@@ -2008,7 +2008,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String diaryMealCalories(int calories) {
-    return '$calories kcal';
+    return '$calories سعرة';
   }
 
   @override
@@ -2055,7 +2055,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String diaryWorkoutSubtitle(int minutes, int calories) {
-    return '$minutes min · $calories kcal';
+    return '$minutes دقيقة · $calories سعرة';
   }
 
   @override
@@ -2104,22 +2104,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get exerciseViewFront => 'أمامي';
 
   @override
-  String get measurements30Days => '30 days';
+  String get measurements30Days => '30 يوم';
 
   @override
-  String get measurements3Months => '3 months';
+  String get measurements3Months => '3 شهور';
 
   @override
-  String get measurements7Days => '7 days';
+  String get measurements7Days => '7 أيام';
 
   @override
   String get measurementsAdd => 'إضافة قياس';
 
   @override
-  String get measurementsAddFirst => 'Log your first measurement';
+  String get measurementsAddFirst => 'سجّل أول قياس';
 
   @override
-  String get measurementsAll => 'All';
+  String get measurementsAll => 'الكل';
 
   @override
   String get measurementsArms => 'الذراعين';
@@ -2131,20 +2131,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get measurementsChest => 'الصدر';
 
   @override
-  String get measurementsDate => 'Date';
+  String get measurementsDate => 'التاريخ';
 
   @override
   String get measurementsDelete => 'حذف';
 
   @override
-  String get measurementsDeleteConfirm => 'Delete this measurement?';
+  String get measurementsDeleteConfirm => 'تمسح القياس ده؟';
 
   @override
   String get measurementsHistory => 'السجل';
 
   @override
   String measurementsLastUpdated(String date) {
-    return 'Updated $date';
+    return 'اتحدّث $date';
   }
 
   @override
@@ -2152,7 +2152,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'سجّل المزيد من القياسات لمتابعة التطور والرسوم البيانية';
 
   @override
-  String get measurementsNoData => 'No measurements yet';
+  String get measurementsNoData => 'لسه مفيش قياسات';
 
   @override
   String get measurementsNotes => 'ملاحظات';
@@ -2167,13 +2167,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get measurementsTitle => 'القياسات';
 
   @override
-  String get measurementsTrendDeclining => 'Needs attention';
+  String get measurementsTrendDeclining => 'محتاج متابعة';
 
   @override
-  String get measurementsTrendImproving => 'Improving';
+  String get measurementsTrendImproving => 'بيتحسّن';
 
   @override
-  String get measurementsTrendStable => 'Stable';
+  String get measurementsTrendStable => 'ثابت';
 
   @override
   String get measurementsWaist => 'الخصر';
@@ -2182,7 +2182,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get measurementsWeight => 'الوزن';
 
   @override
-  String get measurementsWeightInvalid => 'Enter a valid weight';
+  String get measurementsWeightInvalid => 'اكتب وزن صحيح';
 
   @override
   String get muscleBack => 'الظهر';
@@ -2330,22 +2330,30 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notificationsPermissionNotNow => 'ليس الآن';
 
   @override
-  String get vitality12WeekProgram => '12-Week Program';
+  String get vitality12WeekProgram => 'برنامج الـ 12 أسبوع';
 
   @override
   String vitalityArticleCount(int count) {
-    return '$count articles';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مقال',
+      few: '$count مقالات',
+      two: 'مقالين',
+      one: 'مقال واحد',
+    );
+    return '$_temp0';
   }
 
   @override
   String get vitalityArticleDisclaimer =>
-      'For education only. Consult a professional for personal advice.';
+      'للتثقيف فقط. اسأل مختص قبل أي قرار يخص صحتك.';
 
   @override
-  String get vitalityArticlesSection => 'Articles';
+  String get vitalityArticlesSection => 'مقالات';
 
   @override
-  String get vitalityBadgesTitle => 'Badges';
+  String get vitalityBadgesTitle => 'الأوسمة';
 
   @override
   String vitalityBreathingCount(int count) {
@@ -2387,49 +2395,47 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String vitalityDailyChecklistProgress(int done, int total) {
-    return '$done/$total done';
+    return '$done من $total تمّت';
   }
 
   @override
-  String get vitalityDailyChecklistTitle => 'Today\'s checklist';
+  String get vitalityDailyChecklistTitle => 'قايمة النهاردة';
 
   @override
-  String get vitalityDailyTipLabel => 'Daily tip';
+  String get vitalityDailyTipLabel => 'نصيحة اليوم';
 
   @override
-  String get vitalityHubSubtitle =>
-      'Science-backed habits for energy and recovery';
+  String get vitalityHubSubtitle => 'عادات مبنية على العلم لطاقة وتعافي أحسن';
 
   @override
   String get vitalityHubTitle => 'مركز الحيوية';
 
   @override
-  String get vitalityLegendBadge => 'Legend';
+  String get vitalityLegendBadge => 'أسطورة';
 
   @override
-  String get vitalityLinkCopied => 'Link copied';
+  String get vitalityLinkCopied => 'اتنسخ الرابط';
 
   @override
-  String get vitalityLogSection => 'Log';
+  String get vitalityLogSection => 'السجل';
 
   @override
-  String get vitalityMarkRead => 'Mark as read';
+  String get vitalityMarkRead => 'علّم كمقروء';
 
   @override
-  String get vitalityMarkReadDone => 'Read';
+  String get vitalityMarkReadDone => 'اتقرا';
 
   @override
-  String get vitalityMarkReadSuccess => 'Marked as read';
+  String get vitalityMarkReadSuccess => 'اتعلّم كمقروء';
 
   @override
-  String get vitalityMedicalDisclaimer =>
-      'Educational content only — not medical advice.';
+  String get vitalityMedicalDisclaimer => 'محتوى تثقيفي فقط — مش نصيحة طبية.';
 
   @override
-  String get vitalityMetricsEmpty => 'No metrics yet';
+  String get vitalityMetricsEmpty => 'لسه مفيش قياسات';
 
   @override
-  String get vitalityMetricsLast7Days => 'Last 7 days';
+  String get vitalityMetricsLast7Days => 'آخر 7 أيام';
 
   @override
   String vitalityMetricsLastEntry(int score) {
@@ -2437,96 +2443,93 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get vitalityMetricsSave => 'Save metrics';
+  String get vitalityMetricsSave => 'احفظ القياسات';
 
   @override
-  String get vitalityMetricsSaved => 'Saved';
+  String get vitalityMetricsSaved => 'اتحفظت';
 
   @override
-  String get vitalityMetricsTapToLog => 'Tap to log';
+  String get vitalityMetricsTapToLog => 'اضغط عشان تسجّل';
 
   @override
-  String get vitalityMetricsTitle => 'Daily metrics';
+  String get vitalityMetricsTitle => 'قياسات يومك';
 
   @override
-  String get vitalityMorningEnergy => 'Morning energy';
+  String get vitalityMorningEnergy => 'طاقة الصبح';
 
   @override
   String get vitalityMyProgram => 'برنامجي';
 
   @override
-  String get vitalityNotLogged => 'Not logged';
+  String get vitalityNotLogged => 'لسه متسجّلش';
 
   @override
-  String get vitalityPhaseFoundation => 'Foundation';
+  String get vitalityPhaseFoundation => 'التأسيس';
 
   @override
-  String get vitalityPhaseOptimization => 'Optimization';
+  String get vitalityPhaseOptimization => 'التحسين';
 
   @override
-  String get vitalityPhasePeak => 'Peak';
+  String get vitalityPhasePeak => 'القمة';
 
   @override
-  String get vitalityProgramAllWeeks => 'All weeks';
+  String get vitalityProgramAllWeeks => 'كل الأسابيع';
 
   @override
-  String get vitalityProgramComplete => 'Program complete';
+  String get vitalityProgramComplete => 'خلص البرنامج 🎉';
 
   @override
-  String get vitalityProgramContinue => 'Continue';
+  String get vitalityProgramContinue => 'كمّل';
 
   @override
-  String get vitalityProgramDisclaimer =>
-      'Educational program — not a medical treatment.';
+  String get vitalityProgramDisclaimer => 'برنامج تثقيفي — مش علاج طبي.';
 
   @override
-  String get vitalityProgramDone => 'Completed';
+  String get vitalityProgramDone => 'تمّ';
 
   @override
-  String get vitalityProgramOverallProgress => 'Overall progress';
+  String get vitalityProgramOverallProgress => 'تقدّمك الكلي';
 
   @override
-  String get vitalityProgramStartCta => 'Start program';
+  String get vitalityProgramStartCta => 'يلا نبدأ البرنامج';
 
   @override
-  String get vitalityProgramSubtitle =>
-      '12 weeks to better energy, sleep and recovery';
+  String get vitalityProgramSubtitle => '12 أسبوع لطاقة ونوم وتعافي أحسن';
 
   @override
   String get vitalityProgramTitle => 'تحول الحيوية';
 
   @override
-  String get vitalityProtocolBadgeEarned => 'Badge unlocked!';
+  String get vitalityProtocolBadgeEarned => 'اتفتح وسام جديد!';
 
   @override
-  String get vitalityProtocolCompleteDay => 'Complete day';
+  String get vitalityProtocolCompleteDay => 'كمّل اليوم';
 
   @override
   String vitalityProtocolStreak(int days) {
-    return '$days-day streak';
+    return '$days يوم متتالي';
   }
 
   @override
-  String get vitalityProtocolTitle => 'Protocols';
+  String get vitalityProtocolTitle => 'البروتوكولات';
 
   @override
   String vitalityReadingTime(int minutes) {
-    return '$minutes min read';
+    return 'قراءة $minutes دقيقة';
   }
 
   @override
   String get vitalityReportCompletion => 'الإنجاز';
 
   @override
-  String get vitalityReportImproving =>
-      'You\'re improving — keep the streak going.';
+  String get vitalityReportImproving => 'إنت بتتحسّن — كمّل على نفس الخط.';
 
   @override
   String get vitalityReportKeepGoing =>
-      'Small steps still count. Finish a couple tasks today.';
+      'الخطوات الصغيرة بتفرق. جرّب تخلّص مهمتين النهاردة.';
 
   @override
-  String get vitalityScientificSources => 'Sources';
+  String get vitalityScientificSources => 'المصادر العلمية';
 
   @override
   String vitalityScoreBreakdown(
@@ -2557,14 +2560,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String vitalityStreak(int days) {
-    return '$days-day streak';
+    return '$days يوم متتالي';
   }
 
   @override
-  String get vitalityStressLevel => 'Stress';
+  String get vitalityStressLevel => 'التوتر';
 
   @override
-  String get vitalityUnlockNextWeek => 'Unlock next week';
+  String get vitalityUnlockNextWeek => 'افتح الأسبوع الجاي';
 
   @override
   String vitalityWeekProgress(int percent) {
@@ -2572,46 +2575,46 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get vitalityWeekReport => 'Week report';
+  String get vitalityWeekReport => 'تقرير الأسبوع';
 
   @override
   String vitalityWeekX(int week) {
-    return 'Week $week';
+    return 'الأسبوع $week';
   }
 
   @override
   String vitalityWeekXOf12(int week) {
-    return 'Week $week of 12';
+    return 'الأسبوع $week من 12';
   }
 
   @override
-  String get vitalityWorkoutDone => 'Trained';
+  String get vitalityWorkoutDone => 'تمّ التمرين';
 
   @override
-  String get vitalityWorkoutLog => 'Workout';
+  String get vitalityWorkoutLog => 'التمرين';
 
   @override
-  String get vitalityWorkoutPending => 'Rest / not yet';
+  String get vitalityWorkoutPending => 'راحة / لسه';
 
   @override
-  String get vitalityWorkoutPerformance => 'Performance';
+  String get vitalityWorkoutPerformance => 'الأداء';
 
   @override
   String walkingEstimatedMinutes(int minutes) {
-    return '~$minutes min';
+    return '~$minutes دقيقة';
   }
 
   @override
   String get walkingHealthBanner => 'خطوات لايف من عدّاد الموبايل';
 
   @override
-  String get walkingManualStepsLabel => 'Steps today';
+  String get walkingManualStepsLabel => 'خطوات النهاردة';
 
   @override
-  String get walkingUpdateSteps => 'Update steps';
+  String get walkingUpdateSteps => 'حدّث الخطوات';
 
   @override
-  String get walkingWebManualBanner => 'On web, enter steps manually';
+  String get walkingWebManualBanner => 'على الويب، اكتب خطواتك يدوي';
 
   @override
   String get vitalityKeyTakeaway => 'الخلاصة';
@@ -2824,7 +2827,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get todayPlanVitalitySleepSubtitle => 'سجّل 7.5+ ساعات في Vitality';
+  String get todayPlanVitalitySleepSubtitle => 'سجّل 7.5+ ساعات في الحيوية';
 
   @override
   String get todayPlanVitalityProteinSubtitle => 'حقّق هدف البروتين';
@@ -2848,7 +2851,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get todayPlanSleepTargetSubtitle => 'استعد للنوم';
 
   @override
-  String get todayPlanProtocolItem => 'بروتوكول Vitality';
+  String get todayPlanProtocolItem => 'بروتوكول الحيوية';
 
   @override
   String get todayPlanAiSuggestion => 'اقتراح المدرب';
@@ -4339,6 +4342,83 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get livingBackgroundsUnlocked => 'تم الفتح';
+
+  @override
+  String get workoutRpeSubtitle =>
+      'حسّيت بالمجهود قد إيه؟ من 1 (سهل جداً) لـ 10 (صعب جداً)';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'سهل جداً',
+      '2': 'سهل',
+      '3': 'سهل نسبياً',
+      '4': 'خفيف',
+      '5': 'متوسط',
+      '6': 'شوية صعب',
+      '7': 'تقيل',
+      '8': 'صعب',
+      '9': 'صعب أوي',
+      'other': 'صعب جداً',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'إحساسك بعد التمرين إيه؟';
+
+  @override
+  String get workoutFeelTired => 'تعب';
+
+  @override
+  String get workoutFeelJointPain => 'ألم في مفصل';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'مبسوطة',
+      'other': 'مبسوط',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'طاقة عالية';
+
+  @override
+  String get workoutRpeNoteHint => 'اكتب ملاحظة (اختياري)';
+
+  @override
+  String get workoutRpeSave => 'احفظ';
+
+  @override
+  String get workoutRpeDone => 'تمام';
+
+  @override
+  String get workoutRpeSavedTitle => 'اتحفظ ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'ألم المفصل إشارة لازم نحترمها. خفّف الحمل في الجلسة الجاية وركّز على سلامة الحركة.';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'التمرين كان تقيل النهاردة. هنخفّف الحمل شوية المرة الجاية عشان جسمك يتعافى كويس.';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'أداءك أحسن! نفس التمرين حسّيته أخف من المرة اللي فاتت 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'حسّيته سهل. الجلسة الجاية هنزوّد الحمل شوية.';
+
+  @override
+  String get workoutRpeCommentSteady => 'مجهود مظبوط. كمّل على نفس الإيقاع.';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'اللي عملته من المجموعات محسوب وبيفرق. هنرجع أقوى في الجلسة الجاية.';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -4463,6 +4543,15 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
       'لسه ما سجلتش مقاسات.. ابدأ أول قياس النهاردة!';
 
   @override
+  String get vitalityCheckProtein => 'كمّل هدف البروتين';
+
+  @override
+  String get vitalityCheckSleep => 'نوم مريح وكفاية';
+
+  @override
+  String get vitalityCheckSunlight => 'شمس الصبح';
+
+  @override
   String get vitalityProgramStartCta => 'يلا نبدأ البرنامج';
 
   @override
@@ -4479,6 +4568,12 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String get dietStartProgram => 'يلا نبدأ البرنامج ده';
+
+  @override
+  String get todayPlanVitalitySleepSubtitle => 'سجّل 7.5+ ساعات في الحيوية';
+
+  @override
+  String get todayPlanProtocolItem => 'بروتوكول الحيوية';
 
   @override
   String get outdoorHistoryEmpty =>
@@ -5335,6 +5430,83 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get scoreInsightsImmediateActionsTitle =>
       'نصائح وإجراءات فورية لرفع السكور:';
+
+  @override
+  String get workoutRpeSubtitle =>
+      'حسّيت بالمجهود قد إيه؟ من 1 (سهل جداً) لـ 10 (صعب جداً)';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'سهل جداً',
+      '2': 'سهل',
+      '3': 'سهل نسبياً',
+      '4': 'خفيف',
+      '5': 'متوسط',
+      '6': 'شوية صعب',
+      '7': 'تقيل',
+      '8': 'صعب',
+      '9': 'صعب أوي',
+      'other': 'صعب جداً',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'إحساسك بعد التمرين إيه؟';
+
+  @override
+  String get workoutFeelTired => 'تعب';
+
+  @override
+  String get workoutFeelJointPain => 'ألم في مفصل';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'مبسوطة',
+      'other': 'مبسوط',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'طاقة عالية';
+
+  @override
+  String get workoutRpeNoteHint => 'اكتب ملاحظة (اختياري)';
+
+  @override
+  String get workoutRpeSave => 'احفظ';
+
+  @override
+  String get workoutRpeDone => 'تمام';
+
+  @override
+  String get workoutRpeSavedTitle => 'اتحفظ ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'ألم المفصل إشارة لازم نحترمها. خفّف الحمل في الجلسة الجاية وركّز على سلامة الحركة.';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'التمرين كان تقيل النهاردة. هنخفّف الحمل شوية المرة الجاية عشان جسمك يتعافى كويس.';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'أداءك أحسن! نفس التمرين حسّيته أخف من المرة اللي فاتت 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'حسّيته سهل. الجلسة الجاية هنزوّد الحمل شوية.';
+
+  @override
+  String get workoutRpeCommentSteady => 'مجهود مظبوط. كمّل على نفس الإيقاع.';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'اللي عملته من المجموعات محسوب وبيفرق. هنرجع أقوى في الجلسة الجاية.';
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -5475,6 +5647,12 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String get dietStartProgram => 'يلا نبدأ هذا البرنامج';
+
+  @override
+  String get todayPlanVitalitySleepSubtitle => 'سجّل 7.5+ ساعات في الحيوية';
+
+  @override
+  String get todayPlanProtocolItem => 'بروتوكول الحيوية';
 
   @override
   String get outdoorHistoryEmpty =>
@@ -6285,4 +6463,81 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
   @override
   String get scoreInsightsImmediateActionsTitle =>
       'نصائح وإجراءات فورية لرفع السكور:';
+
+  @override
+  String get workoutRpeSubtitle =>
+      'كيف كان شعورك بالمجهود؟ من 1 (سهل جداً) إلى 10 (صعب جداً)';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'سهل جداً',
+      '2': 'سهل',
+      '3': 'سهل نسبياً',
+      '4': 'خفيف',
+      '5': 'متوسط',
+      '6': 'صعب نوعاً ما',
+      '7': 'شاق',
+      '8': 'صعب',
+      '9': 'صعب للغاية',
+      'other': 'صعب جداً',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'ما إحساسك بعد التمرين؟';
+
+  @override
+  String get workoutFeelTired => 'تعب';
+
+  @override
+  String get workoutFeelJointPain => 'ألم في مفصل';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'مسرورة',
+      'other': 'مسرور',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'طاقة عالية';
+
+  @override
+  String get workoutRpeNoteHint => 'اكتب ملاحظة (اختياري)';
+
+  @override
+  String get workoutRpeSave => 'احفظ';
+
+  @override
+  String get workoutRpeDone => 'تمام';
+
+  @override
+  String get workoutRpeSavedTitle => 'تم الحفظ ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'ألم المفصل إشارة تستحق الاهتمام. خفّف الحمل في الجلسة القادمة وركّز على سلامة الحركة.';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'كان التمرين شاقاً اليوم. سنخفف الحمل قليلاً في المرة القادمة ليتعافى جسمك جيداً.';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'أداؤك أفضل! نفس التمرين بدا أخف من المرة السابقة 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'بدا التمرين سهلاً. في الجلسة القادمة سنزيد الحمل قليلاً.';
+
+  @override
+  String get workoutRpeCommentSteady => 'جهد مناسب. استمر على هذا الإيقاع.';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'ما أنجزته من المجموعات يُحسب لك. سنعود أقوى في الجلسة القادمة.';
 }

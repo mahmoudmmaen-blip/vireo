@@ -535,12 +535,16 @@ class _PlanRow extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        timeLabel,
-                        style: TextStyle(
-                          color: colors.textMute,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
+                      Flexible(
+                        child: Text(
+                          timeLabel,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: colors.textMute,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                       if (highlight) ...[

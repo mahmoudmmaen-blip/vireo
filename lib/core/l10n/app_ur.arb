@@ -1268,5 +1268,22 @@
   "scoreInsightsBurnedKcal": "جلائی گئی",
   "scoreInsightsMacrosTitle": "آج کے میکروس (ہدف بمقابلہ اصل)",
   "scoreInsightsScoreTrendTitle": "7 دن کے اسکور کا رجحان",
-  "scoreInsightsImmediateActionsTitle": "اسکور بڑھانے کے فوری اقدامات:"
+  "scoreInsightsImmediateActionsTitle": "اسکور بڑھانے کے فوری اقدامات:",
+  "workoutRpeSubtitle": "کتنی مشکل لگی؟ 1 = بہت آسان، 10 = بہت مشکل",
+  "workoutRpeLabel": "{level, select, 1{بہت آسان} 2{آسان} 3{کافی آسان} 4{ہلکا} 5{درمیانہ} 6{کچھ مشکل} 7{بھاری} 8{مشکل} 9{بہت مشکل} other{انتہائی مشکل}}",
+  "workoutRpeFeelingsTitle": "اب کیسا لگ رہا ہے؟",
+  "workoutFeelTired": "تھکن",
+  "workoutFeelJointPain": "جوڑوں میں درد",
+  "workoutFeelHappy": "{gender, select, female{خوش} other{خوش}}",
+  "workoutFeelEnergized": "بھرپور توانائی",
+  "workoutRpeNoteHint": "نوٹ لکھیں (اختیاری)",
+  "workoutRpeSave": "محفوظ کریں",
+  "workoutRpeDone": "ٹھیک ہے",
+  "workoutRpeSavedTitle": "محفوظ ہو گیا ✅",
+  "workoutRpeCommentJoint": "جوڑوں کا درد ایک اشارہ ہے جس کا احترام ضروری ہے۔ اگلے سیشن میں وزن ہلکا کریں اور درست حرکت پر توجہ دیں۔",
+  "workoutRpeCommentHard": "آج کی ورزش کافی بھاری تھی۔ اگلی بار وزن تھوڑا کم کریں گے تاکہ جسم اچھی طرح سنبھل سکے۔",
+  "workoutRpeCommentBetter": "آپ کی کارکردگی بہتر ہے! یہی ورزش پچھلی بار سے ہلکی لگی 💪",
+  "workoutRpeCommentEasy": "یہ آسان لگا۔ اگلے سیشن میں وزن تھوڑا بڑھائیں گے۔",
+  "workoutRpeCommentSteady": "بالکل مناسب محنت۔ اسی رفتار سے جاری رکھیں۔",
+  "workoutRpeCommentPartial": "جتنے سیٹ کیے وہ بھی شمار ہوتے ہیں۔ اگلے سیشن میں مزید مضبوط واپس آئیں گے۔"
 }

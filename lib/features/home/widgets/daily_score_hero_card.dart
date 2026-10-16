@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
-import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/home/providers/daily_score_provider.dart';
 import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/insights/screens/score_insights_screen.dart';
 import 'package:vireo/features/insights/widgets/next_meal_suggestion_card.dart';
-import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
-import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 
-/// Redesigned Daily Score Hero Card (Section 3):
-/// - Big 120dp score ring with large bold type, "/100", and state label
-/// - 2×2 grid of "what you still need today" rectangles (protein, carbs, fat, calories)
-/// - Optional fifth chip: water remaining cups
-/// - Smart insight line at the bottom
+/// Daily Score Hero Card (P36):
+/// - Big score ring with "/100" and state label
+/// - Next-meal suggestion + smart insight
+/// - Remaining P/C/F live on سعراتك النهارده (mascot card) — not duplicated here
 /// - Tap opens ScoreInsightsScreen
 class DailyScoreHeroCard extends ConsumerWidget {
   const DailyScoreHeroCard({super.key});
@@ -26,13 +22,11 @@ class DailyScoreHeroCard extends ConsumerWidget {
     final colors = context.vireoColors;
     final locale = Localizations.localeOf(context).languageCode;
     final isArabic = locale.startsWith('ar');
+    final ringColor = breakdown.displayColor(colors.ember);
 
     final nutrition = ref.watch(todayNutritionProvider(locale));
-    final waterMl = ref.watch(waterTrackerProvider);
-    final waterGoalMl = ref.watch(waterDailyGoalMlProvider);
-    final remainingWaterGlasses = ((waterGoalMl - waterMl) / 250).ceil().clamp(0, 20);
 
-    // Remaining targets
+    // Remaining targets (for next-meal suggestion only)
     final remProtein = (nutrition.proteinTarget - nutrition.proteinG).round();
     final remCarbs = (nutrition.carbsTarget - nutrition.carbsG).round();
     final remFat = (nutrition.fatTarget - nutrition.fatG).round();
@@ -41,7 +35,11 @@ class DailyScoreHeroCard extends ConsumerWidget {
     // Smart insight line
     final dash = ref.watch(homeDashboardProvider);
     final remSteps = (dash.stepsGoal - dash.stepsToday).clamp(0, 50000);
-    final smartInsight = (breakdown.totalScore < 75 && remSteps > 0 && remProtein > 0)
+    final smartInsight = breakdown.showsNeutralStart
+        ? (isArabic
+            ? breakdown.nextActionTip
+            : 'Your day is just starting — log your first meal to get moving 🍳')
+        : (breakdown.totalScore < 75 && remSteps > 0 && remProtein > 0)
         ? (isArabic
             ? 'لو مشيت $remSteps خطوة كمان وأكلت $remProtein جم بروتين هتوصل 75/100 🎯'
             : 'Walk $remSteps more steps and eat $remProtein g protein to hit 75/100 🎯')
@@ -62,7 +60,7 @@ class DailyScoreHeroCard extends ConsumerWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
               border: Border.all(
-                color: breakdown.scoreColor.withValues(alpha: 0.35),
+                color: ringColor.withValues(alpha: 0.35),
                 width: 1.5,
               ),
               boxShadow: [
@@ -93,7 +91,7 @@ class DailyScoreHeroCard extends ConsumerWidget {
                               value: (breakdown.totalScore / 100.0).clamp(0.0, 1.0),
                               strokeWidth: 9.0,
                               backgroundColor: colors.line,
-                              valueColor: AlwaysStoppedAnimation<Color>(breakdown.scoreColor),
+                              valueColor: AlwaysStoppedAnimation<Color>(ringColor),
                               strokeCap: StrokeCap.round,
                             ),
                           ),
@@ -161,13 +159,15 @@ class DailyScoreHeroCard extends ConsumerWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                              color: breakdown.scoreColor.withValues(alpha: 0.15),
+                              color: ringColor.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              breakdown.scoreTierLabel,
+                              breakdown.showsNeutralStart && !isArabic
+                                  ? 'Your day is just starting ☀️'
+                                  : breakdown.displayLabel,
                               style: TextStyle(
-                                color: breakdown.scoreColor,
+                                color: ringColor,
                                 fontWeight: FontWeight.w900,
                                 fontSize: 13,
                               ),
@@ -196,96 +196,8 @@ class DailyScoreHeroCard extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Divider(height: 1),
-                const SizedBox(height: 14),
-
-                // 2×2 Grid of "What you still need today" rectangles
-                Row(
-                  children: [
-                    Expanded(
-                      child: _RemainingTargetRect(
-                        label: isArabic ? 'بروتين' : 'Protein',
-                        remainingVal: remProtein,
-                        unit: 'جم',
-                        actual: nutrition.proteinG,
-                        target: nutrition.proteinTarget.toDouble(),
-                        color: VMacro.protein,
-                        isArabic: isArabic,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: _RemainingTargetRect(
-                        label: isArabic ? 'كارب' : 'Carbs',
-                        remainingVal: remCarbs,
-                        unit: 'جم',
-                        actual: nutrition.carbsG,
-                        target: nutrition.carbsTarget.toDouble(),
-                        color: VMacro.carbs,
-                        isArabic: isArabic,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _RemainingTargetRect(
-                        label: isArabic ? 'دهون' : 'Fat',
-                        remainingVal: remFat,
-                        unit: 'جم',
-                        actual: nutrition.fatG,
-                        target: nutrition.fatTarget.toDouble(),
-                        color: VMacro.fat,
-                        isArabic: isArabic,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: _RemainingTargetRect(
-                        label: isArabic ? 'سعرات' : 'Calories',
-                        remainingVal: remKcal,
-                        unit: '',
-                        actual: nutrition.eatenKcal.toDouble(),
-                        target: nutrition.goalKcal.toDouble(),
-                        color: colors.ember,
-                        isArabic: isArabic,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-
-                // Optional fifth chip: Water remaining
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: VMacro.water.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: VMacro.water.withValues(alpha: 0.3)),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.water_drop_rounded, size: 16, color: VMacro.water),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          remainingWaterGlasses <= 0
-                              ? (isArabic ? 'الماء: تمام ✓ حققت هدف الترطيب' : 'Water: Hydration goal met ✓')
-                              : (isArabic ? 'مية: باقي $remainingWaterGlasses أكواب' : 'Water: $remainingWaterGlasses cups left'),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // P36: remaining P/C/F/kcal live on سعراتك النهارده (mascot card).
+                // Daily Score focuses on score, tips, and next-meal suggestion.
                 NextMealSuggestionCard(
                   remainingKcal: remKcal,
                   remainingProtein: remProtein.toDouble(),
@@ -325,104 +237,6 @@ class DailyScoreHeroCard extends ConsumerWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _RemainingTargetRect extends StatelessWidget {
-  const _RemainingTargetRect({
-    required this.label,
-    required this.remainingVal,
-    required this.unit,
-    required this.actual,
-    required this.target,
-    required this.color,
-    required this.isArabic,
-  });
-
-  final String label;
-  final int remainingVal;
-  final String unit;
-  final double actual;
-  final double target;
-  final Color color;
-  final bool isArabic;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    final isReached = remainingVal == 0;
-    final isExceeded = remainingVal < 0;
-
-    String statusText;
-    Color statusColor;
-
-    if (isReached) {
-      statusText = isArabic ? 'تمام ✓' : 'Done ✓';
-      statusColor = const Color(0xFF10B981);
-    } else if (isExceeded) {
-      statusText = isArabic ? 'زيادة ${remainingVal.abs()} $unit'.trim() : '+${remainingVal.abs()} $unit'.trim();
-      statusColor = const Color(0xFFF59E0B);
-    } else {
-      statusText = isArabic ? 'باقي $remainingVal $unit'.trim() : '$remainingVal $unit left'.trim();
-      statusColor = colors.text;
-    }
-
-    final frac = target > 0 ? (actual / target).clamp(0.0, 1.0) : 0.0;
-
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: colors.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: colors.line.withValues(alpha: 0.6)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w700,
-                  color: colors.textMute,
-                ),
-              ),
-              Container(
-                width: 7,
-                height: 7,
-                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            statusText,
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w900,
-              color: statusColor,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 6),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(3),
-            child: LinearProgressIndicator(
-              value: frac,
-              minHeight: 4,
-              backgroundColor: colors.line.withValues(alpha: 0.5),
-              valueColor: AlwaysStoppedAnimation<Color>(
-                isExceeded ? const Color(0xFFF59E0B) : (isReached ? const Color(0xFF10B981) : color),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

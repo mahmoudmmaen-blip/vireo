@@ -1268,5 +1268,22 @@
   "scoreInsightsBurnedKcal": "Terbakar",
   "scoreInsightsMacrosTitle": "Makro Hari Ini (Target vs Aktual)",
   "scoreInsightsScoreTrendTitle": "Tren Skor 7 Hari",
-  "scoreInsightsImmediateActionsTitle": "Langkah cepat tingkatkan skor:"
+  "scoreInsightsImmediateActionsTitle": "Langkah cepat tingkatkan skor:",
+  "workoutRpeSubtitle": "Seberapa berat rasanya? 1 = sangat mudah, 10 = sangat berat",
+  "workoutRpeLabel": "{level, select, 1{Sangat mudah} 2{Mudah} 3{Cukup mudah} 4{Ringan} 5{Sedang} 6{Agak berat} 7{Berat} 8{Sulit} 9{Sangat sulit} other{Sangat berat}}",
+  "workoutRpeFeelingsTitle": "Bagaimana perasaanmu?",
+  "workoutFeelTired": "Kelelahan",
+  "workoutFeelJointPain": "Nyeri sendi",
+  "workoutFeelHappy": "{gender, select, female{Senang} other{Senang}}",
+  "workoutFeelEnergized": "Energi tinggi",
+  "workoutRpeNoteHint": "Tambahkan catatan (opsional)",
+  "workoutRpeSave": "Simpan",
+  "workoutRpeDone": "Selesai",
+  "workoutRpeSavedTitle": "Tersimpan ✅",
+  "workoutRpeCommentJoint": "Nyeri sendi adalah sinyal yang perlu dihargai. Ringankan beban di sesi berikutnya dan fokus pada teknik.",
+  "workoutRpeCommentHard": "Latihan hari ini berat. Lain kali bebannya kita turunkan sedikit agar pemulihanmu baik.",
+  "workoutRpeCommentBetter": "Performamu makin baik! Latihan yang sama terasa lebih ringan dari terakhir kali 💪",
+  "workoutRpeCommentEasy": "Terasa mudah. Di sesi berikutnya bebannya kita naikkan sedikit.",
+  "workoutRpeCommentSteady": "Usaha yang pas. Pertahankan ritme ini.",
+  "workoutRpeCommentPartial": "Set yang sudah kamu selesaikan tetap dihitung. Kita kembali lebih kuat di sesi berikutnya."
 }

@@ -1268,5 +1268,22 @@
   "scoreInsightsBurnedKcal": "Quemado",
   "scoreInsightsMacrosTitle": "Macros de Hoy (Objetivo vs Real)",
   "scoreInsightsScoreTrendTitle": "Tendencia de Puntuación de 7 Días",
-  "scoreInsightsImmediateActionsTitle": "Consejos inmediatos para mejorar:"
+  "scoreInsightsImmediateActionsTitle": "Consejos inmediatos para mejorar:",
+  "workoutRpeSubtitle": "¿Qué tan duro se sintió? 1 = muy fácil, 10 = muy difícil",
+  "workoutRpeLabel": "{level, select, 1{Muy fácil} 2{Fácil} 3{Bastante fácil} 4{Ligero} 5{Moderado} 6{Algo duro} 7{Intenso} 8{Duro} 9{Muy duro} other{Muy difícil}}",
+  "workoutRpeFeelingsTitle": "¿Cómo te sientes?",
+  "workoutFeelTired": "Cansancio",
+  "workoutFeelJointPain": "Dolor articular",
+  "workoutFeelHappy": "{gender, select, female{De buen humor} other{De buen humor}}",
+  "workoutFeelEnergized": "Mucha energía",
+  "workoutRpeNoteHint": "Añade una nota (opcional)",
+  "workoutRpeSave": "Guardar",
+  "workoutRpeDone": "Listo",
+  "workoutRpeSavedTitle": "Guardado ✅",
+  "workoutRpeCommentJoint": "El dolor articular es una señal que hay que respetar. Reduce la carga en la próxima sesión y cuida la técnica.",
+  "workoutRpeCommentHard": "Fue una sesión exigente. Bajaremos un poco la carga la próxima vez para que te recuperes bien.",
+  "workoutRpeCommentBetter": "¡Tu rendimiento mejora! Se sintió más ligero que la última vez 💪",
+  "workoutRpeCommentEasy": "Se sintió fácil. En la próxima sesión subiremos un poco la carga.",
+  "workoutRpeCommentSteady": "Esfuerzo justo. Mantén este ritmo.",
+  "workoutRpeCommentPartial": "Lo que hiciste cuenta. Volveremos más fuertes en la próxima sesión."
 }

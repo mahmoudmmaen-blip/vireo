@@ -4369,4 +4369,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get livingBackgroundsUnlocked => 'Unlocked';
+
+  @override
+  String get workoutRpeSubtitle =>
+      'How hard did it feel? 1 = very easy, 10 = very hard';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'Very easy',
+      '2': 'Easy',
+      '3': 'Fairly easy',
+      '4': 'Light',
+      '5': 'Moderate',
+      '6': 'Somewhat hard',
+      '7': 'Tough',
+      '8': 'Hard',
+      '9': 'Really hard',
+      'other': 'Very hard',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'How do you feel?';
+
+  @override
+  String get workoutFeelTired => 'Tired';
+
+  @override
+  String get workoutFeelJointPain => 'Joint pain';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'Happy',
+      'other': 'Happy',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'High energy';
+
+  @override
+  String get workoutRpeNoteHint => 'Add a note (optional)';
+
+  @override
+  String get workoutRpeSave => 'Save';
+
+  @override
+  String get workoutRpeDone => 'Done';
+
+  @override
+  String get workoutRpeSavedTitle => 'Saved ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'Joint pain is a signal worth respecting. Lighten the load next session and focus on form.';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'That was a heavy one. We will ease the load a little next time so you recover well.';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'Your performance is better! The same workout felt lighter than last time 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'That felt easy. Next session we will nudge the load up a little.';
+
+  @override
+  String get workoutRpeCommentSteady =>
+      'Just the right effort. Keep this rhythm.';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'What you did of the sets still counts. We will come back stronger next session.';
 }

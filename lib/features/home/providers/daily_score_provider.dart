@@ -19,6 +19,8 @@ class DailyScoreBreakdown {
     required this.sleepScore,
     required this.totalScore,
     required this.tips,
+    this.caloriesCurrent,
+    this.hourOfDay,
   });
 
   final double stepsScore;   // max 25
@@ -29,6 +31,46 @@ class DailyScoreBreakdown {
   final double sleepScore;   // max 10
   final int totalScore;      // 0..100
   final List<String> tips;
+
+  /// Calories logged so far today (null = unknown).
+  final int? caloriesCurrent;
+
+  /// Local hour of day 0..23 when the score was computed (null = unknown).
+  final int? hourOfDay;
+
+  /// Below this many logged kcal we treat the day as "not really started"
+  /// (roughly fewer than two logged items).
+  static const int kMinLoggedKcalForScoring = 200;
+
+  /// True before 12 PM, or when almost nothing has been logged yet. In that
+  /// state a low score only means the day just began, so the UI stays neutral.
+  bool get isDayJustStarting {
+    final h = hourOfDay;
+    final kcal = caloriesCurrent;
+    if (h != null && h < 12) return true;
+    if (kcal != null && kcal < kMinLoggedKcalForScoring) return true;
+    return false;
+  }
+
+  /// Early-day state with a low score ? neutral wording instead of red alert.
+  bool get showsNeutralStart => isDayJustStarting && totalScore < 40;
+
+  /// Label to display next to the ring. Neutral when the day is just starting.
+  String get displayLabel =>
+      showsNeutralStart ? 'يومك لسه بيبدأ ☀️' : scoreTierLabel;
+
+  /// Ring/label colour: [neutral] when the day is just starting, else the tier colour.
+  Color displayColor(Color neutral) => showsNeutralStart ? neutral : scoreColor;
+
+  /// One calm, concrete next action for the user (Egyptian Arabic).
+  String get nextActionTip {
+    if ((caloriesCurrent ?? 0) < kMinLoggedKcalForScoring) {
+      return 'سجّل فطارك أو أول وجبة — أول خطوة بتحرّك السكور 🍳';
+    }
+    if (waterScore < 15.0) return 'ابدأ بكوبايتين مية عشان تنشّط يومك 💧';
+    if (stepsScore < 25.0) return 'مشوار قصير بعد الأكل بيفرق في سكورك 🚶';
+    return 'كمّل على نفس الإيقاع 💪';
+  }
 
   Color get scoreColor {
     if (totalScore >= 70) return const Color(0xFF10B981); // Emerald Green
@@ -63,6 +105,7 @@ DailyScoreBreakdown calculateDailyScore({
   required bool workoutCompleted,
   required double sleepHours,
   required bool isArabic,
+  int? hourOfDay,
 }) {
   final tips = <String>[];
 
@@ -140,6 +183,8 @@ DailyScoreBreakdown calculateDailyScore({
     sleepScore: sleepScore,
     totalScore: total,
     tips: tips,
+    caloriesCurrent: caloriesCurrent,
+    hourOfDay: hourOfDay,
   );
 }
 
@@ -175,6 +220,7 @@ final dailyScoreProvider = Provider<DailyScoreBreakdown>((ref) {
     workoutCompleted: workoutCompleted,
     sleepHours: sleepHours,
     isArabic: true,
+    hourOfDay: DateTime.now().hour,
   );
 
   // Store today's score in Hive for streak and widgets

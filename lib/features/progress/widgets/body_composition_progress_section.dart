@@ -14,7 +14,7 @@ class BodyCompositionProgressSection extends ConsumerWidget {
   static String _sourceLabel(BodyCompositionSource source, bool isArabic) {
     return switch (source) {
       BodyCompositionSource.inbodyScan => isArabic ? 'تقرير InBody' : 'InBody Scan',
-      BodyCompositionSource.navyTape => isArabic ? 'قياس المازورة (Navy)' : 'Tape Measure',
+      BodyCompositionSource.navyTape => isArabic ? 'قياس المازورة' : 'Tape Measure',
       BodyCompositionSource.healthConnect => 'Health Connect',
       BodyCompositionSource.manual => isArabic ? 'يدوي' : 'Manual',
     };
@@ -108,9 +108,15 @@ class BodyCompositionProgressSection extends ConsumerWidget {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
+                  // Muscle: prefer InBody skeletal muscle mass (SMM); fall back to
+                  // lean mass (tape / smart scale reports have no SMM).
                   child: _MetricCard(
-                    title: isArabic ? 'الكتلة العضلية' : 'Lean Mass',
-                    value: latest.leanMassKg != null ? '${latest.leanMassKg!.toStringAsFixed(1)} كجم' : '—',
+                    title: latest.skeletalMuscleMassKg != null
+                        ? (isArabic ? 'العضلات الهيكلية' : 'Skeletal Muscle')
+                        : (isArabic ? 'الكتلة العضلية' : 'Lean Mass'),
+                    value: (latest.skeletalMuscleMassKg ?? latest.leanMassKg) != null
+                        ? '${(latest.skeletalMuscleMassKg ?? latest.leanMassKg)!.toStringAsFixed(1)} ${isArabic ? 'كجم' : 'kg'}'
+                        : '—',
                     colors: colors,
                   ),
                 ),
@@ -129,7 +135,7 @@ class BodyCompositionProgressSection extends ConsumerWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: _MetricCard(
-                    title: isArabic ? 'حرق BMR' : 'BMR Kcal',
+                    title: isArabic ? 'الحرق الأساسي' : 'BMR Kcal',
                     value: latest.bmrKcal != null ? '${latest.bmrKcal!.round()} سعرة' : '—',
                     colors: colors,
                   ),
@@ -166,7 +172,7 @@ class BodyCompositionProgressSection extends ConsumerWidget {
           ] else ...[
             Text(
               isArabic
-                  ? 'اعرف نسبة دهونك وكتلتك العضلية وحرقك الأساسي (BMR) من خلال قياس المازورة أو مسح ورقة InBody.'
+                  ? 'اعرف نسبة دهونك وكتلتك العضلية وحرقك الأساسي من خلال قياس المازورة أو مسح ورقة InBody.'
                   : 'Track your body fat %, lean muscle mass, and BMR using tape measurement or InBody scans.',
               style: TextStyle(color: colors.textMute, fontSize: 12.5, height: 1.4),
             ),

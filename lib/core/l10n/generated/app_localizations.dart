@@ -7866,6 +7866,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unlocked'**
   String get livingBackgroundsUnlocked;
+
+  /// No description provided for @workoutRpeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How hard did it feel? 1 = very easy, 10 = very hard'**
+  String get workoutRpeSubtitle;
+
+  /// No description provided for @workoutRpeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{level, select, 1{Very easy} 2{Easy} 3{Fairly easy} 4{Light} 5{Moderate} 6{Somewhat hard} 7{Tough} 8{Hard} 9{Really hard} other{Very hard}}'**
+  String workoutRpeLabel(String level);
+
+  /// No description provided for @workoutRpeFeelingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How do you feel?'**
+  String get workoutRpeFeelingsTitle;
+
+  /// No description provided for @workoutFeelTired.
+  ///
+  /// In en, this message translates to:
+  /// **'Tired'**
+  String get workoutFeelTired;
+
+  /// No description provided for @workoutFeelJointPain.
+  ///
+  /// In en, this message translates to:
+  /// **'Joint pain'**
+  String get workoutFeelJointPain;
+
+  /// No description provided for @workoutFeelHappy.
+  ///
+  /// In en, this message translates to:
+  /// **'{gender, select, female{Happy} other{Happy}}'**
+  String workoutFeelHappy(String gender);
+
+  /// No description provided for @workoutFeelEnergized.
+  ///
+  /// In en, this message translates to:
+  /// **'High energy'**
+  String get workoutFeelEnergized;
+
+  /// No description provided for @workoutRpeNoteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note (optional)'**
+  String get workoutRpeNoteHint;
+
+  /// No description provided for @workoutRpeSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get workoutRpeSave;
+
+  /// No description provided for @workoutRpeDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get workoutRpeDone;
+
+  /// No description provided for @workoutRpeSavedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved ✅'**
+  String get workoutRpeSavedTitle;
+
+  /// No description provided for @workoutRpeCommentJoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Joint pain is a signal worth respecting. Lighten the load next session and focus on form.'**
+  String get workoutRpeCommentJoint;
+
+  /// No description provided for @workoutRpeCommentHard.
+  ///
+  /// In en, this message translates to:
+  /// **'That was a heavy one. We will ease the load a little next time so you recover well.'**
+  String get workoutRpeCommentHard;
+
+  /// No description provided for @workoutRpeCommentBetter.
+  ///
+  /// In en, this message translates to:
+  /// **'Your performance is better! The same workout felt lighter than last time 💪'**
+  String get workoutRpeCommentBetter;
+
+  /// No description provided for @workoutRpeCommentEasy.
+  ///
+  /// In en, this message translates to:
+  /// **'That felt easy. Next session we will nudge the load up a little.'**
+  String get workoutRpeCommentEasy;
+
+  /// No description provided for @workoutRpeCommentSteady.
+  ///
+  /// In en, this message translates to:
+  /// **'Just the right effort. Keep this rhythm.'**
+  String get workoutRpeCommentSteady;
+
+  /// No description provided for @workoutRpeCommentPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'What you did of the sets still counts. We will come back stronger next session.'**
+  String get workoutRpeCommentPartial;
 }
 
 class _AppLocalizationsDelegate

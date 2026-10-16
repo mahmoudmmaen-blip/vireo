@@ -1268,5 +1268,22 @@
   "scoreInsightsBurnedKcal": "Brûlé",
   "scoreInsightsMacrosTitle": "Macros du jour (Cible vs Réel)",
   "scoreInsightsScoreTrendTitle": "Tendance du score sur 7 jours",
-  "scoreInsightsImmediateActionsTitle": "Conseils pour améliorer le score :"
+  "scoreInsightsImmediateActionsTitle": "Conseils pour améliorer le score :",
+  "workoutRpeSubtitle": "Quelle difficulté as-tu ressentie ? 1 = très facile, 10 = très difficile",
+  "workoutRpeLabel": "{level, select, 1{Très facile} 2{Facile} 3{Assez facile} 4{Léger} 5{Modéré} 6{Plutôt difficile} 7{Costaud} 8{Difficile} 9{Très dur} other{Très difficile}}",
+  "workoutRpeFeelingsTitle": "Comment te sens-tu ?",
+  "workoutFeelTired": "Fatigue",
+  "workoutFeelJointPain": "Douleur articulaire",
+  "workoutFeelHappy": "{gender, select, female{De bonne humeur} other{De bonne humeur}}",
+  "workoutFeelEnergized": "Pleine d’énergie",
+  "workoutRpeNoteHint": "Ajoute une note (facultatif)",
+  "workoutRpeSave": "Enregistrer",
+  "workoutRpeDone": "Terminé",
+  "workoutRpeSavedTitle": "Enregistré ✅",
+  "workoutRpeCommentJoint": "Une douleur articulaire est un signal à respecter. Allège la charge à la prochaine séance et soigne ta technique.",
+  "workoutRpeCommentHard": "C’était costaud. On allégera un peu la charge la prochaine fois pour bien récupérer.",
+  "workoutRpeCommentBetter": "Tu progresses ! Le même effort paraît plus léger que la dernière fois 💪",
+  "workoutRpeCommentEasy": "Ça t’a paru facile. À la prochaine séance, on augmentera un peu la charge.",
+  "workoutRpeCommentSteady": "Effort bien dosé. Garde ce rythme.",
+  "workoutRpeCommentPartial": "Ce que tu as fait compte. On reviendra plus fort à la prochaine séance."
 }

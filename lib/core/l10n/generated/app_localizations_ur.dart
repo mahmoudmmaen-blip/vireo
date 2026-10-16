@@ -4382,4 +4382,81 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get livingBackgroundsUnlocked => 'Unlocked';
+
+  @override
+  String get workoutRpeSubtitle => 'کتنی مشکل لگی؟ 1 = بہت آسان، 10 = بہت مشکل';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'بہت آسان',
+      '2': 'آسان',
+      '3': 'کافی آسان',
+      '4': 'ہلکا',
+      '5': 'درمیانہ',
+      '6': 'کچھ مشکل',
+      '7': 'بھاری',
+      '8': 'مشکل',
+      '9': 'بہت مشکل',
+      'other': 'انتہائی مشکل',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'اب کیسا لگ رہا ہے؟';
+
+  @override
+  String get workoutFeelTired => 'تھکن';
+
+  @override
+  String get workoutFeelJointPain => 'جوڑوں میں درد';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'خوش',
+      'other': 'خوش',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'بھرپور توانائی';
+
+  @override
+  String get workoutRpeNoteHint => 'نوٹ لکھیں (اختیاری)';
+
+  @override
+  String get workoutRpeSave => 'محفوظ کریں';
+
+  @override
+  String get workoutRpeDone => 'ٹھیک ہے';
+
+  @override
+  String get workoutRpeSavedTitle => 'محفوظ ہو گیا ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'جوڑوں کا درد ایک اشارہ ہے جس کا احترام ضروری ہے۔ اگلے سیشن میں وزن ہلکا کریں اور درست حرکت پر توجہ دیں۔';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'آج کی ورزش کافی بھاری تھی۔ اگلی بار وزن تھوڑا کم کریں گے تاکہ جسم اچھی طرح سنبھل سکے۔';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'آپ کی کارکردگی بہتر ہے! یہی ورزش پچھلی بار سے ہلکی لگی 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'یہ آسان لگا۔ اگلے سیشن میں وزن تھوڑا بڑھائیں گے۔';
+
+  @override
+  String get workoutRpeCommentSteady =>
+      'بالکل مناسب محنت۔ اسی رفتار سے جاری رکھیں۔';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'جتنے سیٹ کیے وہ بھی شمار ہوتے ہیں۔ اگلے سیشن میں مزید مضبوط واپس آئیں گے۔';
 }

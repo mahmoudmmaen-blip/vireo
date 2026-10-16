@@ -245,7 +245,7 @@ class _TrendDeltaPill extends StatelessWidget {
     Color badgeColor = colors.textMute;
     IconData icon = Icons.remove;
     if (isNegative) {
-      badgeColor = const Color(0xFF22C55E); // Green for loss
+      badgeColor = colors.success; // Green for loss
       icon = Icons.trending_down;
     } else if (isPositive) {
       badgeColor = const Color(0xFFEAB308); // Yellow/amber for gain

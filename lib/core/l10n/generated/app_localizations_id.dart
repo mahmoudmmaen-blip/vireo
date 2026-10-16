@@ -4402,4 +4402,82 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get livingBackgroundsUnlocked => 'Unlocked';
+
+  @override
+  String get workoutRpeSubtitle =>
+      'Seberapa berat rasanya? 1 = sangat mudah, 10 = sangat berat';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'Sangat mudah',
+      '2': 'Mudah',
+      '3': 'Cukup mudah',
+      '4': 'Ringan',
+      '5': 'Sedang',
+      '6': 'Agak berat',
+      '7': 'Berat',
+      '8': 'Sulit',
+      '9': 'Sangat sulit',
+      'other': 'Sangat berat',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'Bagaimana perasaanmu?';
+
+  @override
+  String get workoutFeelTired => 'Kelelahan';
+
+  @override
+  String get workoutFeelJointPain => 'Nyeri sendi';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'Senang',
+      'other': 'Senang',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'Energi tinggi';
+
+  @override
+  String get workoutRpeNoteHint => 'Tambahkan catatan (opsional)';
+
+  @override
+  String get workoutRpeSave => 'Simpan';
+
+  @override
+  String get workoutRpeDone => 'Selesai';
+
+  @override
+  String get workoutRpeSavedTitle => 'Tersimpan ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'Nyeri sendi adalah sinyal yang perlu dihargai. Ringankan beban di sesi berikutnya dan fokus pada teknik.';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'Latihan hari ini berat. Lain kali bebannya kita turunkan sedikit agar pemulihanmu baik.';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'Performamu makin baik! Latihan yang sama terasa lebih ringan dari terakhir kali 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'Terasa mudah. Di sesi berikutnya bebannya kita naikkan sedikit.';
+
+  @override
+  String get workoutRpeCommentSteady =>
+      'Usaha yang pas. Pertahankan ritme ini.';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'Set yang sudah kamu selesaikan tetap dihitung. Kita kembali lebih kuat di sesi berikutnya.';
 }

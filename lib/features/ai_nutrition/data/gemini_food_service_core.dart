@@ -18,12 +18,25 @@ class MealScanDraft {
     required this.imageBytes,
     this.imagesBytes = const [],
     this.originalScanned = const [],
+    this.fromCache = false,
+    this.cachedAt,
+    this.language = 'ar',
+    this.userHint,
   });
 
   final List<ResolvedMealLine> lines;
   final Uint8List imageBytes;
   final List<Uint8List> imagesBytes;
   final List<ScannedFoodItem> originalScanned;
+
+  /// True when analyze-meal returned its 24 h cached result for this photo
+  /// (the review screen then offers "حلّل تاني").
+  final bool fromCache;
+  final DateTime? cachedAt;
+
+  /// Request context, kept so "حلّل تاني" can re-send the same request.
+  final String language;
+  final String? userHint;
 
   List<Uint8List> get allImages =>
       imagesBytes.isNotEmpty ? imagesBytes : (imageBytes.isNotEmpty ? [imageBytes] : []);
@@ -78,6 +91,8 @@ abstract final class GeminiFoodServiceCore {
     double remainingProtein, {
     String language = 'ar',
     String? userHint,
+    bool forceReanalyze = false,
+    bool alreadyCompressed = false,
   }) async {
     if (!SupabaseService.isInitialized) {
       throw const FoodVisionOfflineException();
@@ -86,7 +101,11 @@ abstract final class GeminiFoodServiceCore {
     try {
       final compressedImages = <Uint8List>[];
       for (final img in images.take(5)) {
-        compressedImages.add(await MealImageCompressor.compress(img));
+        // Re-sending the exact same bytes keeps the server image hash stable,
+        // so "حلّل تاني" refreshes the same 24 h cache entry.
+        compressedImages.add(
+          alreadyCompressed ? img : await MealImageCompressor.compress(img),
+        );
       }
       if (compressedImages.isEmpty) {
         throw const FoodVisionParseException();
@@ -102,6 +121,8 @@ abstract final class GeminiFoodServiceCore {
         'language': language,
         if (userHint != null && userHint.trim().isNotEmpty)
           'user_hint': userHint.trim(),
+        // "حلّل تاني": skip the server's 24 h image-hash cache.
+        if (forceReanalyze) 'forceReanalyze': true,
       };
 
       final response = await SupabaseService.client.functions.invoke(
@@ -137,6 +158,10 @@ abstract final class GeminiFoodServiceCore {
       if (scanned.isEmpty) {
         throw const FoodVisionNoFoodException();
       }
+      final fromCache = data is Map && data['cached'] == true;
+      final cachedAt = data is Map && data['cached_at'] is String
+          ? DateTime.tryParse(data['cached_at'] as String)
+          : null;
       try {
         final lines =
             await _resolver.resolveItems(scanned, language: language);
@@ -145,6 +170,10 @@ abstract final class GeminiFoodServiceCore {
           lines: lines,
           imageBytes: compressedImages.first,
           imagesBytes: compressedImages,
+          fromCache: fromCache,
+          cachedAt: cachedAt,
+          language: language,
+          userHint: userHint,
         );
       } catch (e) {
         // Never lose a successful vision response to local DB issues.
@@ -166,6 +195,10 @@ abstract final class GeminiFoodServiceCore {
           lines: fallback,
           imageBytes: compressedImages.first,
           imagesBytes: compressedImages,
+          fromCache: fromCache,
+          cachedAt: cachedAt,
+          language: language,
+          userHint: userHint,
         );
       }
     } on FunctionException catch (e) {

@@ -4434,4 +4434,81 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get livingBackgroundsUnlocked => 'Unlocked';
+
+  @override
+  String get workoutRpeSubtitle =>
+      'Quelle difficulté as-tu ressentie ? 1 = très facile, 10 = très difficile';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'Très facile',
+      '2': 'Facile',
+      '3': 'Assez facile',
+      '4': 'Léger',
+      '5': 'Modéré',
+      '6': 'Plutôt difficile',
+      '7': 'Costaud',
+      '8': 'Difficile',
+      '9': 'Très dur',
+      'other': 'Très difficile',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'Comment te sens-tu ?';
+
+  @override
+  String get workoutFeelTired => 'Fatigue';
+
+  @override
+  String get workoutFeelJointPain => 'Douleur articulaire';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'De bonne humeur',
+      'other': 'De bonne humeur',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'Pleine d’énergie';
+
+  @override
+  String get workoutRpeNoteHint => 'Ajoute une note (facultatif)';
+
+  @override
+  String get workoutRpeSave => 'Enregistrer';
+
+  @override
+  String get workoutRpeDone => 'Terminé';
+
+  @override
+  String get workoutRpeSavedTitle => 'Enregistré ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'Une douleur articulaire est un signal à respecter. Allège la charge à la prochaine séance et soigne ta technique.';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'C’était costaud. On allégera un peu la charge la prochaine fois pour bien récupérer.';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'Tu progresses ! Le même effort paraît plus léger que la dernière fois 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'Ça t’a paru facile. À la prochaine séance, on augmentera un peu la charge.';
+
+  @override
+  String get workoutRpeCommentSteady => 'Effort bien dosé. Garde ce rythme.';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'Ce que tu as fait compte. On reviendra plus fort à la prochaine séance.';
 }

@@ -1268,5 +1268,22 @@
   "scoreInsightsBurnedKcal": "Yakılan",
   "scoreInsightsMacrosTitle": "Bugünün Makroları (Hedef vs Gerçek)",
   "scoreInsightsScoreTrendTitle": "7 Günlük Skor Eğilimi",
-  "scoreInsightsImmediateActionsTitle": "Skoru artırmak için ipuçları:"
+  "scoreInsightsImmediateActionsTitle": "Skoru artırmak için ipuçları:",
+  "workoutRpeSubtitle": "Ne kadar zorladı? 1 = çok kolay, 10 = çok zor",
+  "workoutRpeLabel": "{level, select, 1{Çok kolay} 2{Kolay} 3{Oldukça kolay} 4{Hafif} 5{Orta} 6{Biraz zor} 7{Yorucu} 8{Zor} 9{Çok zor} other{Aşırı zor}}",
+  "workoutRpeFeelingsTitle": "Nasıl hissediyorsun?",
+  "workoutFeelTired": "Yorgunluk",
+  "workoutFeelJointPain": "Eklem ağrısı",
+  "workoutFeelHappy": "{gender, select, female{Mutlu} other{Mutlu}}",
+  "workoutFeelEnergized": "Yüksek enerji",
+  "workoutRpeNoteHint": "Not ekle (isteğe bağlı)",
+  "workoutRpeSave": "Kaydet",
+  "workoutRpeDone": "Tamam",
+  "workoutRpeSavedTitle": "Kaydedildi ✅",
+  "workoutRpeCommentJoint": "Eklem ağrısı dikkate alınması gereken bir işarettir. Bir sonraki antrenmanda yükü azalt ve harekete odaklan.",
+  "workoutRpeCommentHard": "Zorlu bir antrenmandı. Bir sonraki sefer yükü biraz azaltacağız, böylece iyi toparlanırsın.",
+  "workoutRpeCommentBetter": "Performansın daha iyi! Aynı antrenman geçen seferden daha hafif geldi 💪",
+  "workoutRpeCommentEasy": "Kolay geldi. Bir sonraki antrenmanda yükü biraz artıracağız.",
+  "workoutRpeCommentSteady": "Tam kıvamında bir efor. Bu tempoyu koru.",
+  "workoutRpeCommentPartial": "Yaptığın kısım da sayılır. Bir sonraki antrenmanda daha güçlü döneceğiz."
 }

@@ -95,7 +95,7 @@ void main() {
       expect(container.read(localeProvider).languageCode, 'fr');
 
       // Tap Egyptian Arabic
-      await tester.tap(find.text('العربية (لهجة مصرية)').first);
+      await tester.tap(find.text('العربية (مصري)').first);
       await tester.pump(const Duration(milliseconds: 300));
 
       expect(container.read(localeProvider), const Locale('ar', 'EG'));

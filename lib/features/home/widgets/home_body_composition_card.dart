@@ -222,7 +222,7 @@ class HomeBodyCompositionCard extends ConsumerWidget {
             // Muscle mass (SMM)
             Expanded(
               child: _MetricTile(
-                title: isArabic ? 'العضلات (SMM)' : 'Muscle (SMM)',
+                title: isArabic ? 'العضلات' : 'Muscle (SMM)',
                 value: smm != null ? '${smm.toStringAsFixed(1)} كجم' : '--',
                 deltaText: delta?.skeletalMuscleMassKg != null
                     ? _deltaStr(delta!.skeletalMuscleMassKg!, 'كجم')

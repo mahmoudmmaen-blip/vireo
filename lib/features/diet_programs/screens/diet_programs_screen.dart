@@ -105,6 +105,8 @@ class DietProgramsScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 p.name.of(lang),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 16,
@@ -112,6 +114,8 @@ class DietProgramsScreen extends ConsumerWidget {
                               ),
                               Text(
                                 p.tagline.of(lang),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: colors.textMute,
                                   fontSize: 13,
@@ -122,17 +126,21 @@ class DietProgramsScreen extends ConsumerWidget {
                           ),
                         ),
                         if (isActive)
-                          VireoPill(
-                            label: l10n.dietActiveBadge,
-                            color: colors.success,
-                            filled: true,
+                          Flexible(
+                            child: VireoPill(
+                              label: l10n.dietActiveBadge,
+                              color: colors.success,
+                              filled: true,
+                            ),
                           )
                         else if (!isUnlocked)
-                          VireoPill(
-                            label: 'PRO',
-                            icon: Icons.lock_outline,
-                            color: colors.gold,
-                            filled: true,
+                          Flexible(
+                            child: VireoPill(
+                              label: 'PRO',
+                              icon: Icons.lock_outline,
+                              color: colors.gold,
+                              filled: true,
+                            ),
                           ),
                       ],
                     ),

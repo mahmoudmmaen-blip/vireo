@@ -9,6 +9,12 @@ import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
+import 'package:vireo/features/ai_nutrition/domain/i_food_vision_service.dart';
+import 'package:vireo/features/ai_nutrition/domain/meal_correction_text.dart';
+import 'package:vireo/features/ai_nutrition/domain/meal_health_score.dart';
+import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
+import 'package:vireo/features/ai_nutrition/widgets/meal_correction_sheet.dart';
+import 'package:vireo/features/ai_nutrition/domain/meal_smart_swap.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
@@ -49,6 +55,10 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   final _scrollController = ScrollController();
   final _resolver = MealResolutionService(FoodDbRepository.instance);
   bool _clarifyingQuestionDismissed = false;
+
+  /// analyze-meal returned its 24 h cached result => offer "حلّل تاني".
+  bool _fromCache = false;
+  bool _reanalyzing = false;
 
   int get _currentOilGrams {
     final idx = _lines.indexWhere((l) =>
@@ -159,6 +169,183 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     }
     _images = List.of(widget.draft.allImages);
     _slot = _mealSlotForNow();
+    _fromCache = widget.draft.fromCache;
+  }
+
+  String _visionErrorText(Object e, bool isArabic) {
+    if (e is FoodVisionDailyLimitException) {
+      return isArabic
+          ? 'وصلت للحد اليومي للتحليل. جرّب بكرة أو عدّل الأصناف بإيدك.'
+          : 'Daily AI limit reached. Try tomorrow or edit items by hand.';
+    }
+    if (e is FoodVisionOfflineException) {
+      return isArabic
+          ? 'مفيش اتصال بالنت. اتأكد من الشبكة وجرّب تاني.'
+          : 'No connection. Check your network and try again.';
+    }
+    if (e is FoodVisionTimeoutException) {
+      return isArabic
+          ? 'التحليل أخد وقت أطول من المتوقع. جرّب تاني.'
+          : 'That took too long. Please try again.';
+    }
+    if (e is FoodVisionParseException || e is FoodVisionNoFoodException) {
+      return isArabic
+          ? 'مقدرناش نفهم الأكل ده. جرّب تكتبه بشكل تاني.'
+          : 'We could not understand that. Try rephrasing.';
+    }
+    return isArabic
+        ? 'حصلت مشكلة. جرّب مرة تانية كمان شوية.'
+        : 'Something went wrong. Please try again shortly.';
+  }
+
+  /// "حلّل تاني": re-call analyze-meal with forceReanalyze (skips the 24 h cache).
+  Future<void> _reanalyze() async {
+    if (_reanalyzing) return;
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final photos = widget.draft.allImages;
+    if (photos.isEmpty) return;
+    HapticFeedback.mediumImpact();
+    setState(() => _reanalyzing = true);
+    try {
+      final fresh = await GeminiFoodServiceCore.analyzeImagesToDraft(
+        photos,
+        ref.read(remainingCaloriesForAiScanProvider),
+        ref.read(remainingProteinForAiScanProvider),
+        language: widget.draft.language,
+        userHint: widget.draft.userHint,
+        forceReanalyze: true,
+        alreadyCompressed: true,
+      );
+      if (!mounted) return;
+      setState(() {
+        _lines = fresh.lines.where((l) => !l.isUnsure && l.confidence >= 0.5).toList();
+        _unsureLines = fresh.lines.where((l) => l.isUnsure || l.confidence < 0.5).toList();
+        if (_lines.isEmpty && fresh.lines.isNotEmpty) {
+          _lines = List.of(fresh.lines);
+          _unsureLines = [];
+        }
+        _expandedIndices.clear();
+        _clarifyingQuestionDismissed = false;
+        _fromCache = false;
+        _reanalyzing = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 3),
+          content: Text(isArabic ? 'اتحلّلت الصورة من جديد ✅' : 'Photo re-analyzed ✅'),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _reanalyzing = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 3),
+          content: Text(_visionErrorText(e, isArabic)),
+        ),
+      );
+    }
+  }
+
+  /// "عدّل النتيجة": parse the typed correction (names + grams only) and
+  /// resolve through [MealResolutionService] (food DB). No kcal guessing.
+  /// Returns an error message, or null on success.
+  Future<String?> _applyCorrection(String text) async {
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final correction = MealCorrectionText.parse(text);
+    if (correction.isEmpty) {
+      return isArabic ? 'اكتب اسم الأكل الصح (ولو تقدر الوزن بالجرام).' : 'Type the correct food (and grams if you know).';
+    }
+    try {
+      final parsed = await GeminiFoodServiceCore.parseTextToDraft(
+        correction.textForParser,
+        language: Localizations.localeOf(context).languageCode,
+      );
+      if (!mounted) return null;
+      var newLines = parsed.lines;
+      if (newLines.isEmpty) {
+        return isArabic ? 'مقدرناش نلاقي الأكل ده. جرّب اسم تاني.' : 'We could not find that food. Try another name.';
+      }
+
+      // A single stated amount on a single food: scale the DB-resolved macros.
+      final stated = correction.statedGrams;
+      if (stated != null && newLines.length == 1 && newLines.first.grams > 0) {
+        final l = newLines.first;
+        final f = stated / l.grams;
+        newLines = [
+          l.copyWith(
+            grams: stated,
+            kcal: l.kcal * f,
+            protein: l.protein * f,
+            carbs: l.carbs * f,
+            fat: l.fat * f,
+            confidence: 1,
+          ),
+        ];
+      }
+
+      // Which existing lines did the user mean? Those named in "مش X".
+      final replaceIdx = <int>[
+        for (var i = 0; i < _lines.length; i++)
+          if (correction.negatedTerms.any((t) => MealCorrectionText.lineMatchesTerm(
+                nameAr: _lines[i].nameAr,
+                nameEn: _lines[i].nameEn,
+                term: t,
+              )))
+            i,
+      ];
+
+      // P34 calibration: user-stated grams vs. the AI's estimate for that item.
+      final replacedOne = replaceIdx.length == 1 ? _lines[replaceIdx.first] : null;
+      if (stated != null && newLines.length == 1 && replacedOne != null) {
+        final key = newLines.first.food?.id ?? newLines.first.nameEn.toLowerCase();
+        await _resolver.recordCorrection(
+          foodKey: key,
+          aiGrams: replacedOne.grams,
+          userGrams: stated,
+        );
+      }
+
+      if (!mounted) return null;
+      setState(() {
+        if (replaceIdx.isEmpty) {
+          _lines = List.of(newLines);
+          _unsureLines = [];
+        } else {
+          final first = replaceIdx.first;
+          final kept = <ResolvedMealLine>[
+            for (var i = 0; i < _lines.length; i++)
+              if (!replaceIdx.contains(i)) _lines[i],
+          ];
+          final insertAt = first.clamp(0, kept.length);
+          kept.insertAll(insertAt, newLines);
+          _lines = kept;
+        }
+        _expandedIndices.clear();
+        _clarifyingQuestionDismissed = false;
+      });
+      HapticFeedback.mediumImpact();
+      return null;
+    } catch (e) {
+      return _visionErrorText(e, isArabic);
+    }
+  }
+
+  Future<void> _openCorrectionSheet() async {
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final ok = await MealCorrectionSheet.show(
+      context,
+      isArabic: isArabic,
+      onSubmit: _applyCorrection,
+    );
+    if (ok == true && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 3),
+          content: Text(isArabic ? 'اتعدّلت النتيجة ✅' : 'Result updated ✅'),
+        ),
+      );
+    }
   }
 
   @override
@@ -180,31 +367,141 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   double get _c => _lines.fold(0.0, (s, l) => s + l.carbs);
   double get _f => _lines.fold(0.0, (s, l) => s + l.fat);
 
+  /// Primary meal name: Arabic names when the locale is Arabic (falling back to
+  /// English only for lines that have no Arabic name), English otherwise.
   String _suggestedMealName(bool isArabic) {
     if (_lines.isEmpty) return isArabic ? 'وجبة فارغة' : 'Empty meal';
     return _lines
-        .map((l) => isArabic ? l.nameAr : (l.nameEn.isNotEmpty ? l.nameEn : l.nameAr))
+        .map((l) => isArabic
+            ? (l.nameAr.isNotEmpty ? l.nameAr : l.nameEn)
+            : (l.nameEn.isNotEmpty ? l.nameEn : l.nameAr))
         .where((n) => n.isNotEmpty)
         .join(' + ');
   }
 
-  (int score, String verdict) _evaluateHealth(bool isArabic) {
-    if (_lines.isEmpty) return (5, isArabic ? 'أضف أصناف لوجبتك' : 'Add items');
-    final total = _kcal;
-    if (total == 0) return (5, isArabic ? 'وجبة خفيفة' : 'Light snack');
+  /// English secondary line, shown only under an Arabic primary name.
+  String? _secondaryMealName(bool isArabic) {
+    if (!isArabic || _lines.isEmpty) return null;
+    final en = _lines.map((l) => l.nameEn).where((n) => n.isNotEmpty).join(' + ');
+    if (en.isEmpty || en == _suggestedMealName(true)) return null;
+    return en;
+  }
 
-    final pRatio = (_p * 4) / total;
-    final fRatio = (_f * 9) / total;
+  static const _vegKeywords = [
+    'salad', 'vegetable', 'broccoli', 'cucumber', 'tomato', 'spinach', 'lettuce',
+    'carrot', 'zucchini', 'okra', 'molokhia', 'cabbage', 'pepper', 'eggplant',
+    'سلطة', 'خضار', 'بروكلي', 'خيار', 'طماطم', 'سبانخ', 'خس', 'جزر', 'كوسة',
+    'بامية', 'ملوخية', 'كرنب', 'فلفل', 'باذنجان',
+  ];
 
-    if (pRatio >= 0.25 && fRatio <= 0.35) {
-      return (9, isArabic ? 'وجبة متوازنة، بروتين عالي ودقيقة 💪' : 'Balanced, high protein');
-    } else if (pRatio >= 0.20) {
-      return (8, isArabic ? 'وجبة صحية ومغذية وممتازة لهدفك' : 'Nutritious & goal-aligned');
-    } else if (fRatio > 0.45) {
-      return (6, isArabic ? 'نسبة الدهون مرتفعة نسبيًا في الوجبة' : 'Relatively high fat');
-    } else {
-      return (7, isArabic ? 'وجبة معتدلة ومتوازنة السعرات' : 'Moderate balanced meal');
+  static bool _isOilLine(ResolvedMealLine l) =>
+      l.food?.id == 'cooking_oil_estimate' ||
+      l.nameEn.toLowerCase().contains('cooking oil') ||
+      l.nameAr.contains('زيت') ||
+      l.nameAr.contains('سمن');
+
+  /// Added-sugar grams for one line. Food DB has no sugar field, so this is an
+  /// estimate from the line identity (typical USDA values per 100 g):
+  /// table sugar 100, honey 82, cola/soda 10.6, fruit juice 9.
+  static double _estimatedAddedSugarG(ResolvedMealLine l) {
+    final id = (l.food?.id ?? '').toLowerCase();
+    final n = '${l.nameEn} ${l.nameAr}'.toLowerCase();
+    final f = l.grams / 100.0;
+    if (id.contains('sugar') || RegExp(r'\bsugar\b').hasMatch(n) || n.contains('سكر ')) {
+      if (n.contains('free') || n.contains('بدون')) return 0;
+      return 100 * f;
     }
+    if (n.contains('honey') || n.contains('عسل')) return 82 * f;
+    if (RegExp(r'\b(cola|soda|pepsi)\b').hasMatch(n) ||
+        n.contains('بيبسي') ||
+        n.contains('كولا') ||
+        n.contains('صودا')) {
+      return 10.6 * f;
+    }
+    if (n.contains('juice') || n.contains('عصير')) return 9 * f;
+    return 0;
+  }
+
+  _MealHealthEval _evaluateHealth(bool isArabic) {
+    if (_lines.isEmpty) {
+      return _MealHealthEval.placeholder(5, isArabic ? 'أضف أصناف لوجبتك' : 'Add items');
+    }
+    if (_kcal <= 0) {
+      return _MealHealthEval.placeholder(5, isArabic ? 'وجبة خفيفة' : 'Light snack');
+    }
+
+    var totalGrams = 0.0;
+    var oilGrams = 0.0;
+    var vegGrams = 0.0;
+    var fiber = 0.0;
+    var sugar = 0.0;
+    var anyFiberFood = false;
+    var fiberEstimated = false;
+    var isFried = false;
+
+    for (final l in _lines) {
+      totalGrams += l.grams;
+      final isOil = _isOilLine(l);
+      if (isOil) oilGrams += l.grams;
+
+      if (l.cookingMethod == CookingMethod.fried || l.food?.isAlreadyFried == true) {
+        isFried = true;
+      }
+      // Oil absorbed while cooking (already inside the line's macros).
+      if (!isOil && l.food?.isAlreadyFried != true) {
+        oilGrams += l.cookingMethod.oilAbsorptionGramsPer100g * l.grams / 100.0;
+      }
+
+      final n = '${l.nameEn} ${l.nameAr}'.toLowerCase();
+      if (_vegKeywords.any(n.contains)) vegGrams += l.grams;
+
+      final food = l.food;
+      if (food != null) {
+        anyFiberFood = true;
+        fiber += food.per100g.fiber * l.grams / 100.0;
+      } else if (!isOil) {
+        fiberEstimated = true; // fiber of this line unknown
+      }
+      sugar += _estimatedAddedSugarG(l);
+    }
+
+    final fiberG = anyFiberFood ? fiber : null;
+    final score = MealHealthScorer.score(MealNutrientSnapshot(
+      kcal: _kcal,
+      proteinG: _p,
+      carbsG: _c,
+      fatG: _f,
+      fiberG: fiberG,
+      sugarG: sugar, // estimated, see _estimatedAddedSugarG
+      sodiumMg: null, // not available in the food DB models
+      oilGrams: oilGrams,
+      vegGrams: vegGrams,
+      totalFoodGrams: totalGrams,
+      isFried: isFried,
+    ));
+
+    final swap = MealSmartSwap.pick([
+      for (final l in _lines)
+        SwapCandidateLine(
+          nameAr: l.nameAr,
+          nameEn: l.nameEn,
+          grams: l.grams,
+          kcal: l.kcal,
+          proteinG: l.protein,
+          carbsG: l.carbs,
+          fatG: l.fat,
+        ),
+    ]);
+
+    return _MealHealthEval(
+      score: score.score,
+      verdict: isArabic ? score.reasonAr : score.reasonEn,
+      fiberG: fiberG,
+      fiberEstimated: fiberEstimated,
+      sugarG: sugar,
+      sodiumMg: null,
+      swap: swap,
+    );
   }
 
   Future<void> _addPhoto() async {
@@ -376,7 +673,8 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     final isRamadan = ref.watch(ramadanSettingsProvider).isEnabled;
 
     final mealName = _suggestedMealName(isArabic);
-    final (healthScore, healthVerdict) = _evaluateHealth(isArabic);
+    final mealNameSecondary = _secondaryMealName(isArabic);
+    final health = _evaluateHealth(isArabic);
 
     // Compute rule-based MealAdvice
     final advice = MealAdviceEngine.computeAdvice(
@@ -423,6 +721,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
             // ── TOP STICKY SUMMARY CARD (MFP-Style, always visible) ──
             _StickyTopSummaryCard(
               mealName: mealName,
+              mealNameSecondary: mealNameSecondary,
               thumbnailBytes: widget.draft.allImages.firstOrNull,
               kcal: _kcal.round(),
               proteinG: _p,
@@ -430,8 +729,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
               fatG: _f,
               fatEquivalentG: (_kcal / 8.84).round(),
               advice: advice,
-              healthScore: healthScore,
-              healthVerdict: healthVerdict,
+              health: health,
               slot: _slot,
               slotLabel: _slotLabel(l10n, _slot),
               onSlotChanged: (next) => setState(() => _slot = next),
@@ -460,6 +758,42 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                 controller: _scrollController,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 children: [
+                  // Same photo analysed within 24 h => same result (stable). Offer a fresh run.
+                  if (_fromCache) ...[
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: colors.surface,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            isArabic
+                                ? 'دي نفس نتيجة تحليل الصورة دي من آخر ٢٤ ساعة. لو شايف إنها مش مظبوطة، حلّلها من جديد.'
+                                : 'This is the saved result for this photo (last 24 h). If it looks off, analyze it again.',
+                            style: TextStyle(color: colors.textMute, fontSize: 12.5, height: 1.4),
+                          ),
+                          const SizedBox(height: 8),
+                          OutlinedButton.icon(
+                            onPressed: _reanalyzing ? null : _reanalyze,
+                            style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
+                            icon: _reanalyzing
+                                ? const SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                : const Icon(Icons.refresh_rounded, size: 18),
+                            label: Text(isArabic ? 'حلّل تاني' : 'Analyze again'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                   // If AI returned unsure items (< 0.5 confidence), show suggestion chip row
                   if (_unsureLines.isNotEmpty) ...[
                     Container(
@@ -725,6 +1059,15 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                   ),
                   const SizedBox(height: 14),
 
+                  // Free-text correction ("ده سلمون مش فراخ، 150 جم") → parse → DB resolve
+                  OutlinedButton.icon(
+                    onPressed: _openCorrectionSheet,
+                    style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
+                    icon: const Icon(Icons.edit_note_rounded, size: 20),
+                    label: Text(isArabic ? 'عدّل النتيجة' : 'Correct the result'),
+                  ),
+                  const SizedBox(height: 14),
+
                   // Items List Header
                   Row(
                     children: [
@@ -824,10 +1167,80 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
       };
 }
 
+/// Result of [_MealReviewScreenState._evaluateHealth]: score + micro nutrients
+/// + optional swap tip. `null` micro values mean "not available".
+class _MealHealthEval {
+  const _MealHealthEval({
+    required this.score,
+    required this.verdict,
+    required this.fiberG,
+    required this.fiberEstimated,
+    required this.sugarG,
+    required this.sodiumMg,
+    required this.swap,
+  });
+
+  factory _MealHealthEval.placeholder(int score, String verdict) => _MealHealthEval(
+        score: score,
+        verdict: verdict,
+        fiberG: null,
+        fiberEstimated: false,
+        sugarG: null,
+        sodiumMg: null,
+        swap: null,
+      );
+
+  final int score;
+  final String verdict;
+  final double? fiberG;
+  final bool fiberEstimated;
+
+  /// Always an estimate: the food DB models carry no sugar field.
+  final double? sugarG;
+
+  /// Not available in the food DB models yet.
+  final double? sodiumMg;
+  final SmartSwapTip? swap;
+}
+
+class _MicroChip extends StatelessWidget {
+  const _MicroChip({
+    required this.label,
+    required this.value,
+    required this.estimated,
+    required this.isArabic,
+  });
+
+  final String label;
+  final String value;
+  final bool estimated;
+  final bool isArabic;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: colors.background,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: colors.line.withValues(alpha: 0.6)),
+      ),
+      child: Text(
+        estimated ? '$label $value · ${isArabic ? 'تقدير' : 'est.'}' : '$label $value',
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700, color: colors.textMute),
+      ),
+    );
+  }
+}
+
 /// ── TOP STICKY SUMMARY CARD (MFP Style) ──
 class _StickyTopSummaryCard extends StatelessWidget {
   const _StickyTopSummaryCard({
     required this.mealName,
+    this.mealNameSecondary,
     this.thumbnailBytes,
     required this.kcal,
     required this.proteinG,
@@ -835,8 +1248,7 @@ class _StickyTopSummaryCard extends StatelessWidget {
     required this.fatG,
     required this.fatEquivalentG,
     required this.advice,
-    required this.healthScore,
-    required this.healthVerdict,
+    required this.health,
     required this.slot,
     required this.slotLabel,
     required this.onSlotChanged,
@@ -845,6 +1257,7 @@ class _StickyTopSummaryCard extends StatelessWidget {
   });
 
   final String mealName;
+  final String? mealNameSecondary;
   final Uint8List? thumbnailBytes;
   final int kcal;
   final double proteinG;
@@ -852,8 +1265,7 @@ class _StickyTopSummaryCard extends StatelessWidget {
   final double fatG;
   final int fatEquivalentG;
   final MealAdviceResult advice;
-  final int healthScore;
-  final String healthVerdict;
+  final _MealHealthEval health;
   final MealType slot;
   final String slotLabel;
   final ValueChanged<MealType> onSlotChanged;
@@ -906,11 +1318,28 @@ class _StickyTopSummaryCard extends StatelessWidget {
                 const SizedBox(width: 10),
               ],
               Expanded(
-                child: Text(
-                  mealName,
-                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15, height: 1.25),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      mealName,
+                      style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15, height: 1.25),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    if (mealNameSecondary != null)
+                      Text(
+                        mealNameSecondary!,
+                        textDirection: TextDirection.ltr,
+                        style: TextStyle(
+                          color: colors.textMute,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                  ],
                 ),
               ),
               const SizedBox(width: 8),
@@ -1042,6 +1471,39 @@ class _StickyTopSummaryCard extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 8),
+
+          // Micro chips: sodium, sugar, fiber ("تقدير" when estimated)
+          Wrap(
+            spacing: 6,
+            runSpacing: 4,
+            children: [
+              _MicroChip(
+                label: isArabic ? 'صوديوم' : 'Sodium',
+                value: health.sodiumMg == null
+                    ? '—'
+                    : '${health.sodiumMg!.round()} ${isArabic ? 'مجم' : 'mg'}',
+                estimated: health.sodiumMg != null,
+                isArabic: isArabic,
+              ),
+              _MicroChip(
+                label: isArabic ? 'سكر' : 'Sugar',
+                value: health.sugarG == null
+                    ? '—'
+                    : '${health.sugarG!.round()} ${isArabic ? 'جم' : 'g'}',
+                estimated: health.sugarG != null,
+                isArabic: isArabic,
+              ),
+              _MicroChip(
+                label: isArabic ? 'ألياف' : 'Fiber',
+                value: health.fiberG == null
+                    ? '—'
+                    : '${health.fiberG!.toStringAsFixed(1)} ${isArabic ? 'جم' : 'g'}',
+                estimated: health.fiberG != null && health.fiberEstimated,
+                isArabic: isArabic,
+              ),
+            ],
+          ),
           const SizedBox(height: 10),
 
           // ── "After this meal" Smart Block ──
@@ -1140,7 +1602,7 @@ class _StickyTopSummaryCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    '★ $healthScore/10',
+                    '★ ${health.score}/10',
                     style: const TextStyle(
                       color: Color(0xFF10B981),
                       fontWeight: FontWeight.w900,
@@ -1151,15 +1613,41 @@ class _StickyTopSummaryCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    healthVerdict,
+                    health.verdict,
                     style: TextStyle(color: colors.textMute, fontSize: 11.5, fontWeight: FontWeight.w600),
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
             ),
           ),
+
+          // Smart swap tip (at most one)
+          if (health.swap != null) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF10B981).withValues(alpha: 0.10),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.35)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.swap_horiz_rounded, size: 16, color: Color(0xFF10B981)),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      isArabic ? health.swap!.tipAr : health.swap!.tipEn,
+                      style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, height: 1.3),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 12),
 
           // Primary & Secondary Buttons: "حفظ" (one tap) & "عدّل التفاصيل"

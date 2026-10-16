@@ -55,6 +55,7 @@ abstract final class DietProgramsCatalog {
   // ───────────────────────── 1. Balanced deficit ─────────────────────────
   static const _balancedDeficit = DietProgram(
     id: DietProgramId.balancedDeficit,
+    deficitFactor: 1.0,
     emoji: '⚖️',
     difficulty: 1,
     name: L10nText('تقليل السعرات المتوازن', 'Balanced calorie deficit'),
@@ -129,6 +130,7 @@ abstract final class DietProgramsCatalog {
   // ───────────────────────── 2. High protein ─────────────────────────
   static const _highProtein = DietProgram(
     id: DietProgramId.highProtein,
+    deficitFactor: 1.05,
     emoji: '💪',
     difficulty: 2,
     name: L10nText('عجز + بروتين عالي (تنشيف)', 'High-protein cut'),
@@ -201,6 +203,7 @@ abstract final class DietProgramsCatalog {
   // ───────────────────────── 3. Intermittent fasting 16:8 ─────────────────────────
   static const _intermittentFasting = DietProgram(
     id: DietProgramId.intermittentFasting,
+    deficitFactor: 0.95,
     emoji: '⏱️',
     difficulty: 2,
     name: L10nText('الصيام المتقطع 16:8', 'Intermittent fasting 16:8'),
@@ -279,6 +282,7 @@ abstract final class DietProgramsCatalog {
   // ───────────────────────── 4. Low carb ─────────────────────────
   static const _lowCarb = DietProgram(
     id: DietProgramId.lowCarb,
+    deficitFactor: 1.1,
     emoji: '🥩',
     difficulty: 2,
     name: L10nText('لو كارب معتدل', 'Moderate low-carb'),
@@ -352,6 +356,7 @@ abstract final class DietProgramsCatalog {
   // ───────────────────────── 5. Keto ─────────────────────────
   static const _keto = DietProgram(
     id: DietProgramId.keto,
+    deficitFactor: 1.15,
     emoji: '🥑',
     difficulty: 3,
     name: L10nText('الكيتو', 'Keto'),
@@ -439,6 +444,7 @@ abstract final class DietProgramsCatalog {
   // ───────────────────────── 6. Fasting + low carb (mix) ─────────────────────────
   static const _fastingLowCarb = DietProgram(
     id: DietProgramId.fastingLowCarb,
+    deficitFactor: 1.1,
     emoji: '🔥',
     difficulty: 3,
     name: L10nText('المزيج: صيام متقطع + لو كارب', 'Mix: Fasting + low-carb'),
@@ -518,6 +524,7 @@ abstract final class DietProgramsCatalog {
   // ───────────────────────── 7. Egyptian clean eating ─────────────────────────
   static const _egyptianClean = DietProgram(
     id: DietProgramId.egyptianClean,
+    deficitFactor: 0.9,
     emoji: '🫓',
     difficulty: 1,
     name: L10nText('الأكل النضيف المصري', 'Egyptian clean eating'),

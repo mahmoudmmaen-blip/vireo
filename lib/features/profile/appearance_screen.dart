@@ -10,6 +10,8 @@ import 'package:vireo/features/engagement/services/coins_service.dart';
 import 'package:vireo/features/home/living_backgrounds/domain/scene_pack.dart';
 import 'package:vireo/features/home/living_backgrounds/providers/living_background_settings_provider.dart';
 import 'package:vireo/features/home/living_backgrounds/widgets/scene_pack_preview.dart';
+import 'package:vireo/features/home/mascot/domain/mascot_companion.dart';
+import 'package:vireo/features/home/mascot/providers/mascot_settings_provider.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 
 class AppearanceScreen extends ConsumerWidget {
@@ -161,7 +163,80 @@ class AppearanceScreen extends ConsumerWidget {
             ),
           ),
           const Divider(),
+          const _MascotCompanionSection(),
+          const Divider(),
           const _LivingBackgroundsSection(),
+        ],
+      ),
+    );
+  }
+}
+
+class _MascotCompanionSection extends ConsumerWidget {
+  const _MascotCompanionSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final colors = context.vireoColors;
+    final isAr = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final settings = ref.watch(mascotSettingsProvider);
+    final notifier = ref.read(mascotSettingsProvider.notifier);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: VSpace.md, vertical: VSpace.xs),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            isAr ? 'رفيقك (السعرات)' : 'Your calorie companion',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            isAr
+                ? 'اختار شكل الرفيق، أو ارجع للدايرة العادية'
+                : 'Pick a companion, or switch back to the classic ring',
+            style: TextStyle(color: colors.textMute, fontSize: 12),
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(isAr ? 'الدايرة العادية' : 'Classic ring'),
+            subtitle: Text(
+              isAr ? 'بدل موجة السعرات بدائرة التقدم' : 'Replace the wave mascot with a progress ring',
+              style: TextStyle(color: colors.textMute, fontSize: 12),
+            ),
+            value: settings.useClassicRing,
+            onChanged: (v) => notifier.setUseClassicRing(v),
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(isAr ? 'طبقات الماكروز' : 'Macro layers'),
+            subtitle: Text(
+              isAr ? 'بروتين / كارب / دهون كموجات ملونة' : 'Protein / carbs / fat as coloured bands',
+              style: TextStyle(color: colors.textMute, fontSize: 12),
+            ),
+            value: settings.showMacroLayers,
+            onChanged: settings.useClassicRing
+                ? null
+                : (v) => notifier.setShowMacroLayers(v),
+          ),
+          if (!settings.useClassicRing) ...[
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final c in MascotCompanion.values)
+                  ChoiceChip(
+                    label: Text(isAr ? c.labelAr(false) : c.labelEn()),
+                    selected: settings.companion == c,
+                    onSelected: (_) => notifier.setCompanion(c),
+                  ),
+              ],
+            ),
+          ],
         ],
       ),
     );

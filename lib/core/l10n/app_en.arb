@@ -2427,5 +2427,36 @@
       }
     }
   },
-  "livingBackgroundsUnlocked": "Unlocked"
+  "livingBackgroundsUnlocked": "Unlocked",
+  "workoutRpeSubtitle": "How hard did it feel? 1 = very easy, 10 = very hard",
+  "@workoutRpeLabel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutRpeLabel": "{level, select, 1{Very easy} 2{Easy} 3{Fairly easy} 4{Light} 5{Moderate} 6{Somewhat hard} 7{Tough} 8{Hard} 9{Really hard} other{Very hard}}",
+  "workoutRpeFeelingsTitle": "How do you feel?",
+  "workoutFeelTired": "Tired",
+  "workoutFeelJointPain": "Joint pain",
+  "@workoutFeelHappy": {
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutFeelHappy": "{gender, select, female{Happy} other{Happy}}",
+  "workoutFeelEnergized": "High energy",
+  "workoutRpeNoteHint": "Add a note (optional)",
+  "workoutRpeSave": "Save",
+  "workoutRpeDone": "Done",
+  "workoutRpeSavedTitle": "Saved ✅",
+  "workoutRpeCommentJoint": "Joint pain is a signal worth respecting. Lighten the load next session and focus on form.",
+  "workoutRpeCommentHard": "That was a heavy one. We will ease the load a little next time so you recover well.",
+  "workoutRpeCommentBetter": "Your performance is better! The same workout felt lighter than last time 💪",
+  "workoutRpeCommentEasy": "That felt easy. Next session we will nudge the load up a little.",
+  "workoutRpeCommentSteady": "Just the right effort. Keep this rhythm.",
+  "workoutRpeCommentPartial": "What you did of the sets still counts. We will come back stronger next session."
 }

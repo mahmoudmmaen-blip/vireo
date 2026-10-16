@@ -4396,4 +4396,82 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get livingBackgroundsUnlocked => 'Unlocked';
+
+  @override
+  String get workoutRpeSubtitle =>
+      'Ne kadar zorladı? 1 = çok kolay, 10 = çok zor';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'Çok kolay',
+      '2': 'Kolay',
+      '3': 'Oldukça kolay',
+      '4': 'Hafif',
+      '5': 'Orta',
+      '6': 'Biraz zor',
+      '7': 'Yorucu',
+      '8': 'Zor',
+      '9': 'Çok zor',
+      'other': 'Aşırı zor',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'Nasıl hissediyorsun?';
+
+  @override
+  String get workoutFeelTired => 'Yorgunluk';
+
+  @override
+  String get workoutFeelJointPain => 'Eklem ağrısı';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'Mutlu',
+      'other': 'Mutlu',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'Yüksek enerji';
+
+  @override
+  String get workoutRpeNoteHint => 'Not ekle (isteğe bağlı)';
+
+  @override
+  String get workoutRpeSave => 'Kaydet';
+
+  @override
+  String get workoutRpeDone => 'Tamam';
+
+  @override
+  String get workoutRpeSavedTitle => 'Kaydedildi ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'Eklem ağrısı dikkate alınması gereken bir işarettir. Bir sonraki antrenmanda yükü azalt ve harekete odaklan.';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'Zorlu bir antrenmandı. Bir sonraki sefer yükü biraz azaltacağız, böylece iyi toparlanırsın.';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'Performansın daha iyi! Aynı antrenman geçen seferden daha hafif geldi 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'Kolay geldi. Bir sonraki antrenmanda yükü biraz artıracağız.';
+
+  @override
+  String get workoutRpeCommentSteady =>
+      'Tam kıvamında bir efor. Bu tempoyu koru.';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'Yaptığın kısım da sayılır. Bir sonraki antrenmanda daha güçlü döneceğiz.';
 }

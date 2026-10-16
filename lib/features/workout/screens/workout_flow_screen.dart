@@ -55,6 +55,12 @@ class _WorkoutFlowScreenState extends ConsumerState<WorkoutFlowScreen> {
       );
     }
 
+    // The feedback (RPE) screen owns its Scaffold, close button and back
+    // handling; wrapping it again would stack a second app bar on top.
+    if (flow.phase == WorkoutFlowPhase.feedback) {
+      return const WorkoutFeedbackScreen();
+    }
+
     final profile = ref.watch(userProfileProvider);
     final showMedical = profile.maybeWhen(
       data: (p) => p.medicalFlag,

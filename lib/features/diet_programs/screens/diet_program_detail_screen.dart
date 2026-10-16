@@ -11,6 +11,8 @@ import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/features/diet_programs/application/diet_plan_engine.dart';
 import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
 import 'package:vireo/features/diet_programs/data/diet_programs_catalog.dart';
+import 'package:vireo/features/diet_programs/data/program_meal_library.dart';
+import 'package:vireo/features/diet_programs/screens/program_meal_library_screen.dart';
 import 'package:vireo/features/diet_programs/domain/diet_program.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
@@ -308,6 +310,11 @@ class _DietProgramDetailScreenState
                     ),
                   ),
                 ),
+                _MealLibraryEntry(
+                  programId: p.id,
+                  programName: p.name,
+                  lang: _lang,
+                ),
                 SectionHeader(title: l10n.dietSideEffects),
                 ...p.sideEffects.map((e) => _Bullet(e.of(_lang))),
                 SectionHeader(title: l10n.dietTips),
@@ -389,6 +396,68 @@ class _DietProgramDetailScreenState
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Opens the per-program meal library (P36). Shows the option count.
+class _MealLibraryEntry extends StatelessWidget {
+  const _MealLibraryEntry({
+    required this.programId,
+    required this.programName,
+    required this.lang,
+  });
+
+  final DietProgramId programId;
+  final L10nText programName;
+  final String lang;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    final count = mealCountFor(programId);
+    final isAr = lang == 'ar';
+    return Padding(
+      padding: const EdgeInsets.only(top: VSpace.md),
+      child: VireoCard(
+        semanticLabel: isAr ? 'مكتبة الوجبات' : 'Meal library',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => ProgramMealLibraryScreen(
+              programId: programId,
+              programName: programName,
+            ),
+          ),
+        ),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 48),
+          child: Row(
+            children: [
+              Icon(Icons.restaurant_menu_rounded, color: colors.ember),
+              const SizedBox(width: VSpace.sm),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      isAr ? 'مكتبة الوجبات' : 'Meal library',
+                      style: const TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                    Text(
+                      isAr
+                          ? '$count وجبة مصرية جاهزة للبرنامج ده'
+                          : '$count ready meals for this program',
+                      style: TextStyle(color: colors.textMute, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right_rounded, color: colors.textMute),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -471,7 +471,7 @@ class _Wrapped1080x1920Card extends StatelessWidget {
             decoration: BoxDecoration(
               color: const Color(0xFF064E3B).withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.5)),
+              border: Border.all(color: context.vireoColors.success.withValues(alpha: 0.5)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -223,10 +223,10 @@ class ProgressScreen extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF22C55E).withValues(alpha: 0.15),
+                        color: context.vireoColors.ember.withValues(alpha: 0.15),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.people_outline, color: Color(0xFF22C55E)),
+                      child: Icon(Icons.people_outline, color: context.vireoColors.ember),
                     ),
                     const SizedBox(width: VSpace.sm),
                     Expanded(

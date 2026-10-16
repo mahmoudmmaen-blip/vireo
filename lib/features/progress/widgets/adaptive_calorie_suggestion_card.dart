@@ -107,7 +107,7 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: (isIncrease ? const Color(0xFF3B82F6) : const Color(0xFF10B981))
+                  color: (isIncrease ? const Color(0xFF3B82F6) : context.vireoColors.success)
                       .withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -116,7 +116,7 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
-                    color: isIncrease ? const Color(0xFF3B82F6) : const Color(0xFF10B981),
+                    color: isIncrease ? const Color(0xFF3B82F6) : context.vireoColors.success,
                   ),
                 ),
               ),

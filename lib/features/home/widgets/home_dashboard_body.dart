@@ -21,9 +21,7 @@ import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart'
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
-import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
-import 'package:vireo/core/services/hive_service.dart';
-import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
+import 'package:vireo/core/services/hive_service.dart';import 'package:vireo/features/diet_programs/data/diet_plan_storage.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/diet_programs/screens/diet_programs_screen.dart';
 import 'package:vireo/features/diet_programs/screens/diet_quiz_screen.dart';
@@ -36,6 +34,7 @@ import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/activity/screens/health_hub_screen.dart';
 import 'package:vireo/features/home/widgets/meal_capture_hero_card.dart';
 import 'package:vireo/features/home/widgets/daily_score_hero_card.dart';
+import 'package:vireo/features/home/widgets/calories_today_mascot_card.dart';
 import 'package:vireo/features/home/widgets/smart_next_action_card.dart';
 import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
 import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
@@ -84,59 +83,45 @@ class HomeDashboardBody extends ConsumerWidget {
             : l10n.homeDayPhase(dash.programDay, homePhaseName(l10n, dash, locale)),
       ),
       const SaveProgressPromptHost(),
+
+      // P36 order: 1 Ramadan → 2 Steps → 3 Meal → 4 Calories(mascot) →
+      // 5 Daily Score → 6 Check-in → 7 Pillars/Plan → ad → المزيد.
       const RamadanCountdownCard(),
 
-      // ── HERO: Big 220dp Steps Ring Card ──
       PremiumStepsHeroCard(
         stepsCurrent: dash.stepsToday,
         stepsGoal: dash.stepsGoal,
         onTap: () => ref.read(shellTabIndexProvider.notifier).goWalk(),
       ),
 
-      // ── Card 1: Meal capture card ("سجّل وجبتك") ──
       const MealCaptureHeroCard(),
 
-      // ── InBody/Smart Scale Plan Recompute Card (One-time with Undo) ──
-      const InBodyPlanUpdateCard(),
+      const CaloriesTodayMascotCard(),
 
-      // ── Sex-Aware Experience: Women's Health ("صحتك") or Men's Vitality ("صحة الرجل") ──
-      if (isFemale)
-        const WomenHealthHeroCard()
-      else
-        const MenVitalityHeroCard(),
-
-      // ── Card 2: Daily Score Card ──
       const DailyScoreHeroCard(),
 
-      // ── Card: Body Composition Card ("تحليل الجسم") ──
-      const HomeBodyCompositionCard(),
+      if (dash.showCheckIn || weeklyDue)
+        _CheckInBanner(onTap: () => push(const WeeklyCheckInScreen())),
 
-      // ── Card: Intermittent Fasting Card ──
-      const HomeFastingCard(),
-
-      // ── Card 2: "اليوم" 2-Column Pillars Grid (Food, Water, Workout, Sleep) ──
       const TodayPillarsGrid(),
-
-      // ── Card 3: "الخطوة الجاية" — ONE smart next-action card ──
       const SmartNextActionCard(),
-
-      // ── Card 4: Today Plan (collapsed to next 3 items + 'عرض الكل') ──
       const TodayPlanSection(),
 
-      // ── Card 5: One native ad slot for free users ──
+      // Ad never between items 1–6; earliest after #7
       const VireoNativeAdCard(),
 
-      // ── Progressive disclosure / "المزيد" for Day 3+ or full unlocked ──
       if (isAdvancedUnlocked) ...[
         SectionHeader(
-          title: locale.startsWith('ar') ? 'المزيد والتحليلات' : 'More & Analytics',
+          title: locale.startsWith('ar') ? 'المزيد' : 'More',
           padding: _headerPad,
         ),
-        TodayHeroCard(
-          data: nutrition,
-          onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
-          onBurnedTap: () => push(const CardioActivityScreen()),
-        ),
+        const HomeBodyCompositionCard(),
+        const InBodyPlanUpdateCard(),
+        if (isFemale)
+          const WomenHealthHeroCard()
+        else
+          const MenVitalityHeroCard(),
+        const HomeFastingCard(),
         if (activeDiet == null)
           ChooseDietPlanCard(
             onTap: () {
@@ -183,8 +168,6 @@ class HomeDashboardBody extends ConsumerWidget {
             ],
           ),
         ),
-        if (dash.showCheckIn || weeklyDue)
-          _CheckInBanner(onTap: () => push(const WeeklyCheckInScreen())),
         SectionHeader(title: l10n.uxSectionThisWeek, padding: _headerPad),
         _WeekStrip(completedDays: dash.weeklyCompletedDays),
         _RecoveryCard(
@@ -212,7 +195,8 @@ class HomeDashboardBody extends ConsumerWidget {
           },
         ),
       ] else ...[
-        // Day 1 & Day 2 prompt to view all features anytime
+        // InBody visible from day 1 (not buried under unlock)
+        const HomeBodyCompositionCard(),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Center(

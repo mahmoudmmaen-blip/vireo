@@ -23,8 +23,33 @@ const corsHeaders = {
 
 const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
 
-// In-memory cache for 10-minute duplicate image retry (key: "userId:hash", val: {timestamp, result})
+// In-memory cache for duplicate image re-analysis (P36: same photo => same
+// result for 24 h unless the user taps "حلّل تاني" => forceReanalyze).
+// key: "userId:mode:language:hint:hash", val: {timestamp, result}
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const CACHE_MAX_ENTRIES = 500;
 const recentAnalysesCache = new Map<string, { timestamp: number; result: unknown }>();
+
+function pruneCache(now: number) {
+  if (recentAnalysesCache.size < CACHE_MAX_ENTRIES) return;
+  for (const [k, v] of recentAnalysesCache) {
+    if (now - v.timestamp >= CACHE_TTL_MS) recentAnalysesCache.delete(k);
+  }
+  // Still too big: drop the oldest entries (Map keeps insertion order).
+  while (recentAnalysesCache.size >= CACHE_MAX_ENTRIES) {
+    const oldest = recentAnalysesCache.keys().next().value;
+    if (oldest === undefined) break;
+    recentAnalysesCache.delete(oldest);
+  }
+}
+
+function cacheResult(key: string, result: unknown) {
+  const now = Date.now();
+  pruneCache(now);
+  // delete first so re-analysis moves the entry to the newest position
+  recentAnalysesCache.delete(key);
+  recentAnalysesCache.set(key, { timestamp: now, result });
+}
 
 async function computeImagesHash(images: string[]): Promise<string> {
   const encoder = new TextEncoder();
@@ -43,6 +68,10 @@ type AnalyzeMealRequest = {
   remaining_protein?: number;
   language?: string;
   user_hint?: string;
+  plate_diameter_cm?: number;
+  /** true => skip the 24 h image-hash cache ("حلّل تاني"). */
+  forceReanalyze?: boolean;
+  force_reanalyze?: boolean;
 };
 
 Deno.serve(async (req) => {
@@ -93,13 +122,34 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Check for 10-minute duplicate retry by image hash
+    // 24 h duplicate-photo cache by image hash (P36: stable results).
+    // Skipped when the client sends forceReanalyze (body flag or ?forceReanalyze=true).
+    const url = new URL(req.url);
+    const forceReanalyze = body.forceReanalyze === true ||
+      body.force_reanalyze === true ||
+      url.searchParams.get('forceReanalyze') === 'true';
     const imageHash = await computeImagesHash(rawImages);
-    const cacheKey = `${user.id}:${imageHash}`;
+    const cacheKey = [
+      user.id,
+      body.mode ?? 'meal',
+      body.language ?? '',
+      (body.user_hint ?? '').trim().toLowerCase(),
+      imageHash,
+    ].join(':');
     const cached = recentAnalysesCache.get(cacheKey);
-    if (cached && Date.now() - cached.timestamp < 10 * 60 * 1000) {
-      console.log(`[analyze-meal] duplicate photo within 10min for user ${user.id}, returning cached result`);
-      return json(cached.result);
+    if (!forceReanalyze && cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+      console.log(`[analyze-meal] duplicate photo within 24h for user ${user.id}, returning cached result`);
+      const base = cached.result && typeof cached.result === 'object'
+        ? cached.result as Record<string, unknown>
+        : {};
+      return json({
+        ...base,
+        cached: true,
+        cached_at: new Date(cached.timestamp).toISOString(),
+      });
+    }
+    if (forceReanalyze) {
+      console.log(`[analyze-meal] forceReanalyze for user ${user.id}, skipping cache`);
     }
 
     const adminClient = createClient(supabaseUrl, serviceRoleKey);
@@ -184,7 +234,7 @@ Deno.serve(async (req) => {
 
       // Successful body report analysis: consume quota now
       await consumeDailyQuota(adminClient, user.id, quotaBucket, limit);
-      recentAnalysesCache.set(cacheKey, { timestamp: Date.now(), result: obj });
+      cacheResult(cacheKey, obj);
       return json(obj);
     }
 
@@ -314,7 +364,7 @@ Deno.serve(async (req) => {
     // Consume quota ONLY if there is at least 1 confirmed or unsure item
     if (hasConfirmedItems || hasUnsureItems) {
       await consumeDailyQuota(adminClient, user.id, quotaBucket, limit);
-      recentAnalysesCache.set(cacheKey, { timestamp: Date.now(), result: parsed });
+      cacheResult(cacheKey, parsed);
     } else {
       console.log(`[analyze-meal] 0 items recognized, not consuming daily quota for user ${user.id}`);
     }

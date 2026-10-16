@@ -264,7 +264,7 @@ class _ReportShareableCard extends StatelessWidget {
                     value: '${data.daysFoodLogged} / 7',
                     sub: isArabic ? 'التزام التغذية' : 'Consistency',
                     icon: Icons.restaurant_menu_outlined,
-                    color: const Color(0xFF10B981),
+                    color: context.vireoColors.success,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -353,9 +353,9 @@ class _ReportShareableCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF10B981).withValues(alpha: 0.12),
+                  color: context.vireoColors.success.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
+                  border: Border.all(color: context.vireoColors.success.withValues(alpha: 0.3)),
                 ),
                 child: Row(
                   children: [

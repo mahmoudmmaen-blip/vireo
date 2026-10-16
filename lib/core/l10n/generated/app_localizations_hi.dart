@@ -4382,4 +4382,82 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get livingBackgroundsUnlocked => 'Unlocked';
+
+  @override
+  String get workoutRpeSubtitle =>
+      'कितना कठिन लगा? 1 = बहुत आसान, 10 = बहुत कठिन';
+
+  @override
+  String workoutRpeLabel(String level) {
+    String _temp0 = intl.Intl.selectLogic(level, {
+      '1': 'बहुत आसान',
+      '2': 'आसान',
+      '3': 'काफ़ी आसान',
+      '4': 'हल्का',
+      '5': 'मध्यम',
+      '6': 'थोड़ा कठिन',
+      '7': 'भारी',
+      '8': 'कठिन',
+      '9': 'बहुत कठिन',
+      'other': 'अत्यंत कठिन',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutRpeFeelingsTitle => 'अब कैसा लग रहा है?';
+
+  @override
+  String get workoutFeelTired => 'थकान';
+
+  @override
+  String get workoutFeelJointPain => 'जोड़ों में दर्द';
+
+  @override
+  String workoutFeelHappy(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female': 'खुश',
+      'other': 'खुश',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get workoutFeelEnergized => 'भरपूर ऊर्जा';
+
+  @override
+  String get workoutRpeNoteHint => 'नोट जोड़ें (वैकल्पिक)';
+
+  @override
+  String get workoutRpeSave => 'सहेजें';
+
+  @override
+  String get workoutRpeDone => 'ठीक है';
+
+  @override
+  String get workoutRpeSavedTitle => 'सहेज लिया ✅';
+
+  @override
+  String get workoutRpeCommentJoint =>
+      'जोड़ों का दर्द एक संकेत है जिसे नज़रअंदाज़ नहीं करना चाहिए। अगले सेशन में वज़न हल्का करें और सही तकनीक पर ध्यान दें।';
+
+  @override
+  String get workoutRpeCommentHard =>
+      'आज की कसरत काफ़ी भारी थी। अगली बार भार थोड़ा कम करेंगे ताकि शरीर अच्छे से रिकवर हो।';
+
+  @override
+  String get workoutRpeCommentBetter =>
+      'आपका प्रदर्शन बेहतर है! वही कसरत पिछली बार से हल्की लगी 💪';
+
+  @override
+  String get workoutRpeCommentEasy =>
+      'यह आसान लगा। अगले सेशन में भार थोड़ा बढ़ाएंगे।';
+
+  @override
+  String get workoutRpeCommentSteady =>
+      'बिल्कुल सही मेहनत। इसी लय को बनाए रखें।';
+
+  @override
+  String get workoutRpeCommentPartial =>
+      'जितने सेट किए वे भी गिने जाते हैं। अगले सेशन में और मज़बूत होकर लौटेंगे।';
 }
