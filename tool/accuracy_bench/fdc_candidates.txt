@@ -1,0 +1,1315 @@
+== baladi_bread | baladi bread | ours kcal=266 | current 790085 = <NOT FOUND> None
+   167939  Garlic bread, frozen  {'protein': 8.4, 'fat': 16.6, 'carbs': 41.7, 'kcal': 350, 'fiber': 2.5}
+   167943  Bread, potato  {'fat': 3.1, 'protein': 12.5, 'fiber': 6.3, 'carbs': 47.1, 'kcal': 266}
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   168896  Wheat flour, white, bread, enriched  {'protein': 12.0, 'fiber': 2.4, 'fat': 1.7, 'carbs': 72.5, 'kcal': 361}
+   167935  Bread, pan dulce, sweet yeast bread  {'fat': 11.6, 'carbs': 56.4, 'kcal': 367, 'fiber': 2.3, 'protein': 9.4}
+   167597  Rudi's, Gluten-Free Bakery, Original Sandwich Bread  {'fat': 10.7, 'carbs': 52.8, 'kcal': 320, 'protein': 3.1, 'fiber': 3.5}
+== pita_bread | pita bread | ours kcal=275 | current 790179 = <NOT FOUND> None
+   167939  Garlic bread, frozen  {'protein': 8.4, 'fat': 16.6, 'carbs': 41.7, 'kcal': 350, 'fiber': 2.5}
+   174915  Bread, pita, white, enriched  {'fiber': 2.2, 'fat': 1.2, 'carbs': 55.7, 'kcal': 275, 'protein': 9.1}
+   167943  Bread, potato  {'fat': 3.1, 'protein': 12.5, 'fiber': 6.3, 'carbs': 47.1, 'kcal': 266}
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   174916  Bread, pita, whole-wheat  {'fat': 1.7, 'fiber': 6.1, 'protein': 9.8, 'carbs': 55.9, 'kcal': 262}
+   172816  Bread, pita, white, unenriched  {'fat': 1.2, 'carbs': 55.7, 'kcal': 275, 'protein': 9.1, 'fiber': 2.2}
+== white_rice_cooked | white rice cooked | ours kcal=130 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+   168882  Rice, white, short-grain, enriched, cooked  {'carbs': 28.7, 'kcal': 130, 'fat': 0.2, 'protein': 2.4}
+   169711  Rice, white, glutinous, unenriched, cooked  {'fat': 0.2, 'carbs': 21.1, 'kcal': 97.0, 'protein': 2.0, 'fiber': 1.0}
+   168880  Rice, white, medium-grain, enriched, cooked  {'fat': 0.2, 'carbs': 28.6, 'kcal': 130, 'protein': 2.4, 'fiber': 0.3}
+   168881  Rice, white, short-grain, enriched, uncooked  {'protein': 6.5, 'fiber': 2.8, 'fat': 0.5, 'carbs': 79.2, 'kcal': 358}
+   168883  Rice, white, glutinous, unenriched, uncooked  {'protein': 6.8, 'fiber': 2.8, 'fat': 0.6, 'carbs': 81.7, 'kcal': 370}
+   168878  Rice, white, long-grain, regular, enriched, cooked  {'fiber': 0.4, 'protein': 2.7, 'fat': 0.3, 'carbs': 28.2, 'kcal': 130}
+== brown_rice_cooked | brown rice cooked | ours kcal=123 | current 168875 = Rice, brown, medium-grain, cooked (Includes foods for USDA's Food Distribution Program) 112
+   173155  Snacks, brown rice chips  {'protein': 8.2, 'fiber': 4.2, 'fat': 2.8, 'carbs': 81.5, 'kcal': 384}
+   173263  Rice, brown, parboiled, cooked, UNCLE BENS  {'fat': 0.8, 'carbs': 31.3, 'fiber': 1.7, 'protein': 3.1, 'kcal': 147}
+   169679  Snacks, rice cakes, brown rice, corn  {'fat': 3.2, 'carbs': 81.2, 'kcal': 385, 'fiber': 2.9, 'protein': 8.4}
+   167967  Snacks, rice cakes, brown rice, buckwheat  {'protein': 9.0, 'fiber': 3.8, 'fat': 3.5, 'carbs': 80.1, 'kcal': 380}
+   172026  Pasta, gluten-free, brown rice flour, cooked, TINKYADA  {'fat': 1.7, 'carbs': 32.2, 'kcal': 138, 'protein': 3.5, 'fiber': 1.7}
+   168855  Snacks, rice cakes, brown rice, rye  {'protein': 8.1, 'fiber': 4.0, 'fat': 3.8, 'carbs': 79.9, 'kcal': 386}
+== pasta_cooked | pasta cooked | ours kcal=158 | current 168928 = Pasta, cooked, unenriched, without added salt 158
+   169736  Pasta, dry, enriched  {'carbs': 74.7, 'kcal': 371, 'fat': 1.5, 'fiber': 3.2, 'protein': 13.0}
+   168900  Pasta, gluten-free, corn, cooked  {'protein': 2.6, 'fiber': 4.8, 'fat': 0.7, 'carbs': 27.9, 'kcal': 126}
+   168927  Pasta, dry, unenriched  {'protein': 13.0, 'fiber': 3.2, 'fat': 1.5, 'carbs': 74.7, 'kcal': 371}
+   168901  Pasta, homemade, made with egg, cooked  {'fat': 1.7, 'carbs': 23.5, 'kcal': 130, 'protein': 5.3}
+   169728  Pasta, fresh-refrigerated, plain, cooked  {'protein': 5.2, 'fat': 1.1, 'carbs': 24.9, 'kcal': 131}
+   169751  Pasta, cooked, enriched, with added salt  {'protein': 5.8, 'fat': 0.9, 'carbs': 30.6, 'kcal': 157, 'fiber': 1.8}
+== bulgur_cooked | bulgur cooked | ours kcal=83 | current 170288 = Corn grain, yellow 365
+   170287  Bulgur, cooked  {'fiber': 4.5, 'protein': 3.1, 'fat': 0.2, 'carbs': 18.6, 'kcal': 83.0}
+   170688  Bulgur, dry  {'fiber': 12.5, 'fat': 1.3, 'carbs': 75.9, 'kcal': 342, 'protein': 12.3}
+== couscous_cooked | couscous cooked | ours kcal=112 | current 169700 = Couscous, cooked 112
+   169700  Couscous, cooked  {'fat': 0.2, 'carbs': 23.2, 'kcal': 112, 'fiber': 1.4, 'protein': 3.8}
+   169699  Couscous, dry  {'fiber': 5.0, 'protein': 12.8, 'fat': 0.6, 'carbs': 77.4, 'kcal': 376}
+== oats_dry | oats dry | ours kcal=389 | current 173904 = Cereals, oats, regular and quick, not fortified, dry 379
+   172989  Cereals, QUAKER, Quick Oats, Dry  {'protein': 13.7, 'fiber': 9.4, 'fat': 6.9, 'carbs': 68.2, 'kcal': 371}
+   174640  Cereals, QUAKER, Quick Oats with Iron, Dry  {'protein': 13.7, 'fiber': 9.4, 'carbs': 68.2, 'kcal': 371, 'fat': 6.9}
+   171661  Cereals, oats, instant, fortified, plain, dry  {'fat': 6.9, 'carbs': 69.5, 'kcal': 362, 'protein': 11.9, 'fiber': 10.0}
+   173904  Cereals, oats, regular and quick, not fortified, dry  {'fiber': 10.1, 'fat': 6.5, 'carbs': 67.7, 'kcal': 379, 'protein': 13.2}
+   173920  Cereals, oats, instant, fortified, maple and brown sugar, dry  {'kcal': 386, 'fiber': 7.2, 'protein': 9.2, 'fat': 4.7, 'carbs': 76.7}
+   171664  Cereals, oats, instant, fortified, with cinnamon and spice, dry  {'fat': 4.8, 'carbs': 76.1, 'kcal': 369, 'fiber': 8.0, 'protein': 9.5}
+== cornflakes | corn flakes | ours kcal=357 | current 173900 = Cereals, CREAM OF RICE, dry 370
+   170002  Onions, dehydrated flakes  {'kcal': 349, 'fat': 0.5, 'carbs': 83.3, 'protein': 8.9, 'fiber': 9.2}
+   173888  Cereals ready-to-eat, POST Bran Flakes  {'fat': 2.1, 'carbs': 80.5, 'kcal': 328, 'fiber': 18.3, 'protein': 9.9}
+   174648  Cereals ready-to-eat, RALSTON Corn Flakes  {'carbs': 88.0, 'fat': 0.9, 'fiber': 2.7, 'protein': 5.9, 'kcal': 384}
+   167631  Corn, dried (Navajo)  {'protein': 9.9, 'fat': 5.2, 'carbs': 74.9, 'kcal': 386}
+   167734  Breakfast bar, corn flake crust with fruit  {'protein': 4.4, 'fiber': 2.1, 'fat': 7.5, 'carbs': 72.8, 'kcal': 376}
+   171648  Cereals ready-to-eat, POST, GRAPE-NUTS Flakes  {'carbs': 82.0, 'kcal': 376, 'protein': 9.4, 'fiber': 10.2, 'fat': 3.7}
+== foul_medames | fava beans cooked | ours kcal=110 | current 173745 = Beans, navy, mature seeds, raw 337
+   175205  Broadbeans (fava beans), mature seeds, raw  {'fat': 1.5, 'protein': 26.1, 'fiber': 25.0, 'carbs': 58.3, 'kcal': 341}
+   173798  Broadbeans (fava beans), mature seeds, cooked, boiled, with salt  {'carbs': 19.6, 'fiber': 5.4, 'kcal': 110, 'protein': 7.6, 'fat': 0.4}
+   173754  Broadbeans (fava beans), mature seeds, canned  {'fiber': 3.7, 'protein': 5.5, 'fat': 0.2, 'carbs': 12.4, 'kcal': 71.0}
+   173753  Broadbeans (fava beans), mature seeds, cooked, boiled, without salt  {'carbs': 19.6, 'kcal': 110, 'fat': 0.4, 'protein': 7.6, 'fiber': 5.4}
+   168396  Lima beans, immature seeds, raw  {'carbs': 20.2, 'kcal': 113, 'fat': 0.9, 'protein': 6.8, 'fiber': 4.9}
+   169065  Beans, chili, barbecue, ranch style, cooked  {'protein': 5.0, 'fiber': 4.2, 'fat': 1.0, 'carbs': 16.9, 'kcal': 97.0}
+== falafel | falafel | ours kcal=333 | current 174258 = Noodles, chinese, cellophane or long rice (mung beans), dehydrated 351
+   172455  Falafel, home-prepared  {'protein': 13.3, 'fat': 17.8, 'carbs': 31.8, 'kcal': 333}
+== lentils_cooked | lentils cooked | ours kcal=116 | current 172421 = Lentils, mature seeds, cooked, boiled, without salt 116
+   168427  Lentils, sprouted, raw  {'fat': 0.6, 'carbs': 22.1, 'kcal': 106, 'protein': 9.0}
+   172420  Lentils, raw  {'fat': 1.1, 'fiber': 10.7, 'protein': 24.6, 'carbs': 63.4, 'kcal': 352}
+   174284  Lentils, pink or red, raw  {'carbs': 63.1, 'kcal': 358, 'protein': 23.9, 'fat': 2.2, 'fiber': 10.8}
+   168551  Lentils, sprouted, cooked, stir-fried, with salt  {'carbs': 21.2, 'kcal': 101, 'protein': 8.8, 'fat': 0.5}
+   175254  Lentils, mature seeds, cooked, boiled, with salt  {'fiber': 7.9, 'carbs': 19.5, 'kcal': 114, 'fat': 0.4, 'protein': 9.0}
+   168428  Lentils, sprouted, cooked, stir-fried, without salt  {'protein': 8.8, 'fat': 0.5, 'carbs': 21.2, 'kcal': 101}
+== chickpeas_cooked | chickpeas cooked | ours kcal=164 | current 173757 = Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt 164
+   173756  Chickpeas (garbanzo beans, bengal gram), mature seeds, raw  {'carbs': 63.0, 'kcal': 378, 'fiber': 12.2, 'protein': 20.5, 'fat': 6.0}
+   173799  Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, with salt  {'fiber': 7.6, 'carbs': 27.4, 'kcal': 164, 'fat': 2.6, 'protein': 8.9}
+   173757  Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt  {'fiber': 7.6, 'carbs': 27.4, 'kcal': 164, 'fat': 2.6, 'protein': 8.9}
+   173800  Chickpeas (garbanzo beans, bengal gram), mature seeds, canned, drained solids  {'protein': 7.0, 'fat': 2.8, 'carbs': 22.5, 'kcal': 139, 'fiber': 6.4}
+   175206  Chickpeas (garbanzo beans, bengal gram), mature seeds, canned, solids and liquids  {'fat': 1.9, 'carbs': 13.5, 'kcal': 88.0, 'protein': 4.9, 'fiber': 4.4}
+   173801  Chickpeas (garbanzo beans, bengal gram), mature seeds, canned, drained, rinsed in tap water  {'fat': 2.5, 'carbs': 22.9, 'kcal': 138, 'protein': 7.0, 'fiber': 6.3}
+== hummus | hummus | ours kcal=166 | current 174289 = Hummus, commercial 237
+   174289  Hummus, commercial  {'protein': 7.8, 'fiber': 5.5, 'fat': 17.8, 'carbs': 15.0, 'kcal': 237}
+   172454  Hummus, home prepared  {'fat': 8.6, 'protein': 4.9, 'fiber': 4.0, 'carbs': 20.1, 'kcal': 177}
+== white_beans_cooked | white beans cooked | ours kcal=139 | current 175203 = Beans, white, mature seeds, cooked, boiled, without salt 139
+   168880  Rice, white, medium-grain, enriched, cooked  {'fat': 0.2, 'carbs': 28.6, 'kcal': 130, 'protein': 2.4, 'fiber': 0.3}
+   168882  Rice, white, short-grain, enriched, cooked  {'carbs': 28.7, 'kcal': 130, 'fat': 0.2, 'protein': 2.4}
+   168881  Rice, white, short-grain, enriched, uncooked  {'protein': 6.5, 'fiber': 2.8, 'fat': 0.5, 'carbs': 79.2, 'kcal': 358}
+   168883  Rice, white, glutinous, unenriched, uncooked  {'protein': 6.8, 'fiber': 2.8, 'fat': 0.6, 'carbs': 81.7, 'kcal': 370}
+   168878  Rice, white, long-grain, regular, enriched, cooked  {'fiber': 0.4, 'protein': 2.7, 'fat': 0.3, 'carbs': 28.2, 'kcal': 130}
+   175204  Beans, white, mature seeds, canned  {'carbs': 21.2, 'kcal': 114, 'fat': 0.3, 'fiber': 4.8, 'protein': 7.3}
+== black_beans_cooked | black beans cooked | ours kcal=132 | current 175185 = Beans, baked, canned, with pork 106
+   171141  Soup, black bean, canned, condensed  {'fat': 1.3, 'carbs': 15.4, 'fiber': 6.8, 'protein': 4.8, 'kcal': 91.0}
+   168068  Restaurant, Latino, black bean soup  {'fat': 2.6, 'carbs': 14.8, 'kcal': 103, 'protein': 5.1, 'fiber': 4.9}
+   168396  Lima beans, immature seeds, raw  {'carbs': 20.2, 'kcal': 113, 'fat': 0.9, 'protein': 6.8, 'fiber': 4.9}
+   175188  Beans, black turtle, mature seeds, canned  {'carbs': 16.6, 'fiber': 6.9, 'protein': 6.0, 'fat': 0.3, 'kcal': 91.0}
+   175237  Beans, black, mature seeds, cooked, boiled, with salt  {'fiber': 8.7, 'protein': 8.9, 'fat': 0.5, 'carbs': 23.7, 'kcal': 132}
+   175239  Beans, black turtle, mature seeds, cooked, boiled, with salt  {'fiber': 8.3, 'fat': 0.3, 'carbs': 24.4, 'kcal': 130, 'protein': 8.2}
+== egg_whole_raw | egg whole raw | ours kcal=143 | current 171287 = Egg, whole, raw, fresh 143
+   171287  Egg, whole, raw, fresh  {'kcal': 143, 'protein': 12.6, 'fat': 9.5, 'carbs': 0.7, 'fiber': 0.0}
+   172188  Egg, whole, dried  {'protein': 48.0, 'fat': 43.9, 'carbs': 1.1, 'fiber': 0.0, 'kcal': 592}
+   172189  Egg, duck, whole, fresh, raw  {'protein': 12.8, 'fiber': 0.0, 'fat': 13.8, 'carbs': 1.4, 'kcal': 185}
+   172190  Egg, goose, whole, fresh, raw  {'fat': 13.3, 'carbs': 1.4, 'kcal': 185, 'protein': 13.9, 'fiber': 0.0}
+   172191  Egg, quail, whole, fresh, raw  {'protein': 13.0, 'fiber': 0.0, 'fat': 11.1, 'carbs': 0.4, 'kcal': 158}
+   172192  Egg, turkey, whole, fresh, raw  {'fat': 11.9, 'carbs': 1.1, 'kcal': 171, 'protein': 13.7, 'fiber': 0.0}
+== egg_boiled | egg boiled | ours kcal=155 | current 173424 = Egg, whole, cooked, hard-boiled 155
+   173424  Egg, whole, cooked, hard-boiled  {'fiber': 0.0, 'kcal': 155, 'protein': 12.6, 'fat': 10.6, 'carbs': 1.1}
+   168216  Plantains, green, boiled  {'protein': 1.1, 'fiber': 2.6, 'fat': 0.1, 'carbs': 29.2, 'kcal': 121}
+   168390  Asparagus, cooked, boiled, drained  {'carbs': 4.1, 'kcal': 22.0, 'fat': 0.2, 'fiber': 2.0, 'protein': 2.4}
+   167632  Squash, Indian, cooked, boiled (Navajo)  {'fat': 0.1, 'carbs': 3.2, 'kcal': 16.0, 'protein': 0.3, 'fiber': 1.5}
+   168484  Sweet potato, cooked, boiled, without skin  {'carbs': 17.7, 'kcal': 76.0, 'protein': 1.4, 'fiber': 2.5, 'fat': 0.1}
+   168408  Cress, garden, cooked, boiled, drained, without salt  {'carbs': 3.8, 'kcal': 23.0, 'fat': 0.6, 'fiber': 0.7, 'protein': 1.9}
+== egg_fried | egg fried | ours kcal=196 | current 172186 = Egg, whole, cooked, poached 143
+   173423  Egg, whole, cooked, fried  {'fiber': 0.0, 'protein': 13.6, 'fat': 14.8, 'carbs': 0.8, 'kcal': 196}
+   168199  Plantains, green, fried  {'protein': 1.5, 'fiber': 3.5, 'fat': 11.8, 'carbs': 49.2, 'kcal': 309}
+   168077  DENNY'S, golden fried shrimp  {'fat': 20.0, 'carbs': 20.9, 'kcal': 319, 'protein': 13.9, 'fiber': 1.5}
+   168435  Mushrooms, shiitake, stir-fried  {'carbs': 7.7, 'kcal': 39.0, 'protein': 3.5, 'fiber': 3.6, 'fat': 0.3}
+   167719  Chicken, meatless, breaded, fried  {'fiber': 4.3, 'protein': 21.3, 'fat': 12.8, 'carbs': 8.5, 'kcal': 234}
+   168383  Canadian bacon, cooked, pan-fried  {'fiber': 0.0, 'kcal': 146, 'protein': 28.3, 'fat': 2.8, 'carbs': 1.8}
+== egg_omelette | omelette | ours kcal=154 | current 172187 = Egg, whole, cooked, scrambled 149
+== chicken_breast_raw | chicken breast raw | ours kcal=120 | current 171477 = Chicken, broilers or fryers, breast, meat only, cooked, roasted 165
+   174608  Chicken breast, roll, oven-roasted  {'fat': 7.7, 'carbs': 1.8, 'protein': 14.6, 'fiber': 0.0, 'kcal': 134}
+   171515  Chicken breast tenders, breaded, uncooked  {'fiber': 1.1, 'protein': 14.7, 'fat': 15.8, 'carbs': 15.0, 'kcal': 263}
+   172945  Oscar Mayer, Chicken Breast (honey glazed)  {'protein': 19.8, 'fat': 1.5, 'carbs': 4.3, 'fiber': 0.0, 'kcal': 109}
+   172963  Chicken breast, oven-roasted, fat-free, sliced  {'fat': 0.4, 'carbs': 2.2, 'kcal': 79.0, 'fiber': 0.0, 'protein': 16.8}
+   171514  Chicken breast tenders, breaded, cooked, microwaved  {'fat': 12.9, 'protein': 16.4, 'fiber': 0.0, 'carbs': 17.6, 'kcal': 252}
+   172962  Chicken breast, fat-free, mesquite flavor, sliced  {'protein': 16.8, 'fiber': 0.0, 'fat': 0.4, 'carbs': 2.2, 'kcal': 80.0}
+== chicken_breast_grilled | chicken breast grilled | ours kcal=165 | current 171078 = Chicken, broilers or fryers, breast, meat only, cooked, fried 187
+   174608  Chicken breast, roll, oven-roasted  {'fat': 7.7, 'carbs': 1.8, 'protein': 14.6, 'fiber': 0.0, 'kcal': 134}
+   172945  Oscar Mayer, Chicken Breast (honey glazed)  {'protein': 19.8, 'fat': 1.5, 'carbs': 4.3, 'fiber': 0.0, 'kcal': 109}
+   172962  Chicken breast, fat-free, mesquite flavor, sliced  {'protein': 16.8, 'fiber': 0.0, 'fat': 0.4, 'carbs': 2.2, 'kcal': 80.0}
+   171515  Chicken breast tenders, breaded, uncooked  {'fiber': 1.1, 'protein': 14.7, 'fat': 15.8, 'carbs': 15.0, 'kcal': 263}
+   172963  Chicken breast, oven-roasted, fat-free, sliced  {'fat': 0.4, 'carbs': 2.2, 'kcal': 79.0, 'fiber': 0.0, 'protein': 16.8}
+   171514  Chicken breast tenders, breaded, cooked, microwaved  {'fat': 12.9, 'protein': 16.4, 'fiber': 0.0, 'carbs': 17.6, 'kcal': 252}
+== chicken_thigh_cooked | chicken thigh cooked | ours kcal=229 | current 172372 = Margarine-like spread, SMART BALANCE Light Buttery Spread 337
+   172387  Chicken, broilers or fryers, thigh, meat only, cooked, fried  {'fiber': 0.0, 'protein': 28.2, 'fat': 10.3, 'carbs': 1.2, 'kcal': 218}
+   172389  Chicken, broilers or fryers, thigh, meat only, cooked, stewed  {'protein': 25.0, 'fiber': 0.0, 'fat': 9.8, 'carbs': 0.0, 'kcal': 195}
+   172388  Chicken, broilers or fryers, thigh, meat only, cooked, roasted  {'protein': 24.8, 'fat': 8.2, 'kcal': 179, 'carbs': 0.0, 'fiber': 0.0}
+   173626  Chicken, broilers or fryers, thigh, meat and skin, cooked, stewed  {'protein': 23.3, 'fiber': 0.0, 'fat': 14.7, 'carbs': 0.0, 'kcal': 232}
+   173625  Chicken, broilers or fryers, thigh, meat and skin, cooked, roasted  {'protein': 23.3, 'fat': 14.7, 'kcal': 232, 'carbs': 0.0, 'fiber': 0.0}
+   173624  Chicken, broilers or fryers, thigh, meat and skin, cooked, fried, flour  {'fiber': 0.1, 'fat': 15.0, 'carbs': 3.2, 'kcal': 262, 'protein': 26.8}
+== chicken_fried | chicken fried | ours kcal=246 | current 171078 = Chicken, broilers or fryers, breast, meat only, cooked, fried 187
+   167719  Chicken, meatless, breaded, fried  {'fiber': 4.3, 'protein': 21.3, 'fat': 12.8, 'carbs': 8.5, 'kcal': 234}
+   169842  CRACKER BARREL, chicken tenderloin platter, fried  {'protein': 18.1, 'fiber': 0.7, 'fat': 15.5, 'carbs': 20.3, 'kcal': 293}
+   170343  KFC, Fried Chicken, EXTRA CRISPY, Skin and Breading  {'fiber': 1.5, 'protein': 11.0, 'fat': 36.6, 'carbs': 22.5, 'kcal': 464}
+   170738  KFC, Fried Chicken, ORIGINAL RECIPE, Skin and Breading  {'protein': 14.2, 'fiber': 0.0, 'fat': 28.0, 'carbs': 18.8, 'kcal': 384}
+   170718  Fast foods, chicken, breaded and fried, boneless pieces, plain  {'fiber': 0.9, 'fat': 20.4, 'carbs': 14.9, 'kcal': 307, 'protein': 15.9}
+   170350  POPEYES, Fried Chicken, Mild, Skin and Breading  {'fiber': 1.0, 'protein': 14.0, 'fat': 32.3, 'carbs': 21.5, 'kcal': 433}
+== whole_chicken_roasted | chicken roasted | ours kcal=239 | current 171450 = Chicken, broilers or fryers, meat and skin, cooked, roasted 239
+   174608  Chicken breast, roll, oven-roasted  {'fat': 7.7, 'carbs': 1.8, 'protein': 14.6, 'fiber': 0.0, 'kcal': 134}
+   172395  Chicken, roasting, meat only, cooked, roasted  {'protein': 25.0, 'fiber': 0.0, 'fat': 6.6, 'carbs': 0.0, 'kcal': 167}
+   172963  Chicken breast, oven-roasted, fat-free, sliced  {'fat': 0.4, 'carbs': 2.2, 'kcal': 79.0, 'fiber': 0.0, 'protein': 16.8}
+   173646  Chicken, capons, meat and skin, cooked, roasted  {'fat': 11.6, 'carbs': 0.0, 'kcal': 229, 'fiber': 0.0, 'protein': 29.0}
+   167634  Mutton, cooked, roasted (Navajo)  {'carbs': 0.1, 'kcal': 234, 'fat': 11.1, 'protein': 33.4}
+   173635  Chicken, roasting, meat and skin, cooked, roasted  {'protein': 24.0, 'fiber': 0.0, 'fat': 13.4, 'carbs': 0.0, 'kcal': 223}
+== beef_lean_raw | beef lean raw | ours kcal=158 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   168608  Beef, grass-fed, ground, raw  {'fat': 12.7, 'carbs': 0.0, 'fiber': 0.0, 'protein': 19.4, 'kcal': 198}
+   168605  Beef, retail cuts, separable fat, raw  {'protein': 8.2, 'fat': 70.9, 'fiber': 0.0, 'carbs': 0.0, 'kcal': 674}
+   167685  Bologna, beef and pork, low fat  {'fiber': 0.0, 'protein': 11.5, 'fat': 19.3, 'carbs': 2.6, 'kcal': 230}
+   170199  Beef, cured, corned beef, brisket, raw  {'fat': 14.9, 'carbs': 0.1, 'kcal': 198, 'protein': 14.7, 'fiber': 0.0}
+   168118  Beef, bologna, reduced sodium  {'fat': 28.4, 'carbs': 2.0, 'kcal': 310, 'protein': 11.7, 'fiber': 0.0}
+   168101  Bologna, beef, low fat  {'carbs': 5.2, 'kcal': 204, 'fiber': 0.0, 'fat': 14.8, 'protein': 11.8}
+== beef_grilled | beef grilled | ours kcal=250 | current 174033 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, pan-broiled 232
+   170199  Beef, cured, corned beef, brisket, raw  {'fat': 14.9, 'carbs': 0.1, 'kcal': 198, 'protein': 14.7, 'fiber': 0.0}
+   168630  Beef, variety meats and by-products, mechanically separated beef, raw  {'protein': 15.0, 'fiber': 0.0, 'fat': 23.5, 'carbs': 0.0, 'kcal': 276}
+   168720  Beef, loin, top loin, separable lean and fat, trimmed to 1/8" fat, select, cooked, grilled  {'fat': 15.1, 'kcal': 250, 'protein': 26.7, 'fiber': 0.0, 'carbs': 0.0}
+   169539  Beef, loin, top loin, separable lean and fat, trimmed to 1/8" fat, all grades, cooked, grilled  {'kcal': 264, 'fat': 16.8, 'protein': 26.4, 'fiber': 0.0, 'carbs': 0.0}
+   168731  Beef, shoulder steak, boneless, separable lean only, trimmed to 0" fat, choice, cooked, grilled  {'carbs': 0.0, 'fiber': 0.0, 'fat': 6.2, 'protein': 28.5, 'kcal': 178}
+   168732  Beef, shoulder steak, boneless, separable lean only, trimmed to 0" fat, select, cooked, grilled  {'carbs': 0.0, 'fiber': 0.0, 'protein': 28.7, 'fat': 5.2, 'kcal': 169}
+== kofta | kofta / meatballs | ours kcal=250 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   169067  Meatballs, meatless  {'carbs': 8.0, 'kcal': 197, 'fat': 9.0, 'fiber': 4.6, 'protein': 21.0}
+   169845  DENNY'S, spaghetti and meatballs  {'protein': 7.8, 'fiber': 1.5, 'fat': 8.5, 'carbs': 15.5, 'kcal': 170}
+   172109  Lean Pockets, Meatballs & Mozzarella  {'protein': 10.5, 'fiber': 2.0, 'fat': 7.7, 'carbs': 32.3, 'kcal': 240}
+   171638  Meatballs, frozen, Italian style  {'carbs': 8.1, 'fat': 22.2, 'kcal': 286, 'protein': 14.4, 'fiber': 2.3}
+   169029  Restaurant, family style, spaghetti and meatballs  {'protein': 7.8, 'fiber': 1.5, 'fat': 8.5, 'carbs': 15.5, 'kcal': 170}
+   172099  Spaghetti, with meatballs in tomato sauce, canned  {'fiber': 2.7, 'protein': 4.4, 'fat': 4.1, 'carbs': 11.4, 'kcal': 100}
+== lamb_cooked | lamb cooked | ours kcal=294 | current 174370 = Lamb, ground, raw 282
+   172616  Lamb, New Zealand, imported, ground lamb, cooked, braised  {'protein': 22.6, 'fiber': 0.0, 'fat': 11.3, 'carbs': 0.0, 'kcal': 192}
+   172617  Lamb, New Zealand, imported, ground lamb, raw  {'fat': 12.4, 'carbs': 0.0, 'kcal': 193, 'protein': 20.3, 'fiber': 0.0}
+   172494  Lamb, rib, separable lean only, trimmed to 1/4" fat, choice, cooked, broiled  {'protein': 27.7, 'fiber': 0.0, 'fat': 13.0, 'carbs': 0.0, 'kcal': 235}
+   172495  Lamb, rib, separable lean only, trimmed to 1/4" fat, choice, cooked, roasted  {'fat': 13.3, 'carbs': 0.0, 'kcal': 232, 'protein': 26.2, 'fiber': 0.0}
+   172492  Lamb, loin, separable lean only, trimmed to 1/4" fat, choice, cooked, broiled  {'protein': 30.0, 'fiber': 0.0, 'fat': 9.7, 'carbs': 0.0, 'kcal': 216}
+   172489  Lamb, loin, separable lean and fat, trimmed to 1/4" fat, choice, cooked, broiled  {'fat': 23.1, 'carbs': 0.0, 'kcal': 316, 'protein': 25.2, 'fiber': 0.0}
+== liver_beef_cooked | beef liver cooked | ours kcal=191 | current 168626 = Beef, variety meats and by-products, liver, cooked, braised 191
+   170200  Beef, cured, corned beef, brisket, cooked  {'protein': 18.2, 'fiber': 0.0, 'fat': 19.0, 'carbs': 0.5, 'kcal': 251}
+   171061  Chicken, liver, all classes, cooked, simmered  {'fat': 6.5, 'protein': 24.5, 'fiber': 0.0, 'carbs': 0.9, 'kcal': 167}
+   170602  Beef, cured, corned beef, canned  {'fat': 14.9, 'carbs': 0.0, 'kcal': 250, 'protein': 27.1, 'fiber': 0.0}
+   168626  Beef, variety meats and by-products, liver, cooked, braised  {'protein': 29.1, 'fat': 5.3, 'carbs': 5.1, 'kcal': 191, 'fiber': 0.0}
+   168627  Beef, variety meats and by-products, liver, cooked, pan-fried  {'fat': 4.7, 'protein': 26.5, 'carbs': 5.2, 'kcal': 175, 'fiber': 0.0}
+   168026  Seal, ringed, liver (Alaska Native)  {'fat': 3.3, 'carbs': 2.9, 'kcal': 116, 'protein': 18.6}
+== fish_tilapia_cooked | tilapia cooked | ours kcal=128 | current 175124 = Fish, mullet, striped, cooked, dry heat 150
+   175177  Fish, tilapia, cooked, dry heat  {'protein': 26.2, 'fiber': 0.0, 'fat': 2.6, 'carbs': 0.0, 'kcal': 128}
+   175176  Fish, tilapia, raw  {'fat': 1.7, 'protein': 20.1, 'fiber': 0.0, 'carbs': 0.0, 'kcal': 96.0}
+== fish_salmon_cooked | salmon cooked | ours kcal=206 | current 175167 = Fish, salmon, Atlantic, farmed, raw 208
+   173687  Fish, salmon, chinook, smoked  {'fat': 4.3, 'carbs': 0.0, 'kcal': 117, 'protein': 18.3, 'fiber': 0.0}
+   173688  Fish, salmon, chinook, raw  {'fat': 10.4, 'kcal': 179, 'protein': 19.9, 'fiber': 0.0, 'carbs': 0.0}
+   173715  Fish, salmon, coho, farmed, raw  {'fiber': 0.0, 'protein': 21.3, 'fat': 7.7, 'carbs': 0.0, 'kcal': 160}
+   172000  Fish, salmon, chum, cooked, dry heat  {'protein': 25.8, 'fiber': 0.0, 'fat': 4.8, 'carbs': 0.0, 'kcal': 154}
+   172001  Fish, salmon, pink, cooked, dry heat  {'protein': 24.6, 'fiber': 0.0, 'fat': 5.3, 'carbs': 0.0, 'kcal': 153}
+   173691  Fish, salmon, sockeye, raw  {'protein': 22.2, 'fat': 4.7, 'kcal': 131, 'carbs': 0.0, 'fiber': 0.0}
+== fish_tuna_canned | tuna canned in water | ours kcal=116 | current 175159 = Fish, tuna, fresh, yellowfin, raw 109
+   175158  Fish, tuna, white, canned in water, drained solids  {'protein': 23.6, 'fiber': 0.0, 'fat': 3.0, 'carbs': 0.0, 'kcal': 128}
+   171986  Fish, tuna, light, canned in water, without salt, drained solids  {'protein': 25.5, 'fat': 0.8, 'kcal': 116, 'carbs': 0.0, 'fiber': 0.0}
+   171988  Fish, tuna, white, canned in water, without salt, drained solids  {'fat': 3.0, 'carbs': 0.0, 'kcal': 128, 'fiber': 0.0, 'protein': 23.6}
+   167769  Cherries, sour, canned, water pack, drained  {'fat': 0.2, 'protein': 0.7, 'fiber': 1.2, 'carbs': 10.4, 'kcal': 42.0}
+   170015  Peas, green, canned, drained solids, rinsed in tap water  {'fat': 0.9, 'carbs': 11.8, 'kcal': 71.0, 'protein': 4.3}
+   169125  Pineapple, canned, water pack, solids and liquids  {'fiber': 0.8, 'protein': 0.4, 'fat': 0.1, 'carbs': 8.3, 'kcal': 32.0}
+== shrimp_cooked | shrimp cooked | ours kcal=99 | current 175180 = Crustaceans, shrimp, cooked 99.0
+   175180  Crustaceans, shrimp, cooked  {'protein': 24.0, 'fat': 0.3, 'carbs': 0.2, 'kcal': 99.0}
+   173160  Snacks, shrimp cracker  {'fat': 17.9, 'carbs': 59.1, 'kcal': 426, 'protein': 7.1, 'fiber': 5.6}
+   171159  Soup, cream of shrimp, canned, condensed  {'fat': 4.1, 'carbs': 6.5, 'kcal': 72.0, 'protein': 2.2, 'fiber': 0.2}
+   175179  Crustaceans, shrimp, raw  {'fat': 0.5, 'carbs': 0.0, 'kcal': 85.0, 'protein': 20.1}
+   172037  Fast foods, shrimp, breaded and fried  {'protein': 7.8, 'fiber': 0.7, 'fat': 18.9, 'carbs': 28.0, 'kcal': 308}
+   171970  Crustaceans, shrimp, mixed species, cooked, breaded and fried  {'fiber': 0.4, 'kcal': 242, 'protein': 21.4, 'fat': 12.3, 'carbs': 11.5}
+== turkey_breast | turkey breast | ours kcal=135 | current 171506 = Turkey, Ground, cooked 203
+   172941  Turkey breast, sliced, prepackaged  {'fat': 3.8, 'carbs': 2.2, 'kcal': 106, 'protein': 14.8, 'fiber': 0.0}
+   171098  Turkey, whole, breast, meat only, raw  {'kcal': 114, 'fat': 1.5, 'protein': 23.7, 'carbs': 0.1, 'fiber': 0.0}
+   174515  Turkey, retail parts, breast, meat only, raw  {'fat': 2.3, 'carbs': 0.0, 'kcal': 114, 'protein': 23.3, 'fiber': 0.0}
+   171093  Turkey, all classes, breast, meat and skin, raw  {'fat': 7.0, 'carbs': 0.0, 'kcal': 157, 'protein': 21.9, 'fiber': 0.0}
+   171496  Turkey, whole, breast, meat only, cooked, roasted  {'protein': 30.1, 'fat': 2.1, 'kcal': 147, 'fiber': 0.0, 'carbs': 0.0}
+   171528  Turkey, retail parts, breast, meat and skin, raw  {'protein': 21.9, 'fiber': 0.0, 'fat': 7.5, 'carbs': 0.0, 'kcal': 155}
+== milk_whole | whole milk | ours kcal=61 | current 173424 = Egg, whole, cooked, hard-boiled 155
+   171284  Yogurt, plain, whole milk  {'kcal': 61.0, 'protein': 3.5, 'fiber': 0.0, 'fat': 3.2, 'carbs': 4.7}
+   170851  Cheese, ricotta, whole milk  {'protein': 7.5, 'fat': 10.2, 'carbs': 7.3, 'kcal': 150, 'fiber': 0.0}
+   170845  Cheese, mozzarella, whole milk  {'protein': 22.2, 'fat': 22.1, 'carbs': 2.4, 'kcal': 299, 'fiber': 0.0}
+   170905  Yogurt, Greek, fruit, whole milk  {'fat': 3.0, 'carbs': 12.3, 'kcal': 106, 'protein': 7.3, 'fiber': 0.0}
+   171304  Yogurt, Greek, plain, whole milk  {'protein': 9.0, 'fiber': 0.0, 'fat': 5.0, 'carbs': 4.0, 'kcal': 97.0}
+   171265  Milk, whole, 3.25% milkfat, with added vitamin D  {'fat': 3.2, 'carbs': 4.8, 'kcal': 61.0, 'fiber': 0.0, 'protein': 3.1}
+== milk_skim | skim milk | ours kcal=34 | current 173441 = Milk, fluid, 1% fat, without added vitamin A and vitamin D 42.0
+   170887  Yogurt, plain, skim milk  {'kcal': 56.0, 'protein': 5.7, 'fiber': 0.0, 'fat': 0.2, 'carbs': 7.7}
+   171248  Cheese, ricotta, part skim milk  {'fiber': 0.0, 'protein': 11.4, 'fat': 7.9, 'carbs': 5.1, 'kcal': 138}
+   170847  Cheese, mozzarella, part skim milk  {'kcal': 254, 'fat': 15.9, 'protein': 24.3, 'carbs': 2.8, 'fiber': 0.0}
+   167946  SCHIFF,TIGER'S MILK BAR  {'kcal': 387, 'fiber': 2.3, 'protein': 16.8, 'fat': 14.3, 'carbs': 56.5}
+   167587  Candies, milk chocolate  {'fat': 29.7, 'fiber': 3.4, 'protein': 7.7, 'carbs': 59.4, 'kcal': 535}
+   167984  Candies, SYMPHONY Milk Chocolate Bar  {'fat': 30.6, 'carbs': 58.0, 'kcal': 531, 'protein': 8.5, 'fiber': 1.7}
+== yogurt_plain | plain yogurt | ours kcal=61 | current 170903 = Yogurt, Greek, plain, lowfat 73.0
+   167722  Tofu yogurt  {'fat': 1.8, 'carbs': 16.0, 'kcal': 94.0, 'protein': 3.5, 'fiber': 0.2}
+   170886  Yogurt, plain, low fat  {'kcal': 63.0, 'fat': 1.6, 'carbs': 7.0, 'protein': 5.2, 'fiber': 0.0}
+   168133  Babyfood, dessert, peach yogurt  {'kcal': 77.0, 'protein': 0.9, 'fiber': 0.4, 'fat': 0.2, 'carbs': 17.6}
+   170903  Yogurt, Greek, plain, lowfat  {'fat': 1.9, 'carbs': 3.9, 'kcal': 73.0, 'protein': 9.9, 'fiber': 0.0}
+   167569  Candies, confectioner's coating, yogurt  {'fiber': 0.0, 'protein': 5.9, 'fat': 27.0, 'carbs': 63.9, 'kcal': 522}
+   171284  Yogurt, plain, whole milk  {'kcal': 61.0, 'protein': 3.5, 'fiber': 0.0, 'fat': 3.2, 'carbs': 4.7}
+== yogurt_greek | Greek yogurt | ours kcal=97 | current 171304 = Yogurt, Greek, plain, whole milk 97.0
+   167722  Tofu yogurt  {'fat': 1.8, 'carbs': 16.0, 'kcal': 94.0, 'protein': 3.5, 'fiber': 0.2}
+   168133  Babyfood, dessert, peach yogurt  {'kcal': 77.0, 'protein': 0.9, 'fiber': 0.4, 'fat': 0.2, 'carbs': 17.6}
+   170903  Yogurt, Greek, plain, lowfat  {'fat': 1.9, 'carbs': 3.9, 'kcal': 73.0, 'protein': 9.9, 'fiber': 0.0}
+   170901  Yogurt, Greek, strawberry, nonfat  {'fat': 0.1, 'carbs': 12.1, 'kcal': 82.0, 'protein': 8.1, 'fiber': 0.6}
+   171300  Yogurt, Greek, strawberry, lowfat  {'protein': 8.2, 'fiber': 1.0, 'fat': 2.6, 'carbs': 12.3, 'kcal': 105}
+   170902  Yogurt, Greek, vanilla, nonfat  {'protein': 8.6, 'fiber': 0.5, 'fat': 0.2, 'carbs': 10.4, 'kcal': 78.0}
+== labneh | labneh | ours kcal=146 | current 170903 = Yogurt, Greek, plain, lowfat 73.0
+== cottage_cheese | cottage cheese | ours kcal=98 | current 172179 = Cheese, cottage, creamed, large or small curd 98.0
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   169078  Cheese, cottage, with vegetables  {'protein': 10.9, 'fat': 4.2, 'carbs': 3.0, 'kcal': 95.0, 'fiber': 0.1}
+   167941  Crackers, cheese, reduced fat  {'protein': 10.0, 'fiber': 3.3, 'fat': 11.7, 'carbs': 68.2, 'kcal': 418}
+   167559  Snacks, tortilla chips, nacho cheese  {'protein': 7.4, 'fat': 27.4, 'carbs': 60.8, 'kcal': 519, 'fiber': 5.1}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+   168076  DENNY'S, mozzarella cheese sticks  {'fat': 17.9, 'carbs': 27.2, 'kcal': 324, 'protein': 13.6, 'fiber': 1.6}
+== feta_cheese | feta cheese | ours kcal=264 | current 173420 = Cheese, feta 265
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   173420  Cheese, feta  {'fat': 21.5, 'carbs': 3.9, 'kcal': 265, 'protein': 14.2, 'fiber': 0.0}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+   167941  Crackers, cheese, reduced fat  {'protein': 10.0, 'fiber': 3.3, 'fat': 11.7, 'carbs': 68.2, 'kcal': 418}
+   168076  DENNY'S, mozzarella cheese sticks  {'fat': 17.9, 'carbs': 27.2, 'kcal': 324, 'protein': 13.6, 'fiber': 1.6}
+   167960  Snacks, popcorn, cheese-flavor  {'protein': 9.3, 'fiber': 9.9, 'fat': 33.2, 'carbs': 51.6, 'kcal': 526}
+== cheddar_cheese | cheddar cheese | ours kcal=403 | current 173414 = Cheese, cheddar (Includes foods for USDA's Food Distribution Program) 403
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+   170899  Cheese, cheddar, sharp, sliced  {'protein': 24.2, 'fiber': 0.0, 'fat': 33.8, 'carbs': 2.1, 'kcal': 410}
+   167941  Crackers, cheese, reduced fat  {'protein': 10.0, 'fiber': 3.3, 'fat': 11.7, 'carbs': 68.2, 'kcal': 418}
+   172955  Sausage, pork and beef, with cheddar cheese, smoked  {'fiber': 0.0, 'fat': 25.8, 'protein': 12.9, 'kcal': 296, 'carbs': 2.1}
+   168076  DENNY'S, mozzarella cheese sticks  {'fat': 17.9, 'carbs': 27.2, 'kcal': 324, 'protein': 13.6, 'fiber': 1.6}
+== mozzarella | mozzarella | ours kcal=300 | current 173430 = Butter, without salt 717
+   169051  Cheese, mozzarella, nonfat  {'fiber': 1.8, 'protein': 31.7, 'fat': 0.0, 'carbs': 3.5, 'kcal': 141}
+   167735  Cheese, mozzarella, low sodium  {'protein': 27.5, 'fiber': 0.0, 'fat': 17.1, 'carbs': 3.1, 'kcal': 280}
+   169011  APPLEBEE'S, mozzarella sticks  {'fat': 18.4, 'carbs': 22.9, 'kcal': 316, 'protein': 14.9, 'fiber': 2.1}
+   170845  Cheese, mozzarella, whole milk  {'protein': 22.2, 'fat': 22.1, 'carbs': 2.4, 'kcal': 299, 'fiber': 0.0}
+   172198  Cheese substitute, mozzarella  {'protein': 11.5, 'fiber': 0.0, 'fat': 12.2, 'carbs': 23.7, 'kcal': 248}
+   169834  T.G.I. FRIDAY'S, fried mozzarella  {'protein': 15.8, 'fiber': 2.2, 'fat': 18.8, 'carbs': 25.3, 'kcal': 333}
+== white_cheese_egyptian | white cheese | ours kcal=264 | current 173420 = Cheese, feta 265
+   167532  Bread, white wheat  {'fat': 2.1, 'carbs': 43.9, 'kcal': 238, 'protein': 10.7, 'fiber': 9.2}
+   167571  Candies, white chocolate  {'fat': 32.1, 'protein': 5.9, 'fiber': 0.2, 'carbs': 59.2, 'kcal': 539}
+   172222  Cheese, dry white, queso seco  {'protein': 24.5, 'fat': 24.4, 'carbs': 2.0, 'kcal': 325}
+   172224  Cheese, white, queso blanco  {'protein': 20.4, 'fat': 24.3, 'carbs': 2.5, 'kcal': 310}
+   168037  Corn, white, steamed (Navajo)  {'fat': 5.2, 'carbs': 75.2, 'kcal': 386, 'protein': 9.7, 'fiber': 16.6}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+== butter | butter | ours kcal=717 | current 173430 = Butter, without salt 717
+   171314  Butter, Clarified butter (ghee)  {'protein': 0.0, 'fiber': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 900}
+   169869  Peanut butter, reduced sodium  {'kcal': 590, 'fat': 49.9, 'carbs': 21.8, 'protein': 24.0, 'fiber': 6.6}
+   168763  Candies, REESE'S Peanut Butter Cups  {'protein': 10.2, 'fiber': 3.6, 'fat': 30.5, 'carbs': 55.4, 'kcal': 515}
+   169894  Butter replacement, without fat, powder  {'fat': 1.0, 'carbs': 89.0, 'kcal': 373, 'protein': 2.0, 'fiber': 0.0}
+   169681  Snacks, granola bars, hard, peanut butter  {'fiber': 2.9, 'fat': 23.8, 'carbs': 62.3, 'kcal': 483, 'protein': 9.8}
+   167546  Candies, honey-combed, with peanut butter  {'kcal': 473, 'fiber': 1.9, 'protein': 8.7, 'fat': 20.2, 'carbs': 67.4}
+== ghee | ghee / clarified butter | ours kcal=876 | current 171328 = Spices, oregano, dried 265
+   171314  Butter, Clarified butter (ghee)  {'protein': 0.0, 'fiber': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 900}
+   170155  Seeds, sunflower seed butter, without salt  {'protein': 17.3, 'fiber': 5.7, 'fat': 55.2, 'carbs': 23.3, 'kcal': 617}
+   167546  Candies, honey-combed, with peanut butter  {'kcal': 473, 'fiber': 1.9, 'protein': 8.7, 'fat': 20.2, 'carbs': 67.4}
+   169690  Candies, semisweet chocolate, made with butter  {'protein': 4.2, 'fat': 29.7, 'carbs': 63.4, 'kcal': 477, 'fiber': 5.9}
+   170038  Potatoes, scalloped, home-prepared with butter  {'carbs': 10.8, 'kcal': 88.0, 'protein': 2.9, 'fiber': 1.9, 'fat': 3.7}
+   168800  Frostings, chocolate, creamy, dry mix, prepared with butter  {'fat': 13.1, 'carbs': 71.8, 'kcal': 408, 'fiber': 1.9, 'protein': 1.1}
+== olive_oil | olive oil | ours kcal=884 | current 171413 = Oil, olive, salad or cooking 884
+   172926  Olive loaf, pork  {'carbs': 9.2, 'kcal': 235, 'protein': 11.8, 'fiber': 0.0, 'fat': 16.5}
+   171413  Oil, olive, salad or cooking  {'fat': 100, 'carbs': 0.0, 'kcal': 884, 'protein': 0.0, 'fiber': 0.0}
+   171443  Mayonnaise, reduced fat, with olive oil  {'fat': 40.0, 'carbs': 0.0, 'kcal': 361, 'protein': 0.4, 'fiber': 0.0}
+   168035  Willow, leaves in oil (Alaska Native)  {'protein': 2.6, 'fat': 61.0, 'carbs': 8.1, 'kcal': 592}
+   169851  OLIVE GARDEN, lasagna classico  {'protein': 11.3, 'fiber': 1.6, 'fat': 10.8, 'carbs': 10.3, 'kcal': 184}
+   168032  Oil, walrus (Alaska Native)  {'fat': 100, 'carbs': 0.0, 'kcal': 900, 'protein': 0.0}
+== sunflower_oil | sunflower oil | ours kcal=884 | current 171034 = Salad dressing, honey mustard dressing, reduced calorie 207
+   171017  Oil, sunflower, linoleic (less than 60%)  {'fat': 100, 'carbs': 0.0, 'kcal': 884, 'protein': 0.0, 'fiber': 0.0}
+   171025  Oil, sunflower, linoleic, (approx. 65%)  {'fiber': 0.0, 'protein': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 884}
+   172338  Oil, sunflower, high oleic (70% and over)  {'fat': 100, 'carbs': 0.0, 'kcal': 884, 'protein': 0.0, 'fiber': 0.0}
+   170562  Seeds, sunflower seed kernels, dried  {'protein': 20.8, 'fiber': 8.6, 'fat': 51.5, 'carbs': 20.0, 'kcal': 584}
+   170155  Seeds, sunflower seed butter, without salt  {'protein': 17.3, 'fiber': 5.7, 'fat': 55.2, 'carbs': 23.3, 'kcal': 617}
+   172328  Oil, sunflower, linoleic, (partially hydrogenated)  {'fat': 100, 'carbs': 0.0, 'kcal': 884, 'protein': 0.0, 'fiber': 0.0}
+== corn_oil | corn oil | ours kcal=884 | current 171029 = Oil, corn, industrial and retail, all purpose salad or cooking 900
+   169867  Oil, corn and canola  {'protein': 0.0, 'fiber': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 884}
+   167631  Corn, dried (Navajo)  {'protein': 9.9, 'fat': 5.2, 'carbs': 74.9, 'kcal': 386}
+   168538  Corn, sweet, white, raw  {'fiber': 2.7, 'carbs': 19.0, 'kcal': 86.0, 'protein': 3.2, 'fat': 1.2}
+   167737  Oil, corn, peanut, and olive  {'fiber': 0.0, 'protein': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 884}
+   167637  Stew, steamed corn (Navajo)  {'protein': 8.8, 'fiber': 2.3, 'fat': 3.8, 'carbs': 10.8, 'kcal': 112}
+   168037  Corn, white, steamed (Navajo)  {'fat': 5.2, 'carbs': 75.2, 'kcal': 386, 'protein': 9.7, 'fiber': 16.6}
+== tahini | tahini | ours kcal=595 | current 170150 = Seeds, sesame seeds, whole, dried 573
+   168604  Seeds, sesame butter, tahini, type of kernels unspecified  {'fat': 53.0, 'protein': 17.4, 'fiber': 4.7, 'carbs': 21.5, 'kcal': 592}
+   169410  Seeds, sesame butter, tahini, from raw and stone ground kernels  {'protein': 17.8, 'fiber': 9.3, 'fat': 48.0, 'carbs': 26.2, 'kcal': 570}
+   170189  Seeds, sesame butter, tahini, from roasted and toasted kernels (most common type)  {'fat': 53.8, 'carbs': 21.2, 'kcal': 595, 'protein': 17.0, 'fiber': 9.3}
+   169406  Seeds, sesame butter, tahini, from unroasted kernels (non-chemically removed seed coat)  {'fat': 56.4, 'carbs': 17.9, 'kcal': 607, 'protein': 18.0, 'fiber': 9.3}
+== molokhia_cooked | molokhia cooked | ours kcal=37 | current 168463 = Spinach, cooked, boiled, drained, without salt 23.0
+== okra_cooked | okra cooked | ours kcal=27 | current 169260 = Okra, raw 33.0
+   169260  Okra, raw  {'fiber': 3.2, 'protein': 1.9, 'fat': 0.2, 'carbs': 7.5, 'kcal': 33.0}
+   169262  Okra, frozen, unprepared  {'carbs': 6.6, 'kcal': 30.0, 'fiber': 2.2, 'protein': 1.7, 'fat': 0.2}
+   170098  Okra, cooked, boiled, drained, with salt  {'fiber': 2.5, 'fat': 0.2, 'carbs': 4.5, 'kcal': 22.0, 'protein': 1.9}
+   169261  Okra, cooked, boiled, drained, without salt  {'fiber': 2.5, 'fat': 0.2, 'carbs': 4.5, 'kcal': 22.0, 'protein': 1.9}
+   170099  Okra, frozen, cooked, boiled, drained, with salt  {'kcal': 29.0, 'fiber': 2.1, 'protein': 1.6, 'fat': 0.2, 'carbs': 6.4}
+   169263  Okra, frozen, cooked, boiled, drained, without salt  {'fat': 0.2, 'carbs': 6.4, 'kcal': 29.0, 'protein': 1.6, 'fiber': 2.1}
+== tomato_raw | tomato raw | ours kcal=21 | current 170050 = Tomatoes, red, ripe, cooked 18.0
+   170461  Tomato powder  {'fiber': 16.5, 'carbs': 74.7, 'kcal': 302, 'fat': 0.4, 'protein': 12.9}
+   170054  Tomato products, canned, sauce  {'protein': 1.2, 'kcal': 24.0, 'fat': 0.3, 'carbs': 5.3, 'fiber': 1.5}
+   170056  Tomato products, canned, sauce, with onions  {'fiber': 1.8, 'fat': 0.2, 'carbs': 9.9, 'kcal': 42.0, 'protein': 1.6}
+   170458  Tomato juice, canned, with salt added  {'kcal': 17.0, 'protein': 0.8, 'fat': 0.3, 'carbs': 3.5, 'fiber': 0.4}
+   167708  Tomato and vegetable juice, low sodium  {'protein': 0.6, 'fiber': 0.8, 'fat': 0.1, 'carbs': 4.6, 'kcal': 22.0}
+   170055  Tomato products, canned, sauce, with mushrooms  {'fiber': 1.5, 'carbs': 8.4, 'kcal': 35.0, 'protein': 1.4, 'fat': 0.1}
+== cucumber | cucumber | ours kcal=18 | current 168409 = Cucumber, with peel, raw 15.0
+   169225  Cucumber, peeled, raw  {'kcal': 10.0, 'fiber': 0.7, 'carbs': 2.2, 'fat': 0.2, 'protein': 0.6}
+   169379  Pickles, cucumber, sour  {'protein': 0.3, 'fiber': 1.2, 'fat': 0.2, 'carbs': 2.3, 'kcal': 11.0}
+   168409  Cucumber, with peel, raw  {'carbs': 3.6, 'kcal': 15.0, 'fat': 0.1, 'fiber': 0.5, 'protein': 0.7}
+   167618  Sea cucumber, yane (Alaska Native)  {'fat': 0.4, 'protein': 13.0, 'carbs': 0.0, 'kcal': 56.0}
+   168562  Pickles, cucumber, sour, low sodium  {'protein': 0.3, 'fiber': 1.2, 'fat': 0.2, 'carbs': 2.3, 'kcal': 11.0}
+   168558  Pickles, cucumber, dill or kosher dill  {'fat': 0.3, 'carbs': 2.4, 'protein': 0.5, 'fiber': 1.0, 'kcal': 12.0}
+== onion_raw | onion raw | ours kcal=40 | current 170000 = Onions, raw 40.0
+   171165  Soup, onion, dry, mix  {'protein': 7.5, 'fiber': 6.6, 'fat': 0.3, 'carbs': 65.1, 'kcal': 293}
+   169844  DENNY'S, onion rings  {'fat': 22.2, 'carbs': 41.0, 'kcal': 385, 'protein': 5.3, 'fiber': 2.4}
+   171172  Gravy, onion, dry, mix  {'protein': 9.0, 'fiber': 6.0, 'fat': 3.0, 'carbs': 67.6, 'kcal': 322}
+   171327  Spices, onion powder  {'fat': 1.0, 'carbs': 79.1, 'kcal': 341, 'fiber': 15.2, 'protein': 10.4}
+   170771  BURGER KING, Onion Rings  {'fat': 25.2, 'carbs': 43.6, 'kcal': 417, 'protein': 3.9, 'fiber': 2.7}
+   171551  Soup, onion, canned, condensed  {'protein': 3.1, 'fiber': 0.7, 'fat': 1.4, 'carbs': 6.7, 'kcal': 46.0}
+== garlic_raw | garlic raw | ours kcal=149 | current 169230 = Garlic, raw 149
+   169230  Garlic, raw  {'carbs': 33.1, 'kcal': 149, 'fiber': 2.1, 'protein': 6.4, 'fat': 0.5}
+   167939  Garlic bread, frozen  {'protein': 8.4, 'fat': 16.6, 'carbs': 41.7, 'kcal': 350, 'fiber': 2.5}
+   171325  Spices, garlic powder  {'fiber': 9.0, 'protein': 16.6, 'fat': 0.7, 'carbs': 72.7, 'kcal': 331}
+   170789  PIZZA HUT, breadstick, parmesan garlic  {'protein': 12.2, 'fiber': 2.4, 'fat': 12.9, 'carbs': 44.5, 'kcal': 343}
+   170788  Fast foods, breadstick, soft, prepared with garlic and parmesan cheese  {'protein': 12.2, 'fiber': 2.4, 'fat': 12.9, 'carbs': 44.5, 'kcal': 343}
+   168318  HORMEL ALWAYS TENDER, Pork Loin Filets, Lemon Garlic-Flavored  {'carbs': 1.8, 'fat': 4.2, 'protein': 17.8, 'kcal': 118}
+== potato_boiled | potato boiled | ours kcal=87 | current 170440 = Potatoes, boiled, cooked without skin, flesh, without salt 86.0
+   168216  Plantains, green, boiled  {'protein': 1.1, 'fiber': 2.6, 'fat': 0.1, 'carbs': 29.2, 'kcal': 121}
+   168484  Sweet potato, cooked, boiled, without skin  {'carbs': 17.7, 'kcal': 76.0, 'protein': 1.4, 'fiber': 2.5, 'fat': 0.1}
+   168390  Asparagus, cooked, boiled, drained  {'carbs': 4.1, 'kcal': 22.0, 'fat': 0.2, 'fiber': 2.0, 'protein': 2.4}
+   170541  Sweet potato, cooked, boiled, without skin, with salt  {'protein': 1.4, 'fiber': 2.5, 'fat': 0.1, 'carbs': 17.7, 'kcal': 76.0}
+   167632  Squash, Indian, cooked, boiled (Navajo)  {'fat': 0.1, 'carbs': 3.2, 'kcal': 16.0, 'protein': 0.3, 'fiber': 1.5}
+   168430  Lotus root, cooked, boiled, drained, without salt  {'carbs': 16.0, 'kcal': 66.0, 'protein': 1.6, 'fiber': 3.1, 'fat': 0.1}
+== potato_fried | french fries | ours kcal=312 | current 170033 = Potatoes, baked, flesh, without salt 93.0
+   167672  DENNY'S, french fries  {'protein': 3.4, 'fat': 14.1, 'carbs': 35.2, 'kcal': 282, 'fiber': 3.5}
+   170726  WENDY'S, french fries  {'protein': 3.7, 'fiber': 4.0, 'fat': 14.1, 'carbs': 39.7, 'kcal': 301}
+   169009  APPLEBEE'S, french fries  {'fat': 13.2, 'carbs': 39.5, 'kcal': 290, 'fiber': 3.9, 'protein': 3.3}
+   170721  McDONALD'S, french fries  {'protein': 3.4, 'fiber': 3.9, 'fat': 15.5, 'carbs': 42.6, 'kcal': 323}
+   170327  BURGER KING, french fries  {'fiber': 2.9, 'fat': 12.5, 'carbs': 38.7, 'kcal': 280, 'protein': 3.2}
+   169833  T.G.I. FRIDAY'S, french fries  {'fat': 14.8, 'carbs': 36.9, 'kcal': 296, 'protein': 3.7, 'fiber': 4.1}
+== eggplant_cooked | eggplant cooked | ours kcal=35 | current 169228 = Eggplant, raw 25.0
+   169892  Eggplant, pickled  {'fat': 0.7, 'carbs': 9.8, 'kcal': 49.0, 'protein': 0.9, 'fiber': 2.5}
+   169228  Eggplant, raw  {'fat': 0.2, 'carbs': 5.9, 'kcal': 25.0, 'fiber': 3.0, 'protein': 1.0}
+   169352  Eggplant, cooked, boiled, drained, with salt  {'fiber': 2.5, 'carbs': 8.1, 'kcal': 33.0, 'fat': 0.2, 'protein': 0.8}
+   169229  Eggplant, cooked, boiled, drained, without salt  {'carbs': 8.7, 'kcal': 35.0, 'protein': 0.8, 'fiber': 2.5, 'fat': 0.2}
+== zucchini_cooked | zucchini cooked | ours kcal=19 | current 169291 = Squash, summer, zucchini, includes skin, raw 17.0
+   168565  Squash, zucchini, baby, raw  {'fiber': 1.1, 'carbs': 3.1, 'kcal': 21.0, 'protein': 2.7, 'fat': 0.4}
+   168471  Squash, summer, zucchini, italian style, canned  {'fat': 0.1, 'carbs': 6.8, 'kcal': 29.0, 'protein': 1.0}
+   169291  Squash, summer, zucchini, includes skin, raw  {'fat': 0.3, 'carbs': 3.1, 'kcal': 17.0, 'fiber': 1.0, 'protein': 1.2}
+   168469  Squash, summer, zucchini, includes skin, frozen, unprepared  {'fiber': 1.3, 'carbs': 3.6, 'fat': 0.1, 'kcal': 17.0, 'protein': 1.2}
+   170534  Squash, summer, zucchini, includes skin, cooked, boiled, drained, with salt  {'protein': 1.1, 'fiber': 1.0, 'fat': 0.4, 'kcal': 15.0, 'carbs': 2.7}
+   169292  Squash, summer, zucchini, includes skin, cooked, boiled, drained, without salt  {'protein': 1.1, 'fiber': 1.0, 'fat': 0.4, 'kcal': 15.0, 'carbs': 2.7}
+== spinach_cooked | spinach cooked | ours kcal=30 | current 168463 = Spinach, cooked, boiled, drained, without salt 23.0
+   169400  Malabar spinach, cooked  {'fiber': 2.1, 'protein': 3.0, 'fat': 0.8, 'carbs': 2.7, 'kcal': 23.0}
+   168912  Spaghetti, spinach, cooked  {'fat': 0.6, 'carbs': 26.2, 'kcal': 130, 'protein': 4.6}
+   170494  Spinach souffle  {'protein': 7.9, 'carbs': 5.9, 'kcal': 172, 'fiber': 0.7, 'fat': 13.0}
+   168462  Spinach, raw  {'protein': 2.9, 'fiber': 2.2, 'fat': 0.4, 'carbs': 3.6, 'kcal': 23.0}
+   169734  Noodles, egg, spinach, enriched, cooked  {'fat': 1.6, 'carbs': 24.2, 'kcal': 132, 'fiber': 2.3, 'protein': 5.0}
+   169730  Pasta, fresh-refrigerated, spinach, cooked  {'protein': 5.1, 'fat': 0.9, 'carbs': 25.0, 'kcal': 130}
+== cabbage_raw | cabbage | ours kcal=29 | current 169975 = Cabbage, raw 25.0
+   169975  Cabbage, raw  {'fat': 0.1, 'carbs': 5.8, 'kcal': 25.0, 'protein': 1.3, 'fiber': 2.5}
+   170392  Cabbage, kimchi  {'fat': 0.5, 'carbs': 2.4, 'kcal': 15.0, 'protein': 1.1, 'fiber': 1.6}
+   169977  Cabbage, red, raw  {'carbs': 7.4, 'kcal': 31.0, 'fiber': 2.1, 'fat': 0.2, 'protein': 1.4}
+   170388  Cabbage, savoy, raw  {'fiber': 3.1, 'protein': 2.0, 'fat': 0.1, 'carbs': 6.1, 'kcal': 27.0}
+   168572  Cabbage, napa, cooked  {'carbs': 2.2, 'fat': 0.2, 'protein': 1.1, 'kcal': 12.0}
+   169891  Cabbage, mustard, salted  {'fat': 0.1, 'carbs': 5.6, 'kcal': 28.0, 'protein': 1.1, 'fiber': 3.1}
+== carrot_raw | carrot | ours kcal=41 | current 170393 = Carrots, raw 41.0
+   170500  Carrot, dehydrated  {'protein': 8.1, 'fiber': 23.6, 'fat': 1.5, 'carbs': 79.6, 'kcal': 341}
+   170491  Carrot juice, canned  {'carbs': 9.3, 'kcal': 40.0, 'fat': 0.1, 'protein': 0.9, 'fiber': 0.8}
+   169043  Babyfood, juice, orange-carrot  {'protein': 0.5, 'fiber': 0.4, 'fat': 0.1, 'carbs': 9.9, 'kcal': 43.0}
+   174932  Cake, pudding-type, carrot, dry mix  {'fat': 9.8, 'carbs': 79.2, 'kcal': 415, 'protein': 5.1}
+   171184  SMART SOUP, Vietnamese Carrot Lemongrass  {'protein': 1.3, 'fiber': 1.5, 'fat': 1.1, 'carbs': 8.2, 'kcal': 44.0}
+   173487  Babyfood, GERBER, 2nd Foods, apple, carrot and squash, organic  {'fat': 0.0, 'carbs': 14.8, 'kcal': 64.0, 'protein': 1.1, 'fiber': 1.2}
+== lettuce | lettuce | ours kcal=19 | current 169249 = Lettuce, green leaf, raw 15.0
+   168431  Lettuce, red leaf, raw  {'kcal': 13.0, 'carbs': 2.3, 'fat': 0.2, 'protein': 1.3, 'fiber': 0.9}
+   169249  Lettuce, green leaf, raw  {'fiber': 1.3, 'carbs': 2.9, 'kcal': 15.0, 'protein': 1.4, 'fat': 0.1}
+   169247  Lettuce, cos or romaine, raw  {'carbs': 3.3, 'kcal': 17.0, 'fat': 0.3, 'fiber': 2.1, 'protein': 1.2}
+   169248  Lettuce, iceberg (includes crisphead types), raw  {'carbs': 3.0, 'kcal': 14.0, 'fiber': 1.2, 'protein': 0.9, 'fat': 0.1}
+   170333  TACO BELL, Soft Taco with beef, cheese and lettuce  {'fat': 9.8, 'carbs': 20.2, 'kcal': 206, 'protein': 9.2, 'fiber': 2.9}
+   170763  Fast foods, taco with beef, cheese and lettuce, soft  {'fat': 9.8, 'carbs': 20.2, 'kcal': 206, 'protein': 9.2, 'fiber': 2.9}
+== pepper_green | green pepper | ours kcal=24 | current 170427 = Peppers, sweet, green, raw 20.0
+   170931  Spices, pepper, black  {'fat': 3.3, 'carbs': 64.0, 'kcal': 251, 'protein': 10.4, 'fiber': 25.3}
+   170933  Spices, pepper, white  {'protein': 10.4, 'fat': 2.1, 'carbs': 68.6, 'kcal': 296, 'fiber': 26.2}
+   167745  Turtle, green, raw  {'fat': 0.5, 'carbs': 0.0, 'kcal': 89.0, 'protein': 19.8, 'fiber': 0.0}
+   169249  Lettuce, green leaf, raw  {'fiber': 1.3, 'carbs': 2.9, 'kcal': 15.0, 'protein': 1.4, 'fat': 0.1}
+   169282  Soybeans, green, raw  {'carbs': 11.0, 'kcal': 147, 'protein': 13.0, 'fiber': 4.2, 'fat': 6.8}
+   168153  Kiwifruit, green, raw  {'protein': 1.1, 'fiber': 3.0, 'fat': 0.5, 'carbs': 14.7, 'kcal': 61.0}
+== peas_cooked | peas cooked | ours kcal=84 | current 170420 = Peas, green, cooked, boiled, drained, without salt 84.0
+   170419  Peas, green, raw  {'carbs': 14.4, 'kcal': 81.0, 'protein': 5.4, 'fat': 0.4, 'fiber': 5.7}
+   170425  Peas and carrots, frozen, unprepared  {'fiber': 3.4, 'protein': 3.4, 'fat': 0.5, 'carbs': 11.2, 'kcal': 53.0}
+   170010  Peas, edible-podded, raw  {'carbs': 7.5, 'kcal': 42.0, 'protein': 2.8, 'fiber': 2.6, 'fat': 0.2}
+   170940  Babyfood, peas, dices, toddler  {'fat': 0.8, 'protein': 3.9, 'fiber': 3.9, 'carbs': 10.3, 'kcal': 64.0}
+   170102  Peas, green, cooked, boiled, drained, with salt  {'carbs': 15.6, 'kcal': 84.0, 'fiber': 5.5, 'protein': 5.4, 'fat': 0.2}
+   170020  Peas and onions, frozen, unprepared  {'fiber': 3.5, 'fat': 0.3, 'carbs': 13.5, 'kcal': 70.0, 'protein': 4.0}
+== corn_cooked | corn cooked | ours kcal=111 | current 170288 = Corn grain, yellow 365
+   167631  Corn, dried (Navajo)  {'protein': 9.9, 'fat': 5.2, 'carbs': 74.9, 'kcal': 386}
+   168836  Syrups, corn, dark  {'protein': 0.0, 'carbs': 77.6, 'kcal': 286, 'fat': 0.0, 'fiber': 0.0}
+   167737  Oil, corn, peanut, and olive  {'fiber': 0.0, 'protein': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 884}
+   168037  Corn, white, steamed (Navajo)  {'fat': 5.2, 'carbs': 75.2, 'kcal': 386, 'protein': 9.7, 'fiber': 16.6}
+   168538  Corn, sweet, white, raw  {'fiber': 2.7, 'carbs': 19.0, 'kcal': 86.0, 'protein': 3.2, 'fat': 1.2}
+   168540  Corn, sweet, white, cooked, boiled, drained, with salt  {'fiber': 2.7, 'protein': 3.3, 'fat': 1.4, 'carbs': 21.7, 'kcal': 97.0}
+== mahshi_mix | stuffed vegetables (mahshi) | ours kcal=120 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+   172275  Babyfood, vegetables, squash, junior  {'protein': 0.8, 'fiber': 0.9, 'fat': 0.2, 'carbs': 5.7, 'kcal': 24.0}
+   172274  Babyfood, vegetables, squash, strained  {'fat': 0.2, 'carbs': 5.7, 'kcal': 28.0, 'protein': 0.8, 'fiber': 0.9}
+   170939  Babyfood, vegetables, peas, strained  {'fat': 0.4, 'carbs': 8.4, 'kcal': 50.0, 'protein': 3.3, 'fiber': 2.0}
+   172283  Babyfood, vegetables, mix vegetables junior  {'kcal': 36.0, 'fiber': 1.5, 'protein': 1.4, 'fat': 0.4, 'carbs': 8.2}
+   172272  Babyfood, vegetables, green beans, junior  {'carbs': 5.8, 'kcal': 24.0, 'fiber': 1.9, 'protein': 1.2, 'fat': 0.1}
+   173515  Babyfood, vegetables, mix vegetables strained  {'kcal': 36.0, 'protein': 1.0, 'carbs': 8.2, 'fiber': 1.5, 'fat': 0.5}
+== date_medjool | dates | ours kcal=277 | current 168191 = Dates, medjool 277
+   168191  Dates, medjool  {'fat': 0.1, 'protein': 1.8, 'fiber': 6.7, 'carbs': 75.0, 'kcal': 277}
+   171726  Dates, deglet noor  {'carbs': 75.0, 'kcal': 282, 'fat': 0.4, 'protein': 2.5, 'fiber': 8.0}
+   174625  Cereals, QUAKER, Instant Oatmeal, raisins, dates and walnuts, dry  {'fat': 7.0, 'carbs': 72.4, 'kcal': 371, 'fiber': 6.9, 'protein': 8.8}
+== banana | banana | ours kcal=89 | current 173944 = Bananas, raw 89.0
+   169394  Pepper, banana, raw  {'fiber': 3.4, 'protein': 1.7, 'fat': 0.5, 'carbs': 5.3, 'kcal': 27.0}
+   167629  Melon, banana (Navajo)  {'protein': 0.8, 'fiber': 0.3, 'fat': 0.2, 'carbs': 4.1, 'kcal': 21.0}
+   168849  Snacks, banana chips  {'carbs': 58.4, 'kcal': 519, 'fat': 33.6, 'fiber': 7.7, 'protein': 2.3}
+   171351  Babyfood, apple-banana juice  {'kcal': 51.0, 'fat': 0.1, 'carbs': 12.3, 'protein': 0.2, 'fiber': 0.2}
+   169648  Puddings, banana, dry mix, instant  {'fiber': 0.0, 'protein': 0.0, 'fat': 0.6, 'carbs': 92.7, 'kcal': 367}
+   169650  Puddings, banana, dry mix, regular  {'fiber': 0.3, 'carbs': 93.0, 'kcal': 366, 'fat': 0.4, 'protein': 0.0}
+== apple | apple | ours kcal=52 | current 171688 = Apples, raw, with skin (Includes foods for USDA's Food Distribution Program) 52.0
+   168816  Fruit butters, apple  {'protein': 0.4, 'fiber': 1.5, 'fat': 0.3, 'carbs': 42.5, 'kcal': 173}
+   170959  Babyfood, juice, apple  {'protein': 0.0, 'fiber': 0.1, 'fat': 0.1, 'carbs': 11.7, 'kcal': 47.0}
+   169909  Mammy-apple, (mamey), raw  {'fat': 0.5, 'carbs': 12.5, 'kcal': 51.0, 'fiber': 3.0, 'protein': 0.5}
+   168822  Pie fillings, apple, canned  {'fiber': 1.0, 'protein': 0.1, 'fat': 0.1, 'carbs': 26.1, 'kcal': 100}
+   167729  Babyfood, juice, apple - cherry  {'protein': 0.2, 'fiber': 0.3, 'fat': 0.1, 'carbs': 11.2, 'kcal': 47.0}
+   171351  Babyfood, apple-banana juice  {'kcal': 51.0, 'fat': 0.1, 'carbs': 12.3, 'protein': 0.2, 'fiber': 0.2}
+== orange | orange | ours kcal=47 | current 169097 = Oranges, raw, all commercial varieties 47.0
+   167577  Sherbet, orange  {'fat': 2.0, 'protein': 1.1, 'carbs': 30.4, 'kcal': 144, 'fiber': 1.3}
+   169103  Orange peel, raw  {'fiber': 10.6, 'kcal': 97.0, 'protein': 1.5, 'fat': 0.2, 'carbs': 25.0}
+   168819  Marmalade, orange  {'protein': 0.3, 'fiber': 0.7, 'kcal': 246, 'fat': 0.0, 'carbs': 66.3}
+   170502  Tomatoes, orange, raw  {'protein': 1.2, 'fiber': 0.9, 'fat': 0.2, 'carbs': 3.2, 'kcal': 16.0}
+   171354  Babyfood, juice, orange  {'kcal': 45.0, 'fat': 0.3, 'carbs': 10.2, 'fiber': 0.1, 'protein': 0.6}
+   167792  Orange Pineapple Juice Blend  {'fat': 0.1, 'carbs': 12.2, 'kcal': 51.0, 'protein': 0.4, 'fiber': 0.2}
+== mango | mango | ours kcal=60 | current 169910 = Mangos, raw 60.0
+   167785  Mango nectar, canned  {'carbs': 13.1, 'kcal': 51.0, 'fat': 0.1, 'protein': 0.1, 'fiber': 0.3}
+   169091  Mango, dried, sweetened  {'protein': 2.5, 'fiber': 2.4, 'fat': 1.2, 'carbs': 78.6, 'kcal': 319}
+   172199  Yogurt, Greek, 2% fat, mango, CHOBANI  {'fat': 1.7, 'carbs': 11.8, 'kcal': 93.0, 'protein': 7.6, 'fiber': 0.5}
+   171933  Beverages, V8 V-FUSION Juices, Peach Mango  {'fat': 0.0, 'carbs': 11.4, 'kcal': 49.0, 'protein': 0.4, 'fiber': 0.0}
+   173186  Beverages, V8 SPLASH Smoothies, Peach Mango  {'fat': 0.0, 'carbs': 7.8, 'kcal': 37.0, 'fiber': 0.0, 'protein': 1.2}
+   171341  Babyfood, fruit dessert, mango with tapioca  {'fat': 0.2, 'carbs': 19.0, 'kcal': 70.0, 'protein': 0.3, 'fiber': 1.1}
+== watermelon | watermelon | ours kcal=35 | current 167765 = Watermelon, raw 30.0
+   167765  Watermelon, raw  {'protein': 0.6, 'fiber': 0.4, 'fat': 0.1, 'carbs': 7.5, 'kcal': 30.0}
+   169407  Seeds, watermelon seed kernels, dried  {'protein': 28.3, 'fat': 47.4, 'carbs': 15.3, 'kcal': 557}
+== grapes | grapes | ours kcal=69 | current 174683 = Grapes, red or green (European type, such as Thompson seedless), raw 69.0
+   173040  Grapes, muscadine, raw  {'fat': 0.5, 'carbs': 13.9, 'fiber': 3.9, 'protein': 0.8, 'kcal': 57.0}
+   174682  Grapes, american type (slip skin), raw  {'fiber': 0.9, 'kcal': 67.0, 'protein': 0.6, 'fat': 0.3, 'carbs': 17.2}
+   174684  Grapes, canned, thompson seedless, water pack, solids and liquids  {'fiber': 0.6, 'protein': 0.5, 'fat': 0.1, 'carbs': 10.3, 'kcal': 40.0}
+   174683  Grapes, red or green (European type, such as Thompson seedless), raw  {'fat': 0.2, 'protein': 0.7, 'fiber': 0.9, 'carbs': 18.1, 'kcal': 69.0}
+   174685  Grapes, canned, thompson seedless, heavy syrup pack, solids and liquids  {'fiber': 0.6, 'fat': 0.1, 'carbs': 19.6, 'protein': 0.5, 'kcal': 76.0}
+== strawberry | strawberry | ours kcal=32 | current 167762 = Strawberries, raw 32.0
+   168758  Toppings, strawberry  {'fiber': 0.7, 'protein': 0.2, 'fat': 0.1, 'carbs': 66.3, 'kcal': 254}
+   168810  Ice creams, strawberry  {'fat': 8.4, 'fiber': 0.9, 'protein': 3.2, 'carbs': 27.6, 'kcal': 192}
+   173045  Guavas, strawberry, raw  {'fiber': 5.4, 'protein': 0.6, 'fat': 0.6, 'carbs': 17.4, 'kcal': 69.0}
+   175228  SILK Strawberry soy yogurt  {'fat': 1.2, 'carbs': 18.2, 'kcal': 94.0, 'fiber': 0.6, 'protein': 2.4}
+   172036  Fast foods, sundae, strawberry  {'protein': 4.1, 'fiber': 0.0, 'fat': 5.1, 'carbs': 29.2, 'kcal': 175}
+   172062  McDONALD'S, Strawberry Sundae  {'fat': 4.0, 'carbs': 28.1, 'protein': 3.2, 'fiber': 0.0, 'kcal': 158}
+== pomegranate | pomegranate | ours kcal=83 | current 169134 = Pomegranates, raw 83.0
+   167787  Pomegranate juice, bottled  {'fat': 0.3, 'carbs': 13.1, 'kcal': 54.0, 'protein': 0.1, 'fiber': 0.1}
+   171909  Beverages, OCEAN SPRAY, Cran Pomegranate  {'protein': 0.1, 'fiber': 0.6, 'carbs': 12.6, 'kcal': 47.0, 'fat': 0.0}
+   170913  Yogurt, Greek, nonfat, Fruit on Bottom, Pomegranate, CHOBANI  {'protein': 7.5, 'fiber': 0.8, 'fat': 0.2, 'carbs': 12.1, 'kcal': 80.0}
+   173166  Beverages, water, bottled, yumberry, pomegranate with anti-oxidants, zero calories  {'fat': 0.0, 'carbs': 1.2, 'kcal': 5.0, 'protein': 0.0, 'fiber': 0.0}
+== guava | guava | ours kcal=68 | current 173044 = Guavas, common, raw 68.0
+   174686  Guava sauce, cooked  {'fat': 0.1, 'carbs': 9.5, 'kcal': 36.0, 'fiber': 3.6, 'protein': 0.3}
+   168210  Guava nectar, with sucralose, canned  {'fat': 0.1, 'carbs': 13.3, 'kcal': 48.0, 'protein': 0.3, 'fiber': 1.2}
+   167528  Pastry, Pastelitos de Guava (guava pastries)  {'fat': 18.5, 'carbs': 47.8, 'kcal': 379, 'protein': 5.5, 'fiber': 2.2}
+   167784  Guava nectar, canned, with added ascorbic acid  {'carbs': 16.2, 'kcal': 63.0, 'protein': 0.1, 'fiber': 1.0, 'fat': 0.1}
+   171930  Beverages, V8 SPLASH Juice Drinks, Guava Passion Fruit  {'protein': 0.0, 'fat': 0.0, 'carbs': 7.8, 'kcal': 33.0}
+   171348  Babyfood, fruit, guava and papaya with tapioca, strained  {'protein': 0.2, 'fat': 0.1, 'carbs': 17.0, 'kcal': 63.0}
+== fig_raw | fig | ours kcal=74 | current 173021 = Figs, raw 74.0
+   172721  Cookies, fig bars  {'protein': 3.7, 'fiber': 4.6, 'fat': 7.3, 'carbs': 70.9, 'kcal': 348}
+== raisins | raisins | ours kcal=299 | current 168165 = Raisins, dark, seedless (Includes foods for USDA's Food Distribution Program) 299
+   168166  Raisins, seeded  {'protein': 2.5, 'fiber': 6.8, 'fat': 0.5, 'carbs': 78.5, 'kcal': 296}
+   168164  Raisins, golden, seedless  {'fat': 0.2, 'carbs': 80.0, 'kcal': 301, 'protein': 3.3, 'fiber': 3.3}
+   174963  Cookies, oatmeal, with raisins  {'fat': 15.8, 'carbs': 69.0, 'kcal': 441, 'protein': 5.9, 'fiber': 3.3}
+   169576  Candies, milk chocolate coated raisins  {'fat': 14.8, 'protein': 4.1, 'carbs': 68.4, 'kcal': 390, 'fiber': 3.1}
+   169587  Candies, NESTLE, RAISINETS Chocolate Covered Raisins  {'fat': 17.0, 'carbs': 71.0, 'kcal': 422, 'protein': 4.4, 'fiber': 2.2}
+   172807  Cookies, oatmeal, prepared from recipe, without raisins  {'fat': 17.9, 'carbs': 66.4, 'kcal': 447, 'protein': 6.8}
+== avocado | avocado | ours kcal=160 | current 171705 = Avocados, raw, all commercial varieties 160
+   173573  Oil, avocado  {'protein': 0.0, 'fiber': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 884}
+== lemon | lemon | ours kcal=44 | current 167747 = Lemon juice, raw 22.0
+   167749  Lemon peel, raw  {'kcal': 47.0, 'fiber': 10.6, 'protein': 1.5, 'fat': 0.3, 'carbs': 16.0}
+   167747  Lemon juice, raw  {'protein': 0.3, 'fiber': 0.3, 'fat': 0.2, 'carbs': 6.9, 'kcal': 22.0}
+   168573  Lemon grass (citronella), raw  {'carbs': 25.3, 'kcal': 99.0, 'protein': 1.8, 'fat': 0.5}
+   168831  Puddings, lemon, dry mix, regular  {'fiber': 0.1, 'protein': 0.1, 'fat': 0.5, 'carbs': 91.8, 'kcal': 363}
+   169654  Puddings, lemon, dry mix, instant  {'fiber': 0.0, 'protein': 0.0, 'fat': 0.7, 'carbs': 95.4, 'kcal': 378}
+   172827  Danish pastry, lemon, unenriched  {'fat': 18.5, 'carbs': 47.8, 'kcal': 371, 'protein': 5.4, 'fiber': 1.9}
+== cantaloupe | cantaloupe | ours kcal=34 | current 169092 = Melons, cantaloupe, raw 34.0
+   169092  Melons, cantaloupe, raw  {'carbs': 8.2, 'kcal': 34.0, 'fiber': 0.9, 'protein': 0.8, 'fat': 0.2}
+== almonds | almonds | ours kcal=579 | current 170567 = Nuts, almonds 579
+   170567  Nuts, almonds  {'protein': 21.2, 'fiber': 12.5, 'fat': 49.9, 'carbs': 21.6, 'kcal': 579}
+   170568  Nuts, almonds, blanched  {'protein': 21.4, 'fiber': 9.9, 'fat': 52.5, 'carbs': 18.7, 'kcal': 590}
+   169060  Candies, nougat, with almonds  {'fiber': 3.3, 'protein': 3.3, 'fat': 1.7, 'carbs': 92.4, 'kcal': 398}
+   170656  Candies, sugar-coated almonds  {'kcal': 465, 'protein': 10.0, 'fiber': 2.5, 'fat': 17.9, 'carbs': 68.3}
+   168754  Candies, milk chocolate, with almonds  {'fat': 34.4, 'protein': 9.0, 'fiber': 6.2, 'carbs': 53.4, 'kcal': 526}
+   168592  Nuts, almonds, honey roasted, unblanched  {'fiber': 13.7, 'protein': 18.2, 'fat': 49.9, 'carbs': 27.9, 'kcal': 594}
+== peanuts | peanuts | ours kcal=567 | current 172430 = Peanuts, all types, raw 567
+   174263  Peanuts, spanish, raw  {'fat': 49.6, 'carbs': 15.8, 'kcal': 570, 'protein': 26.2, 'fiber': 9.5}
+   172432  Peanuts, valencia, raw  {'fiber': 8.7, 'protein': 25.1, 'fat': 47.6, 'carbs': 20.9, 'kcal': 570}
+   172434  Peanuts, virginia, raw  {'protein': 25.2, 'fiber': 8.5, 'fat': 48.8, 'carbs': 16.5, 'kcal': 563}
+   172430  Peanuts, all types, raw  {'fiber': 8.5, 'protein': 25.8, 'fat': 49.2, 'carbs': 16.1, 'kcal': 567}
+   168001  Candies, milk chocolate coated peanuts  {'fiber': 4.7, 'protein': 13.1, 'fat': 33.5, 'carbs': 49.7, 'kcal': 519}
+   172431  Peanuts, spanish, oil-roasted, with salt  {'fiber': 8.9, 'fat': 49.0, 'carbs': 17.4, 'kcal': 579, 'protein': 28.0}
+== walnuts | walnuts | ours kcal=654 | current 170187 = Nuts, walnuts, english 654
+   170593  Nuts, walnuts, glazed  {'fiber': 3.6, 'protein': 8.3, 'carbs': 47.6, 'kcal': 500, 'fat': 35.7}
+   170187  Nuts, walnuts, english  {'carbs': 13.7, 'kcal': 654, 'protein': 15.2, 'fiber': 6.7, 'fat': 65.2}
+   170186  Nuts, walnuts, black, dried  {'fat': 59.3, 'carbs': 9.6, 'kcal': 619, 'fiber': 6.8, 'protein': 24.1}
+   170594  Nuts, walnuts, dry roasted, with salt added  {'fat': 60.7, 'carbs': 17.9, 'protein': 14.3, 'fiber': 7.1, 'kcal': 643}
+   174625  Cereals, QUAKER, Instant Oatmeal, raisins, dates and walnuts, dry  {'fat': 7.0, 'carbs': 72.4, 'kcal': 371, 'fiber': 6.9, 'protein': 8.8}
+== cashews | cashews | ours kcal=553 | current 170162 = Nuts, cashew nuts, raw 553
+== pistachio | pistachios | ours kcal=560 | current 170184 = Nuts, pistachio nuts, raw 560
+== pumpkin_seeds | pumpkin seeds | ours kcal=559 | current 170188 = Seeds, pumpkin and squash seeds, whole, roasted, without salt 446
+   168448  Pumpkin, raw  {'carbs': 6.5, 'fiber': 0.5, 'kcal': 26.0, 'fat': 0.1, 'protein': 1.0}
+   169273  Pumpkin pie mix, canned  {'fiber': 8.3, 'protein': 1.1, 'fat': 0.1, 'carbs': 26.4, 'kcal': 104}
+   170527  Pumpkin, canned, with salt  {'fiber': 2.9, 'carbs': 8.1, 'kcal': 34.0, 'fat': 0.3, 'protein': 1.1}
+   169272  Pumpkin leaves, raw  {'fat': 0.4, 'carbs': 2.3, 'kcal': 19.0, 'protein': 3.1}
+   175151  Fish, sunfish, pumpkin seed, raw  {'fat': 0.7, 'carbs': 0.0, 'kcal': 89.0, 'fiber': 0.0, 'protein': 19.4}
+   169270  Pumpkin flowers, raw  {'fat': 0.1, 'carbs': 3.3, 'kcal': 15.0, 'protein': 1.0}
+== sesame_seeds | sesame seeds | ours kcal=573 | current 170150 = Seeds, sesame seeds, whole, dried 573
+   170150  Seeds, sesame seeds, whole, dried  {'protein': 17.7, 'fiber': 11.8, 'fat': 49.7, 'carbs': 23.4, 'kcal': 573}
+   170191  Seeds, sesame butter, paste  {'carbs': 24.0, 'kcal': 586, 'fat': 50.9, 'fiber': 5.5, 'protein': 18.1}
+   168856  Snacks, sesame sticks, wheat-based, salted  {'fat': 36.7, 'carbs': 46.5, 'kcal': 541, 'protein': 10.9, 'fiber': 2.8}
+   171016  Oil, sesame, salad or cooking  {'protein': 0.0, 'fiber': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 884}
+   170653  Snacks, sesame sticks, wheat-based, unsalted  {'fat': 36.7, 'carbs': 46.5, 'kcal': 541, 'protein': 10.9}
+   171006  Salad dressing, sesame seed dressing, regular  {'fat': 45.2, 'carbs': 8.6, 'kcal': 443, 'protein': 3.1, 'fiber': 1.0}
+== basbousa | basbousa | ours kcal=350 | current 168859 = Tortilla chips, low fat, baked without fat 448
+== kunafa | kunafa | ours kcal=340 | current 168859 = Tortilla chips, low fat, baked without fat 448
+== baklava | baklava | ours kcal=428 | current 167946 = SCHIFF,TIGER'S MILK BAR 387
+== om_ali | om ali | ours kcal=220 | current 168859 = Tortilla chips, low fat, baked without fat 448
+== rice_pudding | rice pudding | ours kcal=133 | current 167922 = Heinz, Weight Watcher, Chocolate Eclair, frozen 241
+   170492  Corn pudding, home prepared  {'fat': 5.0, 'carbs': 17.0, 'kcal': 131, 'protein': 4.4, 'fiber': 1.2}
+   174932  Cake, pudding-type, carrot, dry mix  {'fat': 9.8, 'carbs': 79.2, 'kcal': 415, 'protein': 5.1}
+   174946  Cake, pudding-type, yellow, dry mix  {'fiber': 0.7, 'carbs': 80.0, 'protein': 4.0, 'fat': 9.8, 'kcal': 423}
+   174935  Cake, pudding-type, chocolate, dry mix  {'fiber': 2.3, 'fat': 8.1, 'carbs': 80.2, 'kcal': 391, 'protein': 4.6}
+   168063  Restaurant, Latino, arroz con leche (rice pudding)  {'protein': 3.2, 'fiber': 0.5, 'fat': 3.7, 'carbs': 24.9, 'kcal': 146}
+   172708  Cake, pudding-type, white, enriched, dry mix  {'carbs': 80.9, 'kcal': 423, 'fat': 9.5, 'protein': 3.9, 'fiber': 0.7}
+== ice_cream_vanilla | vanilla ice cream | ours kcal=207 | current 167722 = Tofu yogurt 94.0
+   172061  McDONALD'S, Vanilla Reduced Fat Ice Cream Cone  {'protein': 4.2, 'fiber': 0.1, 'fat': 4.9, 'carbs': 26.4, 'kcal': 162}
+   167575  Ice creams, vanilla  {'fiber': 0.7, 'carbs': 23.6, 'kcal': 207, 'fat': 11.0, 'protein': 3.5}
+   172226  Ice cream sandwich  {'fat': 8.6, 'carbs': 37.1, 'kcal': 237, 'protein': 4.3, 'fiber': 0.0}
+   171307  Light ice cream, Creamsicle  {'fat': 3.1, 'carbs': 32.8, 'kcal': 165, 'protein': 1.5, 'fiber': 0.0}
+   171306  Ice cream sundae cone  {'protein': 3.0, 'fiber': 1.0, 'fat': 14.0, 'carbs': 28.9, 'kcal': 254}
+   172789  Pie, vanilla cream, prepared from recipe  {'fiber': 0.6, 'fat': 14.4, 'carbs': 32.6, 'kcal': 278, 'protein': 4.8}
+== chocolate_dark | dark chocolate | ours kcal=546 | current 170273 = Chocolate, dark, 70-85% cacao solids 598
+   167587  Candies, milk chocolate  {'fat': 29.7, 'fiber': 3.4, 'protein': 7.7, 'carbs': 59.4, 'kcal': 535}
+   167571  Candies, white chocolate  {'fat': 32.1, 'protein': 5.9, 'fiber': 0.2, 'carbs': 59.2, 'kcal': 539}
+   169592  Candies, SPECIAL DARK Chocolate Bar  {'protein': 5.5, 'fiber': 6.5, 'fat': 32.4, 'carbs': 60.5, 'kcal': 556}
+   167585  Ice creams, chocolate, light  {'fat': 7.2, 'fiber': 0.8, 'protein': 5.0, 'carbs': 25.7, 'kcal': 187}
+   169634  Candies, dark chocolate coated coffee beans  {'fat': 30.0, 'carbs': 60.0, 'kcal': 540, 'protein': 7.5, 'fiber': 7.5}
+   167566  Candies, caramels, chocolate-flavor roll  {'fiber': 0.1, 'protein': 1.6, 'fat': 3.3, 'carbs': 87.7, 'kcal': 387}
+== honey | honey | ours kcal=304 | current 169640 = Honey 304
+   169640  Honey  {'protein': 0.3, 'fiber': 0.2, 'fat': 0.0, 'carbs': 82.4, 'kcal': 304}
+   172943  Honey roll sausage, beef  {'fiber': 0.0, 'protein': 18.6, 'fat': 10.5, 'carbs': 2.2, 'kcal': 182}
+   174611  Ham, honey, smoked, cooked  {'protein': 17.9, 'fiber': 0.0, 'fat': 2.4, 'carbs': 7.3, 'kcal': 122}
+   171046  Dressing, honey mustard, fat-free  {'protein': 1.1, 'fiber': 1.2, 'fat': 1.5, 'carbs': 38.4, 'kcal': 169}
+   171043  Salad dressing, honey mustard, regular  {'protein': 0.9, 'fiber': 0.4, 'fat': 40.8, 'carbs': 23.3, 'kcal': 464}
+   168592  Nuts, almonds, honey roasted, unblanched  {'fiber': 13.7, 'protein': 18.2, 'fat': 49.9, 'carbs': 27.9, 'kcal': 594}
+== sugar_white | white sugar | ours kcal=387 | current 169655 = Sugars, granulated 387
+   167532  Bread, white wheat  {'fat': 2.1, 'carbs': 43.9, 'kcal': 238, 'protein': 10.7, 'fiber': 9.2}
+   168538  Corn, sweet, white, raw  {'fiber': 2.7, 'carbs': 19.0, 'kcal': 86.0, 'protein': 3.2, 'fat': 1.2}
+   168037  Corn, white, steamed (Navajo)  {'fat': 5.2, 'carbs': 75.2, 'kcal': 386, 'protein': 9.7, 'fiber': 16.6}
+   168038  Cornmeal, white (Navajo)  {'protein': 11.0, 'fiber': 10.4, 'fat': 5.0, 'carbs': 77.1, 'kcal': 398}
+   168879  Rice, white, medium-grain, raw, enriched  {'protein': 6.6, 'fiber': 1.4, 'fat': 0.6, 'carbs': 79.3, 'kcal': 360}
+   167571  Candies, white chocolate  {'fat': 32.1, 'protein': 5.9, 'fiber': 0.2, 'carbs': 59.2, 'kcal': 539}
+== halawa | halva | ours kcal=469 | current 170150 = Seeds, sesame seeds, whole, dried 573
+== tea_black_brewed | black tea brewed | ours kcal=1 | current 174820 = Beverages, almond milk, chocolate, ready-to-drink 50.0
+   174120  Beverages, tea, Oolong, brewed  {'protein': 0.0, 'fiber': 0.0, 'fat': 0.0, 'carbs': 0.1, 'kcal': 1.0}
+   171946  Beverages, tea, hibiscus, brewed  {'carbs': 0.0, 'fat': 0.0, 'kcal': 0.0, 'fiber': 0.0, 'protein': 0.0}
+   171917  Beverages, tea, green, brewed, regular  {'fat': 0.0, 'carbs': 0.0, 'kcal': 1.0, 'protein': 0.2, 'fiber': 0.0}
+   174156  Beverages, tea, herb, brewed, chamomile  {'fiber': 0.0, 'protein': 0.0, 'fat': 0.0, 'carbs': 0.2, 'kcal': 1.0}
+   175186  Beans, black turtle, mature seeds, raw  {'fiber': 15.5, 'carbs': 63.2, 'kcal': 339, 'protein': 21.2, 'fat': 0.9}
+   173734  Beans, black, mature seeds, raw  {'fiber': 15.5, 'carbs': 62.4, 'kcal': 341, 'protein': 21.6, 'fat': 1.4}
+== coffee_brewed | coffee brewed | ours kcal=0 | current 171890 = Beverages, coffee, brewed, prepared with tap water 1.0
+   171881  Beverages, coffee, brewed, breakfast blend  {'protein': 0.3, 'fiber': 0.0, 'fat': 0.0, 'kcal': 2.0, 'carbs': 0.2}
+   175224  SILK Coffee, soymilk  {'fat': 1.4, 'carbs': 10.3, 'kcal': 62.0, 'protein': 2.1, 'fiber': 0.0}
+   171890  Beverages, coffee, brewed, prepared with tap water  {'kcal': 1.0, 'protein': 0.1, 'fat': 0.0, 'carbs': 0.0, 'fiber': 0.0}
+   171893  Beverages, coffee, instant, regular, powder  {'protein': 12.2, 'fiber': 0.0, 'fat': 0.5, 'carbs': 75.4, 'kcal': 353}
+   169828  Tea, herbal, brewed, Hohoysi (Hopi)  {'protein': 0.1, 'fat': 0.2, 'carbs': 0.0, 'kcal': 2.0}
+   171891  Beverages, coffee, brewed, espresso, restaurant-prepared  {'fiber': 0.0, 'fat': 0.2, 'protein': 0.1, 'carbs': 1.7, 'kcal': 9.0}
+== sugarcane_juice | sugarcane juice | ours kcal=61 | current 169655 = Sugars, granulated 387
+   167787  Pomegranate juice, bottled  {'fat': 0.3, 'carbs': 13.1, 'kcal': 54.0, 'protein': 0.1, 'fiber': 0.1}
+   167753  Prune juice, canned  {'protein': 0.6, 'fiber': 1.0, 'fat': 0.0, 'carbs': 17.4, 'kcal': 71.0}
+   168156  Lime juice, raw  {'protein': 0.4, 'fiber': 0.4, 'fat': 0.1, 'carbs': 8.4, 'kcal': 25.0}
+   168117  Cranberry juice, unsweetened  {'fat': 0.1, 'protein': 0.4, 'carbs': 12.2, 'kcal': 46.0, 'fiber': 0.1}
+   167747  Lemon juice, raw  {'protein': 0.3, 'fiber': 0.3, 'fat': 0.2, 'carbs': 6.9, 'kcal': 22.0}
+   167792  Orange Pineapple Juice Blend  {'fat': 0.1, 'carbs': 12.2, 'kcal': 51.0, 'protein': 0.4, 'fiber': 0.2}
+== orange_juice | orange juice | ours kcal=45 | current 169098 = Orange juice, raw (Includes foods for USDA's Food Distribution Program) 45.0
+   167792  Orange Pineapple Juice Blend  {'fat': 0.1, 'carbs': 12.2, 'kcal': 51.0, 'protein': 0.4, 'fiber': 0.2}
+   169044  Beverages, Orange juice drink  {'fat': 0.0, 'carbs': 13.4, 'kcal': 54.0, 'protein': 0.2, 'fiber': 0.2}
+   169099  Orange juice, canned, unsweetened  {'protein': 0.7, 'fiber': 0.3, 'fat': 0.1, 'carbs': 11.0, 'kcal': 47.0}
+   173178  Beverages, Orange juice, light, No pulp  {'protein': 0.2, 'fiber': 0.0, 'fat': 0.0, 'carbs': 5.4, 'kcal': 21.0}
+   167718  Babyfood, juice, pear  {'kcal': 43.0, 'carbs': 11.9, 'fiber': 0.1, 'protein': 0.0, 'fat': 0.0}
+   167708  Tomato and vegetable juice, low sodium  {'protein': 0.6, 'fiber': 0.8, 'fat': 0.1, 'carbs': 4.6, 'kcal': 22.0}
+== cola | cola soft drink | ours kcal=42 | current 174819 = Alcoholic beverage, distilled, whiskey, 86 proof 250
+   167544  Snacks, granola bars, soft, uncoated, raisin  {'fiber': 4.2, 'protein': 7.6, 'fat': 17.8, 'carbs': 66.4, 'kcal': 448}
+   167954  Snacks, granola bars, soft, uncoated, plain  {'fiber': 4.6, 'protein': 7.4, 'fat': 17.2, 'carbs': 67.3, 'kcal': 443}
+   168848  Frozen yogurts, chocolate, soft-serve  {'fiber': 2.2, 'protein': 4.0, 'fat': 6.0, 'carbs': 24.9, 'kcal': 160}
+   168815  Frozen yogurts, vanilla, soft-serve  {'fiber': 0.0, 'kcal': 159, 'protein': 4.0, 'fat': 5.6, 'carbs': 24.2}
+   167576  Ice creams, vanilla, light, soft-serve  {'protein': 4.9, 'fiber': 0.0, 'carbs': 21.8, 'kcal': 126, 'fat': 2.6}
+   167981  Ice creams, french vanilla, soft-serve  {'fiber': 0.7, 'carbs': 22.2, 'kcal': 222, 'protein': 4.1, 'fat': 13.0}
+== ayran | ayran / salted yogurt drink | ours kcal=35 | current 170903 = Yogurt, Greek, plain, lowfat 73.0
+   173436  Egg, yolk, raw, frozen, salted, pasteurized  {'fat': 22.9, 'carbs': 1.8, 'kcal': 275, 'protein': 14.1, 'fiber': 0.0}
+   169044  Beverages, Orange juice drink  {'fat': 0.0, 'carbs': 13.4, 'kcal': 54.0, 'protein': 0.2, 'fiber': 0.2}
+   170893  Egg, whole, raw, frozen, salted, pasteurized  {'fat': 10.1, 'carbs': 0.8, 'kcal': 138, 'protein': 11.0, 'fiber': 0.0}
+   173410  Butter, salted  {'fiber': 0.0, 'kcal': 717, 'fat': 81.1, 'carbs': 0.1, 'protein': 0.8}
+   168149  Fish, mackerel, salted  {'fat': 25.1, 'carbs': 0.0, 'kcal': 305, 'protein': 18.5, 'fiber': 0.0}
+   168751  Beverages, almond milk, sweetened, vanilla flavor, ready-to-drink  {'fat': 1.0, 'carbs': 6.6, 'fiber': 0.4, 'protein': 0.4, 'kcal': 38.0}
+== karkade | hibiscus tea | ours kcal=0 | current 174820 = Beverages, almond milk, chocolate, ready-to-drink 50.0
+   171946  Beverages, tea, hibiscus, brewed  {'carbs': 0.0, 'fat': 0.0, 'kcal': 0.0, 'fiber': 0.0, 'protein': 0.0}
+   174120  Beverages, tea, Oolong, brewed  {'protein': 0.0, 'fiber': 0.0, 'fat': 0.0, 'carbs': 0.1, 'kcal': 1.0}
+   173231  Beverages, tea, instant, lemon, diet  {'protein': 0.0, 'fat': 0.0, 'carbs': 0.4, 'kcal': 2.0, 'fiber': 0.0}
+   171917  Beverages, tea, green, brewed, regular  {'fat': 0.0, 'carbs': 0.0, 'kcal': 1.0, 'protein': 0.2, 'fiber': 0.0}
+   174144  Beverages, tea, black, ready to drink  {'fat': 0.0, 'carbs': 0.0, 'kcal': 0.0, 'protein': 0.0, 'fiber': 0.0}
+   174156  Beverages, tea, herb, brewed, chamomile  {'fiber': 0.0, 'protein': 0.0, 'fat': 0.0, 'carbs': 0.2, 'kcal': 1.0}
+== sahlab | sahlab drink | ours kcal=90 | current 167922 = Heinz, Weight Watcher, Chocolate Eclair, frozen 241
+   169044  Beverages, Orange juice drink  {'fat': 0.0, 'carbs': 13.4, 'kcal': 54.0, 'protein': 0.2, 'fiber': 0.2}
+   171916  Beverages, grape drink, canned  {'fiber': 0.0, 'fat': 0.0, 'kcal': 61.0, 'protein': 0.0, 'carbs': 15.7}
+   171915  Beverages, Tropical Punch, ready-to-drink  {'fat': 0.0, 'carbs': 2.5, 'kcal': 10.0, 'protein': 0.0, 'fiber': 0.0}
+   171885  Beverages, tea, green, ready-to-drink, diet  {'fat': 0.0, 'protein': 0.0, 'fiber': 0.0, 'carbs': 0.9, 'kcal': 4.0}
+   171892  Beverages, tea, black, ready-to-drink, lemon, diet  {'protein': 0.0, 'fiber': 0.0, 'fat': 0.0, 'carbs': 0.2, 'kcal': 1.0}
+   171899  Beverages, OCEAN SPRAY, Cran Raspberry Juice Drink  {'protein': 0.3, 'fiber': 0.6, 'carbs': 12.0, 'kcal': 49.0, 'fat': 0.0}
+== koshari | koshari | ours kcal=150 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+== foul_sandwich | foul sandwich | ours kcal=180 | current 173745 = Beans, navy, mature seeds, raw 337
+   170790  CHICK-FIL-A, chicken sandwich  {'fat': 11.2, 'carbs': 20.9, 'kcal': 249, 'protein': 16.3, 'fiber': 1.4}
+   170695  Fast foods, roast beef sandwich, plain  {'fat': 10.3, 'carbs': 22.2, 'kcal': 244, 'protein': 15.2, 'fiber': 1.3}
+   170331  BURGER KING, Original Chicken Sandwich  {'kcal': 286, 'fat': 14.7, 'carbs': 26.2, 'protein': 12.1, 'fiber': 2.4}
+   170330  BURGER KING, Premium Fish Sandwich  {'protein': 10.3, 'fat': 12.4, 'carbs': 26.7, 'kcal': 260, 'fiber': 0.9}
+   169069  Sandwich spread, meatless  {'protein': 8.0, 'fiber': 3.3, 'fat': 9.0, 'carbs': 9.0, 'kcal': 149}
+   170791  ARBY'S, roast beef sandwich, classic  {'protein': 15.2, 'fiber': 1.3, 'fat': 10.3, 'carbs': 22.2, 'kcal': 242}
+== taameya_sandwich | falafel sandwich | ours kcal=280 | current 174258 = Noodles, chinese, cellophane or long rice (mung beans), dehydrated 351
+   170790  CHICK-FIL-A, chicken sandwich  {'fat': 11.2, 'carbs': 20.9, 'kcal': 249, 'protein': 16.3, 'fiber': 1.4}
+   172455  Falafel, home-prepared  {'protein': 13.3, 'fat': 17.8, 'carbs': 31.8, 'kcal': 333}
+   170695  Fast foods, roast beef sandwich, plain  {'fat': 10.3, 'carbs': 22.2, 'kcal': 244, 'protein': 15.2, 'fiber': 1.3}
+   170331  BURGER KING, Original Chicken Sandwich  {'kcal': 286, 'fat': 14.7, 'carbs': 26.2, 'protein': 12.1, 'fiber': 2.4}
+   170724  WENDY'S, Ultimate Chicken Grill Sandwich  {'protein': 14.7, 'fiber': 1.1, 'fat': 5.0, 'carbs': 18.9, 'kcal': 179}
+   170770  WEND'YS, Crispy Chicken Sandwich  {'protein': 11.7, 'fat': 13.9, 'carbs': 26.4, 'kcal': 278}
+== shawarma_chicken | chicken shawarma | ours kcal=220 | current 171078 = Chicken, broilers or fryers, breast, meat only, cooked, fried 187
+   169886  Chicken, meatless  {'fat': 12.7, 'carbs': 3.6, 'kcal': 224, 'protein': 23.6, 'fiber': 3.6}
+   169022  DENNY'S, chicken strips  {'fat': 14.5, 'carbs': 22.0, 'kcal': 295, 'protein': 19.2, 'fiber': 1.1}
+   170341  KFC, Crispy Chicken Strips  {'fat': 15.4, 'carbs': 13.7, 'kcal': 274, 'protein': 20.2, 'fiber': 1.4}
+   167719  Chicken, meatless, breaded, fried  {'fiber': 4.3, 'protein': 21.3, 'fat': 12.8, 'carbs': 8.5, 'kcal': 234}
+   169841  APPLEBEE'S, chicken tenders platter  {'fat': 16.2, 'carbs': 18.0, 'kcal': 297, 'protein': 19.6, 'fiber': 1.0}
+   168083  Restaurant, Chinese, chicken chow mein  {'fat': 2.8, 'carbs': 8.3, 'kcal': 85.0, 'protein': 6.8, 'fiber': 1.0}
+== hawawshi | hawawshi | ours kcal=280 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+== molokhia_with_rice | molokhia with rice | ours kcal=95 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+   168755  Candies, milk chocolate, with rice cereal  {'kcal': 511, 'fat': 29.4, 'carbs': 59.7, 'fiber': 3.3, 'protein': 7.6}
+   167665  Restaurant, Mexican, spanish rice  {'protein': 3.3, 'fiber': 1.2, 'fat': 5.3, 'carbs': 31.2, 'kcal': 185}
+   167723  Alcoholic beverage, rice (sake)  {'fat': 0.0, 'carbs': 5.0, 'kcal': 134, 'fiber': 0.0, 'protein': 0.5}
+   171862  Rolls, gluten-free, white, made with rice flour, rice starch, and corn starch  {'fat': 2.6, 'carbs': 50.5, 'kcal': 239, 'protein': 3.3, 'fiber': 5.1}
+   168783  Puddings, rice, dry mix  {'fiber': 0.7, 'protein': 2.7, 'fat': 0.1, 'carbs': 91.2, 'kcal': 376}
+   167728  Babyfood, rice and apples, dry  {'fat': 2.4, 'protein': 6.7, 'fiber': 3.0, 'carbs': 86.9, 'kcal': 396}
+== okara_stew | okra stew | ours kcal=70 | current 169260 = Okra, raw 33.0
+   169260  Okra, raw  {'fiber': 3.2, 'protein': 1.9, 'fat': 0.2, 'carbs': 7.5, 'kcal': 33.0}
+   168061  Acorn stew (Apache)  {'protein': 6.8, 'fiber': 0.7, 'fat': 3.5, 'carbs': 9.2, 'kcal': 95.0}
+   169262  Okra, frozen, unprepared  {'carbs': 6.6, 'kcal': 30.0, 'fiber': 2.2, 'protein': 1.7, 'fat': 0.2}
+   171553  Soup, oyster stew, canned, condensed  {'protein': 1.7, 'fiber': 0.0, 'fat': 3.1, 'carbs': 3.3, 'kcal': 48.0}
+   173330  Beef stew, canned entree  {'fiber': 0.9, 'protein': 4.4, 'fat': 5.5, 'carbs': 7.8, 'kcal': 99.0}
+   170098  Okra, cooked, boiled, drained, with salt  {'fiber': 2.5, 'fat': 0.2, 'carbs': 4.5, 'kcal': 22.0, 'protein': 1.9}
+== macarona_beshamel | pasta bechamel | ours kcal=180 | current 168928 = Pasta, cooked, unenriched, without added salt 158
+   169736  Pasta, dry, enriched  {'carbs': 74.7, 'kcal': 371, 'fat': 1.5, 'fiber': 3.2, 'protein': 13.0}
+   168927  Pasta, dry, unenriched  {'protein': 13.0, 'fiber': 3.2, 'fat': 1.5, 'carbs': 74.7, 'kcal': 371}
+   169751  Pasta, cooked, enriched, with added salt  {'protein': 5.8, 'fat': 0.9, 'carbs': 30.6, 'kcal': 157, 'fiber': 1.8}
+   172014  Pasta, cooked, unenriched, with added salt  {'fiber': 1.8, 'protein': 5.8, 'fat': 0.9, 'carbs': 30.6, 'kcal': 157}
+   169737  Pasta, cooked, enriched, without added salt  {'fat': 0.9, 'protein': 5.8, 'carbs': 30.9, 'kcal': 158, 'fiber': 1.8}
+   168928  Pasta, cooked, unenriched, without added salt  {'fat': 0.9, 'protein': 5.8, 'fiber': 1.8, 'carbs': 30.9, 'kcal': 158}
+== pizza_cheese | cheese pizza | ours kcal=266 | current 172220 = Yogurt, vanilla or lemon flavor, nonfat milk, sweetened with low-calorie sweetener, fortified with vitamin D 43.0
+   172041  PIZZA HUT 12" Cheese Pizza, Pan Crust  {'fat': 12.6, 'carbs': 29.9, 'kcal': 280, 'protein': 11.7, 'fiber': 1.7}
+   173291  PIZZA HUT 14" Cheese Pizza, Pan Crust  {'carbs': 32.8, 'kcal': 276, 'fat': 11.2, 'protein': 10.8, 'fiber': 2.1}
+   173287  PAPA JOHN'S 14" Cheese Pizza, Thin Crust  {'fat': 15.7, 'protein': 12.3, 'fiber': 2.3, 'carbs': 26.3, 'kcal': 295}
+   170774  PIZZA HUT 14" Cheese Pizza, Stuffed Crust  {'fat': 11.6, 'carbs': 30.0, 'kcal': 274, 'protein': 12.2, 'fiber': 1.7}
+   173289  LITTLE CAESARS 14" Cheese Pizza, Thin Crust  {'fat': 17.0, 'carbs': 22.8, 'kcal': 309, 'protein': 16.2, 'fiber': 1.6}
+   173284  PAPA JOHN'S 14" Cheese Pizza, Original Crust  {'protein': 11.5, 'fiber': 1.9, 'fat': 9.2, 'carbs': 32.7, 'kcal': 260}
+== burger_beef | beef burger | ours kcal=295 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   170602  Beef, cured, corned beef, canned  {'fat': 14.9, 'carbs': 0.0, 'kcal': 250, 'protein': 27.1, 'fiber': 0.0}
+   168118  Beef, bologna, reduced sodium  {'fat': 28.4, 'carbs': 2.0, 'kcal': 310, 'protein': 11.7, 'fiber': 0.0}
+   170199  Beef, cured, corned beef, brisket, raw  {'fat': 14.9, 'carbs': 0.1, 'kcal': 198, 'protein': 14.7, 'fiber': 0.0}
+   168608  Beef, grass-fed, ground, raw  {'fat': 12.7, 'carbs': 0.0, 'fiber': 0.0, 'protein': 19.4, 'kcal': 198}
+   173086  Beef, New Zealand, imported, manufacturing beef, raw  {'protein': 21.2, 'fiber': 0.0, 'fat': 3.7, 'carbs': 0.2, 'kcal': 119}
+   170200  Beef, cured, corned beef, brisket, cooked  {'protein': 18.2, 'fiber': 0.0, 'fat': 19.0, 'carbs': 0.5, 'kcal': 251}
+== sardines_canned | sardines canned | ours kcal=208 | current 175139 = Fish, sardine, Atlantic, canned in oil, drained solids with bone 208
+   167786  Tamarind nectar, canned  {'fiber': 0.5, 'protein': 0.1, 'fat': 0.1, 'carbs': 14.7, 'kcal': 57.0}
+   167753  Prune juice, canned  {'protein': 0.6, 'fiber': 1.0, 'fat': 0.0, 'carbs': 17.4, 'kcal': 71.0}
+   167766  Maraschino cherries, canned, drained  {'fat': 0.2, 'fiber': 3.2, 'carbs': 42.0, 'kcal': 165, 'protein': 0.2}
+   167785  Mango nectar, canned  {'carbs': 13.1, 'kcal': 51.0, 'fat': 0.1, 'protein': 0.1, 'fiber': 0.3}
+   167788  Nance, canned, syrup, drained  {'protein': 0.6, 'fiber': 7.0, 'fat': 1.3, 'carbs': 22.8, 'kcal': 95.0}
+   167738  Pie fillings, blueberry, canned  {'protein': 0.4, 'fiber': 2.6, 'fat': 0.2, 'carbs': 44.4, 'kcal': 181}
+== mackerel_cooked | mackerel cooked | ours kcal=262 | current 175120 = Fish, mackerel, Atlantic, cooked, dry heat 262
+   168149  Fish, mackerel, salted  {'fat': 25.1, 'carbs': 0.0, 'kcal': 305, 'protein': 18.5, 'fiber': 0.0}
+   174236  Fish, mackerel, king, cooked, dry heat  {'fat': 2.6, 'carbs': 0.0, 'kcal': 134, 'protein': 26.0, 'fiber': 0.0}
+   173674  Fish, mackerel, spanish, cooked, dry heat  {'fat': 6.3, 'carbs': 0.0, 'kcal': 158, 'protein': 23.6, 'fiber': 0.0}
+   175120  Fish, mackerel, Atlantic, cooked, dry heat  {'protein': 23.8, 'fiber': 0.0, 'fat': 17.8, 'carbs': 0.0, 'kcal': 262}
+   175122  Fish, mackerel, king, raw  {'protein': 20.3, 'fiber': 0.0, 'fat': 2.0, 'carbs': 0.0, 'kcal': 105}
+   175119  Fish, mackerel, Atlantic, raw  {'fat': 13.9, 'carbs': 0.0, 'kcal': 205, 'protein': 18.6, 'fiber': 0.0}
+== duck_cooked | duck cooked | ours kcal=337 | current 172409 = Duck, domesticated, meat and skin, cooked, roasted 337
+   174467  Duck, domesticated, liver, raw  {'protein': 18.7, 'fiber': 0.0, 'fat': 4.6, 'carbs': 3.5, 'kcal': 136}
+   172411  Duck, domesticated, meat only, cooked, roasted  {'fat': 11.2, 'carbs': 0.0, 'kcal': 201, 'protein': 23.5, 'fiber': 0.0}
+   172189  Egg, duck, whole, fresh, raw  {'protein': 12.8, 'fiber': 0.0, 'fat': 13.8, 'carbs': 1.4, 'kcal': 185}
+   171823  Sauce, duck, ready-to-serve  {'fat': 0.1, 'kcal': 245, 'protein': 0.4, 'fiber': 0.6, 'carbs': 60.7}
+   172409  Duck, domesticated, meat and skin, cooked, roasted  {'fat': 28.4, 'carbs': 0.0, 'kcal': 337, 'protein': 19.0, 'fiber': 0.0}
+   172410  Duck, domesticated, meat only, raw  {'carbs': 0.9, 'kcal': 135, 'protein': 18.3, 'fiber': 0.0, 'fat': 6.0}
+== rabbit_cooked | rabbit cooked | ours kcal=173 | current 174348 = Game meat, rabbit, wild, cooked, stewed 173
+   174348  Game meat, rabbit, wild, cooked, stewed  {'fat': 3.5, 'carbs': 0.0, 'kcal': 173, 'protein': 33.0, 'fiber': 0.0}
+   174347  Game meat, rabbit, wild, raw  {'protein': 21.8, 'fiber': 0.0, 'fat': 2.3, 'carbs': 0.0, 'kcal': 114}
+   174346  Game meat, rabbit, domesticated, composite of cuts, cooked, stewed  {'fat': 8.4, 'carbs': 0.0, 'kcal': 206, 'protein': 30.4, 'fiber': 0.0}
+   172522  Game meat, rabbit, domesticated, composite of cuts, cooked, roasted  {'fiber': 0.0, 'protein': 29.1, 'fat': 8.1, 'carbs': 0.0, 'kcal': 197}
+   172521  Game meat, rabbit, domesticated, composite of cuts, raw  {'fat': 5.5, 'carbs': 0.0, 'kcal': 136, 'protein': 20.0, 'fiber': 0.0}
+== tofu | tofu | ours kcal=76 | current 172476 = Tofu, raw, regular, prepared with calcium sulfate 76.0
+   172451  Tofu, fried  {'carbs': 8.9, 'kcal': 270, 'protein': 18.8, 'fat': 20.2, 'fiber': 3.9}
+   167722  Tofu yogurt  {'fat': 1.8, 'carbs': 16.0, 'kcal': 94.0, 'protein': 3.5, 'fiber': 0.2}
+   172461  MORI-NU, Tofu, silken, firm  {'protein': 6.9, 'fat': 2.7, 'carbs': 2.4, 'kcal': 62.0, 'fiber': 0.1}
+   174292  MORI-NU, Tofu, silken, soft  {'fat': 2.7, 'carbs': 2.9, 'protein': 4.8, 'fiber': 0.1, 'kcal': 55.0}
+   167695  Mayonnaise, made with tofu  {'fat': 31.8, 'carbs': 3.1, 'kcal': 322, 'protein': 6.0, 'fiber': 1.1}
+   172450  Tofu, dried-frozen (koyadofu)  {'fiber': 7.2, 'protein': 52.5, 'carbs': 10.0, 'kcal': 477, 'fat': 30.3}
+== tempeh | tempeh | ours kcal=192 | current 174272 = Tempeh 192
+   174272  Tempeh  {'protein': 20.3, 'carbs': 7.6, 'kcal': 192, 'fat': 10.8}
+   172467  Tempeh, cooked  {'protein': 19.9, 'carbs': 7.6, 'kcal': 195, 'fat': 11.4}
+== cream_cheese | cream cheese | ours kcal=342 | current 173418 = Cheese, cream 350
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+   167941  Crackers, cheese, reduced fat  {'protein': 10.0, 'fiber': 3.3, 'fat': 11.7, 'carbs': 68.2, 'kcal': 418}
+   173418  Cheese, cream  {'protein': 6.2, 'fat': 34.4, 'carbs': 5.5, 'kcal': 350, 'fiber': 0.0}
+   172207  Cheese, cream, fat free  {'fiber': 0.0, 'protein': 15.7, 'fat': 1.0, 'carbs': 7.7, 'kcal': 105}
+   168076  DENNY'S, mozzarella cheese sticks  {'fat': 17.9, 'carbs': 27.2, 'kcal': 324, 'protein': 13.6, 'fiber': 1.6}
+== sour_cream | sour cream | ours kcal=193 | current 170900 = Cheese, mozzarella, low moisture, part-skim, shredded 304
+   173443  Sour cream, light  {'fat': 10.6, 'carbs': 7.1, 'protein': 3.5, 'fiber': 0.0, 'kcal': 136}
+   173444  Sour cream, fat free  {'protein': 3.1, 'fiber': 0.0, 'fat': 0.0, 'carbs': 15.6, 'kcal': 74.0}
+   173442  Sour cream, reduced fat  {'protein': 7.0, 'fiber': 0.0, 'fat': 14.1, 'carbs': 7.0, 'kcal': 181}
+   171257  Cream, sour, cultured  {'protein': 2.4, 'fat': 19.4, 'carbs': 4.6, 'kcal': 198, 'fiber': 0.0}
+   170869  Sour cream, imitation, cultured  {'fat': 19.5, 'carbs': 6.6, 'kcal': 208, 'protein': 2.4, 'fiber': 0.0}
+   169079  Cheese, cream, low fat  {'fiber': 0.0, 'protein': 7.8, 'fat': 16.7, 'carbs': 6.7, 'kcal': 208}
+== ricotta | ricotta | ours kcal=174 | current 170890 = Milk dessert bar, frozen, made from lowfat milk 147
+   170851  Cheese, ricotta, whole milk  {'protein': 7.5, 'fat': 10.2, 'carbs': 7.3, 'kcal': 150, 'fiber': 0.0}
+   171248  Cheese, ricotta, part skim milk  {'fiber': 0.0, 'protein': 11.4, 'fat': 7.9, 'carbs': 5.1, 'kcal': 138}
+== parmesan | parmesan | ours kcal=392 | current 173431 = Cheese, parmesan, shredded 415
+   170848  Cheese, parmesan, hard  {'fat': 25.0, 'fiber': 0.0, 'protein': 35.8, 'carbs': 3.2, 'kcal': 392}
+   171247  Cheese, parmesan, grated  {'fat': 27.8, 'carbs': 13.9, 'kcal': 420, 'protein': 28.4, 'fiber': 0.0}
+   173431  Cheese, parmesan, shredded  {'kcal': 415, 'protein': 37.9, 'fiber': 0.0, 'fat': 27.3, 'carbs': 3.4}
+   167705  Cheese, parmesan, low sodium  {'fat': 30.0, 'carbs': 3.7, 'kcal': 451, 'protein': 41.6, 'fiber': 0.0}
+   172206  Parmesan cheese topping, fat free  {'fat': 5.0, 'carbs': 40.0, 'kcal': 370, 'protein': 40.0, 'fiber': 0.0}
+   170789  PIZZA HUT, breadstick, parmesan garlic  {'protein': 12.2, 'fiber': 2.4, 'fat': 12.9, 'carbs': 44.5, 'kcal': 343}
+== sweet_potato_cooked | sweet potato cooked | ours kcal=90 | current 168483 = Sweet potato, cooked, baked in skin, flesh, without salt 90.0
+   169305  Sweet potato, canned, mashed  {'fiber': 1.7, 'carbs': 23.2, 'kcal': 101, 'fat': 0.2, 'protein': 2.0}
+   169303  Sweet potato leaves, raw  {'protein': 2.5, 'fiber': 5.3, 'fat': 0.5, 'carbs': 8.8, 'kcal': 42.0}
+   168484  Sweet potato, cooked, boiled, without skin  {'carbs': 17.7, 'kcal': 76.0, 'protein': 1.4, 'fiber': 2.5, 'fat': 0.1}
+   168485  Sweet potato, canned, vacuum pack  {'fiber': 1.8, 'carbs': 21.1, 'kcal': 91.0, 'protein': 1.6, 'fat': 0.2}
+   170088  Sweet potato, cooked, candied, home-prepared  {'fat': 3.5, 'carbs': 32.1, 'kcal': 164, 'protein': 0.9, 'fiber': 2.1}
+   170542  Sweet potato, frozen, cooked, baked, with salt  {'fiber': 1.8, 'carbs': 23.4, 'kcal': 100, 'protein': 1.7, 'fat': 0.1}
+== broccoli_cooked | broccoli cooked | ours kcal=42 | current 170379 = Broccoli, raw 34.0
+   170382  Broccoli raab, cooked  {'kcal': 25.0, 'carbs': 3.1, 'protein': 3.8, 'fiber': 2.8, 'fat': 0.5}
+   169392  Broccoli, chinese, cooked  {'fiber': 2.5, 'carbs': 3.8, 'kcal': 22.0, 'protein': 1.1, 'fat': 0.7}
+   170379  Broccoli, raw  {'carbs': 6.6, 'kcal': 34.0, 'fat': 0.4, 'protein': 2.8, 'fiber': 2.6}
+   169404  Broccoli, chinese, raw  {'fat': 0.8, 'carbs': 4.7, 'protein': 1.2, 'fiber': 2.6, 'kcal': 26.0}
+   169329  Broccoli, leaves, raw  {'fiber': 2.3, 'carbs': 5.1, 'fat': 0.3, 'kcal': 28.0, 'protein': 3.0}
+   169331  Broccoli, stalks, raw  {'fat': 0.3, 'carbs': 5.2, 'kcal': 28.0, 'protein': 3.0}
+== cauliflower_cooked | cauliflower cooked | ours kcal=28 | current 169986 = Cauliflower, raw 25.0
+   169986  Cauliflower, raw  {'carbs': 5.0, 'kcal': 25.0, 'protein': 1.9, 'fiber': 2.0, 'fat': 0.3}
+   169391  Cauliflower, green, cooked, with salt  {'carbs': 6.3, 'kcal': 32.0, 'protein': 3.0, 'fiber': 3.3, 'fat': 0.3}
+   169389  Cauliflower, green, raw  {'fiber': 3.2, 'fat': 0.3, 'protein': 3.0, 'carbs': 6.1, 'kcal': 31.0}
+   169390  Cauliflower, green, cooked, no salt added  {'carbs': 6.3, 'kcal': 32.0, 'fat': 0.3, 'fiber': 3.3, 'protein': 3.0}
+   170398  Cauliflower, frozen, unprepared  {'fat': 0.3, 'carbs': 4.7, 'kcal': 24.0, 'protein': 2.0, 'fiber': 2.3}
+   168520  Cauliflower, cooked, boiled, drained, with salt  {'fiber': 2.3, 'carbs': 4.1, 'kcal': 23.0, 'protein': 1.8, 'fat': 0.5}
+== mushroom_raw | mushroom | ours kcal=28 | current 169251 = Mushrooms, white, raw 22.0
+   171170  Gravy, mushroom, canned  {'fiber': 0.4, 'protein': 1.3, 'fat': 2.7, 'carbs': 5.5, 'kcal': 50.0}
+   171171  Gravy, mushroom, dry, powder  {'fat': 4.0, 'carbs': 64.7, 'kcal': 328, 'protein': 10.0, 'fiber': 4.8}
+   171175  Soup, beef mushroom, canned, condensed  {'fat': 2.4, 'carbs': 5.2, 'kcal': 61.0, 'protein': 4.6, 'fiber': 0.2}
+   171154  Soup, mushroom barley, canned, condensed  {'protein': 1.5, 'fat': 1.8, 'carbs': 9.6, 'kcal': 61.0}
+   174522  Soup, chicken mushroom, canned, condensed  {'protein': 1.6, 'fiber': 3.2, 'fat': 4.8, 'carbs': 12.0, 'kcal': 100}
+   171155  Soup, cream of mushroom, canned, condensed  {'fiber': 0.7, 'protein': 1.4, 'fat': 5.3, 'carbs': 6.8, 'kcal': 79.0}
+== green_beans_cooked | green beans cooked | ours kcal=42 | current 169963 = Beans, snap, green, frozen, cooked, boiled, drained without salt 28.0
+   172273  Babyfood, green beans, dices, toddler  {'fat': 0.2, 'carbs': 5.7, 'protein': 1.2, 'kcal': 29.0, 'fiber': 1.3}
+   169049  Babyfood, green beans and turkey, strained  {'carbs': 5.3, 'kcal': 51.0, 'fiber': 1.4, 'protein': 4.1, 'fat': 1.5}
+   168216  Plantains, green, boiled  {'protein': 1.1, 'fiber': 2.6, 'fat': 0.1, 'carbs': 29.2, 'kcal': 121}
+   173504  Babyfood, vegetable, green beans and potatoes  {'carbs': 9.0, 'kcal': 62.0, 'fat': 1.9, 'fiber': 1.4, 'protein': 2.2}
+   172271  Babyfood, vegetables, green beans, strained  {'fat': 0.2, 'carbs': 6.3, 'kcal': 27.0, 'protein': 1.2, 'fiber': 2.2}
+   172272  Babyfood, vegetables, green beans, junior  {'carbs': 5.8, 'kcal': 24.0, 'fiber': 1.9, 'protein': 1.2, 'fat': 0.1}
+== beet_cooked | beet cooked | ours kcal=44 | current 169146 = Beets, cooked, boiled, drained 44.0
+   170375  Beet greens, raw  {'protein': 2.2, 'carbs': 4.3, 'kcal': 22.0, 'fiber': 3.7, 'fat': 0.1}
+   168508  Beet greens, cooked, boiled, drained, with salt  {'fiber': 2.9, 'kcal': 27.0, 'carbs': 5.5, 'protein': 2.6, 'fat': 0.2}
+   170376  Beet greens, cooked, boiled, drained, without salt  {'carbs': 5.5, 'kcal': 27.0, 'protein': 2.6, 'fiber': 2.9, 'fat': 0.2}
+== turnip_cooked | turnip cooked | ours kcal=22 | current 170465 = Turnips, raw 28.0
+   170061  Turnip greens, raw  {'fiber': 3.2, 'carbs': 7.1, 'kcal': 32.0, 'protein': 1.5, 'fat': 0.3}
+   170468  Turnip greens, frozen, unprepared  {'fiber': 2.5, 'fat': 0.3, 'carbs': 3.7, 'kcal': 22.0, 'protein': 2.5}
+   170139  Turnip greens, cooked, boiled, drained, with salt  {'fiber': 3.5, 'protein': 1.1, 'fat': 0.2, 'carbs': 4.4, 'kcal': 20.0}
+   170466  Turnip greens, cooked, boiled, drained, without salt  {'fiber': 3.5, 'kcal': 20.0, 'fat': 0.2, 'protein': 1.1, 'carbs': 4.4}
+   168119  Turnip greens, canned, no salt added  {'fat': 0.3, 'carbs': 2.8, 'kcal': 19.0, 'fiber': 1.3, 'protein': 1.4}
+   170140  Turnip greens, frozen, cooked, boiled, drained, with salt  {'fiber': 3.4, 'carbs': 5.0, 'kcal': 29.0, 'fat': 0.4, 'protein': 3.4}
+== radish | radish | ours kcal=16 | current 169249 = Lettuce, green leaf, raw 15.0
+   170095  Radish seeds, sprouted, raw  {'protein': 3.8, 'fat': 2.5, 'carbs': 3.6, 'kcal': 43.0}
+== parsley | parsley | ours kcal=44 | current 170416 = Parsley, fresh 36.0
+   170416  Parsley, fresh  {'carbs': 6.3, 'kcal': 36.0, 'fat': 0.8, 'protein': 3.0, 'fiber': 3.3}
+   170486  Parsley, freeze-dried  {'fiber': 32.7, 'protein': 31.3, 'fat': 5.2, 'carbs': 42.4, 'kcal': 271}
+   170930  Spices, parsley, dried  {'fiber': 26.7, 'protein': 26.6, 'fat': 5.5, 'carbs': 50.6, 'kcal': 292}
+== cilantro | cilantro | ours kcal=28 | current 169997 = Coriander (cilantro) leaves, raw 23.0
+   169997  Coriander (cilantro) leaves, raw  {'protein': 2.1, 'carbs': 3.7, 'kcal': 23.0, 'fiber': 2.8, 'fat': 0.5}
+== mint | mint | ours kcal=53 | current 173433 = Cheese, goat, semisoft type 364
+   170663  Ice creams, BREYERS, All Natural Light Mint Chocolate Chip  {'protein': 4.7, 'fiber': 0.6, 'fat': 7.1, 'carbs': 28.4, 'kcal': 196}
+== ginger_raw | ginger | ours kcal=80 | current 169231 = Ginger root, raw 80.0
+   169231  Ginger root, raw  {'fat': 0.8, 'protein': 1.8, 'carbs': 17.8, 'kcal': 80.0, 'fiber': 2.0}
+   170926  Spices, ginger, ground  {'protein': 9.0, 'fiber': 14.1, 'fat': 4.2, 'carbs': 71.6, 'kcal': 335}
+   174846  Beverages, carbonated, ginger ale  {'fat': 0.0, 'protein': 0.0, 'fiber': 0.0, 'carbs': 8.8, 'kcal': 34.0}
+   175077  Archway Home Style Cookies, Reduced Fat Ginger Snaps  {'protein': 4.7, 'fiber': 1.1, 'fat': 11.1, 'carbs': 76.2, 'kcal': 424}
+   169765  Ginger root, pickled, canned, with artificial sweetener  {'protein': 0.3, 'fiber': 2.6, 'fat': 0.1, 'carbs': 4.8, 'kcal': 20.0}
+== pancake | pancake | ours kcal=227 | current 167961 = Snacks, pork skins, plain 544
+   169578  Syrups, table blends, pancake  {'protein': 0.0, 'fat': 0.0, 'carbs': 61.5, 'kcal': 234, 'fiber': 0.0}
+   168838  Syrups, table blends, pancake, with 2% maple  {'fiber': 0.0, 'protein': 0.0, 'fat': 0.1, 'carbs': 69.6, 'kcal': 265}
+   167584  Syrups, table blends, pancake, with butter  {'fiber': 0.0, 'protein': 0.0, 'fat': 0.1, 'carbs': 72.4, 'kcal': 291}
+   169577  Syrups, table blends, pancake, reduced-calorie  {'fiber': 0.0, 'protein': 0.0, 'fat': 0.0, 'carbs': 44.6, 'kcal': 165}
+   170646  Syrups, table blends, pancake, with 2% maple, with added potassium  {'fiber': 0.0, 'protein': 0.0, 'fat': 0.1, 'carbs': 69.6, 'kcal': 265}
+== toast_white | white toast | ours kcal=265 | current 174930 = Bread, stuffing, dry mix 386
+   167532  Bread, white wheat  {'fat': 2.1, 'carbs': 43.9, 'kcal': 238, 'protein': 10.7, 'fiber': 9.2}
+   168538  Corn, sweet, white, raw  {'fiber': 2.7, 'carbs': 19.0, 'kcal': 86.0, 'protein': 3.2, 'fat': 1.2}
+   168037  Corn, white, steamed (Navajo)  {'fat': 5.2, 'carbs': 75.2, 'kcal': 386, 'protein': 9.7, 'fiber': 16.6}
+   168038  Cornmeal, white (Navajo)  {'protein': 11.0, 'fiber': 10.4, 'fat': 5.0, 'carbs': 77.1, 'kcal': 398}
+   167571  Candies, white chocolate  {'fat': 32.1, 'protein': 5.9, 'fiber': 0.2, 'carbs': 59.2, 'kcal': 539}
+   167617  Duck, scoter, white-winged, meat (Alaska Native)  {'protein': 20.2, 'fat': 0.4, 'carbs': 0.0, 'kcal': 84.0}
+== croissant | croissant | ours kcal=406 | current 172671 = Biscuits, mixed grain, refrigerated dough 263
+   173270  Fast foods, croissant, with egg, cheese, and ham  {'fat': 15.0, 'carbs': 19.0, 'kcal': 261, 'fiber': 0.9, 'protein': 12.4}
+   173269  Fast foods, croissant, with egg, cheese, and bacon  {'protein': 12.9, 'fat': 16.4, 'carbs': 22.5, 'kcal': 289, 'fiber': 1.0}
+   173271  Fast foods, croissant, with egg, cheese, and sausage  {'protein': 12.1, 'fiber': 1.8, 'fat': 21.8, 'carbs': 15.9, 'kcal': 308}
+   173326  HOT POCKETS, CROISSANT POCKETS Chicken, Broccoli, and Cheddar Stuffed Sandwich, frozen  {'fat': 8.6, 'carbs': 30.4, 'kcal': 235, 'protein': 8.9, 'fiber': 1.1}
+== jam_strawberry | strawberry jam | ours kcal=250 | current 168819 = Marmalade, orange 246
+   173045  Guavas, strawberry, raw  {'fiber': 5.4, 'protein': 0.6, 'fat': 0.6, 'carbs': 17.4, 'kcal': 69.0}
+   168758  Toppings, strawberry  {'fiber': 0.7, 'protein': 0.2, 'fat': 0.1, 'carbs': 66.3, 'kcal': 254}
+   168810  Ice creams, strawberry  {'fat': 8.4, 'fiber': 0.9, 'protein': 3.2, 'carbs': 27.6, 'kcal': 192}
+   172062  McDONALD'S, Strawberry Sundae  {'fat': 4.0, 'carbs': 28.1, 'protein': 3.2, 'fiber': 0.0, 'kcal': 158}
+   175228  SILK Strawberry soy yogurt  {'fat': 1.2, 'carbs': 18.2, 'kcal': 94.0, 'fiber': 0.6, 'protein': 2.4}
+   170901  Yogurt, Greek, strawberry, nonfat  {'fat': 0.1, 'carbs': 12.1, 'kcal': 82.0, 'protein': 8.1, 'fiber': 0.6}
+== peanut_butter | peanut butter | ours kcal=588 | current 172470 = Peanut butter, smooth style, without salt 598
+   169869  Peanut butter, reduced sodium  {'kcal': 590, 'fat': 49.9, 'carbs': 21.8, 'protein': 24.0, 'fiber': 6.6}
+   172471  Peanut butter with omega-3, creamy  {'protein': 24.5, 'fiber': 6.1, 'fat': 54.2, 'carbs': 17.0, 'kcal': 608}
+   172458  Peanut butter, smooth, reduced fat  {'fat': 34.0, 'carbs': 35.6, 'kcal': 520, 'protein': 25.9, 'fiber': 5.2}
+   168763  Candies, REESE'S Peanut Butter Cups  {'protein': 10.2, 'fiber': 3.6, 'fat': 30.5, 'carbs': 55.4, 'kcal': 515}
+   174265  Peanut butter, chunk style, with salt  {'protein': 24.1, 'fiber': 8.0, 'fat': 49.9, 'carbs': 21.6, 'kcal': 589}
+   169681  Snacks, granola bars, hard, peanut butter  {'fiber': 2.9, 'fat': 23.8, 'carbs': 62.3, 'kcal': 483, 'protein': 9.8}
+== nutella | chocolate hazelnut spread | ours kcal=539 | current 170273 = Chocolate, dark, 70-85% cacao solids 598
+   168000  Chocolate-flavored hazelnut spread  {'carbs': 62.4, 'kcal': 539, 'fat': 29.7, 'fiber': 5.4, 'protein': 5.4}
+   171629  Ham and cheese spread  {'protein': 16.2, 'fiber': 0.0, 'fat': 18.5, 'carbs': 2.3, 'kcal': 245}
+   172457  Peanut spread, reduced sugar  {'carbs': 14.2, 'kcal': 650, 'fiber': 7.8, 'protein': 24.8, 'fat': 54.9}
+   168834  Syrups, chocolate, HERSHEY'S Genuine Chocolate Flavored Lite Syrup  {'carbs': 34.6, 'kcal': 153, 'fat': 1.0, 'fiber': 0.0, 'protein': 1.4}
+   167717  Yeast extract spread  {'fat': 0.9, 'carbs': 20.4, 'kcal': 185, 'fiber': 6.5, 'protein': 23.9}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+== mayo | mayonnaise | ours kcal=680 | current 171009 = Salad dressing, mayonnaise, regular 680
+   167695  Mayonnaise, made with tofu  {'fat': 31.8, 'carbs': 3.1, 'kcal': 322, 'protein': 6.0, 'fiber': 1.1}
+   173594  Salad dressing, mayonnaise, light  {'fiber': 0.0, 'fat': 22.2, 'carbs': 9.2, 'protein': 0.4, 'kcal': 238}
+   171009  Salad dressing, mayonnaise, regular  {'protein': 1.0, 'fat': 74.8, 'carbs': 0.6, 'kcal': 680, 'fiber': 0.0}
+   167736  Mayonnaise dressing, no cholesterol  {'protein': 0.0, 'fiber': 0.0, 'fat': 77.8, 'carbs': 0.3, 'kcal': 688}
+   171444  Salad dressing, mayonnaise-type, light  {'protein': 0.7, 'fiber': 0.0, 'fat': 10.0, 'carbs': 16.4, 'kcal': 158}
+   171443  Mayonnaise, reduced fat, with olive oil  {'fat': 40.0, 'carbs': 0.0, 'kcal': 361, 'protein': 0.4, 'fiber': 0.0}
+== ketchup | ketchup | ours kcal=112 | current 168559 = Pimento, canned 23.0
+== mustard | mustard | ours kcal=66 | current 172234 = Mustard, prepared, yellow 60.0
+   172337  Oil, mustard  {'fiber': 0.0, 'protein': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 884}
+   169256  Mustard greens, raw  {'protein': 2.9, 'fiber': 3.2, 'fat': 0.4, 'carbs': 4.7, 'kcal': 27.0}
+   169891  Cabbage, mustard, salted  {'fat': 0.1, 'carbs': 5.6, 'kcal': 28.0, 'protein': 1.1, 'fiber': 3.1}
+   172234  Mustard, prepared, yellow  {'protein': 3.7, 'fiber': 4.0, 'fat': 3.3, 'carbs': 5.8, 'kcal': 60.0}
+   170929  Spices, mustard seed, ground  {'protein': 26.1, 'fiber': 12.2, 'fat': 36.2, 'carbs': 28.1, 'kcal': 508}
+   168438  Mustard spinach, (tendergreen), raw  {'fiber': 2.8, 'protein': 2.2, 'fat': 0.3, 'carbs': 3.9, 'kcal': 22.0}
+== soy_sauce | soy sauce | ours kcal=53 | current 174277 = Soy sauce made from soy and wheat (shoyu) 53.0
+   174278  Soy sauce made from soy (tamari)  {'carbs': 5.6, 'kcal': 60.0, 'protein': 10.5, 'fiber': 0.8, 'fat': 0.1}
+   171584  Sauce, cheese sauce mix, dry  {'fat': 18.3, 'carbs': 60.5, 'kcal': 438, 'protein': 7.7, 'fiber': 1.0}
+   170054  Tomato products, canned, sauce  {'protein': 1.2, 'kcal': 24.0, 'fat': 0.3, 'carbs': 5.3, 'fiber': 1.5}
+   174277  Soy sauce made from soy and wheat (shoyu)  {'fat': 0.6, 'carbs': 4.9, 'protein': 8.1, 'kcal': 53.0, 'fiber': 0.8}
+   169074  Tomato sauce, canned, no salt added  {'protein': 1.2, 'kcal': 24.0, 'fiber': 1.5, 'fat': 0.3, 'carbs': 5.3}
+   174279  Soy sauce made from hydrolyzed vegetable protein  {'protein': 7.0, 'fat': 0.5, 'carbs': 7.8, 'kcal': 60.0, 'fiber': 0.5}
+== vinegar | vinegar | ours kcal=0 | current 173130 = Beef, brisket, flat half, separable lean and fat, trimmed to 1/8" fat, choice, cooked, braised 298
+   173469  Vinegar, cider  {'fiber': 0.0, 'fat': 0.0, 'protein': 0.0, 'carbs': 0.9, 'kcal': 21.0}
+   172240  Vinegar, red wine  {'fat': 0.0, 'carbs': 0.3, 'kcal': 19.0, 'protein': 0.0, 'fiber': 0.0}
+   172241  Vinegar, balsamic  {'protein': 0.5, 'fat': 0.0, 'carbs': 17.0, 'kcal': 88.0}
+   172237  Vinegar, distilled  {'fat': 0.0, 'protein': 0.0, 'fiber': 0.0, 'carbs': 0.0, 'kcal': 18.0}
+   171417  Salad dressing, home recipe, vinegar and oil  {'fat': 50.1, 'carbs': 2.5, 'kcal': 449, 'protein': 0.0, 'fiber': 0.0}
+== broth_chicken | chicken broth | ours kcal=12 | current 172885 = Soup, stock, fish, home-prepared 16.0
+   171110  Chicken, canned, no broth  {'fat': 8.1, 'carbs': 0.9, 'kcal': 185, 'protein': 25.3, 'fiber': 0.0}
+   171563  Soup, chicken broth cubes, dry  {'fat': 4.7, 'carbs': 23.5, 'kcal': 198, 'protein': 14.6, 'fiber': 0.0}
+   171606  Fish broth  {'fat': 0.6, 'carbs': 0.4, 'kcal': 16.0, 'fiber': 0.0, 'protein': 2.0}
+   174536  Soup, chicken broth, ready-to-serve  {'protein': 0.6, 'fiber': 0.0, 'fat': 0.2, 'carbs': 0.4, 'kcal': 6.0}
+   171562  Soup, chicken broth or bouillon, dry  {'protein': 16.7, 'fiber': 0.0, 'fat': 13.9, 'carbs': 18.0, 'kcal': 267}
+   171099  Chicken, canned, meat only, with broth  {'protein': 21.8, 'fiber': 0.0, 'fat': 8.0, 'carbs': 0.0, 'kcal': 165}
+== machboos_rice | machboos / kabsa rice | ours kcal=160 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+   167723  Alcoholic beverage, rice (sake)  {'fat': 0.0, 'carbs': 5.0, 'kcal': 134, 'fiber': 0.0, 'protein': 0.5}
+   167958  Snacks, oriental mix, rice-based  {'kcal': 506, 'protein': 17.3, 'fat': 25.6, 'carbs': 51.6, 'fiber': 13.2}
+   167728  Babyfood, rice and apples, dry  {'fat': 2.4, 'protein': 6.7, 'fiber': 3.0, 'carbs': 86.9, 'kcal': 396}
+   168755  Candies, milk chocolate, with rice cereal  {'kcal': 511, 'fat': 29.4, 'carbs': 59.7, 'fiber': 3.3, 'protein': 7.6}
+   167951  Snacks, crisped rice bar, chocolate chip  {'fiber': 2.2, 'protein': 5.1, 'fat': 13.5, 'carbs': 73.0, 'kcal': 404}
+   167668  Restaurant, Chinese, fried rice, without meat  {'fat': 3.0, 'carbs': 32.8, 'kcal': 174, 'protein': 4.0, 'fiber': 1.1}
+== harees | harees | ours kcal=120 | current 170288 = Corn grain, yellow 365
+== thareed | thareed | ours kcal=140 | current 790085 = <NOT FOUND> None
+== luqaimat | luqaimat | ours kcal=380 | current 167946 = SCHIFF,TIGER'S MILK BAR 387
+== samosa | samosa | ours kcal=308 | current 174258 = Noodles, chinese, cellophane or long rice (mung beans), dehydrated 351
+== kibbeh | kibbeh | ours kcal=250 | current 170288 = Corn grain, yellow 365
+== tabbouleh | tabbouleh | ours kcal=75 | current 170288 = Corn grain, yellow 365
+== fattoush | fattoush | ours kcal=90 | current 170050 = Tomatoes, red, ripe, cooked 18.0
+== baba_ganoush | baba ganoush | ours kcal=100 | current 169228 = Eggplant, raw 25.0
+== mutabal | mutabal | ours kcal=110 | current 169228 = Eggplant, raw 25.0
+== warak_enab | stuffed grape leaves | ours kcal=140 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+   168575  Grape leaves, raw  {'protein': 5.6, 'fiber': 11.0, 'carbs': 17.3, 'kcal': 93.0, 'fat': 2.1}
+   169393  Grape leaves, canned  {'carbs': 11.7, 'kcal': 69.0, 'fat': 2.0, 'protein': 4.3, 'fiber': 9.9}
+   173203  Beverages, carbonated, grape soda  {'protein': 0.0, 'fiber': 0.0, 'fat': 0.0, 'carbs': 11.2, 'kcal': 43.0}
+   168385  Amaranth leaves, raw  {'carbs': 4.0, 'kcal': 23.0, 'fat': 0.3, 'protein': 2.5}
+   168416  Drumstick leaves, raw  {'protein': 9.4, 'fiber': 2.0, 'fat': 1.4, 'carbs': 8.3, 'kcal': 64.0}
+   168028  Sourdock, young leaves (Alaska Native)  {'fat': 0.7, 'carbs': 6.5, 'kcal': 42.0, 'protein': 2.3}
+== ful_nabet | sprouted fava | ours kcal=100 | current 173745 = Beans, navy, mature seeds, raw 337
+   168427  Lentils, sprouted, raw  {'fat': 0.6, 'carbs': 22.1, 'kcal': 106, 'protein': 9.0}
+   169725  Wheat, sprouted  {'fat': 1.3, 'carbs': 42.5, 'kcal': 198, 'protein': 7.5, 'fiber': 1.1}
+   170095  Radish seeds, sprouted, raw  {'protein': 3.8, 'fat': 2.5, 'carbs': 3.6, 'kcal': 43.0}
+   168384  Alfalfa seeds, sprouted, raw  {'fiber': 1.9, 'carbs': 2.1, 'kcal': 23.0, 'protein': 4.0, 'fat': 0.7}
+   171851  Bread, wheat, sprouted, toasted  {'fat': 0.0, 'carbs': 36.8, 'kcal': 205, 'protein': 14.3, 'fiber': 5.7}
+   171850  Bread, wheat, sprouted  {'protein': 13.2, 'fiber': 5.3, 'fat': 0.0, 'carbs': 33.9, 'kcal': 188}
+== besara | besara (fava puree) | ours kcal=120 | current 173745 = Beans, navy, mature seeds, raw 337
+   168574  Beans, fava, in pod, raw  {'carbs': 17.6, 'kcal': 88.0, 'fat': 0.7, 'protein': 7.9, 'fiber': 7.5}
+   167780  Prune puree  {'protein': 2.1, 'fiber': 3.3, 'fat': 0.2, 'carbs': 65.1, 'kcal': 257}
+   175205  Broadbeans (fava beans), mature seeds, raw  {'fat': 1.5, 'protein': 26.1, 'fiber': 25.0, 'carbs': 58.3, 'kcal': 341}
+   173754  Broadbeans (fava beans), mature seeds, canned  {'fiber': 3.7, 'protein': 5.5, 'fat': 0.2, 'carbs': 12.4, 'kcal': 71.0}
+   167808  Raspberries, puree, seedless  {'protein': 1.0, 'fiber': 0.9, 'fat': 0.9, 'carbs': 8.0, 'kcal': 41.0}
+   167809  Raspberries, puree, with seeds  {'fat': 1.0, 'carbs': 11.5, 'kcal': 55.0, 'protein': 1.1, 'fiber': 4.3}
+== keshk | keshk | ours kcal=150 | current 170903 = Yogurt, Greek, plain, lowfat 73.0
+== freekeh_cooked | freekeh cooked | ours kcal=141 | current 170288 = Corn grain, yellow 365
+== quinoa_cooked | quinoa cooked | ours kcal=120 | current 168874 = Quinoa, uncooked 368
+   168917  Quinoa, cooked  {'protein': 4.4, 'fiber': 2.8, 'fat': 1.9, 'carbs': 21.3, 'kcal': 120}
+   168874  Quinoa, uncooked  {'fiber': 7.0, 'protein': 14.1, 'fat': 6.1, 'carbs': 64.2, 'kcal': 368}
+   172027  Pasta, gluten-free, corn flour and quinoa flour, cooked, ANCIENT HARVEST  {'protein': 3.2, 'fiber': 3.3, 'fat': 2.1, 'carbs': 31.1, 'kcal': 152}
+== barley_cooked | barley cooked | ours kcal=123 | current 170283 = Barley, hulled 354
+   170285  Barley, pearled, cooked  {'kcal': 123, 'protein': 2.3, 'fiber': 3.8, 'fat': 0.4, 'carbs': 28.2}
+   170283  Barley, hulled  {'fiber': 17.3, 'protein': 12.5, 'fat': 2.3, 'carbs': 73.5, 'kcal': 354}
+   169739  Barley flour or meal  {'fiber': 10.1, 'protein': 10.5, 'fat': 1.6, 'carbs': 74.5, 'kcal': 345}
+   170284  Barley, pearled, raw  {'fat': 1.2, 'carbs': 77.7, 'kcal': 352, 'fiber': 15.6, 'protein': 9.9}
+   169740  Barley malt flour  {'fat': 1.8, 'carbs': 78.3, 'kcal': 361, 'protein': 10.3, 'fiber': 7.1}
+   174073  Soup, beef barley, ready to serve  {'fat': 1.0, 'carbs': 7.9, 'kcal': 52.0, 'protein': 2.8, 'fiber': 0.9}
+== popcorn | popcorn | ours kcal=387 | current 167959 = Snacks, popcorn, air-popped 387
+   170737  KFC, Popcorn Chicken  {'protein': 17.7, 'fat': 21.7, 'carbs': 21.2, 'kcal': 351, 'fiber': 1.0}
+   167550  Snacks, popcorn, cakes  {'fat': 3.1, 'carbs': 80.1, 'kcal': 384, 'protein': 9.7, 'fiber': 2.9}
+   167959  Snacks, popcorn, air-popped  {'kcal': 387, 'carbs': 77.8, 'fat': 4.5, 'protein': 12.9, 'fiber': 14.5}
+   167960  Snacks, popcorn, cheese-flavor  {'protein': 9.3, 'fiber': 9.9, 'fat': 33.2, 'carbs': 51.6, 'kcal': 526}
+   174778  Snacks, popcorn, microwave, low fat  {'fiber': 14.2, 'protein': 12.6, 'fat': 9.5, 'carbs': 72.0, 'kcal': 424}
+   173131  Snacks, popcorn, microwave, 94% fat free  {'fat': 6.1, 'carbs': 76.0, 'kcal': 402, 'protein': 10.7, 'fiber': 13.6}
+== chips_potato | potato chips | ours kcal=536 | current 170033 = Potatoes, baked, flesh, without salt 93.0
+   168446  Potato flour  {'carbs': 83.1, 'kcal': 357, 'fiber': 5.9, 'protein': 6.9, 'fat': 0.3}
+   168854  Snacks, potato sticks  {'fat': 34.4, 'carbs': 53.3, 'kcal': 522, 'protein': 6.7, 'fiber': 3.4}
+   169683  Snacks, potato chips, reduced fat  {'fiber': 5.9, 'fat': 20.8, 'carbs': 66.9, 'kcal': 471, 'protein': 7.1}
+   169677  Snacks, potato chips, plain, salted  {'fat': 34.0, 'carbs': 53.8, 'kcal': 532, 'protein': 6.4, 'fiber': 3.1}
+   169682  Snacks, potato chips, cheese-flavor  {'fiber': 5.2, 'protein': 8.5, 'fat': 27.2, 'carbs': 57.7, 'kcal': 496}
+   170649  Snacks, potato chips, plain, unsalted  {'fiber': 4.8, 'fat': 34.6, 'carbs': 52.9, 'kcal': 536, 'protein': 7.0}
+== biscuit_plain | plain biscuit | ours kcal=450 | current 172671 = Biscuits, mixed grain, refrigerated dough 263
+   170339  KFC, biscuit  {'fat': 17.0, 'carbs': 43.6, 'kcal': 358, 'fiber': 2.0, 'protein': 7.5}
+   172086  POPEYES, biscuit  {'fiber': 3.8, 'protein': 6.0, 'fat': 23.7, 'carbs': 41.0, 'kcal': 401}
+   170302  Fast food, biscuit  {'fat': 18.9, 'carbs': 42.8, 'kcal': 370, 'protein': 7.1, 'fiber': 2.5}
+   171867  Cookies, Marie biscuit  {'fat': 10.6, 'carbs': 70.5, 'kcal': 406, 'protein': 7.0, 'fiber': 3.5}
+   172070  McDONALD'S, Sausage Biscuit  {'protein': 9.6, 'fiber': 1.2, 'fat': 25.4, 'carbs': 27.2, 'kcal': 376}
+   172069  McDONALD'S, Bacon Egg & Cheese Biscuit  {'fat': 18.8, 'carbs': 22.3, 'kcal': 304, 'protein': 13.4, 'fiber': 0.9}
+== cake_plain | plain cake | ours kcal=350 | current 168859 = Tortilla chips, low fat, baked without fat 448
+   169723  Wheat flour, white, cake, enriched  {'fat': 0.9, 'carbs': 78.0, 'kcal': 362, 'protein': 8.2, 'fiber': 1.7}
+   174937  Cake, coffeecake, fruit  {'fiber': 2.5, 'protein': 5.2, 'fat': 10.2, 'carbs': 51.5, 'kcal': 311}
+   167527  Bread, pound cake type, pan de torta salvadoran  {'protein': 7.1, 'fiber': 1.7, 'fat': 17.4, 'carbs': 51.3, 'kcal': 390}
+   172699  Cake, coffeecake, cheese  {'fiber': 1.0, 'fat': 15.2, 'carbs': 44.3, 'kcal': 339, 'protein': 7.0}
+   172057  Fast foods, griddle cake sandwich, sausage  {'kcal': 318, 'fiber': 1.0, 'protein': 8.4, 'carbs': 31.2, 'fat': 17.8}
+   172701  Cake, gingerbread, dry mix  {'fat': 13.8, 'carbs': 74.6, 'kcal': 437, 'protein': 4.4, 'fiber': 1.7}
+== whey_protein | whey protein powder | ours kcal=392 | current 173424 = Egg, whole, cooked, hard-boiled 155
+   173177  Beverages, Whey protein powder isolate  {'fat': 1.2, 'carbs': 29.1, 'kcal': 359, 'protein': 58.1, 'fiber': 0.0}
+   173167  Beverages, ABBOTT, EAS whey protein powder  {'protein': 66.7, 'fiber': 0.0, 'fat': 5.1, 'carbs': 18.0, 'kcal': 385}
+   173181  Beverages, Protein powder soy based  {'fat': 5.6, 'carbs': 28.9, 'kcal': 388, 'protein': 55.6, 'fiber': 6.7}
+   173180  Beverages, Protein powder whey based  {'protein': 78.1, 'fiber': 3.1, 'fat': 1.6, 'carbs': 6.2, 'kcal': 352}
+   174813  Beverages, ABBOTT, EAS soy protein powder  {'fiber': 0.0, 'fat': 3.6, 'carbs': 43.9, 'kcal': 405, 'protein': 47.6}
+   170461  Tomato powder  {'fiber': 16.5, 'carbs': 74.7, 'kcal': 302, 'fat': 0.4, 'protein': 12.9}
+== protein_bar | protein bar | ours kcal=380 | current 173424 = Egg, whole, cooked, hard-boiled 155
+   173158  Formulated Bar, SOUTH BEACH protein bar  {'kcal': 412, 'fiber': 7.3, 'protein': 30.3, 'fat': 15.2, 'carbs': 38.4}
+   167993  Candies, KRACKEL Chocolate Bar  {'carbs': 64.3, 'kcal': 523, 'fat': 26.6, 'fiber': 2.2, 'protein': 6.6}
+   167586  Candies, NESTLE, CHUNKY Bar  {'carbs': 60.4, 'kcal': 519, 'fat': 27.5, 'protein': 7.5, 'fiber': 2.5}
+   167565  Candies, NESTLE, BUTTERFINGER Bar  {'fiber': 2.0, 'protein': 5.4, 'fat': 18.9, 'carbs': 72.9, 'kcal': 459}
+   168760  Candies, MR. GOODBAR Chocolate Bar  {'fat': 33.2, 'carbs': 54.3, 'kcal': 538, 'protein': 10.2, 'fiber': 3.8}
+   167975  Candies, CARAMELLO Candy Bar  {'fat': 21.2, 'carbs': 63.8, 'kcal': 462, 'protein': 6.2, 'fiber': 1.2}
+== skim_labneh | low-fat labneh | ours kcal=90 | current 170904 = Kefir, lowfat, plain, LIFEWAY 43.0
+   168101  Bologna, beef, low fat  {'carbs': 5.2, 'kcal': 204, 'fiber': 0.0, 'fat': 14.8, 'protein': 11.8}
+   168141  Cheese, swiss, low fat  {'fat': 5.1, 'carbs': 3.4, 'protein': 28.4, 'fiber': 0.0, 'kcal': 179}
+   168859  Tortilla chips, low fat, baked without fat  {'carbs': 80.2, 'kcal': 448, 'fat': 5.7, 'protein': 11.0, 'fiber': 5.3}
+   168139  Popcorn, microwave, low fat and sodium  {'carbs': 73.4, 'kcal': 429, 'fiber': 14.2, 'protein': 12.6, 'fat': 9.5}
+   168098  Cheese, monterey, low fat  {'fat': 21.6, 'carbs': 0.7, 'protein': 28.2, 'fiber': 0.0, 'kcal': 313}
+   169050  Cheese, muenster, low fat  {'fat': 17.6, 'carbs': 3.5, 'kcal': 271, 'protein': 24.7, 'fiber': 0.0}
+== turkey_pastrami | turkey pastrami | ours kcal=120 | current 171506 = Turkey, Ground, cooked 203
+   172927  Pastrami, turkey  {'fat': 6.2, 'protein': 16.3, 'fiber': 0.1, 'carbs': 3.3, 'kcal': 139}
+   171083  Turkey, whole, giblets, raw  {'fiber': 0.0, 'protein': 18.2, 'fat': 5.1, 'carbs': 0.1, 'kcal': 124}
+   171098  Turkey, whole, breast, meat only, raw  {'kcal': 114, 'fat': 1.5, 'protein': 23.7, 'carbs': 0.1, 'fiber': 0.0}
+   171081  Turkey, whole, meat and skin, raw  {'carbs': 0.1, 'kcal': 144, 'fiber': 0.0, 'protein': 21.6, 'fat': 5.6}
+   171085  Turkey, gizzard, all classes, raw  {'carbs': 0.0, 'fiber': 0.0, 'protein': 18.8, 'fat': 3.4, 'kcal': 111}
+   171086  Turkey, whole, neck, meat only, raw  {'fiber': 0.0, 'carbs': 0.0, 'protein': 16.5, 'fat': 6.0, 'kcal': 125}
+== beef_pastrami | beef pastrami | ours kcal=150 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   170204  Beef, cured, pastrami  {'fiber': 0.0, 'protein': 21.8, 'fat': 5.8, 'carbs': 0.4, 'kcal': 147}
+   168608  Beef, grass-fed, ground, raw  {'fat': 12.7, 'carbs': 0.0, 'fiber': 0.0, 'protein': 19.4, 'kcal': 198}
+   172959  Pastrami, beef, 98% fat-free  {'protein': 19.6, 'fiber': 0.0, 'fat': 1.2, 'carbs': 1.5, 'kcal': 95.0}
+   168101  Bologna, beef, low fat  {'carbs': 5.2, 'kcal': 204, 'fiber': 0.0, 'fat': 14.8, 'protein': 11.8}
+   168118  Beef, bologna, reduced sodium  {'fat': 28.4, 'carbs': 2.0, 'kcal': 310, 'protein': 11.7, 'fiber': 0.0}
+   170199  Beef, cured, corned beef, brisket, raw  {'fat': 14.9, 'carbs': 0.1, 'kcal': 198, 'protein': 14.7, 'fiber': 0.0}
+== mortadella | mortadella | ours kcal=311 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   174573  Mortadella, beef, pork  {'fat': 25.4, 'carbs': 3.0, 'kcal': 311, 'protein': 16.4, 'fiber': 0.0}
+== hotdog | hot dog | ours kcal=290 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   168560  Pickle relish, hot dog  {'fiber': 1.5, 'protein': 1.5, 'fat': 0.5, 'carbs': 23.4, 'kcal': 91.0}
+   173276  Fast foods, sundae, hot fudge  {'fat': 5.5, 'carbs': 30.2, 'kcal': 180, 'protein': 3.6, 'fiber': 0.0}
+   173302  McDONALD'S, Hot Fudge Sundae  {'fat': 5.9, 'carbs': 30.0, 'fiber': 0.4, 'protein': 4.1, 'kcal': 186}
+   170106  Peppers, hot chili, red, raw  {'fiber': 1.5, 'fat': 0.4, 'carbs': 8.8, 'kcal': 40.0, 'protein': 1.9}
+   174606  Sausage, turkey, hot, smoked  {'protein': 15.0, 'fat': 8.8, 'carbs': 4.7, 'kcal': 158, 'fiber': 0.3}
+   174090  Rolls, hamburger or hot dog, whole wheat  {'protein': 12.4, 'fiber': 6.1, 'fat': 4.4, 'carbs': 44.9, 'kcal': 269}
+== sausage | sausage | ours kcal=300 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   171618  Blood sausage  {'carbs': 1.3, 'kcal': 379, 'fiber': 0.0, 'protein': 14.6, 'fat': 34.5}
+   171617  Sausage, Berliner, pork, beef  {'fat': 17.2, 'fiber': 0.0, 'protein': 15.3, 'carbs': 2.6, 'kcal': 230}
+   172063  McDONALD'S, Sausage Burrito  {'protein': 11.1, 'fiber': 1.2, 'fat': 15.6, 'carbs': 23.0, 'kcal': 277}
+   172070  McDONALD'S, Sausage Biscuit  {'protein': 9.6, 'fiber': 1.2, 'fat': 25.4, 'carbs': 27.2, 'kcal': 376}
+   171631  Sausage, Italian, pork, mild, raw  {'fiber': 0.0, 'protein': 13.9, 'fat': 24.3, 'carbs': 3.0, 'kcal': 290}
+   172059  McDONALD'S, Sausage McGRIDDLES  {'protein': 8.4, 'fiber': 1.0, 'fat': 17.8, 'carbs': 31.2, 'kcal': 312}
+== liver_pate | liver pate | ours kcal=250 | current 169451 = Beef, variety meats and by-products, liver, raw 135
+   172415  Goose, liver, raw  {'fat': 4.3, 'carbs': 6.3, 'kcal': 133, 'protein': 16.4, 'fiber': 0.0}
+   173869  Liver cheese, pork  {'protein': 15.2, 'fiber': 0.0, 'fat': 25.6, 'carbs': 2.1, 'kcal': 304}
+   172928  Pate, chicken liver, canned  {'fat': 13.1, 'carbs': 6.5, 'kcal': 201, 'protein': 13.4, 'fiber': 0.0}
+   168031  Walrus, liver, raw (Alaska Native)  {'protein': 21.0, 'fat': 3.0, 'carbs': 3.5, 'kcal': 125}
+   172930  Pate, liver, not specified, canned  {'fat': 28.0, 'carbs': 1.5, 'kcal': 319, 'protein': 14.2, 'fiber': 0.0}
+   168026  Seal, ringed, liver (Alaska Native)  {'fat': 3.3, 'carbs': 2.9, 'kcal': 116, 'protein': 18.6}
+== dumyati_cheese | Domiati cheese | ours kcal=250 | current 173420 = Cheese, feta 265
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   168076  DENNY'S, mozzarella cheese sticks  {'fat': 17.9, 'carbs': 27.2, 'kcal': 324, 'protein': 13.6, 'fiber': 1.6}
+   167559  Snacks, tortilla chips, nacho cheese  {'protein': 7.4, 'fat': 27.4, 'carbs': 60.8, 'kcal': 519, 'fiber': 5.1}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+   167941  Crackers, cheese, reduced fat  {'protein': 10.0, 'fiber': 3.3, 'fat': 11.7, 'carbs': 68.2, 'kcal': 418}
+   167960  Snacks, popcorn, cheese-flavor  {'protein': 9.3, 'fiber': 9.9, 'fat': 33.2, 'carbs': 51.6, 'kcal': 526}
+== karish_cheese | karish cheese | ours kcal=100 | current 172179 = Cheese, cottage, creamed, large or small curd 98.0
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   167559  Snacks, tortilla chips, nacho cheese  {'protein': 7.4, 'fat': 27.4, 'carbs': 60.8, 'kcal': 519, 'fiber': 5.1}
+   167941  Crackers, cheese, reduced fat  {'protein': 10.0, 'fiber': 3.3, 'fat': 11.7, 'carbs': 68.2, 'kcal': 418}
+   167960  Snacks, popcorn, cheese-flavor  {'protein': 9.3, 'fiber': 9.9, 'fat': 33.2, 'carbs': 51.6, 'kcal': 526}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+   168076  DENNY'S, mozzarella cheese sticks  {'fat': 17.9, 'carbs': 27.2, 'kcal': 324, 'protein': 13.6, 'fiber': 1.6}
+== rumi_cheese | Rumi cheese | ours kcal=380 | current 173414 = Cheese, cheddar (Includes foods for USDA's Food Distribution Program) 403
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   169081  Cheese spread, cream cheese base  {'fat': 28.6, 'carbs': 3.5, 'kcal': 295, 'fiber': 0.0, 'protein': 7.1}
+   167941  Crackers, cheese, reduced fat  {'protein': 10.0, 'fiber': 3.3, 'fat': 11.7, 'carbs': 68.2, 'kcal': 418}
+   167960  Snacks, popcorn, cheese-flavor  {'protein': 9.3, 'fiber': 9.9, 'fat': 33.2, 'carbs': 51.6, 'kcal': 526}
+   167559  Snacks, tortilla chips, nacho cheese  {'protein': 7.4, 'fat': 27.4, 'carbs': 60.8, 'kcal': 519, 'fiber': 5.1}
+   168141  Cheese, swiss, low fat  {'fat': 5.1, 'carbs': 3.4, 'protein': 28.4, 'fiber': 0.0, 'kcal': 179}
+== zabadi_flavored | fruit yogurt | ours kcal=99 | current 170903 = Yogurt, Greek, plain, lowfat 73.0
+   172075  McDONALD'S, Fruit 'n Yogurt Parfait  {'fat': 1.3, 'carbs': 20.7, 'kcal': 105, 'protein': 2.7, 'fiber': 1.0}
+   167726  Babyfood, mixed fruit yogurt, strained  {'fat': 0.8, 'protein': 0.8, 'fiber': 0.4, 'carbs': 16.2, 'kcal': 75.0}
+   169898  Yogurt, fruit variety, nonfat  {'fat': 0.2, 'carbs': 19.0, 'kcal': 95.0, 'protein': 4.4, 'fiber': 0.0}
+   170889  Yogurt, fruit, low fat,9 g protein/8 oz  {'kcal': 99.0, 'fiber': 0.0, 'protein': 4.0, 'fat': 1.1, 'carbs': 18.6}
+   171286  Yogurt, fruit, low fat, 11g protein/8 oz  {'kcal': 105, 'protein': 4.9, 'fiber': 0.0, 'fat': 1.4, 'carbs': 18.6}
+   168091  Babyfood, mixed fruit juice with low fat yogurt  {'kcal': 74.0, 'protein': 2.4, 'fiber': 0.4, 'fat': 0.8, 'carbs': 14.7}
+== cream_whipping | whipping cream | ours kcal=340 | current 170899 = Cheese, cheddar, sharp, sliced 410
+   169664  Toppings, marshmallow cream  {'fiber': 0.1, 'fat': 0.3, 'carbs': 79.0, 'kcal': 322, 'protein': 0.8}
+   170860  Cream, whipped, cream topping, pressurized  {'kcal': 257, 'fiber': 0.0, 'protein': 3.2, 'fat': 22.2, 'carbs': 12.5}
+   169079  Cheese, cream, low fat  {'fiber': 0.0, 'protein': 7.8, 'fat': 16.7, 'carbs': 6.7, 'kcal': 208}
+   170858  Cream, fluid, light whipping  {'kcal': 292, 'fiber': 0.0, 'protein': 2.2, 'fat': 30.9, 'carbs': 3.0}
+   170859  Cream, fluid, heavy whipping  {'fat': 36.1, 'kcal': 340, 'protein': 2.8, 'fiber': 0.0, 'carbs': 2.8}
+   168826  Puddings, coconut cream, dry mix, instant  {'fiber': 4.0, 'protein': 0.9, 'fat': 10.0, 'carbs': 83.5, 'kcal': 415}
+== milk_powder | milk powder | ours kcal=496 | current 173424 = Egg, whole, cooked, hard-boiled 155
+   167587  Candies, milk chocolate  {'fat': 29.7, 'fiber': 3.4, 'protein': 7.7, 'carbs': 59.4, 'kcal': 535}
+   173459  Protein supplement, milk based, Muscle Milk, powder  {'fat': 17.1, 'carbs': 18.5, 'kcal': 411, 'protein': 45.7, 'fiber': 7.1}
+   167730  Milk, imitation, non-soy  {'fiber': 0.0, 'kcal': 46.0, 'protein': 1.6, 'fat': 2.0, 'carbs': 5.3}
+   167946  SCHIFF,TIGER'S MILK BAR  {'kcal': 387, 'fiber': 2.3, 'protein': 16.8, 'fat': 14.3, 'carbs': 56.5}
+   167984  Candies, SYMPHONY Milk Chocolate Bar  {'fat': 30.6, 'carbs': 58.0, 'kcal': 531, 'protein': 8.5, 'fiber': 1.7}
+   173460  Protein supplement, milk based, Muscle Milk Light, powder  {'fiber': 2.0, 'protein': 50.0, 'fat': 12.0, 'carbs': 22.0, 'kcal': 396}
+== evaporated_milk | evaporated milk | ours kcal=134 | current 173441 = Milk, fluid, 1% fat, without added vitamin A and vitamin D 42.0
+   172194  Milk, canned, evaporated, with added vitamin A  {'kcal': 134, 'protein': 6.8, 'fiber': 0.0, 'fat': 7.6, 'carbs': 10.0}
+   168773  Egg custards, dry mix, prepared with whole milk  {'fiber': 0.0, 'fat': 4.0, 'carbs': 17.6, 'kcal': 122, 'protein': 4.0}
+   171302  Milk, evaporated, 2% fat, with added vitamin A and vitamin D  {'fiber': 0.0, 'protein': 6.7, 'fat': 2.0, 'carbs': 15.7, 'kcal': 107}
+   167711  Beverages, Chocolate-flavored drink, whey and milk based  {'protein': 0.6, 'fiber': 0.6, 'fat': 0.4, 'carbs': 10.7, 'kcal': 49.0}
+   168765  Candies, ROLO Caramels in Milk Chocolate  {'protein': 5.1, 'fiber': 0.9, 'fat': 20.9, 'carbs': 68.0, 'kcal': 474}
+   167589  Puddings, banana, dry mix, regular, prepared with 2% milk  {'fiber': 0.0, 'protein': 2.9, 'fat': 1.7, 'carbs': 18.4, 'kcal': 101}
+== condensed_milk | sweetened condensed milk | ours kcal=321 | current 173424 = Egg, whole, cooked, hard-boiled 155
+   171275  Milk, canned, condensed, sweetened  {'kcal': 321, 'fat': 8.7, 'carbs': 54.4, 'protein': 7.9, 'fiber': 0.0}
+   168174  Strawberries, frozen, sweetened, sliced  {'protein': 0.5, 'fiber': 1.9, 'fat': 0.1, 'carbs': 25.9, 'kcal': 96.0}
+   171696  Applesauce, canned, sweetened, without salt  {'protein': 0.2, 'fiber': 1.2, 'fat': 0.2, 'carbs': 17.5, 'kcal': 68.0}
+   169091  Mango, dried, sweetened  {'protein': 2.5, 'fiber': 2.4, 'fat': 1.2, 'carbs': 78.6, 'kcal': 319}
+   167773  Applesauce, canned, sweetened, with salt  {'fiber': 1.2, 'fat': 0.2, 'carbs': 19.9, 'kcal': 76.0, 'protein': 0.2}
+   173459  Protein supplement, milk based, Muscle Milk, powder  {'fat': 17.1, 'carbs': 18.5, 'kcal': 411, 'protein': 45.7, 'fiber': 7.1}
+== bread_whole_wheat | whole wheat bread | ours kcal=247 | current 174930 = Bread, stuffing, dry mix 386
+   167933  Crackers, whole-wheat, reduced fat  {'carbs': 75.5, 'kcal': 416, 'fat': 7.6, 'protein': 11.3, 'fiber': 10.9}
+   172749  Crackers, whole-wheat  {'protein': 10.6, 'fiber': 10.3, 'fat': 14.1, 'carbs': 69.6, 'kcal': 427}
+   172690  Bread, whole-wheat, prepared from recipe  {'fiber': 6.0, 'protein': 8.4, 'fat': 5.4, 'carbs': 51.4, 'kcal': 278}
+   172688  Bread, whole-wheat, commercially prepared  {'fat': 3.5, 'carbs': 42.7, 'kcal': 252, 'protein': 12.4, 'fiber': 6.0}
+   172823  Crackers, whole-wheat, low salt  {'fiber': 10.5, 'fat': 17.2, 'carbs': 68.6, 'kcal': 443, 'protein': 8.8}
+   174916  Bread, pita, whole-wheat  {'fat': 1.7, 'fiber': 6.1, 'protein': 9.8, 'carbs': 55.9, 'kcal': 262}
+== rice_cake | rice cake | ours kcal=387 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+   168855  Snacks, rice cakes, brown rice, rye  {'protein': 8.1, 'fiber': 4.0, 'fat': 3.8, 'carbs': 79.9, 'kcal': 386}
+   169679  Snacks, rice cakes, brown rice, corn  {'fat': 3.2, 'carbs': 81.2, 'kcal': 385, 'fiber': 2.9, 'protein': 8.4}
+   167966  Snacks, rice cracker brown rice, plain  {'fat': 2.8, 'carbs': 81.5, 'kcal': 387, 'fiber': 4.2, 'protein': 8.2}
+   169723  Wheat flour, white, cake, enriched  {'fat': 0.9, 'carbs': 78.0, 'kcal': 362, 'protein': 8.2, 'fiber': 1.7}
+   167967  Snacks, rice cakes, brown rice, buckwheat  {'protein': 9.0, 'fiber': 3.8, 'fat': 3.5, 'carbs': 80.1, 'kcal': 380}
+   169680  Snacks, rice cakes, brown rice, multigrain  {'fiber': 3.0, 'protein': 8.5, 'fat': 3.5, 'carbs': 80.1, 'kcal': 387}
+== tortilla_flour | flour tortilla | ours kcal=312 | current 167535 = Tortillas, ready-to-bake or -fry, flour, shelf stable 297
+   169724  Wheat flour, white, tortilla mix, enriched  {'protein': 9.7, 'fat': 10.6, 'carbs': 67.1, 'kcal': 405}
+   168885  Rye flour, dark  {'fat': 2.2, 'protein': 15.9, 'fiber': 23.8, 'carbs': 68.6, 'kcal': 325}
+   168887  Rye flour, light  {'fat': 1.3, 'protein': 9.8, 'fiber': 8.0, 'carbs': 76.7, 'kcal': 357}
+   168886  Rye flour, medium  {'protein': 10.9, 'fiber': 11.8, 'fat': 1.5, 'carbs': 75.4, 'kcal': 349}
+   168898  Rice flour, brown  {'fiber': 4.6, 'protein': 7.2, 'fat': 2.8, 'carbs': 76.5, 'kcal': 363}
+   168888  Triticale flour, whole-grain  {'fiber': 14.6, 'protein': 13.2, 'fat': 1.8, 'carbs': 73.1, 'kcal': 338}
+== bagel | bagel | ours kcal=257 | current 174930 = Bread, stuffing, dry mix 386
+   173150  Snacks, bagel chips, plain  {'protein': 12.3, 'fiber': 4.1, 'fat': 15.1, 'carbs': 66.4, 'kcal': 451}
+   173322  Fast foods, bagel, with egg, sausage patty, cheese, and condiments  {'carbs': 22.6, 'kcal': 295, 'protein': 13.0, 'fiber': 0.2, 'fat': 17.0}
+   173323  Fast foods, bagel, with breakfast steak, egg, cheese, and condiments  {'carbs': 23.0, 'kcal': 282, 'fat': 14.1, 'protein': 16.0, 'fiber': 0.2}
+== english_muffin | English muffin | ours kcal=227 | current 174930 = Bread, stuffing, dry mix 386
+   174093  English muffins, whole grain white  {'protein': 7.0, 'fiber': 3.5, 'fat': 1.8, 'carbs': 50.2, 'kcal': 245}
+   167515  George Weston Bakeries, Thomas English Muffins  {'protein': 8.0, 'fat': 1.8, 'carbs': 46.0, 'kcal': 232}
+   172761  Muffins, English, wheat  {'fiber': 4.6, 'protein': 8.7, 'fat': 2.0, 'carbs': 44.8, 'kcal': 223}
+   172032  Fast foods, english muffin, with cheese and sausage  {'carbs': 25.3, 'kcal': 338, 'fiber': 0.5, 'protein': 13.3, 'fat': 20.7}
+   172034  Fast foods, english muffin, with egg, cheese, and sausage  {'carbs': 17.4, 'kcal': 286, 'protein': 13.4, 'fiber': 0.2, 'fat': 18.1}
+   170187  Nuts, walnuts, english  {'carbs': 13.7, 'kcal': 654, 'protein': 15.2, 'fiber': 6.7, 'fat': 65.2}
+== hash_brown | hash brown | ours kcal=265 | current 170033 = Potatoes, baked, flesh, without salt 93.0
+   168833  Sugars, brown  {'fat': 0.0, 'carbs': 98.1, 'kcal': 380, 'protein': 0.1, 'fiber': 0.0}
+   173298  McDONALD'S, Hash Brown  {'fat': 16.3, 'carbs': 28.6, 'kcal': 271, 'protein': 2.5, 'fiber': 2.8}
+   171565  Gravy, brown, dry  {'protein': 10.7, 'fiber': 2.0, 'fat': 9.6, 'carbs': 59.4, 'kcal': 367}
+   172078  BURGER KING, Hash Brown Rounds  {'fat': 19.3, 'carbs': 29.4, 'kcal': 302, 'fiber': 2.3, 'protein': 2.8}
+   170036  Potatoes, hash brown, home-prepared  {'fiber': 3.2, 'protein': 3.0, 'fat': 12.5, 'carbs': 35.1, 'kcal': 265}
+   168898  Rice flour, brown  {'fiber': 4.6, 'protein': 7.2, 'fat': 2.8, 'carbs': 76.5, 'kcal': 363}
+== bacon_cooked | bacon cooked | ours kcal=541 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   167914  Pork, cured, bacon, cooked, baked  {'fiber': 0.0, 'protein': 35.7, 'fat': 43.3, 'carbs': 1.4, 'kcal': 548}
+   168324  Pork, bacon, rendered fat, cooked  {'protein': 0.1, 'fiber': 0.0, 'kcal': 898, 'carbs': 0.0, 'fat': 99.5}
+   168383  Canadian bacon, cooked, pan-fried  {'fiber': 0.0, 'kcal': 146, 'protein': 28.3, 'fat': 2.8, 'carbs': 1.8}
+   172439  Bacon, meatless  {'protein': 11.7, 'carbs': 5.3, 'kcal': 309, 'fat': 29.5, 'fiber': 2.6}
+   168321  Pork, cured, bacon, cooked, microwaved  {'fiber': 0.0, 'fat': 34.1, 'carbs': 0.5, 'kcal': 476, 'protein': 39.0}
+   171639  Bacon, turkey, microwaved  {'fat': 25.9, 'carbs': 4.2, 'kcal': 368, 'protein': 29.5, 'fiber': 0.0}
+== ham | ham | ours kcal=145 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   167909  HORMEL, Cure 81 Ham  {'carbs': 0.2, 'protein': 18.4, 'fat': 3.6, 'kcal': 106}
+   167873  Pork, cured, ham, patties, unheated  {'fat': 28.2, 'carbs': 1.7, 'kcal': 315, 'protein': 12.8, 'fiber': 0.0}
+   168110  Pork, cured, ham, low sodium, lean and fat, cooked  {'protein': 22.3, 'fat': 8.3, 'carbs': 0.3, 'kcal': 172, 'fiber': 0.0}
+   168092  Ham, turkey, sliced, extra lean, prepackaged or deli  {'protein': 19.6, 'fiber': 0.0, 'fat': 5.8, 'carbs': 0.9, 'kcal': 134}
+   168224  Pork, fresh, leg (ham), whole, separable lean only, raw  {'fiber': 0.0, 'protein': 20.5, 'fat': 5.4, 'carbs': 0.0, 'kcal': 136}
+   168284  Pork, cured, ham, whole, separable lean only, roasted  {'fat': 5.5, 'carbs': 0.0, 'kcal': 157, 'fiber': 0.0, 'protein': 25.0}
+== salami | salami | ours kcal=378 | current 174032 = Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled 250
+   172935  Salami, cooked, beef  {'protein': 12.6, 'fiber': 0.0, 'fat': 22.2, 'carbs': 1.9, 'kcal': 261}
+   174603  Salami, Italian, pork  {'fat': 37.0, 'carbs': 1.2, 'protein': 21.7, 'fiber': 0.0, 'kcal': 425}
+   172937  Salami, cooked, turkey  {'carbs': 1.6, 'kcal': 172, 'protein': 19.2, 'fat': 9.2, 'fiber': 0.1}
+   172938  Salami, dry or hard, pork  {'protein': 22.6, 'fiber': 0.0, 'fat': 33.7, 'carbs': 1.6, 'kcal': 407}
+   172947  Oscar Mayer, Salami (hard)  {'fiber': 0.0, 'protein': 25.9, 'fat': 28.7, 'carbs': 1.6, 'kcal': 368}
+   171616  Beerwurst, beer salami, pork  {'protein': 14.2, 'fiber': 0.0, 'fat': 18.8, 'carbs': 2.1, 'kcal': 238}
+== anchovy | anchovy | ours kcal=210 | current 174182 = Fish, anchovy, european, raw 131
+   174182  Fish, anchovy, european, raw  {'fiber': 0.0, 'protein': 20.4, 'fat': 4.8, 'carbs': 0.0, 'kcal': 131}
+   174183  Fish, anchovy, european, canned in oil, drained solids  {'fat': 9.7, 'carbs': 0.0, 'kcal': 210, 'fiber': 0.0, 'protein': 28.9}
+== clam_cooked | clam cooked | ours kcal=148 | current 171975 = Mollusks, clam, mixed species, cooked, moist heat 148
+   171975  Mollusks, clam, mixed species, cooked, moist heat  {'fat': 1.9, 'carbs': 5.1, 'kcal': 148, 'protein': 25.6, 'fiber': 0.0}
+   171974  Mollusks, clam, mixed species, cooked, breaded and fried  {'protein': 14.2, 'fat': 11.2, 'carbs': 10.3, 'kcal': 202}
+   174214  Mollusks, clam, mixed species, raw  {'fat': 1.0, 'carbs': 3.6, 'kcal': 86.0, 'protein': 14.7, 'fiber': 0.0}
+   171152  Soup, clam chowder, manhattan, canned, condensed  {'fat': 1.8, 'carbs': 9.7, 'kcal': 61.0, 'protein': 1.7, 'fiber': 1.2}
+   171882  Beverages, Clam and tomato juice, canned  {'carbs': 11.0, 'kcal': 48.0, 'fiber': 0.4, 'fat': 0.2, 'protein': 0.6}
+   171547  Soup, clam chowder, new england, canned, condensed  {'protein': 3.2, 'fiber': 0.7, 'fat': 2.1, 'carbs': 10.3, 'kcal': 72.0}
+== crab_cooked | crab cooked | ours kcal=97 | current 174202 = Crustaceans, crab, alaska king, cooked, moist heat 97.0
+   174205  Crustaceans, crab, blue, cooked, moist heat  {'protein': 17.9, 'fat': 0.7, 'kcal': 83.0, 'fiber': 0.0, 'carbs': 0.0}
+   172008  Crustaceans, crab, queen, cooked, moist heat  {'protein': 23.7, 'fiber': 0.0, 'fat': 1.5, 'carbs': 0.0, 'kcal': 115}
+   171966  Crustaceans, crab, blue, canned  {'fat': 0.7, 'carbs': 0.0, 'kcal': 83.0, 'protein': 17.9, 'fiber': 0.0}
+   172007  Crustaceans, crab, dungeness, cooked, moist heat  {'fat': 1.2, 'carbs': 0.9, 'kcal': 110, 'fiber': 0.0, 'protein': 22.3}
+   174202  Crustaceans, crab, alaska king, cooked, moist heat  {'fat': 1.5, 'carbs': 0.0, 'kcal': 97.0, 'protein': 19.4, 'fiber': 0.0}
+   174204  Crustaceans, crab, blue, raw  {'fat': 1.1, 'carbs': 0.0, 'kcal': 87.0, 'protein': 18.1, 'fiber': 0.0}
+== lobster_cooked | lobster cooked | ours kcal=89 | current 174204 = Crustaceans, crab, blue, raw 87.0
+   174209  Crustaceans, lobster, northern, cooked, moist heat  {'protein': 19.0, 'fat': 0.9, 'carbs': 0.0, 'kcal': 89.0, 'fiber': 0.0}
+   174208  Crustaceans, lobster, northern, raw  {'protein': 16.5, 'fiber': 0.0, 'fat': 0.8, 'carbs': 0.0, 'kcal': 77.0}
+   172009  Crustaceans, spiny lobster, mixed species, cooked, moist heat  {'fat': 1.9, 'carbs': 3.1, 'kcal': 143, 'fiber': 0.0, 'protein': 26.4}
+   174211  Crustaceans, spiny lobster, mixed species, raw  {'fat': 1.5, 'carbs': 2.4, 'kcal': 112, 'fiber': 0.0, 'protein': 20.6}
+== squid_cooked | squid cooked | ours kcal=92 | current 174220 = Mollusks, scallop, mixed species, raw 69.0
+   171982  Mollusks, squid, mixed species, cooked, fried  {'fat': 7.5, 'carbs': 7.8, 'kcal': 175, 'protein': 17.9, 'fiber': 0.0}
+   174223  Mollusks, squid, mixed species, raw  {'protein': 15.6, 'fiber': 0.0, 'fat': 1.4, 'carbs': 3.1, 'kcal': 92.0}
+== octopus_cooked | octopus cooked | ours kcal=82 | current 174219 = Mollusks, oyster, Pacific, raw 81.0
+   168019  Octopus (Alaska Native)  {'protein': 12.3, 'fat': 0.8, 'carbs': 0.0, 'kcal': 56.0}
+   174218  Mollusks, octopus, common, raw  {'fat': 1.0, 'carbs': 2.2, 'kcal': 82.0, 'fiber': 0.0, 'protein': 14.9}
+   174249  Mollusks, octopus, common, cooked, moist heat  {'fat': 2.1, 'carbs': 4.4, 'kcal': 164, 'protein': 29.8, 'fiber': 0.0}
+== asparagus_cooked | asparagus cooked | ours kcal=28 | current 168389 = Asparagus, raw 20.0
+   168389  Asparagus, raw  {'protein': 2.2, 'carbs': 3.9, 'kcal': 20.0, 'fiber': 2.1, 'fat': 0.1}
+   168390  Asparagus, cooked, boiled, drained  {'carbs': 4.1, 'kcal': 22.0, 'fat': 0.2, 'fiber': 2.0, 'protein': 2.4}
+   169208  Asparagus, frozen, unprepared  {'fiber': 1.9, 'protein': 3.2, 'fat': 0.2, 'carbs': 4.1, 'kcal': 24.0}
+   169313  Asparagus, cooked, boiled, drained, with salt  {'carbs': 4.1, 'kcal': 22.0, 'fat': 0.2, 'protein': 2.4, 'fiber': 2.0}
+   169207  Asparagus, canned, drained solids  {'fiber': 1.6, 'fat': 0.7, 'protein': 2.1, 'carbs': 2.5, 'kcal': 19.0}
+   168494  Asparagus, frozen, cooked, boiled, drained, with salt  {'fiber': 1.6, 'fat': 0.4, 'protein': 3.0, 'carbs': 1.9, 'kcal': 18.0}
+== artichoke_cooked | artichoke cooked | ours kcal=62 | current 169205 = Artichokes, (globe or french), raw 47.0
+== celery | celery | ours kcal=16 | current 169984 = Carrots, frozen, cooked, boiled, drained, without salt 37.0
+   169988  Celery, raw  {'kcal': 14.0, 'carbs': 3.0, 'fat': 0.2, 'fiber': 1.6, 'protein': 0.7}
+   170920  Spices, celery seed  {'fat': 25.3, 'carbs': 41.4, 'kcal': 392, 'fiber': 11.8, 'protein': 18.1}
+   171540  Soup, cream of celery, canned, condensed  {'fat': 4.5, 'carbs': 7.0, 'kcal': 72.0, 'fiber': 0.6, 'protein': 1.3}
+   169342  Celery, cooked, boiled, drained, with salt  {'carbs': 4.0, 'kcal': 18.0, 'fiber': 1.6, 'fat': 0.2, 'protein': 0.8}
+   169989  Celery, cooked, boiled, drained, without salt  {'carbs': 4.0, 'kcal': 18.0, 'protein': 0.8, 'fiber': 1.6, 'fat': 0.2}
+   172893  Soup, cream of celery, canned, prepared with equal volume milk  {'fat': 3.9, 'carbs': 5.9, 'kcal': 66.0, 'fiber': 0.3, 'protein': 2.3}
+== eggplant_fried | eggplant fried | ours kcal=180 | current 169228 = Eggplant, raw 25.0
+   168199  Plantains, green, fried  {'protein': 1.5, 'fiber': 3.5, 'fat': 11.8, 'carbs': 49.2, 'kcal': 309}
+   168077  DENNY'S, golden fried shrimp  {'fat': 20.0, 'carbs': 20.9, 'kcal': 319, 'protein': 13.9, 'fiber': 1.5}
+   167719  Chicken, meatless, breaded, fried  {'fiber': 4.3, 'protein': 21.3, 'fat': 12.8, 'carbs': 8.5, 'kcal': 234}
+   168200  Plantains, yellow, fried, Latino restaurant  {'fat': 7.5, 'carbs': 40.8, 'kcal': 236, 'protein': 1.4, 'fiber': 3.2}
+   168322  Pork, cured, bacon, pre-sliced, cooked, pan-fried  {'fiber': 0.0, 'protein': 33.9, 'fat': 35.1, 'carbs': 1.7, 'kcal': 468}
+   168435  Mushrooms, shiitake, stir-fried  {'carbs': 7.7, 'kcal': 39.0, 'protein': 3.5, 'fiber': 3.6, 'fat': 0.3}
+== onion_fried | fried onion | ours kcal=400 | current 170000 = Onions, raw 40.0
+   171327  Spices, onion powder  {'fat': 1.0, 'carbs': 79.1, 'kcal': 341, 'fiber': 15.2, 'protein': 10.4}
+   170771  BURGER KING, Onion Rings  {'fat': 25.2, 'carbs': 43.6, 'kcal': 417, 'protein': 3.9, 'fiber': 2.7}
+   169844  DENNY'S, onion rings  {'fat': 22.2, 'carbs': 41.0, 'kcal': 385, 'protein': 5.3, 'fiber': 2.4}
+   171172  Gravy, onion, dry, mix  {'protein': 9.0, 'fiber': 6.0, 'fat': 3.0, 'carbs': 67.6, 'kcal': 322}
+   172812  Crackers, matzo, egg and onion  {'fiber': 5.0, 'protein': 10.0, 'fat': 3.9, 'carbs': 77.1, 'kcal': 391}
+   171165  Soup, onion, dry, mix  {'protein': 7.5, 'fiber': 6.6, 'fat': 0.3, 'carbs': 65.1, 'kcal': 293}
+== garlic_bread | garlic bread | ours kcal=350 | current 174930 = Bread, stuffing, dry mix 386
+   167939  Garlic bread, frozen  {'protein': 8.4, 'fat': 16.6, 'carbs': 41.7, 'kcal': 350, 'fiber': 2.5}
+   167943  Bread, potato  {'fat': 3.1, 'protein': 12.5, 'fiber': 6.3, 'carbs': 47.1, 'kcal': 266}
+   167944  Bread, cheese  {'protein': 10.4, 'fiber': 2.1, 'fat': 20.8, 'carbs': 44.8, 'kcal': 408}
+   168896  Wheat flour, white, bread, enriched  {'protein': 12.0, 'fiber': 2.4, 'fat': 1.7, 'carbs': 72.5, 'kcal': 361}
+   167935  Bread, pan dulce, sweet yeast bread  {'fat': 11.6, 'carbs': 56.4, 'kcal': 367, 'fiber': 2.3, 'protein': 9.4}
+   167597  Rudi's, Gluten-Free Bakery, Original Sandwich Bread  {'fat': 10.7, 'carbs': 52.8, 'kcal': 320, 'protein': 3.1, 'fiber': 3.5}
+== lasagna | lasagna | ours kcal=160 | current 168928 = Pasta, cooked, unenriched, without added salt 158
+   169851  OLIVE GARDEN, lasagna classico  {'protein': 11.3, 'fiber': 1.6, 'fat': 10.8, 'carbs': 10.3, 'kcal': 184}
+   172106  Lasagna, Vegetable, frozen, baked  {'fat': 6.0, 'protein': 6.9, 'carbs': 14.2, 'kcal': 139, 'fiber': 1.9}
+   173333  Lasagna, cheese, frozen, prepared  {'fiber': 1.7, 'protein': 6.5, 'fat': 5.3, 'carbs': 13.8, 'kcal': 130}
+   168960  Lasagna, cheese, frozen, unprepared  {'fat': 4.2, 'protein': 5.1, 'fiber': 1.7, 'carbs': 21.6, 'kcal': 145}
+   168955  Pasta mix, Italian lasagna, unprepared  {'fat': 2.0, 'carbs': 73.8, 'kcal': 356, 'protein': 10.9, 'fiber': 2.8}
+   169850  Restaurant, Italian, lasagna with meat  {'fat': 10.7, 'carbs': 11.4, 'kcal': 185, 'fiber': 1.5, 'protein': 10.8}
+== pasta_carbonara | pasta carbonara | ours kcal=220 | current 168928 = Pasta, cooked, unenriched, without added salt 158
+   168899  Pasta, gluten-free, corn, dry  {'fat': 2.1, 'carbs': 79.3, 'kcal': 357, 'protein': 7.5, 'fiber': 11.0}
+   169736  Pasta, dry, enriched  {'carbs': 74.7, 'kcal': 371, 'fat': 1.5, 'fiber': 3.2, 'protein': 13.0}
+   168900  Pasta, gluten-free, corn, cooked  {'protein': 2.6, 'fiber': 4.8, 'fat': 0.7, 'carbs': 27.9, 'kcal': 126}
+   168927  Pasta, dry, unenriched  {'protein': 13.0, 'fiber': 3.2, 'fat': 1.5, 'carbs': 74.7, 'kcal': 371}
+   168953  Pasta mix, classic cheeseburger macaroni, unprepared  {'fat': 1.9, 'carbs': 71.5, 'kcal': 349, 'protein': 11.6, 'fiber': 2.7}
+   171192  Sauce, pasta, spaghetti/marinara, ready-to-serve  {'fiber': 1.8, 'fat': 1.6, 'carbs': 7.4, 'kcal': 50.0, 'protein': 1.4}
+== nasi_rice_spiced | spiced rice | ours kcal=145 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+   167723  Alcoholic beverage, rice (sake)  {'fat': 0.0, 'carbs': 5.0, 'kcal': 134, 'fiber': 0.0, 'protein': 0.5}
+   167958  Snacks, oriental mix, rice-based  {'kcal': 506, 'protein': 17.3, 'fat': 25.6, 'carbs': 51.6, 'fiber': 13.2}
+   167665  Restaurant, Mexican, spanish rice  {'protein': 3.3, 'fiber': 1.2, 'fat': 5.3, 'carbs': 31.2, 'kcal': 185}
+   168783  Puddings, rice, dry mix  {'fiber': 0.7, 'protein': 2.7, 'fat': 0.1, 'carbs': 91.2, 'kcal': 376}
+   167951  Snacks, crisped rice bar, chocolate chip  {'fiber': 2.2, 'protein': 5.1, 'fat': 13.5, 'carbs': 73.0, 'kcal': 404}
+   168755  Candies, milk chocolate, with rice cereal  {'kcal': 511, 'fat': 29.4, 'carbs': 59.7, 'fiber': 3.3, 'protein': 7.6}
+== vermicelli_rice | rice with vermicelli | ours kcal=150 | current 168878 = Rice, white, long-grain, regular, enriched, cooked 130
+   168949  Rice and vermicelli mix, beef flavor, unprepared  {'protein': 10.8, 'fiber': 1.6, 'fat': 1.3, 'carbs': 76.0, 'kcal': 359}
+   168755  Candies, milk chocolate, with rice cereal  {'kcal': 511, 'fat': 29.4, 'carbs': 59.7, 'fiber': 3.3, 'protein': 7.6}
+   169884  Vermicelli, made from soy  {'fat': 0.1, 'carbs': 82.3, 'kcal': 331, 'protein': 0.1, 'fiber': 3.9}
+   168877  Rice, white, long-grain, regular, raw, enriched  {'fat': 0.7, 'carbs': 80.0, 'kcal': 365, 'protein': 7.1, 'fiber': 1.3}
+   168951  Rice and vermicelli mix, rice pilaf flavor, unprepared  {'protein': 10.4, 'fiber': 1.2, 'fat': 1.4, 'carbs': 76.3, 'kcal': 359}
+   169680  Snacks, rice cakes, brown rice, multigrain  {'fiber': 3.0, 'protein': 8.5, 'fat': 3.5, 'carbs': 80.1, 'kcal': 387}
+== lentil_soup | lentil soup | ours kcal=80 | current 172421 = Lentils, mature seeds, cooked, boiled, without salt 116
+   168069  Restaurant, Latino, tripe soup  {'protein': 8.6, 'fat': 2.6, 'carbs': 4.1, 'kcal': 74.0}
+   168068  Restaurant, Latino, black bean soup  {'fat': 2.6, 'carbs': 14.8, 'kcal': 103, 'protein': 5.1, 'fiber': 4.9}
+   171577  SMART SOUP, French Lentil  {'fat': 1.1, 'carbs': 9.5, 'kcal': 53.0, 'protein': 2.9, 'fiber': 2.9}
+   172899  Soup, HEALTHY CHOICE Chicken and Rice Soup, canned  {'protein': 2.5, 'fiber': 0.8, 'fat': 0.6, 'carbs': 5.7, 'kcal': 37.0}
+   171549  Soup, lentil with ham, canned, ready-to-serve  {'fat': 1.1, 'carbs': 8.2, 'kcal': 56.0, 'protein': 3.7}
+   168984  Stew/soup, caribou (Alaska Native)  {'protein': 3.8, 'fiber': 0.1, 'fat': 0.7, 'carbs': 4.8, 'kcal': 41.0}
+== chicken_soup | chicken soup | ours kcal=40 | current 172885 = Soup, stock, fish, home-prepared 16.0
+   173496  Babyfood, dinner, chicken soup, strained  {'fiber': 1.1, 'protein': 1.6, 'fat': 1.7, 'carbs': 7.2, 'kcal': 50.0}
+   171556  CAMPBELL'S, Chicken Noodle Soup, condensed  {'fat': 1.5, 'carbs': 6.0, 'kcal': 47.0, 'protein': 2.4}
+   171571  Soup, chicken noodle, dry, mix  {'protein': 15.4, 'fiber': 3.2, 'fat': 6.5, 'carbs': 62.3, 'kcal': 377}
+   171609  Soup, chicken broth, low sodium, canned  {'carbs': 1.2, 'fat': 0.6, 'kcal': 16.0, 'protein': 2.0, 'fiber': 0.0}
+   172884  Soup, stock, chicken, home-prepared  {'fat': 1.2, 'carbs': 3.5, 'kcal': 36.0, 'protein': 2.5, 'fiber': 0.0}
+   171563  Soup, chicken broth cubes, dry  {'fat': 4.7, 'carbs': 23.5, 'kcal': 198, 'protein': 14.6, 'fiber': 0.0}
+== vegetable_soup | vegetable soup | ours kcal=35 | current 170050 = Tomatoes, red, ripe, cooked 18.0
+   171180  Soup, SWANSON, vegetable broth  {'fat': 0.1, 'carbs': 1.0, 'kcal': 6.0, 'protein': 0.2, 'fiber': 0.0}
+   168069  Restaurant, Latino, tripe soup  {'protein': 8.6, 'fat': 2.6, 'carbs': 4.1, 'kcal': 74.0}
+   168068  Restaurant, Latino, black bean soup  {'fat': 2.6, 'carbs': 14.8, 'kcal': 103, 'protein': 5.1, 'fiber': 4.9}
+   174538  Soup, vegetable, canned, low sodium, condensed  {'fat': 0.9, 'carbs': 12.1, 'protein': 2.2, 'fiber': 2.1, 'kcal': 65.0}
+   171166  Soup, cream of vegetable, dry, powder  {'protein': 8.0, 'fiber': 3.0, 'fat': 24.1, 'carbs': 52.1, 'kcal': 446}
+   172900  Soup, HEALTHY CHOICE Garden Vegetable Soup, canned  {'fat': 0.2, 'carbs': 10.0, 'kcal': 51.0, 'protein': 2.1, 'fiber': 1.9}
+== molokhia_soup | molokhia soup | ours kcal=45 | current 168463 = Spinach, cooked, boiled, drained, without salt 23.0
+   168068  Restaurant, Latino, black bean soup  {'fat': 2.6, 'carbs': 14.8, 'kcal': 103, 'protein': 5.1, 'fiber': 4.9}
+   172899  Soup, HEALTHY CHOICE Chicken and Rice Soup, canned  {'protein': 2.5, 'fiber': 0.8, 'fat': 0.6, 'carbs': 5.7, 'kcal': 37.0}
+   168069  Restaurant, Latino, tripe soup  {'protein': 8.6, 'fat': 2.6, 'carbs': 4.1, 'kcal': 74.0}
+   174545  Soup, HEALTHY CHOICE Chicken Noodle Soup, canned  {'fat': 0.6, 'carbs': 5.2, 'kcal': 41.0, 'protein': 3.7, 'fiber': 0.8}
+   172900  Soup, HEALTHY CHOICE Garden Vegetable Soup, canned  {'fat': 0.2, 'carbs': 10.0, 'kcal': 51.0, 'protein': 2.1, 'fiber': 1.9}
+   171165  Soup, onion, dry, mix  {'protein': 7.5, 'fiber': 6.6, 'fat': 0.3, 'carbs': 65.1, 'kcal': 293}
+== smoothie_banana | banana smoothie | ours kcal=80 | current 173944 = Bananas, raw 89.0
+   168849  Snacks, banana chips  {'carbs': 58.4, 'kcal': 519, 'fat': 33.6, 'fiber': 7.7, 'protein': 2.3}
+   167629  Melon, banana (Navajo)  {'protein': 0.8, 'fiber': 0.3, 'fat': 0.2, 'carbs': 4.1, 'kcal': 21.0}
+   175230  SILK Banana-Strawberry soy yogurt  {'fat': 1.2, 'carbs': 17.1, 'kcal': 88.0, 'protein': 2.4, 'fiber': 0.6}
+   167732  Babyfood, banana no tapioca, strained  {'carbs': 21.3, 'kcal': 91.0, 'protein': 1.0, 'fiber': 1.6, 'fat': 0.2}
+   169394  Pepper, banana, raw  {'fiber': 3.4, 'protein': 1.7, 'fat': 0.5, 'carbs': 5.3, 'kcal': 27.0}
+   169650  Puddings, banana, dry mix, regular  {'fiber': 0.3, 'carbs': 93.0, 'kcal': 366, 'fat': 0.4, 'protein': 0.0}
+== energy_drink | energy drink | ours kcal=45 | current 174819 = Alcoholic beverage, distilled, whiskey, 86 proof 250
+   174171  Beverages, Energy drink, AMP  {'carbs': 12.1, 'kcal': 46.0, 'protein': 0.2, 'fiber': 0.0, 'fat': 0.1}
+   174108  Beverages,  Energy drink, Citrus  {'protein': 0.0, 'fiber': 0.0, 'fat': 0.0, 'carbs': 11.3, 'kcal': 45.0}
+   171937  Beverages, Energy drink, ROCKSTAR  {'kcal': 58.0, 'fiber': 0.0, 'carbs': 12.7, 'fat': 0.2, 'protein': 0.3}
+   173210  Beverages, Energy drink, RED BULL  {'protein': 0.5, 'fat': 0.0, 'carbs': 10.2, 'kcal': 43.0, 'fiber': 0.0}
+   174822  Beverages, Energy Drink, sugar free  {'fat': 0.0, 'carbs': 0.4, 'kcal': 4.0, 'protein': 0.4, 'fiber': 0.0}
+   174172  Beverages, Energy drink, FULL THROTTLE  {'protein': 0.2, 'fiber': 0.0, 'fat': 0.1, 'carbs': 12.1, 'kcal': 46.0}
+== coconut_water | coconut water | ours kcal=19 | current 170174 = Nuts, coconut water (liquid from coconuts) 19.0
+   170174  Nuts, coconut water (liquid from coconuts)  {'protein': 0.7, 'fiber': 1.1, 'fat': 0.2, 'carbs': 3.7, 'kcal': 19.0}
+   171575  Sauce, peanut, made from coconut, water, sugar, peanuts  {'protein': 2.0, 'fiber': 1.1, 'fat': 6.3, 'carbs': 28.5, 'kcal': 179}
+   174831  Beverages, Coconut water, ready-to-drink, unsweetened  {'protein': 0.2, 'fiber': 0.0, 'fat': 0.0, 'carbs': 4.2, 'kcal': 18.0}
+   167769  Cherries, sour, canned, water pack, drained  {'fat': 0.2, 'protein': 0.7, 'fiber': 1.2, 'carbs': 10.4, 'kcal': 42.0}
+   170172  Nuts, coconut milk, raw (liquid expressed from grated meat and water)  {'protein': 2.3, 'fiber': 2.2, 'fat': 23.8, 'carbs': 5.5, 'kcal': 230}
+   168397  Corn, sweet, yellow, canned, drained solids, rinsed with tap water  {'kcal': 64.0, 'protein': 2.2, 'fat': 1.4, 'carbs': 13.0, 'fiber': 1.7}
+== almond_milk | almond milk | ours kcal=15 | current 170567 = Nuts, almonds 579
+   167587  Candies, milk chocolate  {'fat': 29.7, 'fiber': 3.4, 'protein': 7.7, 'carbs': 59.4, 'kcal': 535}
+   167984  Candies, SYMPHONY Milk Chocolate Bar  {'fat': 30.6, 'carbs': 58.0, 'kcal': 531, 'protein': 8.5, 'fiber': 1.7}
+   174820  Beverages, almond milk, chocolate, ready-to-drink  {'protein': 0.6, 'fiber': 0.4, 'fat': 1.2, 'carbs': 9.4, 'kcal': 50.0}
+   174832  Beverages, almond milk, unsweetened, shelf stable  {'fiber': 0.2, 'protein': 0.4, 'fat': 1.0, 'carbs': 1.3, 'kcal': 15.0}
+   168001  Candies, milk chocolate coated peanuts  {'fiber': 4.7, 'protein': 13.1, 'fat': 33.5, 'carbs': 49.7, 'kcal': 519}
+   168755  Candies, milk chocolate, with rice cereal  {'kcal': 511, 'fat': 29.4, 'carbs': 59.7, 'fiber': 3.3, 'protein': 7.6}
+== oat_milk | oat milk | ours kcal=43 | current 173904 = Cereals, oats, regular and quick, not fortified, dry 379
+   168873  Oat bran, cooked  {'fiber': 2.6, 'protein': 3.2, 'fat': 0.9, 'carbs': 11.4, 'kcal': 40.0}
+   168872  Oat bran, raw  {'fat': 7.0, 'carbs': 66.2, 'kcal': 246, 'protein': 17.3, 'fiber': 15.4}
+   173576  Oil, oat  {'protein': 0.0, 'fiber': 0.0, 'fat': 100, 'carbs': 0.0, 'kcal': 884}
+   167587  Candies, milk chocolate  {'fat': 29.7, 'fiber': 3.4, 'protein': 7.7, 'carbs': 59.4, 'kcal': 535}
+   172676  Bread, oat bran  {'fat': 4.4, 'carbs': 39.8, 'kcal': 236, 'protein': 10.4, 'fiber': 4.5}
+   172666  Bagels, oat bran  {'fiber': 3.6, 'fat': 1.2, 'carbs': 53.3, 'kcal': 255, 'protein': 10.7}

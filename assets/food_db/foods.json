@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "foods": [
     {
       "id": "baladi_bread",
@@ -33,8 +33,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 790085
+        "name": "Egyptian Food Composition Database"
       },
       "household_units": [
         {
@@ -57,7 +56,6 @@
       "name_en": "pita bread",
       "aliases": [
         "شامي",
-        "صامولي",
         "pita"
       ],
       "per_100g": {
@@ -77,7 +75,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 790179
+        "fdc_id": 174915
       }
     },
     {
@@ -152,7 +150,7 @@
         "kcal": 123,
         "protein": 2.7,
         "carbs": 25.6,
-        "fat": 1,
+        "fat": 1.0,
         "fiber": 1.6
       },
       "state": "cooked",
@@ -165,7 +163,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 168875
+        "fdc_id": 169704
       }
     },
     {
@@ -207,7 +205,7 @@
         "bulgur"
       ],
       "per_100g": {
-        "kcal": 83,
+        "kcal": 83.0,
         "protein": 3.1,
         "carbs": 18.6,
         "fat": 0.2,
@@ -223,7 +221,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170288
+        "fdc_id": 170287
       }
     },
     {
@@ -296,11 +294,11 @@
         "cornflakes"
       ],
       "per_100g": {
-        "kcal": 357,
-        "protein": 7.5,
-        "carbs": 84.1,
-        "fat": 0.4,
-        "fiber": 3.3
+        "kcal": 384,
+        "protein": 5.9,
+        "carbs": 88.0,
+        "fat": 0.9,
+        "fiber": 2.7
       },
       "state": "raw",
       "common_portions": [
@@ -312,7 +310,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173900
+        "fdc_id": 174648
       }
     },
     {
@@ -328,7 +326,7 @@
       "per_100g": {
         "kcal": 110,
         "protein": 7.6,
-        "carbs": 19.7,
+        "carbs": 19.6,
         "fat": 0.4,
         "fiber": 5.4
       },
@@ -347,7 +345,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173745
+        "fdc_id": 173753
       }
     },
     {
@@ -382,7 +380,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174258
+        "fdc_id": 172455
       }
     },
     {
@@ -452,11 +450,11 @@
         "hummus"
       ],
       "per_100g": {
-        "kcal": 166,
-        "protein": 7.9,
-        "carbs": 14.3,
-        "fat": 9.6,
-        "fiber": 6
+        "kcal": 177,
+        "protein": 4.9,
+        "carbs": 20.1,
+        "fat": 8.6,
+        "fiber": 4.0
       },
       "state": "cooked",
       "common_portions": [
@@ -473,7 +471,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174289
+        "fdc_id": 172454
       }
     },
     {
@@ -528,7 +526,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 175185
+        "fdc_id": 175237
       }
     },
     {
@@ -612,7 +610,7 @@
         "protein": 13.6,
         "carbs": 0.8,
         "fat": 14.8,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "fried",
       "common_portions": [
@@ -624,7 +622,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 172186
+        "fdc_id": 173423
       }
     },
     {
@@ -680,8 +678,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 171477
+        "name": "USDA FoodData Central"
       }
     },
     {
@@ -694,10 +691,10 @@
       ],
       "per_100g": {
         "kcal": 165,
-        "protein": 31,
-        "carbs": 0,
+        "protein": 31.0,
+        "carbs": 0.0,
         "fat": 3.6,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "grilled",
       "common_portions": [
@@ -709,7 +706,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 171078
+        "fdc_id": 171477
       },
       "household_units": [
         {
@@ -735,11 +732,11 @@
         "chicken thigh"
       ],
       "per_100g": {
-        "kcal": 229,
-        "protein": 25.2,
-        "carbs": 0,
-        "fat": 13.5,
-        "fiber": 0
+        "kcal": 232,
+        "protein": 23.3,
+        "carbs": 0.0,
+        "fat": 14.7,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -751,7 +748,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 172372
+        "fdc_id": 173625
       }
     },
     {
@@ -764,10 +761,10 @@
       ],
       "per_100g": {
         "kcal": 246,
-        "protein": 24,
-        "carbs": 8,
-        "fat": 13.2,
-        "fiber": 0.3
+        "protein": 30.4,
+        "carbs": 1.8,
+        "fat": 12.1,
+        "fiber": 0.1
       },
       "state": "fried",
       "common_portions": [
@@ -779,7 +776,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 171078
+        "fdc_id": 171460
       }
     },
     {
@@ -825,11 +822,11 @@
         "لحم أحمر"
       ],
       "per_100g": {
-        "kcal": 158,
-        "protein": 21.4,
-        "carbs": 0,
-        "fat": 7.5,
-        "fiber": 0
+        "kcal": 157,
+        "protein": 20.7,
+        "carbs": 0.6,
+        "fat": 7.4,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -841,7 +838,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 168607
       }
     },
     {
@@ -855,10 +852,10 @@
       ],
       "per_100g": {
         "kcal": 250,
-        "protein": 27.2,
-        "carbs": 0,
-        "fat": 15,
-        "fiber": 0
+        "protein": 26.7,
+        "carbs": 0.0,
+        "fat": 15.1,
+        "fiber": 0.0
       },
       "state": "grilled",
       "common_portions": [
@@ -870,7 +867,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174033
+        "fdc_id": 168720
       }
     },
     {
@@ -918,11 +915,11 @@
         "lamb"
       ],
       "per_100g": {
-        "kcal": 294,
-        "protein": 24.5,
-        "carbs": 0,
-        "fat": 20.9,
-        "fiber": 0
+        "kcal": 283,
+        "protein": 24.8,
+        "carbs": 0.0,
+        "fat": 19.6,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -934,7 +931,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174370
+        "fdc_id": 172544
       }
     },
     {
@@ -976,9 +973,9 @@
       "per_100g": {
         "kcal": 128,
         "protein": 26.2,
-        "carbs": 0,
-        "fat": 2.7,
-        "fiber": 0
+        "carbs": 0.0,
+        "fat": 2.6,
+        "fiber": 0.0
       },
       "state": "grilled",
       "common_portions": [
@@ -990,7 +987,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 175124
+        "fdc_id": 175177
       }
     },
     {
@@ -1004,9 +1001,9 @@
       "per_100g": {
         "kcal": 206,
         "protein": 22.1,
-        "carbs": 0,
+        "carbs": 0.0,
         "fat": 12.4,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "baked",
       "common_portions": [
@@ -1018,7 +1015,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 175167
+        "fdc_id": 175168
       }
     },
     {
@@ -1032,9 +1029,9 @@
       "per_100g": {
         "kcal": 116,
         "protein": 25.5,
-        "carbs": 0,
+        "carbs": 0.0,
         "fat": 0.8,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -1046,7 +1043,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 175159
+        "fdc_id": 171986
       }
     },
     {
@@ -1087,11 +1084,11 @@
         "turkey"
       ],
       "per_100g": {
-        "kcal": 135,
-        "protein": 30.1,
-        "carbs": 0,
-        "fat": 0.7,
-        "fiber": 0
+        "kcal": 136,
+        "protein": 29.5,
+        "carbs": 0.0,
+        "fat": 2.0,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -1103,7 +1100,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 171506
+        "fdc_id": 174516
       }
     },
     {
@@ -1116,11 +1113,11 @@
         "milk"
       ],
       "per_100g": {
-        "kcal": 61,
-        "protein": 3.2,
+        "kcal": 61.0,
+        "protein": 3.1,
         "carbs": 4.8,
-        "fat": 3.3,
-        "fiber": 0
+        "fat": 3.2,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -1132,7 +1129,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173424
+        "fdc_id": 171265
       }
     },
     {
@@ -1144,11 +1141,11 @@
         "skim"
       ],
       "per_100g": {
-        "kcal": 34,
+        "kcal": 34.0,
         "protein": 3.4,
-        "carbs": 5,
+        "carbs": 5.0,
         "fat": 0.1,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -1160,7 +1157,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173441
+        "fdc_id": 171269
       }
     },
     {
@@ -1173,11 +1170,11 @@
         "yogurt"
       ],
       "per_100g": {
-        "kcal": 61,
+        "kcal": 61.0,
         "protein": 3.5,
         "carbs": 4.7,
-        "fat": 3.3,
-        "fiber": 0
+        "fat": 3.2,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -1189,7 +1186,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170903
+        "fdc_id": 171284
       }
     },
     {
@@ -1244,8 +1241,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170903
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -1340,11 +1336,11 @@
         "موزاريلا"
       ],
       "per_100g": {
-        "kcal": 300,
+        "kcal": 299,
         "protein": 22.2,
-        "carbs": 2.2,
-        "fat": 22.4,
-        "fiber": 0
+        "carbs": 2.4,
+        "fat": 22.1,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -1356,7 +1352,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173430
+        "fdc_id": 170845
       }
     },
     {
@@ -1425,11 +1421,11 @@
         "ghee"
       ],
       "per_100g": {
-        "kcal": 876,
-        "protein": 0.3,
-        "carbs": 0,
-        "fat": 99.5,
-        "fiber": 0
+        "kcal": 900,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -1441,7 +1437,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 171328
+        "fdc_id": 171314
       }
     },
     {
@@ -1487,10 +1483,10 @@
       ],
       "per_100g": {
         "kcal": 884,
-        "protein": 0,
-        "carbs": 0,
+        "protein": 0.0,
+        "carbs": 0.0,
         "fat": 100,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -1502,7 +1498,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 171034
+        "fdc_id": 171017
       }
     },
     {
@@ -1542,7 +1538,7 @@
       ],
       "per_100g": {
         "kcal": 595,
-        "protein": 17,
+        "protein": 17.0,
         "carbs": 21.2,
         "fat": 53.8,
         "fiber": 9.3
@@ -1557,7 +1553,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170150
+        "fdc_id": 170189
       }
     },
     {
@@ -1585,8 +1581,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168463
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -1599,9 +1594,9 @@
         "باميه"
       ],
       "per_100g": {
-        "kcal": 27,
+        "kcal": 22.0,
         "protein": 1.9,
-        "carbs": 4.5,
+        "carbs": 3.1,
         "fat": 0.2,
         "fiber": 2.5
       },
@@ -1615,7 +1610,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169260
+        "fdc_id": 169261
       }
     },
     {
@@ -1628,9 +1623,9 @@
         "tomato"
       ],
       "per_100g": {
-        "kcal": 21,
+        "kcal": 18.0,
         "protein": 0.9,
-        "carbs": 3.9,
+        "carbs": 3.1,
         "fat": 0.2,
         "fiber": 1.2
       },
@@ -1644,7 +1639,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170050
+        "fdc_id": 170457
       }
     },
     {
@@ -1656,9 +1651,9 @@
         "cucumber"
       ],
       "per_100g": {
-        "kcal": 18,
+        "kcal": 15.0,
         "protein": 0.7,
-        "carbs": 3.6,
+        "carbs": 2.8,
         "fat": 0.1,
         "fiber": 0.5
       },
@@ -1773,11 +1768,11 @@
         "فries"
       ],
       "per_100g": {
-        "kcal": 312,
+        "kcal": 323,
         "protein": 3.4,
-        "carbs": 41.4,
-        "fat": 14.7,
-        "fiber": 3.8
+        "carbs": 42.6,
+        "fat": 15.5,
+        "fiber": 3.9
       },
       "state": "fried",
       "common_portions": [
@@ -1789,7 +1784,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170033
+        "fdc_id": 170721
       }
     },
     {
@@ -1802,7 +1797,7 @@
         "eggplant"
       ],
       "per_100g": {
-        "kcal": 35,
+        "kcal": 35.0,
         "protein": 0.8,
         "carbs": 8.7,
         "fat": 0.2,
@@ -1818,7 +1813,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169228
+        "fdc_id": 169229
       }
     },
     {
@@ -1830,11 +1825,11 @@
         "zucchini"
       ],
       "per_100g": {
-        "kcal": 19,
+        "kcal": 15.0,
         "protein": 1.1,
-        "carbs": 2.7,
+        "carbs": 1.8,
         "fat": 0.4,
-        "fiber": 1
+        "fiber": 1.0
       },
       "state": "cooked",
       "common_portions": [
@@ -1846,7 +1841,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169291
+        "fdc_id": 169292
       }
     },
     {
@@ -1858,9 +1853,9 @@
         "spinach"
       ],
       "per_100g": {
-        "kcal": 30,
-        "protein": 3,
-        "carbs": 3.8,
+        "kcal": 23.0,
+        "protein": 3.0,
+        "carbs": 2.1,
         "fat": 0.3,
         "fiber": 2.4
       },
@@ -1886,9 +1881,9 @@
         "ملفوف"
       ],
       "per_100g": {
-        "kcal": 29,
+        "kcal": 25.0,
         "protein": 1.3,
-        "carbs": 5.8,
+        "carbs": 4.7,
         "fat": 0.1,
         "fiber": 2.5
       },
@@ -1942,10 +1937,10 @@
         "lettuce"
       ],
       "per_100g": {
-        "kcal": 19,
+        "kcal": 15.0,
         "protein": 1.4,
-        "carbs": 2.9,
-        "fat": 0.2,
+        "carbs": 2.1,
+        "fat": 0.1,
         "fiber": 1.3
       },
       "state": "raw",
@@ -1970,9 +1965,9 @@
         "bell pepper"
       ],
       "per_100g": {
-        "kcal": 24,
+        "kcal": 20.0,
         "protein": 0.9,
-        "carbs": 4.6,
+        "carbs": 3.6,
         "fat": 0.2,
         "fiber": 1.7
       },
@@ -2026,9 +2021,9 @@
         "corn"
       ],
       "per_100g": {
-        "kcal": 111,
+        "kcal": 96.0,
         "protein": 3.4,
-        "carbs": 21,
+        "carbs": 21.0,
         "fat": 1.5,
         "fiber": 2.4
       },
@@ -2042,7 +2037,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170288
+        "fdc_id": 169999
       }
     },
     {
@@ -2075,8 +2070,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168878
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -2236,10 +2230,10 @@
         "watermelon"
       ],
       "per_100g": {
-        "kcal": 35,
+        "kcal": 30.0,
         "protein": 0.6,
-        "carbs": 7.6,
-        "fat": 0.2,
+        "carbs": 7.5,
+        "fat": 0.1,
         "fiber": 0.4
       },
       "state": "raw",
@@ -2462,9 +2456,9 @@
         "lemon"
       ],
       "per_100g": {
-        "kcal": 44,
+        "kcal": 29.0,
         "protein": 1.1,
-        "carbs": 9.3,
+        "carbs": 5.5,
         "fat": 0.3,
         "fiber": 2.8
       },
@@ -2478,7 +2472,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 167747
+        "fdc_id": 167746
       }
     },
     {
@@ -2668,8 +2662,8 @@
         "kcal": 559,
         "protein": 30.2,
         "carbs": 10.7,
-        "fat": 49.1,
-        "fiber": 6
+        "fat": 49.0,
+        "fiber": 6.0
       },
       "state": "raw",
       "common_portions": [
@@ -2681,7 +2675,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170188
+        "fdc_id": 170556
       }
     },
     {
@@ -2737,8 +2731,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168859
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -2766,8 +2759,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168859
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -2794,8 +2786,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 167946
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -2822,8 +2813,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168859
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -2850,8 +2840,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 167922
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -2866,7 +2855,7 @@
         "kcal": 207,
         "protein": 3.5,
         "carbs": 23.6,
-        "fat": 11,
+        "fat": 11.0,
         "fiber": 0.7
       },
       "state": "raw",
@@ -2879,7 +2868,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 167722
+        "fdc_id": 167575
       }
     },
     {
@@ -2891,11 +2880,11 @@
         "chocolate"
       ],
       "per_100g": {
-        "kcal": 546,
-        "protein": 4.9,
-        "carbs": 59.4,
-        "fat": 31.3,
-        "fiber": 7
+        "kcal": 598,
+        "protein": 7.8,
+        "carbs": 45.9,
+        "fat": 42.6,
+        "fiber": 10.9
       },
       "state": "raw",
       "common_portions": [
@@ -2996,8 +2985,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170150
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3010,11 +2998,11 @@
         "كوباية شاي"
       ],
       "per_100g": {
-        "kcal": 1,
-        "protein": 0,
+        "kcal": 1.0,
+        "protein": 0.0,
         "carbs": 0.3,
-        "fat": 0,
-        "fiber": 0
+        "fat": 0.0,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -3026,7 +3014,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174820
+        "fdc_id": 173227
       }
     },
     {
@@ -3039,11 +3027,11 @@
         "نسكافيه"
       ],
       "per_100g": {
-        "kcal": 0,
+        "kcal": 1.0,
         "protein": 0.1,
-        "carbs": 0,
-        "fat": 0,
-        "fiber": 0
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -3082,8 +3070,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 169655
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3124,11 +3111,11 @@
         "coca cola"
       ],
       "per_100g": {
-        "kcal": 42,
-        "protein": 0,
-        "carbs": 10.6,
-        "fat": 0,
-        "fiber": 0
+        "kcal": 42.0,
+        "protein": 0.0,
+        "carbs": 10.4,
+        "fat": 0.2,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -3140,7 +3127,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174819
+        "fdc_id": 174852
       }
     },
     {
@@ -3167,8 +3154,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170903
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3180,11 +3166,11 @@
         "karkade"
       ],
       "per_100g": {
-        "kcal": 0,
-        "protein": 0,
-        "carbs": 0,
-        "fat": 0,
-        "fiber": 0
+        "kcal": 0.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -3196,7 +3182,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174820
+        "fdc_id": 171946
       }
     },
     {
@@ -3223,8 +3209,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 167922
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3252,8 +3237,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168878
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3280,8 +3264,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 173745
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3308,8 +3291,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 174258
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3341,8 +3323,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 171078
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3369,8 +3350,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3396,8 +3376,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168878
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3423,8 +3402,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 169260
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3451,8 +3429,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168928
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -3464,11 +3441,11 @@
         "pizza"
       ],
       "per_100g": {
-        "kcal": 266,
-        "protein": 11.4,
-        "carbs": 33,
-        "fat": 10,
-        "fiber": 2.3
+        "kcal": 268,
+        "protein": 10.4,
+        "carbs": 29.0,
+        "fat": 12.3,
+        "fiber": 2.2
       },
       "state": "baked",
       "common_portions": [
@@ -3480,7 +3457,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 172220
+        "fdc_id": 170317
       }
     },
     {
@@ -3492,11 +3469,11 @@
         "hamburger"
       ],
       "per_100g": {
-        "kcal": 295,
-        "protein": 17,
-        "carbs": 24,
-        "fat": 14,
-        "fiber": 1
+        "kcal": 297,
+        "protein": 16.5,
+        "carbs": 31.5,
+        "fat": 12.0,
+        "fiber": 1.7
       },
       "state": "grilled",
       "common_portions": [
@@ -3508,7 +3485,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 170693
       }
     },
     {
@@ -3712,11 +3689,11 @@
         "ساور كريم"
       ],
       "per_100g": {
-        "kcal": 193,
+        "kcal": 198,
         "protein": 2.4,
         "carbs": 4.6,
         "fat": 19.4,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -3728,7 +3705,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170900
+        "fdc_id": 171257
       }
     },
     {
@@ -3739,11 +3716,11 @@
         "ريكوتا"
       ],
       "per_100g": {
-        "kcal": 174,
-        "protein": 11.3,
-        "carbs": 3,
-        "fat": 13,
-        "fiber": 0
+        "kcal": 150,
+        "protein": 7.5,
+        "carbs": 7.3,
+        "fat": 10.2,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -3755,7 +3732,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170890
+        "fdc_id": 170851
       }
     },
     {
@@ -3769,8 +3746,8 @@
         "kcal": 392,
         "protein": 35.8,
         "carbs": 3.2,
-        "fat": 25.8,
-        "fiber": 0
+        "fat": 25.0,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -3782,7 +3759,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173431
+        "fdc_id": 170848
       }
     },
     {
@@ -3820,9 +3797,9 @@
         "بروكلي"
       ],
       "per_100g": {
-        "kcal": 42,
+        "kcal": 35.0,
         "protein": 2.4,
-        "carbs": 7.2,
+        "carbs": 5.4,
         "fat": 0.4,
         "fiber": 3.3
       },
@@ -3836,7 +3813,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170379
+        "fdc_id": 169967
       }
     },
     {
@@ -3847,9 +3824,9 @@
         "قرنبيط"
       ],
       "per_100g": {
-        "kcal": 28,
+        "kcal": 23.0,
         "protein": 1.8,
-        "carbs": 4.1,
+        "carbs": 2.8,
         "fat": 0.5,
         "fiber": 2.3
       },
@@ -3863,7 +3840,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169986
+        "fdc_id": 170397
       }
     },
     {
@@ -3875,11 +3852,11 @@
         "فطر"
       ],
       "per_100g": {
-        "kcal": 28,
+        "kcal": 22.0,
         "protein": 3.1,
-        "carbs": 3.3,
+        "carbs": 1.7,
         "fat": 0.3,
-        "fiber": 1
+        "fiber": 1.0
       },
       "state": "raw",
       "common_portions": [
@@ -3902,9 +3879,9 @@
         "فاصوليا خضراء"
       ],
       "per_100g": {
-        "kcal": 42,
+        "kcal": 35.0,
         "protein": 1.9,
-        "carbs": 7.9,
+        "carbs": 6.2,
         "fat": 0.3,
         "fiber": 3.2
       },
@@ -3918,7 +3895,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169963
+        "fdc_id": 169141
       }
     },
     {
@@ -3957,11 +3934,11 @@
         "لفت"
       ],
       "per_100g": {
-        "kcal": 22,
+        "kcal": 22.0,
         "protein": 0.7,
         "carbs": 5.1,
         "fat": 0.1,
-        "fiber": 2
+        "fiber": 2.0
       },
       "state": "cooked",
       "common_portions": [
@@ -3973,7 +3950,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170465
+        "fdc_id": 170058
       }
     },
     {
@@ -3984,7 +3961,7 @@
         "فجل"
       ],
       "per_100g": {
-        "kcal": 16,
+        "kcal": 16.0,
         "protein": 0.7,
         "carbs": 3.4,
         "fat": 0.1,
@@ -4000,7 +3977,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169249
+        "fdc_id": 169276
       }
     },
     {
@@ -4011,9 +3988,9 @@
         "بقدونس"
       ],
       "per_100g": {
-        "kcal": 44,
-        "protein": 3,
-        "carbs": 6.3,
+        "kcal": 36.0,
+        "protein": 3.0,
+        "carbs": 4.2,
         "fat": 0.8,
         "fiber": 3.3
       },
@@ -4038,9 +4015,9 @@
         "كزبرة"
       ],
       "per_100g": {
-        "kcal": 28,
+        "kcal": 23.0,
         "protein": 2.1,
-        "carbs": 3.7,
+        "carbs": 2.5,
         "fat": 0.5,
         "fiber": 2.8
       },
@@ -4065,9 +4042,9 @@
         "نعناع"
       ],
       "per_100g": {
-        "kcal": 53,
+        "kcal": 44.0,
         "protein": 3.3,
-        "carbs": 8.4,
+        "carbs": 6.1,
         "fat": 0.7,
         "fiber": 6.8
       },
@@ -4081,7 +4058,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173433
+        "fdc_id": 173475
       }
     },
     {
@@ -4137,7 +4114,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 167961
+        "fdc_id": 175009
       }
     },
     {
@@ -4149,10 +4126,10 @@
         "toast"
       ],
       "per_100g": {
-        "kcal": 265,
-        "protein": 9,
-        "carbs": 49,
-        "fat": 3.2,
+        "kcal": 266,
+        "protein": 8.8,
+        "carbs": 49.4,
+        "fat": 3.3,
         "fiber": 2.7
       },
       "state": "baked",
@@ -4165,7 +4142,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174930
+        "fdc_id": 174924
       }
     },
     {
@@ -4180,7 +4157,7 @@
         "kcal": 406,
         "protein": 8.2,
         "carbs": 45.8,
-        "fat": 21,
+        "fat": 21.0,
         "fiber": 2.6
       },
       "state": "baked",
@@ -4193,7 +4170,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 172671
+        "fdc_id": 174987
       }
     },
     {
@@ -4205,11 +4182,11 @@
         "jam"
       ],
       "per_100g": {
-        "kcal": 250,
-        "protein": 0.4,
-        "carbs": 65,
+        "kcal": 254,
+        "protein": 0.2,
+        "carbs": 66.3,
         "fat": 0.1,
-        "fiber": 1
+        "fiber": 0.7
       },
       "state": "raw",
       "common_portions": [
@@ -4221,7 +4198,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 168819
+        "fdc_id": 168758
       }
     },
     {
@@ -4262,9 +4239,9 @@
       ],
       "per_100g": {
         "kcal": 539,
-        "protein": 6.3,
-        "carbs": 57.6,
-        "fat": 30.9,
+        "protein": 5.4,
+        "carbs": 62.4,
+        "fat": 29.7,
         "fiber": 5.4
       },
       "state": "raw",
@@ -4277,7 +4254,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170273
+        "fdc_id": 168000
       }
     },
     {
@@ -4317,9 +4294,9 @@
         "ketchup"
       ],
       "per_100g": {
-        "kcal": 112,
-        "protein": 1,
-        "carbs": 27,
+        "kcal": 101,
+        "protein": 1.0,
+        "carbs": 27.4,
         "fat": 0.1,
         "fiber": 0.3
       },
@@ -4333,7 +4310,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 168559
+        "fdc_id": 168556
       }
     },
     {
@@ -4345,11 +4322,11 @@
         "mustard"
       ],
       "per_100g": {
-        "kcal": 66,
-        "protein": 4.4,
+        "kcal": 60.0,
+        "protein": 3.7,
         "carbs": 5.8,
         "fat": 3.3,
-        "fiber": 3.3
+        "fiber": 4.0
       },
       "state": "raw",
       "common_portions": [
@@ -4401,11 +4378,11 @@
         "vinegar"
       ],
       "per_100g": {
-        "kcal": 0,
-        "protein": 0,
-        "carbs": 0,
-        "fat": 0,
-        "fiber": 0
+        "kcal": 18.0,
+        "protein": 0.0,
+        "carbs": 4.5,
+        "fat": 0.0,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -4417,7 +4394,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173130
+        "fdc_id": 172237
       }
     },
     {
@@ -4444,8 +4421,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 172885
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4473,8 +4449,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168878
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4501,8 +4476,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170288
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4529,8 +4503,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 790085
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4557,8 +4530,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 167946
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4586,8 +4558,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 174258
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4614,8 +4585,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170288
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4642,8 +4612,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170288
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4670,8 +4639,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170050
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4698,8 +4666,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 169228
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4726,8 +4693,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 169228
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4754,8 +4720,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168878
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4781,8 +4746,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 173745
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4809,8 +4773,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 173745
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4836,8 +4799,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170903
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4864,8 +4826,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170288
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -4893,7 +4854,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 168874
+        "fdc_id": 168917
       }
     },
     {
@@ -4920,7 +4881,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170283
+        "fdc_id": 170285
       }
     },
     {
@@ -4961,9 +4922,9 @@
       ],
       "per_100g": {
         "kcal": 536,
-        "protein": 7,
-        "carbs": 53,
-        "fat": 35,
+        "protein": 7.0,
+        "carbs": 52.9,
+        "fat": 34.6,
         "fiber": 4.8
       },
       "state": "fried",
@@ -4976,7 +4937,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170033
+        "fdc_id": 170649
       }
     },
     {
@@ -5003,8 +4964,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 172671
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -5031,8 +4991,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168859
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -5044,11 +5003,11 @@
         "protein powder"
       ],
       "per_100g": {
-        "kcal": 392,
-        "protein": 78,
-        "carbs": 8,
-        "fat": 5,
-        "fiber": 0
+        "kcal": 352,
+        "protein": 78.1,
+        "carbs": 6.2,
+        "fat": 1.6,
+        "fiber": 3.1
       },
       "state": "raw",
       "common_portions": [
@@ -5060,7 +5019,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173424
+        "fdc_id": 173180
       }
     },
     {
@@ -5071,11 +5030,11 @@
         "بروتين بار"
       ],
       "per_100g": {
-        "kcal": 380,
-        "protein": 25,
-        "carbs": 40,
-        "fat": 12,
-        "fiber": 5
+        "kcal": 412,
+        "protein": 30.3,
+        "carbs": 38.4,
+        "fat": 15.2,
+        "fiber": 7.3
       },
       "state": "raw",
       "common_portions": [
@@ -5087,7 +5046,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173424
+        "fdc_id": 173158
       }
     },
     {
@@ -5113,8 +5072,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170904
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -5126,11 +5084,11 @@
         "turkey slices"
       ],
       "per_100g": {
-        "kcal": 120,
-        "protein": 18,
-        "carbs": 3,
-        "fat": 4,
-        "fiber": 0
+        "kcal": 139,
+        "protein": 16.3,
+        "carbs": 3.3,
+        "fat": 6.2,
+        "fiber": 0.1
       },
       "state": "cooked",
       "common_portions": [
@@ -5142,7 +5100,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 171506
+        "fdc_id": 172927
       }
     },
     {
@@ -5154,11 +5112,11 @@
         "pastrami"
       ],
       "per_100g": {
-        "kcal": 150,
-        "protein": 20,
-        "carbs": 2,
-        "fat": 7,
-        "fiber": 0
+        "kcal": 147,
+        "protein": 21.8,
+        "carbs": 0.4,
+        "fat": 5.8,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5170,7 +5128,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 170204
       }
     },
     {
@@ -5183,10 +5141,10 @@
       ],
       "per_100g": {
         "kcal": 311,
-        "protein": 14,
-        "carbs": 3,
-        "fat": 27,
-        "fiber": 0
+        "protein": 16.4,
+        "carbs": 3.0,
+        "fat": 25.4,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5198,7 +5156,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 174573
       }
     },
     {
@@ -5210,11 +5168,11 @@
         "hotdog"
       ],
       "per_100g": {
-        "kcal": 290,
-        "protein": 10,
-        "carbs": 4,
-        "fat": 26,
-        "fiber": 0
+        "kcal": 302,
+        "protein": 10.7,
+        "carbs": 5.2,
+        "fat": 26.4,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5226,7 +5184,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 171634
       }
     },
     {
@@ -5238,11 +5196,11 @@
         "sausage"
       ],
       "per_100g": {
-        "kcal": 300,
-        "protein": 12,
-        "carbs": 2,
-        "fat": 27,
-        "fiber": 0
+        "kcal": 312,
+        "protein": 14.1,
+        "carbs": 2.4,
+        "fat": 26.9,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5254,7 +5212,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 170606
       }
     },
     {
@@ -5266,11 +5224,11 @@
         "liver pate"
       ],
       "per_100g": {
-        "kcal": 250,
-        "protein": 12,
-        "carbs": 5,
-        "fat": 20,
-        "fiber": 0
+        "kcal": 319,
+        "protein": 14.2,
+        "carbs": 1.5,
+        "fat": 28.0,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5282,7 +5240,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169451
+        "fdc_id": 172930
       }
     },
     {
@@ -5293,11 +5251,11 @@
         "دمياطي"
       ],
       "per_100g": {
-        "kcal": 250,
-        "protein": 15,
-        "carbs": 3,
-        "fat": 20,
-        "fiber": 0
+        "kcal": 265,
+        "protein": 14.2,
+        "carbs": 3.9,
+        "fat": 21.5,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -5348,11 +5306,11 @@
         "جبنة رومي"
       ],
       "per_100g": {
-        "kcal": 380,
-        "protein": 25,
-        "carbs": 2,
-        "fat": 30,
-        "fiber": 0
+        "kcal": 403,
+        "protein": 22.9,
+        "carbs": 3.4,
+        "fat": 33.3,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -5375,11 +5333,11 @@
         "زبادي بالفراولة"
       ],
       "per_100g": {
-        "kcal": 99,
-        "protein": 3.5,
-        "carbs": 15,
-        "fat": 2.5,
-        "fiber": 0
+        "kcal": 99.0,
+        "protein": 4.0,
+        "carbs": 18.6,
+        "fat": 1.1,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -5391,7 +5349,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170903
+        "fdc_id": 170889
       }
     },
     {
@@ -5403,10 +5361,10 @@
       ],
       "per_100g": {
         "kcal": 340,
-        "protein": 2,
-        "carbs": 3,
-        "fat": 36,
-        "fiber": 0
+        "protein": 2.8,
+        "carbs": 2.8,
+        "fat": 36.1,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -5418,7 +5376,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170899
+        "fdc_id": 170859
       }
     },
     {
@@ -5430,10 +5388,10 @@
       ],
       "per_100g": {
         "kcal": 496,
-        "protein": 26,
-        "carbs": 38,
-        "fat": 27,
-        "fiber": 0
+        "protein": 26.3,
+        "carbs": 38.4,
+        "fat": 26.7,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -5445,7 +5403,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173424
+        "fdc_id": 170876
       }
     },
     {
@@ -5458,9 +5416,9 @@
       "per_100g": {
         "kcal": 134,
         "protein": 6.8,
-        "carbs": 10,
+        "carbs": 10.0,
         "fat": 7.6,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -5472,7 +5430,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173441
+        "fdc_id": 172194
       }
     },
     {
@@ -5488,7 +5446,7 @@
         "protein": 7.9,
         "carbs": 54.4,
         "fat": 8.7,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -5500,7 +5458,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 173424
+        "fdc_id": 171275
       }
     },
     {
@@ -5515,11 +5473,11 @@
         "brown bread"
       ],
       "per_100g": {
-        "kcal": 247,
-        "protein": 13,
-        "carbs": 41,
-        "fat": 3.4,
-        "fiber": 7
+        "kcal": 252,
+        "protein": 12.4,
+        "carbs": 42.7,
+        "fat": 3.5,
+        "fiber": 6.0
       },
       "state": "baked",
       "common_portions": [
@@ -5531,7 +5489,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174930
+        "fdc_id": 172688
       }
     },
     {
@@ -5543,10 +5501,10 @@
       ],
       "per_100g": {
         "kcal": 387,
-        "protein": 8,
-        "carbs": 81,
+        "protein": 8.2,
+        "carbs": 81.5,
         "fat": 2.8,
-        "fiber": 1.5
+        "fiber": 4.2
       },
       "state": "baked",
       "common_portions": [
@@ -5558,7 +5516,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 168878
+        "fdc_id": 167966
       }
     },
     {
@@ -5569,11 +5527,11 @@
         "تورتيلا"
       ],
       "per_100g": {
-        "kcal": 312,
-        "protein": 8.2,
-        "carbs": 51,
-        "fat": 8,
-        "fiber": 2.5
+        "kcal": 297,
+        "protein": 8.0,
+        "carbs": 49.3,
+        "fat": 7.6,
+        "fiber": 2.4
       },
       "state": "baked",
       "common_portions": [
@@ -5597,11 +5555,11 @@
         "bagel"
       ],
       "per_100g": {
-        "kcal": 257,
-        "protein": 10,
-        "carbs": 50,
-        "fat": 1.5,
-        "fiber": 2
+        "kcal": 264,
+        "protein": 10.6,
+        "carbs": 52.4,
+        "fat": 1.3,
+        "fiber": 1.6
       },
       "state": "baked",
       "common_portions": [
@@ -5613,7 +5571,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174930
+        "fdc_id": 174899
       }
     },
     {
@@ -5624,11 +5582,11 @@
         "مافن"
       ],
       "per_100g": {
-        "kcal": 227,
-        "protein": 8.7,
-        "carbs": 44,
+        "kcal": 235,
+        "protein": 7.7,
+        "carbs": 46.0,
         "fat": 1.8,
-        "fiber": 3.5
+        "fiber": 2.7
       },
       "state": "baked",
       "common_portions": [
@@ -5640,7 +5598,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174930
+        "fdc_id": 175063
       }
     },
     {
@@ -5652,10 +5610,10 @@
       ],
       "per_100g": {
         "kcal": 265,
-        "protein": 3,
-        "carbs": 35,
+        "protein": 3.0,
+        "carbs": 35.1,
         "fat": 12.5,
-        "fiber": 3
+        "fiber": 3.2
       },
       "state": "fried",
       "common_portions": [
@@ -5667,7 +5625,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170033
+        "fdc_id": 170036
       }
     },
     {
@@ -5679,11 +5637,11 @@
         "bacon"
       ],
       "per_100g": {
-        "kcal": 541,
-        "protein": 37,
+        "kcal": 548,
+        "protein": 35.7,
         "carbs": 1.4,
-        "fat": 42,
-        "fiber": 0
+        "fat": 43.3,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5695,7 +5653,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 167914
       }
     },
     {
@@ -5707,10 +5665,10 @@
       ],
       "per_100g": {
         "kcal": 145,
-        "protein": 21,
+        "protein": 20.9,
         "carbs": 1.5,
         "fat": 5.5,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5722,7 +5680,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 167871
       }
     },
     {
@@ -5733,11 +5691,11 @@
         "سلامي"
       ],
       "per_100g": {
-        "kcal": 378,
-        "protein": 22,
-        "carbs": 1,
-        "fat": 31,
-        "fiber": 0
+        "kcal": 368,
+        "protein": 25.9,
+        "carbs": 1.6,
+        "fat": 28.7,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5749,7 +5707,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174032
+        "fdc_id": 172947
       }
     },
     {
@@ -5761,10 +5719,10 @@
       ],
       "per_100g": {
         "kcal": 210,
-        "protein": 29,
-        "carbs": 0,
+        "protein": 28.9,
+        "carbs": 0.0,
         "fat": 9.7,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5776,7 +5734,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174182
+        "fdc_id": 174183
       }
     },
     {
@@ -5841,11 +5799,11 @@
         "إستاكوزا"
       ],
       "per_100g": {
-        "kcal": 89,
-        "protein": 19,
-        "carbs": 0,
+        "kcal": 89.0,
+        "protein": 19.0,
+        "carbs": 0.0,
         "fat": 0.9,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5857,7 +5815,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174204
+        "fdc_id": 174209
       }
     },
     {
@@ -5869,11 +5827,11 @@
         "سيبيا"
       ],
       "per_100g": {
-        "kcal": 92,
+        "kcal": 92.0,
         "protein": 15.6,
         "carbs": 3.1,
         "fat": 1.4,
-        "fiber": 0
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5885,7 +5843,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174220
+        "fdc_id": 174223
       }
     },
     {
@@ -5896,11 +5854,11 @@
         "أخطبوط"
       ],
       "per_100g": {
-        "kcal": 82,
-        "protein": 14.9,
-        "carbs": 2.2,
-        "fat": 1,
-        "fiber": 0
+        "kcal": 164,
+        "protein": 29.8,
+        "carbs": 4.4,
+        "fat": 2.1,
+        "fiber": 0.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5912,7 +5870,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174219
+        "fdc_id": 174249
       }
     },
     {
@@ -5923,11 +5881,11 @@
         "هليون"
       ],
       "per_100g": {
-        "kcal": 28,
+        "kcal": 22.0,
         "protein": 2.4,
-        "carbs": 4.1,
+        "carbs": 2.6,
         "fat": 0.2,
-        "fiber": 2
+        "fiber": 2.0
       },
       "state": "cooked",
       "common_portions": [
@@ -5939,7 +5897,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 168389
+        "fdc_id": 168390
       }
     },
     {
@@ -5950,9 +5908,9 @@
         "خرشوف"
       ],
       "per_100g": {
-        "kcal": 62,
+        "kcal": 53.0,
         "protein": 2.9,
-        "carbs": 12,
+        "carbs": 9.7,
         "fat": 0.3,
         "fiber": 5.7
       },
@@ -5966,7 +5924,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169205
+        "fdc_id": 168386
       }
     },
     {
@@ -5977,9 +5935,9 @@
         "كرفس"
       ],
       "per_100g": {
-        "kcal": 16,
+        "kcal": 14.0,
         "protein": 0.7,
-        "carbs": 3,
+        "carbs": 2.3,
         "fat": 0.2,
         "fiber": 1.6
       },
@@ -5993,7 +5951,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 169984
+        "fdc_id": 169988
       }
     },
     {
@@ -6019,8 +5977,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 169228
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6046,8 +6003,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170000
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6059,10 +6015,10 @@
       ],
       "per_100g": {
         "kcal": 350,
-        "protein": 8,
-        "carbs": 40,
-        "fat": 17,
-        "fiber": 2
+        "protein": 8.4,
+        "carbs": 41.7,
+        "fat": 16.6,
+        "fiber": 2.5
       },
       "state": "baked",
       "common_portions": [
@@ -6074,7 +6030,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174930
+        "fdc_id": 167939
       }
     },
     {
@@ -6100,8 +6056,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168928
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6127,8 +6082,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168928
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6155,8 +6109,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168878
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6182,8 +6135,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168878
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6209,8 +6161,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 172421
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6236,8 +6187,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 172885
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6263,8 +6213,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 170050
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6290,8 +6239,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 168463
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6317,8 +6265,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 173944
+        "name": "Egyptian Food Composition Database"
       }
     },
     {
@@ -6330,11 +6277,11 @@
         "energy drink"
       ],
       "per_100g": {
-        "kcal": 45,
-        "protein": 0,
-        "carbs": 11,
-        "fat": 0,
-        "fiber": 0
+        "kcal": 45.0,
+        "protein": 0.0,
+        "carbs": 11.3,
+        "fat": 0.0,
+        "fiber": 0.0
       },
       "state": "raw",
       "common_portions": [
@@ -6346,7 +6293,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 174819
+        "fdc_id": 174108
       }
     },
     {
@@ -6384,11 +6331,11 @@
         "حليب لوز"
       ],
       "per_100g": {
-        "kcal": 15,
-        "protein": 0.6,
-        "carbs": 0.3,
-        "fat": 1.1,
-        "fiber": 0.4
+        "kcal": 15.0,
+        "protein": 0.4,
+        "carbs": 1.3,
+        "fat": 1.0,
+        "fiber": 0.2
       },
       "state": "raw",
       "common_portions": [
@@ -6400,7 +6347,7 @@
       ],
       "source": {
         "name": "USDA FoodData Central",
-        "fdc_id": 170567
+        "fdc_id": 174832
       }
     },
     {
@@ -6426,8 +6373,7 @@
         }
       ],
       "source": {
-        "name": "USDA FoodData Central",
-        "fdc_id": 173904
+        "name": "USDA FoodData Central"
       }
     },
     {
@@ -13294,6 +13240,322 @@
         "name": "Egyptian Food Composition Database",
         "fdc_id": 0
       }
+    },
+    {
+      "id": "samoli_bread",
+      "name_ar": "صامولي",
+      "name_en": "samoli bread",
+      "aliases": [
+        "صامولي ساب",
+        "ساب",
+        "خبز صامولي",
+        "samoli"
+      ],
+      "per_100g": {
+        "kcal": 266,
+        "protein": 8.8,
+        "carbs": 49.4,
+        "fat": 3.3,
+        "fiber": 2.7
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "رغيف ساب",
+          "name_en": "1 small roll (50g)",
+          "grams": 50
+        },
+        {
+          "name_ar": "رغيف كبير",
+          "name_en": "1 large roll (100g)",
+          "grams": 100
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 174924
+      },
+      "household_units": [
+        {
+          "unit_id": "samoli_roll_small",
+          "grams": 50,
+          "label_ar": "رغيف صامولي ساب",
+          "label_en": "Small samoli roll"
+        },
+        {
+          "unit_id": "samoli_roll_large",
+          "grams": 100,
+          "label_ar": "رغيف صامولي كبير",
+          "label_en": "Large samoli roll"
+        }
+      ]
+    },
+    {
+      "id": "beef_bacon",
+      "name_ar": "بيكن بقري",
+      "name_en": "beef bacon",
+      "aliases": [
+        "بيكن",
+        "بيكون بقري",
+        "beef bacon"
+      ],
+      "per_100g": {
+        "kcal": 449,
+        "protein": 31.3,
+        "carbs": 1.4,
+        "fat": 34.4,
+        "fiber": 0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "1 slice (15g)",
+          "grams": 15
+        },
+        {
+          "name_ar": "شريحتان",
+          "name_en": "2 slices (30g)",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 2705856
+      },
+      "household_units": [
+        {
+          "unit_id": "beef_bacon_slice",
+          "grams": 15,
+          "label_ar": "شريحة بيكن بقري",
+          "label_en": "Beef bacon slice"
+        }
+      ]
+    },
+    {
+      "id": "turkey_bacon",
+      "name_ar": "بيكن ديك رومي",
+      "name_en": "turkey bacon",
+      "aliases": [
+        "بيكن ديك رومي",
+        "بيكون ديك رومي",
+        "turkey bacon"
+      ],
+      "per_100g": {
+        "kcal": 368,
+        "protein": 29.5,
+        "carbs": 4.2,
+        "fat": 25.9,
+        "fiber": 0
+      },
+      "state": "cooked",
+      "common_portions": [
+        {
+          "name_ar": "شريحة",
+          "name_en": "1 slice (15g)",
+          "grams": 15
+        },
+        {
+          "name_ar": "شريحتان",
+          "name_en": "2 slices (30g)",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 171639
+      },
+      "household_units": [
+        {
+          "unit_id": "turkey_bacon_slice",
+          "grams": 15,
+          "label_ar": "شريحة بيكن ديك رومي",
+          "label_en": "Turkey bacon slice"
+        }
+      ]
+    },
+    {
+      "id": "ranch_sauce",
+      "name_ar": "صوص رانش",
+      "name_en": "ranch dressing",
+      "aliases": [
+        "رانش",
+        "دريسنج رانش",
+        "ranch"
+      ],
+      "per_100g": {
+        "kcal": 430,
+        "protein": 1.3,
+        "carbs": 5.9,
+        "fat": 44.5,
+        "fiber": 0
+      },
+      "state": "prepared",
+      "common_portions": [
+        {
+          "name_ar": "ملعقة كبيرة",
+          "name_en": "1 tbsp (15g)",
+          "grams": 15
+        },
+        {
+          "name_ar": "ملعقتان",
+          "name_en": "2 tbsp (30g)",
+          "grams": 30
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 173592
+      },
+      "household_units": [
+        {
+          "unit_id": "ranch_tbsp",
+          "grams": 15,
+          "label_ar": "ملعقة كبيرة رانش",
+          "label_en": "Ranch tbsp"
+        }
+      ]
+    },
+    {
+      "id": "baked_potato",
+      "name_ar": "بطاطس مشوية",
+      "name_en": "baked potato",
+      "aliases": [
+        "بطاطس مشوية",
+        "بطاطس فرن",
+        "jacket potato"
+      ],
+      "per_100g": {
+        "kcal": 93,
+        "protein": 2.5,
+        "carbs": 21.2,
+        "fat": 0.1,
+        "fiber": 2.2
+      },
+      "state": "baked",
+      "common_portions": [
+        {
+          "name_ar": "ثمرة صغيرة",
+          "name_en": "1 small (100g)",
+          "grams": 100
+        },
+        {
+          "name_ar": "ثمرة متوسطة",
+          "name_en": "1 medium (150g)",
+          "grams": 150
+        },
+        {
+          "name_ar": "ثمرة كبيرة",
+          "name_en": "1 large (200g)",
+          "grams": 200
+        }
+      ],
+      "source": {
+        "name": "USDA FoodData Central",
+        "fdc_id": 170093
+      },
+      "household_units": [
+        {
+          "unit_id": "baked_potato_medium",
+          "grams": 150,
+          "label_ar": "بطاطس مشوية متوسطة",
+          "label_en": "Medium baked potato"
+        }
+      ]
+    },
+    {
+      "id": "baladi_halawa_sandwich",
+      "name_ar": "رغيف بلدي محشي حلاوة",
+      "name_en": "baladi loaf with halawa",
+      "aliases": [
+        "رغيف محشي حلاوة",
+        "ساندوتش حلاوة",
+        "بلدي محشي حلاوة"
+      ],
+      "per_100g": {
+        "kcal": 317,
+        "protein": 9.8,
+        "carbs": 50.8,
+        "fat": 8.8,
+        "fiber": 4.4
+      },
+      "state": "prepared",
+      "common_portions": [
+        {
+          "name_ar": "رغيف صغير محشي",
+          "name_en": "small (80g: 60g loaf + 20g halawa)",
+          "grams": 80
+        },
+        {
+          "name_ar": "رغيف وسط محشي",
+          "name_en": "medium (120g: 90g loaf + 30g halawa)",
+          "grams": 120
+        }
+      ],
+      "source": {
+        "name": "Egyptian Food Composition Database"
+      },
+      "household_units": [
+        {
+          "unit_id": "baladi_halawa_small",
+          "grams": 80,
+          "label_ar": "رغيف صغير محشي حلاوة",
+          "label_en": "Small halawa-filled loaf"
+        },
+        {
+          "unit_id": "baladi_halawa_medium",
+          "grams": 120,
+          "label_ar": "رغيف وسط محشي حلاوة",
+          "label_en": "Medium halawa-filled loaf"
+        }
+      ]
+    },
+    {
+      "id": "baladi_cheese_sandwich",
+      "name_ar": "رغيف بلدي محشي جبنة",
+      "name_en": "baladi loaf with white cheese",
+      "aliases": [
+        "رغيف محشي جبنة",
+        "ساندوتش جبنة بلدي",
+        "بلدي محشي جبنة"
+      ],
+      "per_100g": {
+        "kcal": 295,
+        "protein": 12.9,
+        "carbs": 39.5,
+        "fat": 9.8,
+        "fiber": 3.4
+      },
+      "state": "prepared",
+      "common_portions": [
+        {
+          "name_ar": "رغيف صغير محشي",
+          "name_en": "small (80g: 60g loaf + 20g cheese)",
+          "grams": 80
+        },
+        {
+          "name_ar": "رغيف وسط محشي",
+          "name_en": "medium (120g: 90g loaf + 30g cheese)",
+          "grams": 120
+        }
+      ],
+      "source": {
+        "name": "Egyptian Food Composition Database"
+      },
+      "household_units": [
+        {
+          "unit_id": "baladi_cheese_small",
+          "grams": 80,
+          "label_ar": "رغيف صغير محشي جبنة",
+          "label_en": "Small cheese-filled loaf"
+        },
+        {
+          "unit_id": "baladi_cheese_medium",
+          "grams": 120,
+          "label_ar": "رغيف وسط محشي جبنة",
+          "label_en": "Medium cheese-filled loaf"
+        }
+      ]
     }
   ]
 }
