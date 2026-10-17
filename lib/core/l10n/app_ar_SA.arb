@@ -591,5 +591,13 @@
   "caloriesEstimatedHint": "تقديري",
   "homeAteOfGoal": "أكلت {eaten} من {goal}",
   "homeKcalLeft": "{kcal} سعرة فاضلة",
-  "homeKcalOver": "{kcal} سعرة زيادة"
+  "homeKcalOver": "{kcal} سعرة زيادة",
+  "cameraPermissionRationaleTitle": "إذن الكاميرا",
+  "cameraPermissionRationaleBody": "يستخدم Vireo الكاميرا فقط عند تصوير وجبة أو تقرير InBody أو صورة تقدم. تُحلَّل الصور ولا تُحفظ على خوادمنا بعد التحليل.",
+  "microphonePermissionRationaleTitle": "إذن الميكروفون",
+  "microphonePermissionRationaleBody": "يستخدم Vireo الميكروفون فقط عند التسجيل الصوتي للوجبة. يبقى الصوت على جهازك ويُرسل النص فقط للتحليل.",
+  "settingsAboutTitle": "عن التطبيق",
+  "settingsDeleteAccountWeb": "حذف حسابي (خطوات الويب)",
+  "settingsAppVersionLabel": "الإصدار {version}",
+  "healthConnectWatchBody": "اسمح لـ Health Connect (أو Apple Health) حتى يعرض Vireo الخطوات ومعدل القلب والنوم وتشبع الأكسجين والتمارين والوزن وتركيب الجسم التي توافق عليها. لا نقدّر العلامات الحيوية من الهاتف وحده."
 }

@@ -1515,5 +1515,12 @@
   "caloriesEstimatedHint": "estimated",
   "homeAteOfGoal": "Ate {eaten} of {goal}",
   "homeKcalLeft": "{kcal} kcal left",
-  "homeKcalOver": "{kcal} kcal over"
+  "homeKcalOver": "{kcal} kcal over",
+  "cameraPermissionRationaleTitle": "Kamera erişimi",
+  "cameraPermissionRationaleBody": "Vireo kamerayı yalnızca yemek, InBody veya ilerleme fotoğrafı çekerken kullanır. Fotoğraflar analiz edilir ve sonrasında sunucularımızda tutulmaz.",
+  "microphonePermissionRationaleTitle": "Mikrofon erişimi",
+  "microphonePermissionRationaleBody": "Vireo mikrofonu yalnızca sesli öğün kaydında kullanır. Ses cihazınızda kalır; yalnızca metin gönderilir.",
+  "settingsAboutTitle": "Hakkında",
+  "settingsDeleteAccountWeb": "Hesabımı sil (web adımları)",
+  "settingsAppVersionLabel": "Sürüm {version}"
 }

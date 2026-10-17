@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pdfx/pdfx.dart';
 import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/permissions/sensitive_permission_gate.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_nutrition/utils/image_compressor.dart';
@@ -67,6 +68,10 @@ class _InBodyScanScreenState extends ConsumerState<InBodyScanScreen> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
+    if (source == ImageSource.camera) {
+      final ok = await SensitivePermissionGate.ensureCamera(context);
+      if (!ok) return;
+    }
     final picked = await _picker.pickImage(
       source: source,
       imageQuality: 90,

@@ -291,8 +291,11 @@ abstract final class FeatureGates {
 }
 
 /// Convenience Riverpod provider for checking PRO access anywhere.
+/// Covers RevenueCat Pro, `pro_grants`, and coin-unlocked Pro days — no ads.
 final isProUserProvider = Provider<bool>((ref) {
   if (FeatureGates.isCoinProUnlocked()) return true;
+  final hasGrant = ref.watch(proGrantProvider).valueOrNull ?? false;
+  if (hasGrant) return true;
   return ref.watch(subscriptionProvider).maybeWhen(
         data: (s) => s.hasPremiumAccess,
         orElse: () => false,

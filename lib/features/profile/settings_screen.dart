@@ -78,13 +78,13 @@ class SettingsScreen extends ConsumerWidget {
             const SizedBox(height: 16),
 
             // ---------------------------------------------------------------
-            // 4. الخصوصية والشروط (Privacy & Legal)
+            // 4. About (privacy, terms, delete account)
             // ---------------------------------------------------------------
             _SettingsSectionHeader(
-              icon: Icons.shield_outlined,
-              title: isAr ? 'الخصوصية والشروط' : 'Privacy & Terms',
+              icon: Icons.info_outline_rounded,
+              title: l10n.settingsAboutTitle,
             ),
-            _buildPrivacyGroup(context, ref, l10n, colors, isAr),
+            _buildAboutGroup(context, ref, l10n, colors, isAr),
             const SizedBox(height: 16),
 
             // ---------------------------------------------------------------
@@ -423,9 +423,9 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   // ---------------------------------------------------------------------------
-  // 4. Privacy & Legal
+  // 4. About (legal + delete)
   // ---------------------------------------------------------------------------
-  Widget _buildPrivacyGroup(
+  Widget _buildAboutGroup(
     BuildContext context,
     WidgetRef ref,
     AppLocalizations l10n,
@@ -435,6 +435,11 @@ class SettingsScreen extends ConsumerWidget {
     return _SectionCard(
       child: Column(
         children: [
+          ListTile(
+            leading: const Icon(Icons.verified_outlined),
+            title: Text(l10n.settingsAppVersionLabel('1.0.0+2')),
+          ),
+          const Divider(height: 1),
           FutureBuilder<bool>(
             future: AdService.instance.isPrivacyOptionsRequired(),
             builder: (ctx, snap) {
@@ -443,8 +448,12 @@ class SettingsScreen extends ConsumerWidget {
                 children: [
                   ListTile(
                     leading: const Icon(Icons.security_update_good_outlined),
-                    title: Text(isAr ? 'خيارات الخصوصية والإعلانات (EEA/UK)' : 'Privacy Options (Consent)'),
-                    subtitle: Text(isAr ? 'تعديل موافقتك على الإعلانات والبيانات' : 'Update ad tracking consent'),
+                    title: Text(isAr ? 'خيارات الخصوصية والإعلانات' : 'Privacy Options'),
+                    subtitle: Text(
+                      isAr
+                          ? 'تعديل موافقتك على الإعلانات والبيانات (EEA/UK)'
+                          : 'Update ad tracking consent (EEA/UK)',
+                    ),
                     trailing: const Icon(Icons.chevron_right_rounded),
                     onTap: () => AdService.instance.showPrivacyOptionsForm(),
                   ),
@@ -454,6 +463,13 @@ class SettingsScreen extends ConsumerWidget {
             },
           ),
           ListTile(
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: Text(isAr ? 'سياسة الخصوصية' : 'Privacy Policy'),
+            trailing: const Icon(Icons.open_in_new_rounded, size: 18),
+            onTap: () => LegalUrls.openPrivacy(context),
+          ),
+          const Divider(height: 1),
+          ListTile(
             leading: const Icon(Icons.description_outlined),
             title: Text(isAr ? 'شروط الاستخدام' : 'Terms of Use'),
             trailing: const Icon(Icons.open_in_new_rounded, size: 18),
@@ -461,10 +477,30 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            leading: const Icon(Icons.privacy_tip_outlined),
-            title: Text(isAr ? 'سياسة الخصوصية' : 'Privacy Policy'),
+            leading: Icon(Icons.delete_forever, color: colors.danger),
+            title: Text(
+              l10n.deleteAccountTitle,
+              style: TextStyle(color: colors.danger),
+            ),
+            subtitle: Text(
+              isAr
+                  ? 'يحذف كل بياناتك عبر السيرفر ويخرجك من الحساب'
+                  : 'Deletes synced data via the server and signs you out',
+              style: TextStyle(fontSize: 12, color: colors.textMute),
+            ),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const DeleteAccountWarningScreen(),
+              ),
+            ),
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(Icons.language_outlined),
+            title: Text(l10n.settingsDeleteAccountWeb),
             trailing: const Icon(Icons.open_in_new_rounded, size: 18),
-            onTap: () => LegalUrls.openPrivacy(context),
+            onTap: () => LegalUrls.openDeleteAccountPage(),
           ),
           const Divider(height: 1),
           ListTile(

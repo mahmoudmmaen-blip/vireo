@@ -3064,7 +3064,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get healthConnectWatchBody =>
-      'Grant access to Health Connect or Apple Health so Vireo can show heart rate, sleep, steps, and more. We never estimate vitals from the phone.';
+      'Grant Health Connect (or Apple Health) so Vireo can show steps, heart rate, sleep, SpO2, workouts, weight and body composition you approve. We never estimate vitals from the phone alone.';
 
   @override
   String get healthGrantPermission => 'Grant health access';
@@ -4895,5 +4895,30 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String homeKcalOver(String kcal) {
     return '$kcal kcal over';
+  }
+
+  @override
+  String get cameraPermissionRationaleTitle => 'Camera access';
+
+  @override
+  String get cameraPermissionRationaleBody =>
+      'Vireo uses the camera only when you take a meal, InBody, or progress photo. Photos are analyzed and not kept on our servers after analysis.';
+
+  @override
+  String get microphonePermissionRationaleTitle => 'Microphone access';
+
+  @override
+  String get microphonePermissionRationaleBody =>
+      'Vireo uses the microphone only when you tap voice meal logging. Speech stays on your device; only the text is sent for analysis.';
+
+  @override
+  String get settingsAboutTitle => 'About';
+
+  @override
+  String get settingsDeleteAccountWeb => 'Delete my account (web steps)';
+
+  @override
+  String settingsAppVersionLabel(String version) {
+    return 'Version $version';
   }
 }

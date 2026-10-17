@@ -1515,5 +1515,12 @@
   "caloriesEstimatedHint": "estimated",
   "homeAteOfGoal": "Ate {eaten} of {goal}",
   "homeKcalLeft": "{kcal} kcal left",
-  "homeKcalOver": "{kcal} kcal over"
+  "homeKcalOver": "{kcal} kcal over",
+  "cameraPermissionRationaleTitle": "कैमरा अनुमति",
+  "cameraPermissionRationaleBody": "Vireo कैमरा केवल भोजन, InBody या प्रगति फ़ोटो लेने पर उपयोग करता है। विश्लेषण के बाद फ़ोटो हमारे सर्वर पर नहीं रखी जातीं।",
+  "microphonePermissionRationaleTitle": "माइक्रोफ़ोन अनुमति",
+  "microphonePermissionRationaleBody": "Vireo माइक केवल वॉइस मील लॉग पर उपयोग करता है। आवाज़ डिवाइस पर रहती है; केवल टेक्स्ट भेजा जाता है।",
+  "settingsAboutTitle": "परिचय",
+  "settingsDeleteAccountWeb": "मेरा खाता हटाएँ (वेब चरण)",
+  "settingsAppVersionLabel": "संस्करण {version}"
 }

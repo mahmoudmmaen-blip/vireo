@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:vireo/core/boot/boot_log.dart';
+import 'package:vireo/core/permissions/sensitive_permission_gate.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/ai_nutrition/data/barcode_lookup_service.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
@@ -89,6 +90,8 @@ class _MealBarcodeScreenState extends ConsumerState<MealBarcodeScreen> {
 
   Future<void> _captureNutritionLabel() async {
     if (_notFoundBarcode == null) return;
+    final camOk = await SensitivePermissionGate.ensureCamera(context);
+    if (!camOk) return;
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.camera, imageQuality: 85);
     if (picked == null || !mounted) return;

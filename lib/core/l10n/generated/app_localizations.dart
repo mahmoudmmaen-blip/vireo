@@ -5548,7 +5548,7 @@ abstract class AppLocalizations {
   /// No description provided for @healthConnectWatchBody.
   ///
   /// In en, this message translates to:
-  /// **'Grant access to Health Connect or Apple Health so Vireo can show heart rate, sleep, steps, and more. We never estimate vitals from the phone.'**
+  /// **'Grant Health Connect (or Apple Health) so Vireo can show steps, heart rate, sleep, SpO2, workouts, weight and body composition you approve. We never estimate vitals from the phone alone.'**
   String get healthConnectWatchBody;
 
   /// No description provided for @healthGrantPermission.
@@ -8736,6 +8736,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{kcal} kcal over'**
   String homeKcalOver(String kcal);
+
+  /// No description provided for @cameraPermissionRationaleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera access'**
+  String get cameraPermissionRationaleTitle;
+
+  /// No description provided for @cameraPermissionRationaleBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo uses the camera only when you take a meal, InBody, or progress photo. Photos are analyzed and not kept on our servers after analysis.'**
+  String get cameraPermissionRationaleBody;
+
+  /// No description provided for @microphonePermissionRationaleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Microphone access'**
+  String get microphonePermissionRationaleTitle;
+
+  /// No description provided for @microphonePermissionRationaleBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo uses the microphone only when you tap voice meal logging. Speech stays on your device; only the text is sent for analysis.'**
+  String get microphonePermissionRationaleBody;
+
+  /// No description provided for @settingsAboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsAboutTitle;
+
+  /// No description provided for @settingsDeleteAccountWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account (web steps)'**
+  String get settingsDeleteAccountWeb;
+
+  /// No description provided for @settingsAppVersionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String settingsAppVersionLabel(String version);
 }
 
 class _AppLocalizationsDelegate

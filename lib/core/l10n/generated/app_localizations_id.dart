@@ -4925,4 +4925,29 @@ class AppLocalizationsId extends AppLocalizations {
   String homeKcalOver(String kcal) {
     return '$kcal kcal over';
   }
+
+  @override
+  String get cameraPermissionRationaleTitle => 'Akses kamera';
+
+  @override
+  String get cameraPermissionRationaleBody =>
+      'Vireo memakai kamera hanya saat Anda memotret makanan, InBody, atau progres. Foto dianalisis dan tidak disimpan di server kami setelahnya.';
+
+  @override
+  String get microphonePermissionRationaleTitle => 'Akses mikrofon';
+
+  @override
+  String get microphonePermissionRationaleBody =>
+      'Vireo memakai mikrofon hanya saat pencatatan makanan lewat suara. Audio tetap di perangkat; hanya teks yang dikirim.';
+
+  @override
+  String get settingsAboutTitle => 'Tentang';
+
+  @override
+  String get settingsDeleteAccountWeb => 'Hapus akun saya (langkah web)';
+
+  @override
+  String settingsAppVersionLabel(String version) {
+    return 'Versi $version';
+  }
 }

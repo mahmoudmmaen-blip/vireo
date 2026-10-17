@@ -29,12 +29,22 @@ class AdService {
   bool _isInterstitialLoading = false;
 
   /// Initialize MobileAds SDK after first frame for non-Pro users.
+  /// UMP consent runs before any ad request (EEA/UK).
   Future<void> initialize({required bool isPro}) async {
     if (isPro || kIsWeb) return;
     if (_initialized) return;
+    if (!AppConfig.adsConfiguredForRelease) {
+      BootLog.warn(
+        'AdService: ads disabled in release — test AdMob IDs still configured',
+      );
+      return;
+    }
 
     try {
       _recordInstallDateIfNeeded();
+
+      // UMP consent BEFORE any ad request (Play / EEA-UK requirement)
+      await _requestConsent();
 
       // Configure strictly family-safe content filter: Max rating G
       // ignore: deprecated_member_use
@@ -49,10 +59,7 @@ class AdService {
         ),
       );
 
-      // Check / request UMP consent (EEA/UK requirement)
-      await _requestConsent();
-
-      // Initialize SDK
+      // Initialize SDK only after consent flow completes
       await MobileAds.instance.initialize();
       _initialized = true;
       BootLog.ok('AdService.initialize: MobileAds initialized with MaxAdContentRating.g');
@@ -128,7 +135,12 @@ class AdService {
 
   /// Preloads an interstitial ad if not already loading or loaded.
   void preloadInterstitial() {
-    if (kIsWeb || _interstitialAd != null || _isInterstitialLoading) return;
+    if (kIsWeb ||
+        !AppConfig.adsConfiguredForRelease ||
+        _interstitialAd != null ||
+        _isInterstitialLoading) {
+      return;
+    }
     _isInterstitialLoading = true;
 
     InterstitialAd.load(
@@ -157,7 +169,7 @@ class AdService {
     required bool isPro,
     DateTime? nowOverride,
   }) {
-    if (isPro || kIsWeb) return false;
+    if (isPro || kIsWeb || !AppConfig.adsConfiguredForRelease) return false;
     if (!HiveService.isInitialized) return false;
 
     final now = nowOverride ?? DateTime.now();
@@ -280,8 +292,8 @@ class AdService {
     required VoidCallback onRewarded,
     VoidCallback? onFailed,
   }) async {
-    if (kIsWeb) {
-      // In web, grant reward directly for testing or fail gracefully
+    if (kIsWeb || !AppConfig.adsConfiguredForRelease) {
+      // Web / misconfigured release: grant reward without loading test ads
       onRewarded();
       return true;
     }

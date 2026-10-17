@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/permissions/sensitive_permission_gate.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
@@ -81,6 +82,10 @@ class _AiScanScreenState extends ConsumerState<AiScanScreen> {
 
   Future<void> _pick(ImageSource source) async {
     ref.read(aiScanProvider.notifier).reset();
+    if (source == ImageSource.camera) {
+      final ok = await SensitivePermissionGate.ensureCamera(context);
+      if (!ok) return;
+    }
     final picked = await _picker.pickImage(
       source: source,
       imageQuality: 85,

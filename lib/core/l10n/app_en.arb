@@ -1745,7 +1745,7 @@
   "healthNotMedical": "Not for medical use. Metrics come from your watch via Health Connect / Apple Health.",
   "healthFromWatch": "From your watch",
   "healthConnectWatchTitle": "Connect your watch",
-  "healthConnectWatchBody": "Grant access to Health Connect or Apple Health so Vireo can show heart rate, sleep, steps, and more. We never estimate vitals from the phone.",
+  "healthConnectWatchBody": "Grant Health Connect (or Apple Health) so Vireo can show steps, heart rate, sleep, SpO2, workouts, weight and body composition you approve. We never estimate vitals from the phone alone.",
   "healthGrantPermission": "Grant health access",
   "healthMetricHeartRate": "Heart rate",
   "healthMetricRestingHr": "Resting heart rate",
@@ -2746,6 +2746,20 @@
   "@homeKcalOver": {
     "placeholders": {
       "kcal": {
+        "type": "String"
+      }
+    }
+  },
+  "cameraPermissionRationaleTitle": "Camera access",
+  "cameraPermissionRationaleBody": "Vireo uses the camera only when you take a meal, InBody, or progress photo. Photos are analyzed and not kept on our servers after analysis.",
+  "microphonePermissionRationaleTitle": "Microphone access",
+  "microphonePermissionRationaleBody": "Vireo uses the microphone only when you tap voice meal logging. Speech stays on your device; only the text is sent for analysis.",
+  "settingsAboutTitle": "About",
+  "settingsDeleteAccountWeb": "Delete my account (web steps)",
+  "settingsAppVersionLabel": "Version {version}",
+  "@settingsAppVersionLabel": {
+    "placeholders": {
+      "version": {
         "type": "String"
       }
     }

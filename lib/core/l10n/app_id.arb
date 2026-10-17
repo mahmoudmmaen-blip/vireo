@@ -1515,5 +1515,12 @@
   "caloriesEstimatedHint": "estimated",
   "homeAteOfGoal": "Ate {eaten} of {goal}",
   "homeKcalLeft": "{kcal} kcal left",
-  "homeKcalOver": "{kcal} kcal over"
+  "homeKcalOver": "{kcal} kcal over",
+  "cameraPermissionRationaleTitle": "Akses kamera",
+  "cameraPermissionRationaleBody": "Vireo memakai kamera hanya saat Anda memotret makanan, InBody, atau progres. Foto dianalisis dan tidak disimpan di server kami setelahnya.",
+  "microphonePermissionRationaleTitle": "Akses mikrofon",
+  "microphonePermissionRationaleBody": "Vireo memakai mikrofon hanya saat pencatatan makanan lewat suara. Audio tetap di perangkat; hanya teks yang dikirim.",
+  "settingsAboutTitle": "Tentang",
+  "settingsDeleteAccountWeb": "Hapus akun saya (langkah web)",
+  "settingsAppVersionLabel": "Versi {version}"
 }

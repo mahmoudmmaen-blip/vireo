@@ -4948,4 +4948,29 @@ class AppLocalizationsEs extends AppLocalizations {
   String homeKcalOver(String kcal) {
     return '$kcal kcal over';
   }
+
+  @override
+  String get cameraPermissionRationaleTitle => 'Acceso a la cámara';
+
+  @override
+  String get cameraPermissionRationaleBody =>
+      'Vireo usa la cámara solo al tomar una foto de comida, InBody o progreso. Las fotos se analizan y no se guardan en nuestros servidores después.';
+
+  @override
+  String get microphonePermissionRationaleTitle => 'Acceso al micrófono';
+
+  @override
+  String get microphonePermissionRationaleBody =>
+      'Vireo usa el micrófono solo al registrar comida por voz. El audio permanece en tu dispositivo; solo se envía el texto.';
+
+  @override
+  String get settingsAboutTitle => 'Acerca de';
+
+  @override
+  String get settingsDeleteAccountWeb => 'Eliminar mi cuenta (pasos web)';
+
+  @override
+  String settingsAppVersionLabel(String version) {
+    return 'Versión $version';
+  }
 }

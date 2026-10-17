@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/permissions/sensitive_permission_gate.dart';
 import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/core/services/home_widget_sync.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
@@ -591,6 +592,10 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
       ),
     );
     if (source == null) return;
+    if (source == ImageSource.camera) {
+      final ok = await SensitivePermissionGate.ensureCamera(context);
+      if (!ok || !mounted) return;
+    }
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: source, imageQuality: 85);
     if (picked != null) {

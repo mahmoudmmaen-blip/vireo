@@ -1515,5 +1515,12 @@
   "caloriesEstimatedHint": "estimated",
   "homeAteOfGoal": "Ate {eaten} of {goal}",
   "homeKcalLeft": "{kcal} kcal left",
-  "homeKcalOver": "{kcal} kcal over"
+  "homeKcalOver": "{kcal} kcal over",
+  "cameraPermissionRationaleTitle": "Acceso a la cámara",
+  "cameraPermissionRationaleBody": "Vireo usa la cámara solo al tomar una foto de comida, InBody o progreso. Las fotos se analizan y no se guardan en nuestros servidores después.",
+  "microphonePermissionRationaleTitle": "Acceso al micrófono",
+  "microphonePermissionRationaleBody": "Vireo usa el micrófono solo al registrar comida por voz. El audio permanece en tu dispositivo; solo se envía el texto.",
+  "settingsAboutTitle": "Acerca de",
+  "settingsDeleteAccountWeb": "Eliminar mi cuenta (pasos web)",
+  "settingsAppVersionLabel": "Versión {version}"
 }

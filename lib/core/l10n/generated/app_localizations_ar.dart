@@ -3047,7 +3047,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get healthConnectWatchBody =>
-      'اسمح بالوصول إلى Health Connect أو Apple Health. لا نقدّر العلامات الحيوية من الهاتف.';
+      'اسمح لـ Health Connect (أو Apple Health) حتى يعرض Vireo الخطوات ومعدل القلب والنوم وتشبع الأكسجين والتمارين والوزن وتركيب الجسم التي توافق عليها. لا نقدّر العلامات الحيوية من الهاتف وحده.';
 
   @override
   String get healthGrantPermission => 'منح صلاحية الصحة';
@@ -4864,6 +4864,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String homeKcalOver(String kcal) {
     return '$kcal سعرة زيادة';
   }
+
+  @override
+  String get cameraPermissionRationaleTitle => 'إذن الكاميرا';
+
+  @override
+  String get cameraPermissionRationaleBody =>
+      'يستخدم Vireo الكاميرا فقط عند تصوير وجبة أو تقرير InBody أو صورة تقدم. تُحلَّل الصور ولا تُحفظ على خوادمنا بعد التحليل.';
+
+  @override
+  String get microphonePermissionRationaleTitle => 'إذن الميكروفون';
+
+  @override
+  String get microphonePermissionRationaleBody =>
+      'يستخدم Vireo الميكروفون فقط عند التسجيل الصوتي للوجبة. يبقى الصوت على جهازك ويُرسل النص فقط للتحليل.';
+
+  @override
+  String get settingsAboutTitle => 'عن التطبيق';
+
+  @override
+  String get settingsDeleteAccountWeb => 'حذف حسابي (خطوات الويب)';
+
+  @override
+  String settingsAppVersionLabel(String version) {
+    return 'الإصدار $version';
+  }
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -5023,6 +5048,10 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get outdoorHistoryEmpty =>
       'لسه ما نزلتش تمرين بره.. يلا جرّب أول جولة!';
+
+  @override
+  String get healthConnectWatchBody =>
+      'اسمح لـ Health Connect عشان فيريو يعرض الخطوات ومعدل القلب والنوم وتشبع الأكسجين والتمارين والوزن وتركيب الجسم اللي توافق عليها. مش بنخمّن العلامات الحيوية من الموبايل لوحده.';
 
   @override
   String get mealReviewEstimated => 'تقديري';
@@ -6405,6 +6434,31 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   String homeKcalOver(String kcal) {
     return '$kcal سعرة زيادة';
   }
+
+  @override
+  String get cameraPermissionRationaleTitle => 'إذن الكاميرا';
+
+  @override
+  String get cameraPermissionRationaleBody =>
+      'فيريو بيستخدم الكاميرا بس لما تصوّر وجبة أو تقرير InBody أو صورة تقدم. الصور بتتحلل ومش بتتحفظ على سيرفراتنا بعد التحليل.';
+
+  @override
+  String get microphonePermissionRationaleTitle => 'إذن المايك';
+
+  @override
+  String get microphonePermissionRationaleBody =>
+      'فيريو بيستخدم المايك بس لما تضغط تسجيل الوجبة بالصوت. الصوت بيفضل على موبايلك والنص بس اللي بيتبعت للتحليل.';
+
+  @override
+  String get settingsAboutTitle => 'عن التطبيق';
+
+  @override
+  String get settingsDeleteAccountWeb => 'حذف حسابي (خطوات الويب)';
+
+  @override
+  String settingsAppVersionLabel(String version) {
+    return 'الإصدار $version';
+  }
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -6555,6 +6609,10 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
   @override
   String get outdoorHistoryEmpty =>
       'ما سجّلت تمارين خارجية بعد.. اخرج وتحرّك اليوم!';
+
+  @override
+  String get healthConnectWatchBody =>
+      'اسمح لـ Health Connect (أو Apple Health) حتى يعرض Vireo الخطوات ومعدل القلب والنوم وتشبع الأكسجين والتمارين والوزن وتركيب الجسم التي توافق عليها. لا نقدّر العلامات الحيوية من الهاتف وحده.';
 
   @override
   String get mealReviewEstimated => 'تقديري';
@@ -7883,5 +7941,30 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
   @override
   String homeKcalOver(String kcal) {
     return '$kcal سعرة زيادة';
+  }
+
+  @override
+  String get cameraPermissionRationaleTitle => 'إذن الكاميرا';
+
+  @override
+  String get cameraPermissionRationaleBody =>
+      'يستخدم Vireo الكاميرا فقط عند تصوير وجبة أو تقرير InBody أو صورة تقدم. تُحلَّل الصور ولا تُحفظ على خوادمنا بعد التحليل.';
+
+  @override
+  String get microphonePermissionRationaleTitle => 'إذن الميكروفون';
+
+  @override
+  String get microphonePermissionRationaleBody =>
+      'يستخدم Vireo الميكروفون فقط عند التسجيل الصوتي للوجبة. يبقى الصوت على جهازك ويُرسل النص فقط للتحليل.';
+
+  @override
+  String get settingsAboutTitle => 'عن التطبيق';
+
+  @override
+  String get settingsDeleteAccountWeb => 'حذف حسابي (خطوات الويب)';
+
+  @override
+  String settingsAppVersionLabel(String version) {
+    return 'الإصدار $version';
   }
 }

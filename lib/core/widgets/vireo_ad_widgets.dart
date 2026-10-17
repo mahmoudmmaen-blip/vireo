@@ -28,7 +28,7 @@ class _VireoBannerAdWidgetState extends ConsumerState<VireoBannerAdWidget> {
 
   void _loadAd() {
     final isPro = ref.read(isProUserProvider);
-    if (isPro || kIsWeb) return;
+    if (isPro || kIsWeb || !AppConfig.adsConfiguredForRelease) return;
     if (_bannerAd != null) return;
 
     _bannerAd = BannerAd(
@@ -56,7 +56,11 @@ class _VireoBannerAdWidgetState extends ConsumerState<VireoBannerAdWidget> {
   @override
   Widget build(BuildContext context) {
     final isPro = ref.watch(isProUserProvider);
-    if (isPro || kIsWeb || !_isLoaded || _bannerAd == null) {
+    if (isPro ||
+        kIsWeb ||
+        !AppConfig.adsConfiguredForRelease ||
+        !_isLoaded ||
+        _bannerAd == null) {
       return const SizedBox.shrink();
     }
 
@@ -95,7 +99,7 @@ class _VireoNativeAdCardState extends ConsumerState<VireoNativeAdCard> {
 
   void _loadNativeAd() {
     final isPro = ref.read(isProUserProvider);
-    if (isPro || kIsWeb) return;
+    if (isPro || kIsWeb || !AppConfig.adsConfiguredForRelease) return;
     if (_nativeAd != null) return;
 
     _nativeAd = NativeAd(
@@ -127,7 +131,7 @@ class _VireoNativeAdCardState extends ConsumerState<VireoNativeAdCard> {
   @override
   Widget build(BuildContext context) {
     final isPro = ref.watch(isProUserProvider);
-    if (isPro || kIsWeb) {
+    if (isPro || kIsWeb || !AppConfig.adsConfiguredForRelease) {
       return const SizedBox.shrink();
     }
 

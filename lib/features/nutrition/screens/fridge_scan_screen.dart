@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/permissions/sensitive_permission_gate.dart';
 import 'package:vireo/features/subscription/premium_access.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
@@ -47,6 +48,10 @@ class _FridgeScanScreenState extends ConsumerState<FridgeScanScreen> {
       }
     }
 
+    if (source == ImageSource.camera) {
+      final camOk = await SensitivePermissionGate.ensureCamera(context);
+      if (!camOk || !mounted) return;
+    }
     final picked = await _picker.pickImage(source: source, imageQuality: 85);
     if (picked == null) return;
 

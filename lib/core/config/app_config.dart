@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 /// Runtime configuration. Prefer `--dart-define` overrides for CI/release builds.
 abstract final class AppConfig {
   static const supabaseUrl = String.fromEnvironment(
@@ -23,7 +25,15 @@ abstract final class AppConfig {
 
   static const appRelease = String.fromEnvironment(
     'APP_RELEASE',
-    defaultValue: 'vireo@1.0.0+1',
+    defaultValue: 'vireo@1.0.0+2',
+  );
+
+  /// Hosted legal pages base URL (no trailing slash).
+  /// TODO(owner): set after uploading `web_legal/` to a static host, e.g.
+  /// `--dart-define=LEGAL_BASE_URL=https://vireo.app/legal`
+  static const legalBaseUrl = String.fromEnvironment(
+    'LEGAL_BASE_URL',
+    defaultValue: 'https://TODO_HOST_LEGAL_PAGES.example/legal',
   );
 
   static const revenueCatAppleApiKey = String.fromEnvironment(
@@ -95,24 +105,42 @@ abstract final class AppConfig {
     defaultValue: false,
   );
 
-  /// AdMob IDs (default to Google Official Test IDs)
+  /// Google official test AdMob unit IDs (debug only).
+  static const _testBannerId = 'ca-app-pub-3940256099942544/6300978111';
+  static const _testNativeId = 'ca-app-pub-3940256099942544/2247696110';
+  static const _testInterstitialId = 'ca-app-pub-3940256099942544/1033173712';
+  static const _testRewardedId = 'ca-app-pub-3940256099942544/5224354917';
+
+  /// AdMob IDs — production IDs must come from dart-defines only.
   static const admobBannerId = String.fromEnvironment(
     'ADMOB_BANNER_ID',
-    defaultValue: 'ca-app-pub-3940256099942544/6300978111',
+    defaultValue: _testBannerId,
   );
 
   static const admobNativeId = String.fromEnvironment(
     'ADMOB_NATIVE_ID',
-    defaultValue: 'ca-app-pub-3940256099942544/2247696110',
+    defaultValue: _testNativeId,
   );
 
   static const admobInterstitialId = String.fromEnvironment(
     'ADMOB_INTERSTITIAL_ID',
-    defaultValue: 'ca-app-pub-3940256099942544/1033173712',
+    defaultValue: _testInterstitialId,
   );
 
   static const admobRewardedId = String.fromEnvironment(
     'ADMOB_REWARDED_ID',
-    defaultValue: 'ca-app-pub-3940256099942544/5224354917',
+    defaultValue: _testRewardedId,
   );
+
+  static bool get _hasTestAdIds =>
+      admobBannerId == _testBannerId ||
+      admobNativeId == _testNativeId ||
+      admobInterstitialId == _testInterstitialId ||
+      admobRewardedId == _testRewardedId;
+
+  /// In release, never serve ads when only test unit IDs are configured.
+  static bool get adsConfiguredForRelease {
+    if (kReleaseMode && _hasTestAdIds) return false;
+    return true;
+  }
 }

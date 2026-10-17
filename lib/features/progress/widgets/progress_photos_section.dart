@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/permissions/sensitive_permission_gate.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/progress/domain/progress_photo_service.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
@@ -48,6 +49,8 @@ class _ProgressPhotosSectionState extends ConsumerState<ProgressPhotosSection> {
 
     File? imageFile;
     if (source == ImageSource.camera) {
+      final camOk = await SensitivePermissionGate.ensureCamera(context);
+      if (!camOk || !mounted) return;
       // Find latest photo for ghost overlay
       final allPhotos = ref.read(progressPhotosProvider);
       final lastPhoto = allPhotos.where((p) => p.pose == _selectedPose).firstOrNull;

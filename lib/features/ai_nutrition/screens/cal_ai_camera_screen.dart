@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/permissions/sensitive_permission_gate.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/ai_nutrition/application/ai_scan_state.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_provider.dart';
@@ -36,8 +38,8 @@ class _CalAiCameraScreenState extends ConsumerState<CalAiCameraScreen> {
 
   Future<void> _initCamera() async {
     try {
-      final status = await Permission.camera.request();
-      if (!status.isGranted) {
+      final granted = await SensitivePermissionGate.ensureCamera(context);
+      if (!granted) {
         if (mounted) {
           setState(() => _isInitializing = false);
           _showPermissionDeniedDialog();
@@ -72,28 +74,27 @@ class _CalAiCameraScreenState extends ConsumerState<CalAiCameraScreen> {
   }
 
   void _showPermissionDeniedDialog() {
+    final l10n = AppLocalizations.of(context);
     showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        title: const Text('إذن استخدام الكاميرا مطلوب 📷'),
-        content: const Text(
-          'نحتاج إذن الكاميرا لتصوير وجبتك وحساب السعرات والماكروز بالذكاء الاصطناعي بدقة.\n\nيمكنك استخدام المعرض أو تفعيل الإذن من الإعدادات.',
-        ),
+        title: Text(l10n.cameraPermissionRationaleTitle),
+        content: Text(l10n.cameraPermissionRationaleBody),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(ctx);
               _pickFromGallery();
             },
-            child: const Text('اختيار من المعرض'),
+            child: Text(l10n.photoSourceGallery),
           ),
           FilledButton(
             onPressed: () async {
               Navigator.pop(ctx);
               await openAppSettings();
             },
-            child: const Text('فتح الإعدادات'),
+            child: Text(l10n.continueButton),
           ),
         ],
       ),

@@ -612,5 +612,13 @@
   "caloriesEstimatedHint": "تقديري",
   "homeAteOfGoal": "أكلت {eaten} من {goal}",
   "homeKcalLeft": "{kcal} سعرة فاضلة",
-  "homeKcalOver": "{kcal} سعرة زيادة"
+  "homeKcalOver": "{kcal} سعرة زيادة",
+  "cameraPermissionRationaleTitle": "إذن الكاميرا",
+  "cameraPermissionRationaleBody": "فيريو بيستخدم الكاميرا بس لما تصوّر وجبة أو تقرير InBody أو صورة تقدم. الصور بتتحلل ومش بتتحفظ على سيرفراتنا بعد التحليل.",
+  "microphonePermissionRationaleTitle": "إذن المايك",
+  "microphonePermissionRationaleBody": "فيريو بيستخدم المايك بس لما تضغط تسجيل الوجبة بالصوت. الصوت بيفضل على موبايلك والنص بس اللي بيتبعت للتحليل.",
+  "settingsAboutTitle": "عن التطبيق",
+  "settingsDeleteAccountWeb": "حذف حسابي (خطوات الويب)",
+  "settingsAppVersionLabel": "الإصدار {version}",
+  "healthConnectWatchBody": "اسمح لـ Health Connect عشان فيريو يعرض الخطوات ومعدل القلب والنوم وتشبع الأكسجين والتمارين والوزن وتركيب الجسم اللي توافق عليها. مش بنخمّن العلامات الحيوية من الموبايل لوحده."
 }

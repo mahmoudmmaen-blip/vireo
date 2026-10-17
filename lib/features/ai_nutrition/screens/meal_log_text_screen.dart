@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/core/permissions/sensitive_permission_gate.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
@@ -79,6 +80,11 @@ class _MealLogTextScreenState extends ConsumerState<MealLogTextScreen> {
     if (_listening) {
       await _speech.stop();
       setState(() => _listening = false);
+      return;
+    }
+    final micOk = await SensitivePermissionGate.ensureMicrophone(context);
+    if (!micOk) {
+      if (mounted) setState(() => _error = l10n.mealVoiceUnavailable);
       return;
     }
     final ok = await _speech.initialize(
