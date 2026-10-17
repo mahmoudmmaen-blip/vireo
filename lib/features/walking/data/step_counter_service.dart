@@ -5,6 +5,7 @@ import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:vireo/core/services/health_steps_service.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/sync_engine.dart';
+import 'package:vireo/core/utils/merciful_streak.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
 import 'package:vireo/features/walking/data/pedometer_stream_stub.dart'
     if (dart.library.io) 'package:vireo/features/walking/data/pedometer_stream_io.dart';
@@ -298,24 +299,29 @@ abstract final class StepCounterService {
     await HiveService.settingsBox.put(_workoutDaysKey, days.toList());
   }
 
-  /// Consecutive days ending today with workout completed OR steps ≥ goal.
-  static int computeStreakDays({required int stepsGoal}) {
+  /// Merciful streak (P40): consecutive days with workout completed OR
+  /// steps ≥ goal. Today is "pending" until it is hit, and ONE isolated missed
+  /// day is forgiven with a "يوم راحة" token (see [MercifulStreakEngine]).
+  static MercifulStreak computeStreakDetails({
+    required int stepsGoal,
+    DateTime? today,
+  }) {
     final workoutDays = readWorkoutDays();
     final history = readHistory();
-    final today = DateTime.now();
-    var streak = 0;
-    for (var i = 0; i < 365; i++) {
-      final day = DateTime(today.year, today.month, today.day)
-          .subtract(Duration(days: i));
-      final key = dateKey(day);
-      final steps = history[key] ?? 0;
-      final hit = workoutDays.contains(key) ||
-          (stepsGoal > 0 && steps >= stepsGoal);
-      if (!hit) break;
-      streak++;
-    }
-    return streak;
+    return MercifulStreakEngine.compute(
+      today: today,
+      hit: (day) {
+        final key = dateKey(day);
+        final steps = history[key] ?? 0;
+        return workoutDays.contains(key) ||
+            (stepsGoal > 0 && steps >= stepsGoal);
+      },
+    );
   }
+
+  /// Streak length with the rest-day token applied.
+  static int computeStreakDays({required int stepsGoal}) =>
+      computeStreakDetails(stepsGoal: stepsGoal).days;
 
   /// Days in the last 7 (including today) with workout or steps goal hit.
   static int computeWeeklyCompletedDays({required int stepsGoal}) {

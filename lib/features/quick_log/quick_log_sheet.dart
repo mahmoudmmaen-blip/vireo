@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/config/feature_flags.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/motion.dart';
@@ -165,8 +166,9 @@ class _QuickLogSheet extends StatelessWidget {
           l10n.uxQuickInbody, l10n.uxQuickInbodySub, colors.gold),
       _TileData(QuickLogAction.cardio, Icons.directions_run_rounded,
           l10n.uxQuickCardio, l10n.uxQuickCardioSub, VMacro.steps),
-      _TileData(QuickLogAction.outdoor, Icons.map_outlined, l10n.uxQuickOutdoor,
-          l10n.uxQuickOutdoorSub, VMacro.steps),
+      if (FeatureFlags.resolve().gpsRunScreen)
+        _TileData(QuickLogAction.outdoor, Icons.map_outlined,
+            l10n.uxQuickOutdoor, l10n.uxQuickOutdoorSub, VMacro.steps),
       _TileData(QuickLogAction.coach, Icons.auto_awesome_rounded,
           l10n.uxQuickCoach, l10n.uxQuickCoachSub, VMacro.ai),
       _TileData(QuickLogAction.profile, Icons.person_outline_rounded,

@@ -274,6 +274,40 @@ void main() {
       }
     });
 
+    test('Ramadan mode schedules a single water reminder between iftar and suhoor', () {
+      const settings = NotificationSettings(
+        enabledMap: {
+          NotificationType.waterReminder: true,
+        },
+        maxDailyNotifications: 4,
+      );
+
+      const contextRamadan = ReminderContext(
+        isWaterGoalMet: false,
+        currentSteps: 5000,
+        dailyStepsGoal: 6000,
+        hasLoggedToday: true,
+        hasWorkoutToday: false,
+        isRamadanMode: true,
+        fastingStartHour: 4,
+        fastingStartMinute: 30,
+        fastingEndHour: 18,
+        fastingEndMinute: 15,
+      );
+
+      final schedule = scheduler.generateSchedule(
+        settings: settings,
+        context: contextRamadan,
+      );
+
+      final waterItems =
+          schedule.where((c) => c.type == NotificationType.waterReminder).toList();
+      expect(waterItems.length, 1);
+      // 90 min after iftar (18:15) → 19:45, before quiet hours at 23:00.
+      expect(waterItems.single.hour, 19);
+      expect(waterItems.single.minute, 45);
+    });
+
     test('steps nudge triggers at 18:00 if under 50% of goal', () {
       const settings = NotificationSettings(
         enabledMap: {
@@ -417,6 +451,8 @@ void main() {
           NotificationType.mealLunchReminder: true,
           NotificationType.mealDinnerReminder: true,
         },
+        // This test is about meal TIMES, not the default cap (now 2, P40).
+        maxDailyNotifications: 6,
       );
 
       const context = ReminderContext(

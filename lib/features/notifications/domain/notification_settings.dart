@@ -30,8 +30,11 @@ class NotificationSettings {
     this.quietHoursStartMinute = 0,
     this.quietHoursEndHour = 7,
     this.quietHoursEndMinute = 0,
-    this.maxDailyNotifications = 6,
+    this.maxDailyNotifications = defaultMaxDailyNotifications,
   });
+
+  /// P40: max 2 notifications per day by default.
+  static const int defaultMaxDailyNotifications = 2;
 
   final Map<NotificationType, bool> enabledMap;
   final Map<NotificationType, TimeOfDay> customTimes;
@@ -201,7 +204,8 @@ class NotificationSettings {
       quietHoursStartMinute: (json['quiet_hours_start_minute'] as num?)?.toInt() ?? 0,
       quietHoursEndHour: (json['quiet_hours_end_hour'] as num?)?.toInt() ?? 7,
       quietHoursEndMinute: (json['quiet_hours_end_minute'] as num?)?.toInt() ?? 0,
-      maxDailyNotifications: (json['max_daily_notifications'] as num?)?.toInt() ?? 6,
+      maxDailyNotifications: (json['max_daily_notifications'] as num?)?.toInt() ??
+          defaultMaxDailyNotifications,
     );
   }
 

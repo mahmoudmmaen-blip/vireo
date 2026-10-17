@@ -4,11 +4,6 @@ import {
   mealTextPrompt,
   unmatchedFoodMacrosPrompt,
 } from '../_shared/prompts/meal-vision.ts';
-import {
-  consumeDailyQuota,
-  hasPremiumEntitlement,
-  mealScanLimit,
-} from '../_shared/ai-usage.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -35,8 +30,6 @@ Deno.serve(async (req) => {
 
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
-    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-
     const userClient = createClient(supabaseUrl, supabaseAnonKey, {
       global: { headers: { Authorization: authHeader } },
     });
@@ -48,17 +41,8 @@ Deno.serve(async (req) => {
 
     const body = (await req.json()) as ParseMealTextRequest;
 
-    const adminClient = createClient(supabaseUrl, serviceRoleKey);
-    const premium = await hasPremiumEntitlement(adminClient, user.id);
-    const isAnonymous = user.is_anonymous === true;
-    const limit = mealScanLimit({ premium, isAnonymous });
-    const allowed = await consumeDailyQuota(
-      adminClient,
-      user.id,
-      'meal_scan',
-      limit,
-    );
-    if (!allowed) return json({ error: 'DAILY_LIMIT' }, 429);
+    // P40: text / voice logging is unlimited. It does NOT consume the
+    // `meal_scan` quota (only photo scans in analyze-meal do).
 
     if (body.mode === 'estimate_macros') {
       const list = (body.items ?? [])

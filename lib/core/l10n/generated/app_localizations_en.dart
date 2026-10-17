@@ -3187,6 +3187,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mealReviewEstimated => 'estimated';
 
   @override
+  String mealReviewKcalApprox(int count) {
+    return '≈ $count kcal';
+  }
+
+  @override
+  String get mealReviewPortionLabel => 'Portion';
+
+  @override
+  String get mealReviewOilPrefix => 'Oil:';
+
+  @override
+  String get mealReviewOilLight => 'light';
+
+  @override
+  String get mealReviewOilNormal => 'normal';
+
+  @override
+  String get mealReviewOilHeavy => 'heavy';
+
+  @override
+  String get mealReviewFamilyPlateToggle => 'We shared one dish';
+
+  @override
+  String get mealReviewMyShare => 'My share';
+
+  @override
+  String get ramadanWaterTrackerQuestion =>
+      'How many cups since iftar until suhoor?';
+
+  @override
+  String ramadanWaterGoalSplit(int iftarCups, int eveningCups, int suhoorCups) {
+    return 'Iftar: $iftarCups · Evening: $eveningCups · Suhoor: $suhoorCups cups';
+  }
+
+  @override
+  String get ramadanPrayerCityPickerTitle => 'Choose prayer city';
+
+  @override
+  String get ramadanPrayerCityCustom => 'Another city';
+
+  @override
+  String get ramadanCustomCityName => 'City name';
+
+  @override
+  String get ramadanCustomCityLat => 'Latitude';
+
+  @override
+  String get ramadanCustomCityLng => 'Longitude';
+
+  @override
+  String get notificationPostScanTitle => 'Want meal reminders?';
+
+  @override
+  String get notificationPostScanBody =>
+      'Gentle nudges for lunch and dinner — max 2 per day, quiet from 11 PM to 7 AM.';
+
+  @override
+  String get notificationPostScanYes => 'Yes, remind me';
+
+  @override
+  String get notificationPostScanNotNow => 'Not now';
+
+  @override
   String get mealReviewCheckAmount => 'check the amount';
 
   @override
@@ -4447,4 +4510,132 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get workoutRpeCommentPartial =>
       'What you did of the sets still counts. We will come back stronger next session.';
+
+  @override
+  String get foodFactCardTitle => 'Food fact';
+
+  @override
+  String get foodFactShareHint => 'Tap to share as a story card';
+
+  @override
+  String get ramadanGuideTitle => 'Ramadan guide';
+
+  @override
+  String get ramadanGuideOpenHint =>
+      'Suhoor ranking & iftar pacing — tap to open';
+
+  @override
+  String get ramadanSuhoorRankTitle => 'Suhoor fullness ranking';
+
+  @override
+  String ramadanSuhoorRankSubtitle(int grams, int kcal) {
+    return 'Example portion $grams g · ≈ $kcal kcal';
+  }
+
+  @override
+  String get ramadanIftarPaceTitle => 'Iftar pacing';
+
+  @override
+  String get ramadanIftarStep1 => 'Dates + water first';
+
+  @override
+  String get ramadanIftarStep2 => 'Warm soup';
+
+  @override
+  String get ramadanIftarStep3 => 'Wait 15 minutes';
+
+  @override
+  String get ramadanIftarStep4 => 'Main dish';
+
+  @override
+  String get ramadanReboundTitle => 'After Ramadan';
+
+  @override
+  String ramadanReboundBody(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female':
+          'Ease back gently: keep suhoor protein, log iftar without guilt, and add 10 minutes of walking for a week before big calorie cuts.',
+      'other':
+          'Ease back gently: keep suhoor protein, log iftar without guilt, and add 10 minutes of walking for a week before big calorie cuts.',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsMySubscription => 'My subscription';
+
+  @override
+  String get settingsMySubscriptionBody =>
+      'Cancel or change your plan anytime in Google Play — no calls or hidden steps.';
+
+  @override
+  String get weeklyBurnShareTitle => 'Your burn balance this week';
+
+  @override
+  String get weeklyBurnShareSubtitle => 'Share your steps & streak';
+
+  @override
+  String get weeklyBurnShareCaption => 'My weekly burn balance on Vireo';
+
+  @override
+  String get weeklyBurnShareAction => 'Share story card';
+
+  @override
+  String get weeklyBurnShareIncludeWeight =>
+      'Include weight change on the card';
+
+  @override
+  String get weeklyBurnShareStepsLabel => 'Steps this week';
+
+  @override
+  String get weeklyBurnShareStreakLabel => 'Streak';
+
+  @override
+  String get weeklyBurnShareWeightLabel => 'Weight change';
+
+  @override
+  String get widgetCaloriesLeftLabel => 'Calories left';
+
+  @override
+  String get scanLimitTitle => 'Daily AI scan limit reached';
+
+  @override
+  String get scanLimitBody =>
+      'Photo scans use server resources. Wait until tomorrow, go Pro, or log manually — your choice.';
+
+  @override
+  String get scanLimitProTitle => 'Vireo Pro';
+
+  @override
+  String get scanLimitProSubtitle =>
+      'Unlimited AI scans (40/day fair use), no ads, full programs';
+
+  @override
+  String get scanLimitProCta => 'Get Pro';
+
+  @override
+  String get scanLimitWaitTitle => 'Wait until tomorrow';
+
+  @override
+  String get scanLimitWaitSubtitle =>
+      'Your free scans reset at midnight — text & barcode logging stay unlimited';
+
+  @override
+  String get scanLimitWaitCta => 'OK, see you tomorrow';
+
+  @override
+  String get scanLimitManualTitle => 'Search & manual log';
+
+  @override
+  String get scanLimitManualSubtitle => 'Always free and unlimited';
+
+  @override
+  String get scanLimitManualCta => 'Log manually';
+
+  @override
+  String get scanLimitAdRewardSnack => '+2 extra scans added for today';
+
+  @override
+  String get scanLimitAdFailedSnack =>
+      'Could not load the ad — try again later';
 }

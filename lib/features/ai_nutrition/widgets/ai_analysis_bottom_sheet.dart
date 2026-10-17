@@ -5,6 +5,8 @@ import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
+import 'package:vireo/features/notifications/widgets/post_scan_notification_prompt.dart';
+import 'package:vireo/features/subscription/widgets/soft_paywall_after_scan.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -167,7 +169,18 @@ class _AiAnalysisSheetBody extends ConsumerWidget {
             FilledButton(
               onPressed: () async {
                 await ref.read(aiMealLogProvider.notifier).save(result);
-                await recordSuccessfulMealScan();
+                final scanCount = await recordSuccessfulMealScan();
+                if (!context.mounted) return;
+                await maybePromptMealRemindersAfterScan(
+                  context,
+                  ref,
+                  scanCountAfterSave: scanCount,
+                );
+                await maybeShowSoftPaywallAfterFirstScan(
+                  context,
+                  ref,
+                  scanCountAfterSave: scanCount,
+                );
                 if (!context.mounted) return;
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(

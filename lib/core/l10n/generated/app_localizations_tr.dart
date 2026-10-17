@@ -3209,6 +3209,69 @@ class AppLocalizationsTr extends AppLocalizations {
   String get mealReviewEstimated => 'tahmini';
 
   @override
+  String mealReviewKcalApprox(int count) {
+    return '≈ $count kcal';
+  }
+
+  @override
+  String get mealReviewPortionLabel => 'Porsiyon';
+
+  @override
+  String get mealReviewOilPrefix => 'Yağ:';
+
+  @override
+  String get mealReviewOilLight => 'az';
+
+  @override
+  String get mealReviewOilNormal => 'normal';
+
+  @override
+  String get mealReviewOilHeavy => 'bol';
+
+  @override
+  String get mealReviewFamilyPlateToggle => 'Tek tabaktan paylaştık';
+
+  @override
+  String get mealReviewMyShare => 'Benim payım';
+
+  @override
+  String get ramadanWaterTrackerQuestion =>
+      'İftardan sahur vaktine kaç bardak?';
+
+  @override
+  String ramadanWaterGoalSplit(int iftarCups, int eveningCups, int suhoorCups) {
+    return 'İftar: $iftarCups · Akşam: $eveningCups · Sahur: $suhoorCups bardak';
+  }
+
+  @override
+  String get ramadanPrayerCityPickerTitle => 'Namaz şehri seç';
+
+  @override
+  String get ramadanPrayerCityCustom => 'Başka şehir';
+
+  @override
+  String get ramadanCustomCityName => 'Şehir adı';
+
+  @override
+  String get ramadanCustomCityLat => 'Enlem';
+
+  @override
+  String get ramadanCustomCityLng => 'Boylam';
+
+  @override
+  String get notificationPostScanTitle => 'Yemek hatırlatıcısı ister misin?';
+
+  @override
+  String get notificationPostScanBody =>
+      'Öğle ve akşam için nazik hatırlatmalar — günde en fazla 2, 23:00–07:00 sessiz.';
+
+  @override
+  String get notificationPostScanYes => 'Evet, hatırlat';
+
+  @override
+  String get notificationPostScanNotNow => 'Şimdi değil';
+
+  @override
   String get mealReviewCheckAmount => 'miktarı kontrol edin';
 
   @override
@@ -4474,4 +4537,129 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get workoutRpeCommentPartial =>
       'Yaptığın kısım da sayılır. Bir sonraki antrenmanda daha güçlü döneceğiz.';
+
+  @override
+  String get foodFactCardTitle => 'Yemek gerçeği';
+
+  @override
+  String get foodFactShareHint => 'Kartı paylaşmak için dokun';
+
+  @override
+  String get ramadanGuideTitle => 'Ramazan rehberi';
+
+  @override
+  String get ramadanGuideOpenHint =>
+      'Sahur sıralaması ve iftar temposu — dokun';
+
+  @override
+  String get ramadanSuhoorRankTitle => 'Sahur tokluk sıralaması';
+
+  @override
+  String ramadanSuhoorRankSubtitle(int grams, int kcal) {
+    return 'Örnek porsiyon $grams g · ≈ $kcal kcal';
+  }
+
+  @override
+  String get ramadanIftarPaceTitle => 'İftar temposu';
+
+  @override
+  String get ramadanIftarStep1 => 'Önce hurma + su';
+
+  @override
+  String get ramadanIftarStep2 => 'Sıcak çorba';
+
+  @override
+  String get ramadanIftarStep3 => '15 dakika bekle';
+
+  @override
+  String get ramadanIftarStep4 => 'Ana yemek';
+
+  @override
+  String get ramadanReboundTitle => 'Ramazan sonrası';
+
+  @override
+  String ramadanReboundBody(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female':
+          'Yavaş dön: sahurda protein, iftarı suçsuz kaydet, büyük kalori kesmeden önce bir hafta 10 dk yürüyüş ekle.',
+      'other':
+          'Yavaş dön: sahurda protein, iftarı suçsuz kaydet, büyük kalori kesmeden önce bir hafta 10 dk yürüyüş ekle.',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsMySubscription => 'Aboneliğim';
+
+  @override
+  String get settingsMySubscriptionBody =>
+      'Planınızı Google Play\'den istediğiniz zaman iptal edin veya değiştirin.';
+
+  @override
+  String get weeklyBurnShareTitle => 'Bu haftaki yakım bakiyen';
+
+  @override
+  String get weeklyBurnShareSubtitle => 'Adım ve seriyi paylaş';
+
+  @override
+  String get weeklyBurnShareCaption => 'Vireo\'da haftalık bakiyem';
+
+  @override
+  String get weeklyBurnShareAction => 'Kartı paylaş';
+
+  @override
+  String get weeklyBurnShareIncludeWeight => 'Kilo değişimini göster';
+
+  @override
+  String get weeklyBurnShareStepsLabel => 'Haftalık adım';
+
+  @override
+  String get weeklyBurnShareStreakLabel => 'Seri';
+
+  @override
+  String get weeklyBurnShareWeightLabel => 'Kilo değişimi';
+
+  @override
+  String get widgetCaloriesLeftLabel => 'Kalan kalori';
+
+  @override
+  String get scanLimitTitle => 'Günlük tarama limiti doldu';
+
+  @override
+  String get scanLimitBody =>
+      'Yarına kadar bekleyin, Pro\'ya geçin veya manuel kaydedin.';
+
+  @override
+  String get scanLimitProTitle => 'Vireo Pro';
+
+  @override
+  String get scanLimitProSubtitle => 'Sınırsız tarama (40/gün), reklamsız';
+
+  @override
+  String get scanLimitProCta => 'Pro al';
+
+  @override
+  String get scanLimitWaitTitle => 'Yarına kadar bekle';
+
+  @override
+  String get scanLimitWaitSubtitle =>
+      'Ücretsiz taramalar gece yarısı yenilenir';
+
+  @override
+  String get scanLimitWaitCta => 'Tamam, yarın görüşürüz';
+
+  @override
+  String get scanLimitManualTitle => 'Arama ve manuel kayıt';
+
+  @override
+  String get scanLimitManualSubtitle => 'Her zaman ücretsiz ve sınırsız';
+
+  @override
+  String get scanLimitManualCta => 'Manuel kaydet';
+
+  @override
+  String get scanLimitAdRewardSnack => 'Bugün +2 tarama eklendi';
+
+  @override
+  String get scanLimitAdFailedSnack => 'Reklam yüklenemedi';
 }

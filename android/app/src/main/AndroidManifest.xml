@@ -70,6 +70,12 @@
                     android:scheme="com.vireofit.app"
                     android:host="login-callback" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="vireo" />
+            </intent-filter>
         </activity>
         <activity-alias
             android:name="ViewPermissionUsageActivity"

@@ -5773,6 +5773,120 @@ abstract class AppLocalizations {
   /// **'estimated'**
   String get mealReviewEstimated;
 
+  /// No description provided for @mealReviewKcalApprox.
+  ///
+  /// In en, this message translates to:
+  /// **'≈ {count} kcal'**
+  String mealReviewKcalApprox(int count);
+
+  /// No description provided for @mealReviewPortionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Portion'**
+  String get mealReviewPortionLabel;
+
+  /// No description provided for @mealReviewOilPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Oil:'**
+  String get mealReviewOilPrefix;
+
+  /// No description provided for @mealReviewOilLight.
+  ///
+  /// In en, this message translates to:
+  /// **'light'**
+  String get mealReviewOilLight;
+
+  /// No description provided for @mealReviewOilNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'normal'**
+  String get mealReviewOilNormal;
+
+  /// No description provided for @mealReviewOilHeavy.
+  ///
+  /// In en, this message translates to:
+  /// **'heavy'**
+  String get mealReviewOilHeavy;
+
+  /// No description provided for @mealReviewFamilyPlateToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'We shared one dish'**
+  String get mealReviewFamilyPlateToggle;
+
+  /// No description provided for @mealReviewMyShare.
+  ///
+  /// In en, this message translates to:
+  /// **'My share'**
+  String get mealReviewMyShare;
+
+  /// No description provided for @ramadanWaterTrackerQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'How many cups since iftar until suhoor?'**
+  String get ramadanWaterTrackerQuestion;
+
+  /// No description provided for @ramadanWaterGoalSplit.
+  ///
+  /// In en, this message translates to:
+  /// **'Iftar: {iftarCups} · Evening: {eveningCups} · Suhoor: {suhoorCups} cups'**
+  String ramadanWaterGoalSplit(int iftarCups, int eveningCups, int suhoorCups);
+
+  /// No description provided for @ramadanPrayerCityPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose prayer city'**
+  String get ramadanPrayerCityPickerTitle;
+
+  /// No description provided for @ramadanPrayerCityCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Another city'**
+  String get ramadanPrayerCityCustom;
+
+  /// No description provided for @ramadanCustomCityName.
+  ///
+  /// In en, this message translates to:
+  /// **'City name'**
+  String get ramadanCustomCityName;
+
+  /// No description provided for @ramadanCustomCityLat.
+  ///
+  /// In en, this message translates to:
+  /// **'Latitude'**
+  String get ramadanCustomCityLat;
+
+  /// No description provided for @ramadanCustomCityLng.
+  ///
+  /// In en, this message translates to:
+  /// **'Longitude'**
+  String get ramadanCustomCityLng;
+
+  /// No description provided for @notificationPostScanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Want meal reminders?'**
+  String get notificationPostScanTitle;
+
+  /// No description provided for @notificationPostScanBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle nudges for lunch and dinner — max 2 per day, quiet from 11 PM to 7 AM.'**
+  String get notificationPostScanBody;
+
+  /// No description provided for @notificationPostScanYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, remind me'**
+  String get notificationPostScanYes;
+
+  /// No description provided for @notificationPostScanNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notificationPostScanNotNow;
+
   /// No description provided for @mealReviewCheckAmount.
   ///
   /// In en, this message translates to:
@@ -7968,6 +8082,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What you did of the sets still counts. We will come back stronger next session.'**
   String get workoutRpeCommentPartial;
+
+  /// No description provided for @foodFactCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Food fact'**
+  String get foodFactCardTitle;
+
+  /// No description provided for @foodFactShareHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to share as a story card'**
+  String get foodFactShareHint;
+
+  /// No description provided for @ramadanGuideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ramadan guide'**
+  String get ramadanGuideTitle;
+
+  /// No description provided for @ramadanGuideOpenHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Suhoor ranking & iftar pacing — tap to open'**
+  String get ramadanGuideOpenHint;
+
+  /// No description provided for @ramadanSuhoorRankTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Suhoor fullness ranking'**
+  String get ramadanSuhoorRankTitle;
+
+  /// No description provided for @ramadanSuhoorRankSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Example portion {grams} g · ≈ {kcal} kcal'**
+  String ramadanSuhoorRankSubtitle(int grams, int kcal);
+
+  /// No description provided for @ramadanIftarPaceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Iftar pacing'**
+  String get ramadanIftarPaceTitle;
+
+  /// No description provided for @ramadanIftarStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Dates + water first'**
+  String get ramadanIftarStep1;
+
+  /// No description provided for @ramadanIftarStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Warm soup'**
+  String get ramadanIftarStep2;
+
+  /// No description provided for @ramadanIftarStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Wait 15 minutes'**
+  String get ramadanIftarStep3;
+
+  /// No description provided for @ramadanIftarStep4.
+  ///
+  /// In en, this message translates to:
+  /// **'Main dish'**
+  String get ramadanIftarStep4;
+
+  /// No description provided for @ramadanReboundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'After Ramadan'**
+  String get ramadanReboundTitle;
+
+  /// No description provided for @ramadanReboundBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{gender, select, female{Ease back gently: keep suhoor protein, log iftar without guilt, and add 10 minutes of walking for a week before big calorie cuts.} other{Ease back gently: keep suhoor protein, log iftar without guilt, and add 10 minutes of walking for a week before big calorie cuts.}}'**
+  String ramadanReboundBody(String gender);
+
+  /// No description provided for @settingsMySubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'My subscription'**
+  String get settingsMySubscription;
+
+  /// No description provided for @settingsMySubscriptionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel or change your plan anytime in Google Play — no calls or hidden steps.'**
+  String get settingsMySubscriptionBody;
+
+  /// No description provided for @weeklyBurnShareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your burn balance this week'**
+  String get weeklyBurnShareTitle;
+
+  /// No description provided for @weeklyBurnShareSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your steps & streak'**
+  String get weeklyBurnShareSubtitle;
+
+  /// No description provided for @weeklyBurnShareCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'My weekly burn balance on Vireo'**
+  String get weeklyBurnShareCaption;
+
+  /// No description provided for @weeklyBurnShareAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Share story card'**
+  String get weeklyBurnShareAction;
+
+  /// No description provided for @weeklyBurnShareIncludeWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Include weight change on the card'**
+  String get weeklyBurnShareIncludeWeight;
+
+  /// No description provided for @weeklyBurnShareStepsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps this week'**
+  String get weeklyBurnShareStepsLabel;
+
+  /// No description provided for @weeklyBurnShareStreakLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get weeklyBurnShareStreakLabel;
+
+  /// No description provided for @weeklyBurnShareWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight change'**
+  String get weeklyBurnShareWeightLabel;
+
+  /// No description provided for @widgetCaloriesLeftLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories left'**
+  String get widgetCaloriesLeftLabel;
+
+  /// No description provided for @scanLimitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily AI scan limit reached'**
+  String get scanLimitTitle;
+
+  /// No description provided for @scanLimitBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo scans use server resources. Wait until tomorrow, go Pro, or log manually — your choice.'**
+  String get scanLimitBody;
+
+  /// No description provided for @scanLimitProTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vireo Pro'**
+  String get scanLimitProTitle;
+
+  /// No description provided for @scanLimitProSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited AI scans (40/day fair use), no ads, full programs'**
+  String get scanLimitProSubtitle;
+
+  /// No description provided for @scanLimitProCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Pro'**
+  String get scanLimitProCta;
+
+  /// No description provided for @scanLimitWaitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wait until tomorrow'**
+  String get scanLimitWaitTitle;
+
+  /// No description provided for @scanLimitWaitSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your free scans reset at midnight — text & barcode logging stay unlimited'**
+  String get scanLimitWaitSubtitle;
+
+  /// No description provided for @scanLimitWaitCta.
+  ///
+  /// In en, this message translates to:
+  /// **'OK, see you tomorrow'**
+  String get scanLimitWaitCta;
+
+  /// No description provided for @scanLimitManualTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search & manual log'**
+  String get scanLimitManualTitle;
+
+  /// No description provided for @scanLimitManualSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Always free and unlimited'**
+  String get scanLimitManualSubtitle;
+
+  /// No description provided for @scanLimitManualCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Log manually'**
+  String get scanLimitManualCta;
+
+  /// No description provided for @scanLimitAdRewardSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'+2 extra scans added for today'**
+  String get scanLimitAdRewardSnack;
+
+  /// No description provided for @scanLimitAdFailedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the ad — try again later'**
+  String get scanLimitAdFailedSnack;
 }
 
 class _AppLocalizationsDelegate

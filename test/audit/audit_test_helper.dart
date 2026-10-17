@@ -38,6 +38,7 @@ class FakeRamadanSettingsNotifier extends RamadanSettingsNotifier {
   RamadanSettingsState get state => const RamadanSettingsState(
         isEnabled: false,
         calculationMethod: RamadanCalculationMethod.egyptian,
+        cityPresetId: 'cairo',
         cityName: 'Cairo',
         latitude: 30.0444,
         longitude: 31.2357,

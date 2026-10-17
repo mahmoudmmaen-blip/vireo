@@ -115,7 +115,7 @@ abstract final class GeminiFoodServiceCore {
         'images': compressedImages.map(base64Encode).toList(),
         // Keep image_base64 for backward compatibility with existing server
         'image_base64': base64Encode(compressedImages.first),
-        'mime_type': 'image/jpeg',
+        'mime_type': 'image/webp',
         'remaining_calories': remainingCalories,
         'remaining_protein': remainingProtein,
         'language': language,

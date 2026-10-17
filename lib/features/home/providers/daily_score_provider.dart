@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
-import 'package:vireo/core/services/widget_service.dart';
+import 'package:vireo/core/utils/merciful_streak.dart';
 import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
@@ -225,11 +225,7 @@ final dailyScoreProvider = Provider<DailyScoreBreakdown>((ref) {
 
   // Store today's score in Hive for streak and widgets
   _persistDailyScore(result.totalScore);
-  WidgetService.updateWidget(
-    steps: stepsCurrent,
-    waterMl: waterMlCurrent,
-    dailyScore: result.totalScore,
-  );
+  // Widget push is handled by [syncHomeScreenWidget] from MainShell lifecycle.
 
   return result;
 });
@@ -241,36 +237,26 @@ void _persistDailyScore(int score) {
   HiveService.settingsBox.put(key, score);
 }
 
-/// Streak of consecutive days with score >= 60.
-final dailyScoreStreakProvider = Provider<int>((ref) {
+String _dailyScoreKey(DateTime d) =>
+    'daily_score_${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+/// Merciful streak of days with score >= 60 (P40): today stays "pending"
+/// until it reaches 60, and ONE isolated missed day is forgiven with the
+/// "يوم راحة" token.
+final dailyScoreStreakDetailsProvider = Provider<MercifulStreak>((ref) {
   ref.watch(dailyScoreProvider); // Recompute when score updates
-  if (!HiveService.isInitialized) return 0;
+  if (!HiveService.isInitialized) return MercifulStreak.empty;
 
   final box = HiveService.settingsBox;
-  int streak = 0;
-  DateTime checkDay = DateTime.now();
+  return MercifulStreakEngine.compute(
+    hit: (day) {
+      final score = box.get(_dailyScoreKey(day));
+      return score is num && score >= 60;
+    },
+  );
+});
 
-  while (true) {
-    final key = 'daily_score_${checkDay.year}-${checkDay.month.toString().padLeft(2, '0')}-${checkDay.day.toString().padLeft(2, '0')}';
-    final score = box.get(key) as int?;
-    if (score != null && score >= 60) {
-      streak++;
-      checkDay = checkDay.subtract(const Duration(days: 1));
-    } else {
-      // If today is still < 60, check if yesterday was part of active streak
-      if (streak == 0 && checkDay.day == DateTime.now().day) {
-        checkDay = checkDay.subtract(const Duration(days: 1));
-        final yesterdayKey = 'daily_score_${checkDay.year}-${checkDay.month.toString().padLeft(2, '0')}-${checkDay.day.toString().padLeft(2, '0')}';
-        final yScore = box.get(yesterdayKey) as int?;
-        if (yScore != null && yScore >= 60) {
-          streak++;
-          checkDay = checkDay.subtract(const Duration(days: 1));
-          continue;
-        }
-      }
-      break;
-    }
-  }
-
-  return streak;
+/// Streak length of consecutive days with score >= 60 (rest day applied).
+final dailyScoreStreakProvider = Provider<int>((ref) {
+  return ref.watch(dailyScoreStreakDetailsProvider).days;
 });

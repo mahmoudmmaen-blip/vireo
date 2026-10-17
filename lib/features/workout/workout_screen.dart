@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/config/feature_flags.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/navigation/vireo_page_routes.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
@@ -153,14 +154,16 @@ class WorkoutScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  OutlinedButton.icon(
-                    onPressed: () => Navigator.of(context).push(
-                      SlideUpRoute(page: const OutdoorPickScreen()),
+                  if (ref.watch(featureFlagsProvider).gpsRunScreen) ...[
+                    OutlinedButton.icon(
+                      onPressed: () => Navigator.of(context).push(
+                        SlideUpRoute(page: const OutdoorPickScreen()),
+                      ),
+                      icon: const Icon(Icons.map_outlined),
+                      label: Text(l10n.outdoorWorkoutTitle),
                     ),
-                    icon: const Icon(Icons.map_outlined),
-                    label: Text(l10n.outdoorWorkoutTitle),
-                  ),
-                  const SizedBox(height: 8),
+                    const SizedBox(height: 8),
+                  ],
                   OutlinedButton.icon(
                     onPressed: () => Navigator.of(context).push(
                       SlideUpRoute(page: const ActivityHubScreen()),

@@ -19,6 +19,7 @@ class DailyScoreHeroCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final breakdown = ref.watch(dailyScoreProvider);
     final streak = ref.watch(dailyScoreStreakProvider);
+    final streakDetails = ref.watch(dailyScoreStreakDetailsProvider);
     final colors = context.vireoColors;
     final locale = Localizations.localeOf(context).languageCode;
     final isArabic = locale.startsWith('ar');
@@ -189,6 +190,20 @@ class DailyScoreHeroCard extends ConsumerWidget {
                                 ),
                               ],
                             ),
+                            if (streakDetails.usedRestDay)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 2),
+                                child: Text(
+                                  isArabic
+                                      ? 'يوم راحة اتحسب معاك 🌿'
+                                      : 'A rest day was counted for you 🌿',
+                                  style: TextStyle(
+                                    color: colors.textMute,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ),
                           ],
                         ],
                       ),

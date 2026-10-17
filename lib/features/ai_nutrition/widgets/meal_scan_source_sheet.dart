@@ -10,6 +10,7 @@ import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/cal_ai_camera_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
+import 'package:vireo/features/nutrition/widgets/meal_quick_relog_row.dart';
 
 /// Shows the unified bottom sheet "سجّل وجبتك" with 5 big tiles:
 /// 1. صوّر الوجبة (CalAi camera)
@@ -47,7 +48,9 @@ Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
+              const MealQuickRelogRow(),
+              const SizedBox(height: 8),
               Text(
                 'سجّل وجبتك',
                 textAlign: TextAlign.center,

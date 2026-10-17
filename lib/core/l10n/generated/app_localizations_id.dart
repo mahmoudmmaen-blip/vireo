@@ -3214,6 +3214,69 @@ class AppLocalizationsId extends AppLocalizations {
   String get mealReviewEstimated => 'perkiraan';
 
   @override
+  String mealReviewKcalApprox(int count) {
+    return '≈ $count kcal';
+  }
+
+  @override
+  String get mealReviewPortionLabel => 'Porsi';
+
+  @override
+  String get mealReviewOilPrefix => 'Minyak:';
+
+  @override
+  String get mealReviewOilLight => 'sedikit';
+
+  @override
+  String get mealReviewOilNormal => 'normal';
+
+  @override
+  String get mealReviewOilHeavy => 'banyak';
+
+  @override
+  String get mealReviewFamilyPlateToggle => 'Kami berbagi satu piring';
+
+  @override
+  String get mealReviewMyShare => 'Bagian saya';
+
+  @override
+  String get ramadanWaterTrackerQuestion =>
+      'Berapa gelas sejak iftar hingga sahur?';
+
+  @override
+  String ramadanWaterGoalSplit(int iftarCups, int eveningCups, int suhoorCups) {
+    return 'Iftar: $iftarCups · Malam: $eveningCups · Sahur: $suhoorCups gelas';
+  }
+
+  @override
+  String get ramadanPrayerCityPickerTitle => 'Pilih kota waktu sholat';
+
+  @override
+  String get ramadanPrayerCityCustom => 'Kota lain';
+
+  @override
+  String get ramadanCustomCityName => 'Nama kota';
+
+  @override
+  String get ramadanCustomCityLat => 'Lintang';
+
+  @override
+  String get ramadanCustomCityLng => 'Bujur';
+
+  @override
+  String get notificationPostScanTitle => 'Ingin pengingat makan?';
+
+  @override
+  String get notificationPostScanBody =>
+      'Pengingat lembut untuk makan siang & malam — maks 2/hari, hening 23.00–07.00.';
+
+  @override
+  String get notificationPostScanYes => 'Ya, ingatkan';
+
+  @override
+  String get notificationPostScanNotNow => 'Nanti saja';
+
+  @override
   String get mealReviewCheckAmount => 'periksa jumlahnya';
 
   @override
@@ -4480,4 +4543,128 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get workoutRpeCommentPartial =>
       'Set yang sudah kamu selesaikan tetap dihitung. Kita kembali lebih kuat di sesi berikutnya.';
+
+  @override
+  String get foodFactCardTitle => 'Fakta makanan';
+
+  @override
+  String get foodFactShareHint => 'Ketuk untuk membagikan kartu';
+
+  @override
+  String get ramadanGuideTitle => 'Panduan Ramadan';
+
+  @override
+  String get ramadanGuideOpenHint => 'Peringkat sahur & tempo iftar — ketuk';
+
+  @override
+  String get ramadanSuhoorRankTitle => 'Peringkat kenyang sahur';
+
+  @override
+  String ramadanSuhoorRankSubtitle(int grams, int kcal) {
+    return 'Contoh porsi $grams g · ≈ $kcal kkal';
+  }
+
+  @override
+  String get ramadanIftarPaceTitle => 'Tempo iftar';
+
+  @override
+  String get ramadanIftarStep1 => 'Kurma + air dulu';
+
+  @override
+  String get ramadanIftarStep2 => 'Sup hangat';
+
+  @override
+  String get ramadanIftarStep3 => 'Tunggu 15 menit';
+
+  @override
+  String get ramadanIftarStep4 => 'Hidangan utama';
+
+  @override
+  String get ramadanReboundTitle => 'Setelah Ramadan';
+
+  @override
+  String ramadanReboundBody(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female':
+          'Kembali pelan: protein sahur, catat iftar tanpa rasa bersalah, tambah jalan 10 menit seminggu sebelum potong kalori besar.',
+      'other':
+          'Kembali pelan: protein sahur, catat iftar tanpa rasa bersalah, tambah jalan 10 menit seminggu sebelum potong kalori besar.',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsMySubscription => 'Langganan saya';
+
+  @override
+  String get settingsMySubscriptionBody =>
+      'Batalkan atau ubah paket kapan saja di Google Play.';
+
+  @override
+  String get weeklyBurnShareTitle => 'Saldo bakar minggu ini';
+
+  @override
+  String get weeklyBurnShareSubtitle => 'Bagikan langkah & streak';
+
+  @override
+  String get weeklyBurnShareCaption => 'Minggu saya di Vireo';
+
+  @override
+  String get weeklyBurnShareAction => 'Bagikan kartu';
+
+  @override
+  String get weeklyBurnShareIncludeWeight => 'Sertakan perubahan berat';
+
+  @override
+  String get weeklyBurnShareStepsLabel => 'Langkah minggu ini';
+
+  @override
+  String get weeklyBurnShareStreakLabel => 'Streak';
+
+  @override
+  String get weeklyBurnShareWeightLabel => 'Perubahan berat';
+
+  @override
+  String get widgetCaloriesLeftLabel => 'Kalori tersisa';
+
+  @override
+  String get scanLimitTitle => 'Batas pemindaian harian tercapai';
+
+  @override
+  String get scanLimitBody => 'Tunggu besok, upgrade Pro, atau catat manual.';
+
+  @override
+  String get scanLimitProTitle => 'Vireo Pro';
+
+  @override
+  String get scanLimitProSubtitle =>
+      'Pemindaian tak terbatas (40/hari), tanpa iklan';
+
+  @override
+  String get scanLimitProCta => 'Dapatkan Pro';
+
+  @override
+  String get scanLimitWaitTitle => 'Tunggu besok';
+
+  @override
+  String get scanLimitWaitSubtitle =>
+      'Pemindaian gratis diperbarui tengah malam';
+
+  @override
+  String get scanLimitWaitCta => 'Oke, sampai besok';
+
+  @override
+  String get scanLimitManualTitle => 'Cari & catat manual';
+
+  @override
+  String get scanLimitManualSubtitle => 'Selalu gratis & tak terbatas';
+
+  @override
+  String get scanLimitManualCta => 'Catat manual';
+
+  @override
+  String get scanLimitAdRewardSnack => '+2 pemindaian ditambahkan hari ini';
+
+  @override
+  String get scanLimitAdFailedSnack => 'Iklan gagal dimuat';
 }

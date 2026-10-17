@@ -22,7 +22,7 @@ import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 
 const _notificationSettingsKey = 'notification_settings';
-const _permissionRequestedKey = 'notification_permission_requested';
+const notificationPermissionRequestedKey = 'notification_permission_requested';
 
 final notificationServiceProvider = Provider<INotificationService>((ref) {
   return LocalNotificationService(
@@ -147,7 +147,7 @@ final hasWorkoutScheduledProvider = Provider<bool>((ref) {
 
 final notificationPermissionRequestedProvider = Provider<bool>((ref) {
   if (!HiveService.isInitialized) return false;
-  return HiveService.settingsBox.get(_permissionRequestedKey) == true;
+  return HiveService.settingsBox.get(notificationPermissionRequestedKey) == true;
 });
 
 class NotificationSettingsNotifier extends Notifier<NotificationSettings> {

@@ -5,13 +5,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/ad_service.dart';
+import 'package:vireo/core/services/home_widget_sync.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/domain/i_food_vision_service.dart';
+import 'package:vireo/features/ai_nutrition/domain/family_plate_share.dart';
 import 'package:vireo/features/ai_nutrition/domain/meal_correction_text.dart';
 import 'package:vireo/features/ai_nutrition/domain/meal_health_score.dart';
+import 'package:vireo/features/ai_nutrition/domain/meal_review_calibration.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_correction_sheet.dart';
 import 'package:vireo/features/ai_nutrition/domain/meal_smart_swap.dart';
@@ -23,22 +26,35 @@ import 'package:vireo/features/nutrition/data/food_db_repository.dart';
 import 'package:vireo/features/nutrition/data/meal_resolution_service.dart';
 import 'package:vireo/features/nutrition/providers/confirmed_meals_provider.dart';
 import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
+import 'package:vireo/features/nutrition/providers/repeat_meal_service.dart';
 import 'package:vireo/features/insights/domain/meal_advice.dart';
 import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 import 'package:vireo/features/nutrition/domain/household_measures.dart';
 import 'package:vireo/features/nutrition/providers/cup_size_preference_provider.dart';
 import 'package:vireo/features/nutrition/widgets/portion_picker_sheet.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
+import 'package:vireo/features/subscription/widgets/soft_paywall_after_scan.dart';
 import 'package:vireo/features/fasting/providers/fasting_provider.dart';
+import 'package:vireo/features/notifications/widgets/post_scan_notification_prompt.dart';
 
 class MealReviewScreen extends ConsumerStatefulWidget {
-  const MealReviewScreen({super.key, required this.draft});
+  const MealReviewScreen({super.key, required this.draft, this.initialSlot});
 
   final MealScanDraft draft;
 
-  static Future<bool?> open(BuildContext context, MealScanDraft draft) {
+  /// Pre-selects the meal slot (e.g. "زي امبارح" repeats into the same slot).
+  /// Defaults to the slot for the current time of day.
+  final MealType? initialSlot;
+
+  static Future<bool?> open(
+    BuildContext context,
+    MealScanDraft draft, {
+    MealType? slot,
+  }) {
     return Navigator.of(context).push<bool>(
-      MaterialPageRoute(builder: (_) => MealReviewScreen(draft: draft)),
+      MaterialPageRoute(
+        builder: (_) => MealReviewScreen(draft: draft, initialSlot: slot),
+      ),
     );
   }
 
@@ -59,6 +75,14 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   /// analyze-meal returned its 24 h cached result => offer "حلّل تاني".
   bool _fromCache = false;
   bool _reanalyzing = false;
+
+  double _portionMultiplier = 1.0;
+  bool _familyPlateOn = false;
+  FamilyPlateShare _familyShare = FamilyPlateShare.half;
+
+  double get _displayShare => _familyPlateOn ? _familyShare.fraction : 1.0;
+
+  double _scaledMacro(double raw) => raw * _displayShare;
 
   int get _currentOilGrams {
     final idx = _lines.indexWhere((l) =>
@@ -87,6 +111,38 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
         }
       }
     });
+  }
+
+  CookingOilCalibrationLevel? get _currentOilLevel =>
+      CookingOilCalibrationLevel.fromGrams(_currentOilGrams);
+
+  void _setOilLevel(CookingOilCalibrationLevel level) {
+    _setCookingOilGrams(level.grams);
+  }
+
+  void _setPortionPreset(MealPortionPreset preset) {
+    final next = preset.multiplier;
+    if ((next - _portionMultiplier).abs() < 0.001) return;
+    final ratio = next / _portionMultiplier;
+    HapticFeedback.selectionClick();
+    setState(() {
+      _portionMultiplier = next;
+      _lines = [
+        for (final l in _lines)
+          rescaleLine(l, (l.grams * ratio).clamp(0.5, 10000)),
+      ];
+    });
+  }
+
+  List<ResolvedMealLine> _linesForPersist() {
+    if (!_familyPlateOn) return List.of(_lines);
+    return [
+      for (final l in _lines)
+        rescaleLine(
+          l,
+          scaleGrams(totalGrams: l.grams, share: _familyShare.fraction),
+        ),
+    ];
   }
 
   void _addQuickAddon(String id, String nameAr, String nameEn, double grams) {
@@ -168,7 +224,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
       _unsureLines = [];
     }
     _images = List.of(widget.draft.allImages);
-    _slot = _mealSlotForNow();
+    _slot = widget.initialSlot ?? _mealSlotForNow();
     _fromCache = widget.draft.fromCache;
   }
 
@@ -362,10 +418,10 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     return MealType.snack;
   }
 
-  double get _kcal => _lines.fold(0.0, (s, l) => s + l.kcal);
-  double get _p => _lines.fold(0.0, (s, l) => s + l.protein);
-  double get _c => _lines.fold(0.0, (s, l) => s + l.carbs);
-  double get _f => _lines.fold(0.0, (s, l) => s + l.fat);
+  double get _kcal => _scaledMacro(_lines.fold(0.0, (s, l) => s + l.kcal));
+  double get _p => _scaledMacro(_lines.fold(0.0, (s, l) => s + l.protein));
+  double get _c => _scaledMacro(_lines.fold(0.0, (s, l) => s + l.carbs));
+  double get _f => _scaledMacro(_lines.fold(0.0, (s, l) => s + l.fat));
 
   /// Primary meal name: Arabic names when the locale is Arabic (falling back to
   /// English only for lines that have no Arabic name), English otherwise.
@@ -577,16 +633,18 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
       }
     }
 
+    final persistLines = _linesForPersist();
     final result = MealScanDraft(
-      lines: _lines,
+      lines: persistLines,
       imageBytes: _images.isNotEmpty ? _images.first : widget.draft.imageBytes,
       imagesBytes: _images,
     ).toAnalysisResult();
 
     await ref.read(aiMealLogProvider.notifier).save(result);
-    await recordSuccessfulMealScan();
-    await _resolver.rememberLines(_lines, originalScanned: widget.draft.originalScanned);
-    await ref.read(mealRecentProvider.notifier).push(_lines);
+    final scanCount = await recordSuccessfulMealScan();
+    await _resolver.rememberLines(persistLines, originalScanned: widget.draft.originalScanned);
+    await ref.read(mealRecentProvider.notifier).push(persistLines);
+    await ref.read(mealSlotHistoryProvider.notifier).record(_slot, persistLines);
     ref.read(confirmedMealsProvider.notifier).update((s) => {...s, _slot});
     ref.invalidate(todayNutritionProvider);
 
@@ -616,13 +674,28 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
             : null,
       ),
     );
+    if (!mounted) return;
+    await maybePromptMealRemindersAfterScan(
+      context,
+      ref,
+      scanCountAfterSave: scanCount,
+    );
+    if (!mounted) return;
+    await syncHomeScreenWidget(ref, context: context, force: true);
+    if (!mounted) return;
+    await maybeShowSoftPaywallAfterFirstScan(
+      context,
+      ref,
+      scanCountAfterSave: scanCount,
+    );
+    if (!mounted) return;
     final isPro = ref.read(isProUserProvider);
     Navigator.of(context).pop(true);
     await AdService.instance.showInterstitialIfEligible(isPro: isPro);
   }
 
   Future<void> _saveFavorite() async {
-    await ref.read(mealFavoritesProvider.notifier).add(_lines);
+    await ref.read(mealFavoritesProvider.notifier).add(_linesForPersist());
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -720,6 +793,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
           children: [
             // ── TOP STICKY SUMMARY CARD (MFP-Style, always visible) ──
             _StickyTopSummaryCard(
+              l10n: l10n,
               mealName: mealName,
               mealNameSecondary: mealNameSecondary,
               thumbnailBytes: widget.draft.allImages.firstOrNull,
@@ -732,6 +806,17 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
               health: health,
               slot: _slot,
               slotLabel: _slotLabel(l10n, _slot),
+              portionMultiplier: _portionMultiplier,
+              onPortionChanged: _setPortionPreset,
+              oilLevel: _currentOilLevel,
+              onOilLevelChanged: _setOilLevel,
+              familyPlateOn: _familyPlateOn,
+              familyShare: _familyShare,
+              onFamilyPlateChanged: (on) => setState(() => _familyPlateOn = on),
+              onFamilyShareChanged: (share) => setState(() {
+                _familyPlateOn = true;
+                _familyShare = share;
+              }),
               onSlotChanged: (next) => setState(() => _slot = next),
               onSave: _lines.isEmpty ? null : () => _save(advice),
               onEditDetails: () {
@@ -962,7 +1047,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                     const SizedBox(height: 12),
                   ],
 
-                  // ── HIDDEN CALORIES & COOKING OIL AUTO ADJUSTMENT ──
+                  // Common extras (oil + portion live in the sticky calibration hero).
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -970,89 +1055,38 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: colors.line.withValues(alpha: 0.6)),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.opacity_rounded, color: Color(0xFFF59E0B), size: 16),
-                            const SizedBox(width: 6),
-                            Expanded(
-                              child: Text(
-                                isArabic ? 'زيت وسمن الطبخ (تقديري)' : 'Cooking Oil / Ghee (Estimate)',
-                                style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
-                              ),
-                            ),
-                            if (_currentOilGrams > 0)
-                              Text(
-                                '${(_currentOilGrams * 8.84).round()} kcal',
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFFF59E0B)),
-                              ),
-                          ],
+                        Text(
+                          isArabic ? 'إضافات شائعة:' : 'Common extras:',
+                          style: TextStyle(fontSize: 11, color: colors.textMute, fontWeight: FontWeight.w600),
                         ),
-                        const SizedBox(height: 8),
-                        Wrap(
-                          spacing: 6,
-                          runSpacing: 6,
-                          children: [
-                            ChoiceChip(
-                              label: Text(isArabic ? 'لا (0 جم)' : 'None (0g)', style: const TextStyle(fontSize: 11.5)),
-                              selected: _currentOilGrams == 0,
-                              onSelected: (_) => _setCookingOilGrams(0),
-                            ),
-                            ChoiceChip(
-                              label: Text(isArabic ? 'قليل (5 جم)' : 'Low (5g)', style: const TextStyle(fontSize: 11.5)),
-                              selected: _currentOilGrams == 5,
-                              onSelected: (_) => _setCookingOilGrams(5),
-                            ),
-                            ChoiceChip(
-                              label: Text(isArabic ? 'متوسط (10 جم)' : 'Med (10g)', style: const TextStyle(fontSize: 11.5)),
-                              selected: _currentOilGrams == 10,
-                              onSelected: (_) => _setCookingOilGrams(10),
-                            ),
-                            ChoiceChip(
-                              label: Text(isArabic ? 'كتير (20 جم)' : 'High (20g)', style: const TextStyle(fontSize: 11.5)),
-                              selected: _currentOilGrams >= 20,
-                              onSelected: (_) => _setCookingOilGrams(20),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        // Quick Addon Chips (Tahini, Dressing, Sugar)
-                        Row(
-                          children: [
-                            Text(
-                              isArabic ? 'إضافات شائعة:' : 'Common extras:',
-                              style: TextStyle(fontSize: 11, color: colors.textMute, fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(width: 6),
-                            Expanded(
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    ActionChip(
-                                      visualDensity: VisualDensity.compact,
-                                      label: Text(isArabic ? '+ طحينة (25 جم)' : '+ Tahini (25g)', style: const TextStyle(fontSize: 10.5)),
-                                      onPressed: () => _addQuickAddon('tahini', 'طحينة', 'Tahini dip', 25),
-                                    ),
-                                    const SizedBox(width: 6),
-                                    ActionChip(
-                                      visualDensity: VisualDensity.compact,
-                                      label: Text(isArabic ? '+ صوص/دريسنج (20 جم)' : '+ Dressing (20g)', style: const TextStyle(fontSize: 10.5)),
-                                      onPressed: () => _addQuickAddon('salad_dressing', 'صوص وسلطة', 'Salad dressing', 20),
-                                    ),
-                                    const SizedBox(width: 6),
-                                    ActionChip(
-                                      visualDensity: VisualDensity.compact,
-                                      label: Text(isArabic ? '+ سكر بمشروب (10 جم)' : '+ Drink sugar (10g)', style: const TextStyle(fontSize: 10.5)),
-                                      onPressed: () => _addQuickAddon('sugar_white_granulated', 'سكر أبيض بالمشروب', 'Sugar in drink', 10),
-                                    ),
-                                  ],
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                ActionChip(
+                                  visualDensity: VisualDensity.compact,
+                                  label: Text(isArabic ? '+ طحينة (25 جم)' : '+ Tahini (25g)', style: const TextStyle(fontSize: 10.5)),
+                                  onPressed: () => _addQuickAddon('tahini', 'طحينة', 'Tahini dip', 25),
                                 ),
-                              ),
+                                const SizedBox(width: 6),
+                                ActionChip(
+                                  visualDensity: VisualDensity.compact,
+                                  label: Text(isArabic ? '+ صوص/دريسنج (20 جم)' : '+ Dressing (20g)', style: const TextStyle(fontSize: 10.5)),
+                                  onPressed: () => _addQuickAddon('salad_dressing', 'صوص وسلطة', 'Salad dressing', 20),
+                                ),
+                                const SizedBox(width: 6),
+                                ActionChip(
+                                  visualDensity: VisualDensity.compact,
+                                  label: Text(isArabic ? '+ سكر بمشروب (10 جم)' : '+ Drink sugar (10g)', style: const TextStyle(fontSize: 10.5)),
+                                  onPressed: () => _addQuickAddon('sugar_white_granulated', 'سكر أبيض بالمشروب', 'Sugar in drink', 10),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
@@ -1237,8 +1271,136 @@ class _MicroChip extends StatelessWidget {
 }
 
 /// ── TOP STICKY SUMMARY CARD (MFP Style) ──
+/// P40 sticky hero: portion stepper, oil chip, family-plate share.
+class _MealReviewCalibrationHero extends StatelessWidget {
+  const _MealReviewCalibrationHero({
+    required this.l10n,
+    required this.colors,
+    required this.isArabic,
+    required this.portionMultiplier,
+    required this.onPortionChanged,
+    required this.oilLevel,
+    required this.onOilLevelChanged,
+    required this.familyPlateOn,
+    required this.familyShare,
+    required this.onFamilyPlateChanged,
+    required this.onFamilyShareChanged,
+  });
+
+  final AppLocalizations l10n;
+  final VireoColors colors;
+  final bool isArabic;
+  final double portionMultiplier;
+  final ValueChanged<MealPortionPreset> onPortionChanged;
+  final CookingOilCalibrationLevel? oilLevel;
+  final ValueChanged<CookingOilCalibrationLevel> onOilLevelChanged;
+  final bool familyPlateOn;
+  final FamilyPlateShare familyShare;
+  final ValueChanged<bool> onFamilyPlateChanged;
+  final ValueChanged<FamilyPlateShare> onFamilyShareChanged;
+
+  String _oilLabel(CookingOilCalibrationLevel level) => switch (level) {
+        CookingOilCalibrationLevel.light => l10n.mealReviewOilLight,
+        CookingOilCalibrationLevel.normal => l10n.mealReviewOilNormal,
+        CookingOilCalibrationLevel.heavy => l10n.mealReviewOilHeavy,
+      };
+
+  String _shareChipLabel(FamilyPlateShare share) {
+    if (isArabic) return '${share.glyph} ${share.labelAr}';
+    return '${share.glyph} (${share.numerator}/${share.denominator})';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final selectedPortion = MealPortionPreset.fromMultiplier(portionMultiplier);
+
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: colors.background,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: colors.line.withValues(alpha: 0.65)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            l10n.mealReviewPortionLabel,
+            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: colors.textMute),
+          ),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: [
+              for (final preset in MealPortionPreset.values)
+                ChoiceChip(
+                  visualDensity: VisualDensity.compact,
+                  label: Text(preset.label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800)),
+                  selected: selectedPortion == preset,
+                  onSelected: (_) => onPortionChanged(preset),
+                ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Text(
+                l10n.mealReviewOilPrefix,
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: colors.textMute),
+              ),
+              for (final level in CookingOilCalibrationLevel.values)
+                ChoiceChip(
+                  visualDensity: VisualDensity.compact,
+                  label: Text(_oilLabel(level), style: const TextStyle(fontSize: 11.5)),
+                  selected: oilLevel == level,
+                  onSelected: (_) => onOilLevelChanged(level),
+                ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            title: Text(
+              l10n.mealReviewFamilyPlateToggle,
+              style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700),
+            ),
+            value: familyPlateOn,
+            onChanged: onFamilyPlateChanged,
+          ),
+          if (familyPlateOn) ...[
+            Text(
+              l10n.mealReviewMyShare,
+              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: colors.textMute),
+            ),
+            const SizedBox(height: 4),
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                for (final share in FamilyPlateShare.values)
+                  ChoiceChip(
+                    visualDensity: VisualDensity.compact,
+                    label: Text(_shareChipLabel(share), style: const TextStyle(fontSize: 11.5)),
+                    selected: familyShare == share,
+                    onSelected: (_) => onFamilyShareChanged(share),
+                  ),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
 class _StickyTopSummaryCard extends StatelessWidget {
   const _StickyTopSummaryCard({
+    required this.l10n,
     required this.mealName,
     this.mealNameSecondary,
     this.thumbnailBytes,
@@ -1252,10 +1414,19 @@ class _StickyTopSummaryCard extends StatelessWidget {
     required this.slot,
     required this.slotLabel,
     required this.onSlotChanged,
+    required this.portionMultiplier,
+    required this.onPortionChanged,
+    required this.oilLevel,
+    required this.onOilLevelChanged,
+    required this.familyPlateOn,
+    required this.familyShare,
+    required this.onFamilyPlateChanged,
+    required this.onFamilyShareChanged,
     required this.onSave,
     required this.onEditDetails,
   });
 
+  final AppLocalizations l10n;
   final String mealName;
   final String? mealNameSecondary;
   final Uint8List? thumbnailBytes;
@@ -1269,6 +1440,14 @@ class _StickyTopSummaryCard extends StatelessWidget {
   final MealType slot;
   final String slotLabel;
   final ValueChanged<MealType> onSlotChanged;
+  final double portionMultiplier;
+  final ValueChanged<MealPortionPreset> onPortionChanged;
+  final CookingOilCalibrationLevel? oilLevel;
+  final ValueChanged<CookingOilCalibrationLevel> onOilLevelChanged;
+  final bool familyPlateOn;
+  final FamilyPlateShare familyShare;
+  final ValueChanged<bool> onFamilyPlateChanged;
+  final ValueChanged<FamilyPlateShare> onFamilyShareChanged;
   final VoidCallback? onSave;
   final VoidCallback onEditDetails;
 
@@ -1378,7 +1557,22 @@ class _StickyTopSummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
+
+          _MealReviewCalibrationHero(
+            l10n: l10n,
+            colors: colors,
+            isArabic: isArabic,
+            portionMultiplier: portionMultiplier,
+            onPortionChanged: onPortionChanged,
+            oilLevel: oilLevel,
+            onOilLevelChanged: onOilLevelChanged,
+            familyPlateOn: familyPlateOn,
+            familyShare: familyShare,
+            onFamilyPlateChanged: onFamilyPlateChanged,
+            onFamilyShareChanged: onFamilyShareChanged,
+          ),
+          const SizedBox(height: 10),
 
           // Big Total Kcal & Macro Donut Chart
           Row(
@@ -1403,16 +1597,17 @@ class _StickyTopSummaryCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '$kcal',
-                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
+                            l10n.mealReviewKcalApprox(kcal),
+                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
+                            textAlign: TextAlign.center,
                           ),
                           Text(
-                            isArabic ? 'سعرة' : 'kcal',
-                            semanticsLabel: '$kcal kcal',
+                            l10n.mealReviewEstimated,
+                            semanticsLabel: l10n.mealReviewEstimated,
                             style: TextStyle(
                               color: colors.textMute,
-                              fontSize: 9,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 8,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],

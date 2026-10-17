@@ -20,6 +20,17 @@ enum MascotExpression {
   sleepy,
 }
 
+/// Emoji shown on the home-screen widget for the current mascot mood.
+String mascotExpressionEmoji(MascotExpression expression) {
+  return switch (expression) {
+    MascotExpression.hungry => '😋',
+    MascotExpression.happy => '😊',
+    MascotExpression.satisfied => '😌',
+    MascotExpression.full => '🤰',
+    MascotExpression.sleepy => '😴',
+  };
+}
+
 @immutable
 class MascotFillMath {
   const MascotFillMath({

@@ -10,7 +10,8 @@ import 'package:vireo/features/progress/providers/progress_extended_provider.dar
 import 'package:vireo/features/progress/providers/progress_provider.dart';
 import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_progress_report_screen.dart';
-import 'package:vireo/features/progress/screens/weekly_wrapped_story_screen.dart';
+import 'package:vireo/features/progress/providers/weekly_share_eligibility_provider.dart';
+import 'package:vireo/features/progress/screens/weekly_burn_share_screen.dart';
 import 'package:vireo/features/progress/widgets/achievements_grid_card.dart';
 import 'package:vireo/features/progress/widgets/adherence_bar_chart.dart';
 import 'package:vireo/features/progress/widgets/adaptive_calorie_suggestion_card.dart';
@@ -41,6 +42,7 @@ class ProgressScreen extends ConsumerWidget {
     final deficit = ref.watch(weeklyDeficitProvider);
     final trendAnalysis = ref.watch(weightTrendAnalysisProvider);
     final showAdaptive = ref.watch(showAdaptiveCalorieCardProvider);
+    final canShareWeekly = ref.watch(weeklyShareEligibleProvider);
 
     return GradientMeshBackground(
       child: FeatureScaffold(
@@ -110,10 +112,11 @@ class ProgressScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  if (canShareWeekly) ...[
                   const SizedBox(width: 8),
                   Expanded(
                     child: VireoCard(
-                      onTap: () => WeeklyWrappedStoryScreen.open(context),
+                      onTap: () => WeeklyBurnShareScreen.open(context),
                       child: Row(
                         children: [
                           Container(
@@ -122,7 +125,7 @@ class ProgressScreen extends ConsumerWidget {
                               color: const Color(0xFFF97316).withValues(alpha: 0.15),
                               shape: BoxShape.circle,
                             ),
-                            child: const Text('🎁', style: TextStyle(fontSize: 18)),
+                            child: const Text('🔥', style: TextStyle(fontSize: 18)),
                           ),
                           const SizedBox(width: VSpace.xs),
                           Expanded(
@@ -130,7 +133,7 @@ class ProgressScreen extends ConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'ملخص الأسبوع' : 'Weekly Wrapped',
+                                  l10n.weeklyBurnShareTitle,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -138,7 +141,7 @@ class ProgressScreen extends ConsumerWidget {
                                       ),
                                 ),
                                 Text(
-                                  Localizations.localeOf(context).languageCode.startsWith('ar') ? 'شارك إنجازاتك' : 'Share stories',
+                                  l10n.weeklyBurnShareSubtitle,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -153,6 +156,7 @@ class ProgressScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  ],
                 ],
               ),
               const SizedBox(height: 12),

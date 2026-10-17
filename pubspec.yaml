@@ -98,3 +98,5 @@ flutter:
     - assets/exercises/svg/
     - assets/food_db/foods.json
     - assets/food_db/usda_foods.json
+    - assets/content/food_facts.json
+    - assets/content/local_food_swaps.json

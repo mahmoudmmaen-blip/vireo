@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/config/feature_flags.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
@@ -116,24 +117,26 @@ class ActivityHubScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: VSpace.sm),
-          _HubTile(
-            icon: Icons.map_outlined,
-            title: l10n.outdoorWorkoutTitle,
-            subtitle: l10n.outdoorWorkoutSubtitle,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const OutdoorPickScreen()),
+          if (ref.watch(featureFlagsProvider).gpsRunScreen) ...[
+            _HubTile(
+              icon: Icons.map_outlined,
+              title: l10n.outdoorWorkoutTitle,
+              subtitle: l10n.outdoorWorkoutSubtitle,
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const OutdoorPickScreen()),
+              ),
             ),
-          ),
-          const SizedBox(height: VSpace.sm),
-          _HubTile(
-            icon: Icons.history_rounded,
-            title: l10n.outdoorHistoryTitle,
-            subtitle: l10n.outdoorHistorySubtitle,
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const OutdoorHistoryScreen()),
+            const SizedBox(height: VSpace.sm),
+            _HubTile(
+              icon: Icons.history_rounded,
+              title: l10n.outdoorHistoryTitle,
+              subtitle: l10n.outdoorHistorySubtitle,
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const OutdoorHistoryScreen()),
+              ),
             ),
-          ),
-          const SizedBox(height: VSpace.sm),
+            const SizedBox(height: VSpace.sm),
+          ],
           _HubTile(
             icon: Icons.monitor_heart_outlined,
             title: l10n.healthHubTitle,

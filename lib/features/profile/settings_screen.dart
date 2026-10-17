@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/constants/legal_urls.dart';
+import 'package:vireo/core/constants/subscription_urls.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/accent_palette_provider.dart';
 import 'package:vireo/core/services/ad_service.dart';
@@ -23,7 +24,7 @@ import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/walking/screens/step_diagnostic_screen.dart';
 import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
-import 'package:vireo/features/ramadan/services/ramadan_schedule_service.dart';
+import 'package:vireo/features/ramadan/widgets/ramadan_city_picker.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -248,30 +249,15 @@ class SettingsScreen extends ConsumerWidget {
               dense: true,
               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               leading: const Icon(Icons.location_on_outlined, size: 20),
-              title: Text(isAr ? 'طريقة الحساب والمدينة' : 'Prayer Calculation Method'),
+              title: Text(l10n.ramadanPrayerCityPickerTitle),
               subtitle: Text(
-                '${ref.watch(ramadanSettingsProvider).cityName} (${ref.watch(ramadanSettingsProvider).calculationMethod.labelAr})',
+                isAr
+                    ? '${ref.watch(ramadanSettingsProvider).cityName} — ${ref.watch(ramadanSettingsProvider).calculationMethod.labelAr}'
+                    : '${ref.watch(ramadanSettingsProvider).cityName} — ${ref.watch(ramadanSettingsProvider).calculationMethod.name}',
                 style: TextStyle(fontSize: 12, color: colors.gold),
               ),
               trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () async {
-                final picked = await showDialog<RamadanCalculationMethod>(
-                  context: context,
-                  builder: (ctx) => SimpleDialog(
-                    title: Text(isAr ? 'طريقة الحساب والمدينة' : 'Calculation Method'),
-                    children: [
-                      for (final m in RamadanCalculationMethod.values)
-                        SimpleDialogOption(
-                          onPressed: () => Navigator.pop(ctx, m),
-                          child: Text('${m.defaultCity} — ${m.labelAr}'),
-                        ),
-                    ],
-                  ),
-                );
-                if (picked != null) {
-                  await ref.read(ramadanSettingsProvider.notifier).setCalculationMethod(picked);
-                }
-              },
+              onTap: () => showRamadanCityPicker(context, ref),
             ),
           ],
           const Divider(height: 1),
@@ -508,12 +494,24 @@ class SettingsScreen extends ConsumerWidget {
     bool isAr,
   ) {
     return _SectionCard(
-      child: ListTile(
-        leading: Icon(Icons.star_rounded, color: colors.ember),
-        title: Text(l10n.paywallTitle),
-        subtitle: Text(l10n.settingsManageSubscription),
-        trailing: const Icon(Icons.chevron_right_rounded),
-        onTap: () => openPaywall(context),
+      child: Column(
+        children: [
+          ListTile(
+            leading: Icon(Icons.star_rounded, color: colors.ember),
+            title: Text(l10n.paywallTitle),
+            subtitle: Text(l10n.settingsManageSubscription),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => openPaywall(context),
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: Icon(Icons.receipt_long_outlined, color: colors.textMute),
+            title: Text(l10n.settingsMySubscription),
+            subtitle: Text(l10n.settingsMySubscriptionBody),
+            trailing: const Icon(Icons.open_in_new_rounded, size: 20),
+            onTap: SubscriptionUrls.openPlaySubscriptions,
+          ),
+        ],
       ),
     );
   }

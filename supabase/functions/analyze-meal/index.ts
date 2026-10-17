@@ -10,7 +10,9 @@ import {
   bodyReportLimit,
   checkDailyQuota,
   consumeDailyQuota,
+  getAccountCreatedAt,
   hasPremiumEntitlement,
+  installDayAgeFrom,
   mealScanLimit,
 } from '../_shared/ai-usage.ts';
 
@@ -157,9 +159,17 @@ Deno.serve(async (req) => {
     const isAnonymous = user.is_anonymous === true;
     const isBodyReport = body.mode === 'body_report';
     const quotaBucket = isBodyReport ? 'body_report' : 'meal_scan';
+    // P40: free accounts get 5 scans/day during their first 7 days, then 3.
+    // The age comes from the auth user's created_at (server truth, not the client).
+    let installDayAge: number | null = null;
+    if (!isBodyReport && !premium && !isAnonymous) {
+      installDayAge = installDayAgeFrom(
+        await getAccountCreatedAt(adminClient, user),
+      );
+    }
     const limit = isBodyReport
       ? bodyReportLimit({ premium })
-      : mealScanLimit({ premium, isAnonymous });
+      : mealScanLimit({ premium, isAnonymous, installDayAge });
 
     // Pre-check quota without consuming yet
     const { allowed } = await checkDailyQuota(

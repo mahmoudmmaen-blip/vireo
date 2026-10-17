@@ -120,19 +120,25 @@ class ReminderScheduler {
     required int count,
     required int wakeHour,
     required int sleepHour,
+    int wakeMinute = 0,
+    int sleepMinute = 0,
   }) {
     if (count <= 0) return const [];
-    final wakeMin = wakeHour * 60;
-    final sleepMin = sleepHour * 60;
+    var wakeMin = wakeHour * 60 + wakeMinute;
+    var sleepMin = sleepHour * 60 + sleepMinute;
     if (wakeMin >= sleepMin) {
-      return [for (var i = 0; i < count; i++) (8 + i * 2, 0)];
+      // Eating window crosses midnight (Ramadan: iftar → suhoor).
+      sleepMin += 24 * 60;
     }
 
     final span = sleepMin - wakeMin;
+    if (span <= 0) {
+      return [for (var i = 0; i < count; i++) (8 + i * 2, 0)];
+    }
     final step = span ~/ (count + 1);
 
     return List.generate(count, (i) {
-      final m = wakeMin + (i + 1) * step;
+      final m = (wakeMin + (i + 1) * step) % (24 * 60);
       return (m ~/ 60, m % 60);
     });
   }
@@ -146,11 +152,41 @@ class ReminderScheduler {
 
     // 1. Water reminders (spread across waking hours, skip when goal is met)
     if (settings.isEnabled(NotificationType.waterReminder) && !context.isWaterGoalMet) {
-      final waterSlots = calculateWaterSlots(
-        count: NotificationType.waterReminder.slotCount,
-        wakeHour: context.wakeHour,
-        sleepHour: context.sleepHour,
-      );
+      // P36/P40: one hydration nudge during Ramadan (between iftar and suhoor).
+      final waterSlotCount =
+          context.isRamadanMode ? 1 : NotificationType.waterReminder.slotCount;
+      List<(int, int)> waterSlots;
+      if (context.isRamadanMode &&
+          waterSlotCount == 1 &&
+          context.fastingEndHour != null) {
+        // One nudge ~90 min after iftar, but never inside quiet hours (23:00 default).
+        var m = context.fastingEndHour! * 60 +
+            (context.fastingEndMinute ?? 0) +
+            90;
+        final quietStart = settings.quietHoursStartHour * 60 +
+            settings.quietHoursStartMinute;
+        if (m >= quietStart) {
+          m = quietStart - 45;
+        }
+        m = m % (24 * 60);
+        waterSlots = [(m ~/ 60, m % 60)];
+      } else if (context.isRamadanMode &&
+          context.fastingEndHour != null &&
+          context.fastingStartHour != null) {
+        waterSlots = calculateWaterSlots(
+          count: waterSlotCount,
+          wakeHour: context.fastingEndHour!,
+          wakeMinute: context.fastingEndMinute ?? 0,
+          sleepHour: context.fastingStartHour!,
+          sleepMinute: context.fastingStartMinute ?? 0,
+        );
+      } else {
+        waterSlots = calculateWaterSlots(
+          count: waterSlotCount,
+          wakeHour: context.wakeHour,
+          sleepHour: context.sleepHour,
+        );
+      }
       for (var i = 0; i < waterSlots.length; i++) {
         final slot = waterSlots[i];
         candidates.add(
@@ -323,15 +359,29 @@ class ReminderScheduler {
 
     // Filter out quiet hours and Ramadan fasting hours (for food/water)
     final filtered = candidates.where((c) {
-      if (isInQuietHours(
+      final inQuiet = isInQuietHours(
         hour: c.hour,
         minute: c.minute,
         startHour: settings.quietHoursStartHour,
         startMinute: settings.quietHoursStartMinute,
         endHour: settings.quietHoursEndHour,
         endMinute: settings.quietHoursEndMinute,
-      )) {
-        return false;
+      );
+      if (inQuiet) {
+        // Ramadan: allow suhoor reminders inside quiet hours (before Fajr).
+        if (context.isRamadanMode && context.fastingStartHour != null) {
+          final tMin = c.hour * 60 + c.minute;
+          final fajrMin =
+              context.fastingStartHour! * 60 + (context.fastingStartMinute ?? 0);
+          const suhoorWindowMinutes = 90;
+          if (tMin >= fajrMin - suhoorWindowMinutes && tMin < fajrMin) {
+            // Keep this candidate.
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
       }
 
       // If Ramadan mode is on, suppress food and water reminders during fasting hours (Fajr to Maghrib)

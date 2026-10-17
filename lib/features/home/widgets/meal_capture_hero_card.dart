@@ -7,7 +7,10 @@ import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/home/living_backgrounds/widgets/living_meal_capture_background.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
+import 'package:vireo/features/home/widgets/saved_meals_sheets.dart';
+import 'package:vireo/features/nutrition/providers/repeat_meal_service.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
+import 'package:vireo/features/subscription/meal_scan_quota.dart';
 
 /// Full-width meal capture card ("سجّل وجبتك") placed right below the Steps hero card.
 class MealCaptureHeroCard extends ConsumerWidget {
@@ -109,8 +112,8 @@ class MealCaptureHeroCard extends ConsumerWidget {
                             ),
                             child: Text(
                               isArabic
-                                  ? 'فاضلك ${FeatureGates.getDailyFreeMealScansAllowed()} تحليلات النهارده'
-                                  : '${FeatureGates.getDailyFreeMealScansAllowed()} free scans left today',
+                                  ? 'فاضلك ${MealScanQuota.remainingFreeScansToday()} تحليلات النهارده'
+                                  : '${MealScanQuota.remainingFreeScansToday()} free scans left today',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 11,
@@ -175,6 +178,50 @@ class MealCaptureHeroCard extends ConsumerWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 8),
+
+                // Repeat row (P40): زي امبارح · وجباتي · آخر حاجات
+                Row(
+                  children: [
+                    Expanded(
+                      child: _QuickActionChip(
+                        icon: Icons.replay_rounded,
+                        label: isArabic ? 'زي امبارح' : 'Same as yesterday',
+                        minHeight: 48,
+                        onTap: () => _repeatYesterday(
+                          context,
+                          ref,
+                          currentSlot,
+                          isArabic,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: _QuickActionChip(
+                        icon: Icons.star_rounded,
+                        label: isArabic ? 'وجباتي' : 'My meals',
+                        minHeight: 48,
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          showFavoriteMealsSheet(context, slot: currentSlot);
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: _QuickActionChip(
+                        icon: Icons.history_rounded,
+                        label: isArabic ? 'آخر حاجات' : 'Recent',
+                        minHeight: 48,
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          showRecentMealsSheet(context, slot: currentSlot);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 14),
 
                 // Under it: Today's last logged meal mini row OR "لسه ما سجلتش فطارك"
@@ -227,6 +274,39 @@ class MealCaptureHeroCard extends ConsumerWidget {
   );
   }
 
+  /// "زي امبارح": copies yesterday's meal of the same slot into the review
+  /// screen (one tap; the user still confirms before it is saved).
+  Future<void> _repeatYesterday(
+    BuildContext context,
+    WidgetRef ref,
+    MealType slot,
+    bool isArabic,
+  ) async {
+    HapticFeedback.selectionClick();
+    final yesterday = ref.read(yesterdaySameSlotProvider(slot));
+    if (yesterday == null) {
+      final slotName = switch (slot) {
+        MealType.breakfast => isArabic ? 'الفطار' : 'breakfast',
+        MealType.lunch => isArabic ? 'الغدا' : 'lunch',
+        MealType.dinner => isArabic ? 'العشا' : 'dinner',
+        MealType.snack => isArabic ? 'السناك' : 'snack',
+      };
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              isArabic
+                  ? 'مفيش حاجة متسجلة في $slotName امبارح. جرّب "آخر حاجات" 😊'
+                  : 'Nothing logged for $slotName yesterday. Try "Recent" 😊',
+            ),
+          ),
+        );
+      return;
+    }
+    await openSavedMealInReview(context, yesterday, slot: slot);
+  }
+
   static MealType _currentMealSlot() {
     final h = DateTime.now().hour;
     if (h < 11) return MealType.breakfast;
@@ -241,11 +321,13 @@ class _QuickActionChip extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
+    this.minHeight = 0,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback onTap;
+  final double minHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -253,6 +335,7 @@ class _QuickActionChip extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(10),
       child: Container(
+        constraints: BoxConstraints(minHeight: minHeight),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.16),

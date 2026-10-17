@@ -3168,6 +3168,69 @@ class AppLocalizationsAr extends AppLocalizations {
   String get mealReviewEstimated => 'تقديري';
 
   @override
+  String mealReviewKcalApprox(int count) {
+    return '≈ $count سعرة';
+  }
+
+  @override
+  String get mealReviewPortionLabel => 'الحصة';
+
+  @override
+  String get mealReviewOilPrefix => 'زيت:';
+
+  @override
+  String get mealReviewOilLight => 'خفيف';
+
+  @override
+  String get mealReviewOilNormal => 'عادي';
+
+  @override
+  String get mealReviewOilHeavy => 'مسبّك';
+
+  @override
+  String get mealReviewFamilyPlateToggle => 'أكلنا من طبق واحد';
+
+  @override
+  String get mealReviewMyShare => 'نصيبي';
+
+  @override
+  String get ramadanWaterTrackerQuestion =>
+      'شربت كام كوباية من الإفطار للسحور؟';
+
+  @override
+  String ramadanWaterGoalSplit(int iftarCups, int eveningCups, int suhoorCups) {
+    return 'هدف الإفطار: $iftarCups · الليل: $eveningCups · السحور: $suhoorCups كوب';
+  }
+
+  @override
+  String get ramadanPrayerCityPickerTitle => 'اختار مدينة المواعيد';
+
+  @override
+  String get ramadanPrayerCityCustom => 'مدينة تانية';
+
+  @override
+  String get ramadanCustomCityName => 'اسم المدينة';
+
+  @override
+  String get ramadanCustomCityLat => 'خط العرض';
+
+  @override
+  String get ramadanCustomCityLng => 'خط الطول';
+
+  @override
+  String get notificationPostScanTitle => 'عايزني أفكرك بالوجبات؟';
+
+  @override
+  String get notificationPostScanBody =>
+      'تذكيرات لطيفة بمواعيد الغدا والعشا — مرتين في اليوم بس، ومفيش إزعاج من ١١ بالليل لـ ٧ الصبح.';
+
+  @override
+  String get notificationPostScanYes => 'أيوه، فكّرني';
+
+  @override
+  String get notificationPostScanNotNow => 'مش دلوقتي';
+
+  @override
   String get mealReviewCheckAmount => 'راجع الكمية';
 
   @override
@@ -4419,6 +4482,134 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get workoutRpeCommentPartial =>
       'اللي عملته من المجموعات محسوب وبيفرق. هنرجع أقوى في الجلسة الجاية.';
+
+  @override
+  String get foodFactCardTitle => 'حقيقة عن أكلك';
+
+  @override
+  String get foodFactShareHint => 'اضغط لمشاركة البطاقة';
+
+  @override
+  String get ramadanGuideTitle => 'دليل رمضان';
+
+  @override
+  String get ramadanGuideOpenHint =>
+      'ترتيب السحور وإيقاع الإفطار — اضغط للتفاصيل';
+
+  @override
+  String get ramadanSuhoorRankTitle =>
+      'ترتيب شبع السحور (بروتين + ألياف من قاعدة البيانات)';
+
+  @override
+  String ramadanSuhoorRankSubtitle(int grams, int kcal) {
+    return 'حصة مثال $grams جم · ≈ $kcal سعرة';
+  }
+
+  @override
+  String get ramadanIftarPaceTitle => 'إيقاع الإفطار';
+
+  @override
+  String get ramadanIftarStep1 => 'تمر + مية الأول';
+
+  @override
+  String get ramadanIftarStep2 => 'شوربة دافية';
+
+  @override
+  String get ramadanIftarStep3 => 'استنى 15 دقيقة';
+
+  @override
+  String get ramadanIftarStep4 => 'الطبق الرئيسي';
+
+  @override
+  String get ramadanReboundTitle => 'بعد رمضان';
+
+  @override
+  String ramadanReboundBody(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female':
+          'ارجعي للروتين براحة: خلّي السحور فيه بروتين، سجّلي الإفطار من غير لوم، وزوّدي 10 دقائق مشي لمدة أسبوع قبل أي تخفيض كبير في السعرات.',
+      'other':
+          'ارجع للروتين براحة: خلّي السحور فيه بروتين، سجّل الإفطار من غير لوم، وزوّد 10 دقائق مشي لمدة أسبوع قبل أي تخفيض كبير في السعرات.',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsMySubscription => 'اشتراكي';
+
+  @override
+  String get settingsMySubscriptionBody =>
+      'تقدر تلغي أو تغيّر خطتك في أي وقت من Google Play — من غير مكالمات ولا خطوات مخفية.';
+
+  @override
+  String get weeklyBurnShareTitle => 'رصيد حرقك الأسبوع ده';
+
+  @override
+  String get weeklyBurnShareSubtitle => 'شارك خطواتك واستمراريتك';
+
+  @override
+  String get weeklyBurnShareCaption => 'رصيد حرقي الأسبوع ده مع ڤيريو';
+
+  @override
+  String get weeklyBurnShareAction => 'شارك بطاقة الأسبوع';
+
+  @override
+  String get weeklyBurnShareIncludeWeight => 'إظهار تغيّر الوزن في البطاقة';
+
+  @override
+  String get weeklyBurnShareStepsLabel => 'خطوات الأسبوع';
+
+  @override
+  String get weeklyBurnShareStreakLabel => 'الاستمرارية';
+
+  @override
+  String get weeklyBurnShareWeightLabel => 'تغيّر الوزن';
+
+  @override
+  String get widgetCaloriesLeftLabel => 'سعرات فاضلة';
+
+  @override
+  String get scanLimitTitle => 'خلصت تحليلات الصور النهارده';
+
+  @override
+  String get scanLimitBody =>
+      'تحليل الصور بيستخدم خوادم. استنى لبكرة، أو Pro، أو سجّل يدوي — على مزاجك.';
+
+  @override
+  String get scanLimitProTitle => 'ڤيريو Pro';
+
+  @override
+  String get scanLimitProSubtitle =>
+      'مسح ذكي غير محدود (40/يوم استخدام عادل)، بدون إعلانات، وكل البرامج';
+
+  @override
+  String get scanLimitProCta => 'اشتراك Pro';
+
+  @override
+  String get scanLimitWaitTitle => 'استنى لبكرة';
+
+  @override
+  String get scanLimitWaitSubtitle =>
+      'التحليلات المجانية بتتجدد مع منتصف الليل — الكتابة والباركود لسه مفتوحين';
+
+  @override
+  String get scanLimitWaitCta => 'تمام، نشوف بكرة';
+
+  @override
+  String get scanLimitManualTitle => 'بحث وتسجيل يدوي';
+
+  @override
+  String get scanLimitManualSubtitle => 'مجاني وغير محدود دايماً';
+
+  @override
+  String get scanLimitManualCta => 'تسجيل يدوي';
+
+  @override
+  String get scanLimitAdRewardSnack => 'اتضاف +2 تحليلات للنهارده';
+
+  @override
+  String get scanLimitAdFailedSnack =>
+      'مقدرناش نحمّل الإعلان — جرّب تاني بعد شوية';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -4580,6 +4771,72 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
       'لسه ما نزلتش تمرين بره.. يلا جرّب أول جولة!';
 
   @override
+  String get mealReviewEstimated => 'تقديري';
+
+  @override
+  String mealReviewKcalApprox(int count) {
+    return '≈ $count سعرة';
+  }
+
+  @override
+  String get mealReviewPortionLabel => 'الحصة';
+
+  @override
+  String get mealReviewOilPrefix => 'زيت:';
+
+  @override
+  String get mealReviewOilLight => 'خفيف';
+
+  @override
+  String get mealReviewOilNormal => 'عادي';
+
+  @override
+  String get mealReviewOilHeavy => 'مسبّك';
+
+  @override
+  String get mealReviewFamilyPlateToggle => 'أكلنا من طبق واحد';
+
+  @override
+  String get mealReviewMyShare => 'نصيبي';
+
+  @override
+  String get ramadanWaterTrackerQuestion =>
+      'شربت كام كوباية من الإفطار للسحور؟';
+
+  @override
+  String ramadanWaterGoalSplit(int iftarCups, int eveningCups, int suhoorCups) {
+    return 'هدف الإفطار: $iftarCups · الليل: $eveningCups · السحور: $suhoorCups كوب';
+  }
+
+  @override
+  String get ramadanPrayerCityPickerTitle => 'اختار مدينة المواعيد';
+
+  @override
+  String get ramadanPrayerCityCustom => 'مدينة تانية';
+
+  @override
+  String get ramadanCustomCityName => 'اسم المدينة';
+
+  @override
+  String get ramadanCustomCityLat => 'خط العرض';
+
+  @override
+  String get ramadanCustomCityLng => 'خط الطول';
+
+  @override
+  String get notificationPostScanTitle => 'عايزني أفكرك بالوجبات؟';
+
+  @override
+  String get notificationPostScanBody =>
+      'تذكيرات لطيفة بمواعيد الغدا والعشا — مرتين في اليوم بس، ومفيش إزعاج من ١١ بالليل لـ ٧ الصبح.';
+
+  @override
+  String get notificationPostScanYes => 'أيوه، فكّرني';
+
+  @override
+  String get notificationPostScanNotNow => 'مش دلوقتي';
+
+  @override
   String get mealScanHintLabel => 'زوّد كلمتين لو حابب (اختياري)';
 
   @override
@@ -4587,6 +4844,12 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String get inbodyEmpty => 'لسه مفيش تقارير.. صوّر ورقة InBody ويلا بينا!';
+
+  @override
+  String get mealFavoritesTitle => 'وجباتي';
+
+  @override
+  String get mealRecentTitle => 'آخر حاجات';
 
   @override
   String get celebrationWaterTitle => 'عاش! قفلت هدف المية النهاردة 💧';
@@ -5507,6 +5770,134 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get workoutRpeCommentPartial =>
       'اللي عملته من المجموعات محسوب وبيفرق. هنرجع أقوى في الجلسة الجاية.';
+
+  @override
+  String get foodFactCardTitle => 'حقيقة عن أكلك';
+
+  @override
+  String get foodFactShareHint => 'اضغط لمشاركة البطاقة';
+
+  @override
+  String get ramadanGuideTitle => 'دليل رمضان';
+
+  @override
+  String get ramadanGuideOpenHint =>
+      'ترتيب السحور وإيقاع الإفطار — اضغط للتفاصيل';
+
+  @override
+  String get ramadanSuhoorRankTitle =>
+      'ترتيب شبع السحور (بروتين + ألياف من قاعدة البيانات)';
+
+  @override
+  String ramadanSuhoorRankSubtitle(int grams, int kcal) {
+    return 'حصة مثال $grams جم · ≈ $kcal سعرة';
+  }
+
+  @override
+  String get ramadanIftarPaceTitle => 'إيقاع الإفطار';
+
+  @override
+  String get ramadanIftarStep1 => 'تمر + مية الأول';
+
+  @override
+  String get ramadanIftarStep2 => 'شوربة دافية';
+
+  @override
+  String get ramadanIftarStep3 => 'استنى 15 دقيقة';
+
+  @override
+  String get ramadanIftarStep4 => 'الطبق الرئيسي';
+
+  @override
+  String get ramadanReboundTitle => 'بعد رمضان';
+
+  @override
+  String ramadanReboundBody(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female':
+          'ارجعي للروتين براحة: خلّي السحور فيه بروتين، سجّلي الإفطار من غير لوم، وزوّدي 10 دقائق مشي لمدة أسبوع قبل أي تخفيض كبير في السعرات.',
+      'other':
+          'ارجع للروتين براحة: خلّي السحور فيه بروتين، سجّل الإفطار من غير لوم، وزوّد 10 دقائق مشي لمدة أسبوع قبل أي تخفيض كبير في السعرات.',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsMySubscription => 'اشتراكي';
+
+  @override
+  String get settingsMySubscriptionBody =>
+      'تقدر تلغي أو تغيّر خطتك في أي وقت من Google Play — من غير مكالمات ولا خطوات مخفية.';
+
+  @override
+  String get weeklyBurnShareTitle => 'رصيد حرقك الأسبوع ده';
+
+  @override
+  String get weeklyBurnShareSubtitle => 'شارك خطواتك واستمراريتك';
+
+  @override
+  String get weeklyBurnShareCaption => 'رصيد حرقي الأسبوع ده مع ڤيريو';
+
+  @override
+  String get weeklyBurnShareAction => 'شارك بطاقة الأسبوع';
+
+  @override
+  String get weeklyBurnShareIncludeWeight => 'إظهار تغيّر الوزن في البطاقة';
+
+  @override
+  String get weeklyBurnShareStepsLabel => 'خطوات الأسبوع';
+
+  @override
+  String get weeklyBurnShareStreakLabel => 'الاستمرارية';
+
+  @override
+  String get weeklyBurnShareWeightLabel => 'تغيّر الوزن';
+
+  @override
+  String get widgetCaloriesLeftLabel => 'سعرات فاضلة';
+
+  @override
+  String get scanLimitTitle => 'خلصت تحليلات الصور النهارده';
+
+  @override
+  String get scanLimitBody =>
+      'تحليل الصور بيستخدم خوادم. استنى لبكرة، أو Pro، أو سجّل يدوي — على مزاجك.';
+
+  @override
+  String get scanLimitProTitle => 'ڤيريو Pro';
+
+  @override
+  String get scanLimitProSubtitle =>
+      'مسح ذكي غير محدود (40/يوم استخدام عادل)، بدون إعلانات، وكل البرامج';
+
+  @override
+  String get scanLimitProCta => 'اشتراك Pro';
+
+  @override
+  String get scanLimitWaitTitle => 'استنى لبكرة';
+
+  @override
+  String get scanLimitWaitSubtitle =>
+      'التحليلات المجانية بتتجدد مع منتصف الليل — الكتابة والباركود لسه مفتوحين';
+
+  @override
+  String get scanLimitWaitCta => 'تمام، نشوف بكرة';
+
+  @override
+  String get scanLimitManualTitle => 'بحث وتسجيل يدوي';
+
+  @override
+  String get scanLimitManualSubtitle => 'مجاني وغير محدود دايماً';
+
+  @override
+  String get scanLimitManualCta => 'تسجيل يدوي';
+
+  @override
+  String get scanLimitAdRewardSnack => 'اتضاف +2 تحليلات للنهارده';
+
+  @override
+  String get scanLimitAdFailedSnack =>
+      'مقدرناش نحمّل الإعلان — جرّب تاني بعد شوية';
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -5657,6 +6048,72 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
   @override
   String get outdoorHistoryEmpty =>
       'ما سجّلت تمارين خارجية بعد.. اخرج وتحرّك اليوم!';
+
+  @override
+  String get mealReviewEstimated => 'تقديري';
+
+  @override
+  String mealReviewKcalApprox(int count) {
+    return '≈ $count سعرة';
+  }
+
+  @override
+  String get mealReviewPortionLabel => 'الحصة';
+
+  @override
+  String get mealReviewOilPrefix => 'زيت:';
+
+  @override
+  String get mealReviewOilLight => 'خفيف';
+
+  @override
+  String get mealReviewOilNormal => 'عادي';
+
+  @override
+  String get mealReviewOilHeavy => 'مسبّك';
+
+  @override
+  String get mealReviewFamilyPlateToggle => 'أكلنا من طبق واحد';
+
+  @override
+  String get mealReviewMyShare => 'نصيبي';
+
+  @override
+  String get ramadanWaterTrackerQuestion =>
+      'كم كوب شربت من الإفطار إلى السحور؟';
+
+  @override
+  String ramadanWaterGoalSplit(int iftarCups, int eveningCups, int suhoorCups) {
+    return 'هدف الإفطار: $iftarCups · الليل: $eveningCups · السحور: $suhoorCups كوب';
+  }
+
+  @override
+  String get ramadanPrayerCityPickerTitle => 'اختر مدينة المواعيد';
+
+  @override
+  String get ramadanPrayerCityCustom => 'مدينة أخرى';
+
+  @override
+  String get ramadanCustomCityName => 'اسم المدينة';
+
+  @override
+  String get ramadanCustomCityLat => 'خط العرض';
+
+  @override
+  String get ramadanCustomCityLng => 'خط الطول';
+
+  @override
+  String get notificationPostScanTitle => 'تريد تذكيرات الوجبات؟';
+
+  @override
+  String get notificationPostScanBody =>
+      'تذكيرات لطيفة للغداء والعشاء — مرتين يومياً كحد أقصى، ولا إزعاج من 11 مساءً إلى 7 صباحاً.';
+
+  @override
+  String get notificationPostScanYes => 'نعم، ذكّرني';
+
+  @override
+  String get notificationPostScanNotNow => 'ليس الآن';
 
   @override
   String get mealScanHintLabel => 'أضف كلمتين لو ودّك (اختياري)';
@@ -6540,4 +6997,131 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
   @override
   String get workoutRpeCommentPartial =>
       'ما أنجزته من المجموعات يُحسب لك. سنعود أقوى في الجلسة القادمة.';
+
+  @override
+  String get foodFactCardTitle => 'حقيقة عن أكلك';
+
+  @override
+  String get foodFactShareHint => 'اضغط لمشاركة البطاقة';
+
+  @override
+  String get ramadanGuideTitle => 'دليل رمضان';
+
+  @override
+  String get ramadanGuideOpenHint =>
+      'ترتيب السحور وإيقاع الإفطار — اضغط للتفاصيل';
+
+  @override
+  String get ramadanSuhoorRankTitle =>
+      'ترتيب شبع السحور (بروتين + ألياف من قاعدة البيانات)';
+
+  @override
+  String ramadanSuhoorRankSubtitle(int grams, int kcal) {
+    return 'حصة مثال $grams جم · ≈ $kcal سعرة';
+  }
+
+  @override
+  String get ramadanIftarPaceTitle => 'إيقاع الإفطار';
+
+  @override
+  String get ramadanIftarStep1 => 'تمر + مية أولاً';
+
+  @override
+  String get ramadanIftarStep2 => 'شوربة دافئة';
+
+  @override
+  String get ramadanIftarStep3 => 'انتظر 15 دقيقة';
+
+  @override
+  String get ramadanIftarStep4 => 'الطبق الرئيسي';
+
+  @override
+  String get ramadanReboundTitle => 'بعد رمضان';
+
+  @override
+  String ramadanReboundBody(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female':
+          'عودي للروتين برفق: أبقي السحور غنياً بالبروتين، سجّلي الإفطار دون لوم، وأضيفي 10 دقائق مشي لمدة أسبوع قبل أي تخفيض كبير للسعرات.',
+      'other':
+          'عد للروتين برفق: أبقِ السحور غنياً بالبروtين، سجّل الإفطار دون لوم، وأضف 10 دقائق مشي لمدة أسبوع قبل أي تخفيض كبير للسعرات.',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsMySubscription => 'اشتراكي';
+
+  @override
+  String get settingsMySubscriptionBody =>
+      'يمكنك إلغاء أو تغيير خطتك في أي وقت من Google Play — دون مكالمات أو خطوات مخفية.';
+
+  @override
+  String get weeklyBurnShareTitle => 'رصيد حرقك هذا الأسبوع';
+
+  @override
+  String get weeklyBurnShareSubtitle => 'شارك خطواتك واستمراريتك';
+
+  @override
+  String get weeklyBurnShareCaption => 'رصيد حرقي هذا الأسبوع مع Vireo';
+
+  @override
+  String get weeklyBurnShareAction => 'مشاركة بطاقة الأسبوع';
+
+  @override
+  String get weeklyBurnShareIncludeWeight => 'إظهار تغيّر الوزن في البطاقة';
+
+  @override
+  String get weeklyBurnShareStepsLabel => 'خطوات الأسبوع';
+
+  @override
+  String get weeklyBurnShareStreakLabel => 'الاستمرارية';
+
+  @override
+  String get weeklyBurnShareWeightLabel => 'تغيّر الوزن';
+
+  @override
+  String get widgetCaloriesLeftLabel => 'سعرات متبقية';
+
+  @override
+  String get scanLimitTitle => 'انتهى حد تحليل الصور اليوم';
+
+  @override
+  String get scanLimitBody =>
+      'تحليل الصور يستخدم خوادم. انتظر حتى الغد، أو Pro، أو سجّل يدوياً.';
+
+  @override
+  String get scanLimitProTitle => 'Vireo Pro';
+
+  @override
+  String get scanLimitProSubtitle =>
+      'مسح ذكي غير محدود (40/يوم)، بدون إعلانات، وكل البرامج';
+
+  @override
+  String get scanLimitProCta => 'اشتراك Pro';
+
+  @override
+  String get scanLimitWaitTitle => 'انتظر حتى الغد';
+
+  @override
+  String get scanLimitWaitSubtitle =>
+      'تتجدد التحليلات المجانية عند منتصف الليل — الكتابة والباركود مفتوحان';
+
+  @override
+  String get scanLimitWaitCta => 'حسناً، أراك غداً';
+
+  @override
+  String get scanLimitManualTitle => 'بحث وتسجيل يدوي';
+
+  @override
+  String get scanLimitManualSubtitle => 'مجاني وغير محدود دائماً';
+
+  @override
+  String get scanLimitManualCta => 'تسجيل يدوي';
+
+  @override
+  String get scanLimitAdRewardSnack => 'تمت إضافة +2 تحليلات لليوم';
+
+  @override
+  String get scanLimitAdFailedSnack => 'تعذر تحميل الإعلان — حاول لاحقاً';
 }

@@ -8,7 +8,7 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/domain/i_food_vision_service.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
-import 'package:vireo/features/ai_nutrition/widgets/meal_quick_relog_row.dart';
+import 'package:vireo/features/nutrition/widgets/meal_quick_relog_row.dart';
 
 class MealLogTextScreen extends ConsumerStatefulWidget {
   const MealLogTextScreen({
@@ -66,9 +66,16 @@ class _MealLogTextScreenState extends ConsumerState<MealLogTextScreen> {
     }
   }
 
+  String _speechLocaleId(Locale locale) {
+    if (locale.languageCode != 'ar') return 'en_US';
+    final cc = locale.countryCode?.toUpperCase();
+    if (cc == 'SA') return 'ar_SA';
+    return 'ar_EG';
+  }
+
   Future<void> _toggleVoice() async {
     final l10n = AppLocalizations.of(context);
-    final lang = Localizations.localeOf(context).languageCode;
+    final locale = Localizations.localeOf(context);
     if (_listening) {
       await _speech.stop();
       setState(() => _listening = false);
@@ -84,7 +91,7 @@ class _MealLogTextScreenState extends ConsumerState<MealLogTextScreen> {
     setState(() => _listening = true);
     await _speech.listen(
       listenOptions: stt.SpeechListenOptions(
-        localeId: lang == 'ar' ? 'ar_EG' : 'en_US',
+        localeId: _speechLocaleId(locale),
       ),
       onResult: (r) {
         setState(() => _ctrl.text = r.recognizedWords);

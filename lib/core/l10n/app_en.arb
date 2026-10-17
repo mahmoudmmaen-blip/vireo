@@ -1814,6 +1814,39 @@
     }
   },
   "mealReviewEstimated": "estimated",
+  "mealReviewKcalApprox": "≈ {count} kcal",
+  "@mealReviewKcalApprox": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mealReviewPortionLabel": "Portion",
+  "mealReviewOilPrefix": "Oil:",
+  "mealReviewOilLight": "light",
+  "mealReviewOilNormal": "normal",
+  "mealReviewOilHeavy": "heavy",
+  "mealReviewFamilyPlateToggle": "We shared one dish",
+  "mealReviewMyShare": "My share",
+  "ramadanWaterTrackerQuestion": "How many cups since iftar until suhoor?",
+  "ramadanWaterGoalSplit": "Iftar: {iftarCups} · Evening: {eveningCups} · Suhoor: {suhoorCups} cups",
+  "@ramadanWaterGoalSplit": {
+    "placeholders": {
+      "iftarCups": { "type": "int" },
+      "eveningCups": { "type": "int" },
+      "suhoorCups": { "type": "int" }
+    }
+  },
+  "ramadanPrayerCityPickerTitle": "Choose prayer city",
+  "ramadanPrayerCityCustom": "Another city",
+  "ramadanCustomCityName": "City name",
+  "ramadanCustomCityLat": "Latitude",
+  "ramadanCustomCityLng": "Longitude",
+  "notificationPostScanTitle": "Want meal reminders?",
+  "notificationPostScanBody": "Gentle nudges for lunch and dinner — max 2 per day, quiet from 11 PM to 7 AM.",
+  "notificationPostScanYes": "Yes, remind me",
+  "notificationPostScanNotNow": "Not now",
   "mealReviewCheckAmount": "check the amount",
   "mealReviewSearchFood": "Search foods…",
   "mealReviewLogByText": "Log by text instead",
@@ -2458,5 +2491,48 @@
   "workoutRpeCommentBetter": "Your performance is better! The same workout felt lighter than last time 💪",
   "workoutRpeCommentEasy": "That felt easy. Next session we will nudge the load up a little.",
   "workoutRpeCommentSteady": "Just the right effort. Keep this rhythm.",
-  "workoutRpeCommentPartial": "What you did of the sets still counts. We will come back stronger next session."
+  "workoutRpeCommentPartial": "What you did of the sets still counts. We will come back stronger next session.",
+  "foodFactCardTitle": "Food fact",
+  "foodFactShareHint": "Tap to share as a story card",
+  "ramadanGuideTitle": "Ramadan guide",
+  "ramadanGuideOpenHint": "Suhoor ranking & iftar pacing — tap to open",
+  "ramadanSuhoorRankTitle": "Suhoor fullness ranking",
+  "ramadanSuhoorRankSubtitle": "Example portion {grams} g · ≈ {kcal} kcal",
+  "@ramadanSuhoorRankSubtitle": {
+    "placeholders": {
+      "grams": { "type": "int" },
+      "kcal": { "type": "int" }
+    }
+  },
+  "ramadanIftarPaceTitle": "Iftar pacing",
+  "ramadanIftarStep1": "Dates + water first",
+  "ramadanIftarStep2": "Warm soup",
+  "ramadanIftarStep3": "Wait 15 minutes",
+  "ramadanIftarStep4": "Main dish",
+  "ramadanReboundTitle": "After Ramadan",
+  "ramadanReboundBody": "{gender, select, female{Ease back gently: keep suhoor protein, log iftar without guilt, and add 10 minutes of walking for a week before big calorie cuts.} other{Ease back gently: keep suhoor protein, log iftar without guilt, and add 10 minutes of walking for a week before big calorie cuts.}}",
+  "settingsMySubscription": "My subscription",
+  "settingsMySubscriptionBody": "Cancel or change your plan anytime in Google Play — no calls or hidden steps.",
+  "weeklyBurnShareTitle": "Your burn balance this week",
+  "weeklyBurnShareSubtitle": "Share your steps & streak",
+  "weeklyBurnShareCaption": "My weekly burn balance on Vireo",
+  "weeklyBurnShareAction": "Share story card",
+  "weeklyBurnShareIncludeWeight": "Include weight change on the card",
+  "weeklyBurnShareStepsLabel": "Steps this week",
+  "weeklyBurnShareStreakLabel": "Streak",
+  "weeklyBurnShareWeightLabel": "Weight change",
+  "widgetCaloriesLeftLabel": "Calories left",
+  "scanLimitTitle": "Daily AI scan limit reached",
+  "scanLimitBody": "Photo scans use server resources. Wait until tomorrow, go Pro, or log manually — your choice.",
+  "scanLimitProTitle": "Vireo Pro",
+  "scanLimitProSubtitle": "Unlimited AI scans (40/day fair use), no ads, full programs",
+  "scanLimitProCta": "Get Pro",
+  "scanLimitWaitTitle": "Wait until tomorrow",
+  "scanLimitWaitSubtitle": "Your free scans reset at midnight — text & barcode logging stay unlimited",
+  "scanLimitWaitCta": "OK, see you tomorrow",
+  "scanLimitManualTitle": "Search & manual log",
+  "scanLimitManualSubtitle": "Always free and unlimited",
+  "scanLimitManualCta": "Log manually",
+  "scanLimitAdRewardSnack": "+2 extra scans added for today",
+  "scanLimitAdFailedSnack": "Could not load the ad — try again later"
 }

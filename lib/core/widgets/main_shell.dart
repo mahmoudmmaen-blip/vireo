@@ -10,8 +10,8 @@ import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
-import 'package:vireo/core/services/widget_service.dart';
-import 'package:vireo/features/home/providers/daily_score_provider.dart';
+import 'package:home_widget/home_widget.dart';
+import 'package:vireo/core/services/home_widget_sync.dart';
 import 'package:vireo/core/utils/connectivity_check.dart';
 import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/data/repositories/workout_repository.dart';
@@ -24,6 +24,7 @@ import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/home/home_screen.dart';
 import 'package:vireo/features/notifications/providers/notification_settings_provider.dart';
+import 'package:vireo/features/notifications/services/nurture_scheduler.dart';
 import 'package:vireo/features/nutrition/nutrition_screen.dart';
 import 'package:vireo/features/nutrition/providers/demo_meal_overrides_provider.dart';
 import 'package:vireo/features/profile/profile_screen.dart';
@@ -75,6 +76,14 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    HomeWidget.widgetClicked.listen((uri) {
+      if (!mounted) return;
+      _openFromWidgetUri(uri);
+    });
+    HomeWidget.initiallyLaunchedFromHomeWidget().then((uri) {
+      if (!mounted || uri == null) return;
+      _openFromWidgetUri(uri);
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _triggerSyncPull();
       _startConnectivityWatcher();
@@ -82,7 +91,17 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
       ref.read(stepCounterBootstrapProvider);
       final isPro = ref.read(isProUserProvider);
       AdService.instance.initialize(isPro: isPro);
+      if (mounted) syncHomeScreenWidget(ref, context: context);
     });
+  }
+
+  void _openFromWidgetUri(Uri? uri) {
+    if (uri == null) return;
+    if (uri.host == 'nutrition' && uri.path.contains('camera')) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) AiScanScreen.openCamera(context, ref);
+      });
+    }
   }
 
   @override
@@ -105,16 +124,8 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
   }
 
   void _syncWidget() {
-    try {
-      final scoreBreakdown = ref.read(dailyScoreProvider);
-      final waterMl = ref.read(waterTrackerProvider);
-      final steps = ref.read(todayStepsProvider);
-      WidgetService.updateWidget(
-        steps: steps,
-        waterMl: waterMl,
-        dailyScore: scoreBreakdown.totalScore,
-      );
-    } catch (_) {}
+    if (!mounted) return;
+    syncHomeScreenWidget(ref, context: context);
   }
 
   void _triggerSyncPull() {
@@ -156,6 +167,8 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
   Widget build(BuildContext context) {
     final index = ref.watch(shellTabIndexProvider);
     ref.watch(notificationBootstrapProvider);
+    ref.watch(nurtureBootstrapProvider);
+    void markGoalHit() => ref.read(nurtureSchedulerProvider).markGoalHit();
     void rescheduleIfEnabled() {
       final settings = ref.read(notificationSettingsProvider);
       if (settings.hasAnyEnabled) {
@@ -172,6 +185,7 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
     ref.listen(waterTrackerProvider, (prev, next) {
       final goal = ref.read(waterDailyGoalMlProvider);
       if (goal > 0 && next >= goal) {
+        markGoalHit();
         CelebrationService.trigger(
           context,
           type: CelebrationType.water,
@@ -186,6 +200,7 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
     ref.listen(dailyNutritionTotalsProvider, (prev, next) {
       final target = ref.read(calorieGoalProvider).proteinG;
       if (target > 0 && next.protein >= target) {
+        markGoalHit();
         CelebrationService.trigger(
           context,
           type: CelebrationType.protein,
@@ -199,6 +214,7 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
     ref.listen(todayStepsProvider, (prev, next) {
       final goal = ref.read(walkingTrackerProvider).valueOrNull?.dailyGoal ?? 6000;
       if (goal > 0 && next >= goal) {
+        markGoalHit();
         CelebrationService.trigger(
           context,
           type: CelebrationType.steps,
@@ -209,6 +225,7 @@ class _MainShellState extends ConsumerState<MainShell> with WidgetsBindingObserv
 
     ref.listen(vitalityDailyLogProvider, (prev, next) {
       if (next.workoutCompleted && (prev == null || !prev.workoutCompleted)) {
+        markGoalHit();
         CelebrationService.trigger(
           context,
           type: CelebrationType.workout,

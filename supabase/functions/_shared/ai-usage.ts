@@ -4,12 +4,17 @@ export type AiUsageKind = 'meal_scan' | 'coach_chat' | 'body_report';
 
 export const MEAL_SCAN_LIMIT_ANON = 2;
 export const MEAL_SCAN_LIMIT_FREE = 3;
-export const MEAL_SCAN_LIMIT_PREMIUM = 50;
+/** Free accounts get 5 scans/day during their first 7 days (P40). */
+export const MEAL_SCAN_LIMIT_FREE_FIRST_WEEK = 5;
+/** Hidden fair-use cap for Pro (the UI says "unlimited"). */
+export const MEAL_SCAN_LIMIT_PREMIUM = 40;
+export const FIRST_WEEK_DAYS = 7;
 export const BODY_REPORT_LIMIT_FREE = 1;
 export const BODY_REPORT_LIMIT_PREMIUM = 50;
-export const COACH_CHAT_LIMIT_ANON = 10;
-export const COACH_CHAT_LIMIT_FREE = 20;
-export const COACH_CHAT_LIMIT_PREMIUM = 200;
+/** AI coach chat is Pro-only (P40): free and anonymous users get 0. */
+export const COACH_CHAT_LIMIT_ANON = 0;
+export const COACH_CHAT_LIMIT_FREE = 0;
+export const COACH_CHAT_LIMIT_PREMIUM = 30;
 
 export function utcDay(): string {
   return new Date().toISOString().slice(0, 10);
@@ -70,13 +75,60 @@ export async function hasPremiumEntitlement(
   return data?.subscription_tier === 'premium';
 }
 
+/**
+ * Whole days elapsed since [createdAt] (UTC day boundaries are not needed:
+ * the first-week window is a soft growth perk, not a billing rule).
+ * Returns null when the date is missing or invalid.
+ */
+export function installDayAgeFrom(
+  createdAt: string | null | undefined,
+  now: Date = new Date(),
+): number | null {
+  if (!createdAt) return null;
+  const t = new Date(createdAt).getTime();
+  if (Number.isNaN(t)) return null;
+  const days = Math.floor((now.getTime() - t) / 86_400_000);
+  return Math.max(0, days);
+}
+
+/** True while the account is younger than [FIRST_WEEK_DAYS] days. */
+export function isFirstWeek(installDayAge: number | null | undefined): boolean {
+  return installDayAge != null && installDayAge >= 0 &&
+    installDayAge < FIRST_WEEK_DAYS;
+}
+
+/**
+ * Reads the account `created_at` from the auth user.
+ * Uses the user object we already have; falls back to the admin API.
+ */
+export async function getAccountCreatedAt(
+  admin: SupabaseClient,
+  user: { id: string; created_at?: string | null },
+): Promise<string | null> {
+  if (user.created_at) return user.created_at;
+  try {
+    const { data } = await admin.auth.admin.getUserById(user.id);
+    return data?.user?.created_at ?? null;
+  } catch (_) {
+    return null;
+  }
+}
+
 export function mealScanLimit(args: {
   premium: boolean;
   isAnonymous: boolean;
   rewardedBonus?: number;
+  /** Whole days since account creation; < 7 => first-week limit. */
+  installDayAge?: number | null;
+  /** Explicit override; wins over [installDayAge] when provided. */
+  firstWeek?: boolean;
 }): number {
   if (args.premium) return MEAL_SCAN_LIMIT_PREMIUM;
-  const base = args.isAnonymous ? MEAL_SCAN_LIMIT_ANON : MEAL_SCAN_LIMIT_FREE;
+  const firstWeek = args.firstWeek ?? isFirstWeek(args.installDayAge);
+  const registeredBase = firstWeek
+    ? MEAL_SCAN_LIMIT_FREE_FIRST_WEEK
+    : MEAL_SCAN_LIMIT_FREE;
+  const base = args.isAnonymous ? MEAL_SCAN_LIMIT_ANON : registeredBase;
   const bonus = Math.min(Math.max(0, args.rewardedBonus ?? 0), 4); // Max 2 ads * 2 = 4
   return base + bonus;
 }

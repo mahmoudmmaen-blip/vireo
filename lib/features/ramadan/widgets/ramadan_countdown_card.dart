@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
+import 'package:vireo/features/ramadan/screens/ramadan_guide_screen.dart';
 
 class RamadanCountdownCard extends ConsumerStatefulWidget {
   const RamadanCountdownCard({super.key});
@@ -60,7 +62,14 @@ class _RamadanCountdownCardState extends ConsumerState<RamadanCountdownCard> {
         ? (isAr ? 'أذان المغرب: ${timeFormat.format(prayer.maghrib)}' : 'Maghrib: ${timeFormat.format(prayer.maghrib)}')
         : (isAr ? 'أذان الفجر: ${timeFormat.format(prayer.fajr)}' : 'Fajr: ${timeFormat.format(prayer.fajr)}');
 
-    return Container(
+    final l10n = AppLocalizations.of(context);
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => RamadanGuideScreen.open(context),
+        borderRadius: BorderRadius.circular(VRadius.lg),
+        child: Container(
       margin: const EdgeInsets.fromLTRB(16, 6, 16, 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
@@ -123,6 +132,15 @@ class _RamadanCountdownCardState extends ConsumerState<RamadanCountdownCard> {
                   ],
                 ),
                 const SizedBox(height: 3),
+                Text(
+                  l10n.ramadanGuideOpenHint,
+                  style: TextStyle(
+                    color: colors.gold.withValues(alpha: 0.85),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 2),
                 Row(
                   children: [
                     Text(
@@ -147,6 +165,8 @@ class _RamadanCountdownCardState extends ConsumerState<RamadanCountdownCard> {
             ),
           ),
         ],
+      ),
+        ),
       ),
     );
   }

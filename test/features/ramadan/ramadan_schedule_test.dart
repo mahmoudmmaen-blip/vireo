@@ -57,8 +57,24 @@ void main() {
       );
 
       expect(pt.fajr.isBefore(pt.maghrib), isTrue);
-      expect(pt.fajr.hour, inInclusiveRange(4, 5));
-      expect(pt.maghrib.hour, inInclusiveRange(17, 19));
+      // Known offline values (adhan + Egyptian method), 2026-03-15 Cairo.
+      expect(pt.fajr, DateTime(2026, 3, 15, 5, 39));
+      expect(pt.maghrib, DateTime(2026, 3, 15, 19, 3));
+    });
+
+    test('computes prayer times locally for Riyadh with Umm al-Qura method', () {
+      final date = DateTime(2026, 3, 15);
+      final pt = RamadanPrayerTimes.calculate(
+        lat: 24.7136,
+        lng: 46.6753,
+        method: RamadanCalculationMethod.ummAlQura,
+        date: date,
+      );
+
+      expect(pt.fajr.isBefore(pt.maghrib), isTrue);
+      // Known offline values (adhan + Umm al-Qura), 2026-03-15 Riyadh.
+      expect(pt.fajr, DateTime(2026, 3, 15, 4, 45));
+      expect(pt.maghrib, DateTime(2026, 3, 15, 18, 2));
     });
 
     test('countdown and fasting state with mock clock', () {

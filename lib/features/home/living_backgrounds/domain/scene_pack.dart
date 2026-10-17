@@ -12,9 +12,10 @@ enum ScenePackId {
   nightSky,
   garden,
 
-  // Special overrides
+  // Special overrides (P40 seasonal: Ramadan lantern free in Ramadan, Eid, winter)
   ramadan,
   eid,
+  winter,
   streakReward,
 
   // Extra Premium (Coins tie-in: 300 coins or Pro)
@@ -23,6 +24,9 @@ enum ScenePackId {
 
   bool get isPremium => this == ScenePackId.pharaonicGold || this == ScenePackId.alexandriaAurora;
   int get coinCost => isPremium ? 300 : 0;
+
+  /// Free during Ramadan even for free users (P40 seasonal mascot pack).
+  bool get isRamadanFree => this == ScenePackId.ramadan;
 
   String displayName(bool isArabic) => switch (this) {
         ScenePackId.nile => isArabic ? 'نهر النيل' : 'Nile River',
@@ -33,6 +37,7 @@ enum ScenePackId {
         ScenePackId.garden => isArabic ? 'الواحة الخضراء' : 'Lush Garden',
         ScenePackId.ramadan => isArabic ? 'ليالي رمضان المبارك' : 'Ramadan Nights',
         ScenePackId.eid => isArabic ? 'بهجة العيد' : 'Festive Eid',
+        ScenePackId.winter => isArabic ? 'شتا دافي' : 'Cozy Winter',
         ScenePackId.streakReward => isArabic ? 'شعلة الالتزام 🔥' : 'Streak Flame 🔥',
         ScenePackId.pharaonicGold => isArabic ? 'أفق الفراعنة الذهبي 👑' : 'Pharaonic Gold 👑',
         ScenePackId.alexandriaAurora => isArabic ? 'شفق الإسكندرية 🌅' : 'Alexandria Aurora 🌅',
@@ -45,8 +50,9 @@ enum ScenePackId {
         ScenePackId.seaWaves => isArabic ? 'نسيم المتوسط وأمواجه المتتابعة' : 'Mediterranean waves and coastal breeze',
         ScenePackId.nightSky => isArabic ? 'نجوم القاهرة المتلألئة' : 'Twinkling Cairo stars and moon',
         ScenePackId.garden => isArabic ? 'طبيعة الدلتا والواحات الغنّاء' : 'Lush greenery and tranquil palms',
-        ScenePackId.ramadan => isArabic ? 'فانوس رمضان وهلال البركة' : 'Crescent moon & festive lantern',
+        ScenePackId.ramadan => isArabic ? 'الجمل مع فانوس رمضان وهلال البركة' : 'Camel with Ramadan lantern & crescent',
         ScenePackId.eid => isArabic ? 'أنوار وألعاب نارية احتفالية' : 'Festive lights & celebration sparkles',
+        ScenePackId.winter => isArabic ? 'سماء شتوية دافية ومشوار هادي' : 'Soft winter sky & a calm walk',
         ScenePackId.streakReward => isArabic ? 'مكافأة 7 أيام التزام مستمر' : 'Reward for 7+ days streak',
         ScenePackId.pharaonicGold => isArabic ? 'حضارة ذهبية خالدة (300 نقطة)' : 'Ancient gilded glory (300 coins)',
         ScenePackId.alexandriaAurora => isArabic ? 'غروب ساحر ومنارة الإسكندرية (300 نقطة)' : 'Coastal dusk & lighthouse (300 coins)',
@@ -96,6 +102,12 @@ class ScenePack {
   }
 
   /// Determines the active pack given options, dates, and overrides.
+  /// Northern-hemisphere winter window used for the free winter scene (Dec–Feb).
+  static bool isWinterSeason(DateTime date) {
+    final m = date.month;
+    return m == 12 || m == 1 || m == 2;
+  }
+
   static ScenePackId resolveActive({
     required DateTime date,
     required bool isEnabled,
@@ -120,9 +132,10 @@ class ScenePack {
       }
     }
 
-    // 2. Special seasonal overrides
+    // 2. Special seasonal overrides (Ramadan lantern free forever during Ramadan)
     if (isRamadan) return ScenePackId.ramadan;
     if (isEid) return ScenePackId.eid;
+    if (isWinterSeason(date)) return ScenePackId.winter;
     if (streakDays >= 7) return ScenePackId.streakReward;
 
     // 3. Deterministic 3-day rotation
@@ -143,6 +156,7 @@ class ScenePack {
       ScenePackId.garden => _buildGardenPalette(stage, themeAccent, themeSecondary, isDark),
       ScenePackId.ramadan => _buildRamadanPalette(stage, themeAccent, themeSecondary, isDark),
       ScenePackId.eid => _buildEidPalette(stage, themeAccent, themeSecondary, isDark),
+      ScenePackId.winter => _buildWinterPalette(stage, themeAccent, themeSecondary, isDark),
       ScenePackId.streakReward => _buildStreakPalette(stage, themeAccent, themeSecondary, isDark),
       ScenePackId.pharaonicGold => _buildPharaonicPalette(stage, themeAccent, themeSecondary, isDark),
       ScenePackId.alexandriaAurora => _buildAuroraPalette(stage, themeAccent, themeSecondary, isDark),
@@ -342,6 +356,25 @@ class ScenePack {
       midTerrainColor: const Color(0xFF431C63),
       foregroundPathColor: const Color(0xFF632891),
       landmarkColor: const Color(0xFFFDE047),
+    );
+  }
+
+  static ScenePackPalette _buildWinterPalette(
+      JourneyStage stage, Color accent, Color secondary, bool isDark) {
+    final sky = switch (stage.skyTime) {
+      JourneySkyTime.dawn => const [Color(0xFF0F172A), Color(0xFF1E293B), Color(0xFF334155)],
+      JourneySkyTime.morning => const [Color(0xFF1E3A5F), Color(0xFF334155), Color(0xFF64748B)],
+      JourneySkyTime.noon => const [Color(0xFF1E40AF), Color(0xFF3B82F6), Color(0xFF93C5FD)],
+      JourneySkyTime.golden => const [Color(0xFF1E293B), Color(0xFF475569), Color(0xFF94A3B8)],
+    };
+    return ScenePackPalette(
+      skyGradient: sky,
+      sunOrMoonColor: stage.isNightOrDawn ? const Color(0xFFE2E8F0) : const Color(0xFFF8FAFC),
+      sunHaloColor: const Color(0x3394A3B8),
+      distantTerrainColor: const Color(0xFF0F172A),
+      midTerrainColor: const Color(0xFF1E293B),
+      foregroundPathColor: const Color(0xFF334155),
+      landmarkColor: const Color(0xFFE2E8F0),
     );
   }
 

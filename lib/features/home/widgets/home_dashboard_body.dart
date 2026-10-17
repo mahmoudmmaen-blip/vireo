@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:vireo/core/config/feature_flags.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
@@ -47,6 +48,7 @@ import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/features/engagement/widgets/coins_header_pill.dart';
 import 'package:vireo/features/men_health/widgets/men_vitality_hero_card.dart';
 import 'package:vireo/features/ramadan/widgets/ramadan_countdown_card.dart';
+import 'package:vireo/features/content/widgets/daily_food_fact_card.dart';
 import 'package:vireo/features/home/widgets/home_body_composition_card.dart';
 import 'package:vireo/features/women_health/widgets/women_health_hero_card.dart';
 
@@ -115,11 +117,12 @@ class HomeDashboardBody extends ConsumerWidget {
           title: locale.startsWith('ar') ? 'المزيد' : 'More',
           padding: _headerPad,
         ),
+        const DailyFoodFactCard(),
         const HomeBodyCompositionCard(),
         const InBodyPlanUpdateCard(),
         if (isFemale)
           const WomenHealthHeroCard()
-        else
+        else if (ref.watch(featureFlagsProvider).mensVitalityModule)
           const MenVitalityHeroCard(),
         const HomeFastingCard(),
         if (activeDiet == null)

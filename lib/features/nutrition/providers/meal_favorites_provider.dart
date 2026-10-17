@@ -165,6 +165,9 @@ class MealRecentNotifier extends Notifier<List<SavedMealSnippet>> {
   }
 }
 
+/// Reads the persisted "recent meals" list straight from Hive (no Riverpod).
+List<SavedMealSnippet> loadRecentMealSnippets() => _load(_recentKey);
+
 List<SavedMealSnippet> _load(String key) {
   if (!HiveService.isInitialized) return const [];
   final raw = HiveService.cacheBox.get(key);

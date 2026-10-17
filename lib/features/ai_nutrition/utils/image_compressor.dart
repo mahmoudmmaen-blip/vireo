@@ -2,16 +2,14 @@ import 'dart:typed_data';
 
 import 'package:image/image.dart' as img;
 
-/// Compresses meal photos to max [maxDimension] (768 px on long side)
-/// at JPEG quality [quality] (~80–150 KB) for high-speed analysis.
+/// Compresses meal photos to max [maxDimension] (720 px on long side)
+/// as WebP for lower upload cost (P40 API cost guard).
 abstract final class MealImageCompressor {
-  static const int maxDimension = 768;
-  static const int defaultQuality = 70;
+  static const int maxDimension = 720;
 
   static Future<Uint8List> compress(
     Uint8List input, {
     int maxSide = maxDimension,
-    int quality = defaultQuality,
   }) async {
     final decoded = img.decodeImage(input);
     if (decoded == null) return input;
@@ -29,7 +27,7 @@ abstract final class MealImageCompressor {
       }
     }
 
-    final encoded = img.encodeJpg(working, quality: quality);
+    final encoded = img.encodeWebP(working);
     return Uint8List.fromList(encoded);
   }
 }

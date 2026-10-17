@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/constants/legal_urls.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
@@ -193,6 +194,15 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     }
   }
 
+  String? _annualDailyCostLine(SubscriptionPlan? annual, bool isAr) {
+    if (annual == null || annual.rawPrice <= 0) return null;
+    final daily = annual.rawPrice / 365.0;
+    final formatted = NumberFormat.simpleCurrency(name: annual.currencyCode).format(daily);
+    return isAr
+        ? 'أرخص من كوباية شاي في اليوم ($formatted)'
+        : 'Less than a cup of tea per day ($formatted)';
+  }
+
   int _computeSavingsPercent(SubscriptionPlan? annual, SubscriptionPlan? monthly) {
     if (annual == null || monthly == null) return 50;
     if (monthly.rawPrice <= 0 || annual.rawPrice <= 0) return 50;
@@ -246,9 +256,11 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
         data: (snapshot) {
-          final plans = snapshot.plans.isNotEmpty
-              ? snapshot.plans
-              : SubscriptionSnapshot.demoFree.plans;
+          final plans = (snapshot.plans.isNotEmpty
+                  ? snapshot.plans
+                  : SubscriptionSnapshot.demoFree.plans)
+              .where((p) => p.id != SubscriptionPlanId.lifetime)
+              .toList();
 
           final annualPlan = plans.firstWhere(
             (p) => p.id == SubscriptionPlanId.annual,
@@ -260,6 +272,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
           );
 
           final savingsPct = _computeSavingsPercent(annualPlan, monthlyPlan);
+          final dailyCostLine = _annualDailyCostLine(annualPlan, isAr);
           final heroHeadline = _computeHeroHeadline(context);
 
           return ListView(
@@ -340,8 +353,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     _BenefitRow(
                       icon: Icons.camera_alt_outlined,
                       title: isAr
-                          ? 'مسح غير محدود للوجبات (50 مسح/يوم)'
-                          : '50 Plate Scans / Day & Macro Swaps',
+                          ? 'مسح غير محدود للوجبات (40 مسح/يوم)'
+                          : '40 Plate Scans / Day & Macro Swaps',
                       subtitle: isAr
                           ? 'تحليل ذكي فوري لكل الأكلات والمطاعم'
                           : 'Instant visual breakdown for meals & recipes',
@@ -350,8 +363,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     _BenefitRow(
                       icon: Icons.chat_bubble_outline_rounded,
                       title: isAr
-                          ? 'مدرب ذكاء اصطناعي متاح دائماً (200 رسالة/يوم)'
-                          : '200 AI Coach Messages / Day',
+                          ? 'مدرب ذكاء اصطناعي متاح دائماً (30 رسالة/يوم)'
+                          : '30 AI Coach Messages / Day',
                       subtitle: isAr
                           ? 'توجيهات غذائية وبرامج تمرين متكيفة لحظياً'
                           : 'Daily answers, guidance, and motivation',
@@ -380,6 +393,19 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 ),
               ),
               const SizedBox(height: 24),
+
+              if (dailyCostLine != null && _selected == SubscriptionPlanId.annual) ...[
+                Text(
+                  dailyCostLine,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: colors.gold,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
 
               // ── PRODUCT SELECTION (Annual Pre-selected with Save X%) ──
               ...plans.map((plan) {
@@ -550,8 +576,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                         const SizedBox(height: 4),
                         Text(
                           isAr
-                              ? '• مسح الوجبات بالذكاء الاصطناعي (حتى 50 مسح/يوم)\n• محادثة مفتوحة مع المدرب الذكي 24/7\n• كافة برامج التغذية السبعة وسعرات متكيفة\n• تقارير أسبوعية تفصيلية وبدون أي إعلانات'
-                              : '• 50 AI meal scans / day\n• 24/7 personal AI coaching\n• All 7 diet programs & adaptive calories\n• Zero ads and deep weekly reports',
+                              ? '• مسح الوجبات بالذكاء الاصطناعي (حتى 40 مسح/يوم)\n• محادثة مفتوحة مع المدرب الذكي (30 رسالة/يوم)\n• كافة برامج التغذية السبعة وسعرات متكيفة\n• تقارير أسبوعية تفصيلية وبدون أي إعلانات'
+                              : '• 40 AI meal scans / day\n• AI coach chat (30 messages / day)\n• All 7 diet programs & adaptive calories\n• Zero ads and deep weekly reports',
                           style: TextStyle(fontSize: 12, color: colors.textMute, height: 1.4),
                         ),
                         const SizedBox(height: 10),

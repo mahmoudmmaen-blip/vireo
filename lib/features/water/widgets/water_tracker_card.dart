@@ -7,6 +7,8 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
+import 'package:vireo/features/ramadan/services/ramadan_schedule_service.dart';
 import 'package:vireo/features/water/providers/water_cup_size_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
@@ -135,8 +137,20 @@ class _WaterTrackerCardState extends ConsumerState<WaterTrackerCard>
     final progress = ref.watch(waterTrackerProgressProvider);
     final cup = ref.watch(waterCupSizeProvider);
     final goalMl = ref.watch(waterDailyGoalMlProvider);
+    final isRamadan = ref.watch(ramadanSettingsProvider).isEnabled;
     final liters = ml / 1000.0;
     final goalLiters = goalMl / 1000.0;
+    final split = isRamadan ? RamadanScheduleService.distributeWaterMl(goalMl) : null;
+    final cupMlSafe = cup > 0 ? cup : 250;
+    String? ramadanSplitLine;
+    if (split != null) {
+      int cups(int partMl) => (partMl / cupMlSafe).round().clamp(0, 99);
+      ramadanSplitLine = l10n.ramadanWaterGoalSplit(
+        cups(split['iftar']!),
+        cups(split['evening']!),
+        cups(split['suhoor']!),
+      );
+    }
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -150,7 +164,7 @@ class _WaterTrackerCardState extends ConsumerState<WaterTrackerCard>
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  l10n.waterTrackerTitle,
+                  isRamadan ? l10n.ramadanWaterTrackerQuestion : l10n.waterTrackerTitle,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
@@ -183,6 +197,13 @@ class _WaterTrackerCardState extends ConsumerState<WaterTrackerCard>
             ),
             style: TextStyle(color: colors.textMute, fontSize: 13),
           ),
+          if (ramadanSplitLine != null) ...[
+            const SizedBox(height: 6),
+            Text(
+              ramadanSplitLine,
+              style: TextStyle(color: colors.textMute, fontSize: 12, height: 1.35),
+            ),
+          ],
           const SizedBox(height: 14),
           SizedBox(
             height: 56,

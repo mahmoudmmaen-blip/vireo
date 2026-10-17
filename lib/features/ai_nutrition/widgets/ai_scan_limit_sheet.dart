@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/ad_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
@@ -6,11 +7,7 @@ import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
-/// Friendly modal sheet when AI meal scan limit is reached ("وصلت للحد الأقصى").
-/// Provides 3 clear, non-dead-end options:
-/// (a) Watch an ad for +2 scans
-/// (b) Upgrade to Pro (unlimited scans)
-/// (c) Log manually / search food DB (always free and unlimited)
+/// Modal when the daily AI meal scan limit is reached.
 class AiScanLimitSheet extends StatelessWidget {
   const AiScanLimitSheet({
     super.key,
@@ -34,6 +31,7 @@ class AiScanLimitSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
+    final l10n = AppLocalizations.of(context);
     final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
     final canWatchAd = AdService.canWatchRewardedToday();
 
@@ -49,7 +47,6 @@ class AiScanLimitSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Handle
             Center(
               child: Container(
                 width: 36,
@@ -61,8 +58,6 @@ class AiScanLimitSheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 18),
-
-            // Icon + Title
             Center(
               child: Container(
                 width: 56,
@@ -78,28 +73,53 @@ class AiScanLimitSheet extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              isArabic ? 'وصلت للحد اليومي للتحليل الذكي' : 'Daily AI Scan Limit Reached',
+              l10n.scanLimitTitle,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 6),
             Text(
-              isArabic
-                  ? 'التحليل بالذكاء الاصطناعي بيحتاج خوادم مكلفة. اختر الطريقة اللي تناسبك للمتابعة:'
-                  : 'AI vision scans require dedicated server resources. Choose how you want to continue:',
+              l10n.scanLimitBody,
               textAlign: TextAlign.center,
               style: TextStyle(color: colors.textMute, fontSize: 13, height: 1.4),
             ),
             const SizedBox(height: 20),
 
-            // Option 1: Watch an ad for +2 scans
+            _ActionOptionCard(
+              emoji: '👑',
+              title: l10n.scanLimitProTitle,
+              subtitle: l10n.scanLimitProSubtitle,
+              buttonLabel: l10n.scanLimitProCta,
+              buttonColor: colors.gold,
+              isEnabled: true,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const PaywallScreen()),
+                );
+              },
+            ),
+            const SizedBox(height: 10),
+
+            _ActionOptionCard(
+              emoji: '🌙',
+              title: l10n.scanLimitWaitTitle,
+              subtitle: l10n.scanLimitWaitSubtitle,
+              buttonLabel: l10n.scanLimitWaitCta,
+              buttonColor: colors.line,
+              isSecondary: true,
+              isEnabled: true,
+              onTap: () => Navigator.pop(context),
+            ),
+            const SizedBox(height: 10),
+
             _ActionOptionCard(
               emoji: '🎁',
               title: isArabic ? 'إعلان سريع = مسحين إضافيين (+2)' : 'Short Ad = +2 Free Scans',
               subtitle: canWatchAd
                   ? (isArabic
-                      ? 'شاهد إعلان قصير 30 ثانية للحصول على مسحين إضافيين فوراً (باقي إعلانات اليوم)'
-                      : 'Watch a 30s ad for +2 extra meal scans right now')
+                      ? 'شاهد إعلان قصير للحصول على مسحين إضافيين فوراً'
+                      : 'Watch a short ad for +2 extra meal scans today')
                   : (isArabic ? 'وصلت للحد الأقصى للإعلانات اليوم' : 'Daily ad limit reached'),
               buttonLabel: isArabic ? 'مشاهدة إعلان (+2)' : 'Watch Ad (+2)',
               buttonColor: colors.ember,
@@ -115,11 +135,7 @@ class AiScanLimitSheet extends StatelessWidget {
                         SnackBar(
                           duration: const Duration(seconds: 3),
                           persist: false,
-                          content: Text(
-                            isArabic
-                                ? 'تمت إضافة +2 مسح ذكي للوجبات اليوم! 🎉'
-                                : '+2 extra scans added for today! 🎉',
-                          ),
+                          content: Text(l10n.scanLimitAdRewardSnack),
                         ),
                       );
                     }
@@ -130,11 +146,7 @@ class AiScanLimitSheet extends StatelessWidget {
                         SnackBar(
                           duration: const Duration(seconds: 3),
                           persist: false,
-                          content: Text(
-                            isArabic
-                                ? 'تعذر تحميل الإعلان، يرجى المحاولة بعد قليل.'
-                                : 'Failed to load ad. Please try again.',
-                          ),
+                          content: Text(l10n.scanLimitAdFailedSnack),
                         ),
                       );
                     }
@@ -144,33 +156,11 @@ class AiScanLimitSheet extends StatelessWidget {
             ),
             const SizedBox(height: 10),
 
-            // Option 2: Upgrade to Pro
-            _ActionOptionCard(
-              emoji: '👑',
-              title: isArabic ? 'الترقية إلى Vireo Pro' : 'Upgrade to Vireo Pro',
-              subtitle: isArabic
-                  ? 'تحليل غير محدود (50 مسح/يوم)، بدون إعلانات، وكل المميزات المتقدمة'
-                  : 'Unlimited scans (50/day), zero ads, and all premium features',
-              buttonLabel: isArabic ? 'اشتراك Pro' : 'Get Pro',
-              buttonColor: colors.gold,
-              isEnabled: true,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const PaywallScreen()),
-                );
-              },
-            ),
-            const SizedBox(height: 10),
-
-            // Option 3: Search food DB / manual log (always 100% free & unlimited)
             _ActionOptionCard(
               emoji: '✍️',
-              title: isArabic ? 'البحث اليدوي وقاعدة الأطعمة' : 'Search Foods & Manual Log',
-              subtitle: isArabic
-                  ? 'مجاني وغير محدود دائماً، آلاف الأكلات المصرية مع مقاييس البيت'
-                  : 'Always free and unlimited. Thousands of Egyptian foods with household measures',
-              buttonLabel: isArabic ? 'تسجيل يدوي' : 'Log Manually',
+              title: l10n.scanLimitManualTitle,
+              subtitle: l10n.scanLimitManualSubtitle,
+              buttonLabel: l10n.scanLimitManualCta,
               buttonColor: colors.line,
               isSecondary: true,
               isEnabled: true,

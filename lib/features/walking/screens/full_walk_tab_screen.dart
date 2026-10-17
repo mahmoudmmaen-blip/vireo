@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:vireo/core/config/feature_flags.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
@@ -128,18 +129,25 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
     );
     final progress = goal > 0 ? (steps / goal).clamp(0.0, 1.0) : 0.0;
 
-    final sessionSteps = _isSessionActive ? (steps - _sessionStepsStart).clamp(0, 100000) : 0;
+    final sessionSteps = _isSessionActive
+        ? (steps - _sessionStepsStart).clamp(0, 100000)
+        : 0;
 
     return Scaffold(
       backgroundColor: colors.background,
       appBar: AppBar(
-        title: Text(l10n.walkingScreenTitle, style: const TextStyle(fontWeight: FontWeight.w900)),
+        title: Text(
+          l10n.walkingScreenTitle,
+          style: const TextStyle(fontWeight: FontWeight.w900),
+        ),
         actions: [
           IconButton(
             tooltip: l10n.walkingDiagnosticsTooltip,
             icon: const Icon(Icons.settings_suggest_rounded),
             onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const StepDiagnosticScreen()),
+              MaterialPageRoute<void>(
+                builder: (_) => const StepDiagnosticScreen(),
+              ),
             ),
           ),
           IconButton(
@@ -160,7 +168,9 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF162032), // Deep Navy from Leap reference
+                  color: const Color(
+                    0xFF162032,
+                  ), // Deep Navy from Leap reference
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
@@ -183,7 +193,9 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                           onTap: () async {
                             HapticFeedback.heavyImpact();
                             await StepForegroundService.toggle();
-                            await ref.read(isStepCounterRunningProvider.notifier).resync();
+                            await ref
+                                .read(isStepCounterRunningProvider.notifier)
+                                .resync();
                           },
                           borderRadius: BorderRadius.circular(999),
                           child: Container(
@@ -193,12 +205,16 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                               color: const Color(0xFF2C3E55),
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: isRunning ? _stepsAccent : Colors.white24,
+                                color: isRunning
+                                    ? _stepsAccent
+                                    : Colors.white24,
                                 width: 1.5,
                               ),
                             ),
                             child: Icon(
-                              isRunning ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                              isRunning
+                                  ? Icons.pause_rounded
+                                  : Icons.play_arrow_rounded,
                               color: isRunning ? _stepsAccent : Colors.white,
                               size: 28,
                             ),
@@ -215,7 +231,11 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                                 children: [
                                   IconButton(
                                     visualDensity: VisualDensity.compact,
-                                    icon: const Icon(Icons.edit, size: 16, color: Colors.white54),
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      size: 16,
+                                      color: Colors.white54,
+                                    ),
                                     onPressed: () => _editGoal(goal),
                                   ),
                                   Text(
@@ -254,7 +274,9 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                         child: LinearProgressIndicator(
                           value: progress,
                           backgroundColor: const Color(0xFF2C3E55),
-                          valueColor: const AlwaysStoppedAnimation<Color>(_stepsAccent),
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                            _stepsAccent,
+                          ),
                         ),
                       ),
                     ),
@@ -279,7 +301,8 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                         _WalkStatCol(
                           icon: Icons.access_time_filled_rounded,
                           iconColor: const Color(0xFF38BDF8),
-                          value: '${(metrics.activeMinutes ~/ 60)}س ${(metrics.activeMinutes % 60)}د',
+                          value:
+                              '${(metrics.activeMinutes ~/ 60)}س ${(metrics.activeMinutes % 60)}د',
                           label: 'الوقت',
                         ),
                       ],
@@ -298,23 +321,40 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                       style: FilledButton.styleFrom(
                         backgroundColor: _stepsAccent,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 12),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(VRadius.pill)),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 28,
+                          vertical: 12,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(VRadius.pill),
+                        ),
                       ),
                       onPressed: () => _startSession(steps),
                       icon: const Icon(Icons.directions_walk_rounded, size: 22),
-                      label: const Text('ابدأ جولة مشي محددة', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                      label: const Text(
+                        'ابدأ جولة مشي محددة',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                        ),
+                      ),
                     )
                   else ...[
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: _stepsAccent.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(VRadius.pill),
                       ),
                       child: Text(
                         'جولة جارية: $sessionSteps خطوة',
-                        style: const TextStyle(color: _stepsAccent, fontWeight: FontWeight.w800),
+                        style: const TextStyle(
+                          color: _stepsAccent,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -322,77 +362,106 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: colors.danger,
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(VRadius.pill)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(VRadius.pill),
+                        ),
                       ),
                       onPressed: _pauseOrStopSession,
-                      child: const Text('إنهاء الجولة', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        'إنهاء الجولة',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ],
               ),
               const SizedBox(height: 20),
 
-              // ── GPS Tracking Live Map Banner (OpenStreetMap) ──
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      _stepsAccent.withValues(alpha: 0.15),
-                      colors.surface,
+              // v1: GPS map banner hidden behind FeatureFlags.gpsRunScreen (code kept).
+              if (ref.watch(featureFlagsProvider).gpsRunScreen) ...[
+                // ── GPS Tracking Live Map Banner (OpenStreetMap) ──
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        _stepsAccent.withValues(alpha: 0.15),
+                        colors.surface,
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(VRadius.lg),
+                    border: Border.all(
+                      color: _stepsAccent.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: _stepsAccent.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.map_rounded,
+                          color: _stepsAccent,
+                          size: 26,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'المشي في الهواء الطلق مع الخريطة',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              'تتبع مسار GPS المباشر، السرعة، والصوت التوجيهي',
+                              style: TextStyle(
+                                color: colors.textMute,
+                                fontSize: 11.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      FilledButton(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: _stepsAccent,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 8,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => const OutdoorLiveScreen(
+                                type: OutdoorWorkoutType.walk,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          l10n.walkingStartGps,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  borderRadius: BorderRadius.circular(VRadius.lg),
-                  border: Border.all(color: _stepsAccent.withValues(alpha: 0.3)),
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: _stepsAccent.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(Icons.map_rounded, color: _stepsAccent, size: 26),
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'المشي في الهواء الطلق مع الخريطة',
-                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'تتبع مسار GPS المباشر، السرعة، والصوت التوجيهي',
-                            style: TextStyle(color: colors.textMute, fontSize: 11.5),
-                          ),
-                        ],
-                      ),
-                    ),
-                    FilledButton(
-                      style: FilledButton.styleFrom(
-                        backgroundColor: _stepsAccent,
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (_) => const OutdoorLiveScreen(
-                              type: OutdoorWorkoutType.walk,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Text(l10n.walkingStartGps, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
+                const SizedBox(height: 24),
+              ],
 
               // ── Segmented Control & Charts (Day / Week / Month) ──
               // Uses Column + Row without horizontal overflow
@@ -412,7 +481,10 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                         Expanded(
                           child: Text(
                             l10n.walkingActivityHistory,
-                            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -420,16 +492,37 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                           child: SegmentedButton<WalkChartFilter>(
                             style: SegmentedButton.styleFrom(
                               visualDensity: VisualDensity.compact,
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
                             ),
                             segments: [
-                              ButtonSegment(value: WalkChartFilter.day, label: Text(l10n.walkingFilterDay, style: const TextStyle(fontSize: 12))),
-                              ButtonSegment(value: WalkChartFilter.week, label: Text(l10n.walkingFilterWeek, style: const TextStyle(fontSize: 12))),
-                              ButtonSegment(value: WalkChartFilter.month, label: Text(l10n.walkingFilterMonth, style: const TextStyle(fontSize: 12))),
+                              ButtonSegment(
+                                value: WalkChartFilter.day,
+                                label: Text(
+                                  l10n.walkingFilterDay,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                              ),
+                              ButtonSegment(
+                                value: WalkChartFilter.week,
+                                label: Text(
+                                  l10n.walkingFilterWeek,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                              ),
+                              ButtonSegment(
+                                value: WalkChartFilter.month,
+                                label: Text(
+                                  l10n.walkingFilterMonth,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                              ),
                             ],
                             selected: {_filter},
                             onSelectionChanged: (set) {
-                              if (set.isNotEmpty) setState(() => _filter = set.first);
+                              if (set.isNotEmpty)
+                                setState(() => _filter = set.first);
                             },
                           ),
                         ),
@@ -460,7 +553,13 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(l10n.walkingAchievementsTitle, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                    Text(
+                      l10n.walkingAchievementsTitle,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15,
+                      ),
+                    ),
                     const SizedBox(height: 12),
                     GridView.count(
                       crossAxisCount: 2,
@@ -472,14 +571,16 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                       children: [
                         _AchievementTile(
                           title: 'أعلى يوم خطوات',
-                          value: '${last7.fold<int>(steps, (m, d) => d.steps > m ? d.steps : m)} خطوة',
+                          value:
+                              '${last7.fold<int>(steps, (m, d) => d.steps > m ? d.steps : m)} خطوة',
                           icon: Icons.military_tech_rounded,
                           color: colors.gold,
                           colors: colors,
                         ),
                         _AchievementTile(
                           title: 'تحقيق الهدف',
-                          value: '${last7.where((d) => d.steps >= goal).length} من 7 أيام',
+                          value:
+                              '${last7.where((d) => d.steps >= goal).length} من 7 أيام',
                           icon: Icons.verified_rounded,
                           color: _stepsAccent,
                           colors: colors,
@@ -493,7 +594,8 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                         ),
                         _AchievementTile(
                           title: 'مجموع المسافة',
-                          value: '${(metrics.distanceKm * 7).toStringAsFixed(1)} كم',
+                          value:
+                              '${(metrics.distanceKm * 7).toStringAsFixed(1)} كم',
                           icon: Icons.route_rounded,
                           color: _stepsCyan,
                           colors: colors,
@@ -595,14 +697,21 @@ class _AchievementTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(color: colors.textMute, fontSize: 10.5, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    color: colors.textMute,
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.bold,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Text(
                   value,
-                  style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 12,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -646,7 +755,9 @@ class _WalkPeriodChart extends StatelessWidget {
     final currentHour = DateTime.now().hour;
     final hours = [8, 10, 12, 14, 16, 18, 20, 22];
     final activeHoursCount = hours.where((h) => h <= currentHour).length;
-    final stepsPerBlock = activeHoursCount > 0 ? (todaySteps / activeHoursCount).round() : 0;
+    final stepsPerBlock = activeHoursCount > 0
+        ? (todaySteps / activeHoursCount).round()
+        : 0;
 
     final maxVal = (todaySteps > 0 ? stepsPerBlock * 1.5 : 500).toDouble();
 
@@ -667,15 +778,20 @@ class _WalkPeriodChart extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: LayoutBuilder(
                           builder: (ctx, constraints) {
-                            final blockSteps = h <= currentHour ? stepsPerBlock : 0;
+                            final blockSteps = h <= currentHour
+                                ? stepsPerBlock
+                                : 0;
                             final height = maxVal > 0
-                                ? (blockSteps / maxVal * constraints.maxHeight).clamp(4.0, constraints.maxHeight)
+                                ? (blockSteps / maxVal * constraints.maxHeight)
+                                      .clamp(4.0, constraints.maxHeight)
                                 : 4.0;
                             return Container(
                               height: height,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: blockSteps > 0 ? accent : colors.line.withValues(alpha: 0.4),
+                                color: blockSteps > 0
+                                    ? accent
+                                    : colors.line.withValues(alpha: 0.4),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                             );
@@ -686,7 +802,11 @@ class _WalkPeriodChart extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       '$h:00',
-                      style: TextStyle(color: colors.textMute, fontSize: 9, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        color: colors.textMute,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ],
                 ),
@@ -716,7 +836,11 @@ class _WalkPeriodChart extends StatelessWidget {
                     if (list[i].steps > 0)
                       Text(
                         _compact(list[i].steps),
-                        style: TextStyle(color: colors.textMute, fontSize: 9, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          color: colors.textMute,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     const SizedBox(height: 4),
                     Expanded(
@@ -725,7 +849,10 @@ class _WalkPeriodChart extends StatelessWidget {
                         child: LayoutBuilder(
                           builder: (ctx, constraints) {
                             final h = maxSteps > 0
-                                ? (list[i].steps / maxSteps * constraints.maxHeight).clamp(4.0, constraints.maxHeight)
+                                ? (list[i].steps /
+                                          maxSteps *
+                                          constraints.maxHeight)
+                                      .clamp(4.0, constraints.maxHeight)
                                 : 4.0;
                             final hit = goal > 0 && list[i].steps >= goal;
                             return Container(
@@ -744,9 +871,13 @@ class _WalkPeriodChart extends StatelessWidget {
                     Text(
                       _dayInitial(list[i].date),
                       style: TextStyle(
-                        color: _isToday(list[i].date) ? accent : colors.textMute,
+                        color: _isToday(list[i].date)
+                            ? accent
+                            : colors.textMute,
                         fontSize: 10,
-                        fontWeight: _isToday(list[i].date) ? FontWeight.w900 : FontWeight.w600,
+                        fontWeight: _isToday(list[i].date)
+                            ? FontWeight.w900
+                            : FontWeight.w600,
                       ),
                     ),
                   ],
@@ -783,8 +914,11 @@ class _WalkPeriodChart extends StatelessWidget {
                           builder: (ctx, constraints) {
                             final dt = DateTime(now.year, now.month, d);
                             final key = StepCounterService.dateKey(dt);
-                            final s = d == now.day ? todaySteps : (history[key] ?? 0);
-                            final h = (s / maxSteps * constraints.maxHeight).clamp(2.0, constraints.maxHeight);
+                            final s = d == now.day
+                                ? todaySteps
+                                : (history[key] ?? 0);
+                            final h = (s / maxSteps * constraints.maxHeight)
+                                .clamp(2.0, constraints.maxHeight);
                             final hit = s >= goal;
                             return Container(
                               height: h,
@@ -792,7 +926,9 @@ class _WalkPeriodChart extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: hit
                                     ? accent
-                                    : (s > 0 ? accent.withValues(alpha: 0.5) : colors.line.withValues(alpha: 0.3)),
+                                    : (s > 0
+                                          ? accent.withValues(alpha: 0.5)
+                                          : colors.line.withValues(alpha: 0.3)),
                                 borderRadius: BorderRadius.circular(2),
                               ),
                             );

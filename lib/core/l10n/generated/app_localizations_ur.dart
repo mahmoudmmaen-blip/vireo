@@ -3198,6 +3198,68 @@ class AppLocalizationsUr extends AppLocalizations {
   String get mealReviewEstimated => 'تخمینی';
 
   @override
+  String mealReviewKcalApprox(int count) {
+    return '≈ $count kcal';
+  }
+
+  @override
+  String get mealReviewPortionLabel => 'حصہ';
+
+  @override
+  String get mealReviewOilPrefix => 'تیل:';
+
+  @override
+  String get mealReviewOilLight => 'ہلکا';
+
+  @override
+  String get mealReviewOilNormal => 'عام';
+
+  @override
+  String get mealReviewOilHeavy => 'زیادہ';
+
+  @override
+  String get mealReviewFamilyPlateToggle => 'ہم نے ایک پلیٹ شیئر کی';
+
+  @override
+  String get mealReviewMyShare => 'میرا حصہ';
+
+  @override
+  String get ramadanWaterTrackerQuestion => 'افطار سے سحری تک کتنے کپ پیا؟';
+
+  @override
+  String ramadanWaterGoalSplit(int iftarCups, int eveningCups, int suhoorCups) {
+    return 'افطار: $iftarCups · رات: $eveningCups · سحری: $suhoorCups کپ';
+  }
+
+  @override
+  String get ramadanPrayerCityPickerTitle => 'نماز کا شہر منتخب کریں';
+
+  @override
+  String get ramadanPrayerCityCustom => 'دوسرا شہر';
+
+  @override
+  String get ramadanCustomCityName => 'شہر کا نام';
+
+  @override
+  String get ramadanCustomCityLat => 'عرض بلد';
+
+  @override
+  String get ramadanCustomCityLng => 'طول بلد';
+
+  @override
+  String get notificationPostScanTitle => 'کھانے کی یاد دہانی چاہیے؟';
+
+  @override
+  String get notificationPostScanBody =>
+      'دوپہر اور رات کے کھانے کے لیے نرم یاد دہانیاں — دن میں زیادہ سے زیادہ 2، رات 11 سے صبح 7 خاموش۔';
+
+  @override
+  String get notificationPostScanYes => 'ہاں، یاد دلائیں';
+
+  @override
+  String get notificationPostScanNotNow => 'ابھی نہیں';
+
+  @override
   String get mealReviewCheckAmount => 'مقدار چیک کریں';
 
   @override
@@ -4459,4 +4521,126 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get workoutRpeCommentPartial =>
       'جتنے سیٹ کیے وہ بھی شمار ہوتے ہیں۔ اگلے سیشن میں مزید مضبوط واپس آئیں گے۔';
+
+  @override
+  String get foodFactCardTitle => 'کھانے کی حقیقت';
+
+  @override
+  String get foodFactShareHint => 'کارڈ شیئر کرنے کے لیے ٹیپ کریں';
+
+  @override
+  String get ramadanGuideTitle => 'رمضان گائیڈ';
+
+  @override
+  String get ramadanGuideOpenHint => 'سحری درجہ بندی اور افطار — ٹیپ کریں';
+
+  @override
+  String get ramadanSuhoorRankTitle => 'سحری سیر رینکنگ';
+
+  @override
+  String ramadanSuhoorRankSubtitle(int grams, int kcal) {
+    return 'مثال $grams g · ≈ $kcal kcal';
+  }
+
+  @override
+  String get ramadanIftarPaceTitle => 'افطار کی رفتار';
+
+  @override
+  String get ramadanIftarStep1 => 'پہلے کھجور + پانی';
+
+  @override
+  String get ramadanIftarStep2 => 'گرم سوپ';
+
+  @override
+  String get ramadanIftarStep3 => '15 منٹ انتظار';
+
+  @override
+  String get ramadanIftarStep4 => 'اہم ڈش';
+
+  @override
+  String get ramadanReboundTitle => 'رمضان کے بعد';
+
+  @override
+  String ramadanReboundBody(String gender) {
+    String _temp0 = intl.Intl.selectLogic(gender, {
+      'female':
+          'آہستہ واپس آئیں: سحری میں پروٹین، بغیر ملامت افطار لکھیں، بڑی کٹوتی سے پہلے ایک ہفتے 10 منٹ چلیں۔',
+      'other':
+          'آہستہ واپس آئیں: سحری میں پروٹین، بغیر ملامت افطار لکھیں، بڑی کٹوتی سے پہلے ایک ہفتے 10 منٹ چلیں۔',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsMySubscription => 'میری سبسکرپشن';
+
+  @override
+  String get settingsMySubscriptionBody =>
+      'Google Play سے کسی بھی وقت منسوخ یا تبدیل کریں۔';
+
+  @override
+  String get weeklyBurnShareTitle => 'اس ہفتے کا burn balance';
+
+  @override
+  String get weeklyBurnShareSubtitle => 'قدم اور streak شیئر کریں';
+
+  @override
+  String get weeklyBurnShareCaption => 'Vireo پر میرا ہفتہ';
+
+  @override
+  String get weeklyBurnShareAction => 'کارڈ شیئر کریں';
+
+  @override
+  String get weeklyBurnShareIncludeWeight => 'وزن کی تبدیلی شامل کریں';
+
+  @override
+  String get weeklyBurnShareStepsLabel => 'ہفتے کے قدم';
+
+  @override
+  String get weeklyBurnShareStreakLabel => 'سلسلہ';
+
+  @override
+  String get weeklyBurnShareWeightLabel => 'وزن میں تبدیلی';
+
+  @override
+  String get widgetCaloriesLeftLabel => 'باقی کیلوریز';
+
+  @override
+  String get scanLimitTitle => 'روزانہ اسکین کی حد پوری';
+
+  @override
+  String get scanLimitBody => 'کل تک انتظار کریں، Pro لیں، یا دستی لاگ کریں۔';
+
+  @override
+  String get scanLimitProTitle => 'Vireo Pro';
+
+  @override
+  String get scanLimitProSubtitle => 'لامحدود اسکین (40/دن)، بغیر اشتہار';
+
+  @override
+  String get scanLimitProCta => 'Pro حاصل کریں';
+
+  @override
+  String get scanLimitWaitTitle => 'کل تک انتظار';
+
+  @override
+  String get scanLimitWaitSubtitle => 'مفت اسکین آدھی رات کو ری سیٹ';
+
+  @override
+  String get scanLimitWaitCta => 'ٹھیک ہے، کل ملتے ہیں';
+
+  @override
+  String get scanLimitManualTitle => 'تلاش اور دستی لاگ';
+
+  @override
+  String get scanLimitManualSubtitle => 'ہمیشہ مفت اور لامحدود';
+
+  @override
+  String get scanLimitManualCta => 'دستی لاگ';
+
+  @override
+  String get scanLimitAdRewardSnack => 'آج +2 اسکین شامل';
+
+  @override
+  String get scanLimitAdFailedSnack => 'اشتہار لوڈ نہیں ہوا';
 }

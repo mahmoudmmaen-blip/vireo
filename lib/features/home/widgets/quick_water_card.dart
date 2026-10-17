@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/ring_progress.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
@@ -16,7 +18,9 @@ class QuickWaterCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.vireoColors;
+    final l10n = AppLocalizations.of(context);
     final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final isRamadan = ref.watch(ramadanSettingsProvider).isEnabled;
     final waterMl = ref.watch(waterTrackerProvider);
     final goalMl = ref.watch(waterDailyGoalMlProvider);
     final progress = goalMl > 0 ? (waterMl / goalMl).clamp(0.0, 1.0) : 0.0;
@@ -52,8 +56,12 @@ class QuickWaterCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  isArabic ? 'الماء والترطيب' : 'Hydration',
+                  isRamadan
+                      ? l10n.ramadanWaterTrackerQuestion
+                      : (isArabic ? 'الماء والترطيب' : 'Hydration'),
                   style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Text(

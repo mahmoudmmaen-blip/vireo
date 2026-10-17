@@ -3,7 +3,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:vireo/core/services/install_date.dart';
 import 'package:vireo/features/notifications/data/notification_messages.dart';
+import 'package:vireo/features/notifications/domain/nurture_plan.dart';
 import 'package:vireo/features/notifications/domain/i_notification_service.dart';
 import 'package:vireo/features/notifications/domain/notification_settings.dart';
 import 'package:vireo/features/notifications/domain/notification_type.dart';
@@ -158,7 +160,21 @@ class LocalNotificationService implements INotificationService {
   Future<void> scheduleAll(NotificationSettings settings) async {
     if (kIsWeb || !_initialized) return;
 
-    await cancelAll();
+    // Keep the first-week nurture notifications (ids 7001-7007); they are
+    // (re)scheduled by NurtureScheduler.
+    await _cancelAllExceptNurture();
+
+    // P40: max N per day INCLUDING the nurture message. During the first week
+    // one daily slot is reserved for it.
+    final install = InstallDate.read();
+    final reserveForNurture = install != null &&
+        settings.maxDailyNotifications >= 1 &&
+        NurturePlan.isActiveWindow(install, DateTime.now());
+    final effectiveSettings = reserveForNurture
+        ? settings.copyWith(
+            maxDailyNotifications: settings.maxDailyNotifications - 1,
+          )
+        : settings;
 
     final locale = _readLocaleCode();
     final weeklyDeficit = _readWeeklyDeficit();
@@ -175,7 +191,7 @@ class LocalNotificationService implements INotificationService {
           );
 
     final scheduledCandidates = _scheduler.generateSchedule(
-      settings: settings,
+      settings: effectiveSettings,
       context: reminderCtx,
     );
 
@@ -280,6 +296,21 @@ class LocalNotificationService implements INotificationService {
         presentSound: true,
       ),
     );
+  }
+
+  /// Cancels every pending notification except the first-week nurture ones.
+  Future<void> _cancelAllExceptNurture() async {
+    if (kIsWeb) return;
+    try {
+      final pending = await _plugin.pendingNotificationRequests();
+      for (final p in pending) {
+        if (NurturePlan.isNurtureId(p.id)) continue;
+        await _plugin.cancel(p.id);
+      }
+    } catch (_) {
+      // Fall back to the old behaviour; nurture is re-planned on next launch.
+      await cancelAll();
+    }
   }
 
   @override

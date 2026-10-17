@@ -8,6 +8,7 @@ import 'package:vireo/features/ai_nutrition/data/gemini_food_service.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/domain/i_food_vision_service.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
+import 'package:vireo/features/subscription/meal_scan_quota.dart';
 
 final foodVisionServiceProvider = Provider<IFoodVisionService>(
   (ref) => GeminiFoodService(),
@@ -46,6 +47,7 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
         language: language,
         userHint: userHint,
       );
+      await MealScanQuota.recordScanConsumed();
       state = AsyncValue.data(AiScanSuccess(draft));
     } on FoodVisionOfflineException {
       state = AsyncValue.data(
@@ -102,6 +104,7 @@ class AiScanNotifier extends AsyncNotifier<AiScanState> {
         language: language,
         userHint: userHint,
       );
+      await MealScanQuota.recordScanConsumed();
       state = AsyncValue.data(AiScanSuccess(draft));
     } on FoodVisionOfflineException {
       state = AsyncValue.data(

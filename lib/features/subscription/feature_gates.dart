@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/core/services/install_date.dart';
 import 'package:vireo/core/services/locale_provider.dart';
 import 'package:vireo/data/models/subscription_state.dart';
 import 'package:vireo/features/diet_programs/domain/diet_program.dart';
@@ -13,10 +14,17 @@ import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 abstract final class FeatureGates {
   // Quota limits
   static const freeMealScansPerDay = 3;
-  static const proMealScansPerDay = 50;
 
-  static const freeCoachMessagesPerDay = 20;
-  static const proCoachMessagesPerDay = 200;
+  /// Free scans per day during the first [firstWeekDays] days after install.
+  static const freeMealScansFirstWeek = 5;
+  static const firstWeekDays = 7;
+
+  /// Hidden fair-use cap for Pro (the UI says "unlimited").
+  static const proMealScansPerDay = 40;
+
+  /// AI coach chat is Pro-only.
+  static const freeCoachMessagesPerDay = 0;
+  static const proCoachMessagesPerDay = 30;
 
   static const freeHistoryDays = 7;
 
@@ -32,12 +40,30 @@ abstract final class FeatureGates {
   static const _rewardedVitalityKey = 'rewarded_unlock_vitality_pro';
   static const _rewardedCoinProKey = 'rewarded_unlock_coin_pro';
 
-  /// Total free meal scans allowed today (base 3 + rewarded scans).
+  /// True while the install is younger than [firstWeekDays] days.
+  /// Unknown install date => false (the stricter 3/day limit).
+  static bool isFirstWeek({DateTime? now}) {
+    if (!HiveService.isInitialized) return false;
+    return isWithinFirstWeek(InstallDate.read(), now ?? DateTime.now());
+  }
+
+  /// Pure helper (unit-testable): is [installDate] within the first week at [now]?
+  static bool isWithinFirstWeek(DateTime? installDate, DateTime now) {
+    if (installDate == null) return false;
+    return InstallDate.dayAge(installDate, now) < firstWeekDays;
+  }
+
+  /// Base free scans per day (5 in the first week, otherwise 3), no rewarded bonus.
+  static int freeMealScansBaseToday({DateTime? now}) =>
+      isFirstWeek(now: now) ? freeMealScansFirstWeek : freeMealScansPerDay;
+
+  /// Total free meal scans allowed today:
+  /// base (5 in the first 7 days, else 3) + rewarded scans.
   static int getDailyFreeMealScansAllowed() {
     if (!HiveService.isInitialized) return freeMealScansPerDay;
     final today = _todayKey();
     final extra = HiveService.settingsBox.get('${_rewardedExtraScansKey}_$today') as int? ?? 0;
-    return freeMealScansPerDay + extra;
+    return freeMealScansBaseToday() + extra;
   }
 
   /// Grants +2 extra AI meal scans for today via rewarded ad.
@@ -163,12 +189,42 @@ abstract final class FeatureGates {
 
   /// Checks if the user is PRO. If not, triggers the paywall and returns false.
   /// For direct user interactions (tapping a PRO item), force: true opens the paywall.
+  /// P40: these surfaces stay free forever — never route them through a paywall.
+  static bool neverPaywallRamadanMode({required bool ramadanEnabled}) =>
+      ramadanEnabled;
+
+  static bool neverPaywallBarcodeScan() => true;
+
+  static bool neverPaywallWomensModule() => true;
+
+  static bool shouldBypassPaywall({
+    bool ramadanEnabled = false,
+    bool barcodeScan = false,
+    bool womensModule = false,
+  }) {
+    if (neverPaywallRamadanMode(ramadanEnabled: ramadanEnabled)) return true;
+    if (barcodeScan && neverPaywallBarcodeScan()) return true;
+    if (womensModule && neverPaywallWomensModule()) return true;
+    return false;
+  }
+
   static bool requirePro(
     BuildContext context,
     WidgetRef ref, {
     PaywallContext paywallContext = PaywallContext.standard,
     bool force = true,
+    bool ramadanEnabled = false,
+    bool barcodeScan = false,
+    bool womensModule = false,
   }) {
+    if (shouldBypassPaywall(
+      ramadanEnabled: ramadanEnabled,
+      barcodeScan: barcodeScan,
+      womensModule: womensModule,
+    )) {
+      return true;
+    }
+
     final snapshot = ref.read(subscriptionProvider).valueOrNull;
     if (snapshot?.hasPremiumAccess == true) return true;
 

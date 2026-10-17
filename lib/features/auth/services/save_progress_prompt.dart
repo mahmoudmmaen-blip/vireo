@@ -124,10 +124,12 @@ class _SaveProgressPromptHostState extends ConsumerState<SaveProgressPromptHost>
   }
 }
 
-/// Call after a successful AI meal scan is saved.
-Future<void> recordSuccessfulMealScan() async {
-  if (!HiveService.isInitialized) return;
+/// Call after a successful AI meal scan is saved. Returns the new total count.
+Future<int> recordSuccessfulMealScan() async {
+  if (!HiveService.isInitialized) return 0;
   final current =
       (HiveService.cacheBox.get(_successfulScansKey) as num?)?.toInt() ?? 0;
-  await HiveService.cacheBox.put(_successfulScansKey, current + 1);
+  final next = current + 1;
+  await HiveService.cacheBox.put(_successfulScansKey, next);
+  return next;
 }
