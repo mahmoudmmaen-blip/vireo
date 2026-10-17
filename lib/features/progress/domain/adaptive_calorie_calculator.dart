@@ -59,7 +59,9 @@ abstract final class AdaptiveCalorieCalculator {
   static const int minFoodLogsRequired = 10;
   static const int minWeighInsRequired = 4;
   static const int maxWeeklyChangeKcal = 150;
+  /// Default floor (men). Prefer [AdaptiveTdeeEngine] / [SafetyFloors] for sex-aware.
   static const int calorieFloor = 1500;
+  static const int calorieFloorWomen = 1200;
   static const double kcalPerKgFat = 7700.0;
 
   /// Pure computation for adaptive calories recommendation.

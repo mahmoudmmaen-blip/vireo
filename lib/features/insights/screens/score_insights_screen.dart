@@ -17,8 +17,10 @@ import 'package:vireo/features/measurements/screens/body_composition_screen.dart
 import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
 import 'package:vireo/features/measurements/screens/navy_tape_measure_screen.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
+import 'package:vireo/features/progress/domain/energy_ledger.dart';
 import 'package:vireo/features/progress/models/daily_deficit_entry.dart';
 import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
+import 'package:vireo/features/progress/widgets/energy_ledger_card.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
 
 /// Full-screen Score & Smart Insights Screen with pinned summary-first hierarchy.
@@ -117,6 +119,15 @@ class ScoreInsightsScreen extends ConsumerWidget {
                     remainingProtein: (nutrition.proteinTarget - nutrition.proteinG).clamp(0.0, 500.0),
                     remainingCarbs: (nutrition.carbsTarget - nutrition.carbsG).clamp(0.0, 500.0),
                     remainingFat: (nutrition.fatTarget - nutrition.fatG).clamp(0.0, 500.0),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // ── P38 رصيد حرقك ──
+                  EnergyLedgerCard(
+                    days: EnergyLedger.loadAll(),
+                    trendWeightChangeKg: projection.hasSufficientData
+                        ? (projection.weeklyFatLossGrams / 1000.0) * -1
+                        : null,
                   ),
                   const SizedBox(height: 16),
 

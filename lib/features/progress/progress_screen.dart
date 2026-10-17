@@ -19,6 +19,7 @@ import 'package:vireo/features/progress/widgets/body_composition_progress_sectio
 import 'package:vireo/features/progress/widgets/body_measurements_section.dart';
 import 'package:vireo/features/progress/widgets/energy_line_chart.dart';
 import 'package:vireo/features/progress/widgets/progress_photos_section.dart';
+import 'package:vireo/features/progress/widgets/weekly_balance_chart.dart';
 import 'package:vireo/features/progress/widgets/weekly_deficit_chart.dart';
 import 'package:vireo/features/progress/widgets/weight_trend_chart_card.dart';
 import 'package:vireo/core/ui/pressable.dart';
@@ -303,6 +304,14 @@ class ProgressScreen extends ConsumerWidget {
                 title: l10n.weeklyDeficitChartTitle,
                 subtitle: l10n.weeklyDeficitSubtitle,
                 child: WeeklyDeficitChart(summary: deficit),
+              ),
+              const SizedBox(height: 16),
+
+              // ── P38 ميزان الأسبوع ──
+              _ChartCard(
+                title: l10n.weeklyBalanceTitle,
+                subtitle: l10n.weeklyDeficitSubtitle,
+                child: WeeklyBalanceChart(summary: deficit),
               ),
               const SizedBox(height: 16),
 

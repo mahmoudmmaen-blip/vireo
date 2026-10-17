@@ -2282,9 +2282,15 @@
   "ramadanWaterGoalSplit": "هدف الإفطار: {iftarCups} · الليل: {eveningCups} · السحور: {suhoorCups} كوب",
   "@ramadanWaterGoalSplit": {
     "placeholders": {
-      "iftarCups": { "type": "int" },
-      "eveningCups": { "type": "int" },
-      "suhoorCups": { "type": "int" }
+      "iftarCups": {
+        "type": "int"
+      },
+      "eveningCups": {
+        "type": "int"
+      },
+      "suhoorCups": {
+        "type": "int"
+      }
     }
   },
   "ramadanPrayerCityPickerTitle": "اختار مدينة المواعيد",
@@ -2295,5 +2301,137 @@
   "notificationPostScanTitle": "عايزني أفكرك بالوجبات؟",
   "notificationPostScanBody": "تذكيرات لطيفة بمواعيد الغدا والعشا — مرتين في اليوم بس، ومفيش إزعاج من ١١ بالليل لـ ٧ الصبح.",
   "notificationPostScanYes": "أيوه، فكّرني",
-  "notificationPostScanNotNow": "مش دلوقتي"
+  "notificationPostScanNotNow": "مش دلوقتي",
+  "rebalanceCardTitle": "تظبيط يومك",
+  "rebalanceSafeDay": "عادي — يومك لسه في الأمان",
+  "rebalanceNeedsTap": "مفيش تغيير غير لما تختار",
+  "weeklyBalanceTitle": "ميزان الأسبوع",
+  "weeklyBalanceEmpty": "سجّل كام يوم عشان نشوف ميزان الأسبوع",
+  "weeklyBalanceOnTrack": "لسه في الهدف: عجز أسبوعي {actual} من {target}",
+  "@weeklyBalanceOnTrack": {
+    "placeholders": {
+      "actual": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyBalanceOffTrack": "الأسبوع ده: عجز {actual} من {target} — نقدر نعدّل",
+  "@weeklyBalanceOffTrack": {
+    "placeholders": {
+      "actual": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyBalanceCumulative": "التراكمي: {kcal} سعرة",
+  "@weeklyBalanceCumulative": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
+  "energyLedgerTitle": "رصيد حرقك",
+  "energyLedgerToday": "اليوم",
+  "energyLedgerWeek": "الأسبوع",
+  "energyLedgerMonth": "الشهر",
+  "energyLedgerAllTime": "من أول يوم",
+  "energyLedgerBurned": "حرقت {kcal} سعرة ≈ {fatKg} كجم دهون",
+  "@energyLedgerBurned": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      },
+      "fatKg": {
+        "type": "String"
+      }
+    }
+  },
+  "energyLedgerBalanceNote": "سعرات النشاط وتقدير الدهون من الرصيد منفصلين (تقديري)",
+  "energyLedgerStepsDistance": "{steps} خطوة · {km} كم",
+  "@energyLedgerStepsDistance": {
+    "placeholders": {
+      "steps": {
+        "type": "int"
+      },
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "fingerprintTitle": "بصمتك — نظام Vireo الذكي",
+  "fingerprintSubtitle": "اتعلمت من عاداتك الحقيقية بعد ١٤ يوم",
+  "fingerprintReset": "ارجّع الافتراضي",
+  "fingerprintActivity": "نشاطك",
+  "fingerprintNutrition": "أكلك",
+  "fingerprintTolerance": "تحمّلك",
+  "fingerprintChronotype": "مواعيدك",
+  "fingerprintStepsUnit": "خطوة مريحة",
+  "fingerprintMealsCount": "{count} وجبات / يوم",
+  "@fingerprintMealsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fingerprintDeficitValue": "عجز تتحمّله ≈ {kcal} سعرة",
+  "@fingerprintDeficitValue": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
+  "fingerprintLogHour": "بتسجّل عادة حوالي الساعة {hour}",
+  "@fingerprintLogHour": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "fingerprintActivityWhy": "ليه؟ متوسط أحسن ٧٠٪ من أيام خطواتك",
+  "fingerprintNutritionWhy": "ليه؟ من مواعيد وجباتك وأكلك المفضّل",
+  "fingerprintToleranceWhy": "ليه؟ العجز اللي بتكمله من غير ارتداد",
+  "fingerprintChronotypeWhy": "ليه؟ من مواعيد التسجيل والمشي",
+  "fingerprintEdit": "عدّلها",
+  "fingerprintNotReady": "لسه بنتعلّم — {days}/١٤ يوم",
+  "@fingerprintNotReady": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "strideCalibratedBadge": "مُعايَر على مشيك ✓",
+  "stepSourceLabel": "المصدر: {source}",
+  "@stepSourceLabel": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "stepSourcePedometer": "حساس الموبايل",
+  "stepSourceHealth": "الصحة",
+  "stepSourceManual": "يدوي",
+  "stepSourceNone": "غير متاح",
+  "eatBackSettingTitle": "استرجاع سعرات التمرين",
+  "eatBackHalf": "٥٠٪ (افتراضي)",
+  "eatBackFull": "١٠٠٪",
+  "eatBackNone": "٠٪",
+  "tdeeCheckInTitle": "خطتك اتعدلت",
+  "tdeeCheckInUndo": "تراجع",
+  "missedStepsCardTitle": "خطوات امبارح",
+  "outdoorNetKcalLabel": "صافي سعرات",
+  "outdoorCadenceLabel": "إيقاع الخطوة",
+  "weeklyReviewTitle": "مراجعة الأسبوع",
+  "adaptiveTdeeBlendNote": "مزيج من تسجيلك + المعادلة"
 }

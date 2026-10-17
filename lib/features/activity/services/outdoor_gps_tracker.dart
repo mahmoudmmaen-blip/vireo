@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:vireo/features/activity/data/outdoor_met_calculator.dart';
+import 'package:vireo/features/activity/domain/gps_point_filter.dart';
 import 'package:vireo/features/activity/domain/outdoor_workout_models.dart';
 import 'package:vireo/features/walking/data/pedometer_stream_stub.dart'
     if (dart.library.io) 'package:vireo/features/walking/data/pedometer_stream_io.dart';
@@ -72,6 +73,9 @@ class OutdoorGpsTracker {
     required OutdoorWorkoutType type,
     required this.weightKg,
     this.autoPauseEnabled = true,
+    this.age = 30,
+    this.isFemale = false,
+    this.heartRateBpm,
   }) : _currentType = type;
 
   OutdoorWorkoutType _currentType;
@@ -80,6 +84,9 @@ class OutdoorGpsTracker {
   bool _isManuallyOverridden = false;
 
   final double weightKg;
+  final int age;
+  final bool isFemale;
+  double? heartRateBpm;
   bool autoPauseEnabled;
 
   StreamSubscription<Position>? _sub;
@@ -87,21 +94,31 @@ class OutdoorGpsTracker {
   int _latestSteps = 0;
   final _samples = <_Sample>[];
   double _smoothedSpeedKmh = 0;
+  double _smoothedSpeedMps = 0;
   double _cadenceSpm = 0;
+  double _smoothedAltitude = double.nan;
+  double _grade = 0;
   DateTime? _startedAt;
   DateTime? _lastTick;
+  DateTime? _lastAcceptedAt;
   int _elapsedSeconds = 0;
   int _activeSeconds = 0;
   bool _paused = false;
   int _slowSeconds = 0;
   double _distanceM = 0;
   LatLng? _lastPoint;
+  double? _lastAltitude;
   final _route = <OutdoorRoutePoint>[];
   final _splits = <OutdoorKmSplit>[];
   int _lastKmAnnounced = 0;
   int _kmSegmentStartActive = 0;
   int _calories = 0;
   double _speedKmh = 0;
+  double _accuracySum = 0;
+  int _accuracyCount = 0;
+
+  double get meanAccuracyM =>
+      _accuracyCount == 0 ? 99 : _accuracySum / _accuracyCount;
 
   final _controller = StreamController<OutdoorLiveStats>.broadcast();
   Stream<OutdoorLiveStats> get stream => _controller.stream;
@@ -165,33 +182,80 @@ class OutdoorGpsTracker {
     final now = DateTime.now();
     _tickClock(now);
 
-    final speed = pos.speed >= 0 ? pos.speed * 3.6 : _speedKmh;
-    _speedKmh = speed.clamp(0, 60);
+    final accuracy = pos.accuracy;
+    _accuracySum += accuracy;
+    _accuracyCount++;
 
-    // 20s smoothing buffer
+    double impliedMps = 0;
+    if (_lastPoint != null && _lastAcceptedAt != null) {
+      final delta = const Distance().as(
+        LengthUnit.Meter,
+        _lastPoint!,
+        point,
+      );
+      final dt = now.difference(_lastAcceptedAt!).inMilliseconds / 1000.0;
+      if (dt > 0) impliedMps = delta / dt;
+    } else if (pos.speed >= 0) {
+      impliedMps = pos.speed;
+    }
+
+    final isRunning = _currentType == OutdoorWorkoutType.run;
+    if (!GpsPointFilter.acceptPoint(
+      accuracyM: accuracy,
+      impliedSpeedMps: impliedMps,
+      isRunning: isRunning,
+    )) {
+      _emit();
+      return;
+    }
+
+    _smoothedSpeedMps = GpsPointFilter.smoothSpeed(
+      previous: _smoothedSpeedMps,
+      measured: impliedMps > 0 ? impliedMps : (pos.speed >= 0 ? pos.speed : 0),
+    );
+    _speedKmh = (_smoothedSpeedMps * 3.6).clamp(0, 60);
+    _smoothedSpeedKmh = _speedKmh;
+
+    if (pos.altitude.isFinite) {
+      _smoothedAltitude = GpsPointFilter.smoothAltitude(
+        previous: _smoothedAltitude,
+        measured: pos.altitude,
+      );
+      if (_lastPoint != null && _lastAltitude != null) {
+        final horiz = const Distance().as(
+          LengthUnit.Meter,
+          _lastPoint!,
+          point,
+        );
+        _grade = GpsPointFilter.gradeFromAltitude(
+          deltaAltM: _smoothedAltitude - _lastAltitude!,
+          horizontalM: horiz,
+        );
+      }
+      _lastAltitude = _smoothedAltitude;
+    }
+
+    // 20s smoothing buffer for cadence
     _samples.add(_Sample(time: now, speedKmh: _speedKmh, steps: _latestSteps));
     final windowCutoff = now.subtract(const Duration(seconds: 20));
     _samples.removeWhere((s) => s.time.isBefore(windowCutoff));
 
-    if (_samples.isNotEmpty) {
-      final totalSpeed = _samples.fold<double>(0, (sum, s) => sum + s.speedKmh);
-      _smoothedSpeedKmh = totalSpeed / _samples.length;
-
-      if (_samples.length > 1) {
-        final durationSec = _samples.last.time.difference(_samples.first.time).inSeconds;
-        final stepDelta = _samples.last.steps - _samples.first.steps;
-        if (durationSec > 0 && stepDelta >= 0) {
-          _cadenceSpm = (stepDelta / durationSec) * 60;
-        }
+    if (_samples.length > 1) {
+      final durationSec =
+          _samples.last.time.difference(_samples.first.time).inSeconds;
+      final stepDelta = _samples.last.steps - _samples.first.steps;
+      if (durationSec > 0 && stepDelta >= 0) {
+        _cadenceSpm = (stepDelta / durationSec) * 60;
       }
     }
 
     _evaluateAutoDetect();
 
+    // Auto-pause: speed < 0.5 m/s for 10 s
     if (autoPauseEnabled && !_paused) {
-      if (_speedKmh < 1) {
+      if (_smoothedSpeedMps < GpsPointFilter.autoPauseSpeedMps) {
         _slowSeconds++;
-        if (_slowSeconds >= 10) _paused = true;
+        if (_slowSeconds >= GpsPointFilter.autoPauseSeconds) _paused = true;
       } else {
         _slowSeconds = 0;
       }
@@ -208,6 +272,7 @@ class OutdoorGpsTracker {
       }
     }
     _lastPoint = point;
+    _lastAcceptedAt = now;
     _route.add(
       OutdoorRoutePoint(
         latitude: pos.latitude,
@@ -252,6 +317,10 @@ class OutdoorGpsTracker {
       weightKg: weightKg,
       durationSeconds: _activeSeconds,
       speedKmh: _speedKmh > 0.5 ? _speedKmh : 3.5,
+      grade: _grade,
+      heartRateBpm: heartRateBpm,
+      age: age,
+      isFemale: isFemale,
     );
   }
 

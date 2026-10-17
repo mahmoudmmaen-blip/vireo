@@ -62,9 +62,11 @@ void main() {
       expect(res.steps, 8000);
       expect(res.strideMeters, closeTo(0.72625, 0.001));
       expect(res.distanceKm, closeTo(5.81, 0.02));
-      expect(res.caloriesKcal, greaterThan(250));
+      // NET ACSM/fallback ≈ 0.0005·80·0.72625·8000 ≈ 232 kcal (not gross 0.57·kg·km).
+      expect(res.caloriesKcal, greaterThan(200));
+      expect(res.caloriesKcal, lessThan(300));
       expect(res.activeMinutes, 80);
-      expect(res.fatBurnedGrams, greaterThan(30.0));
+      expect(res.fatBurnedGrams, greaterThan(25.0));
     });
   });
 }

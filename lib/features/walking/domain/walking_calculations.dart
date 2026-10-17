@@ -1,15 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:vireo/core/services/hive_service.dart';
+import 'package:vireo/features/activity/domain/acsm_net_energy.dart';
+import 'package:vireo/features/activity/domain/stride_calibration.dart';
 
-/// Accurate walking metrics calculation based on stature, weight, and sex.
-///
-/// Formulas:
-/// - Stride length: `height_cm * (isFemale ? 0.413 : 0.415) / 100` (in meters).
-/// - Distance: `(steps * stride) / 1000` (in kilometers).
-/// - Energy: `0.57 * weight_kg * distance_km * walking_factor` (ACSM energy estimation).
-///   where walking_factor = 1.0 (standard walking speed ~4.5 km/h).
-/// - Active minutes: `(steps / 100).round()`.
-/// - Fat equivalent: `kcal / 7.7` (1 g adipose tissue ≈ 7.7 kcal).
+/// Accurate walking metrics — NET kcal (ACSM), personal stride, fat ≈ kcal/7.7.
 @immutable
 class WalkingMetricsResult {
   const WalkingMetricsResult({
@@ -19,6 +13,7 @@ class WalkingMetricsResult {
     required this.caloriesKcal,
     required this.activeMinutes,
     required this.fatBurnedGrams,
+    this.isStrideCalibrated = false,
   });
 
   final int steps;
@@ -27,22 +22,26 @@ class WalkingMetricsResult {
   final int caloriesKcal;
   final int activeMinutes;
   final double fatBurnedGrams;
+  final bool isStrideCalibrated;
 }
 
 abstract final class WalkingCalculations {
-  /// Standard walking energy factor (ACSM metabolic model for normal pace).
+  /// Legacy gross factor kept for backward-compat tests; prefer [computeCaloriesNet].
   static const double walkingFactor = 1.0;
 
-  /// Stride length in meters.
-  /// Male: height_cm * 0.415 / 100
-  /// Female: height_cm * 0.413 / 100
+  /// Stride length in meters (height × 0.415 men / 0.413 women).
   static double computeStrideMeters({
     required double heightCm,
     bool isFemale = false,
+    double? calibratedStrideM,
   }) {
-    final clampedHeight = heightCm.clamp(100.0, 240.0);
-    final ratio = isFemale ? 0.413 : 0.415;
-    return (clampedHeight * ratio) / 100.0;
+    if (calibratedStrideM != null) {
+      return calibratedStrideM.clamp(0.5, 1.3);
+    }
+    return AcsmNetEnergy.defaultWalkingStrideMeters(
+      heightCm: heightCm,
+      isFemale: isFemale,
+    );
   }
 
   /// Distance in kilometers.
@@ -54,8 +53,7 @@ abstract final class WalkingCalculations {
     return (steps * strideMeters) / 1000.0;
   }
 
-  /// Kcal expenditure based on ACSM formula:
-  /// kcal ≈ 0.57 * weight_kg * distance_km * walking_factor
+  /// Legacy gross estimate (kept for older call sites). Prefer [computeCaloriesNet].
   static int computeCalories({
     required double weightKg,
     required double distanceKm,
@@ -65,6 +63,21 @@ abstract final class WalkingCalculations {
     final clampedWeight = weightKg.clamp(30.0, 250.0);
     final kcal = 0.57 * clampedWeight * distanceKm * factor;
     return kcal.round().clamp(0, 10000);
+  }
+
+  /// NET walking kcal from steps (ACSM via cadence×stride, else kcal/step fallback).
+  static int computeCaloriesNet({
+    required int steps,
+    required double weightKg,
+    required double strideMeters,
+    double? cadenceSpm,
+  }) {
+    return AcsmNetEnergy.stepsNetKcal(
+      steps: steps,
+      weightKg: weightKg,
+      strideMeters: strideMeters,
+      cadenceSpm: cadenceSpm,
+    ).round().clamp(0, 10000);
   }
 
   /// Active walking minutes (≈ steps / 100).
@@ -79,17 +92,40 @@ abstract final class WalkingCalculations {
     return caloriesKcal / 7.7;
   }
 
-  /// Complete computation helper.
+  /// Complete computation helper (NET kcal).
   static WalkingMetricsResult compute({
     required int steps,
     required double heightCm,
     required double weightKg,
     bool isFemale = false,
+    double? cadenceSpm,
+    bool useCalibratedStride = true,
   }) {
     final safeSteps = steps.clamp(0, 200000);
-    final stride = computeStrideMeters(heightCm: heightCm, isFemale: isFemale);
+    var calibrated = false;
+    double? calStride;
+    if (useCalibratedStride) {
+      final state = StrideCalibrationState.load(
+        heightCm: heightCm,
+        isFemale: isFemale,
+      );
+      if (state.isCalibrated) {
+        calStride = state.strideMeters;
+        calibrated = true;
+      }
+    }
+    final stride = computeStrideMeters(
+      heightCm: heightCm,
+      isFemale: isFemale,
+      calibratedStrideM: calStride,
+    );
     final distKm = computeDistanceKm(steps: safeSteps, strideMeters: stride);
-    final kcal = computeCalories(weightKg: weightKg, distanceKm: distKm);
+    final kcal = computeCaloriesNet(
+      steps: safeSteps,
+      weightKg: weightKg,
+      strideMeters: stride,
+      cadenceSpm: cadenceSpm,
+    );
     final activeMin = computeActiveMinutes(safeSteps);
     final fatG = computeFatBurnedGrams(kcal);
 
@@ -100,6 +136,7 @@ abstract final class WalkingCalculations {
       caloriesKcal: kcal,
       activeMinutes: activeMin,
       fatBurnedGrams: fatG,
+      isStrideCalibrated: calibrated,
     );
   }
 

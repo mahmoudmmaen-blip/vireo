@@ -1,5 +1,9 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.1';
-import { generateContent, type GeminiContent } from '../_shared/gemini-client.ts';
+import type { GeminiContent } from '../_shared/gemini-client.ts';
+import {
+  routeGenerate,
+  validateNumbersAgainstFacts,
+} from '../_shared/ai-router.ts';
 import { buildCoachSystemInstruction } from '../_shared/prompts/coach.ts';
 import {
   coachChatLimit,
@@ -119,19 +123,47 @@ Deno.serve(async (req) => {
       parts: [{ text: message }],
     });
 
-    const reply = await generateContent({
-      contents,
+    const allowedFacts = [
+      Number(ctx.remainingCalories ?? 0),
+      Number(ctx.remainingProtein ?? 0),
+      Number(ctx.targetCalories ?? 0),
+      Number(ctx.targetProtein ?? 0),
+      Number(ctx.currentWeight ?? 0),
+      Number(ctx.stepGoal ?? 0),
+    ].filter((n) => Number.isFinite(n) && n !== 0);
+
+    const historyText = history
+      .map((h) => `${h.role === 'assistant' || h.role === 'model' ? 'coach' : 'user'}: ${h.content}`)
+      .join('\n');
+    const userText = `${historyText}\nuser: ${message}`.trim();
+
+    const routed = await routeGenerate({
+      task: 'coach_chat',
       systemInstruction,
+      userText,
+      contents,
       temperature: 0.7,
     });
 
-    return json({ reply });
+    let reply = routed.text;
+    if (!validateNumbersAgainstFacts(reply, allowedFacts)) {
+      // Fall back to a deterministic template — never invent numbers.
+      reply =
+        `هدف يومك ${Number(ctx.targetCalories ?? 0)} سعرة، فاضلك ${Number(ctx.remainingCalories ?? 0)}. ` +
+        `خلّي الخطوة الجاية بسيطة وواضحة — من غير أرقام زيادة.`;
+    }
+
+    return json({
+      reply,
+      provider: routed.provider,
+      tokens: { input: routed.inputTokens, output: routed.outputTokens },
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    if (message === 'GEMINI_NOT_CONFIGURED') {
+    if (message === 'GEMINI_NOT_CONFIGURED' || message === 'ANTHROPIC_NOT_CONFIGURED') {
       return json({ error: message }, 503);
     }
-    if (message.startsWith('GEMINI_API_ERROR:')) {
+    if (message.startsWith('GEMINI_API_ERROR:') || message.startsWith('ANTHROPIC_HTTP_')) {
       return json({ error: message }, 502);
     }
     if (message === 'GEMINI_EMPTY_RESPONSE') {

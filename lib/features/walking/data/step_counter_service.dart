@@ -9,6 +9,7 @@ import 'package:vireo/core/utils/merciful_streak.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
 import 'package:vireo/features/walking/data/pedometer_stream_stub.dart'
     if (dart.library.io) 'package:vireo/features/walking/data/pedometer_stream_io.dart';
+import 'package:vireo/features/walking/domain/step_fusion.dart';
 
 /// Live step snapshot used across Home and Walking.
 @immutable
@@ -254,12 +255,19 @@ abstract final class StepCounterService {
     final sensorSteps = pedoSteps ?? fromState;
     final sensorAvailable = pedometerHardwareSupported && !sensorError && !kIsWeb;
 
+    // Day-level fusion via StepFusion (hourly buckets when available; else max).
+    // Prefer fuller coverage — never sum both sources (no double count).
     int todaySteps;
     StepSource source;
     if (sensorAvailable && healthOk) {
-      todaySteps = sensorSteps >= healthSteps ? sensorSteps : healthSteps;
-      source =
-          sensorSteps >= healthSteps ? StepSource.pedometer : StepSource.health;
+      final fused = StepFusion.fuseDay(
+        pedometerHours: const [],
+        healthHours: const [],
+        pedometerDayTotal: sensorSteps,
+        healthDayTotal: healthSteps,
+      );
+      todaySteps = fused.totalSteps;
+      source = fused.source;
     } else if (sensorAvailable && sensorSteps > 0) {
       todaySteps = sensorSteps;
       source = StepSource.pedometer;

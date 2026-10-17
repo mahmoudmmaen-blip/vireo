@@ -19,19 +19,22 @@ class CalorieTarget {
 abstract final class CalorieCalculator {
   /// Maintenance calories (TDEE) before any goal deficit/surplus.
   /// When [leanMassKg] is known (e.g. InBody), uses Katch-McArdle BMR.
+  /// Mifflin-St Jeor is sex-aware (+5 men / −161 women).
   static int maintenanceKcal({
     required double weightKg,
     required double heightCm,
     required int age,
     required ActivityLevel activityLevel,
     double? leanMassKg,
+    bool isFemale = false,
   }) {
     final multiplier = _activityMultiplier(activityLevel);
     if (leanMassKg != null && leanMassKg > 0) {
       final bmr = 370 + 21.6 * leanMassKg;
       return (bmr * multiplier).round();
     }
-    final bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
+    final sexOffset = isFemale ? -161.0 : 5.0;
+    final bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + sexOffset;
     return (bmr * multiplier).round();
   }
 

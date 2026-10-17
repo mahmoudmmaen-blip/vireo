@@ -8304,6 +8304,306 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not load the ad — try again later'**
   String get scanLimitAdFailedSnack;
+
+  /// No description provided for @rebalanceCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s rebalance'**
+  String get rebalanceCardTitle;
+
+  /// No description provided for @rebalanceSafeDay.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re still in the safe zone today'**
+  String get rebalanceSafeDay;
+
+  /// No description provided for @rebalanceNeedsTap.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing changes until you tap an option'**
+  String get rebalanceNeedsTap;
+
+  /// No description provided for @weeklyBalanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly balance'**
+  String get weeklyBalanceTitle;
+
+  /// No description provided for @weeklyBalanceEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a few days to see your weekly balance'**
+  String get weeklyBalanceEmpty;
+
+  /// No description provided for @weeklyBalanceOnTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'Still on track: weekly deficit {actual} of {target}'**
+  String weeklyBalanceOnTrack(int actual, int target);
+
+  /// No description provided for @weeklyBalanceOffTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'This week: deficit {actual} of {target} — we can adjust'**
+  String weeklyBalanceOffTrack(int actual, int target);
+
+  /// No description provided for @weeklyBalanceCumulative.
+  ///
+  /// In en, this message translates to:
+  /// **'Cumulative: {kcal} kcal'**
+  String weeklyBalanceCumulative(int kcal);
+
+  /// No description provided for @energyLedgerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your burn balance'**
+  String get energyLedgerTitle;
+
+  /// No description provided for @energyLedgerToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get energyLedgerToday;
+
+  /// No description provided for @energyLedgerWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get energyLedgerWeek;
+
+  /// No description provided for @energyLedgerMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get energyLedgerMonth;
+
+  /// No description provided for @energyLedgerAllTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get energyLedgerAllTime;
+
+  /// No description provided for @energyLedgerBurned.
+  ///
+  /// In en, this message translates to:
+  /// **'Burned {kcal} kcal ≈ {fatKg} kg fat'**
+  String energyLedgerBurned(int kcal, String fatKg);
+
+  /// No description provided for @energyLedgerBalanceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity kcal and balance-based fat are labeled separately (estimate)'**
+  String get energyLedgerBalanceNote;
+
+  /// No description provided for @energyLedgerStepsDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'{steps} steps · {km} km'**
+  String energyLedgerStepsDistance(int steps, String km);
+
+  /// No description provided for @fingerprintTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Fingerprint — Vireo smart system'**
+  String get fingerprintTitle;
+
+  /// No description provided for @fingerprintSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learned from your real habits after 14 days'**
+  String get fingerprintSubtitle;
+
+  /// No description provided for @fingerprintReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get fingerprintReset;
+
+  /// No description provided for @fingerprintActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Your activity'**
+  String get fingerprintActivity;
+
+  /// No description provided for @fingerprintNutrition.
+  ///
+  /// In en, this message translates to:
+  /// **'Your eating'**
+  String get fingerprintNutrition;
+
+  /// No description provided for @fingerprintTolerance.
+  ///
+  /// In en, this message translates to:
+  /// **'Your tolerance'**
+  String get fingerprintTolerance;
+
+  /// No description provided for @fingerprintChronotype.
+  ///
+  /// In en, this message translates to:
+  /// **'Your timing'**
+  String get fingerprintChronotype;
+
+  /// No description provided for @fingerprintStepsUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'comfortable steps'**
+  String get fingerprintStepsUnit;
+
+  /// No description provided for @fingerprintMealsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} meals / day'**
+  String fingerprintMealsCount(int count);
+
+  /// No description provided for @fingerprintDeficitValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Sustainable deficit ≈ {kcal} kcal'**
+  String fingerprintDeficitValue(int kcal);
+
+  /// No description provided for @fingerprintLogHour.
+  ///
+  /// In en, this message translates to:
+  /// **'Usually logs around {hour}:00'**
+  String fingerprintLogHour(int hour);
+
+  /// No description provided for @fingerprintActivityWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Why? Median of your best 70% step days'**
+  String get fingerprintActivityWhy;
+
+  /// No description provided for @fingerprintNutritionWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Why? From your meal times and favorites'**
+  String get fingerprintNutritionWhy;
+
+  /// No description provided for @fingerprintToleranceWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Why? Deficit you sustain without rebound'**
+  String get fingerprintToleranceWhy;
+
+  /// No description provided for @fingerprintChronotypeWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Why? From your logging and walk hours'**
+  String get fingerprintChronotypeWhy;
+
+  /// No description provided for @fingerprintEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get fingerprintEdit;
+
+  /// No description provided for @fingerprintNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Still learning — {days}/14 days'**
+  String fingerprintNotReady(int days);
+
+  /// No description provided for @strideCalibratedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Calibrated to your walk ✓'**
+  String get strideCalibratedBadge;
+
+  /// No description provided for @stepSourceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Source: {source}'**
+  String stepSourceLabel(String source);
+
+  /// No description provided for @stepSourcePedometer.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone sensor'**
+  String get stepSourcePedometer;
+
+  /// No description provided for @stepSourceHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Connect'**
+  String get stepSourceHealth;
+
+  /// No description provided for @stepSourceManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get stepSourceManual;
+
+  /// No description provided for @stepSourceNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable'**
+  String get stepSourceNone;
+
+  /// No description provided for @eatBackSettingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Eat-back from exercise'**
+  String get eatBackSettingTitle;
+
+  /// No description provided for @eatBackHalf.
+  ///
+  /// In en, this message translates to:
+  /// **'50% (default)'**
+  String get eatBackHalf;
+
+  /// No description provided for @eatBackFull.
+  ///
+  /// In en, this message translates to:
+  /// **'100%'**
+  String get eatBackFull;
+
+  /// No description provided for @eatBackNone.
+  ///
+  /// In en, this message translates to:
+  /// **'0%'**
+  String get eatBackNone;
+
+  /// No description provided for @tdeeCheckInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your plan updated'**
+  String get tdeeCheckInTitle;
+
+  /// No description provided for @tdeeCheckInUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get tdeeCheckInUndo;
+
+  /// No description provided for @missedStepsCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday\'s steps'**
+  String get missedStepsCardTitle;
+
+  /// No description provided for @outdoorNetKcalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Net kcal'**
+  String get outdoorNetKcalLabel;
+
+  /// No description provided for @outdoorCadenceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cadence'**
+  String get outdoorCadenceLabel;
+
+  /// No description provided for @weeklyReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly review'**
+  String get weeklyReviewTitle;
+
+  /// No description provided for @adaptiveTdeeBlendNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Blended from your logs + formula'**
+  String get adaptiveTdeeBlendNote;
 }
 
 class _AppLocalizationsDelegate

@@ -1318,9 +1318,15 @@
   "ramadanWaterGoalSplit": "इफ्तार: {iftarCups} · शाम: {eveningCups} · सहूर: {suhoorCups} गिलास",
   "@ramadanWaterGoalSplit": {
     "placeholders": {
-      "iftarCups": { "type": "int" },
-      "eveningCups": { "type": "int" },
-      "suhoorCups": { "type": "int" }
+      "iftarCups": {
+        "type": "int"
+      },
+      "eveningCups": {
+        "type": "int"
+      },
+      "suhoorCups": {
+        "type": "int"
+      }
     }
   },
   "ramadanPrayerCityPickerTitle": "नमाज़ का शहर चुनें",
@@ -1355,5 +1361,137 @@
   "scanLimitManualSubtitle": "हमेशा मुफ़्त और असीमित",
   "scanLimitManualCta": "मैन्युअल लॉग",
   "scanLimitAdRewardSnack": "आज +2 स्कैन जोड़े गए",
-  "scanLimitAdFailedSnack": "विज्ञापन लोड नहीं हुआ"
+  "scanLimitAdFailedSnack": "विज्ञापन लोड नहीं हुआ",
+  "rebalanceCardTitle": "Today's rebalance",
+  "rebalanceSafeDay": "You're still in the safe zone today",
+  "rebalanceNeedsTap": "Nothing changes until you tap an option",
+  "weeklyBalanceTitle": "Weekly balance",
+  "weeklyBalanceEmpty": "Log a few days to see your weekly balance",
+  "weeklyBalanceOnTrack": "Still on track: weekly deficit {actual} of {target}",
+  "@weeklyBalanceOnTrack": {
+    "placeholders": {
+      "actual": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyBalanceOffTrack": "This week: deficit {actual} of {target} — we can adjust",
+  "@weeklyBalanceOffTrack": {
+    "placeholders": {
+      "actual": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyBalanceCumulative": "Cumulative: {kcal} kcal",
+  "@weeklyBalanceCumulative": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
+  "energyLedgerTitle": "Your burn balance",
+  "energyLedgerToday": "Today",
+  "energyLedgerWeek": "Week",
+  "energyLedgerMonth": "Month",
+  "energyLedgerAllTime": "All time",
+  "energyLedgerBurned": "Burned {kcal} kcal ≈ {fatKg} kg fat",
+  "@energyLedgerBurned": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      },
+      "fatKg": {
+        "type": "String"
+      }
+    }
+  },
+  "energyLedgerBalanceNote": "Activity kcal and balance-based fat are labeled separately (estimate)",
+  "energyLedgerStepsDistance": "{steps} steps · {km} km",
+  "@energyLedgerStepsDistance": {
+    "placeholders": {
+      "steps": {
+        "type": "int"
+      },
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "fingerprintTitle": "Your Fingerprint — Vireo smart system",
+  "fingerprintSubtitle": "Learned from your real habits after 14 days",
+  "fingerprintReset": "Reset",
+  "fingerprintActivity": "Your activity",
+  "fingerprintNutrition": "Your eating",
+  "fingerprintTolerance": "Your tolerance",
+  "fingerprintChronotype": "Your timing",
+  "fingerprintStepsUnit": "comfortable steps",
+  "fingerprintMealsCount": "{count} meals / day",
+  "@fingerprintMealsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fingerprintDeficitValue": "Sustainable deficit ≈ {kcal} kcal",
+  "@fingerprintDeficitValue": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
+  "fingerprintLogHour": "Usually logs around {hour}:00",
+  "@fingerprintLogHour": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "fingerprintActivityWhy": "Why? Median of your best 70% step days",
+  "fingerprintNutritionWhy": "Why? From your meal times and favorites",
+  "fingerprintToleranceWhy": "Why? Deficit you sustain without rebound",
+  "fingerprintChronotypeWhy": "Why? From your logging and walk hours",
+  "fingerprintEdit": "Edit",
+  "fingerprintNotReady": "Still learning — {days}/14 days",
+  "@fingerprintNotReady": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "strideCalibratedBadge": "Calibrated to your walk ✓",
+  "stepSourceLabel": "Source: {source}",
+  "@stepSourceLabel": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "stepSourcePedometer": "Phone sensor",
+  "stepSourceHealth": "Health Connect",
+  "stepSourceManual": "Manual",
+  "stepSourceNone": "Unavailable",
+  "eatBackSettingTitle": "Eat-back from exercise",
+  "eatBackHalf": "50% (default)",
+  "eatBackFull": "100%",
+  "eatBackNone": "0%",
+  "tdeeCheckInTitle": "Your plan updated",
+  "tdeeCheckInUndo": "Undo",
+  "missedStepsCardTitle": "Yesterday's steps",
+  "outdoorNetKcalLabel": "Net kcal",
+  "outdoorCadenceLabel": "Cadence",
+  "weeklyReviewTitle": "Weekly review",
+  "adaptiveTdeeBlendNote": "Blended from your logs + formula"
 }

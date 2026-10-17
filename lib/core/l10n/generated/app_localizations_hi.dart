@@ -4646,4 +4646,179 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get scanLimitAdFailedSnack => 'विज्ञापन लोड नहीं हुआ';
+
+  @override
+  String get rebalanceCardTitle => 'Today\'s rebalance';
+
+  @override
+  String get rebalanceSafeDay => 'You\'re still in the safe zone today';
+
+  @override
+  String get rebalanceNeedsTap => 'Nothing changes until you tap an option';
+
+  @override
+  String get weeklyBalanceTitle => 'Weekly balance';
+
+  @override
+  String get weeklyBalanceEmpty => 'Log a few days to see your weekly balance';
+
+  @override
+  String weeklyBalanceOnTrack(int actual, int target) {
+    return 'Still on track: weekly deficit $actual of $target';
+  }
+
+  @override
+  String weeklyBalanceOffTrack(int actual, int target) {
+    return 'This week: deficit $actual of $target — we can adjust';
+  }
+
+  @override
+  String weeklyBalanceCumulative(int kcal) {
+    return 'Cumulative: $kcal kcal';
+  }
+
+  @override
+  String get energyLedgerTitle => 'Your burn balance';
+
+  @override
+  String get energyLedgerToday => 'Today';
+
+  @override
+  String get energyLedgerWeek => 'Week';
+
+  @override
+  String get energyLedgerMonth => 'Month';
+
+  @override
+  String get energyLedgerAllTime => 'All time';
+
+  @override
+  String energyLedgerBurned(int kcal, String fatKg) {
+    return 'Burned $kcal kcal ≈ $fatKg kg fat';
+  }
+
+  @override
+  String get energyLedgerBalanceNote =>
+      'Activity kcal and balance-based fat are labeled separately (estimate)';
+
+  @override
+  String energyLedgerStepsDistance(int steps, String km) {
+    return '$steps steps · $km km';
+  }
+
+  @override
+  String get fingerprintTitle => 'Your Fingerprint — Vireo smart system';
+
+  @override
+  String get fingerprintSubtitle =>
+      'Learned from your real habits after 14 days';
+
+  @override
+  String get fingerprintReset => 'Reset';
+
+  @override
+  String get fingerprintActivity => 'Your activity';
+
+  @override
+  String get fingerprintNutrition => 'Your eating';
+
+  @override
+  String get fingerprintTolerance => 'Your tolerance';
+
+  @override
+  String get fingerprintChronotype => 'Your timing';
+
+  @override
+  String get fingerprintStepsUnit => 'comfortable steps';
+
+  @override
+  String fingerprintMealsCount(int count) {
+    return '$count meals / day';
+  }
+
+  @override
+  String fingerprintDeficitValue(int kcal) {
+    return 'Sustainable deficit ≈ $kcal kcal';
+  }
+
+  @override
+  String fingerprintLogHour(int hour) {
+    return 'Usually logs around $hour:00';
+  }
+
+  @override
+  String get fingerprintActivityWhy => 'Why? Median of your best 70% step days';
+
+  @override
+  String get fingerprintNutritionWhy =>
+      'Why? From your meal times and favorites';
+
+  @override
+  String get fingerprintToleranceWhy =>
+      'Why? Deficit you sustain without rebound';
+
+  @override
+  String get fingerprintChronotypeWhy =>
+      'Why? From your logging and walk hours';
+
+  @override
+  String get fingerprintEdit => 'Edit';
+
+  @override
+  String fingerprintNotReady(int days) {
+    return 'Still learning — $days/14 days';
+  }
+
+  @override
+  String get strideCalibratedBadge => 'Calibrated to your walk ✓';
+
+  @override
+  String stepSourceLabel(String source) {
+    return 'Source: $source';
+  }
+
+  @override
+  String get stepSourcePedometer => 'Phone sensor';
+
+  @override
+  String get stepSourceHealth => 'Health Connect';
+
+  @override
+  String get stepSourceManual => 'Manual';
+
+  @override
+  String get stepSourceNone => 'Unavailable';
+
+  @override
+  String get eatBackSettingTitle => 'Eat-back from exercise';
+
+  @override
+  String get eatBackHalf => '50% (default)';
+
+  @override
+  String get eatBackFull => '100%';
+
+  @override
+  String get eatBackNone => '0%';
+
+  @override
+  String get tdeeCheckInTitle => 'Your plan updated';
+
+  @override
+  String get tdeeCheckInUndo => 'Undo';
+
+  @override
+  String get missedStepsCardTitle => 'Yesterday\'s steps';
+
+  @override
+  String get outdoorNetKcalLabel => 'Net kcal';
+
+  @override
+  String get outdoorCadenceLabel => 'Cadence';
+
+  @override
+  String get weeklyReviewTitle => 'Weekly review';
+
+  @override
+  String get adaptiveTdeeBlendNote => 'Blended from your logs + formula';
 }

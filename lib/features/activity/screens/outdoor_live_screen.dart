@@ -11,6 +11,7 @@ import 'package:vireo/features/activity/providers/outdoor_session_actions.dart';
 import 'package:vireo/features/activity/services/outdoor_gps_tracker.dart';
 import 'package:vireo/features/activity/services/outdoor_voice_cues.dart';
 import 'package:vireo/features/activity/widgets/outdoor_map_view.dart';
+import 'package:vireo/features/activity/widgets/outdoor_run_metrics_panel.dart';
 import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/features/activity/screens/outdoor_detail_screen.dart';
 import 'package:vireo/features/walking/data/body_metrics.dart';
@@ -253,18 +254,21 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
                     ),
                   ),
                 ],
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _Stat(l10n.outdoorDistance, '${(_stats.distanceMeters / 1000).toStringAsFixed(2)} km'),
-                    _Stat(l10n.outdoorDuration, _formatDuration(_stats.activeSeconds)),
-                    _Stat(
-                      _stats.currentType == OutdoorWorkoutType.cycle
-                          ? l10n.outdoorSpeed
-                          : l10n.outdoorPace,
-                      _paceOrSpeed(l10n),
-                    ),
-                  ],
+                OutdoorRunMetricsPanel(
+                  stats: _stats,
+                  paceOrSpeedLabel: _paceOrSpeed(l10n),
+                ),
+                const SizedBox(height: VSpace.sm),
+                Text(
+                  l10n.outdoorDuration,
+                  style: TextStyle(color: colors.textMute, fontSize: 12),
+                ),
+                Text(
+                  _formatDuration(_stats.activeSeconds),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: colors.text,
+                      ),
                 ),
                 const SizedBox(height: VSpace.md),
                 Text(
@@ -334,21 +338,4 @@ class _OutdoorLiveScreenState extends ConsumerState<OutdoorLiveScreen> {
         OutdoorWorkoutType.run => l10n.outdoorTypeRun,
         OutdoorWorkoutType.cycle => l10n.outdoorTypeCycle,
       };
-}
-
-class _Stat extends StatelessWidget {
-  const _Stat(this.label, this.value);
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(label, style: TextStyle(color: context.vireoColors.textMute, fontSize: 12)),
-        const SizedBox(height: 4),
-        Text(value, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
-      ],
-    );
-  }
 }

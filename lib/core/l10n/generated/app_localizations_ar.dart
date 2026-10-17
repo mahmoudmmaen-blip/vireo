@@ -4610,6 +4610,177 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get scanLimitAdFailedSnack =>
       'مقدرناش نحمّل الإعلان — جرّب تاني بعد شوية';
+
+  @override
+  String get rebalanceCardTitle => 'تظبيط يومك';
+
+  @override
+  String get rebalanceSafeDay => 'عادي — يومك لسه في الأمان';
+
+  @override
+  String get rebalanceNeedsTap => 'مفيش تغيير غير لما تختار';
+
+  @override
+  String get weeklyBalanceTitle => 'ميزان الأسبوع';
+
+  @override
+  String get weeklyBalanceEmpty => 'سجّل كام يوم عشان نشوف ميزان الأسبوع';
+
+  @override
+  String weeklyBalanceOnTrack(int actual, int target) {
+    return 'لسه في الهدف: عجز أسبوعي $actual من $target';
+  }
+
+  @override
+  String weeklyBalanceOffTrack(int actual, int target) {
+    return 'الأسبوع ده: عجز $actual من $target — نقدر نعدّل';
+  }
+
+  @override
+  String weeklyBalanceCumulative(int kcal) {
+    return 'التراكمي: $kcal سعرة';
+  }
+
+  @override
+  String get energyLedgerTitle => 'رصيد حرقك';
+
+  @override
+  String get energyLedgerToday => 'اليوم';
+
+  @override
+  String get energyLedgerWeek => 'الأسبوع';
+
+  @override
+  String get energyLedgerMonth => 'الشهر';
+
+  @override
+  String get energyLedgerAllTime => 'من أول يوم';
+
+  @override
+  String energyLedgerBurned(int kcal, String fatKg) {
+    return 'حرقت $kcal سعرة ≈ $fatKg كجم دهون';
+  }
+
+  @override
+  String get energyLedgerBalanceNote =>
+      'سعرات النشاط وتقدير الدهون من الرصيد منفصلين (تقديري)';
+
+  @override
+  String energyLedgerStepsDistance(int steps, String km) {
+    return '$steps خطوة · $km كم';
+  }
+
+  @override
+  String get fingerprintTitle => 'بصمتك — نظام Vireo الذكي';
+
+  @override
+  String get fingerprintSubtitle => 'اتعلمت من عاداتك الحقيقية بعد ١٤ يوم';
+
+  @override
+  String get fingerprintReset => 'ارجّع الافتراضي';
+
+  @override
+  String get fingerprintActivity => 'نشاطك';
+
+  @override
+  String get fingerprintNutrition => 'أكلك';
+
+  @override
+  String get fingerprintTolerance => 'تحمّلك';
+
+  @override
+  String get fingerprintChronotype => 'مواعيدك';
+
+  @override
+  String get fingerprintStepsUnit => 'خطوة مريحة';
+
+  @override
+  String fingerprintMealsCount(int count) {
+    return '$count وجبات / يوم';
+  }
+
+  @override
+  String fingerprintDeficitValue(int kcal) {
+    return 'عجز تتحمّله ≈ $kcal سعرة';
+  }
+
+  @override
+  String fingerprintLogHour(int hour) {
+    return 'بتسجّل عادة حوالي الساعة $hour';
+  }
+
+  @override
+  String get fingerprintActivityWhy => 'ليه؟ متوسط أحسن ٧٠٪ من أيام خطواتك';
+
+  @override
+  String get fingerprintNutritionWhy => 'ليه؟ من مواعيد وجباتك وأكلك المفضّل';
+
+  @override
+  String get fingerprintToleranceWhy => 'ليه؟ العجز اللي بتكمله من غير ارتداد';
+
+  @override
+  String get fingerprintChronotypeWhy => 'ليه؟ من مواعيد التسجيل والمشي';
+
+  @override
+  String get fingerprintEdit => 'عدّلها';
+
+  @override
+  String fingerprintNotReady(int days) {
+    return 'لسه بنتعلّم — $days/١٤ يوم';
+  }
+
+  @override
+  String get strideCalibratedBadge => 'مُعايَر على مشيك ✓';
+
+  @override
+  String stepSourceLabel(String source) {
+    return 'المصدر: $source';
+  }
+
+  @override
+  String get stepSourcePedometer => 'حساس الموبايل';
+
+  @override
+  String get stepSourceHealth => 'الصحة';
+
+  @override
+  String get stepSourceManual => 'يدوي';
+
+  @override
+  String get stepSourceNone => 'غير متاح';
+
+  @override
+  String get eatBackSettingTitle => 'استرجاع سعرات التمرين';
+
+  @override
+  String get eatBackHalf => '٥٠٪ (افتراضي)';
+
+  @override
+  String get eatBackFull => '١٠٠٪';
+
+  @override
+  String get eatBackNone => '٠٪';
+
+  @override
+  String get tdeeCheckInTitle => 'خطتك اتعدلت';
+
+  @override
+  String get tdeeCheckInUndo => 'تراجع';
+
+  @override
+  String get missedStepsCardTitle => 'خطوات امبارح';
+
+  @override
+  String get outdoorNetKcalLabel => 'صافي سعرات';
+
+  @override
+  String get outdoorCadenceLabel => 'إيقاع الخطوة';
+
+  @override
+  String get weeklyReviewTitle => 'مراجعة الأسبوع';
+
+  @override
+  String get adaptiveTdeeBlendNote => 'مزيج من تسجيلك + المعادلة';
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -5898,6 +6069,177 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   @override
   String get scanLimitAdFailedSnack =>
       'مقدرناش نحمّل الإعلان — جرّب تاني بعد شوية';
+
+  @override
+  String get rebalanceCardTitle => 'تظبيط يومك';
+
+  @override
+  String get rebalanceSafeDay => 'عادي — يومك لسه في الأمان';
+
+  @override
+  String get rebalanceNeedsTap => 'مفيش تغيير غير لما تختار';
+
+  @override
+  String get weeklyBalanceTitle => 'ميزان الأسبوع';
+
+  @override
+  String get weeklyBalanceEmpty => 'سجّل كام يوم عشان نشوف ميزان الأسبوع';
+
+  @override
+  String weeklyBalanceOnTrack(int actual, int target) {
+    return 'لسه في الهدف: عجز أسبوعي $actual من $target';
+  }
+
+  @override
+  String weeklyBalanceOffTrack(int actual, int target) {
+    return 'الأسبوع ده: عجز $actual من $target — نقدر نعدّل';
+  }
+
+  @override
+  String weeklyBalanceCumulative(int kcal) {
+    return 'التراكمي: $kcal سعرة';
+  }
+
+  @override
+  String get energyLedgerTitle => 'رصيد حرقك';
+
+  @override
+  String get energyLedgerToday => 'اليوم';
+
+  @override
+  String get energyLedgerWeek => 'الأسبوع';
+
+  @override
+  String get energyLedgerMonth => 'الشهر';
+
+  @override
+  String get energyLedgerAllTime => 'من أول يوم';
+
+  @override
+  String energyLedgerBurned(int kcal, String fatKg) {
+    return 'حرقت $kcal سعرة ≈ $fatKg كجم دهون';
+  }
+
+  @override
+  String get energyLedgerBalanceNote =>
+      'سعرات النشاط وتقدير الدهون من الرصيد منفصلين (تقديري)';
+
+  @override
+  String energyLedgerStepsDistance(int steps, String km) {
+    return '$steps خطوة · $km كم';
+  }
+
+  @override
+  String get fingerprintTitle => 'بصمتك — نظام Vireo الذكي';
+
+  @override
+  String get fingerprintSubtitle => 'اتعلمت من عاداتك الحقيقية بعد ١٤ يوم';
+
+  @override
+  String get fingerprintReset => 'ارجّع الافتراضي';
+
+  @override
+  String get fingerprintActivity => 'نشاطك';
+
+  @override
+  String get fingerprintNutrition => 'أكلك';
+
+  @override
+  String get fingerprintTolerance => 'تحمّلك';
+
+  @override
+  String get fingerprintChronotype => 'مواعيدك';
+
+  @override
+  String get fingerprintStepsUnit => 'خطوة مريحة';
+
+  @override
+  String fingerprintMealsCount(int count) {
+    return '$count وجبات / يوم';
+  }
+
+  @override
+  String fingerprintDeficitValue(int kcal) {
+    return 'عجز تتحمّله ≈ $kcal سعرة';
+  }
+
+  @override
+  String fingerprintLogHour(int hour) {
+    return 'بتسجّل عادة حوالي الساعة $hour';
+  }
+
+  @override
+  String get fingerprintActivityWhy => 'ليه؟ متوسط أحسن ٧٠٪ من أيام خطواتك';
+
+  @override
+  String get fingerprintNutritionWhy => 'ليه؟ من مواعيد وجباتك وأكلك المفضّل';
+
+  @override
+  String get fingerprintToleranceWhy => 'ليه؟ العجز اللي بتكمله من غير ارتداد';
+
+  @override
+  String get fingerprintChronotypeWhy => 'ليه؟ من مواعيد التسجيل والمشي';
+
+  @override
+  String get fingerprintEdit => 'عدّلها';
+
+  @override
+  String fingerprintNotReady(int days) {
+    return 'لسه بنتعلّم — $days/١٤ يوم';
+  }
+
+  @override
+  String get strideCalibratedBadge => 'مُعايَر على مشيك ✓';
+
+  @override
+  String stepSourceLabel(String source) {
+    return 'المصدر: $source';
+  }
+
+  @override
+  String get stepSourcePedometer => 'حساس الموبايل';
+
+  @override
+  String get stepSourceHealth => 'الصحة';
+
+  @override
+  String get stepSourceManual => 'يدوي';
+
+  @override
+  String get stepSourceNone => 'غير متاح';
+
+  @override
+  String get eatBackSettingTitle => 'استرجاع سعرات التمرين';
+
+  @override
+  String get eatBackHalf => '٥٠٪ (افتراضي)';
+
+  @override
+  String get eatBackFull => '١٠٠٪';
+
+  @override
+  String get eatBackNone => '٠٪';
+
+  @override
+  String get tdeeCheckInTitle => 'خطتك اتعدلت';
+
+  @override
+  String get tdeeCheckInUndo => 'تراجع';
+
+  @override
+  String get missedStepsCardTitle => 'خطوات امبارح';
+
+  @override
+  String get outdoorNetKcalLabel => 'صافي سعرات';
+
+  @override
+  String get outdoorCadenceLabel => 'إيقاع الخطوة';
+
+  @override
+  String get weeklyReviewTitle => 'مراجعة الأسبوع';
+
+  @override
+  String get adaptiveTdeeBlendNote => 'مزيج من تسجيلك + المعادلة';
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -7124,4 +7466,175 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String get scanLimitAdFailedSnack => 'تعذر تحميل الإعلان — حاول لاحقاً';
+
+  @override
+  String get rebalanceCardTitle => 'تظبيط يومك';
+
+  @override
+  String get rebalanceSafeDay => 'عادي — يومك لسه في الأمان';
+
+  @override
+  String get rebalanceNeedsTap => 'مفيش تغيير غير لما تختار';
+
+  @override
+  String get weeklyBalanceTitle => 'ميزان الأسبوع';
+
+  @override
+  String get weeklyBalanceEmpty => 'سجّل كام يوم عشان نشوف ميزان الأسبوع';
+
+  @override
+  String weeklyBalanceOnTrack(int actual, int target) {
+    return 'لسه في الهدف: عجز أسبوعي $actual من $target';
+  }
+
+  @override
+  String weeklyBalanceOffTrack(int actual, int target) {
+    return 'الأسبوع ده: عجز $actual من $target — نقدر نعدّل';
+  }
+
+  @override
+  String weeklyBalanceCumulative(int kcal) {
+    return 'التراكمي: $kcal سعرة';
+  }
+
+  @override
+  String get energyLedgerTitle => 'رصيد حرقك';
+
+  @override
+  String get energyLedgerToday => 'اليوم';
+
+  @override
+  String get energyLedgerWeek => 'الأسبوع';
+
+  @override
+  String get energyLedgerMonth => 'الشهر';
+
+  @override
+  String get energyLedgerAllTime => 'من أول يوم';
+
+  @override
+  String energyLedgerBurned(int kcal, String fatKg) {
+    return 'حرقت $kcal سعرة ≈ $fatKg كجم دهون';
+  }
+
+  @override
+  String get energyLedgerBalanceNote =>
+      'سعرات النشاط وتقدير الدهون من الرصيد منفصلين (تقديري)';
+
+  @override
+  String energyLedgerStepsDistance(int steps, String km) {
+    return '$steps خطوة · $km كم';
+  }
+
+  @override
+  String get fingerprintTitle => 'بصمتك — نظام Vireo الذكي';
+
+  @override
+  String get fingerprintSubtitle => 'اتعلمت من عاداتك الحقيقية بعد ١٤ يوم';
+
+  @override
+  String get fingerprintReset => 'ارجّع الافتراضي';
+
+  @override
+  String get fingerprintActivity => 'نشاطك';
+
+  @override
+  String get fingerprintNutrition => 'أكلك';
+
+  @override
+  String get fingerprintTolerance => 'تحمّلك';
+
+  @override
+  String get fingerprintChronotype => 'مواعيدك';
+
+  @override
+  String get fingerprintStepsUnit => 'خطوة مريحة';
+
+  @override
+  String fingerprintMealsCount(int count) {
+    return '$count وجبات / يوم';
+  }
+
+  @override
+  String fingerprintDeficitValue(int kcal) {
+    return 'عجز تتحمّله ≈ $kcal سعرة';
+  }
+
+  @override
+  String fingerprintLogHour(int hour) {
+    return 'بتسجّل عادة حوالي الساعة $hour';
+  }
+
+  @override
+  String get fingerprintActivityWhy => 'ليه؟ متوسط أحسن ٧٠٪ من أيام خطواتك';
+
+  @override
+  String get fingerprintNutritionWhy => 'ليه؟ من مواعيد وجباتك وأكلك المفضّل';
+
+  @override
+  String get fingerprintToleranceWhy => 'ليه؟ العجز اللي بتكمله من غير ارتداد';
+
+  @override
+  String get fingerprintChronotypeWhy => 'ليه؟ من مواعيد التسجيل والمشي';
+
+  @override
+  String get fingerprintEdit => 'عدّلها';
+
+  @override
+  String fingerprintNotReady(int days) {
+    return 'لسه بنتعلّم — $days/١٤ يوم';
+  }
+
+  @override
+  String get strideCalibratedBadge => 'مُعايَر على مشيك ✓';
+
+  @override
+  String stepSourceLabel(String source) {
+    return 'المصدر: $source';
+  }
+
+  @override
+  String get stepSourcePedometer => 'حساس الموبايل';
+
+  @override
+  String get stepSourceHealth => 'الصحة';
+
+  @override
+  String get stepSourceManual => 'يدوي';
+
+  @override
+  String get stepSourceNone => 'غير متاح';
+
+  @override
+  String get eatBackSettingTitle => 'استرجاع سعرات التمرين';
+
+  @override
+  String get eatBackHalf => '٥٠٪ (افتراضي)';
+
+  @override
+  String get eatBackFull => '١٠٠٪';
+
+  @override
+  String get eatBackNone => '٠٪';
+
+  @override
+  String get tdeeCheckInTitle => 'خطتك اتعدلت';
+
+  @override
+  String get tdeeCheckInUndo => 'تراجع';
+
+  @override
+  String get missedStepsCardTitle => 'خطوات امبارح';
+
+  @override
+  String get outdoorNetKcalLabel => 'صافي سعرات';
+
+  @override
+  String get outdoorCadenceLabel => 'إيقاع الخطوة';
+
+  @override
+  String get weeklyReviewTitle => 'مراجعة الأسبوع';
+
+  @override
+  String get adaptiveTdeeBlendNote => 'مزيج من تسجيلك + المعادلة';
 }
