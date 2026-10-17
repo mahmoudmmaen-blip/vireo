@@ -1005,10 +1005,9 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                                     ),
                                   ),
                                   IconButton(
-                                    visualDensity: VisualDensity.compact,
-                                    padding: EdgeInsets.zero,
-                                    constraints: const BoxConstraints(),
-                                    icon: const Icon(Icons.close, size: 16),
+                                    tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
+                                    icon: const Icon(Icons.close, size: 18),
+                                    constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
                                     onPressed: () => setState(() => _clarifyingQuestionDismissed = true),
                                   ),
                                 ],

@@ -4,6 +4,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/ui/estimated_kcal_label.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/ring_progress.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
@@ -114,7 +115,7 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        '${nutrition.remainingKcal.abs()}',
+                        formatCount(nutrition.remainingKcal.abs()),
                         style: VType.number(
                           size: 20,
                           weight: FontWeight.w800,
@@ -155,9 +156,9 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      isArabic
-                          ? '${nutrition.remainingKcal.abs()} سعرة ${nutrition.isOver ? 'زيادة' : 'فاضلة'}'
-                          : '${nutrition.remainingKcal.abs()} kcal ${nutrition.isOver ? 'over' : 'left'}',
+                      nutrition.isOver
+                          ? l10n.homeKcalOver(formatCount(nutrition.remainingKcal.abs()))
+                          : l10n.homeKcalLeft(formatCount(nutrition.remainingKcal.abs())),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -166,11 +167,21 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
                         color: nutrition.isOver ? colors.gold : colors.text,
                       ),
                     ),
+                    const SizedBox(height: 2),
+                    Text(
+                      l10n.mealReviewEstimated,
+                      style: TextStyle(
+                        color: colors.gold,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                     const SizedBox(height: 4),
                     Text(
-                      isArabic
-                          ? 'أكلت ${nutrition.eatenKcal} من $goalKcal'
-                          : 'Ate ${nutrition.eatenKcal} of $goalKcal',
+                      l10n.homeAteOfGoal(
+                        formatCount(nutrition.eatenKcal),
+                        formatCount(goalKcal),
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(color: colors.textMute, fontSize: 12),

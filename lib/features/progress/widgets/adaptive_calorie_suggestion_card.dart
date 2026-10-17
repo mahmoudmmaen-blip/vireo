@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/ui/estimated_kcal_label.dart';
+import 'package:vireo/core/ui/vireo_icon_button.dart';
+import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/progress/domain/adaptive_calorie_calculator.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
@@ -21,12 +24,15 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
 
     final isIncrease = suggestion.appliedDeltaKcal > 0;
     final deltaSign = isIncrease ? '+' : '';
+    final deltaColor = isIncrease ? colors.recovery : colors.success;
+    final isAr = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final kcalUnit = isAr ? 'سعرة' : 'kcal';
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(VSpace.md),
       decoration: BoxDecoration(
         color: colors.surfaceRaised,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(VRadius.md),
         border: Border.all(color: colors.ember.withValues(alpha: 0.4), width: 1.5),
         boxShadow: [
           BoxShadow(
@@ -42,7 +48,7 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(VSpace.xs),
                 decoration: BoxDecoration(
                   color: colors.ember.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
@@ -61,16 +67,17 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
                           ),
                     ),
                     Text(
-                      'Based on your real metabolic response',
+                      l10n.adaptiveCalorieBasedOnResponse,
                       style: TextStyle(color: colors.textMute, fontSize: 11),
                     ),
                   ],
                 ),
               ),
-              IconButton(
-                icon: const Icon(Icons.info_outline, size: 20),
-                color: colors.textMute,
+              VireoIconButton(
+                icon: Icons.info_outline,
                 tooltip: l10n.adaptiveCalorieExplainMath,
+                color: colors.textMute,
+                iconSize: 20,
                 onPressed: () => _showMathExplanation(context, suggestion),
               ),
             ],
@@ -82,9 +89,12 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Current Target', style: TextStyle(color: colors.textMute, fontSize: 11)),
                   Text(
-                    '${suggestion.currentCalorieTarget} kcal',
+                    l10n.adaptiveCalorieCurrentTarget,
+                    style: TextStyle(color: colors.textMute, fontSize: 11),
+                  ),
+                  Text(
+                    '${formatCount(suggestion.currentCalorieTarget)} $kcalUnit',
                     style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                   ),
                 ],
@@ -93,9 +103,12 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Suggested Target', style: TextStyle(color: colors.textMute, fontSize: 11)),
                   Text(
-                    '${suggestion.suggestedCalorieTarget} kcal',
+                    l10n.adaptiveCalorieSuggestedTarget,
+                    style: TextStyle(color: colors.textMute, fontSize: 11),
+                  ),
+                  Text(
+                    '${formatCount(suggestion.suggestedCalorieTarget)} $kcalUnit',
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 17,
@@ -107,25 +120,29 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: (isIncrease ? const Color(0xFF3B82F6) : context.vireoColors.success)
-                      .withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8),
+                  color: deltaColor.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(VRadius.sm),
                 ),
                 child: Text(
-                  '$deltaSign${suggestion.appliedDeltaKcal} kcal/d',
+                  l10n.adaptiveCalorieDeltaPerDay(
+                    deltaSign,
+                    suggestion.appliedDeltaKcal.abs(),
+                  ),
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
-                    color: isIncrease ? const Color(0xFF3B82F6) : context.vireoColors.success,
+                    color: deltaColor,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: VSpace.sm),
           Text(
-            'Estimated real maintenance: ${suggestion.estimatedMaintenanceKcal} kcal/day '
-            'from ${suggestion.daysCount} days tracking.',
+            l10n.adaptiveCalorieMaintenanceLine(
+              suggestion.estimatedMaintenanceKcal ?? 0,
+              suggestion.daysCount,
+            ),
             style: TextStyle(color: colors.textMute, fontSize: 12),
           ),
           const SizedBox(height: 14),
@@ -141,13 +158,14 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
                   child: Text(l10n.adaptiveCalorieDismiss),
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: VSpace.sm),
               Expanded(
                 flex: 2,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: colors.ember,
-                    foregroundColor: Colors.white,
+                    foregroundColor: colors.text,
+                    minimumSize: const Size(48, 48),
                   ),
                   onPressed: () async {
                     if (!FeatureGates.requirePro(context, ref, force: true)) {
@@ -161,7 +179,9 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
                         SnackBar(
                           duration: const Duration(seconds: 3),
                           content: Text(
-                            'Calorie target updated to ${suggestion.suggestedCalorieTarget} kcal!',
+                            l10n.adaptiveCalorieUpdatedSnack(
+                              suggestion.suggestedCalorieTarget,
+                            ),
                           ),
                         ),
                       );
@@ -185,11 +205,11 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
       context: context,
       backgroundColor: colors.surfaceRaised,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(VRadius.lg)),
       ),
       builder: (ctx) {
         return Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(VSpace.xl),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,30 +217,32 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    l10n.adaptiveCalorieExplainMath,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                  Expanded(
+                    child: Text(
+                      l10n.adaptiveCalorieExplainMath,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
+                  VireoIconButton(
+                    icon: Icons.close,
+                    tooltip: MaterialLocalizations.of(ctx).closeButtonTooltip,
                     onPressed: () => Navigator.pop(ctx),
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: VSpace.sm),
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: colors.surface,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(VRadius.sm),
                   border: Border.all(color: colors.line),
                 ),
                 child: Text(
-                  'Maintenance = Avg Intake − (Weight Change kg × 7700 ÷ Days)',
+                  l10n.adaptiveCalorieMathFormula,
                   style: TextStyle(
-                    fontFamily: 'monospace',
                     fontWeight: FontWeight.bold,
                     color: colors.ember,
                     fontSize: 13,
@@ -228,27 +250,34 @@ class AdaptiveCalorieSuggestionCard extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 14),
-              _MathRow(label: 'Window span', value: '${s.daysCount} days'),
-              _MathRow(label: 'Food logs count', value: '${s.foodLogsCount} days'),
-              _MathRow(label: 'Weigh-ins count', value: '${s.weighInsCount} times'),
-              _MathRow(label: 'Average intake', value: '${s.averageIntakeKcal} kcal/day'),
+              _MathRow(label: l10n.adaptiveCalorieWindowSpan, value: '${s.daysCount}'),
+              _MathRow(label: l10n.adaptiveCalorieFoodLogsCount, value: '${s.foodLogsCount}'),
+              _MathRow(label: l10n.adaptiveCalorieWeighInsCount, value: '${s.weighInsCount}'),
               _MathRow(
-                label: 'Trend weight change',
-                value: '${(s.trendWeightChangeKg ?? 0) >= 0 ? '+' : ''}${s.trendWeightChangeKg} kg',
+                label: l10n.adaptiveCalorieAverageIntake,
+                value:
+                    '${formatCount(s.averageIntakeKcal ?? 0)} ${Localizations.localeOf(context).languageCode.startsWith('ar') ? 'سعرة' : 'kcal'}',
               ),
               _MathRow(
-                label: 'Estimated maintenance',
-                value: '${s.estimatedMaintenanceKcal} kcal/day',
+                label: l10n.adaptiveCalorieTrendWeightChange,
+                value:
+                    '${(s.trendWeightChangeKg ?? 0) >= 0 ? '+' : ''}${s.trendWeightChangeKg}',
               ),
               _MathRow(
-                label: 'Weekly change cap',
-                value: '±150 kcal/week (${s.cappedDeltaKcal >= 0 ? '+' : ''}${s.cappedDeltaKcal} kcal)',
+                label: l10n.adaptiveCalorieEstimatedMaintenance,
+                value:
+                    '${formatCount(s.estimatedMaintenanceKcal ?? 0)} ${Localizations.localeOf(context).languageCode.startsWith('ar') ? 'سعرة' : 'kcal'}',
               ),
               _MathRow(
-                label: 'Safety floor applied',
-                value: s.floorApplied ? 'Yes (minimum 1500 kcal)' : 'No (>1500 kcal)',
+                label: l10n.adaptiveCalorieWeeklyChangeCap,
+                value:
+                    '±150 (${s.cappedDeltaKcal >= 0 ? '+' : ''}${s.cappedDeltaKcal})',
               ),
-              const SizedBox(height: 16),
+              _MathRow(
+                label: l10n.adaptiveCalorieSafetyFloorApplied,
+                value: s.floorApplied ? l10n.adaptiveCalorieFloorYes : l10n.adaptiveCalorieFloorNo,
+              ),
+              const SizedBox(height: VSpace.md),
             ],
           ),
         );
@@ -270,7 +299,12 @@ class _MathRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: context.vireoColors.textMute, fontSize: 13)),
+          Expanded(
+            child: Text(
+              label,
+              style: TextStyle(color: context.vireoColors.textMute, fontSize: 13),
+            ),
+          ),
           Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
         ],
       ),

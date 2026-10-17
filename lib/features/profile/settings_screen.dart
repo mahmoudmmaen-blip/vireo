@@ -20,6 +20,7 @@ import 'package:vireo/features/home/providers/feature_unlock_provider.dart';
 import 'package:vireo/features/notifications/screens/notification_settings_screen.dart';
 import 'package:vireo/features/nutrition/providers/cup_size_preference_provider.dart';
 import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
+import 'package:vireo/features/debug/design_system_page.dart';
 import 'package:vireo/features/profile/delete_account_warning_screen.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/walking/screens/step_diagnostic_screen.dart';
@@ -666,6 +667,16 @@ class SettingsScreen extends ConsumerWidget {
                 );
               }
             },
+          ),
+          ListTile(
+            leading: const Icon(Icons.palette_outlined),
+            title: Text(isAr ? 'نظام التصميم' : 'Design system'),
+            subtitle: Text(
+              isAr ? 'ألوان، خطوط، أزرار، حالات' : 'Tokens, type, buttons, states',
+              style: TextStyle(fontSize: 12, color: colors.textMute),
+            ),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => DesignSystemPage.open(context),
           ),
         ],
       ),

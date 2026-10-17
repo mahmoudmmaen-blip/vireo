@@ -182,7 +182,9 @@ class StepsHeroCard extends ConsumerWidget {
                 ),
                 _StatItem(
                   label: l10n.stepsFatBurned(metrics.fatBurnedGrams.toStringAsFixed(1)),
-                  value: '${metrics.fatBurnedGrams.toStringAsFixed(1)}g',
+                  value: Localizations.localeOf(context).languageCode.startsWith('ar')
+                      ? '${metrics.fatBurnedGrams.toStringAsFixed(1)} جم'
+                      : '${metrics.fatBurnedGrams.toStringAsFixed(1)}g',
                   icon: Icons.water_drop_outlined,
                   color: colors.gold,
                 ),

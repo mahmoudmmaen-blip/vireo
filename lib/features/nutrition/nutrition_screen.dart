@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
+import 'package:vireo/core/ui/async_state_view.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
 import 'package:vireo/core/widgets/language_selector.dart';
 import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
@@ -222,12 +223,19 @@ class _MealTab extends ConsumerWidget {
     final mealsAsync = ref.watch(effectiveTodayMealsProvider);
 
     return mealsAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
+      loading: () => AsyncStateView.loading(skeletonRows: 3),
+      error: (error, stackTrace) => AsyncStateView.error(
+        message: l10n.authErrorGeneric,
+        onRetry: () => ref.invalidate(effectiveTodayMealsProvider),
+      ),
       data: (meals) {
         final meal = meals.where((m) => m.mealType == mealType).firstOrNull;
         if (meal == null) {
-          return Center(child: Text(l10n.nutritionNoMealPlanned));
+          return AsyncStateView.empty(
+            title: l10n.nutritionNoMealPlanned,
+            message: l10n.uxStateEmptyMessage,
+            icon: Icons.restaurant_outlined,
+          );
         }
         return ListView(
           padding: const EdgeInsets.all(16),

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/theme/vireo_decorations.dart';
+import 'package:vireo/core/ui/async_state_view.dart';
 import 'package:vireo/core/utils/cardio_calorie_calculator.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/cardio/screens/cardio_activity_screen.dart';
@@ -28,8 +29,11 @@ class DiaryScreen extends ConsumerWidget {
       backgroundColor: colors.background,
       appBar: AppBar(title: Text(l10n.diaryTitle)),
       body: diaryAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text(l10n.authErrorGeneric)),
+        loading: () => AsyncStateView.loading(skeletonRows: 5),
+        error: (error, _) => AsyncStateView.error(
+          message: l10n.authErrorGeneric,
+          onRetry: () => ref.invalidate(diaryProvider),
+        ),
         data: (day) => Column(
           children: [
             _WeekSelector(

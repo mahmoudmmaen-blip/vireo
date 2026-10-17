@@ -5,6 +5,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/shell_navigation_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/ui/async_state_view.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/core/utils/fat_equivalent.dart';
@@ -48,8 +49,11 @@ class ProfileScreen extends ConsumerWidget {
         onPressed: () => ref.read(shellTabIndexProvider.notifier).goHome(),
       ),
       body: auth.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => Center(child: Text(l10n.authErrorGeneric)),
+        loading: () => AsyncStateView.loading(skeletonRows: 4),
+        error: (_, __) => AsyncStateView.error(
+          message: l10n.authErrorGeneric,
+          onRetry: () => ref.invalidate(authProvider),
+        ),
         data: (state) {
           return ListView(
             padding: const EdgeInsets.all(VSpace.md),
@@ -242,8 +246,9 @@ class _ProfileHeaderCard extends ConsumerWidget {
                 ),
               ),
               IconButton(
-                visualDensity: VisualDensity.compact,
+                tooltip: l10n.profileEditProfile,
                 icon: const Icon(Icons.edit_outlined, size: 18),
+                constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
                 onPressed: () => _editName(context, name),
               ),
             ],

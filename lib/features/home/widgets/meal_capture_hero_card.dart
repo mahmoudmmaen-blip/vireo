@@ -39,7 +39,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
               color: colors.ember.withValues(alpha: 0.35),

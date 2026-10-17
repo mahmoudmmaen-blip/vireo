@@ -4,6 +4,7 @@ import 'package:vireo/core/config/feature_flags.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/navigation/vireo_page_routes.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/ui/async_state_view.dart';
 import 'package:vireo/core/utils/program_generator.dart';
 import 'package:vireo/core/widgets/animated_backgrounds.dart';
 import 'package:vireo/core/widgets/feature_scaffold.dart';
@@ -45,8 +46,11 @@ class WorkoutScreen extends ConsumerWidget {
           ),
         ],
         body: sessionAsync.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
+          loading: () => AsyncStateView.loading(skeletonRows: 4),
+          error: (error, stackTrace) => AsyncStateView.error(
+            message: l10n.authErrorGeneric,
+            onRetry: () => ref.invalidate(todayWorkoutProvider),
+          ),
           data: (session) {
             final sub = subAsync.valueOrNull;
             final phase = phaseAsync.valueOrNull ?? 1;

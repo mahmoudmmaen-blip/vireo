@@ -382,13 +382,13 @@ class _FastingScreenState extends ConsumerState<FastingScreen> with SingleTicker
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF10B981).withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
+                    color: colors.success.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: colors.success.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.nights_stay_rounded, color: Color(0xFF10B981), size: 18),
+                      Icon(Icons.nights_stay_rounded, color: colors.success, size: 18),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -409,13 +409,13 @@ class _FastingScreenState extends ConsumerState<FastingScreen> with SingleTicker
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEF4444).withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0xFFEF4444).withValues(alpha: 0.3)),
+                    color: colors.danger.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: colors.danger.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.warning_amber_rounded, color: Color(0xFFEF4444), size: 18),
+                      Icon(Icons.warning_amber_rounded, color: colors.danger, size: 18),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(

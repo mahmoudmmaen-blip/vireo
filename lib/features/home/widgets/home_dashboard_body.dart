@@ -342,8 +342,8 @@ class _HomeHeader extends ConsumerWidget {
               onTap: () => ref.read(shellTabIndexProvider.notifier).goProfile(),
               semanticLabel: l10n.profileTitle,
               child: Container(
-                width: 44,
-                height: 44,
+                width: 48,
+                height: 48,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(color: colors.ember, width: 2),
@@ -413,14 +413,14 @@ class _CircleIconButton extends StatelessWidget {
         onTap: onTap,
         semanticLabel: tooltip,
         child: Container(
-          width: 40,
-          height: 40,
+          width: 48,
+          height: 48,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: colors.surface,
             border: Border.all(color: colors.line),
           ),
-          child: Icon(icon, size: 19, color: colors.text),
+          child: Icon(icon, size: 20, color: colors.text),
         ),
       ),
     );

@@ -52,14 +52,14 @@ class DailyScoreHeroCard extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Material(
         color: colors.surfaceRaised,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(18),
         child: InkWell(
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(18),
           onTap: () => ScoreInsightsScreen.open(context),
           child: Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(22),
+              borderRadius: BorderRadius.circular(18),
               border: Border.all(
                 color: ringColor.withValues(alpha: 0.35),
                 width: 1.5,

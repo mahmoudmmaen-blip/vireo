@@ -82,6 +82,7 @@ class _WorkoutFlowScreenState extends ConsumerState<WorkoutFlowScreen> {
         appBar: AppBar(
           title: Text(_titleForPhase(l10n, flow.phase)),
           leading: IconButton(
+            tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
             icon: const Icon(Icons.close),
             onPressed: () =>
                 ref.read(workoutFlowProvider.notifier).togglePause(true),
@@ -89,7 +90,9 @@ class _WorkoutFlowScreenState extends ConsumerState<WorkoutFlowScreen> {
           actions: [
             IconButton(
               icon: Icon(_isMuted ? Icons.volume_off_rounded : Icons.volume_up_rounded),
-              tooltip: _isMuted ? 'Unmute voice cues' : 'Mute voice cues',
+              tooltip: Localizations.localeOf(context).languageCode.startsWith('ar')
+                  ? (_isMuted ? 'تشغيل الصوت' : 'كتم الصوت')
+                  : (_isMuted ? 'Unmute voice cues' : 'Mute voice cues'),
               onPressed: () {
                 setState(() {
                   _isMuted = !_isMuted;
@@ -99,6 +102,9 @@ class _WorkoutFlowScreenState extends ConsumerState<WorkoutFlowScreen> {
             ),
             if (showPause)
               IconButton(
+                tooltip: Localizations.localeOf(context).languageCode.startsWith('ar')
+                    ? 'إيقاف مؤقت'
+                    : 'Pause',
                 icon: const Icon(Icons.pause_circle_outline),
                 onPressed: () =>
                     ref.read(workoutFlowProvider.notifier).togglePause(true),

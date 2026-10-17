@@ -280,7 +280,7 @@
       }
     }
   },
-  "scoreInsightsWeekFatSummary": "هذا الأسبوع: خسرت ≈ {grams} جم دهون",
+  "scoreInsightsWeekFatSummary": "هذا الأسبوع: حرق ≈ {grams} جم دهون",
   "@scoreInsightsWeekFatSummary": {
     "placeholders": {
       "grams": {
@@ -339,7 +339,7 @@
   "scoreInsightsEnergyBalanceTitle": "توازن الطاقة (المأكول مقابل المحروق)",
   "scoreInsightsEatenKcal": "سعرات أكل",
   "scoreInsightsBurnedKcal": "حرق ونشاط",
-  "scoreInsightsMacrosTitle": "توزيع الماكروز اليوم (الهدف vs المأكول)",
+  "scoreInsightsMacrosTitle": "توزيع الماكروز اليوم (الهدف مقابل المأكول)",
   "scoreInsightsScoreTrendTitle": "مسار السكور خلال 7 أيام",
   "scoreInsightsImmediateActionsTitle": "نصائح وإجراءات فورية لرفع السكور:",
   "workoutRpeSubtitle": "كيف كان شعورك بالمجهود؟ من 1 (سهل جداً) إلى 10 (صعب جداً)",
@@ -569,5 +569,27 @@
   "outdoorNetKcalLabel": "صافي سعرات",
   "outdoorCadenceLabel": "إيقاع الخطوة",
   "weeklyReviewTitle": "مراجعة الأسبوع",
-  "adaptiveTdeeBlendNote": "مزيج من تسجيلك + المعادلة"
+  "adaptiveTdeeBlendNote": "مزيج من تسجيلك + المعادلة",
+  "uxStateEmptyTitle": "لسه فاضي هنا",
+  "uxStateEmptyMessage": "لما تضيف حاجة هتظهر هنا.",
+  "uxStateErrorTitle": "حصلت مشكلة",
+  "uxStateErrorMessage": "مقدرناش نحمّل الصفحة. جرّب تاني.",
+  "uxStateOfflineTitle": "مفيش نت",
+  "uxStateOfflineMessage": "اتأكد من الاتصال وجرّب تاني.",
+  "uxStateRetry": "جرّب تاني",
+  "designSystemTitle": "نظام التصميم",
+  "paywallFeatureFairUseScans": "٤٠ مسح للطبق / يوم (استخدام عادل)",
+  "paywallFeatureFairUseScansDesc": "مسح يومي مريح — حد عادل ٤٠ مسح ذكي في اليوم",
+  "paywallHonestSubtitle": "برو يفتح مسح ذكي بعدل (٤٠/يوم)، مدرب متكيف، تاريخ رصيد حرقك كامل، وتجربة بدون إعلانات.",
+  "adaptiveCalorieBasedOnResponse": "بناءً على استجابة جسمك الحقيقية",
+  "adaptiveCalorieDeltaPerDay": "{sign}{kcal} سعرة/يوم",
+  "adaptiveCalorieMaintenanceLine": "ثبات تقديري: {kcal} سعرة/يوم من {days} يوم تتبع.",
+  "adaptiveCalorieUpdatedSnack": "اتحدّث هدف السعرات لـ {kcal}",
+  "adaptiveCalorieMathFormula": "الثبات = متوسط الأكل − (تغير الوزن كجم × ٧٧٠٠ ÷ الأيام)",
+  "adaptiveCalorieFloorYes": "نعم (الحد الأدنى الآمن)",
+  "adaptiveCalorieFloorNo": "لا (فوق الحد الآمن)",
+  "caloriesEstimatedHint": "تقديري",
+  "homeAteOfGoal": "أكلت {eaten} من {goal}",
+  "homeKcalLeft": "{kcal} سعرة فاضلة",
+  "homeKcalOver": "{kcal} سعرة زيادة"
 }

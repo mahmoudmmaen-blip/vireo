@@ -852,14 +852,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'No program changes needed — keep going!';
 
   @override
-  String get paywallTitle => 'Vireo Premium';
+  String get paywallTitle => 'Vireo Pro';
 
   @override
   String get paywallHeadline => 'Unlock your full potential';
 
   @override
   String get paywallSubtitle =>
-      'Premium gives you unlimited scans, full program phases, and deeper progress insights.';
+      'Pro unlocks fair-use AI scans (40/day), adaptive coach, full Burn Balance history, and an ad-free experience.';
 
   @override
   String get paywallBestValue => 'Best Value';
@@ -874,7 +874,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paywallPlanLifetime => 'Lifetime';
 
   @override
-  String get paywallFeatureUnlimitedScans => 'Unlimited Instant Plate Scans';
+  String get paywallFeatureUnlimitedScans => '40 plate scans / day (fair use)';
 
   @override
   String get paywallFeatureFullProgram =>
@@ -3875,11 +3875,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Unlock unlimited plate scans, full AI workout generation, and advanced analytics.';
 
   @override
-  String get paywallProBadge => 'VIREO PRO';
+  String get paywallProBadge => 'Vireo Pro';
 
   @override
   String get paywallFeatureUnlimitedScansDesc =>
-      'Never worry about daily limits or quotas';
+      'Daily AI scans with a fair-use cap of 40 — no surprise overages';
 
   @override
   String get paywallFeatureSmartSub => 'AI Smart Substitution & Meal Prep';
@@ -4272,7 +4272,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String scoreInsightsWeekFatSummary(int grams) {
-    return 'This week: lost ≈ ${grams}g fat';
+    return 'This week: burned ≈ ${grams}g fat';
   }
 
   @override
@@ -4813,4 +4813,87 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adaptiveTdeeBlendNote => 'Blended from your logs + formula';
+
+  @override
+  String get uxStateEmptyTitle => 'Nothing here yet';
+
+  @override
+  String get uxStateEmptyMessage =>
+      'When you add something, it will show up here.';
+
+  @override
+  String get uxStateErrorTitle => 'Something went wrong';
+
+  @override
+  String get uxStateErrorMessage => 'We could not load this. Please try again.';
+
+  @override
+  String get uxStateOfflineTitle => 'You are offline';
+
+  @override
+  String get uxStateOfflineMessage => 'Check your connection, then try again.';
+
+  @override
+  String get uxStateRetry => 'Try again';
+
+  @override
+  String get designSystemTitle => 'Design system';
+
+  @override
+  String get paywallFeatureFairUseScans => '40 plate scans / day (fair use)';
+
+  @override
+  String get paywallFeatureFairUseScansDesc =>
+      'Unlimited feel for daily logging — fair-use cap of 40 AI scans/day';
+
+  @override
+  String get paywallHonestSubtitle =>
+      'Pro unlocks fair-use AI scans (40/day), adaptive coach, full Burn Balance history, and an ad-free experience.';
+
+  @override
+  String get adaptiveCalorieBasedOnResponse =>
+      'Based on your real metabolic response';
+
+  @override
+  String adaptiveCalorieDeltaPerDay(String sign, int kcal) {
+    return '$sign$kcal kcal/d';
+  }
+
+  @override
+  String adaptiveCalorieMaintenanceLine(int kcal, int days) {
+    return 'Estimated real maintenance: $kcal kcal/day from $days days tracking.';
+  }
+
+  @override
+  String adaptiveCalorieUpdatedSnack(int kcal) {
+    return 'Calorie target updated to $kcal kcal';
+  }
+
+  @override
+  String get adaptiveCalorieMathFormula =>
+      'Maintenance = Avg Intake − (Weight Change kg × 7700 ÷ Days)';
+
+  @override
+  String get adaptiveCalorieFloorYes => 'Yes (minimum safety floor)';
+
+  @override
+  String get adaptiveCalorieFloorNo => 'No (above safety floor)';
+
+  @override
+  String get caloriesEstimatedHint => 'estimated';
+
+  @override
+  String homeAteOfGoal(String eaten, String goal) {
+    return 'Ate $eaten of $goal';
+  }
+
+  @override
+  String homeKcalLeft(String kcal) {
+    return '$kcal kcal left';
+  }
+
+  @override
+  String homeKcalOver(String kcal) {
+    return '$kcal kcal over';
+  }
 }

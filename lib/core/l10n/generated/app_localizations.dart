@@ -1633,7 +1633,7 @@ abstract class AppLocalizations {
   /// No description provided for @paywallTitle.
   ///
   /// In en, this message translates to:
-  /// **'Vireo Premium'**
+  /// **'Vireo Pro'**
   String get paywallTitle;
 
   /// No description provided for @paywallHeadline.
@@ -1645,7 +1645,7 @@ abstract class AppLocalizations {
   /// No description provided for @paywallSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Premium gives you unlimited scans, full program phases, and deeper progress insights.'**
+  /// **'Pro unlocks fair-use AI scans (40/day), adaptive coach, full Burn Balance history, and an ad-free experience.'**
   String get paywallSubtitle;
 
   /// No description provided for @paywallBestValue.
@@ -1675,7 +1675,7 @@ abstract class AppLocalizations {
   /// No description provided for @paywallFeatureUnlimitedScans.
   ///
   /// In en, this message translates to:
-  /// **'Unlimited Instant Plate Scans'**
+  /// **'40 plate scans / day (fair use)'**
   String get paywallFeatureUnlimitedScans;
 
   /// No description provided for @paywallFeatureFullProgram.
@@ -7024,13 +7024,13 @@ abstract class AppLocalizations {
   /// No description provided for @paywallProBadge.
   ///
   /// In en, this message translates to:
-  /// **'VIREO PRO'**
+  /// **'Vireo Pro'**
   String get paywallProBadge;
 
   /// No description provided for @paywallFeatureUnlimitedScansDesc.
   ///
   /// In en, this message translates to:
-  /// **'Never worry about daily limits or quotas'**
+  /// **'Daily AI scans with a fair-use cap of 40 — no surprise overages'**
   String get paywallFeatureUnlimitedScansDesc;
 
   /// No description provided for @paywallFeatureSmartSub.
@@ -7750,7 +7750,7 @@ abstract class AppLocalizations {
   /// No description provided for @scoreInsightsWeekFatSummary.
   ///
   /// In en, this message translates to:
-  /// **'This week: lost ≈ {grams}g fat'**
+  /// **'This week: burned ≈ {grams}g fat'**
   String scoreInsightsWeekFatSummary(int grams);
 
   /// No description provided for @scoreInsightsGoalWeeksSummary.
@@ -8604,6 +8604,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Blended from your logs + formula'**
   String get adaptiveTdeeBlendNote;
+
+  /// No description provided for @uxStateEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here yet'**
+  String get uxStateEmptyTitle;
+
+  /// No description provided for @uxStateEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'When you add something, it will show up here.'**
+  String get uxStateEmptyMessage;
+
+  /// No description provided for @uxStateErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get uxStateErrorTitle;
+
+  /// No description provided for @uxStateErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not load this. Please try again.'**
+  String get uxStateErrorMessage;
+
+  /// No description provided for @uxStateOfflineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You are offline'**
+  String get uxStateOfflineTitle;
+
+  /// No description provided for @uxStateOfflineMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection, then try again.'**
+  String get uxStateOfflineMessage;
+
+  /// No description provided for @uxStateRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get uxStateRetry;
+
+  /// No description provided for @designSystemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Design system'**
+  String get designSystemTitle;
+
+  /// No description provided for @paywallFeatureFairUseScans.
+  ///
+  /// In en, this message translates to:
+  /// **'40 plate scans / day (fair use)'**
+  String get paywallFeatureFairUseScans;
+
+  /// No description provided for @paywallFeatureFairUseScansDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited feel for daily logging — fair-use cap of 40 AI scans/day'**
+  String get paywallFeatureFairUseScansDesc;
+
+  /// No description provided for @paywallHonestSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro unlocks fair-use AI scans (40/day), adaptive coach, full Burn Balance history, and an ad-free experience.'**
+  String get paywallHonestSubtitle;
+
+  /// No description provided for @adaptiveCalorieBasedOnResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on your real metabolic response'**
+  String get adaptiveCalorieBasedOnResponse;
+
+  /// No description provided for @adaptiveCalorieDeltaPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'{sign}{kcal} kcal/d'**
+  String adaptiveCalorieDeltaPerDay(String sign, int kcal);
+
+  /// No description provided for @adaptiveCalorieMaintenanceLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated real maintenance: {kcal} kcal/day from {days} days tracking.'**
+  String adaptiveCalorieMaintenanceLine(int kcal, int days);
+
+  /// No description provided for @adaptiveCalorieUpdatedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Calorie target updated to {kcal} kcal'**
+  String adaptiveCalorieUpdatedSnack(int kcal);
+
+  /// No description provided for @adaptiveCalorieMathFormula.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintenance = Avg Intake − (Weight Change kg × 7700 ÷ Days)'**
+  String get adaptiveCalorieMathFormula;
+
+  /// No description provided for @adaptiveCalorieFloorYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes (minimum safety floor)'**
+  String get adaptiveCalorieFloorYes;
+
+  /// No description provided for @adaptiveCalorieFloorNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No (above safety floor)'**
+  String get adaptiveCalorieFloorNo;
+
+  /// No description provided for @caloriesEstimatedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'estimated'**
+  String get caloriesEstimatedHint;
+
+  /// No description provided for @homeAteOfGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Ate {eaten} of {goal}'**
+  String homeAteOfGoal(String eaten, String goal);
+
+  /// No description provided for @homeKcalLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal left'**
+  String homeKcalLeft(String kcal);
+
+  /// No description provided for @homeKcalOver.
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal over'**
+  String homeKcalOver(String kcal);
 }
 
 class _AppLocalizationsDelegate

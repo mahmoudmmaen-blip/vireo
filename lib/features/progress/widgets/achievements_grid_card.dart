@@ -150,7 +150,7 @@ class _BadgeItem extends StatelessWidget {
                 ),
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: const Text('OK'),
+                child: Text(MaterialLocalizations.of(context).okButtonLabel),
               ),
             ],
           ),

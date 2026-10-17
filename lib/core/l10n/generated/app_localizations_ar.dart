@@ -841,14 +841,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reassessmentNoPhaseChange => 'مفيش تغيير في البرنامج — كمّل!';
 
   @override
-  String get paywallTitle => 'Vireo Premium';
+  String get paywallTitle => 'ڤيريو برو';
 
   @override
   String get paywallHeadline => 'افتح إمكانياتك الكاملة';
 
   @override
   String get paywallSubtitle =>
-      'Premium يمنحك مسح غير محدود، مراحل برنامج كاملة، ورؤى تقدم أعمق.';
+      'برو يفتح مسح ذكي بعدل (٤٠/يوم)، مدرب متكيف، تاريخ رصيد حرقك كامل، وتجربة بدون إعلانات.';
 
   @override
   String get paywallBestValue => 'أفضل قيمة';
@@ -863,7 +863,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paywallPlanLifetime => 'مدى الحياة';
 
   @override
-  String get paywallFeatureUnlimitedScans => 'مسح غير محدود للأطباق';
+  String get paywallFeatureUnlimitedScans =>
+      '٤٠ مسح للطبق / يوم (استخدام عادل)';
 
   @override
   String get paywallFeatureFullProgram => 'مراحل برنامج كاملة وتمارين متقدمة';
@@ -2787,7 +2788,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get todayPlanNow => 'الآن';
 
   @override
-  String get todayPlanPro => 'PRO';
+  String get todayPlanPro => 'برو';
 
   @override
   String todayPlanWaterReminder(int index, int total) {
@@ -3853,7 +3854,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get paywallFeatureUnlimitedScansDesc =>
-      'بدون أي حدود أو قيود يومية على عدد الوجبات';
+      'مسح يومي مريح — حد عادل ٤٠ مسح ذكي في اليوم';
 
   @override
   String get paywallFeatureSmartSub => 'بدائل الوجبات الذكية بالذكاء الاصطناعي';
@@ -4245,7 +4246,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String scoreInsightsWeekFatSummary(int grams) {
-    return 'هذا الأسبوع: خسرت ≈ $grams جم دهون';
+    return 'هذا الأسبوع: حرق ≈ $grams جم دهون';
   }
 
   @override
@@ -4334,7 +4335,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get scoreInsightsMacrosTitle =>
-      'توزيع الماكروز اليوم (الهدف vs المأكول)';
+      'توزيع الماكروز اليوم (الهدف مقابل المأكول)';
 
   @override
   String get scoreInsightsScoreTrendTitle => 'مسار السكور خلال 7 أيام';
@@ -4781,6 +4782,88 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get adaptiveTdeeBlendNote => 'مزيج من تسجيلك + المعادلة';
+
+  @override
+  String get uxStateEmptyTitle => 'لسه فاضي هنا';
+
+  @override
+  String get uxStateEmptyMessage => 'لما تضيف حاجة هتظهر هنا.';
+
+  @override
+  String get uxStateErrorTitle => 'حصلت مشكلة';
+
+  @override
+  String get uxStateErrorMessage => 'مقدرناش نحمّل الصفحة. جرّب تاني.';
+
+  @override
+  String get uxStateOfflineTitle => 'مفيش نت';
+
+  @override
+  String get uxStateOfflineMessage => 'اتأكد من الاتصال وجرّب تاني.';
+
+  @override
+  String get uxStateRetry => 'جرّب تاني';
+
+  @override
+  String get designSystemTitle => 'نظام التصميم';
+
+  @override
+  String get paywallFeatureFairUseScans => '٤٠ مسح للطبق / يوم (استخدام عادل)';
+
+  @override
+  String get paywallFeatureFairUseScansDesc =>
+      'مسح يومي مريح — حد عادل ٤٠ مسح ذكي في اليوم';
+
+  @override
+  String get paywallHonestSubtitle =>
+      'برو يفتح مسح ذكي بعدل (٤٠/يوم)، مدرب متكيف، تاريخ رصيد حرقك كامل، وتجربة بدون إعلانات.';
+
+  @override
+  String get adaptiveCalorieBasedOnResponse =>
+      'بناءً على استجابة جسمك الحقيقية';
+
+  @override
+  String adaptiveCalorieDeltaPerDay(String sign, int kcal) {
+    return '$sign$kcal سعرة/يوم';
+  }
+
+  @override
+  String adaptiveCalorieMaintenanceLine(int kcal, int days) {
+    return 'ثبات تقديري: $kcal سعرة/يوم من $days يوم تتبع.';
+  }
+
+  @override
+  String adaptiveCalorieUpdatedSnack(int kcal) {
+    return 'اتحدّث هدف السعرات لـ $kcal';
+  }
+
+  @override
+  String get adaptiveCalorieMathFormula =>
+      'الثبات = متوسط الأكل − (تغير الوزن كجم × ٧٧٠٠ ÷ الأيام)';
+
+  @override
+  String get adaptiveCalorieFloorYes => 'نعم (الحد الأدنى الآمن)';
+
+  @override
+  String get adaptiveCalorieFloorNo => 'لا (فوق الحد الآمن)';
+
+  @override
+  String get caloriesEstimatedHint => 'تقديري';
+
+  @override
+  String homeAteOfGoal(String eaten, String goal) {
+    return 'أكلت $eaten من $goal';
+  }
+
+  @override
+  String homeKcalLeft(String kcal) {
+    return '$kcal سعرة فاضلة';
+  }
+
+  @override
+  String homeKcalOver(String kcal) {
+    return '$kcal سعرة زيادة';
+  }
 }
 
 /// The translations for Arabic, as used in Egypt (`ar_EG`).
@@ -5767,7 +5850,7 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String scoreInsightsWeekFatSummary(int grams) {
-    return 'الأسبوع ده: خسرت ≈ $grams جم دهون';
+    return 'الأسبوع ده: حرق ≈ $grams جم دهون';
   }
 
   @override
@@ -5856,7 +5939,7 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String get scoreInsightsMacrosTitle =>
-      'توزيع الماكروز اليوم (الهدف vs المأكول)';
+      'توزيع الماكروز اليوم (الهدف مقابل المأكول)';
 
   @override
   String get scoreInsightsScoreTrendTitle => 'مسار السكور خلال 7 أيام';
@@ -6240,6 +6323,88 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
 
   @override
   String get adaptiveTdeeBlendNote => 'مزيج من تسجيلك + المعادلة';
+
+  @override
+  String get uxStateEmptyTitle => 'لسه فاضي هنا';
+
+  @override
+  String get uxStateEmptyMessage => 'لما تضيف حاجة هتظهر هنا.';
+
+  @override
+  String get uxStateErrorTitle => 'حصلت مشكلة';
+
+  @override
+  String get uxStateErrorMessage => 'مقدرناش نحمّل الصفحة. جرّب تاني.';
+
+  @override
+  String get uxStateOfflineTitle => 'مفيش نت';
+
+  @override
+  String get uxStateOfflineMessage => 'اتأكد من الاتصال وجرّب تاني.';
+
+  @override
+  String get uxStateRetry => 'جرّب تاني';
+
+  @override
+  String get designSystemTitle => 'نظام التصميم';
+
+  @override
+  String get paywallFeatureFairUseScans => '٤٠ مسح للطبق / يوم (استخدام عادل)';
+
+  @override
+  String get paywallFeatureFairUseScansDesc =>
+      'مسح يومي مريح — حد عادل ٤٠ مسح ذكي في اليوم';
+
+  @override
+  String get paywallHonestSubtitle =>
+      'برو يفتح مسح ذكي بعدل (٤٠/يوم)، مدرب متكيف، تاريخ رصيد حرقك كامل، وتجربة بدون إعلانات.';
+
+  @override
+  String get adaptiveCalorieBasedOnResponse =>
+      'بناءً على استجابة جسمك الحقيقية';
+
+  @override
+  String adaptiveCalorieDeltaPerDay(String sign, int kcal) {
+    return '$sign$kcal سعرة/يوم';
+  }
+
+  @override
+  String adaptiveCalorieMaintenanceLine(int kcal, int days) {
+    return 'ثبات تقديري: $kcal سعرة/يوم من $days يوم تتبع.';
+  }
+
+  @override
+  String adaptiveCalorieUpdatedSnack(int kcal) {
+    return 'اتحدّث هدف السعرات لـ $kcal';
+  }
+
+  @override
+  String get adaptiveCalorieMathFormula =>
+      'الثبات = متوسط الأكل − (تغير الوزن كجم × ٧٧٠٠ ÷ الأيام)';
+
+  @override
+  String get adaptiveCalorieFloorYes => 'نعم (الحد الأدنى الآمن)';
+
+  @override
+  String get adaptiveCalorieFloorNo => 'لا (فوق الحد الآمن)';
+
+  @override
+  String get caloriesEstimatedHint => 'تقديري';
+
+  @override
+  String homeAteOfGoal(String eaten, String goal) {
+    return 'أكلت $eaten من $goal';
+  }
+
+  @override
+  String homeKcalLeft(String kcal) {
+    return '$kcal سعرة فاضلة';
+  }
+
+  @override
+  String homeKcalOver(String kcal) {
+    return '$kcal سعرة زيادة';
+  }
 }
 
 /// The translations for Arabic, as used in Saudi Arabia (`ar_SA`).
@@ -7165,7 +7330,7 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String scoreInsightsWeekFatSummary(int grams) {
-    return 'هذا الأسبوع: خسرت ≈ $grams جم دهون';
+    return 'هذا الأسبوع: حرق ≈ $grams جم دهون';
   }
 
   @override
@@ -7254,7 +7419,7 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String get scoreInsightsMacrosTitle =>
-      'توزيع الماكروز اليوم (الهدف vs المأكول)';
+      'توزيع الماكروز اليوم (الهدف مقابل المأكول)';
 
   @override
   String get scoreInsightsScoreTrendTitle => 'مسار السكور خلال 7 أيام';
@@ -7637,4 +7802,86 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String get adaptiveTdeeBlendNote => 'مزيج من تسجيلك + المعادلة';
+
+  @override
+  String get uxStateEmptyTitle => 'لسه فاضي هنا';
+
+  @override
+  String get uxStateEmptyMessage => 'لما تضيف حاجة هتظهر هنا.';
+
+  @override
+  String get uxStateErrorTitle => 'حصلت مشكلة';
+
+  @override
+  String get uxStateErrorMessage => 'مقدرناش نحمّل الصفحة. جرّب تاني.';
+
+  @override
+  String get uxStateOfflineTitle => 'مفيش نت';
+
+  @override
+  String get uxStateOfflineMessage => 'اتأكد من الاتصال وجرّب تاني.';
+
+  @override
+  String get uxStateRetry => 'جرّب تاني';
+
+  @override
+  String get designSystemTitle => 'نظام التصميم';
+
+  @override
+  String get paywallFeatureFairUseScans => '٤٠ مسح للطبق / يوم (استخدام عادل)';
+
+  @override
+  String get paywallFeatureFairUseScansDesc =>
+      'مسح يومي مريح — حد عادل ٤٠ مسح ذكي في اليوم';
+
+  @override
+  String get paywallHonestSubtitle =>
+      'برو يفتح مسح ذكي بعدل (٤٠/يوم)، مدرب متكيف، تاريخ رصيد حرقك كامل، وتجربة بدون إعلانات.';
+
+  @override
+  String get adaptiveCalorieBasedOnResponse =>
+      'بناءً على استجابة جسمك الحقيقية';
+
+  @override
+  String adaptiveCalorieDeltaPerDay(String sign, int kcal) {
+    return '$sign$kcal سعرة/يوم';
+  }
+
+  @override
+  String adaptiveCalorieMaintenanceLine(int kcal, int days) {
+    return 'ثبات تقديري: $kcal سعرة/يوم من $days يوم تتبع.';
+  }
+
+  @override
+  String adaptiveCalorieUpdatedSnack(int kcal) {
+    return 'اتحدّث هدف السعرات لـ $kcal';
+  }
+
+  @override
+  String get adaptiveCalorieMathFormula =>
+      'الثبات = متوسط الأكل − (تغير الوزن كجم × ٧٧٠٠ ÷ الأيام)';
+
+  @override
+  String get adaptiveCalorieFloorYes => 'نعم (الحد الأدنى الآمن)';
+
+  @override
+  String get adaptiveCalorieFloorNo => 'لا (فوق الحد الآمن)';
+
+  @override
+  String get caloriesEstimatedHint => 'تقديري';
+
+  @override
+  String homeAteOfGoal(String eaten, String goal) {
+    return 'أكلت $eaten من $goal';
+  }
+
+  @override
+  String homeKcalLeft(String kcal) {
+    return '$kcal سعرة فاضلة';
+  }
+
+  @override
+  String homeKcalOver(String kcal) {
+    return '$kcal سعرة زيادة';
+  }
 }

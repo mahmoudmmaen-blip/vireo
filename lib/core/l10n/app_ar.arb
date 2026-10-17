@@ -347,14 +347,14 @@
     }
   },
   "reassessmentNoPhaseChange": "مفيش تغيير في البرنامج — كمّل!",
-  "paywallTitle": "Vireo Premium",
+  "paywallTitle": "ڤيريو برو",
   "paywallHeadline": "افتح إمكانياتك الكاملة",
-  "paywallSubtitle": "Premium يمنحك مسح غير محدود، مراحل برنامج كاملة، ورؤى تقدم أعمق.",
+  "paywallSubtitle": "برو يفتح مسح ذكي بعدل (٤٠/يوم)، مدرب متكيف، تاريخ رصيد حرقك كامل، وتجربة بدون إعلانات.",
   "paywallBestValue": "أفضل قيمة",
   "paywallPlanMonthly": "شهري",
   "paywallPlanAnnual": "سنوي",
   "paywallPlanLifetime": "مدى الحياة",
-  "paywallFeatureUnlimitedScans": "مسح غير محدود للأطباق",
+  "paywallFeatureUnlimitedScans": "٤٠ مسح للطبق / يوم (استخدام عادل)",
   "paywallFeatureFullProgram": "مراحل برنامج كاملة وتمارين متقدمة",
   "paywallFeatureCloudSync": "مزامنة سحابية بين الأجهزة",
   "paywallFeatureProgressAnalytics": "تحليلات تقدم متقدمة",
@@ -1522,7 +1522,7 @@
     }
   },
   "todayPlanNow": "الآن",
-  "todayPlanPro": "PRO",
+  "todayPlanPro": "برو",
   "todayPlanWaterReminder": "تذكير ماء {index} من {total}",
   "@todayPlanWaterReminder": {
     "placeholders": {
@@ -1981,7 +1981,7 @@
   "onboardingPaywallTitle": "سرّع تحقيق نتائجك",
   "onboardingPaywallSubtitle": "امسح الأطباق بلا حدود، واحصل على جداول تمارين ذكية وتحليلات متقدمة.",
   "paywallProBadge": "ڤيريو برو",
-  "paywallFeatureUnlimitedScansDesc": "بدون أي حدود أو قيود يومية على عدد الوجبات",
+  "paywallFeatureUnlimitedScansDesc": "مسح يومي مريح — حد عادل ٤٠ مسح ذكي في اليوم",
   "paywallFeatureSmartSub": "بدائل الوجبات الذكية بالذكاء الاصطناعي",
   "paywallFeatureSmartSubDesc": "بدائل صحية ومناسبة للماكروز للأطباق المحلية",
   "paywallFeatureAdaptiveSplits": "جداول تمارين ذكية متكيفة",
@@ -2111,7 +2111,7 @@
       }
     }
   },
-  "scoreInsightsWeekFatSummary": "هذا الأسبوع: خسرت ≈ {grams} جم دهون",
+  "scoreInsightsWeekFatSummary": "هذا الأسبوع: حرق ≈ {grams} جم دهون",
   "@scoreInsightsWeekFatSummary": {
     "placeholders": {
       "grams": {
@@ -2170,7 +2170,7 @@
   "scoreInsightsEnergyBalanceTitle": "توازن الطاقة (المأكول مقابل المحروق)",
   "scoreInsightsEatenKcal": "سعرات أكل",
   "scoreInsightsBurnedKcal": "حرق ونشاط",
-  "scoreInsightsMacrosTitle": "توزيع الماكروز اليوم (الهدف vs المأكول)",
+  "scoreInsightsMacrosTitle": "توزيع الماكروز اليوم (الهدف مقابل المأكول)",
   "scoreInsightsScoreTrendTitle": "مسار السكور خلال 7 أيام",
   "scoreInsightsImmediateActionsTitle": "نصائح وإجراءات فورية لرفع السكور:",
   "stepMilestoneToast25": "{gender, select, female{بداية قوية يا بطلة 👏} other{بداية قوية يا بطل 👏}}",
@@ -2433,5 +2433,27 @@
   "outdoorNetKcalLabel": "صافي سعرات",
   "outdoorCadenceLabel": "إيقاع الخطوة",
   "weeklyReviewTitle": "مراجعة الأسبوع",
-  "adaptiveTdeeBlendNote": "مزيج من تسجيلك + المعادلة"
+  "adaptiveTdeeBlendNote": "مزيج من تسجيلك + المعادلة",
+  "uxStateEmptyTitle": "لسه فاضي هنا",
+  "uxStateEmptyMessage": "لما تضيف حاجة هتظهر هنا.",
+  "uxStateErrorTitle": "حصلت مشكلة",
+  "uxStateErrorMessage": "مقدرناش نحمّل الصفحة. جرّب تاني.",
+  "uxStateOfflineTitle": "مفيش نت",
+  "uxStateOfflineMessage": "اتأكد من الاتصال وجرّب تاني.",
+  "uxStateRetry": "جرّب تاني",
+  "designSystemTitle": "نظام التصميم",
+  "paywallFeatureFairUseScans": "٤٠ مسح للطبق / يوم (استخدام عادل)",
+  "paywallFeatureFairUseScansDesc": "مسح يومي مريح — حد عادل ٤٠ مسح ذكي في اليوم",
+  "paywallHonestSubtitle": "برو يفتح مسح ذكي بعدل (٤٠/يوم)، مدرب متكيف، تاريخ رصيد حرقك كامل، وتجربة بدون إعلانات.",
+  "adaptiveCalorieBasedOnResponse": "بناءً على استجابة جسمك الحقيقية",
+  "adaptiveCalorieDeltaPerDay": "{sign}{kcal} سعرة/يوم",
+  "adaptiveCalorieMaintenanceLine": "ثبات تقديري: {kcal} سعرة/يوم من {days} يوم تتبع.",
+  "adaptiveCalorieUpdatedSnack": "اتحدّث هدف السعرات لـ {kcal}",
+  "adaptiveCalorieMathFormula": "الثبات = متوسط الأكل − (تغير الوزن كجم × ٧٧٠٠ ÷ الأيام)",
+  "adaptiveCalorieFloorYes": "نعم (الحد الأدنى الآمن)",
+  "adaptiveCalorieFloorNo": "لا (فوق الحد الآمن)",
+  "caloriesEstimatedHint": "تقديري",
+  "homeAteOfGoal": "أكلت {eaten} من {goal}",
+  "homeKcalLeft": "{kcal} سعرة فاضلة",
+  "homeKcalOver": "{kcal} سعرة زيادة"
 }

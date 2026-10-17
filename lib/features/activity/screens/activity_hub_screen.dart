@@ -53,7 +53,7 @@ class ActivityHubScreen extends ConsumerWidget {
                   height: 48,
                   decoration: BoxDecoration(
                     color: VMacro.steps.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(Icons.directions_walk_rounded, color: VMacro.steps),
                 ),
@@ -185,7 +185,7 @@ class _HubTile extends StatelessWidget {
             height: 48,
             decoration: BoxDecoration(
               color: colors.ember.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: colors.ember),
           ),

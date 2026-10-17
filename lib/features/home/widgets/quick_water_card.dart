@@ -77,13 +77,14 @@ class QuickWaterCard extends ConsumerWidget {
               await ref.read(waterTrackerProvider.notifier).addGlass();
             },
             style: FilledButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              minimumSize: const Size(48, 48),
             ),
-            child: const Text(
-              '+250 ml',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+            child: Text(
+              Localizations.localeOf(context).languageCode.startsWith('ar')
+                  ? '+٢٥٠ مل'
+                  : '+250 ml',
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             ),
           ),
         ],

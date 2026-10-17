@@ -591,7 +591,7 @@ class _BodyCompositionInsightsCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: _MetricTile(
-                    title: isArabic ? 'حرق BMR (Katch)' : 'BMR Kcal',
+                    title: isArabic ? 'حرق معدل الأيض (Katch)' : 'BMR Kcal',
                     value: report!.bmrKcal != null ? '${report!.bmrKcal!.round()} سعرة' : '—',
                     color: const Color(0xFF8B5CF6),
                   ),

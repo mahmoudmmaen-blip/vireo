@@ -78,7 +78,7 @@ class InBodyPlanUpdateCard extends ConsumerWidget {
                     const SizedBox(height: 2),
                     Text(
                       isArabic
-                          ? 'حساب دقيق لـ BMR والبروتين بناءً على كتلتك العضلية (${target.calories} سعرة · ${target.proteinG} جم بروتين)'
+                          ? 'حساب دقيق لمعدل الأيض والبروتين بناءً على كتلتك العضلية (${target.calories} سعرة · ${target.proteinG} جم بروتين)'
                           : 'BMR & protein tuned to your lean mass (${target.calories} kcal · ${target.proteinG}g protein)',
                       style: TextStyle(color: colors.textMute, fontSize: 11.5, height: 1.3),
                     ),

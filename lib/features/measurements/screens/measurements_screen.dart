@@ -37,7 +37,9 @@ class MeasurementsScreen extends ConsumerWidget {
             onPressed: () => BodyCompositionScreen.open(context),
           ),
           IconButton(
+            tooltip: l10n.inbodyAddResult,
             icon: const Icon(Icons.add),
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
             onPressed: () => showAddMeasurementSheet(context),
           ),
         ],

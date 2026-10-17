@@ -6,6 +6,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/revenue_cat_service.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/ui/async_state_view.dart';
 import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/subscription_state.dart';
@@ -253,8 +254,11 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
         ],
       ),
       body: subAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Center(child: Text(l10n.authErrorGeneric)),
+        loading: () => AsyncStateView.loading(skeletonRows: 5),
+        error: (error, stackTrace) => AsyncStateView.error(
+          message: l10n.authErrorGeneric,
+          onRetry: () => ref.invalidate(subscriptionProvider),
+        ),
         data: (snapshot) {
           final plans = (snapshot.plans.isNotEmpty
                   ? snapshot.plans
@@ -309,7 +313,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                       Icon(Icons.workspace_premium_rounded, size: 16, color: colors.gold),
                       const SizedBox(width: 6),
                       Text(
-                        'VIREO PRO',
+                        l10n.paywallProBadge,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w800,
@@ -332,9 +336,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                isAr
-                    ? 'وصول غير محدود لكل برامج التغذية والتدريب وذكاء ڤيريو المتقدم'
-                    : 'Unlimited access to all diet programs, workouts, and advanced AI',
+                l10n.paywallHonestSubtitle,
                 style: TextStyle(color: colors.textMute, fontSize: 13.5),
                 textAlign: TextAlign.center,
               ),
@@ -352,12 +354,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                   children: [
                     _BenefitRow(
                       icon: Icons.camera_alt_outlined,
-                      title: isAr
-                          ? 'مسح غير محدود للوجبات (40 مسح/يوم)'
-                          : '40 Plate Scans / Day & Macro Swaps',
-                      subtitle: isAr
-                          ? 'تحليل ذكي فوري لكل الأكلات والمطاعم'
-                          : 'Instant visual breakdown for meals & recipes',
+                      title: l10n.paywallFeatureFairUseScans,
+                      subtitle: l10n.paywallFeatureFairUseScansDesc,
                     ),
                     const Divider(height: 20),
                     _BenefitRow(
