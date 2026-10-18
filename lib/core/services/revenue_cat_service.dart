@@ -106,7 +106,11 @@ abstract final class RevenueCatService {
 
   static Future<CustomerInfo> purchasePackage(Package package) async {
     try {
-      return await Purchases.purchasePackage(package);
+      // purchases_flutter 9+ returns PurchaseResult (Billing Library 8).
+      final result = await Purchases.purchase(
+        PurchaseParams.package(package),
+      );
+      return result.customerInfo;
     } catch (_) {
       rethrow;
     }
