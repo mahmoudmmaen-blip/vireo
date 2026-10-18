@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:vireo/core/constants/admob_constants.dart';
 
 /// Runtime configuration. Prefer `--dart-define` overrides for CI/release builds.
 abstract final class AppConfig {
@@ -105,42 +106,49 @@ abstract final class AppConfig {
     defaultValue: false,
   );
 
-  /// Google official test AdMob unit IDs (debug only).
-  static const _testBannerId = 'ca-app-pub-3940256099942544/6300978111';
-  static const _testNativeId = 'ca-app-pub-3940256099942544/2247696110';
-  static const _testInterstitialId = 'ca-app-pub-3940256099942544/1033173712';
-  static const _testRewardedId = 'ca-app-pub-3940256099942544/5224354917';
+  static const _bannerOverride = String.fromEnvironment('ADMOB_BANNER_ID');
+  static const _nativeOverride = String.fromEnvironment('ADMOB_NATIVE_ID');
+  static const _interstitialOverride =
+      String.fromEnvironment('ADMOB_INTERSTITIAL_ID');
+  static const _rewardedOverride = String.fromEnvironment('ADMOB_REWARDED_ID');
 
-  /// AdMob IDs — production IDs must come from dart-defines only.
-  static const admobBannerId = String.fromEnvironment(
-    'ADMOB_BANNER_ID',
-    defaultValue: _testBannerId,
-  );
+  /// Banner unit: dart-define override, else test IDs in debug, production in release.
+  static String get admobBannerId {
+    if (_bannerOverride.isNotEmpty) return _bannerOverride;
+    return kDebugMode
+        ? AdMobConstants.testBannerAdUnitId
+        : AdMobConstants.bannerAdUnitId;
+  }
 
-  static const admobNativeId = String.fromEnvironment(
-    'ADMOB_NATIVE_ID',
-    defaultValue: _testNativeId,
-  );
+  /// Native unit: override or test ID (no production native unit yet).
+  static String get admobNativeId {
+    if (_nativeOverride.isNotEmpty) return _nativeOverride;
+    return AdMobConstants.testNativeAdUnitId;
+  }
 
-  static const admobInterstitialId = String.fromEnvironment(
-    'ADMOB_INTERSTITIAL_ID',
-    defaultValue: _testInterstitialId,
-  );
+  static String get admobInterstitialId {
+    if (_interstitialOverride.isNotEmpty) return _interstitialOverride;
+    return kDebugMode
+        ? AdMobConstants.testInterstitialAdUnitId
+        : AdMobConstants.interstitialAdUnitId;
+  }
 
-  static const admobRewardedId = String.fromEnvironment(
-    'ADMOB_REWARDED_ID',
-    defaultValue: _testRewardedId,
-  );
+  static String get admobRewardedId {
+    if (_rewardedOverride.isNotEmpty) return _rewardedOverride;
+    return kDebugMode
+        ? AdMobConstants.testRewardedAdUnitId
+        : AdMobConstants.rewardedAdUnitId;
+  }
 
-  static bool get _hasTestAdIds =>
-      admobBannerId == _testBannerId ||
-      admobNativeId == _testNativeId ||
-      admobInterstitialId == _testInterstitialId ||
-      admobRewardedId == _testRewardedId;
+  static bool get _primaryUnitsAreTest =>
+      admobBannerId == AdMobConstants.testBannerAdUnitId ||
+      admobInterstitialId == AdMobConstants.testInterstitialAdUnitId ||
+      admobRewardedId == AdMobConstants.testRewardedAdUnitId;
 
-  /// In release, never serve ads when only test unit IDs are configured.
+  /// In release, never serve ads when banner/interstitial/rewarded are still test IDs.
+  /// Native may remain a Google test unit until a production native unit exists.
   static bool get adsConfiguredForRelease {
-    if (kReleaseMode && _hasTestAdIds) return false;
+    if (kReleaseMode && _primaryUnitsAreTest) return false;
     return true;
   }
 }

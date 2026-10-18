@@ -16,7 +16,7 @@ if (hasKeyProperties) {
 }
 
 android {
-    namespace = "com.vireofit.app"
+    namespace = "com.vireoapp.fitness"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -31,14 +31,15 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.vireofit.app"
+        applicationId = "com.vireoapp.fitness"
         minSdk = 26
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
+        // Production AdMob App ID. Override with -PADMOB_APP_ID=... for local test app ids.
         val admobAppId = (project.findProperty("ADMOB_APP_ID") as? String)
-            ?: "ca-app-pub-3940256099942544~3347511713"
+            ?: "ca-app-pub-9991756921251214~5695541111"
         manifestPlaceholders["ADMOB_APP_ID"] = admobAppId
     }
 

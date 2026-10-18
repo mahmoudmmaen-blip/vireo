@@ -1,6 +1,6 @@
 # Google Play reviewer notes — Vireo (Android)
 
-**Package:** `com.vireofit.app`  
+**Package:** `com.vireoapp.fitness`  
 **Version for this submission:** 1.0.0+2  
 **Contact:** mahmoud.mma.en@gmail.com
 

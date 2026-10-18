@@ -70,7 +70,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:scheme="com.vireofit.app"
+                    android:scheme="com.vireoapp.fitness"
                     android:host="login-callback" />
             </intent-filter>
             <intent-filter>

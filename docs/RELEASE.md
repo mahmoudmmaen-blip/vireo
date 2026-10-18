@@ -64,13 +64,13 @@ keyPassword=<KEY_PASSWORD>
 
 ## 4. Supabase Auth URL Configuration
 
-The application ID has been configured to `com.vireofit.app`.
+The application ID has been configured to `com.vireoapp.fitness`.
 
 In your **Supabase Dashboard**:
 1. Navigate to **Authentication** -> **URL Configuration**.
 2. Add the following redirect URI to **Redirect URLs**:
    ```
-   com.vireofit.app://login-callback
+   com.vireoapp.fitness://login-callback
    ```
 3. Save changes.
 
@@ -96,10 +96,12 @@ flutter build appbundle --release `
   --dart-define=GOOGLE_IOS_CLIENT_ID="<GOOGLE_IOS_CLIENT_ID>" `
   --dart-define=GOOGLE_AUTH_ENABLED=true `
   --dart-define=APPLE_AUTH_ENABLED=false `
-  --dart-define=ADMOB_BANNER_ID="<ADMOB_BANNER_ID>" `
-  --dart-define=ADMOB_NATIVE_ID="<ADMOB_NATIVE_ID>" `
-  --dart-define=ADMOB_INTERSTITIAL_ID="<ADMOB_INTERSTITIAL_ID>" `
-  --dart-define=ADMOB_REWARDED_ID="<ADMOB_REWARDED_ID>"
+  # AdMob production IDs are baked into AdMobConstants / gradle defaults.
+  # Optional overrides:
+  # --dart-define=ADMOB_BANNER_ID="..." `
+  # --dart-define=ADMOB_NATIVE_ID="..." `
+  # --dart-define=ADMOB_INTERSTITIAL_ID="..." `
+  # --dart-define=ADMOB_REWARDED_ID="..."
 ```
 
 ### Complete List of Environment Variables from `AppConfig`
@@ -120,10 +122,11 @@ flutter build appbundle --release `
 | `GOOGLE_IOS_CLIENT_ID` | `""` | Google OAuth iOS Client ID |
 | `GOOGLE_AUTH_ENABLED` | `false` | Set to `true` to enable Google Sign-In |
 | `APPLE_AUTH_ENABLED` | `false` | Set to `true` to enable Apple Sign-In |
-| `ADMOB_BANNER_ID` | `ca-app-pub-3940256099942544/6300978111` | AdMob Banner ad unit ID (default: Google test ID) |
-| `ADMOB_NATIVE_ID` | `ca-app-pub-3940256099942544/2247696110` | AdMob Native ad unit ID (default: Google test ID) |
-| `ADMOB_INTERSTITIAL_ID` | `ca-app-pub-3940256099942544/1033173712` | AdMob Interstitial ad unit ID (default: Google test ID) |
-| `ADMOB_REWARDED_ID` | `ca-app-pub-3940256099942544/5224354917` | AdMob Rewarded ad unit ID (default: Google test ID) |
+| `ADMOB_BANNER_ID` | production unit in `AdMobConstants` (debug: Google test) | Optional override for Banner |
+| `ADMOB_NATIVE_ID` | Google test until a native unit is created | Optional override for Native |
+| `ADMOB_INTERSTITIAL_ID` | production unit in `AdMobConstants` (debug: Google test) | Optional override for Interstitial |
+| `ADMOB_REWARDED_ID` | production unit in `AdMobConstants` (debug: Google test) | Optional override for Rewarded |
+| `ADMOB_APP_ID` (Gradle `-P`) | production App ID in `android/app/build.gradle.kts` | Manifest `APPLICATION_ID` |
 
 ---
 

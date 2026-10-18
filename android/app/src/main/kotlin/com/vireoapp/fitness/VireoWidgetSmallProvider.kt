@@ -1,4 +1,4 @@
-package com.vireofit.app
+﻿package com.vireoapp.fitness
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
@@ -17,7 +17,7 @@ class VireoWidgetSmallProvider : HomeWidgetProvider() {
         widgetData: SharedPreferences
     ) {
         val calories = widgetData.getInt("widget_calories_remaining", 0)
-        val emoji = widgetData.getString("widget_mascot_emoji", "😊") ?: "😊"
+        val emoji = widgetData.getString("widget_mascot_emoji", "ًںکٹ") ?: "ًںکٹ"
         val fastingActive = widgetData.getBoolean("widget_fasting_active", false)
         val fastingMin = widgetData.getInt("widget_fasting_remaining_min", 0)
         val isDark = widgetData.getBoolean("widget_is_dark", true)
@@ -33,9 +33,9 @@ class VireoWidgetSmallProvider : HomeWidgetProvider() {
                     val hours = fastingMin / 60
                     val mins = fastingMin % 60
                     val countdown = if (isRtl) {
-                        "⏳ ${hours}:${mins.toString().padStart(2, '0')} للإفطار"
+                        "âڈ³ ${hours}:${mins.toString().padStart(2, '0')} ظ„ظ„ط¥ظپط·ط§ط±"
                     } else {
-                        "⏳ ${hours}:${mins.toString().padStart(2, '0')} to eat"
+                        "âڈ³ ${hours}:${mins.toString().padStart(2, '0')} to eat"
                     }
                     setTextViewText(R.id.widget_fasting_countdown, countdown)
                     setViewVisibility(R.id.widget_fasting_countdown, View.VISIBLE)

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:vireo/core/config/app_config.dart';
+import 'package:vireo/core/constants/admob_constants.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
@@ -100,6 +101,11 @@ class _VireoNativeAdCardState extends ConsumerState<VireoNativeAdCard> {
   void _loadNativeAd() {
     final isPro = ref.read(isProUserProvider);
     if (isPro || kIsWeb || !AppConfig.adsConfiguredForRelease) return;
+    // No production native unit yet — never request Google test units in release.
+    if (kReleaseMode &&
+        AppConfig.admobNativeId == AdMobConstants.testNativeAdUnitId) {
+      return;
+    }
     if (_nativeAd != null) return;
 
     _nativeAd = NativeAd(

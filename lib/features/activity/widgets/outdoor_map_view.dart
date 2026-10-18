@@ -29,7 +29,7 @@ class OutdoorMapView extends StatelessWidget {
       children: [
         TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.vireofit.app',
+          userAgentPackageName: 'com.vireoapp.fitness',
         ),
         if (route.length >= 2)
           PolylineLayer(
