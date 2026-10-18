@@ -884,6 +884,25 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                     ),
                     const SizedBox(height: 12),
                   ],
+                  if (_lines.isNotEmpty &&
+                      _lines.map((l) => l.confidence).reduce((a, b) => a + b) / _lines.length < 0.7) ...[
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: colors.gold.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: colors.gold.withValues(alpha: 0.4)),
+                      ),
+                      child: Text(
+                        isArabic
+                            ? 'الصورة مش واضحة أوي. راجع الأسماء والكميات قبل الحفظ.'
+                            : 'This scan looks uncertain. Check the names and portions before saving.',
+                        style: TextStyle(color: colors.text, fontSize: 13, height: 1.35),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                   // If AI returned unsure items (< 0.5 confidence), show suggestion chip row
                   if (_unsureLines.isNotEmpty) ...[
                     Container(
@@ -2083,9 +2102,20 @@ class _MfpItemRow extends StatelessWidget {
             onTap: onToggleExpand,
             borderRadius: BorderRadius.circular(14),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Row(
                 children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: colors.ember.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Text('🍽️', style: TextStyle(fontSize: 18)),
+                  ),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -2096,6 +2126,13 @@ class _MfpItemRow extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          isArabic ? '${line.grams.round()} جم' : '${line.grams.round()} g',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: colors.textMute, fontSize: 12),
                         ),
                         const SizedBox(height: 3),
                         Builder(

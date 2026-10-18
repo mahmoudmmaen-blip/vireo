@@ -96,11 +96,11 @@ abstract final class VireoDecorations {
   static LinearGradient emberGradient = const LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFFE8763C), Color(0xFFC9622E)],
+    colors: [Color(0xFFFF6B35), Color(0xFFC9622E)],
   );
 
   static LinearGradient streakGradient = const LinearGradient(
-    colors: [Color(0xFFE8763C), Color(0xFFC9A24B)],
+    colors: [Color(0xFFFF6B35), Color(0xFFC9A24B)],
   );
 
   static LinearGradient titleGradient(VireoColors colors) => LinearGradient(

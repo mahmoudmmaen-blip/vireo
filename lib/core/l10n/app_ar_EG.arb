@@ -13,6 +13,7 @@
   "uxGoodEvening": "مساء الورد يا {name}",
   "authWelcomeTitle": "أهلاً بيك في ڤيريو!",
   "authWelcomeSubtitle": "رحلتك لجسم أصح ولياقة أعلى بتبدأ هنا.",
+  "authErrorEmailTaken": "الإيميل ده مربوط بحساب. ادخل بيه، أو جرّب إيميل تاني.",
   "continueButton": "يلا بينا",
   "skipButton": "عدّيها",
   "finishButton": "خلّصنا",

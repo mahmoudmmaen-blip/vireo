@@ -18,7 +18,7 @@ enum AccentPalette {
   String get storageKey => name;
 
   Color get color => switch (this) {
-        AccentPalette.vireoOrange => const Color(0xFFE8763C), // Ember default
+        AccentPalette.vireoOrange => const Color(0xFFFF6B35),
         AccentPalette.oceanicBlue => const Color(0xFF1976D2), // Ocean
         AccentPalette.emeraldHealth => const Color(0xFF2E7D32), // Forest
         AccentPalette.deepViolet => const Color(0xFF7B1FA2), // Royal

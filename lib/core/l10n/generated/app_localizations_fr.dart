@@ -368,6 +368,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Une erreur s\'est produite. Veuillez réessayer.';
 
   @override
+  String get authErrorEmailTaken =>
+      'Cet e-mail a déjà un compte. Connecte-toi avec, ou essaie un autre.';
+
+  @override
   String get authErrorOffline =>
       'Aucune connexion Internet. Vérifiez votre réseau et réessayez.';
 

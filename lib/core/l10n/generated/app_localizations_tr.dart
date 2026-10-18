@@ -366,6 +366,10 @@ class AppLocalizationsTr extends AppLocalizations {
       'Bir şeyler ters gitti. Lütfen tekrar deneyin.';
 
   @override
+  String get authErrorEmailTaken =>
+      'Bu e-posta zaten bir hesapta. Onunla gir veya başka bir e-posta dene.';
+
+  @override
   String get authErrorOffline =>
       'İnternet bağlantısı yok. Bağlantınızı kontrol edip tekrar deneyin.';
 

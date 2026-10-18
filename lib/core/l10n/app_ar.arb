@@ -123,6 +123,7 @@
   "authNoAccount": "ما عندكش حساب؟",
   "authSignedIn": "مسجّل الدخول",
   "authErrorGeneric": "حصل خطأ. حاول تاني.",
+  "authErrorEmailTaken": "الإيميل ده مربوط بحساب. ادخل بيه، أو جرّب إيميل تاني.",
   "authErrorOffline": "مفيش نت. تأكد من الاتصال وحاول تاني.",
   "authErrorWrongCode": "الكود غلط. راجع الأرقام وحاول تاني.",
   "authErrorTooMany": "محاولات كتير، حاول تاني بعد دقيقة.",

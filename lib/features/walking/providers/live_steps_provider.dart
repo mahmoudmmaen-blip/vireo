@@ -67,6 +67,9 @@ final enableStepCountingProvider =
 final stepCounterBootstrapProvider = FutureProvider<void>((ref) async {
   if (await StepPermission.isGranted()) {
     await StepForegroundService.init();
+    if (!StepForegroundService.isActive) {
+      await StepCounterService.startListening();
+    }
   }
   await StepCounterService.refresh();
 });

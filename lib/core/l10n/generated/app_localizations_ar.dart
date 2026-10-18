@@ -354,6 +354,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get authErrorGeneric => 'حصل خطأ. حاول تاني.';
 
   @override
+  String get authErrorEmailTaken =>
+      'الإيميل ده مربوط بحساب. ادخل بيه، أو جرّب إيميل تاني.';
+
+  @override
   String get authErrorOffline => 'مفيش نت. تأكد من الاتصال وحاول تاني.';
 
   @override
@@ -4917,6 +4921,10 @@ class AppLocalizationsArEg extends AppLocalizationsAr {
   String get authWelcomeSubtitle => 'رحلتك لجسم أصح ولياقة أعلى بتبدأ هنا.';
 
   @override
+  String get authErrorEmailTaken =>
+      'الإيميل ده مربوط بحساب. ادخل بيه، أو جرّب إيميل تاني.';
+
+  @override
   String get workoutFinishCoolDown => 'عاش.. ننهي التمرين';
 
   @override
@@ -6485,6 +6493,10 @@ class AppLocalizationsArSa extends AppLocalizationsAr {
 
   @override
   String get authWelcomeSubtitle => 'رحلتك لجسم صحي ولياقة أفضل تبدأ الحين.';
+
+  @override
+  String get authErrorEmailTaken =>
+      'الإيميل هذا مربوط بحساب. ادخل فيه، أو جرّب إيميل ثاني.';
 
   @override
   String get workoutFinishCoolDown => 'كفو.. إنهاء التمرين';

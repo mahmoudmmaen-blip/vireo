@@ -107,6 +107,7 @@
   "authNoAccount": "Vous n'avez pas de compte ?",
   "authSignedIn": "Connecté",
   "authErrorGeneric": "Une erreur s'est produite. Veuillez réessayer.",
+  "authErrorEmailTaken": "Cet e-mail a déjà un compte. Connecte-toi avec, ou essaie un autre.",
   "authErrorOffline": "Aucune connexion Internet. Vérifiez votre réseau et réessayez.",
   "authErrorWrongCode": "Code incorrect. Vérifiez les chiffres et réessayez.",
   "authErrorTooMany": "Trop de tentatives. Veuillez réessayer dans une minute.",

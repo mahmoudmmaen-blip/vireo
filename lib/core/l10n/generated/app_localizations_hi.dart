@@ -361,6 +361,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get authErrorGeneric => 'कुछ गड़बड़ हुई। कृपया पुनः प्रयास करें।';
 
   @override
+  String get authErrorEmailTaken =>
+      'यह ईमेल पहले से किसी खाते पर है। उसी से प्रवेश करें, या दूसरा आज़माएँ।';
+
+  @override
   String get authErrorOffline =>
       'इंटरनेट नहीं है। अपना कनेक्शन जांचें और पुनः प्रयास करें।';
 

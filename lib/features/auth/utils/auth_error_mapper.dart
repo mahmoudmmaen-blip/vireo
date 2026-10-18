@@ -17,9 +17,15 @@ String mapAuthError(Object error, AppLocalizations l10n) {
   logAuthError(error);
 
   if (error is AuthException) {
-    final code = '${error.code ?? ''} ${error.message}'.toLowerCase();
+    final code = '${error.code ?? ''} ${error.statusCode ?? ''} ${error.message}'.toLowerCase();
     if (code.contains('over_email_send_rate_limit')) {
       return l10n.authErrorEmailRateLimit;
+    }
+    if (code.contains('422') ||
+        code.contains('email_exists') ||
+        code.contains('already registered') ||
+        code.contains('already been registered')) {
+      return l10n.authErrorEmailTaken;
     }
   }
 

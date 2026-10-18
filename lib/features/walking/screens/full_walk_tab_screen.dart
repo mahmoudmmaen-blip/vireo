@@ -16,6 +16,7 @@ import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
 import 'package:vireo/features/walking/screens/step_diagnostic_screen.dart';
 import 'package:vireo/features/walking/widgets/step_permission_gate.dart';
+import 'package:vireo/features/walking/widgets/walking_week_charts.dart';
 
 enum WalkChartFilter { day, week, month }
 
@@ -31,7 +32,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
   bool _isSessionActive = false;
   int _sessionStepsStart = 0;
 
-  static const _stepsAccent = Color(0xFF10B981);
+  static const _stepsAccent = Color(0xFFFF6B35);
   static const _stepsCyan = Color(0xFF06B6D4);
 
   void _startSession(int currentSteps) {
@@ -114,7 +115,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
     final live = ref.watch(liveStepsProvider).valueOrNull;
     final isRunning = ref.watch(isStepCounterRunningProvider);
 
-    final steps = live?.todaySteps ?? trackerState.valueOrNull?.todaySteps ?? 0;
+    final steps = ref.watch(todayStepsProvider);
     final goal = trackerState.valueOrNull?.dailyGoal ?? 7000;
     final last7 = live?.last7Days.isNotEmpty == true
         ? live!.last7Days
@@ -535,7 +536,14 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                       last7Days: last7,
                       goal: goal,
                       colors: colors,
-                      accent: _stepsAccent,
+                      accent: colors.ember,
+                    ),
+                    const SizedBox(height: 16),
+                    WalkingWeekCharts(
+                      days: last7,
+                      heightCm: profile.heightCm,
+                      weightKg: profile.weightKg,
+                      isFemale: profile.isFemale,
                     ),
                   ],
                 ),

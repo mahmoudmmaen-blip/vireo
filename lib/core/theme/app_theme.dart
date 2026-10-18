@@ -66,7 +66,9 @@ abstract final class AppTheme {
               ? GoogleFonts.ibmPlexSansArabic().fontFamily
               : GoogleFonts.inter().fontFamily,
           fontWeight: FontWeight.w800,
-          color: colors.text,
+          color: brightness == Brightness.dark
+              ? const Color(0xFFFFFFFF)
+              : colors.text,
           fontFeatures: const [FontFeature.tabularFigures()],
         );
 
@@ -115,9 +117,9 @@ abstract final class AppTheme {
             secondary: colors.gold,
             error: colors.danger,
             onSurface: colors.text,
-            onPrimary: Colors.white,
+            onPrimary: const Color(0xFF1A1A1A),
             onSecondary: colors.text,
-            onError: Colors.white,
+            onError: const Color(0xFFFFFFFF),
             surfaceContainerHighest: colors.surfaceRaised,
             outline: colors.line,
           );
@@ -143,6 +145,13 @@ abstract final class AppTheme {
           borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
           side: BorderSide(color: colors.line.withValues(alpha: 0.75)),
         ),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: colors.surface,
+        selectedItemColor: colors.ember,
+        unselectedItemColor: colors.textMute,
+        type: BottomNavigationBarType.fixed,
+        elevation: 8,
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: colors.surface,
@@ -173,11 +182,11 @@ abstract final class AppTheme {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           backgroundColor: variant == AppThemeVariant.calmGold
-              ? (brightness == Brightness.dark ? Colors.white : const Color(0xFF1E2124))
+              ? (brightness == Brightness.dark ? const Color(0xFFFFFFFF) : const Color(0xFF1E2124))
               : colors.ember,
           foregroundColor: variant == AppThemeVariant.calmGold
-              ? (brightness == Brightness.dark ? const Color(0xFF141618) : Colors.white)
-              : (brightness == Brightness.dark ? colors.text : Colors.white),
+              ? (brightness == Brightness.dark ? const Color(0xFF141618) : const Color(0xFFFFFFFF))
+              : const Color(0xFF1A1A1A),
           minimumSize: const Size(48, 48),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
@@ -190,7 +199,7 @@ abstract final class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: colors.ember,
-          foregroundColor: brightness == Brightness.dark ? colors.text : Colors.white,
+          foregroundColor: const Color(0xFF1A1A1A),
           minimumSize: const Size(48, 48),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(VireoDecorations.buttonRadius),

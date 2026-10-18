@@ -35,27 +35,27 @@ class VireoColors extends ThemeExtension<VireoColors> {
 
   static const VireoColors dark = VireoColors(
     background: Color(0xFF0D0F12),
-    surface: Color(0xFF161A20),
+    surface: Color(0xFF1A1D21),
     surfaceRaised: Color(0xFF1E232B),
     surfaceGradientStart: Color(0xFF1E232B),
     surfaceGradientEnd: Color(0xFF161A20),
-    ember: Color(0xFFE8763C),
+    ember: Color(0xFFFF6B35),
     gold: Color(0xFFC9A24B),
     success: Color(0xFF5FAE7A),
     danger: Color(0xFFE85C5C),
     recovery: Color(0xFF4DA3B8),
-    text: Color(0xFFF0F2F5),
+    text: Color(0xFFE8E8E8),
     textMute: Color(0xFF8B94A0),
     line: Color(0xFF2A323D),
   );
 
   static const VireoColors light = VireoColors(
-    background: Color(0xFFF5F5F5),
+    background: Color(0xFFF8F9FA),
     surface: Color(0xFFFFFFFF),
     surfaceRaised: Color(0xFFFFFFFF),
     surfaceGradientStart: Color(0xFFFFFFFF),
     surfaceGradientEnd: Color(0xFFF0F0F0),
-    ember: Color(0xFFE8763C),
+    ember: Color(0xFFFF6B35),
     gold: Color(0xFFC9A24B),
     success: Color(0xFF5FAE7A),
     danger: Color(0xFFE85C5C),

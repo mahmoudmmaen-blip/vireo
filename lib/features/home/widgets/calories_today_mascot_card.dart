@@ -6,7 +6,6 @@ import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/estimated_kcal_label.dart';
 import 'package:vireo/core/ui/pressable.dart';
-import 'package:vireo/core/ui/ring_progress.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
@@ -100,118 +99,66 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
             style: TextStyle(color: colors.textMute, fontSize: 11.5),
           ),
           const SizedBox(height: VSpace.sm),
+          Text(
+            formatCount(nutrition.eatenKcal),
+            textAlign: TextAlign.center,
+            style: VType.number(
+              size: 32,
+              weight: FontWeight.w800,
+              color: colors.ember,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            isArabic
+                ? 'من أصل ${formatCount(goalKcal)} سعرة'
+                : 'of ${formatCount(goalKcal)} kcal',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: colors.textMute, fontSize: 14),
+          ),
+          const SizedBox(height: VSpace.sm),
+          Center(child: _RemainingBadge(remaining: nutrition.remainingKcal)),
+          const SizedBox(height: VSpace.sm),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (settings.useClassicRing)
-                RingProgress(
-                  progress: nutrition.progress,
-                  size: 108,
-                  stroke: 10,
-                  color: nutrition.isOver ? colors.gold : colors.ember,
-                  secondaryColor: colors.gold,
-                  trackColor: colors.line.withValues(alpha: 0.55),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        formatCount(nutrition.remainingKcal.abs()),
-                        style: VType.number(
-                          size: 20,
-                          weight: FontWeight.w800,
-                          color: colors.text,
-                        ),
-                      ),
-                      Text(
-                        nutrition.isOver
-                            ? (isArabic ? 'زيادة' : 'over')
-                            : (isArabic ? 'فاضلة' : 'left'),
-                        style: TextStyle(
-                          color: colors.textMute,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              else
-                CalorieMascotWave(
-                  consumedKcal: nutrition.eatenKcal,
-                  targetKcal: goalKcal,
-                  companion: settings.companion,
-                  size: 112,
-                  showMacroLayers: settings.showMacroLayers,
-                  proteinRatio: proteinRatio * 0.34,
-                  carbsRatio: carbsRatio * 0.33,
-                  fatRatio: fatRatio * 0.33,
-                  isFemale: isFemale,
-                  showCaption: false,
-                  onTap: openInsights,
-                  onLongPress: quickLog,
-                ),
-              const SizedBox(width: VSpace.sm),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      nutrition.isOver
-                          ? l10n.homeKcalOver(formatCount(nutrition.remainingKcal.abs()))
-                          : l10n.homeKcalLeft(formatCount(nutrition.remainingKcal.abs())),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 15,
-                        color: nutrition.isOver ? colors.gold : colors.text,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      l10n.mealReviewEstimated,
-                      style: TextStyle(
-                        color: colors.gold,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      l10n.homeAteOfGoal(
-                        formatCount(nutrition.eatenKcal),
-                        formatCount(goalKcal),
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: colors.textMute, fontSize: 12),
-                    ),
-                    const SizedBox(height: VSpace.sm),
-                    _MiniMacro(
-                      label: l10n.uxProtein,
-                      value: nutrition.proteinG,
-                      target: nutrition.proteinTarget.toDouble(),
-                      color: VMacro.protein,
-                    ),
-                    const SizedBox(height: 6),
-                    _MiniMacro(
-                      label: l10n.uxCarbs,
-                      value: nutrition.carbsG,
-                      target: nutrition.carbsTarget.toDouble(),
-                      color: VMacro.carbs,
-                    ),
-                    const SizedBox(height: 6),
-                    _MiniMacro(
-                      label: l10n.uxFat,
-                      value: nutrition.fatG,
-                      target: nutrition.fatTarget.toDouble(),
-                      color: VMacro.fat,
-                    ),
-                  ],
-                ),
+              _MacroPill(
+                label: l10n.uxProtein,
+                value: nutrition.proteinG,
+                color: VMacro.protein,
+              ),
+              const SizedBox(width: 8),
+              _MacroPill(
+                label: l10n.uxCarbs,
+                value: nutrition.carbsG,
+                color: VMacro.carbs,
+              ),
+              const SizedBox(width: 8),
+              _MacroPill(
+                label: l10n.uxFat,
+                value: nutrition.fatG,
+                color: VMacro.fat,
               ),
             ],
           ),
+          if (!settings.useClassicRing) ...[
+            const SizedBox(height: VSpace.sm),
+            Center(
+              child: CalorieMascotWave(
+                consumedKcal: nutrition.eatenKcal,
+                targetKcal: goalKcal,
+                companion: settings.companion,
+                size: 72,
+                showMacroLayers: settings.showMacroLayers,
+                proteinRatio: proteinRatio * 0.34,
+                carbsRatio: carbsRatio * 0.33,
+                fatRatio: fatRatio * 0.33,
+                isFemale: isFemale,
+                showCaption: false,
+                onTap: openInsights,
+                onLongPress: quickLog,
+              ),
+            ),
+          ],
           if (!settings.useClassicRing) ...[
             const SizedBox(height: VSpace.xs),
             Text(
@@ -233,58 +180,83 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
   }
 }
 
-class _MiniMacro extends StatelessWidget {
-  const _MiniMacro({
+class _RemainingBadge extends StatelessWidget {
+  const _RemainingBadge({required this.remaining});
+
+  final int remaining;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
+    final color = remaining > 200
+        ? colors.success
+        : remaining >= 50
+            ? colors.ember
+            : colors.danger;
+    final label = remaining < 0
+        ? (isArabic ? 'زيادة ${formatCount(remaining.abs())}' : '${formatCount(remaining.abs())} over')
+        : (isArabic ? 'فاضل ${formatCount(remaining)}' : '${formatCount(remaining)} left');
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.16),
+        borderRadius: BorderRadius.circular(99),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 13),
+      ),
+    );
+  }
+}
+
+class _MacroPill extends StatelessWidget {
+  const _MacroPill({
     required this.label,
     required this.value,
-    required this.target,
     required this.color,
   });
 
   final String label;
   final double value;
-  final double target;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
-    final progress = target > 0 ? (value / target).clamp(0.0, 1.0) : 0.0;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        decoration: BoxDecoration(
+          color: colors.background,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: colors.line),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              label,
-              style: TextStyle(
-                color: colors.textMute,
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-              ),
+            Container(
+              width: 8,
+              height: 8,
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
             ),
-            const Spacer(),
-            Text(
-              '${value.round()}/${target.round()}',
-              style: TextStyle(
-                color: colors.text,
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
+            const SizedBox(width: 6),
+            Flexible(
+              child: Text(
+                '$label ${value.round()}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: colors.text,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 3),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(99),
-          child: LinearProgressIndicator(
-            value: progress,
-            minHeight: 5,
-            backgroundColor: colors.line.withValues(alpha: 0.5),
-            color: color,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

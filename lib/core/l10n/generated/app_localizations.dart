@@ -766,6 +766,12 @@ abstract class AppLocalizations {
   /// **'Something went wrong. Please try again.'**
   String get authErrorGeneric;
 
+  /// No description provided for @authErrorEmailTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already on an account. Sign in with it, or try another email.'**
+  String get authErrorEmailTaken;
+
   /// No description provided for @authErrorOffline.
   ///
   /// In en, this message translates to:

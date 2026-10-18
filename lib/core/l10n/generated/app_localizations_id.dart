@@ -363,6 +363,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get authErrorGeneric => 'Terjadi kesalahan. Silakan coba lagi.';
 
   @override
+  String get authErrorEmailTaken =>
+      'Email ini sudah punya akun. Masuk dengan email itu, atau coba yang lain.';
+
+  @override
   String get authErrorOffline =>
       'Tidak ada koneksi internet. Periksa koneksi Anda dan coba lagi.';
 

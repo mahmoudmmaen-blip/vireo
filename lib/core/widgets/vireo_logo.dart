@@ -6,7 +6,7 @@ class VireoLogo extends StatelessWidget {
   const VireoLogo({
     super.key,
     this.size = 64,
-    this.color = const Color(0xFFE8763C),
+    this.color = const Color(0xFFFF6B35),
     this.showBackground = false,
     this.backgroundColor = const Color(0xFF0D0F12),
   });

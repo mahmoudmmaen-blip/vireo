@@ -123,6 +123,7 @@ class AuthRepository {
     final user = currentUser;
     try {
       if (user != null && user.isAnonymous) {
+        // GoTrue PUT /user accepts only email, password, and data.
         await SupabaseService.auth.updateUser(
           UserAttributes(email: trimmed),
         );

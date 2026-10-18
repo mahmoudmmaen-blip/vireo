@@ -18,6 +18,9 @@ class TodayLogItem {
     required this.calories,
     required this.protein,
     required this.loggedAt,
+    this.carbs = 0,
+    this.fat = 0,
+    this.portionLabel = '',
     this.mealType,
     this.isAi = false,
   });
@@ -26,6 +29,9 @@ class TodayLogItem {
   final String title;
   final int calories;
   final double protein;
+  final double carbs;
+  final double fat;
+  final String portionLabel;
   final DateTime? loggedAt;
   final MealType? mealType;
   final bool isAi;
@@ -91,6 +97,8 @@ final todayNutritionProvider = Provider.family<TodayNutrition, String>((
         title: r.localizedTitle(languageCode),
         calories: r.calories,
         protein: r.proteinG.toDouble(),
+        carbs: r.carbsG.toDouble(),
+        fat: r.fatG.toDouble(),
         loggedAt: null,
         mealType: meal.mealType,
       ),
@@ -105,6 +113,9 @@ final todayNutritionProvider = Provider.family<TodayNutrition, String>((
         title: r.foodName,
         calories: r.calories,
         protein: r.protein,
+        carbs: r.carbs,
+        fat: r.fats,
+        portionLabel: r.portionEstimate,
         loggedAt: e.loggedAt,
         isAi: true,
       ),

@@ -13,6 +13,7 @@
   "uxGoodEvening": "مساء النور يا {name}",
   "authWelcomeTitle": "يا هلا ومسهلا في ڤيريو!",
   "authWelcomeSubtitle": "رحلتك لجسم صحي ولياقة أفضل تبدأ الحين.",
+  "authErrorEmailTaken": "الإيميل هذا مربوط بحساب. ادخل فيه، أو جرّب إيميل ثاني.",
   "continueButton": "قدّام",
   "skipButton": "تخطّي",
   "finishButton": "تم",

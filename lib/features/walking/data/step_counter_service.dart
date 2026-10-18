@@ -50,6 +50,10 @@ abstract final class StepCounterService {
   static final _controller = StreamController<LiveStepsSnapshot>.broadcast();
   static LiveStepsSnapshot _latest = LiveStepsSnapshot.empty;
   static bool _started = false;
+  static DateTime? _healthFetchedAt;
+  static int _cachedHealthSteps = 0;
+  static bool _cachedHealthOk = false;
+  static DateTime? _lastRemoteStepSync;
 
   static LiveStepsSnapshot get latest => _latest;
 
@@ -113,13 +117,18 @@ abstract final class StepCounterService {
       }
     }
     await _writeHistory(history);
+    final now = DateTime.now();
+    if (_lastRemoteStepSync != null &&
+        now.difference(_lastRemoteStepSync!) < const Duration(seconds: 30)) {
+      return;
+    }
+    _lastRemoteStepSync = now;
     try {
       await SyncEngine().enqueueChange(
         table: 'daily_steps_history',
         id: 'steps_$day',
         operation: SyncOperation.update,
         data: {
-          'id': 'steps_$day',
           'day': day,
           'steps': steps,
         },
@@ -195,22 +204,26 @@ abstract final class StepCounterService {
     _started = true;
     _sub?.cancel();
     _sub = pedometerCumulativeStream().listen(
-      (cumulative) async {
-        try {
-          final pedoSteps = await applyCumulative(cumulative);
-          await _emitMerged(pedoSteps: pedoSteps);
-        } catch (_) {}
+      (cumulative) {
+        unawaited(_onPedometerStep(cumulative));
       },
-      onError: (_) async {
-        await _emitMerged(pedoSteps: null, sensorError: true);
+      onError: (_) {
+        unawaited(_emitMerged(pedoSteps: null, sensorError: true));
       },
     );
 
-    // Refresh every 60 seconds while foregrounded.
+    // Health fusion is slower than the sensor. Step events themselves are not debounced.
     _foregroundRefreshTimer?.cancel();
-    _foregroundRefreshTimer = Timer.periodic(const Duration(seconds: 60), (_) {
-      refresh();
+    _foregroundRefreshTimer = Timer.periodic(const Duration(seconds: 15), (_) {
+      unawaited(refresh());
     });
+  }
+
+  static Future<void> _onPedometerStep(int cumulative) async {
+    try {
+      final pedoSteps = await applyCumulative(cumulative);
+      await _emitMerged(pedoSteps: pedoSteps, allowHealthFetch: false);
+    } catch (_) {}
   }
 
   static Future<void> stopListening() async {
@@ -227,21 +240,37 @@ abstract final class StepCounterService {
   }) =>
       _emitMerged(pedoSteps: pedoSteps, sensorError: sensorError);
 
+  static Future<void> _refreshHealthCache() async {
+    final fetchedAt = _healthFetchedAt;
+    if (fetchedAt != null &&
+        DateTime.now().difference(fetchedAt) < const Duration(seconds: 15)) {
+      return;
+    }
+    try {
+      if (!HealthStepsService.isSupported) return;
+      final snap = await HealthStepsService.fetchSnapshot();
+      _healthFetchedAt = DateTime.now();
+      if (snap.status == HealthStepsStatus.granted) {
+        _cachedHealthSteps = snap.todaySteps;
+        _cachedHealthOk = true;
+      } else {
+        _cachedHealthOk = false;
+      }
+    } catch (_) {
+      _healthFetchedAt = DateTime.now();
+    }
+  }
+
   static Future<LiveStepsSnapshot> _emitMerged({
     int? pedoSteps,
     bool sensorError = false,
+    bool allowHealthFetch = true,
   }) async {
-    var healthSteps = 0;
-    var healthOk = false;
-    try {
-      if (HealthStepsService.isSupported) {
-        final snap = await HealthStepsService.fetchSnapshot();
-        if (snap.status == HealthStepsStatus.granted) {
-          healthSteps = snap.todaySteps;
-          healthOk = true;
-        }
-      }
-    } catch (_) {}
+    if (allowHealthFetch) {
+      await _refreshHealthCache();
+    }
+    final healthSteps = _cachedHealthSteps;
+    final healthOk = _cachedHealthOk;
 
     final state = _readState();
     final baseline = (state['baseline'] as num?)?.toInt();

@@ -108,7 +108,7 @@ class _WalkingTrackerBodyState extends ConsumerState<_WalkingTrackerBody> {
     final colors = context.vireoColors;
     final data = widget.data;
     final live = ref.watch(liveStepsProvider).valueOrNull;
-    final steps = live?.todaySteps ?? data.todaySteps;
+    final steps = ref.watch(todayStepsProvider);
     final last7 = live?.last7Days.isNotEmpty == true
         ? live!.last7Days
         : data.last7Days;

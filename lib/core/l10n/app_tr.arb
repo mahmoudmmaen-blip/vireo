@@ -107,6 +107,7 @@
   "authNoAccount": "Hesabın yok mu?",
   "authSignedIn": "Giriş yapıldı",
   "authErrorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+  "authErrorEmailTaken": "Bu e-posta zaten bir hesapta. Onunla gir veya başka bir e-posta dene.",
   "authErrorOffline": "İnternet bağlantısı yok. Bağlantınızı kontrol edip tekrar deneyin.",
   "authErrorWrongCode": "Hatalı kod. Rakamları kontrol edip tekrar deneyin.",
   "authErrorTooMany": "Çok fazla deneme yapıldı, lütfen bir dakika sonra tekrar deneyin.",

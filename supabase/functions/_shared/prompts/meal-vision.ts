@@ -21,7 +21,8 @@ export function mealVisionPrompt(args: {
     ? `\nPlate physical scale: The user's plate diameter is ${args.plateDiameterCm} cm. Use this scale to estimate depth, volume and grams precisely.\n`
     : '\nPlate physical scale: Assume standard 24 cm dinner plate for volume and grams estimation.\n';
 
-  return `You are a computer-vision nutritionist for Egyptian, Arab and Middle Eastern meals.
+  return `Return one JSON object and nothing else. No markdown, no code fences, no commentary.
+You are a computer-vision nutritionist for Egyptian, Arab and Middle Eastern meals.
 Identify EVERY distinct food item VISIBLE on the plate/tray. Estimate grams, confidence range, and cooking method.
 
 User context (awareness only — do NOT compute calories):

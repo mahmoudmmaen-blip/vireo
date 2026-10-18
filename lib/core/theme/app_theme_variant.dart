@@ -28,7 +28,7 @@ enum AppThemeVariant {
       };
 
   Color get primaryAccent => switch (this) {
-        AppThemeVariant.ember => const Color(0xFFE8763C),
+        AppThemeVariant.ember => const Color(0xFFFF6B35),
         AppThemeVariant.calmGold => const Color(0xFFD4AF37),
         AppThemeVariant.ocean => const Color(0xFF00B4D8),
         AppThemeVariant.rose => const Color(0xFFD977A6),

@@ -420,6 +420,13 @@ class _CalAiCameraScreenState extends ConsumerState<CalAiCameraScreen> {
                 ),
               ),
             ),
+            if (_isTakingPhoto)
+              const ColoredBox(
+                color: Color(0x88000000),
+                child: Center(
+                  child: CircularProgressIndicator(color: Color(0xFFFF6B35)),
+                ),
+              ),
           ],
         ),
       ),

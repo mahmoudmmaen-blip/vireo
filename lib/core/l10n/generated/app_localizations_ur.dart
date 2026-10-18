@@ -357,6 +357,10 @@ class AppLocalizationsUr extends AppLocalizations {
   String get authErrorGeneric => 'کچھ غلط ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔';
 
   @override
+  String get authErrorEmailTaken =>
+      'یہ ای میل پہلے سے کسی اکاؤنٹ پر ہے۔ اسی سے داخل ہوں، یا دوسری آزمائیں۔';
+
+  @override
   String get authErrorOffline =>
       'انٹرنیٹ نہیں ہے۔ اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں۔';
 

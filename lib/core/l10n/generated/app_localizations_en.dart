@@ -358,6 +358,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authErrorGeneric => 'Something went wrong. Please try again.';
 
   @override
+  String get authErrorEmailTaken =>
+      'This email is already on an account. Sign in with it, or try another email.';
+
+  @override
   String get authErrorOffline =>
       'No internet. Check your connection and try again.';
 

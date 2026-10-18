@@ -107,6 +107,7 @@
   "authNoAccount": "Belum punya akun?",
   "authSignedIn": "Sudah masuk",
   "authErrorGeneric": "Terjadi kesalahan. Silakan coba lagi.",
+  "authErrorEmailTaken": "Email ini sudah punya akun. Masuk dengan email itu, atau coba yang lain.",
   "authErrorOffline": "Tidak ada koneksi internet. Periksa koneksi Anda dan coba lagi.",
   "authErrorWrongCode": "Kode salah. Periksa angka dan coba lagi.",
   "authErrorTooMany": "Terlalu banyak percobaan, coba lagi dalam satu menit.",

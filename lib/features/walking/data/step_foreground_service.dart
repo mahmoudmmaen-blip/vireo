@@ -68,7 +68,6 @@ class _StepTaskHandler extends TaskHandler {
         // Send updated steps to the main isolate
         FlutterForegroundTask.sendDataToMain({
           'type': 'step_update',
-          'todaySteps': todaySteps,
           'cumulative': cumulative,
         });
 
@@ -179,9 +178,12 @@ abstract final class StepForegroundService {
     if (data is Map) {
       final type = data['type'];
       if (type == 'step_update') {
-        final todaySteps = (data['todaySteps'] as num?)?.toInt();
-        if (todaySteps != null) {
-          StepCounterService.refresh(pedoSteps: todaySteps);
+        final cumulative = (data['cumulative'] as num?)?.toInt();
+        if (cumulative != null) {
+          unawaited(() async {
+            final steps = await StepCounterService.applyCumulative(cumulative);
+            await StepCounterService.refresh(pedoSteps: steps);
+          }());
         }
         if (!_isActive) {
           _isActive = true;
@@ -197,9 +199,14 @@ abstract final class StepForegroundService {
     if (HiveService.isInitialized) {
       await HiveService.settingsBox.put(_activeKey, true);
     }
-    await StepCounterService.startListening();
+    // The foreground isolate is the only pedometer subscriber while the
+    // service is running. The main isolate applies those readings.
+    await StepCounterService.stopListening();
 
-    if (!PlatformUtils.isMobileNative || kIsWeb) return;
+    if (!PlatformUtils.isMobileNative || kIsWeb) {
+      await StepCounterService.startListening();
+      return;
+    }
 
     if (!_commPortInitialized) {
       _commPortInitialized = true;
@@ -232,6 +239,7 @@ abstract final class StepForegroundService {
       }
     } catch (e) {
       debugPrint('[StepForegroundService] start error: $e');
+      await StepCounterService.startListening();
       rethrow;
     }
   }
@@ -257,8 +265,10 @@ abstract final class StepForegroundService {
       }
     } catch (e) {
       debugPrint('[StepForegroundService] stop error: $e');
+      await StepCounterService.startListening();
       rethrow;
     }
+    await StepCounterService.startListening();
   }
 
   static Future<void> toggle() async {

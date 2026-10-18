@@ -133,6 +133,7 @@
   "authNoAccount": "Don't have an account?",
   "authSignedIn": "Signed in",
   "authErrorGeneric": "Something went wrong. Please try again.",
+  "authErrorEmailTaken": "This email is already on an account. Sign in with it, or try another email.",
   "authErrorOffline": "No internet. Check your connection and try again.",
   "authErrorWrongCode": "Wrong code. Check the digits and try again.",
   "authErrorTooMany": "Too many attempts, try again in a minute.",

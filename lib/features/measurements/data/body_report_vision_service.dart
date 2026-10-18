@@ -46,7 +46,7 @@ abstract final class BodyReportVisionService {
           'mode': 'body_report',
           'images': compressedImages,
           'image_base64': compressedImages.first,
-          'mime_type': 'image/webp',
+          'mime_type': MealImageCompressor.mimeType,
           'language': language,
         },
       );

@@ -952,57 +952,71 @@ class _LogRow extends StatelessWidget {
     final colors = context.vireoColors;
     final accent = item.isAi ? VMacro.ai : colors.ember;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: VSpace.md, vertical: VSpace.sm),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: accent.withValues(alpha: 0.14),
-              borderRadius: BorderRadius.circular(VRadius.sm),
+    final portion = item.portionLabel.trim().isNotEmpty
+        ? item.portionLabel
+        : _subtitle(context);
+    return SizedBox(
+      height: 64,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: VSpace.md),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: accent.withValues(alpha: 0.14),
+                borderRadius: BorderRadius.circular(VRadius.sm),
+              ),
+              child: Icon(
+                item.isAi ? Icons.auto_awesome_rounded : Icons.restaurant_rounded,
+                size: 20,
+                color: accent,
+              ),
             ),
-            child: Icon(
-              item.isAi ? Icons.auto_awesome_rounded : Icons.restaurant_rounded,
-              size: 20,
-              color: accent,
+            const SizedBox(width: VSpace.sm),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    portion,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: colors.textMute, fontSize: 12),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(width: VSpace.sm),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            const SizedBox(width: VSpace.xs),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  item.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.w700),
+                  '${item.calories}',
+                  style: VType.number(size: 14, color: colors.text).copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  _subtitle(context),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: colors.textMute, fontSize: 12),
+                  'P${item.protein.round()} C${item.carbs.round()} F${item.fat.round()}',
+                  style: TextStyle(color: colors.textMute, fontSize: 11),
                 ),
               ],
             ),
-          ),
-          const SizedBox(width: VSpace.xs),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text('${item.calories}', style: VType.number(size: 16, color: colors.text)),
-              const SizedBox(height: 2),
-              Text(
-                'P ${item.protein.round()}g',
-                style: TextStyle(color: VMacro.protein, fontSize: 11, fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -362,6 +362,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'Algo salió mal. Por favor, inténtalo de nuevo.';
 
   @override
+  String get authErrorEmailTaken =>
+      'Este correo ya tiene una cuenta. Entra con él o prueba otro.';
+
+  @override
   String get authErrorOffline =>
       'Sin internet. Comprueba tu conexión e inténtalo de nuevo.';
 

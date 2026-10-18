@@ -7,6 +7,25 @@ import 'package:vireo/core/services/supabase_service.dart';
 
 enum SyncOperation { insert, update, delete }
 
+final _uuidIdPattern = RegExp(
+  r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+);
+
+/// Removes ids that are not UUIDs (for example `water_2026-10-18`).
+/// Postgres rejects those with 22P02 before the row is written.
+Map<String, dynamic> remoteSyncPayload(Map<String, dynamic> data) {
+  final payload = Map<String, dynamic>.from(data);
+  final rawId = payload['id'];
+  if (rawId is! String || !_uuidIdPattern.hasMatch(rawId)) {
+    payload.remove('id');
+  }
+  return payload;
+}
+
+/// Tables whose natural key is (user_id, day), not a client-supplied id.
+bool remoteSyncUsesDayConflict(String table) =>
+    table == 'water_logs' || table == 'daily_steps_history';
+
 enum SyncStatus { idle, syncing, offline, error, synced }
 
 @immutable
@@ -139,11 +158,24 @@ class SyncEngine {
               .update({'deleted_at': item.updatedAt.toIso8601String()})
               .eq('id', item.id);
         } else {
-          // Upsert last-write-wins
-          await SupabaseService.client.from(item.table).upsert(
-                item.data,
-                onConflict: 'id',
-              );
+          final payload = remoteSyncPayload(item.data);
+          final userId = SupabaseService.auth.currentUser?.id;
+          if (userId != null && payload['user_id'] == null) {
+            payload['user_id'] = userId;
+          }
+          if (remoteSyncUsesDayConflict(item.table)) {
+            await SupabaseService.client.from(item.table).upsert(
+                  payload,
+                  onConflict: 'user_id,day',
+                );
+          } else if (payload['id'] == null) {
+            await SupabaseService.client.from(item.table).insert(payload);
+          } else {
+            await SupabaseService.client.from(item.table).upsert(
+                  payload,
+                  onConflict: 'id',
+                );
+          }
         }
         pending.remove(item);
       } catch (e) {

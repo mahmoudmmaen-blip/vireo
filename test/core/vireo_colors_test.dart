@@ -10,16 +10,20 @@ void main() {
       expect(colors.background, const Color(0xFF0D0F12));
     });
 
+    test('surface', () {
+      expect(colors.surface, const Color(0xFF1A1D21));
+    });
+
     test('surfaceRaised', () {
       expect(colors.surfaceRaised, const Color(0xFF1E232B));
     });
 
     test('ember primary', () {
-      expect(colors.ember, const Color(0xFFE8763C));
+      expect(colors.ember, const Color(0xFFFF6B35));
     });
 
     test('text', () {
-      expect(colors.text, const Color(0xFFF0F2F5));
+      expect(colors.text, const Color(0xFFE8E8E8));
     });
 
     test('textMute', () {

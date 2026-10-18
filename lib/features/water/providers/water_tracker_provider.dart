@@ -100,7 +100,6 @@ class WaterTrackerNotifier extends Notifier<int> {
             id: 'water_$day',
             operation: SyncOperation.update,
             data: {
-              'id': 'water_$day',
               'day': day,
               'amount_ml': ml,
               'goal_ml': goalMl,

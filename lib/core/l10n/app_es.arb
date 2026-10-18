@@ -107,6 +107,7 @@
   "authNoAccount": "¿No tienes una cuenta?",
   "authSignedIn": "Sesión iniciada",
   "authErrorGeneric": "Algo salió mal. Por favor, inténtalo de nuevo.",
+  "authErrorEmailTaken": "Este correo ya tiene una cuenta. Entra con él o prueba otro.",
   "authErrorOffline": "Sin internet. Comprueba tu conexión e inténtalo de nuevo.",
   "authErrorWrongCode": "Código incorrecto. Comprueba los dígitos e inténtalo de nuevo.",
   "authErrorTooMany": "Demasiados intentos, vuelve a intentarlo en un minuto.",

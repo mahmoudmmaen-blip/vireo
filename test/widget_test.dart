@@ -20,7 +20,7 @@ void main() {
     expect(materialApp.theme?.scaffoldBackgroundColor, VireoColors.dark.background);
     expect(
       materialApp.theme?.extension<VireoColors>()?.ember,
-      const Color(0xFFE8763C),
+      const Color(0xFFFF6B35),
     );
   });
 }
