@@ -6,6 +6,7 @@ import 'package:vireo/features/home/living_backgrounds/domain/journey_stage.dart
 import 'package:vireo/features/home/living_backgrounds/painters/meal_doodle_painter.dart';
 import 'package:vireo/features/home/living_backgrounds/painters/step_journey_painter.dart';
 import 'package:vireo/features/home/living_backgrounds/providers/living_background_settings_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class ScenePackPreview extends ConsumerStatefulWidget {
   const ScenePackPreview({
@@ -86,7 +87,7 @@ class _ScenePackPreviewState extends ConsumerState<ScenePackPreview> {
                               ),
                               if (stage.hasStarBadge) ...[
                                 const SizedBox(width: 6),
-                                const Icon(Icons.star_rounded, color: Color(0xFFFFD700), size: 24),
+                                const Icon(Icons.star_rounded, color: VBridge.cFFFFD700, size: 24),
                               ],
                             ],
                           ),

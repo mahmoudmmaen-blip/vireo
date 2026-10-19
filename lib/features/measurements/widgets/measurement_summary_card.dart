@@ -7,6 +7,7 @@ import 'package:vireo/features/measurements/domain/measurement_trend.dart';
 import 'package:vireo/features/measurements/providers/measurement_provider.dart';
 import 'package:vireo/features/measurements/screens/measurements_screen.dart';
 import 'package:vireo/features/measurements/widgets/measurement_weight_chart.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class MeasurementSummaryCard extends ConsumerWidget {
   const MeasurementSummaryCard({super.key});
@@ -86,8 +87,8 @@ class _TrendIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (icon, color) = switch (trend) {
-      MeasurementTrend.improving => (Icons.arrow_downward, const Color(0xFF2E7D32)),
-      MeasurementTrend.declining => (Icons.arrow_upward, const Color(0xFFC62828)),
+      MeasurementTrend.improving => (Icons.arrow_downward, VBridge.cFF2E7D32),
+      MeasurementTrend.declining => (Icons.arrow_upward, VBridge.cFFC62828),
       MeasurementTrend.stable => (Icons.arrow_forward, Colors.grey),
     };
 

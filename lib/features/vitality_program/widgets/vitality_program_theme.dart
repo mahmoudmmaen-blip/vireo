@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/vitality_program/domain/vitality_program_phase.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 Color vitalityTaskCategoryColor(VitalityTaskCategory category, VireoColors colors) {
   return switch (category) {
-    VitalityTaskCategory.nutrition => const Color(0xFF22C55E),
-    VitalityTaskCategory.workout => const Color(0xFFF97316),
-    VitalityTaskCategory.sleep => const Color(0xFFA855F7),
-    VitalityTaskCategory.supplement => const Color(0xFF3B82F6),
-    VitalityTaskCategory.mindset => const Color(0xFF14B8A6),
+    VitalityTaskCategory.nutrition => VBridge.cFF22C55E,
+    VitalityTaskCategory.workout => VBridge.cFFF97316,
+    VitalityTaskCategory.sleep => VBridge.cFFA855F7,
+    VitalityTaskCategory.supplement => VBridge.cFF3B82F6,
+    VitalityTaskCategory.mindset => VBridge.cFF14B8A6,
   };
 }
 

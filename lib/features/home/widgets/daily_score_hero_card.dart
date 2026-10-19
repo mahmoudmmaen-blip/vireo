@@ -6,6 +6,7 @@ import 'package:vireo/features/home/providers/home_dashboard_provider.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/insights/screens/score_insights_screen.dart';
 import 'package:vireo/features/insights/widgets/next_meal_suggestion_card.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Daily Score Hero Card (P36):
 /// - Big score ring with "/100" and state label
@@ -230,7 +231,7 @@ class DailyScoreHeroCard extends ConsumerWidget {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.lightbulb_rounded, size: 16, color: Color(0xFFF59E0B)),
+                      const Icon(Icons.lightbulb_rounded, size: 16, color: VBridge.cFFF59E0B),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(

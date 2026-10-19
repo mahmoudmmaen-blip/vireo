@@ -12,6 +12,7 @@ import 'package:vireo/core/widgets/vireo_fab.dart';
 import 'package:vireo/features/measurements/screens/body_composition_screen.dart';
 import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
 import 'package:vireo/features/measurements/widgets/measurement_weight_chart.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class MeasurementsScreen extends ConsumerWidget {
   const MeasurementsScreen({super.key});
@@ -188,12 +189,12 @@ class _TrendBadge extends StatelessWidget {
     final (icon, color, label) = switch (trend) {
       MeasurementTrend.improving => (
           Icons.trending_down,
-          const Color(0xFF2E7D32),
+          VBridge.cFF2E7D32,
           l10n.measurementsTrendImproving,
         ),
       MeasurementTrend.declining => (
           Icons.trending_up,
-          const Color(0xFFC62828),
+          VBridge.cFFC62828,
           l10n.measurementsTrendDeclining,
         ),
       MeasurementTrend.stable => (

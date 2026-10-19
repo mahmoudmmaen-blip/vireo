@@ -4,6 +4,7 @@ import 'package:vireo/core/theme/app_theme_variant.dart';
 import 'package:vireo/features/home/living_backgrounds/domain/journey_stage.dart';
 import 'package:vireo/features/home/living_backgrounds/domain/scene_pack.dart';
 import 'package:vireo/features/home/living_backgrounds/domain/scrim_contrast.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class StepJourneyPainter extends CustomPainter {
   const StepJourneyPainter({
@@ -322,13 +323,13 @@ class StepJourneyPainter extends CustomPainter {
       ..lineTo(base.dx, base.dy - 10)
       ..close();
 
-    final flagPaint = Paint()..color = const Color(0xFFEF4444).withValues(alpha: 0.85);
+    final flagPaint = Paint()..color = VBridge.cFFEF4444.withValues(alpha: 0.85);
     canvas.drawPath(flagPath, flagPaint);
   }
 
   void _paintStarBadge(Canvas canvas, Offset center) {
     final haloPaint = Paint()
-      ..color = const Color(0xFFFFD700).withValues(alpha: 0.35)
+      ..color = VBridge.cFFFFD700.withValues(alpha: 0.35)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12);
     canvas.drawCircle(center, 18, haloPaint);
 
@@ -350,7 +351,7 @@ class StepJourneyPainter extends CustomPainter {
     }
     starPath.close();
 
-    final starPaint = Paint()..color = const Color(0xFFFFD700);
+    final starPaint = Paint()..color = VBridge.cFFFFD700;
     canvas.drawPath(starPath, starPaint);
   }
 

@@ -5,9 +5,10 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/features/progress/models/daily_deficit_entry.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
-const _deficitGreen = Color(0xFF2E7D32);
-const _surplusAmber = Color(0xFFE8763C);
+const _deficitGreen = VBridge.cFF2E7D32;
+const _surplusAmber = VBridge.cFFE8763C;
 
 class WeeklyDeficitChart extends StatelessWidget {
   const WeeklyDeficitChart({

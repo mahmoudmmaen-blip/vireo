@@ -22,6 +22,7 @@ import 'package:vireo/features/progress/models/daily_deficit_entry.dart';
 import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
 import 'package:vireo/features/progress/widgets/energy_ledger_card.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Full-screen Score & Smart Insights Screen with pinned summary-first hierarchy.
 class ScoreInsightsScreen extends ConsumerWidget {
@@ -368,7 +369,7 @@ class _SmartPredictionsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors.surfaceRaised,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.5)),
+        border: Border.all(color: VBridge.cFF8B5CF6.withValues(alpha: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -378,10 +379,10 @@ class _SmartPredictionsCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF8B5CF6).withValues(alpha: 0.2),
+                  color: VBridge.cFF8B5CF6.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.auto_graph_rounded, color: Color(0xFF8B5CF6), size: 20),
+                child: const Icon(Icons.auto_graph_rounded, color: VBridge.cFF8B5CF6, size: 20),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -412,7 +413,7 @@ class _SmartPredictionsCard extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline, color: Color(0xFFF59E0B), size: 18),
+                  const Icon(Icons.info_outline, color: VBridge.cFFF59E0B, size: 18),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -431,7 +432,7 @@ class _SmartPredictionsCard extends StatelessWidget {
                   child: _MetricTile(
                     title: l10n.scoreInsightsWeeklyFatLoss,
                     value: '≈ ${projection.weeklyFatLossGrams.round()} جم',
-                    color: const Color(0xFF10B981),
+                    color: VBridge.cFF10B981,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -451,7 +452,7 @@ class _SmartPredictionsCard extends StatelessWidget {
                   child: _MetricTile(
                     title: l10n.scoreInsightsIn8Weeks,
                     value: '${projection.projectedWeight8Weeks} كجم',
-                    color: const Color(0xFF38BDF8),
+                    color: VBridge.cFF38BDF8,
                   ),
                 ),
                 if (projection.weeksToGoalWeight != null) ...[
@@ -460,7 +461,7 @@ class _SmartPredictionsCard extends StatelessWidget {
                     child: _MetricTile(
                       title: l10n.scoreInsightsGoalHitIn,
                       value: '≈ ${projection.weeksToGoalWeight} أسبوع',
-                      color: const Color(0xFF8B5CF6),
+                      color: VBridge.cFF8B5CF6,
                     ),
                   ),
                 ],
@@ -471,14 +472,14 @@ class _SmartPredictionsCard extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 l10n.scoreInsightsClampWarning,
-                style: const TextStyle(color: Color(0xFFF59E0B), fontSize: 11, fontWeight: FontWeight.w600),
+                style: const TextStyle(color: VBridge.cFFF59E0B, fontSize: 11, fontWeight: FontWeight.w600),
               ),
             ],
             if (projection.isDeficitTooAggressive) ...[
               const SizedBox(height: 6),
               Text(
                 l10n.scoreInsightsAggressiveDeficitWarning,
-                style: const TextStyle(color: Color(0xFFEF4444), fontSize: 11, fontWeight: FontWeight.w600),
+                style: const TextStyle(color: VBridge.cFFEF4444, fontSize: 11, fontWeight: FontWeight.w600),
               ),
             ],
           ],
@@ -573,7 +574,7 @@ class _BodyCompositionInsightsCard extends StatelessWidget {
                   child: _MetricTile(
                     title: isArabic ? 'الكتلة العضلية' : 'Lean Mass',
                     value: report!.leanMassKg != null ? '${report!.leanMassKg!.toStringAsFixed(1)} كجم' : '—',
-                    color: const Color(0xFF10B981),
+                    color: VBridge.cFF10B981,
                   ),
                 ),
               ],
@@ -585,7 +586,7 @@ class _BodyCompositionInsightsCard extends StatelessWidget {
                   child: _MetricTile(
                     title: isArabic ? 'كتلة الدهون' : 'Fat Mass',
                     value: report!.bodyFatMassKg != null ? '${report!.bodyFatMassKg!.toStringAsFixed(1)} كجم' : '—',
-                    color: const Color(0xFFF59E0B),
+                    color: VBridge.cFFF59E0B,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -593,7 +594,7 @@ class _BodyCompositionInsightsCard extends StatelessWidget {
                   child: _MetricTile(
                     title: isArabic ? 'حرق معدل الأيض (Katch)' : 'BMR Kcal',
                     value: report!.bmrKcal != null ? '${report!.bmrKcal!.round()} سعرة' : '—',
-                    color: const Color(0xFF8B5CF6),
+                    color: VBridge.cFF8B5CF6,
                   ),
                 ),
               ],
@@ -885,7 +886,7 @@ class _ChartsSection extends StatelessWidget {
                         ),
                         BarChartRodData(
                           toY: (days[i].tdee + days[i].burned).toDouble().clamp(0.0, 3000.0),
-                          color: const Color(0xFF10B981),
+                          color: VBridge.cFF10B981,
                           width: 8,
                           borderRadius: BorderRadius.circular(4),
                         ),
@@ -903,7 +904,7 @@ class _ChartsSection extends StatelessWidget {
               const SizedBox(width: 4),
               Text(l10n.scoreInsightsEatenKcal, style: const TextStyle(fontSize: 11)),
               const SizedBox(width: 16),
-              Container(width: 8, height: 8, color: const Color(0xFF10B981)),
+              Container(width: 8, height: 8, color: VBridge.cFF10B981),
               const SizedBox(width: 4),
               Text(l10n.scoreInsightsBurnedKcal, style: const TextStyle(fontSize: 11)),
             ],

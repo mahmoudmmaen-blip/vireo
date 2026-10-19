@@ -7,6 +7,7 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/women_health/models/cycle_data.dart';
 import 'package:vireo/features/women_health/providers/women_health_provider.dart';
 import 'package:vireo/features/women_health/screens/women_health_screen.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class WomenHealthHeroCard extends ConsumerWidget {
   const WomenHealthHeroCard({super.key});
@@ -54,12 +55,12 @@ class WomenHealthHeroCard extends ConsumerWidget {
                     width: 38,
                     height: 38,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF43F5E).withValues(alpha: 0.15),
+                      color: VBridge.cFFF43F5E.withValues(alpha: 0.15),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.spa_rounded,
-                      color: Color(0xFFF43F5E),
+                      color: VBridge.cFFF43F5E,
                       size: 20,
                     ),
                   ),
@@ -164,7 +165,7 @@ class WomenHealthHeroCard extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF43F5E).withValues(alpha: 0.15),
+                        color: VBridge.cFFF43F5E.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -172,7 +173,7 @@ class WomenHealthHeroCard extends ConsumerWidget {
                         style: const TextStyle(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFFF43F5E),
+                          color: VBridge.cFFF43F5E,
                         ),
                       ),
                     ),

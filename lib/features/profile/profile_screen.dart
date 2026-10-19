@@ -28,6 +28,7 @@ import 'package:vireo/features/profile/widgets/profile_body_metrics_sheet.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 import 'package:vireo/features/subscription/widgets/subscription_status_banner.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 const _displayNameKey = 'profile_display_name';
 
@@ -286,7 +287,7 @@ class _ProfileHeaderCard extends ConsumerWidget {
                 width: 6,
                 height: 6,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF22C55E),
+                  color: VBridge.cFF22C55E,
                   shape: BoxShape.circle,
                 ),
               ),

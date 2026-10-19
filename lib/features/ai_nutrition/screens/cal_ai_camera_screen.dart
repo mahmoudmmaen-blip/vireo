@@ -11,6 +11,7 @@ import 'package:vireo/features/ai_nutrition/application/ai_scan_state.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_provider.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_scan_loading_overlay.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class CalAiCameraScreen extends ConsumerStatefulWidget {
   const CalAiCameraScreen({super.key, this.initialPhotos = const []});
@@ -423,9 +424,9 @@ class _CalAiCameraScreenState extends ConsumerState<CalAiCameraScreen> {
             ),
             if (_isTakingPhoto)
               const ColoredBox(
-                color: Color(0x88000000),
+                color: VBridge.c88000000,
                 child: Center(
-                  child: CircularProgressIndicator(color: Color(0xFFFF6B35)),
+                  child: CircularProgressIndicator(color: VBridge.cFFFF6B35),
                 ),
               ),
           ],

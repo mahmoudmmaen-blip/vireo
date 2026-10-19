@@ -10,6 +10,7 @@ import 'package:vireo/features/vitality_program/screens/program_complete_screen.
 import 'package:vireo/features/vitality_program/widgets/daily_metrics_logger.dart';
 import 'package:vireo/features/vitality_program/widgets/vitality_program_theme.dart';
 import 'package:vireo/features/vitality_program/widgets/week_report_sheet.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class VitalityProgramScreen extends ConsumerWidget {
   const VitalityProgramScreen({super.key});
@@ -129,7 +130,7 @@ class _HeroBanner extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             colors.gold.withValues(alpha: 0.85),
-            const Color(0xFF6B21A8).withValues(alpha: 0.9),
+            VBridge.cFF6B21A8.withValues(alpha: 0.9),
           ],
         ),
       ),

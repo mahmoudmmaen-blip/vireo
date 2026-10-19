@@ -11,6 +11,7 @@ import 'package:vireo/core/utils/fat_equivalent.dart';
 import 'package:vireo/features/progress/domain/weekly_progress_report_data.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
 import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class WeeklyWrappedStoryScreen extends ConsumerStatefulWidget {
   const WeeklyWrappedStoryScreen({super.key});
@@ -133,7 +134,7 @@ class _WeeklyWrappedStoryScreenState extends ConsumerState<WeeklyWrappedStoryScr
           final stories = [
             // Slide 1: Intro
             _WrappedStoryPage(
-              gradient: const [Color(0xFF0F172A), Color(0xFF1E1B4B)],
+              gradient: const [VBridge.cFF0F172A, VBridge.cFF1E1B4B],
               emoji: '🎁',
               title: isAr ? 'ملخص أسبوعك جاهز!' : 'Your Weekly Wrapped!',
               subtitle: isAr ? 'إليك أبرز إنجازاتك الرياضية والصحية هذا الأسبوع' : 'Here are your fitness & health highlights from this week.',
@@ -141,7 +142,7 @@ class _WeeklyWrappedStoryScreenState extends ConsumerState<WeeklyWrappedStoryScr
 
             // Slide 2: Steps + Fun Comparison
             _WrappedStoryPage(
-              gradient: const [Color(0xFF064E3B), Color(0xFF022C22)],
+              gradient: const [VBridge.cFF064E3B, VBridge.cFF022C22],
               emoji: '🚶‍♂️',
               title: isAr ? 'إجمالي الخطوات' : 'Total Steps',
               metricValue: '${data.totalWeeklySteps}',
@@ -151,7 +152,7 @@ class _WeeklyWrappedStoryScreenState extends ConsumerState<WeeklyWrappedStoryScr
 
             // Slide 3: Calories Burned & Fat Equivalent
             _WrappedStoryPage(
-              gradient: const [Color(0xFF7C2D12), Color(0xFF451A03)],
+              gradient: const [VBridge.cFF7C2D12, VBridge.cFF451A03],
               emoji: '🔥',
               title: isAr ? 'السعرات المحروقة' : 'Calories Burned',
               metricValue: '$totalBurned',
@@ -163,7 +164,7 @@ class _WeeklyWrappedStoryScreenState extends ConsumerState<WeeklyWrappedStoryScr
 
             // Slide 4: Best Day & Streak
             _WrappedStoryPage(
-              gradient: const [Color(0xFF581C87), Color(0xFF3B0764)],
+              gradient: const [VBridge.cFF581C87, VBridge.cFF3B0764],
               emoji: '⚡',
               title: isAr ? 'أفضل يوم واستمرارية' : 'Best Day & Streak',
               metricValue: '${data.streakDays}',
@@ -175,7 +176,7 @@ class _WeeklyWrappedStoryScreenState extends ConsumerState<WeeklyWrappedStoryScr
 
             // Slide 5: Workouts & Protein Goals
             _WrappedStoryPage(
-              gradient: const [Color(0xFF1E293B), Color(0xFF0F172A)],
+              gradient: const [VBridge.cFF1E293B, VBridge.cFF0F172A],
               emoji: '💪',
               title: isAr ? 'التمارين والبروتين' : 'Workouts & Protein',
               metricValue: '${data.totalWorkoutsCompleted}',
@@ -360,7 +361,7 @@ class _WrappedStoryPage extends StatelessWidget {
               Text(
                 metricUnit!,
                 style: const TextStyle(
-                  color: Color(0xFFF97316),
+                  color: VBridge.cFFF97316,
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
@@ -416,7 +417,7 @@ class _Wrapped1080x1920Card extends StatelessWidget {
       padding: const EdgeInsets.all(28),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF0F172A), Color(0xFF020617), Color(0xFF1E1010)],
+          colors: [VBridge.cFF0F172A, VBridge.cFF020617, VBridge.cFF1E1010],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -433,7 +434,7 @@ class _Wrapped1080x1920Card extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: const BoxDecoration(
-                      color: Color(0xFFEF5350),
+                      color: VBridge.cFFEF5350,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.bolt, color: Colors.white, size: 20),
@@ -469,7 +470,7 @@ class _Wrapped1080x1920Card extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF064E3B).withValues(alpha: 0.4),
+              color: VBridge.cFF064E3B.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(18),
               border: Border.all(color: context.vireoColors.success.withValues(alpha: 0.5)),
             ),
@@ -488,7 +489,7 @@ class _Wrapped1080x1920Card extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   funComparison,
-                  style: const TextStyle(color: Color(0xFF34D399), fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: VBridge.cFF34D399, fontSize: 12, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -544,9 +545,9 @@ class _Wrapped1080x1920Card extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: const Color(0xFF7C2D12).withValues(alpha: 0.3),
+                color: VBridge.cFF7C2D12.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: const Color(0xFFF97316).withValues(alpha: 0.4)),
+                border: Border.all(color: VBridge.cFFF97316.withValues(alpha: 0.4)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

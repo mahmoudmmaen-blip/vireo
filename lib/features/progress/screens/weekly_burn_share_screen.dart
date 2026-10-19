@@ -11,6 +11,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/home/mascot/domain/mascot_state.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// P40 story card (1080×1920): weekly burn balance — steps, mascot, streak, logo.
 class WeeklyBurnShareScreen extends ConsumerStatefulWidget {
@@ -145,7 +146,7 @@ class WeeklyBurnShareCard extends StatelessWidget {
       padding: const EdgeInsets.all(28),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF0F172A), Color(0xFF1E1B4B), Color(0xFF020617)],
+          colors: [VBridge.cFF0F172A, VBridge.cFF1E1B4B, VBridge.cFF020617],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),

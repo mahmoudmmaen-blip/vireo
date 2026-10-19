@@ -12,6 +12,7 @@ import 'package:vireo/features/measurements/domain/body_composition_insights.dar
 import 'package:vireo/features/measurements/domain/body_composition_report.dart';
 import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class InBodyReviewScreen extends ConsumerStatefulWidget {
   const InBodyReviewScreen({super.key, required this.report});
@@ -300,7 +301,7 @@ class _InBodyReviewScreenState extends ConsumerState<InBodyReviewScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.verified_outlined, size: 14, color: Color(0xFFF97316)),
+                        const Icon(Icons.verified_outlined, size: 14, color: VBridge.cFFF97316),
                         const SizedBox(width: 5),
                         Text(
                           brandLabel,

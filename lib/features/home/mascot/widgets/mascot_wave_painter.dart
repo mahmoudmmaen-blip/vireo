@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/home/mascot/domain/mascot_companion.dart';
 import 'package:vireo/features/home/mascot/domain/mascot_state.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Original flat mascot whose body is a liquid-wave container.
 ///
@@ -263,7 +264,7 @@ class MascotWavePainter extends CustomPainter {
 
     // Cheeks when full
     if (expression == MascotExpression.full) {
-      final cheek = Paint()..color = const Color(0xFFFFB4A2).withValues(alpha: 0.7);
+      final cheek = Paint()..color = VBridge.cFFFFB4A2.withValues(alpha: 0.7);
       canvas.drawCircle(Offset(c.dx - r * 0.55, c.dy + r * 0.15), r * 0.18, cheek);
       canvas.drawCircle(Offset(c.dx + r * 0.55, c.dy + r * 0.15), r * 0.18, cheek);
     }

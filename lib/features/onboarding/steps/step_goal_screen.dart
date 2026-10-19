@@ -11,6 +11,7 @@ import 'package:vireo/data/models/fitness_goal.dart';
 import 'package:vireo/features/onboarding/providers/onboarding_provider.dart';
 import 'package:vireo/features/onboarding/widgets/onboarding_step_shell.dart';
 import 'package:vireo/features/onboarding/widgets/why_we_ask_box.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class StepGoalScreen extends ConsumerStatefulWidget {
   const StepGoalScreen({super.key});
@@ -87,7 +88,7 @@ class _StepGoalScreenState extends ConsumerState<StepGoalScreen> {
         title: l10n.goalLoseFatTitle,
         subtitle: l10n.goalLoseFatSubtitle,
         icon: Icons.local_fire_department_rounded,
-        color: const Color(0xFFFF5252),
+        color: VBridge.cFFFF5252,
       ),
       (
         goal: FitnessGoal.muscleGain,
@@ -101,7 +102,7 @@ class _StepGoalScreenState extends ConsumerState<StepGoalScreen> {
         title: l10n.goalMoreEnergyTitle,
         subtitle: l10n.goalMoreEnergySubtitle,
         icon: Icons.bolt_rounded,
-        color: const Color(0xFFF59E0B),
+        color: VBridge.cFFF59E0B,
       ),
       (
         goal: FitnessGoal.allOfAbove,

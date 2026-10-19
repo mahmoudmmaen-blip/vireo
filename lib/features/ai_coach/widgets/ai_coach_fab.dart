@@ -5,6 +5,7 @@ import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/widgets/vireo_fab.dart';
 import 'package:vireo/features/ai_coach/screens/ai_coach_screen.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class AiCoachFab extends StatelessWidget {
   const AiCoachFab({super.key});
@@ -19,14 +20,14 @@ class AiCoachFab extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              const Color(0xFF7C3AED),
+              VBridge.cFF7C3AED,
               colors.ember,
             ],
           ),
           borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF7C3AED).withValues(alpha: 0.35),
+              color: VBridge.cFF7C3AED.withValues(alpha: 0.35),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),

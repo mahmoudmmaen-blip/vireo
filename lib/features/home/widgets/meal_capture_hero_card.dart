@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
@@ -19,7 +18,6 @@ class MealCaptureHeroCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = context.vireoColors;
     final locale = Localizations.localeOf(context).languageCode;
     final isArabic = locale.startsWith('ar');
     final nutrition = ref.watch(todayNutritionProvider(locale));
@@ -37,9 +35,10 @@ class MealCaptureHeroCard extends ConsumerWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
+          // P50: soft neutral depth — ember stays on the CTA itself, not the card shell.
           boxShadow: [
             BoxShadow(
-              color: colors.ember.withValues(alpha: 0.35),
+              color: Colors.black.withValues(alpha: 0.22),
               blurRadius: 16,
               offset: const Offset(0, 5),
             ),

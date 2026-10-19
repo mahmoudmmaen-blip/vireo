@@ -8,6 +8,7 @@ import 'package:vireo/features/measurements/domain/body_composition_report.dart'
 import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
 import 'package:vireo/features/measurements/screens/navy_tape_measure_screen.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// "تحليل الجسم" card on Home (below the score card).
 /// Shows latest body fat %, muscle mass, visceral fat, and trend arrows,
@@ -365,7 +366,7 @@ class _MetricTile extends StatelessWidget {
                 Icon(
                   isPositiveChange ? Icons.trending_down_rounded : Icons.trending_up_rounded,
                   size: 13,
-                  color: isPositiveChange ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
+                  color: isPositiveChange ? VBridge.cFF10B981 : VBridge.cFFF59E0B,
                 ),
                 const SizedBox(width: 3),
                 Expanded(
@@ -374,7 +375,7 @@ class _MetricTile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w800,
-                      color: isPositiveChange ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
+                      color: isPositiveChange ? VBridge.cFF10B981 : VBridge.cFFF59E0B,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -388,7 +389,7 @@ class _MetricTile extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w800,
-                color: isPositiveChange ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
+                color: isPositiveChange ? VBridge.cFF10B981 : VBridge.cFFF59E0B,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class ParticleBurstPainter extends CustomPainter {
   const ParticleBurstPainter({
@@ -30,7 +31,7 @@ class ParticleBurstPainter extends CustomPainter {
       final y = center.dy + distance * math.sin(angle);
 
       final isGold = i % 2 == 0;
-      final color = isGold ? const Color(0xFFFFD700) : accentColor;
+      final color = isGold ? VBridge.cFFFFD700 : accentColor;
 
       final paint = Paint()
         ..color = color.withValues(alpha: alpha * 0.85)

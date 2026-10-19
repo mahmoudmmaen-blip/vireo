@@ -8,6 +8,7 @@ import 'package:vireo/features/fasting/domain/fasting_plan.dart';
 import 'package:vireo/features/fasting/domain/fasting_session.dart';
 import 'package:vireo/features/fasting/domain/fasting_stage.dart';
 import 'package:vireo/features/fasting/providers/fasting_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class FastingScreen extends ConsumerStatefulWidget {
   const FastingScreen({super.key});
@@ -145,7 +146,7 @@ class _FastingScreenState extends ConsumerState<FastingScreen> with SingleTicker
       if (coins > 0) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: const Color(0xFF10B981),
+            backgroundColor: VBridge.cFF10B981,
             content: Row(
               children: [
                 const Icon(Icons.stars_rounded, color: Colors.amber, size: 24),
@@ -276,7 +277,7 @@ class _FastingScreenState extends ConsumerState<FastingScreen> with SingleTicker
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                 color: plan.isBeginner
-                                    ? const Color(0xFF10B981).withValues(alpha: 0.2)
+                                    ? VBridge.cFF10B981.withValues(alpha: 0.2)
                                     : colors.surface,
                                 borderRadius: BorderRadius.circular(6),
                               ),
@@ -284,7 +285,7 @@ class _FastingScreenState extends ConsumerState<FastingScreen> with SingleTicker
                                 plan.code,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
-                                  color: plan.isBeginner ? const Color(0xFF10B981) : colors.text,
+                                  color: plan.isBeginner ? VBridge.cFF10B981 : colors.text,
                                   fontSize: 13,
                                 ),
                               ),
@@ -305,7 +306,7 @@ class _FastingScreenState extends ConsumerState<FastingScreen> with SingleTicker
                                         Container(
                                           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFF10B981).withValues(alpha: 0.15),
+                                            color: VBridge.cFF10B981.withValues(alpha: 0.15),
                                             borderRadius: BorderRadius.circular(4),
                                           ),
                                           child: Text(
@@ -313,7 +314,7 @@ class _FastingScreenState extends ConsumerState<FastingScreen> with SingleTicker
                                             style: const TextStyle(
                                               fontSize: 9.5,
                                               fontWeight: FontWeight.w700,
-                                              color: Color(0xFF10B981),
+                                              color: VBridge.cFF10B981,
                                             ),
                                           ),
                                         ),
@@ -554,7 +555,7 @@ class _FastingScreenState extends ConsumerState<FastingScreen> with SingleTicker
                 height: 52,
                 child: FilledButton.icon(
                   style: FilledButton.styleFrom(
-                    backgroundColor: isFasting ? const Color(0xFFEF4444) : colors.ember,
+                    backgroundColor: isFasting ? VBridge.cFFEF4444 : colors.ember,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                   onPressed: _isOptimisticActionRunning

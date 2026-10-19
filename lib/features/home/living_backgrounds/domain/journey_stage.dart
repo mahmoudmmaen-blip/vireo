@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vireo/core/theme/app_theme_variant.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Represents one of the 13 progression stages (0 to 12) of the step journey.
 /// Evolving every 1,000 steps up to 12,000+ steps.
@@ -121,7 +122,7 @@ class JourneyStage {
     final secondary = variant.secondaryAccent;
 
     if (index >= 12) {
-      return const Color(0xFFFFD700); // Triumphant Gold at 12k+
+      return VBridge.cFFFFD700; // Triumphant Gold at 12k+
     }
 
     final t = (index / 12.0).clamp(0.0, 1.0);

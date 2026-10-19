@@ -10,6 +10,7 @@ import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/theme/app_theme.dart';
 import 'package:vireo/features/ai_nutrition/data/gemini_food_service_core.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
+import 'package:vireo/features/ai_nutrition/widgets/meal_component_chips.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';
 import 'package:vireo/features/nutrition/providers/plate_size_provider.dart';
 
@@ -40,6 +41,7 @@ void main() {
       ],
       child: MaterialApp(
         theme: AppTheme.dark,
+        locale: const Locale('ar', 'EG'),
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -92,14 +94,16 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
 
       expect(find.byType(MealReviewScreen), findsOneWidget);
-      expect(find.text('Boiled Egg'), findsOneWidget);
-      expect(find.text('Pita Bread'), findsOneWidget);
+      expect(find.byType(MealComponentChips), findsOneWidget);
+      // P54 chips render Arabic name + grams + kcal on ar locale.
+      expect(find.textContaining('بيض مسلوق'), findsWidgets);
+      expect(find.textContaining('خبز بلدي'), findsWidgets);
 
-      // Total calories: 155 + 210 = 365
-      expect(find.text('365'), findsWidgets);
+      // Total calories: 155 + 210 = 365 (may be formatted with ≈)
+      expect(find.textContaining('365'), findsWidgets);
 
       // Verify save button exists
-      expect(find.byType(FilledButton), findsOneWidget);
+      expect(find.byType(FilledButton), findsWidgets);
     });
   });
 }

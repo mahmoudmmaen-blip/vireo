@@ -9,6 +9,7 @@ import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/home/widgets/sleep_log_sheet.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Today's pillars — food / workout / sleep.
 /// Water lives only on [QuickWaterCard] (single Home water tracker).
@@ -67,7 +68,7 @@ class TodayPillarsGrid extends ConsumerWidget {
                     ? (isArabic ? 'مكتمل ✅' : 'Done')
                     : (isArabic ? 'لسه' : 'Not yet'),
                 icon: Icons.fitness_center_rounded,
-                accentColor: const Color(0xFF8B5CF6),
+                accentColor: VBridge.cFF8B5CF6,
                 progress: workoutDone ? 1.0 : 0.0,
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute<void>(
@@ -84,7 +85,7 @@ class TodayPillarsGrid extends ConsumerWidget {
                     ? '$sleepHours س'
                     : (isArabic ? 'سجّل' : 'Log'),
                 icon: Icons.bedtime_rounded,
-                accentColor: const Color(0xFF6366F1),
+                accentColor: VBridge.cFF6366F1,
                 progress: sleepRatio,
                 onTap: () => showSleepLogSheet(context, ref),
               ),

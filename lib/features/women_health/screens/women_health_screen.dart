@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/women_health/models/cycle_data.dart';
 import 'package:vireo/features/women_health/providers/women_health_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class WomenHealthScreen extends ConsumerStatefulWidget {
   const WomenHealthScreen({super.key});
@@ -352,23 +353,23 @@ class _WomenHealthScreenState extends ConsumerState<WomenHealthScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF43F5E).withValues(alpha: 0.08),
+                  color: VBridge.cFFF43F5E.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFF43F5E).withValues(alpha: 0.25)),
+                  border: Border.all(color: VBridge.cFFF43F5E.withValues(alpha: 0.25)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.insights_rounded, color: Color(0xFFF43F5E)),
+                        const Icon(Icons.insights_rounded, color: VBridge.cFFF43F5E),
                         const SizedBox(width: 8),
                         Text(
                           currentPhase.displayNameAr,
                           style: const TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 15,
-                            color: Color(0xFFF43F5E),
+                            color: VBridge.cFFF43F5E,
                           ),
                         ),
                         const Spacer(),

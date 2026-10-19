@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/vitality_program/providers/vitality_program_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class ProgramCompleteScreen extends ConsumerWidget {
   const ProgramCompleteScreen({super.key, required this.onDone});
@@ -31,7 +32,7 @@ class ProgramCompleteScreen extends ConsumerWidget {
                   gradient: LinearGradient(
                     colors: [
                       colors.gold.withValues(alpha: 0.9),
-                      const Color(0xFF6B21A8).withValues(alpha: 0.85),
+                      VBridge.cFF6B21A8.withValues(alpha: 0.85),
                     ],
                   ),
                   boxShadow: [

@@ -13,6 +13,7 @@ import 'package:vireo/features/home/living_backgrounds/widgets/scene_pack_previe
 import 'package:vireo/features/home/mascot/domain/mascot_companion.dart';
 import 'package:vireo/features/home/mascot/providers/mascot_settings_provider.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class AppearanceScreen extends ConsumerWidget {
   const AppearanceScreen({super.key});
@@ -336,7 +337,7 @@ class _LivingBackgroundsSection extends ConsumerWidget {
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         ),
-                        icon: const Icon(Icons.monetization_on_rounded, size: 14, color: Color(0xFFFFD700)),
+                        icon: const Icon(Icons.monetization_on_rounded, size: 14, color: VBridge.cFFFFD700),
                         label: Text(
                           l10n.livingBackgroundsUnlockForCoins(300),
                           style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),

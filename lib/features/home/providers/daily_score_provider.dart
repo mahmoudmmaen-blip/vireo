@@ -7,6 +7,7 @@ import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Breakdown of factors composing the 0–100 Daily Score.
 class DailyScoreBreakdown {
@@ -73,9 +74,9 @@ class DailyScoreBreakdown {
   }
 
   Color get scoreColor {
-    if (totalScore >= 70) return const Color(0xFF10B981); // Emerald Green
-    if (totalScore >= 40) return const Color(0xFFF59E0B); // Amber
-    return const Color(0xFFEF4444);                     // Coral Red
+    if (totalScore >= 70) return VBridge.cFF10B981; // Emerald Green
+    if (totalScore >= 40) return VBridge.cFFF59E0B; // Amber
+    return VBridge.cFFEF4444;                     // Coral Red
   }
 
   String get scoreTierLabel {

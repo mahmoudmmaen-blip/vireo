@@ -8,6 +8,7 @@ import 'package:vireo/features/vitality/domain/vitality_models.dart';
 import 'package:vireo/features/vitality/providers/vitality_progress_provider.dart';
 import 'package:vireo/features/vitality/providers/vitality_provider.dart';
 import 'package:vireo/features/vitality/widgets/protocol_tracker.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class ArticleDetailScreen extends ConsumerWidget {
   const ArticleDetailScreen({super.key, required this.articleId});
@@ -46,7 +47,7 @@ class ArticleDetailScreen extends ConsumerWidget {
                     end: Alignment.bottomRight,
                     colors: [
                       colors.gold.withValues(alpha: 0.85),
-                      const Color(0xFF6B21A8).withValues(alpha: 0.9),
+                      VBridge.cFF6B21A8.withValues(alpha: 0.9),
                     ],
                   ),
                 ),

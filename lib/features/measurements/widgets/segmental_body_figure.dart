@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/measurements/domain/body_composition_report.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Simple SVG-like body figure colored by segmental lean balance.
 class SegmentalBodyFigure extends StatelessWidget {
@@ -11,9 +12,9 @@ class SegmentalBodyFigure extends StatelessWidget {
   Color _colorFor(SegmentalPart part, Color ember, Color mute) {
     final pct = part.percent?.value;
     if (pct == null) return mute.withValues(alpha: 0.35);
-    if (pct >= 100) return const Color(0xFF2E7D32);
+    if (pct >= 100) return VBridge.cFF2E7D32;
     if (pct >= 90) return ember;
-    return const Color(0xFFE8763C);
+    return VBridge.cFFE8763C;
   }
 
   @override

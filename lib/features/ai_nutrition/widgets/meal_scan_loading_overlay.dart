@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_nutrition/application/ai_scan_stage.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Photo with an animated scan line, staged progress, and a 25s timeout retry.
 class MealScanLoadingOverlay extends StatefulWidget {
@@ -252,7 +253,7 @@ class _StageDot extends StatelessWidget {
       width: active ? 22 : 8,
       height: 8,
       decoration: BoxDecoration(
-        color: active ? const Color(0xFFFF6B35) : Colors.white24,
+        color: active ? VBridge.cFFFF6B35 : Colors.white24,
         borderRadius: BorderRadius.circular(99),
       ),
     );

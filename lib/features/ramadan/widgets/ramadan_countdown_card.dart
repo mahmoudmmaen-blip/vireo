@@ -7,6 +7,7 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 import 'package:vireo/features/ramadan/screens/ramadan_guide_screen.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class RamadanCountdownCard extends ConsumerStatefulWidget {
   const RamadanCountdownCard({super.key});
@@ -75,7 +76,7 @@ class _RamadanCountdownCardState extends ConsumerState<RamadanCountdownCard> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xFF1E293B),
+            VBridge.cFF1E293B,
             colors.surface,
           ],
           begin: Alignment.topLeft,

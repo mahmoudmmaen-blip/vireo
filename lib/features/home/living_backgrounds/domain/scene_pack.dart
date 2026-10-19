@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vireo/core/theme/app_theme_variant.dart';
 import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/home/living_backgrounds/domain/journey_stage.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 enum ScenePackId {
   // Standard 6 (rotate every 3 days)
@@ -178,15 +179,15 @@ class ScenePack {
       final isSuhoor = nowHour >= 22 || nowHour < 6;
       if (isSuhoor) {
         return [
-          const Color(0xFF1E1B4B),
-          const Color(0xFF312E81),
+          VBridge.cFF1E1B4B,
+          VBridge.cFF312E81,
           accent.withValues(alpha: 0.6),
         ];
       } else {
         return [
-          const Color(0xFF78350F),
-          const Color(0xFFB45309),
-          const Color(0xFFD97706),
+          VBridge.cFF78350F,
+          VBridge.cFFB45309,
+          VBridge.cFFD97706,
         ];
       }
     }
@@ -194,26 +195,26 @@ class ScenePack {
     return switch (slot) {
       MealType.breakfast => [
           // Soft morning sunrise pastel tone
-          isDark ? const Color(0xFF431407) : const Color(0xFFFFF7ED),
+          isDark ? VBridge.cFF431407 : VBridge.cFFFFF7ED,
           accent.withValues(alpha: isDark ? 0.85 : 0.9),
-          isDark ? const Color(0xFF7C2D12) : const Color(0xFFFDBA74),
+          isDark ? VBridge.cFF7C2D12 : VBridge.cFFFDBA74,
         ],
       MealType.lunch => [
           // Bright energetic midday tone
-          isDark ? const Color(0xFF78350F) : const Color(0xFFFEF3C7),
+          isDark ? VBridge.cFF78350F : VBridge.cFFFEF3C7,
           accent,
-          isDark ? const Color(0xFFB45309) : const Color(0xFFF59E0B),
+          isDark ? VBridge.cFFB45309 : VBridge.cFFF59E0B,
         ],
       MealType.dinner => [
           // Calm soothing evening twilight
-          isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9),
+          isDark ? VBridge.cFF0F172A : VBridge.cFFF1F5F9,
           accent.withValues(alpha: 0.8),
-          isDark ? const Color(0xFF1E293B) : const Color(0xFF94A3B8),
+          isDark ? VBridge.cFF1E293B : VBridge.cFF94A3B8,
         ],
       MealType.snack => [
-          isDark ? const Color(0xFF1C1917) : const Color(0xFFFAFAF9),
+          isDark ? VBridge.cFF1C1917 : VBridge.cFFFAFAF9,
           accent.withValues(alpha: 0.85),
-          isDark ? const Color(0xFF292524) : const Color(0xFFD6D3D1),
+          isDark ? VBridge.cFF292524 : VBridge.cFFD6D3D1,
         ],
     };
   }
@@ -223,197 +224,197 @@ class ScenePack {
   static ScenePackPalette _buildNilePalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     final sky = switch (stage.skyTime) {
-      JourneySkyTime.dawn => [const Color(0xFF0C1B2A), const Color(0xFF16324F), const Color(0xFF1F4E79)],
-      JourneySkyTime.morning => [const Color(0xFF133E68), const Color(0xFF1E5F8A), const Color(0xFF4A90E2)],
-      JourneySkyTime.noon => [const Color(0xFF0E4C7A), const Color(0xFF2A7FB8), const Color(0xFF5BA4CF)],
-      JourneySkyTime.golden => [const Color(0xFF281C3E), const Color(0xFF6B3A5B), const Color(0xFFD97736)],
+      JourneySkyTime.dawn => [VBridge.cFF0C1B2A, VBridge.cFF16324F, VBridge.cFF1F4E79],
+      JourneySkyTime.morning => [VBridge.cFF133E68, VBridge.cFF1E5F8A, VBridge.cFF4A90E2],
+      JourneySkyTime.noon => [VBridge.cFF0E4C7A, VBridge.cFF2A7FB8, VBridge.cFF5BA4CF],
+      JourneySkyTime.golden => [VBridge.cFF281C3E, VBridge.cFF6B3A5B, VBridge.cFFD97736],
     };
 
     return ScenePackPalette(
       skyGradient: sky,
-      sunOrMoonColor: stage.isNightOrDawn ? const Color(0xFFE2E8F0) : const Color(0xFFFFD166),
-      sunHaloColor: stage.isNightOrDawn ? const Color(0x33CBD5E1) : const Color(0x4DFFA726),
-      distantTerrainColor: const Color(0xFF0D283E),
-      midTerrainColor: const Color(0xFF0F3B56),
-      foregroundPathColor: const Color(0xFF185375),
-      landmarkColor: const Color(0xFFE2E8F0),
+      sunOrMoonColor: stage.isNightOrDawn ? VBridge.cFFE2E8F0 : VBridge.cFFFFD166,
+      sunHaloColor: stage.isNightOrDawn ? VBridge.c33CBD5E1 : VBridge.c4DFFA726,
+      distantTerrainColor: VBridge.cFF0D283E,
+      midTerrainColor: VBridge.cFF0F3B56,
+      foregroundPathColor: VBridge.cFF185375,
+      landmarkColor: VBridge.cFFE2E8F0,
     );
   }
 
   static ScenePackPalette _buildDesertPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     final sky = switch (stage.skyTime) {
-      JourneySkyTime.dawn => [const Color(0xFF24141E), const Color(0xFF4A2535), const Color(0xFF8C4646)],
-      JourneySkyTime.morning => [const Color(0xFF5A2A18), const Color(0xFF9E4B27), const Color(0xFFD97736)],
-      JourneySkyTime.noon => [const Color(0xFF804E19), const Color(0xFFB87828), const Color(0xFFE4AC42)],
-      JourneySkyTime.golden => [const Color(0xFF381418), const Color(0xFF7A2522), const Color(0xFFD4622B)],
+      JourneySkyTime.dawn => [VBridge.cFF24141E, VBridge.cFF4A2535, VBridge.cFF8C4646],
+      JourneySkyTime.morning => [VBridge.cFF5A2A18, VBridge.cFF9E4B27, VBridge.cFFD97736],
+      JourneySkyTime.noon => [VBridge.cFF804E19, VBridge.cFFB87828, VBridge.cFFE4AC42],
+      JourneySkyTime.golden => [VBridge.cFF381418, VBridge.cFF7A2522, VBridge.cFFD4622B],
     };
 
     return ScenePackPalette(
       skyGradient: sky,
-      sunOrMoonColor: stage.isNightOrDawn ? const Color(0xFFFDE68A) : const Color(0xFFFFFBEB),
-      sunHaloColor: const Color(0x4DF59E0B),
-      distantTerrainColor: const Color(0xFF5C3317),
-      midTerrainColor: const Color(0xFF7C441E),
-      foregroundPathColor: const Color(0xFFA15E28),
-      landmarkColor: const Color(0xFFFEF3C7),
+      sunOrMoonColor: stage.isNightOrDawn ? VBridge.cFFFDE68A : VBridge.cFFFFFBEB,
+      sunHaloColor: VBridge.c4DF59E0B,
+      distantTerrainColor: VBridge.cFF5C3317,
+      midTerrainColor: VBridge.cFF7C441E,
+      foregroundPathColor: VBridge.cFFA15E28,
+      landmarkColor: VBridge.cFFFEF3C7,
     );
   }
 
   static ScenePackPalette _buildMountainsPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     final sky = switch (stage.skyTime) {
-      JourneySkyTime.dawn => [const Color(0xFF171926), const Color(0xFF282B42), const Color(0xFF3F4466)],
-      JourneySkyTime.morning => [const Color(0xFF1F2B3E), const Color(0xFF304563), const Color(0xFF4A6B94)],
-      JourneySkyTime.noon => [const Color(0xFF1C3A5A), const Color(0xFF32608E), const Color(0xFF5188BD)],
-      JourneySkyTime.golden => [const Color(0xFF2E1929), const Color(0xFF5A2C46), const Color(0xFFAB5E63)],
+      JourneySkyTime.dawn => [VBridge.cFF171926, VBridge.cFF282B42, VBridge.cFF3F4466],
+      JourneySkyTime.morning => [VBridge.cFF1F2B3E, VBridge.cFF304563, VBridge.cFF4A6B94],
+      JourneySkyTime.noon => [VBridge.cFF1C3A5A, VBridge.cFF32608E, VBridge.cFF5188BD],
+      JourneySkyTime.golden => [VBridge.cFF2E1929, VBridge.cFF5A2C46, VBridge.cFFAB5E63],
     };
 
     return ScenePackPalette(
       skyGradient: sky,
-      sunOrMoonColor: stage.isNightOrDawn ? const Color(0xFFE0E7FF) : const Color(0xFFFEF08A),
-      sunHaloColor: const Color(0x33818CF8),
-      distantTerrainColor: const Color(0xFF1E2235),
-      midTerrainColor: const Color(0xFF2B314B),
-      foregroundPathColor: const Color(0xFF3B4466),
-      landmarkColor: const Color(0xFFE0E7FF),
+      sunOrMoonColor: stage.isNightOrDawn ? VBridge.cFFE0E7FF : VBridge.cFFFEF08A,
+      sunHaloColor: VBridge.c33818CF8,
+      distantTerrainColor: VBridge.cFF1E2235,
+      midTerrainColor: VBridge.cFF2B314B,
+      foregroundPathColor: VBridge.cFF3B4466,
+      landmarkColor: VBridge.cFFE0E7FF,
     );
   }
 
   static ScenePackPalette _buildSeaPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     final sky = switch (stage.skyTime) {
-      JourneySkyTime.dawn => [const Color(0xFF0A1826), const Color(0xFF102A45), const Color(0xFF1A476F)],
-      JourneySkyTime.morning => [const Color(0xFF0F3252), const Color(0xFF195587), const Color(0xFF2A7FC0)],
-      JourneySkyTime.noon => [const Color(0xFF10436C), const Color(0xFF1D6AA3), const Color(0xFF399BE2)],
-      JourneySkyTime.golden => [const Color(0xFF1F1C36), const Color(0xFF4B325E), const Color(0xFFC76950)],
+      JourneySkyTime.dawn => [VBridge.cFF0A1826, VBridge.cFF102A45, VBridge.cFF1A476F],
+      JourneySkyTime.morning => [VBridge.cFF0F3252, VBridge.cFF195587, VBridge.cFF2A7FC0],
+      JourneySkyTime.noon => [VBridge.cFF10436C, VBridge.cFF1D6AA3, VBridge.cFF399BE2],
+      JourneySkyTime.golden => [VBridge.cFF1F1C36, VBridge.cFF4B325E, VBridge.cFFC76950],
     };
 
     return ScenePackPalette(
       skyGradient: sky,
-      sunOrMoonColor: const Color(0xFFE0F2FE),
-      sunHaloColor: const Color(0x3338BDF8),
-      distantTerrainColor: const Color(0xFF0B2136),
-      midTerrainColor: const Color(0xFF0F3657),
-      foregroundPathColor: const Color(0xFF165282),
-      landmarkColor: const Color(0xFFBAE6FD),
+      sunOrMoonColor: VBridge.cFFE0F2FE,
+      sunHaloColor: VBridge.c3338BDF8,
+      distantTerrainColor: VBridge.cFF0B2136,
+      midTerrainColor: VBridge.cFF0F3657,
+      foregroundPathColor: VBridge.cFF165282,
+      landmarkColor: VBridge.cFFBAE6FD,
     );
   }
 
   static ScenePackPalette _buildNightPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     return ScenePackPalette(
-      skyGradient: const [Color(0xFF070B14), Color(0xFF0E1626), Color(0xFF152238)],
-      sunOrMoonColor: const Color(0xFFF1F5F9),
-      sunHaloColor: const Color(0x3394A3B8),
-      distantTerrainColor: const Color(0xFF0A101D),
-      midTerrainColor: const Color(0xFF101B2E),
-      foregroundPathColor: const Color(0xFF192A45),
-      landmarkColor: const Color(0xFFF8FAFC),
+      skyGradient: const [VBridge.cFF070B14, VBridge.cFF0E1626, VBridge.cFF152238],
+      sunOrMoonColor: VBridge.cFFF1F5F9,
+      sunHaloColor: VBridge.c3394A3B8,
+      distantTerrainColor: VBridge.cFF0A101D,
+      midTerrainColor: VBridge.cFF101B2E,
+      foregroundPathColor: VBridge.cFF192A45,
+      landmarkColor: VBridge.cFFF8FAFC,
     );
   }
 
   static ScenePackPalette _buildGardenPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     final sky = switch (stage.skyTime) {
-      JourneySkyTime.dawn => [const Color(0xFF111E18), const Color(0xFF1B332A), const Color(0xFF284F41)],
-      JourneySkyTime.morning => [const Color(0xFF1A3528), const Color(0xFF2A5741), const Color(0xFF3E805E)],
-      JourneySkyTime.noon => [const Color(0xFF184232), const Color(0xFF2A6E52), const Color(0xFF44A076)],
-      JourneySkyTime.golden => [const Color(0xFF2A2416), const Color(0xFF574624), const Color(0xFF9E7B36)],
+      JourneySkyTime.dawn => [VBridge.cFF111E18, VBridge.cFF1B332A, VBridge.cFF284F41],
+      JourneySkyTime.morning => [VBridge.cFF1A3528, VBridge.cFF2A5741, VBridge.cFF3E805E],
+      JourneySkyTime.noon => [VBridge.cFF184232, VBridge.cFF2A6E52, VBridge.cFF44A076],
+      JourneySkyTime.golden => [VBridge.cFF2A2416, VBridge.cFF574624, VBridge.cFF9E7B36],
     };
 
     return ScenePackPalette(
       skyGradient: sky,
-      sunOrMoonColor: const Color(0xFFFEF3C7),
-      sunHaloColor: const Color(0x3334D399),
-      distantTerrainColor: const Color(0xFF10281F),
-      midTerrainColor: const Color(0xFF163E2F),
-      foregroundPathColor: const Color(0xFF1E5841),
-      landmarkColor: const Color(0xFFD1FAE5),
+      sunOrMoonColor: VBridge.cFFFEF3C7,
+      sunHaloColor: VBridge.c3334D399,
+      distantTerrainColor: VBridge.cFF10281F,
+      midTerrainColor: VBridge.cFF163E2F,
+      foregroundPathColor: VBridge.cFF1E5841,
+      landmarkColor: VBridge.cFFD1FAE5,
     );
   }
 
   static ScenePackPalette _buildRamadanPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     return ScenePackPalette(
-      skyGradient: const [Color(0xFF100E29), Color(0xFF1F1A4D), Color(0xFF2E246B)],
-      sunOrMoonColor: const Color(0xFFFFE082),
-      sunHaloColor: const Color(0x55FFD54F),
-      distantTerrainColor: const Color(0xFF161338),
-      midTerrainColor: const Color(0xFF231E54),
-      foregroundPathColor: const Color(0xFF37307A),
-      landmarkColor: const Color(0xFFFFD54F),
+      skyGradient: const [VBridge.cFF100E29, VBridge.cFF1F1A4D, VBridge.cFF2E246B],
+      sunOrMoonColor: VBridge.cFFFFE082,
+      sunHaloColor: VBridge.c55FFD54F,
+      distantTerrainColor: VBridge.cFF161338,
+      midTerrainColor: VBridge.cFF231E54,
+      foregroundPathColor: VBridge.cFF37307A,
+      landmarkColor: VBridge.cFFFFD54F,
     );
   }
 
   static ScenePackPalette _buildEidPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     return ScenePackPalette(
-      skyGradient: const [Color(0xFF210F33), Color(0xFF3F175E), Color(0xFF6B21A8)],
-      sunOrMoonColor: const Color(0xFFFDE047),
-      sunHaloColor: const Color(0x4DC084FC),
-      distantTerrainColor: const Color(0xFF29123D),
-      midTerrainColor: const Color(0xFF431C63),
-      foregroundPathColor: const Color(0xFF632891),
-      landmarkColor: const Color(0xFFFDE047),
+      skyGradient: const [VBridge.cFF210F33, VBridge.cFF3F175E, VBridge.cFF6B21A8],
+      sunOrMoonColor: VBridge.cFFFDE047,
+      sunHaloColor: VBridge.c4DC084FC,
+      distantTerrainColor: VBridge.cFF29123D,
+      midTerrainColor: VBridge.cFF431C63,
+      foregroundPathColor: VBridge.cFF632891,
+      landmarkColor: VBridge.cFFFDE047,
     );
   }
 
   static ScenePackPalette _buildWinterPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     final sky = switch (stage.skyTime) {
-      JourneySkyTime.dawn => const [Color(0xFF0F172A), Color(0xFF1E293B), Color(0xFF334155)],
-      JourneySkyTime.morning => const [Color(0xFF1E3A5F), Color(0xFF334155), Color(0xFF64748B)],
-      JourneySkyTime.noon => const [Color(0xFF1E40AF), Color(0xFF3B82F6), Color(0xFF93C5FD)],
-      JourneySkyTime.golden => const [Color(0xFF1E293B), Color(0xFF475569), Color(0xFF94A3B8)],
+      JourneySkyTime.dawn => const [VBridge.cFF0F172A, VBridge.cFF1E293B, VBridge.cFF334155],
+      JourneySkyTime.morning => const [VBridge.cFF1E3A5F, VBridge.cFF334155, VBridge.cFF64748B],
+      JourneySkyTime.noon => const [VBridge.cFF1E40AF, VBridge.cFF3B82F6, VBridge.cFF93C5FD],
+      JourneySkyTime.golden => const [VBridge.cFF1E293B, VBridge.cFF475569, VBridge.cFF94A3B8],
     };
     return ScenePackPalette(
       skyGradient: sky,
-      sunOrMoonColor: stage.isNightOrDawn ? const Color(0xFFE2E8F0) : const Color(0xFFF8FAFC),
-      sunHaloColor: const Color(0x3394A3B8),
-      distantTerrainColor: const Color(0xFF0F172A),
-      midTerrainColor: const Color(0xFF1E293B),
-      foregroundPathColor: const Color(0xFF334155),
-      landmarkColor: const Color(0xFFE2E8F0),
+      sunOrMoonColor: stage.isNightOrDawn ? VBridge.cFFE2E8F0 : VBridge.cFFF8FAFC,
+      sunHaloColor: VBridge.c3394A3B8,
+      distantTerrainColor: VBridge.cFF0F172A,
+      midTerrainColor: VBridge.cFF1E293B,
+      foregroundPathColor: VBridge.cFF334155,
+      landmarkColor: VBridge.cFFE2E8F0,
     );
   }
 
   static ScenePackPalette _buildStreakPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     return ScenePackPalette(
-      skyGradient: const [Color(0xFF3B1009), Color(0xFF6E1B0E), Color(0xFFB91C1C)],
-      sunOrMoonColor: const Color(0xFFFEF08A),
-      sunHaloColor: const Color(0x66F97316),
-      distantTerrainColor: const Color(0xFF45140D),
-      midTerrainColor: const Color(0xFF6B1D11),
-      foregroundPathColor: const Color(0xFF992B19),
-      landmarkColor: const Color(0xFFFEF08A),
+      skyGradient: const [VBridge.cFF3B1009, VBridge.cFF6E1B0E, VBridge.cFFB91C1C],
+      sunOrMoonColor: VBridge.cFFFEF08A,
+      sunHaloColor: VBridge.c66F97316,
+      distantTerrainColor: VBridge.cFF45140D,
+      midTerrainColor: VBridge.cFF6B1D11,
+      foregroundPathColor: VBridge.cFF992B19,
+      landmarkColor: VBridge.cFFFEF08A,
     );
   }
 
   static ScenePackPalette _buildPharaonicPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     return ScenePackPalette(
-      skyGradient: const [Color(0xFF291E0B), Color(0xFF543D15), Color(0xFF8A651E)],
-      sunOrMoonColor: const Color(0xFFFFE57F),
-      sunHaloColor: const Color(0x66FFC107),
-      distantTerrainColor: const Color(0xFF3D2B0E),
-      midTerrainColor: const Color(0xFF5E4317),
-      foregroundPathColor: const Color(0xFF8A6424),
-      landmarkColor: const Color(0xFFFFE57F),
+      skyGradient: const [VBridge.cFF291E0B, VBridge.cFF543D15, VBridge.cFF8A651E],
+      sunOrMoonColor: VBridge.cFFFFE57F,
+      sunHaloColor: VBridge.c66FFC107,
+      distantTerrainColor: VBridge.cFF3D2B0E,
+      midTerrainColor: VBridge.cFF5E4317,
+      foregroundPathColor: VBridge.cFF8A6424,
+      landmarkColor: VBridge.cFFFFE57F,
     );
   }
 
   static ScenePackPalette _buildAuroraPalette(
       JourneyStage stage, Color accent, Color secondary, bool isDark) {
     return ScenePackPalette(
-      skyGradient: const [Color(0xFF1E1035), Color(0xFF431D61), Color(0xFF86198F)],
-      sunOrMoonColor: const Color(0xFFFBCFE8),
-      sunHaloColor: const Color(0x4DF472B6),
-      distantTerrainColor: const Color(0xFF2A1547),
-      midTerrainColor: const Color(0xFF472173),
-      foregroundPathColor: const Color(0xFF6D2F9E),
-      landmarkColor: const Color(0xFFFDF2F8),
+      skyGradient: const [VBridge.cFF1E1035, VBridge.cFF431D61, VBridge.cFF86198F],
+      sunOrMoonColor: VBridge.cFFFBCFE8,
+      sunHaloColor: VBridge.c4DF472B6,
+      distantTerrainColor: VBridge.cFF2A1547,
+      midTerrainColor: VBridge.cFF472173,
+      foregroundPathColor: VBridge.cFF6D2F9E,
+      landmarkColor: VBridge.cFFFDF2F8,
     );
   }
 }

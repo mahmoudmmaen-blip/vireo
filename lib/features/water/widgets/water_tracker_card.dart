@@ -12,6 +12,7 @@ import 'package:vireo/features/ramadan/services/ramadan_schedule_service.dart';
 import 'package:vireo/features/water/providers/water_cup_size_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class WaterTrackerCard extends ConsumerStatefulWidget {
   const WaterTrackerCard({super.key});
@@ -160,7 +161,7 @@ class _WaterTrackerCardState extends ConsumerState<WaterTrackerCard>
         children: [
           Row(
             children: [
-              const Icon(Icons.water_drop_outlined, color: Color(0xFF5BA4F5)),
+              const Icon(Icons.water_drop_outlined, color: VBridge.cFF5BA4F5),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -183,7 +184,7 @@ class _WaterTrackerCardState extends ConsumerState<WaterTrackerCard>
                   value: (progress + boost).clamp(0.0, 1.0),
                   minHeight: 12,
                   backgroundColor: colors.line,
-                  color: const Color(0xFF5BA4F5),
+                  color: VBridge.cFF5BA4F5,
                 ),
               );
             },
@@ -213,7 +214,7 @@ class _WaterTrackerCardState extends ConsumerState<WaterTrackerCard>
               icon: const Icon(Icons.add),
               label: Text(l10n.waterAddOneGlass(cup)),
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF5BA4F5),
+                backgroundColor: VBridge.cFF5BA4F5,
                 foregroundColor: Colors.white,
               ),
             ),
@@ -238,7 +239,7 @@ class WaterWavePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = const Color(0xFF5BA4F5).withValues(alpha: 0.35);
+    final paint = Paint()..color = VBridge.cFF5BA4F5.withValues(alpha: 0.35);
     final path = Path()..moveTo(0, size.height);
     for (var x = 0.0; x <= size.width; x += 4) {
       final y = size.height * (1 - progress) +

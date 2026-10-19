@@ -27,7 +27,7 @@ class FridgeScanBanner extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(VireoDecorations.cardRadius),
         border: Border.all(color: colors.line),
-        boxShadow: VireoDecorations.cardShadow(glow: colors.ember),
+        boxShadow: VireoDecorations.cardShadow(),
       ),
       child: Row(
         children: [

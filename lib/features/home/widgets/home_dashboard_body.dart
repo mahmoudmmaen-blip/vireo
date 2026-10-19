@@ -455,7 +455,6 @@ class TodayHeroCard extends StatelessWidget {
     return VireoCard(
       onTap: onTap,
       semanticLabel: l10n.uxCaloriesLeft,
-      glow: colors.ember,
       padding: const EdgeInsets.fromLTRB(VSpace.md, VSpace.md, VSpace.md, VSpace.sm),
       gradient: LinearGradient(
         begin: AlignmentDirectional.topStart,

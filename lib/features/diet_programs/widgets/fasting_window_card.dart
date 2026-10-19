@@ -35,7 +35,6 @@ class FastingWindowCard extends ConsumerWidget {
           builder: (_) => DietProgramDetailScreen(programId: program.id),
         ),
       ),
-      glow: colors.ember,
       child: Row(
         children: [
           RingProgress(

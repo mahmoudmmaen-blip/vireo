@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class SocialShareCardHelper {
   static Future<void> showBadgeShareSheet({
@@ -187,13 +188,13 @@ class _BadgeShareSheetState extends State<_BadgeShareSheet> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF22C55E).withValues(alpha: 0.15),
+                      color: VBridge.cFF22C55E.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
                       widget.isArabic ? 'تم الإنجاز بنجاح 🏅' : 'Achievement Unlocked 🏅',
                       style: const TextStyle(
-                        color: Color(0xFF22C55E),
+                        color: VBridge.cFF22C55E,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
                       ),

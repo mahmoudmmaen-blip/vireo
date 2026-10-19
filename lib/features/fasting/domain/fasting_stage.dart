@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 enum FastingStage {
   anabolic(
@@ -11,7 +12,7 @@ enum FastingStage {
     scienceEn: 'Body digests and absorbs the last meal. Insulin temporarily rises to transport glucose and nutrients to cells.',
     badgeLabelAr: '0 - 4 ساعات',
     badgeLabelEn: '0 - 4 hrs',
-    accentColor: Color(0xFF3B82F6), // Blue
+    accentColor: VBridge.cFF3B82F6, // Blue
   ),
   catabolic(
     id: 'catabolic',
@@ -23,7 +24,7 @@ enum FastingStage {
     scienceEn: 'Blood sugar and insulin gradually stabilize. The liver begins breaking down stored glycogen to supply steady energy.',
     badgeLabelAr: '4 - 12 ساعة',
     badgeLabelEn: '4 - 12 hrs',
-    accentColor: Color(0xFF10B981), // Emerald
+    accentColor: VBridge.cFF10B981, // Emerald
   ),
   fatBurning(
     id: 'fat_burning',
@@ -35,7 +36,7 @@ enum FastingStage {
     scienceEn: 'As liver glycogen declines, the body typically shifts towards using stored triglycerides for metabolic fuel.',
     badgeLabelAr: '12 - 18 ساعة',
     badgeLabelEn: '12 - 18 hrs',
-    accentColor: Color(0xFFF59E0B), // Amber
+    accentColor: VBridge.cFFF59E0B, // Amber
   ),
   ketosis(
     id: 'ketosis',
@@ -47,7 +48,7 @@ enum FastingStage {
     scienceEn: 'Depending on individual metabolism and activity level, the liver begins producing ketone bodies as alternative fuel.',
     badgeLabelAr: '18 - 24 ساعة',
     badgeLabelEn: '18 - 24 hrs',
-    accentColor: Color(0xFF8B5CF6), // Purple
+    accentColor: VBridge.cFF8B5CF6, // Purple
   ),
   autophagy(
     id: 'autophagy',
@@ -59,7 +60,7 @@ enum FastingStage {
     scienceEn: 'Cellular biology indicates activation of self-clearing mechanisms for cellular debris. Timing and depth vary by individual.',
     badgeLabelAr: '24+ ساعة',
     badgeLabelEn: '24+ hrs',
-    accentColor: Color(0xFFEC4899), // Pink
+    accentColor: VBridge.cFFEC4899, // Pink
   );
 
   const FastingStage({

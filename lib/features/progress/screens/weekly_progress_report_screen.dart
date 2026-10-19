@@ -14,6 +14,7 @@ import 'package:vireo/features/progress/domain/weekly_progress_report_data.dart'
 import 'package:vireo/features/progress/models/daily_deficit_entry.dart';
 import 'package:vireo/features/progress/providers/progress_extended_provider.dart';
 import 'package:vireo/features/progress/providers/weekly_deficit_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class WeeklyProgressReportScreen extends ConsumerStatefulWidget {
   const WeeklyProgressReportScreen({super.key});
@@ -168,12 +169,12 @@ class _ReportShareableCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [Color(0xFF18181B), Color(0xFF0F0F12), Color(0xFF1E1010)],
+            colors: [VBridge.cFF18181B, VBridge.cFF0F0F12, VBridge.cFF1E1010],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: const Color(0xFFEF5350).withValues(alpha: 0.3), width: 1.5),
+          border: Border.all(color: VBridge.cFFEF5350.withValues(alpha: 0.3), width: 1.5),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.5),
@@ -195,7 +196,7 @@ class _ReportShareableCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: const BoxDecoration(
-                        color: Color(0xFFEF5350),
+                        color: VBridge.cFFEF5350,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.bolt, color: Colors.white, size: 20),
@@ -240,7 +241,7 @@ class _ReportShareableCard extends StatelessWidget {
                     value: '${data.avgCalories}',
                     sub: isArabic ? 'الهدف: ${data.targetCalories}' : 'Target: ${data.targetCalories}',
                     icon: Icons.local_fire_department_outlined,
-                    color: const Color(0xFFF97316),
+                    color: VBridge.cFFF97316,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -250,7 +251,7 @@ class _ReportShareableCard extends StatelessWidget {
                     value: '${data.avgProteinG} g',
                     sub: isArabic ? 'الهدف: ${data.targetProteinG} g' : 'Target: ${data.targetProteinG} g',
                     icon: Icons.fitness_center,
-                    color: const Color(0xFFEF4444),
+                    color: VBridge.cFFEF4444,
                   ),
                 ),
               ],
@@ -274,7 +275,7 @@ class _ReportShareableCard extends StatelessWidget {
                     value: '${data.totalWorkoutsCompleted}',
                     sub: isArabic ? 'حصص تدريبية' : 'Sessions done',
                     icon: Icons.sports_gymnastics,
-                    color: const Color(0xFF8B5CF6),
+                    color: VBridge.cFF8B5CF6,
                   ),
                 ),
               ],
@@ -288,7 +289,7 @@ class _ReportShareableCard extends StatelessWidget {
                     value: '${data.avgDailySteps}',
                     sub: isArabic ? 'خطوة/يوم' : 'steps/day',
                     icon: Icons.directions_walk,
-                    color: const Color(0xFF3B82F6),
+                    color: VBridge.cFF3B82F6,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -298,7 +299,7 @@ class _ReportShareableCard extends StatelessWidget {
                     value: '${data.avgDailyWaterMl} ml',
                     sub: isArabic ? 'ترطيب ممتاز' : 'Daily intake',
                     icon: Icons.water_drop_outlined,
-                    color: const Color(0xFF06B6D4),
+                    color: VBridge.cFF06B6D4,
                   ),
                 ),
               ],
@@ -312,7 +313,7 @@ class _ReportShareableCard extends StatelessWidget {
                     value: '${data.avgSleepHours.toStringAsFixed(1)} h',
                     sub: isArabic ? 'ساعات راحة' : 'hours/night',
                     icon: Icons.bedtime_outlined,
-                    color: const Color(0xFFA855F7),
+                    color: VBridge.cFFA855F7,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -322,7 +323,7 @@ class _ReportShareableCard extends StatelessWidget {
                     value: weightDeltaStr,
                     sub: isArabic ? 'معدل التغير' : 'Over 7 days',
                     icon: Icons.monitor_weight_outlined,
-                    color: const Color(0xFFEC4899),
+                    color: VBridge.cFFEC4899,
                   ),
                 ),
               ],
@@ -367,7 +368,7 @@ class _ReportShareableCard extends StatelessWidget {
                             ? 'عجز الأسبوع ≈ ${FatEquivalent.formatAmount(FatEquivalent.gramsFromKcal(deficitSummary.totalNetKcal), languageCode: 'ar')} دهون'
                             : 'This week\'s deficit ≈ ${FatEquivalent.formatAmount(FatEquivalent.gramsFromKcal(deficitSummary.totalNetKcal), languageCode: 'en')} fat',
                         style: const TextStyle(
-                          color: Color(0xFF34D399),
+                          color: VBridge.cFF34D399,
                           fontWeight: FontWeight.w700,
                           fontSize: 11.5,
                         ),
@@ -383,9 +384,9 @@ class _ReportShareableCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFEF5350).withValues(alpha: 0.12),
+                color: VBridge.cFFEF5350.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFEF5350).withValues(alpha: 0.3)),
+                border: Border.all(color: VBridge.cFFEF5350.withValues(alpha: 0.3)),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -399,7 +400,7 @@ class _ReportShareableCard extends StatelessWidget {
                         Text(
                           isArabic ? 'نصيحة المدرب الذكي' : 'AI Coach Tip',
                           style: const TextStyle(
-                            color: Color(0xFFEF5350),
+                            color: VBridge.cFFEF5350,
                             fontWeight: FontWeight.bold,
                             fontSize: 11,
                           ),

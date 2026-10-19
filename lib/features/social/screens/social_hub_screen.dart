@@ -6,6 +6,7 @@ import 'package:vireo/data/models/app_auth_state.dart';
 import 'package:vireo/features/auth/providers/auth_provider.dart';
 import 'package:vireo/features/social/domain/social_models.dart';
 import 'package:vireo/features/social/providers/social_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class SocialHubScreen extends ConsumerStatefulWidget {
   const SocialHubScreen({super.key});
@@ -192,7 +193,7 @@ class _FriendsTab extends ConsumerWidget {
           ),
           child: Row(
             children: [
-              const Icon(Icons.shield_outlined, color: Color(0xFF22C55E), size: 20),
+              const Icon(Icons.shield_outlined, color: VBridge.cFF22C55E, size: 20),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
@@ -288,7 +289,7 @@ class _FriendsTab extends ConsumerWidget {
                         Text('🔥 ${f.currentStreak}d'),
                         if (f.hasLoggedToday) ...[
                           const SizedBox(width: 8),
-                          const Icon(Icons.check_circle, size: 14, color: Color(0xFF22C55E)),
+                          const Icon(Icons.check_circle, size: 14, color: VBridge.cFF22C55E),
                         ],
                       ],
                     ),

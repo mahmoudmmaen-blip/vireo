@@ -27,6 +27,7 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/core/widgets/vireo_ad_widgets.dart';
 import 'package:vireo/features/social/screens/social_hub_screen.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -123,7 +124,7 @@ class ProgressScreen extends ConsumerWidget {
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF97316).withValues(alpha: 0.15),
+                              color: VBridge.cFFF97316.withValues(alpha: 0.15),
                               shape: BoxShape.circle,
                             ),
                             child: const Text('🔥', style: TextStyle(fontSize: 18)),

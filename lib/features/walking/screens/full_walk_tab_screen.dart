@@ -17,6 +17,8 @@ import 'package:vireo/features/walking/providers/walking_tracker_provider.dart';
 import 'package:vireo/features/walking/screens/step_diagnostic_screen.dart';
 import 'package:vireo/features/walking/widgets/step_permission_gate.dart';
 import 'package:vireo/features/walking/widgets/walking_week_charts.dart';
+import 'package:vireo/features/progress/screens/weekly_charts_screen.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 enum WalkChartFilter { day, week, month }
 
@@ -32,8 +34,8 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
   bool _isSessionActive = false;
   int _sessionStepsStart = 0;
 
-  static const _stepsAccent = Color(0xFFFF6B35);
-  static const _stepsCyan = Color(0xFF06B6D4);
+  static const _stepsAccent = VBridge.cFFFF6B35;
+  static const _stepsCyan = VBridge.cFF06B6D4;
 
   void _startSession(int currentSteps) {
     HapticFeedback.heavyImpact();
@@ -203,7 +205,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                             width: 52,
                             height: 52,
                             decoration: BoxDecoration(
-                              color: const Color(0xFF2C3E55),
+                              color: VBridge.cFF2C3E55,
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: isRunning
@@ -274,7 +276,7 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                         height: 16,
                         child: LinearProgressIndicator(
                           value: progress,
-                          backgroundColor: const Color(0xFF2C3E55),
+                          backgroundColor: VBridge.cFF2C3E55,
                           valueColor: const AlwaysStoppedAnimation<Color>(
                             _stepsAccent,
                           ),
@@ -289,19 +291,19 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                       children: [
                         _WalkStatCol(
                           icon: Icons.track_changes_rounded,
-                          iconColor: const Color(0xFFFBBF24),
+                          iconColor: VBridge.cFFFBBF24,
                           value: metrics.distanceKm.toStringAsFixed(2),
                           label: 'كم',
                         ),
                         _WalkStatCol(
                           icon: Icons.local_fire_department_rounded,
-                          iconColor: const Color(0xFFF97316),
+                          iconColor: VBridge.cFFF97316,
                           value: '${metrics.caloriesKcal}',
                           label: 'السعرات',
                         ),
                         _WalkStatCol(
                           icon: Icons.access_time_filled_rounded,
-                          iconColor: const Color(0xFF38BDF8),
+                          iconColor: VBridge.cFF38BDF8,
                           value:
                               '${(metrics.activeMinutes ~/ 60)}س ${(metrics.activeMinutes % 60)}د',
                           label: 'الوقت',
@@ -539,6 +541,33 @@ class _FullWalkTabScreenState extends ConsumerState<FullWalkTabScreen> {
                       accent: colors.ember,
                     ),
                     const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            l10n.uxSectionThisWeek,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => WeeklyChartsScreen.open(context),
+                          child: Text(
+                            Localizations.localeOf(context)
+                                    .languageCode
+                                    .startsWith('ar')
+                                ? 'التفاصيل'
+                                : 'Details',
+                            style: TextStyle(
+                              color: colors.ember,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     WalkingWeekCharts(
                       days: last7,
                       heightCm: profile.heightCm,

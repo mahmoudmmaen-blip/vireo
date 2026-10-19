@@ -13,6 +13,7 @@ import 'package:vireo/features/walking/data/step_counter_service.dart';
 import 'package:vireo/features/walking/data/step_foreground_service.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Steps hero card matching Leap Step Tracker (leap_step_tracker_home.jpg).
 /// Features:
@@ -36,8 +37,8 @@ class PremiumStepsHeroCard extends ConsumerStatefulWidget {
   final VoidCallback onTap;
   final int? overrideStage;
 
-  static const stepsAccent = Color(0xFF10B981); // Bright Emerald Green
-  static const stepsCardBg = Color(0xFF1E293B); // Deep slate blue / Leap style
+  static const stepsAccent = VBridge.cFF10B981; // Bright Emerald Green
+  static const stepsCardBg = VBridge.cFF1E293B; // Deep slate blue / Leap style
 
   @override
   ConsumerState<PremiumStepsHeroCard> createState() => _PremiumStepsHeroCardState();
@@ -287,7 +288,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                             decoration: BoxDecoration(
                               color: isRunning
                                   ? PremiumStepsHeroCard.stepsAccent
-                                  : const Color(0xFF1E293B),
+                                  : VBridge.cFF1E293B,
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: isRunning
@@ -317,7 +318,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                                     )
                                   : Icon(
                                       isRunning ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                                      color: isRunning ? const Color(0xFF064E3B) : Colors.white,
+                                      color: isRunning ? VBridge.cFF064E3B : Colors.white,
                                       size: 32,
                                     ),
                             ),
@@ -363,7 +364,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                             ),
                             if (stage.hasStarBadge) ...[
                               const SizedBox(width: 6),
-                              const Icon(Icons.star_rounded, color: Color(0xFFFFD700), size: 30),
+                              const Icon(Icons.star_rounded, color: VBridge.cFFFFD700, size: 30),
                             ],
                           ],
                         ),
@@ -391,7 +392,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                 height: 18,
                 child: LinearProgressIndicator(
                   value: ratio,
-                  backgroundColor: const Color(0xFF2C3E55),
+                  backgroundColor: VBridge.cFF2C3E55,
                   valueColor: AlwaysStoppedAnimation<Color>(rampColor),
                 ),
               ),
@@ -405,7 +406,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                 Expanded(
                   child: _LeapStatColumn(
                     icon: Icons.track_changes_rounded,
-                    iconColor: const Color(0xFFFBBF24), // Yellow
+                    iconColor: VBridge.cFFFBBF24, // Yellow
                     value: metrics.distanceKm.toStringAsFixed(2),
                     label: 'كم',
                   ),
@@ -414,7 +415,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                 Expanded(
                   child: _LeapStatColumn(
                     icon: Icons.local_fire_department_rounded,
-                    iconColor: const Color(0xFFF97316), // Orange
+                    iconColor: VBridge.cFFF97316, // Orange
                     value: '${metrics.caloriesKcal}',
                     label: 'السعرات',
                   ),
@@ -423,7 +424,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                 Expanded(
                   child: _LeapStatColumn(
                     icon: Icons.access_time_filled_rounded,
-                    iconColor: const Color(0xFF38BDF8), // Cyan
+                    iconColor: VBridge.cFF38BDF8, // Cyan
                     value: '${(activeMinutes ~/ 60)}س ${(activeMinutes % 60)}د',
                     label: 'الوقت',
                   ),
@@ -587,7 +588,7 @@ class _DayCircleItem extends StatelessWidget {
                 height: 32,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: reached ? accent : const Color(0xFF223048),
+                  color: reached ? accent : VBridge.cFF223048,
                 ),
                 alignment: Alignment.center,
                 child: reached

@@ -12,6 +12,7 @@ import 'package:vireo/features/measurements/screens/inbody_scan_screen.dart';
 import 'package:vireo/features/measurements/screens/navy_tape_measure_screen.dart';
 import 'package:vireo/features/measurements/services/body_comp_health_sync.dart';
 import 'package:vireo/features/measurements/widgets/segmental_body_figure.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class BodyCompositionScreen extends ConsumerStatefulWidget {
   const BodyCompositionScreen({super.key});
@@ -331,7 +332,7 @@ class _DeltaRow extends StatelessWidget {
     Color? color;
     if (goodWhenUp != null) {
       final good = goodWhenUp! ? up : !up;
-      color = good ? const Color(0xFF2E7D32) : context.vireoColors.danger;
+      color = good ? VBridge.cFF2E7D32 : context.vireoColors.danger;
     }
     final sign = delta! > 0 ? '+' : '';
     return ListTile(

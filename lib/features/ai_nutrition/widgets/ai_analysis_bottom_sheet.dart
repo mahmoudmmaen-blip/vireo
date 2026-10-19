@@ -9,6 +9,7 @@ import 'package:vireo/features/notifications/widgets/post_scan_notification_prom
 import 'package:vireo/features/subscription/widgets/soft_paywall_after_scan.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 Future<void> showAiAnalysisBottomSheet(
   BuildContext context,
@@ -96,7 +97,7 @@ class _AiAnalysisSheetBody extends ConsumerWidget {
                   child: _MacroTile(
                     label: l10n.aiScanMacroProtein,
                     value: result.protein,
-                    color: const Color(0xFF5BA4F5),
+                    color: VBridge.cFF5BA4F5,
                     colors: colors,
                   ),
                 ),
@@ -105,7 +106,7 @@ class _AiAnalysisSheetBody extends ConsumerWidget {
                   child: _MacroTile(
                     label: l10n.aiScanMacroCarbs,
                     value: result.carbs,
-                    color: const Color(0xFFFF9F43),
+                    color: VBridge.cFFFF9F43,
                     colors: colors,
                   ),
                 ),
@@ -114,7 +115,7 @@ class _AiAnalysisSheetBody extends ConsumerWidget {
                   child: _MacroTile(
                     label: l10n.aiScanMacroFats,
                     value: result.fats,
-                    color: const Color(0xFFFF6B6B),
+                    color: VBridge.cFFFF6B6B,
                     colors: colors,
                   ),
                 ),

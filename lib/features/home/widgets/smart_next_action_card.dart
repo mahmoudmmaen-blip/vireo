@@ -9,6 +9,7 @@ import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/walking/walking_tracker_screen.dart';
 import 'package:vireo/features/water/providers/water_tracker_provider.dart';
 import 'package:vireo/features/workout/screens/workout_flow_screen.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// "الخطوة الجاية" — ONE smart contextual next-action card for Home.
 /// Examples:
@@ -76,7 +77,7 @@ class SmartNextActionCard extends ConsumerWidget {
     // 4. Fallback: Movement / steps
     return _ActionCardLayout(
       icon: Icons.directions_walk_rounded,
-      iconColor: const Color(0xFF10B981),
+      iconColor: VBridge.cFF10B981,
       title: isArabic ? 'الخطوة الجاية' : 'Next Step',
       headline: isArabic
           ? 'كمّل خطواتك اليومية لنشاط وحرق أعلى'

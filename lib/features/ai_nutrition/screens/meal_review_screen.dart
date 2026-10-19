@@ -18,6 +18,7 @@ import 'package:vireo/features/ai_nutrition/domain/meal_health_score.dart';
 import 'package:vireo/features/ai_nutrition/domain/meal_review_calibration.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_scan_budget_provider.dart';
 import 'package:vireo/features/ai_nutrition/widgets/meal_correction_sheet.dart';
+import 'package:vireo/features/ai_nutrition/widgets/meal_component_chips.dart';
 import 'package:vireo/features/ai_nutrition/domain/meal_smart_swap.dart';
 import 'package:vireo/features/ai_nutrition/providers/ai_meal_log_provider.dart';
 import 'package:vireo/features/auth/services/save_progress_prompt.dart';
@@ -30,13 +31,11 @@ import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart'
 import 'package:vireo/features/nutrition/providers/repeat_meal_service.dart';
 import 'package:vireo/features/insights/domain/meal_advice.dart';
 import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
-import 'package:vireo/features/nutrition/domain/household_measures.dart';
-import 'package:vireo/features/nutrition/providers/cup_size_preference_provider.dart';
-import 'package:vireo/features/nutrition/widgets/portion_picker_sheet.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/widgets/soft_paywall_after_scan.dart';
 import 'package:vireo/features/fasting/providers/fasting_provider.dart';
 import 'package:vireo/features/notifications/widgets/post_scan_notification_prompt.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class MealReviewScreen extends ConsumerStatefulWidget {
   const MealReviewScreen({super.key, required this.draft, this.initialSlot});
@@ -867,13 +866,6 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
               onSlotChanged: (next) => setState(() => _slot = next),
               onSave: _lines.isEmpty ? null : () => _save(advice),
               onEditDetails: () {
-                setState(() {
-                  if (_expandedIndices.length == _lines.length) {
-                    _expandedIndices.clear();
-                  } else {
-                    _expandedIndices.addAll(List.generate(_lines.length, (i) => i));
-                  }
-                });
                 if (_scrollController.hasClients) {
                   _scrollController.animateTo(
                     120,
@@ -959,7 +951,7 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.help_outline_rounded, size: 16, color: Color(0xFFF59E0B)),
+                              const Icon(Icons.help_outline_rounded, size: 16, color: VBridge.cFFF59E0B),
                               const SizedBox(width: 6),
                               Text(
                                 isArabic ? 'ممكن يكون فيه كمان في الوجبة؟' : 'Possible extra items found?',
@@ -1167,52 +1159,18 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
                   ),
                   const SizedBox(height: 14),
 
-                  // Items List Header
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          isArabic ? 'محتويات الوجبة (${_lines.length})' : 'Meal Items (${_lines.length})',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
-                        ),
-                      ),
-                      TextButton.icon(
-                        style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
-                        onPressed: _addFood,
-                        icon: const Icon(Icons.add, size: 16),
-                        label: Text(l10n.mealReviewAddItem),
-                      ),
-                    ],
+                  // P54: editable component chips (name + grams + kcal).
+                  MealComponentChips(
+                    lines: _lines,
+                    isArabic: isArabic,
+                    onChanged: (index, updated) =>
+                        setState(() => _lines[index] = updated),
+                    onRemove: (index) => setState(() {
+                      _lines.removeAt(index);
+                      _expandedIndices.remove(index);
+                    }),
+                    onAdd: _addFood,
                   ),
-                  const SizedBox(height: 6),
-
-                  // Compact items list
-                  for (var i = 0; i < _lines.length; i++) ...[
-                    _MfpItemRow(
-                      key: ValueKey('${_lines[i].nameEn}_$i'),
-                      line: _lines[i],
-                      index: i,
-                      isExpanded: _expandedIndices.contains(i),
-                      isArabic: isArabic,
-                      onToggleExpand: () {
-                        setState(() {
-                          if (_expandedIndices.contains(i)) {
-                            _expandedIndices.remove(i);
-                          } else {
-                            _expandedIndices.add(i);
-                          }
-                        });
-                      },
-                      onChanged: (updated) => setState(() => _lines[i] = updated),
-                      onDelete: () => setState(() {
-                        _lines.removeAt(i);
-                        _expandedIndices.remove(i);
-                      }),
-                    ),
-                    const SizedBox(height: 8),
-                  ],
 
                   const SizedBox(height: 16),
 
@@ -1831,7 +1789,7 @@ class _StickyTopSummaryCard extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.tips_and_updates_rounded, size: 14, color: Color(0xFFF59E0B)),
+                    const Icon(Icons.tips_and_updates_rounded, size: 14, color: VBridge.cFFF59E0B),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
@@ -1858,13 +1816,13 @@ class _StickyTopSummaryCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF10B981).withValues(alpha: 0.15),
+                    color: VBridge.cFF10B981.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
                     '★ ${health.score}/10',
                     style: const TextStyle(
-                      color: Color(0xFF10B981),
+                      color: VBridge.cFF10B981,
                       fontWeight: FontWeight.w900,
                       fontSize: 11,
                     ),
@@ -1889,14 +1847,14 @@ class _StickyTopSummaryCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFF10B981).withValues(alpha: 0.10),
+                color: VBridge.cFF10B981.withValues(alpha: 0.10),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.35)),
+                border: Border.all(color: VBridge.cFF10B981.withValues(alpha: 0.35)),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.swap_horiz_rounded, size: 16, color: Color(0xFF10B981)),
+                  const Icon(Icons.swap_horiz_rounded, size: 16, color: VBridge.cFF10B981),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
@@ -1970,10 +1928,10 @@ class _RemainingChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       decoration: BoxDecoration(
-        color: isOver ? const Color(0xFFF59E0B).withValues(alpha: 0.15) : color.withValues(alpha: 0.12),
+        color: isOver ? VBridge.cFFF59E0B.withValues(alpha: 0.15) : color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isOver ? const Color(0xFFF59E0B) : color.withValues(alpha: 0.3),
+          color: isOver ? VBridge.cFFF59E0B : color.withValues(alpha: 0.3),
           width: 0.8,
         ),
       ),
@@ -1984,7 +1942,7 @@ class _RemainingChip extends StatelessWidget {
             style: TextStyle(
               fontSize: 9.5,
               fontWeight: FontWeight.w600,
-              color: isOver ? const Color(0xFFF59E0B) : color,
+              color: isOver ? VBridge.cFFF59E0B : color,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -1995,7 +1953,7 @@ class _RemainingChip extends StatelessWidget {
             style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w800,
-              color: isOver ? const Color(0xFFF59E0B) : Colors.white,
+              color: isOver ? VBridge.cFFF59E0B : Colors.white,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -2103,384 +2061,6 @@ class _MacroDonutPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _MacroDonutPainter oldDelegate) => true;
-}
-
-/// ── COMPACT ITEM ROW (MFP Style) ──
-class _MfpItemRow extends StatelessWidget {
-  const _MfpItemRow({
-    super.key,
-    required this.line,
-    required this.index,
-    required this.isExpanded,
-    required this.isArabic,
-    required this.onToggleExpand,
-    required this.onChanged,
-    required this.onDelete,
-  });
-
-  final ResolvedMealLine line;
-  final int index;
-  final bool isExpanded;
-  final bool isArabic;
-  final VoidCallback onToggleExpand;
-  final ValueChanged<ResolvedMealLine> onChanged;
-  final VoidCallback onDelete;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    final name = isArabic ? line.nameAr : (line.nameEn.isNotEmpty ? line.nameEn : line.nameAr);
-
-    return Container(
-      decoration: BoxDecoration(
-        color: colors.surface,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: colors.line.withValues(alpha: 0.6)),
-      ),
-      child: Column(
-        children: [
-          // Row: name · grams · kcal
-          InkWell(
-            onTap: onToggleExpand,
-            borderRadius: BorderRadius.circular(14),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              child: Row(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: colors.ember.withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Text('🍽️', style: TextStyle(fontSize: 18)),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          isArabic ? '${line.grams.round()} جم' : '${line.grams.round()} g',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: colors.textMute, fontSize: 12),
-                        ),
-                        const SizedBox(height: 3),
-                        Builder(
-                          builder: (context) {
-                            final (sourceLabel, sourceColor) = () {
-                              if (line.isUnsure) {
-                                return (isArabic ? 'مش متأكدين ⚠️' : 'Unsure ⚠️', const Color(0xFFF59E0B));
-                              }
-                              return switch (line.source) {
-                                FoodDatabaseSource.personalCalibrated => (
-                                    isArabic ? 'معدّلة على أكلك 💜' : 'Calibrated 💜',
-                                    const Color(0xFF8B5CF6)
-                                  ),
-                                FoodDatabaseSource.egyptianDb => (
-                                    isArabic ? 'قاعدة بيانات' : 'Database',
-                                    const Color(0xFF10B981)
-                                  ),
-                                FoodDatabaseSource.usda => (
-                                    'USDA',
-                                    const Color(0xFF06B6D4)
-                                  ),
-                                FoodDatabaseSource.estimated => (
-                                    isArabic ? 'تقدير' : 'Estimated',
-                                    const Color(0xFFF59E0B)
-                                  ),
-                              };
-                            }();
-
-                            return Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
-                              decoration: BoxDecoration(
-                                color: sourceColor.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Text(
-                                sourceLabel,
-                                style: TextStyle(
-                                  color: sourceColor,
-                                  fontSize: 9.5,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: Builder(
-                      builder: (context) {
-                        final calRange = (line.kcalLow != null && line.kcalHigh != null && (line.kcalHigh! - line.kcalLow! > 5))
-                            ? '≈ ${line.kcal.round()} (${line.kcalLow!.round()}–${line.kcalHigh!.round()})'
-                            : '≈ ${line.kcal.round()} سعرة';
-                        return Text(
-                          '${line.grams.round()} جم  ·  $calRange',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: colors.textMute,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Icon(
-                    isExpanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
-                    color: colors.textMute,
-                    size: 20,
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // Expanded Editor
-          if (isExpanded) ...[
-            const Divider(height: 1),
-            Padding(
-              padding: const EdgeInsets.all(14),
-              child: _ExpandedItemEditor(
-                line: line,
-                isArabic: isArabic,
-                onChanged: onChanged,
-                onDelete: onDelete,
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-/// ── ITEM EDITOR (Expanded only) ──
-class _ExpandedItemEditor extends ConsumerWidget {
-  const _ExpandedItemEditor({
-    required this.line,
-    required this.isArabic,
-    required this.onChanged,
-    required this.onDelete,
-  });
-
-  final ResolvedMealLine line;
-  final bool isArabic;
-  final ValueChanged<ResolvedMealLine> onChanged;
-  final VoidCallback onDelete;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final colors = context.vireoColors;
-    final oil = FoodDbRepository.instance.byId('sunflower_oil');
-    final foodNameLower = '${line.nameEn} ${line.nameAr}'.toLowerCase();
-
-    // Specific unit table per food type
-    final unitChips = _getUnitsForFood(foodNameLower, isArabic, ref);
-
-    // Cooking methods relevant only where it matters (chicken, meat, eggs, fish, potatoes)
-    final showsCookingMethod = foodNameLower.contains('chicken') ||
-        foodNameLower.contains('دجاج') ||
-        foodNameLower.contains('فراخ') ||
-        foodNameLower.contains('meat') ||
-        foodNameLower.contains('لحم') ||
-        foodNameLower.contains('fish') ||
-        foodNameLower.contains('سمك') ||
-        foodNameLower.contains('egg') ||
-        foodNameLower.contains('بيض') ||
-        foodNameLower.contains('potato') ||
-        foodNameLower.contains('بطاطس');
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // Grams stepper and slider
-        Row(
-          children: [
-            IconButton(
-              visualDensity: VisualDensity.compact,
-              onPressed: () {
-                HapticFeedback.selectionClick();
-                onChanged(rescaleLine(line, (line.grams - 10).clamp(10, 2000)));
-              },
-              icon: const Icon(Icons.remove_circle_outline, size: 20),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: colors.background,
-                borderRadius: BorderRadius.circular(VRadius.sm),
-                border: Border.all(color: colors.line),
-              ),
-              child: Text(
-                '${line.grams.round()} جم',
-                style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
-              ),
-            ),
-            IconButton(
-              visualDensity: VisualDensity.compact,
-              onPressed: () {
-                HapticFeedback.selectionClick();
-                onChanged(rescaleLine(line, (line.grams + 10).clamp(10, 2000)));
-              },
-              icon: const Icon(Icons.add_circle_outline, size: 20),
-            ),
-            Expanded(
-              child: Slider(
-                value: line.grams.clamp(10, 500),
-                min: 10,
-                max: 500,
-                divisions: 49,
-                onChanged: (v) => onChanged(rescaleLine(line, v)),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 6),
-
-        // Per-Food Unit Chips
-        Wrap(
-          spacing: 6,
-          runSpacing: 6,
-          children: [
-            ActionChip(
-              visualDensity: VisualDensity.compact,
-              avatar: const Text('🥣', style: TextStyle(fontSize: 14)),
-              label: Text(isArabic ? 'مقاييس البيت' : 'Household portion'),
-              onPressed: () async {
-                HapticFeedback.selectionClick();
-                final pickedGrams = await PortionPickerSheet.show(
-                  context,
-                  nameAr: line.nameAr,
-                  nameEn: line.nameEn,
-                  initialGrams: line.grams,
-                );
-                if (pickedGrams != null) {
-                  onChanged(rescaleLine(line, pickedGrams));
-                }
-              },
-            ),
-            for (final u in unitChips)
-              ActionChip(
-                visualDensity: VisualDensity.compact,
-                label: Text(u.label),
-                onPressed: () => onChanged(rescaleLine(line, u.grams)),
-              ),
-            ActionChip(
-              visualDensity: VisualDensity.compact,
-              label: const Text('100 جم'),
-              onPressed: () => onChanged(rescaleLine(line, 100)),
-            ),
-          ],
-        ),
-
-        // Cooking Method Chips (Only where relevant)
-        if (showsCookingMethod) ...[
-          const SizedBox(height: 10),
-          Wrap(
-            spacing: 6,
-            runSpacing: 6,
-            children: [
-              _CookingChip(
-                label: isArabic ? 'مسلوق' : 'Boiled',
-                isSelected: line.cookingMethod == CookingMethod.boiled,
-                onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.boiled, oilFood: oil)),
-              ),
-              _CookingChip(
-                label: isArabic ? 'مشوي' : 'Grilled',
-                isSelected: line.cookingMethod == CookingMethod.grilled,
-                onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.grilled, oilFood: oil)),
-              ),
-              _CookingChip(
-                label: isArabic ? 'مقلي' : 'Fried',
-                isSelected: line.cookingMethod == CookingMethod.fried,
-                onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.fried, oilFood: oil)),
-              ),
-              _CookingChip(
-                label: isArabic ? 'في الفرن' : 'Baked',
-                isSelected: line.cookingMethod == CookingMethod.baked,
-                onSelected: () => onChanged(recomputeWithMethod(line, CookingMethod.baked, oilFood: oil)),
-              ),
-            ],
-          ),
-        ],
-
-        const SizedBox(height: 10),
-
-        // Row of individual macros + Delete button
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '≈ ${line.kcal.round()} سعرة  ·  P: ${line.protein.round()}g  ·  C: ${line.carbs.round()}g  ·  F: ${line.fat.round()}g',
-              style: TextStyle(color: colors.textMute, fontSize: 11, fontWeight: FontWeight.bold),
-            ),
-            IconButton(
-              tooltip: 'حذف الصنف',
-              icon: Icon(Icons.delete_outline, size: 18, color: colors.danger),
-              onPressed: onDelete,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  List<({String label, double grams})> _getUnitsForFood(String food, bool isArabic, WidgetRef ref) {
-    final cupMl = ref.read(userCupSizeProvider);
-    final householdList = HouseholdMeasures.getUnitsForFood(
-      nameAr: food,
-      nameEn: food,
-    );
-
-    return [
-      for (final u in householdList)
-        (
-          label: '${u.label(isArabic)} (${u.gramsWithCupCalibration(cupMl).round()} ${isArabic ? "جم" : "g"})',
-          grams: u.gramsWithCupCalibration(cupMl),
-        ),
-    ];
-  }
-}
-
-class _CookingChip extends StatelessWidget {
-  const _CookingChip({
-    required this.label,
-    required this.isSelected,
-    required this.onSelected,
-  });
-
-  final String label;
-  final bool isSelected;
-  final VoidCallback onSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return ChoiceChip(
-      visualDensity: VisualDensity.compact,
-      label: Text(label),
-      selected: isSelected,
-      onSelected: (_) => onSelected(),
-    );
-  }
 }
 
 class _ItemMathTable extends StatelessWidget {

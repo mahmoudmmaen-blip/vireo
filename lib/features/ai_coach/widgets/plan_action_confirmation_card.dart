@@ -6,6 +6,7 @@ import 'package:vireo/core/ui/vireo_snackbar.dart';
 import 'package:vireo/features/ai_coach/domain/plan_action.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class PlanActionConfirmationCard extends ConsumerStatefulWidget {
   const PlanActionConfirmationCard({
@@ -36,7 +37,7 @@ class _PlanActionConfirmationCardState extends ConsumerState<PlanActionConfirmat
         color: colors.background,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: _applied ? const Color(0xFF10B981) : colors.ember.withValues(alpha: 0.6),
+          color: _applied ? VBridge.cFF10B981 : colors.ember.withValues(alpha: 0.6),
           width: 1.5,
         ),
       ),
@@ -48,13 +49,13 @@ class _PlanActionConfirmationCardState extends ConsumerState<PlanActionConfirmat
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: (_applied ? const Color(0xFF10B981) : colors.ember).withValues(alpha: 0.15),
+                  color: (_applied ? VBridge.cFF10B981 : colors.ember).withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   _applied ? Icons.check_circle_rounded : Icons.auto_awesome_rounded,
                   size: 16,
-                  color: _applied ? const Color(0xFF10B981) : colors.ember,
+                  color: _applied ? VBridge.cFF10B981 : colors.ember,
                 ),
               ),
               const SizedBox(width: 8),
@@ -180,13 +181,13 @@ class _PlanActionConfirmationCardState extends ConsumerState<PlanActionConfirmat
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF10B981).withValues(alpha: 0.15),
+                      color: VBridge.cFF10B981.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
                       isArabic ? 'مُطبّق في الخطة ✓' : 'Applied to Plan ✓',
                       style: const TextStyle(
-                        color: Color(0xFF10B981),
+                        color: VBridge.cFF10B981,
                         fontWeight: FontWeight.w800,
                         fontSize: 12,
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// In-app preview of the 2×2 home widget for audit tests.
 class HomeWidgetPreview extends StatelessWidget {
@@ -20,8 +21,8 @@ class HomeWidgetPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final bg = isDark ? const Color(0xFF121826) : const Color(0xFFF9FAFB);
-    final mute = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
+    final bg = isDark ? VBridge.cFF121826 : VBridge.cFFF9FAFB;
+    final mute = isDark ? VBridge.cFF9CA3AF : VBridge.cFF6B7280;
     final accent = context.vireoColors.success;
 
     return Material(
@@ -61,7 +62,7 @@ class HomeWidgetPreview extends StatelessWidget {
                   width: 130,
                   child: Text(
                     fastingCountdown!,
-                    style: const TextStyle(color: Color(0xFF38BDF8), fontSize: 11),
+                    style: const TextStyle(color: VBridge.cFF38BDF8, fontSize: 11),
                     textAlign: TextAlign.center,
                     maxLines: 2,
                   ),

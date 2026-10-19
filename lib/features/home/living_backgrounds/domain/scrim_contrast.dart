@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// WCAG AA Contrast and Luminance utilities for automatic readability scrims.
 abstract final class ScrimContrast {
@@ -61,7 +62,7 @@ abstract final class ScrimContrast {
   /// transition to 0.85 opacity over dark slate to guarantee WCAG AA contrast (>= 4.5:1)
   /// for white text regardless of the scene colors underneath.
   static LinearGradient standardStepsScrim({Color? baseColor}) {
-    final base = baseColor ?? const Color(0xFF0B1320);
+    final base = baseColor ?? VBridge.cFF0B1320;
     return LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,

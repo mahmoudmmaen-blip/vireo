@@ -1,38 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
+import 'package:vireo/core/ui/vireo_tokens.dart';
 
 void main() {
-  group('VireoColors.dark premium tokens', () {
+  group('VireoColors.dark premium tokens (P50)', () {
     const colors = VireoColors.dark;
 
-    test('background', () {
-      expect(colors.background, const Color(0xFF0D0F12));
+    test('background is #12151a not pure black', () {
+      expect(colors.background, const Color(0xFF12151A));
     });
 
-    test('surface', () {
-      expect(colors.surface, const Color(0xFF1A1D21));
+    test('ember accent is #e8763c', () {
+      expect(colors.ember, const Color(0xFFE8763C));
     });
 
-    test('surfaceRaised', () {
-      expect(colors.surfaceRaised, const Color(0xFF1E232B));
-    });
-
-    test('ember primary', () {
-      expect(colors.ember, const Color(0xFFFF6B35));
-    });
-
-    test('text', () {
+    test('text / mute / line neutrals', () {
       expect(colors.text, const Color(0xFFE8E8E8));
-    });
-
-    test('textMute', () {
       expect(colors.textMute, const Color(0xFF8B94A0));
-    });
-
-    test('line', () {
       expect(colors.line, const Color(0xFF2A323D));
     });
+  });
+
+  group('VireoColors.light (P50)', () {
+    const colors = VireoColors.light;
+
+    test('light neutrals with same accent', () {
+      expect(colors.background, const Color(0xFFF7F8FA));
+      expect(colors.surface, const Color(0xFFFFFFFF));
+      expect(colors.ember, const Color(0xFFE8763C));
+      expect(colors.text, const Color(0xFF12151A));
+    });
+  });
+
+  test('macro colors are fixed across themes', () {
+    expect(VMacro.protein, const Color(0xFF5B9DFF));
+    expect(VMacro.carbs, const Color(0xFFF5A524));
+    expect(VMacro.fat, const Color(0xFFFF6B8A));
+  });
+
+  test('accent variants share dark/light neutrals', () {
+    expect(VireoColors.calmGoldDark.background, VireoColors.dark.background);
+    expect(VireoColors.oceanLight.surface, VireoColors.light.surface);
+    expect(VireoColors.calmGoldDark.ember, isNot(VireoColors.dark.ember));
   });
 
   test('VireoColors is registered on AppTheme', () {

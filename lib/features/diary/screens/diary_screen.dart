@@ -14,6 +14,7 @@ import 'package:vireo/features/diary/domain/diary_entry.dart';
 import 'package:vireo/features/diary/providers/diary_provider.dart';
 import 'package:vireo/features/progress/screens/weekly_checkin_screen.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class DiaryScreen extends ConsumerWidget {
   const DiaryScreen({super.key});
@@ -284,7 +285,7 @@ class _DiaryBody extends ConsumerWidget {
                   value: waterProgress,
                   minHeight: 8,
                   backgroundColor: colors.line,
-                  color: const Color(0xFF5BA4F5),
+                  color: VBridge.cFF5BA4F5,
                 ),
               ),
               const SizedBox(height: 4),

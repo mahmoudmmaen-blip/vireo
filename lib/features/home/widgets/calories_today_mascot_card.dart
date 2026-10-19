@@ -14,8 +14,8 @@ import 'package:vireo/features/home/mascot/domain/mascot_state.dart';
 import 'package:vireo/features/home/mascot/providers/mascot_settings_provider.dart';
 import 'package:vireo/features/home/mascot/widgets/calorie_mascot_wave.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
-import 'package:vireo/features/insights/screens/score_insights_screen.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
+import 'package:vireo/features/progress/screens/weekly_charts_screen.dart';
 
 /// Home calories card (P49): remaining kcal hero + mascot wave as progress.
 class CaloriesTodayMascotCard extends ConsumerWidget {
@@ -56,7 +56,7 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
         ? (nutrition.fatG / nutrition.fatTarget).clamp(0.0, 1.0)
         : 0.0;
 
-    void openInsights() => ScoreInsightsScreen.open(context);
+    void openWeeklyCharts() => WeeklyChartsScreen.open(context);
     void quickLog() => AiScanScreen.open(context, ref);
 
     final caption = isArabic
@@ -78,7 +78,7 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
 
     return VireoCard(
       onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
-      glow: colors.ember,
+      // P50: orange is accent-only — no full-card ember glow.
       padding:
           const EdgeInsets.fromLTRB(VSpace.md, VSpace.md, VSpace.md, VSpace.sm),
       child: Column(
@@ -94,8 +94,23 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
                       ),
                 ),
               ),
-              Icon(Icons.chevron_right_rounded,
-                  color: colors.textMute, size: 20),
+              // P53: one tap to weekly steps/calories/weight charts.
+              TextButton(
+                onPressed: openWeeklyCharts,
+                style: TextButton.styleFrom(
+                  foregroundColor: colors.ember,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  minimumSize: const Size(48, 36),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                child: Text(
+                  isArabic ? 'التفاصيل' : 'Details',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 2),
@@ -111,7 +126,7 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
           if (settings.useClassicRing)
             Center(
               child: GestureDetector(
-                onTap: openInsights,
+                onTap: openWeeklyCharts,
                 onLongPress: quickLog,
                 child: RingProgress(
                   progress: goalKcal > 0
@@ -136,7 +151,7 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
                 fatRatio: fatRatio * 0.33,
                 isFemale: isFemale,
                 showCaption: false,
-                onTap: openInsights,
+                onTap: openWeeklyCharts,
                 onLongPress: quickLog,
               ),
             ),

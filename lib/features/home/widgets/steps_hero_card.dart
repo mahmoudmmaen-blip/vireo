@@ -9,6 +9,7 @@ import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class StepsHeroCard extends ConsumerWidget {
   const StepsHeroCard({
@@ -30,7 +31,7 @@ class StepsHeroCard extends ConsumerWidget {
     final permissionGranted = live?.permissionGranted ?? true;
 
     // Distinct emerald/teal accent color for walking & steps
-    const stepsAccent = Color(0xFF10B981); // Emerald 500
+    const stepsAccent = VBridge.cFF10B981; // Emerald 500
 
     if (!permissionGranted && stepsCurrent == 0) {
       return VireoCard(

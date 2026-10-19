@@ -7,6 +7,7 @@ import 'package:vireo/features/measurements/domain/navy_tape_calculator.dart';
 import 'package:vireo/features/measurements/providers/body_composition_provider.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 import 'package:vireo/features/walking/domain/walking_calculations.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class NavyTapeMeasureScreen extends ConsumerStatefulWidget {
   const NavyTapeMeasureScreen({super.key});
@@ -389,10 +390,10 @@ class _ResultDisplayCard extends StatelessWidget {
 
   Color _categoryColor(BodyFatCategory c) {
     return switch (c) {
-      BodyFatCategory.athletic => const Color(0xFF10B981),
-      BodyFatCategory.fit => const Color(0xFF3B82F6),
-      BodyFatCategory.average => const Color(0xFFF59E0B),
-      BodyFatCategory.high => const Color(0xFFEF4444),
+      BodyFatCategory.athletic => VBridge.cFF10B981,
+      BodyFatCategory.fit => VBridge.cFF3B82F6,
+      BodyFatCategory.average => VBridge.cFFF59E0B,
+      BodyFatCategory.high => VBridge.cFFEF4444,
     };
   }
 

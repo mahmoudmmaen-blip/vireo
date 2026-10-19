@@ -9,6 +9,7 @@ import 'package:vireo/data/models/progress_models.dart';
 import 'package:vireo/data/models/unit_preference.dart';
 import 'package:vireo/features/progress/domain/weight_trend_calculator.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 class WeightTrendChartCard extends ConsumerWidget {
   const WeightTrendChartCard({
@@ -248,7 +249,7 @@ class _TrendDeltaPill extends StatelessWidget {
       badgeColor = colors.success; // Green for loss
       icon = Icons.trending_down;
     } else if (isPositive) {
-      badgeColor = const Color(0xFFEAB308); // Yellow/amber for gain
+      badgeColor = VBridge.cFFEAB308; // Yellow/amber for gain
       icon = Icons.trending_up;
     }
 

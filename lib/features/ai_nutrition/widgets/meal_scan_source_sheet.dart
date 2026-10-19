@@ -11,6 +11,7 @@ import 'package:vireo/features/ai_nutrition/screens/cal_ai_camera_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_log_text_screen.dart';
 import 'package:vireo/features/nutrition/widgets/meal_quick_relog_row.dart';
+import 'package:vireo/core/theme/vireo_bridge.dart';
 
 /// Shows the unified bottom sheet "سجّل وجبتك" with 5 big tiles:
 /// 1. صوّر الوجبة (CalAi camera)
@@ -75,7 +76,7 @@ Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
               const SizedBox(height: 10),
               _SourceOptionTile(
                 icon: Icons.photo_library_rounded,
-                iconColor: const Color(0xFF38BDF8), // sky blue
+                iconColor: VBridge.cFF38BDF8, // sky blue
                 title: 'من الاستوديو',
                 onTap: () {
                   Navigator.of(sheetCtx).pop();
@@ -85,7 +86,7 @@ Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
               const SizedBox(height: 10),
               _SourceOptionTile(
                 icon: Icons.edit_note_rounded,
-                iconColor: const Color(0xFF10B981), // emerald
+                iconColor: VBridge.cFF10B981, // emerald
                 title: 'اكتب',
                 onTap: () {
                   Navigator.of(sheetCtx).pop();
@@ -99,7 +100,7 @@ Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
               const SizedBox(height: 10),
               _SourceOptionTile(
                 icon: Icons.mic_rounded,
-                iconColor: const Color(0xFFA855F7), // purple
+                iconColor: VBridge.cFFA855F7, // purple
                 title: 'بالصوت',
                 onTap: () {
                   Navigator.of(sheetCtx).pop();
@@ -113,7 +114,7 @@ Future<void> showMealScanSourceSheet(BuildContext context, WidgetRef ref) {
               const SizedBox(height: 10),
               _SourceOptionTile(
                 icon: Icons.qr_code_scanner_rounded,
-                iconColor: const Color(0xFFF59E0B), // amber
+                iconColor: VBridge.cFFF59E0B, // amber
                 title: 'باركود',
                 onTap: () {
                   Navigator.of(sheetCtx).pop();
@@ -188,7 +189,7 @@ Future<ImageSource?> showPhotoSourceSheet(
               const SizedBox(height: 10),
               _SourceOptionTile(
                 icon: Icons.photo_library_rounded,
-                iconColor: const Color(0xFF38BDF8),
+                iconColor: VBridge.cFF38BDF8,
                 title: l10n.scanSourceGallery,
                 onTap: () => Navigator.of(sheetCtx).pop(ImageSource.gallery),
               ),
@@ -196,7 +197,7 @@ Future<ImageSource?> showPhotoSourceSheet(
                 const SizedBox(height: 10),
                 _SourceOptionTile(
                   icon: customActionIcon ?? Icons.description_rounded,
-                  iconColor: const Color(0xFFA855F7),
+                  iconColor: VBridge.cFFA855F7,
                   title: customActionLabel,
                   onTap: () {
                     Navigator.of(sheetCtx).pop();
