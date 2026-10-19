@@ -116,6 +116,9 @@ List<SlotMealRecord> _loadHistory() {
       .toList();
 }
 
+/// Sync read of slot history (for food-search stats without Riverpod).
+List<SlotMealRecord> loadSlotMealHistory() => _loadHistory();
+
 /// Remembers every confirmed meal with its slot so "زي امبارح" is exact.
 class MealSlotHistoryNotifier extends Notifier<List<SlotMealRecord>> {
   @override

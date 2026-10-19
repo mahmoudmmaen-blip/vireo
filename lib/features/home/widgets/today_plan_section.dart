@@ -287,18 +287,7 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
           ),
         ),
 
-        // ── Single Water Card with Ring & Quick Add ──
-        if (plan.waterItem != null) ...[
-          _WaterHighlightCard(
-            item: plan.waterItem!,
-            onTap: () => _onTapItem(plan.waterItem!, plan.isComplete(plan.waterItem!.id)),
-            onQuickAdd: () async {
-              HapticFeedback.selectionClick();
-              await ref.read(waterTrackerProvider.notifier).addGlass();
-            },
-          ),
-          const SizedBox(height: VSpace.sm),
-        ],
+        // Water logging lives only on QuickWaterCard (Home) — not duplicated here.
 
         // ── Plan Items (Progressive Disclosure: Next 3 items collapsed, expandable on tap) ──
         Builder(
@@ -364,81 +353,6 @@ class _TodayPlanSectionState extends ConsumerState<TodayPlanSection>
     return DateFormat.jm().format(dt);
   }
 }
-
-class _WaterHighlightCard extends StatelessWidget {
-  const _WaterHighlightCard({
-    required this.item,
-    required this.onTap,
-    required this.onQuickAdd,
-  });
-
-  final TodayPlanItem item;
-  final VoidCallback onTap;
-  final VoidCallback onQuickAdd;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    final ratio = item.progress ?? 0.0;
-
-    return VireoCard(
-      padding: const EdgeInsets.symmetric(horizontal: VSpace.md, vertical: VSpace.sm + 2),
-      onTap: onTap,
-      child: Row(
-        children: [
-          RingProgress(
-            progress: ratio,
-            size: 40,
-            stroke: 4.5,
-            color: VMacro.water,
-            child: Icon(Icons.water_drop_rounded, size: 18, color: VMacro.water),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.title,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                ),
-                if (item.progressLabel != null)
-                  Text(
-                    item.progressLabel!,
-                    style: TextStyle(
-                      color: colors.textMute,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-              ],
-            ),
-          ),
-          TextButton.icon(
-            style: TextButton.styleFrom(
-              backgroundColor: VMacro.water.withValues(alpha: 0.12),
-              foregroundColor: VMacro.water,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(VRadius.pill),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              minimumSize: const Size(0, 32),
-            ),
-            onPressed: onQuickAdd,
-            icon: const Icon(Icons.add, size: 16),
-            label: Text(
-              item.quickActionLabel ?? '+250 ml',
-              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 
 class _PlanRow extends StatelessWidget {
   const _PlanRow({

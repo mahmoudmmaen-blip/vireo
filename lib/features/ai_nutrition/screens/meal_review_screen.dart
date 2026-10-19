@@ -700,12 +700,52 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
   }
 
   Future<void> _saveFavorite() async {
-    await ref.read(mealFavoritesProvider.notifier).add(_linesForPersist());
+    final isArabic =
+        Localizations.localeOf(context).languageCode.startsWith('ar');
+    final suggested = _suggestedMealName(isArabic);
+    final controller = TextEditingController(text: suggested);
+    final name = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(isArabic ? 'احفظ كوجبة' : 'Save as meal'),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          textInputAction: TextInputAction.done,
+          decoration: InputDecoration(
+            hintText: isArabic
+                ? 'اسم الوجبة (مثال: فطار الشغل)'
+                : 'Meal name (e.g. Work breakfast)',
+          ),
+          onSubmitted: (v) => Navigator.pop(ctx, v.trim()),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(isArabic ? 'إلغاء' : 'Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, controller.text.trim()),
+            child: Text(isArabic ? 'حفظ' : 'Save'),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (name == null || name.isEmpty || !mounted) return;
+
+    await ref
+        .read(mealFavoritesProvider.notifier)
+        .addNamed(_linesForPersist(), name);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 3),
-        content: Text(AppLocalizations.of(context).mealFavoriteSaved),
+        content: Text(
+          isArabic
+              ? 'اتحفظت "$name" في وجباتي'
+              : '"$name" saved to My meals',
+        ),
       ),
     );
   }
@@ -787,8 +827,10 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
         elevation: 0,
         actions: [
           IconButton(
-            tooltip: l10n.mealFavoriteSave,
-            icon: const Icon(Icons.star_outline),
+            tooltip: Localizations.localeOf(context).languageCode.startsWith('ar')
+                ? 'احفظ كوجبة'
+                : 'Save as meal',
+            icon: const Icon(Icons.bookmark_add_outlined),
             onPressed: _lines.isEmpty ? null : _saveFavorite,
           ),
         ],

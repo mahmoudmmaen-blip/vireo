@@ -8,6 +8,7 @@ import 'package:vireo/features/ai_nutrition/screens/meal_barcode_screen.dart';
 import 'package:vireo/features/home/living_backgrounds/widgets/living_meal_capture_background.dart';
 import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/home/widgets/saved_meals_sheets.dart';
+import 'package:vireo/features/nutrition/providers/meal_relog_service.dart';
 import 'package:vireo/features/nutrition/providers/repeat_meal_service.dart';
 import 'package:vireo/features/subscription/feature_gates.dart';
 import 'package:vireo/features/subscription/meal_scan_quota.dart';
@@ -180,13 +181,13 @@ class MealCaptureHeroCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
 
-                // Repeat row (P40): زي امبارح · وجباتي · آخر حاجات
+                // Repeat row (P46): نفس فطار إمبارح؟ · وجباتي · آخر حاجات
                 Row(
                   children: [
                     Expanded(
                       child: _QuickActionChip(
                         icon: Icons.replay_rounded,
-                        label: isArabic ? 'زي امبارح' : 'Same as yesterday',
+                        label: _yesterdayChipLabel(currentSlot, isArabic),
                         minHeight: 48,
                         onTap: () => _repeatYesterday(
                           context,
@@ -274,8 +275,7 @@ class MealCaptureHeroCard extends ConsumerWidget {
   );
   }
 
-  /// "زي امبارح": copies yesterday's meal of the same slot into the review
-  /// screen (one tap; the user still confirms before it is saved).
+  /// One-tap re-log of yesterday's same-slot meal (no review screen).
   Future<void> _repeatYesterday(
     BuildContext context,
     WidgetRef ref,
@@ -297,23 +297,57 @@ class MealCaptureHeroCard extends ConsumerWidget {
           SnackBar(
             content: Text(
               isArabic
-                  ? 'مفيش حاجة متسجلة في $slotName امبارح. جرّب "آخر حاجات" 😊'
-                  : 'Nothing logged for $slotName yesterday. Try "Recent" 😊',
+                  ? 'مفيش حاجة متسجلة في $slotName امبارح. جرّب "آخر حاجات"'
+                  : 'Nothing logged for $slotName yesterday. Try "Recent".',
             ),
           ),
         );
       return;
     }
-    await openSavedMealInReview(context, yesterday, slot: slot);
+
+    final kcal = await MealRelogService.quickConfirm(
+      ref: ref,
+      snippet: yesterday,
+      slot: slot,
+      context: context,
+    );
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            kcal == null
+                ? (isArabic
+                    ? 'مقدرتش أسجّل الوجبة دي. جرّب تاني.'
+                    : 'Could not re-log this meal. Please try again.')
+                : (isArabic
+                    ? 'اتسجلت — ≈ $kcal سعرة. مش مشكلة لو حابب تعدّل من آخر حاجات.'
+                    : 'Logged — ≈ $kcal kcal. You can tweak it from Recent anytime.'),
+          ),
+        ),
+      );
   }
 
-  static MealType _currentMealSlot() {
-    final h = DateTime.now().hour;
-    if (h < 11) return MealType.breakfast;
-    if (h < 16) return MealType.lunch;
-    if (h < 21) return MealType.dinner;
-    return MealType.snack;
+  static String _yesterdayChipLabel(MealType slot, bool isArabic) {
+    if (!isArabic) {
+      return switch (slot) {
+        MealType.breakfast => 'Same breakfast?',
+        MealType.lunch => 'Same lunch?',
+        MealType.dinner => 'Same dinner?',
+        MealType.snack => 'Same snack?',
+      };
+    }
+    return switch (slot) {
+      MealType.breakfast => 'نفس فطار إمبارح؟',
+      MealType.lunch => 'نفس غدا إمبارح؟',
+      MealType.dinner => 'نفس عشا إمبارح؟',
+      MealType.snack => 'نفس سناك إمبارح؟',
+    };
   }
+
+  static MealType _currentMealSlot() =>
+      RepeatMealService.slotForTime(DateTime.now());
 }
 
 class _QuickActionChip extends StatelessWidget {

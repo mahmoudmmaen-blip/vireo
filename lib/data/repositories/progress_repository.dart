@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:vireo/core/services/health_connect_write_service.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/supabase_service.dart';
 import 'package:vireo/core/services/sync_engine.dart';
@@ -92,6 +95,10 @@ class ProgressRepository {
             'weight_kg': weightKg,
             'logged_at': at.toUtc().toIso8601String(),
           });
+          // Best-effort Health Connect write (does not block / fail the log).
+          unawaited(
+            HealthConnectWriteService.writeWeightKg(weightKg, at: at),
+          );
           return;
         }
       }
@@ -118,6 +125,8 @@ class ProgressRepository {
         },
       );
     } catch (_) {}
+
+    unawaited(HealthConnectWriteService.writeWeightKg(weightKg, at: at));
   }
 
   Future<List<AdherenceWeek>> fetchAdherenceWeeks({int weeks = 8}) async {

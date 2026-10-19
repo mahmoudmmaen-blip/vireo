@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:vireo/core/services/health_connect_write_service.dart';
 import 'package:vireo/features/activity/data/outdoor_met_calculator.dart';
 import 'package:vireo/features/activity/domain/gps_point_filter.dart';
 import 'package:vireo/features/activity/domain/outdoor_workout_models.dart';
@@ -424,6 +425,16 @@ class OutdoorGpsTracker {
       stepsAtEnd: stepsAtEnd,
     );
     await _controller.close();
+    // Best-effort Health Connect write — never blocks local session save.
+    unawaited(
+      HealthConnectWriteService.writeExerciseSession(
+        start: session.startedAt,
+        end: session.endedAt,
+        isRun: session.type == OutdoorWorkoutType.run,
+        energyKcal: session.caloriesBurned,
+        distanceMeters: session.distanceMeters.round(),
+      ),
+    );
     return session;
   }
 

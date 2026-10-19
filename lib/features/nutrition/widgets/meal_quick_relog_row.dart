@@ -2,14 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
+import 'package:vireo/data/models/meal_type.dart';
 import 'package:vireo/features/ai_nutrition/screens/meal_review_screen.dart';
 import 'package:vireo/features/home/widgets/saved_meals_sheets.dart';
 import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
+import 'package:vireo/features/nutrition/providers/meal_relog_service.dart';
 import 'package:vireo/features/nutrition/providers/repeat_meal_service.dart';
 
-/// One-tap repeat row: "زي امبارح" (same slot yesterday) + "وجباتي" (favorites).
+/// One-tap repeat row: same-as-yesterday + "وجباتي" (favorites).
 class MealQuickRelogRow extends ConsumerWidget {
   const MealQuickRelogRow({super.key});
+
+  static String _yesterdayLabel(MealType slot) => switch (slot) {
+        MealType.breakfast => 'نفس فطار إمبارح؟',
+        MealType.lunch => 'نفس غدا إمبارح؟',
+        MealType.dinner => 'نفس عشا إمبارح؟',
+        MealType.snack => 'نفس سناك إمبارح؟',
+      };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,7 +46,7 @@ class MealQuickRelogRow extends ConsumerWidget {
               Icon(Icons.history_rounded, size: 16, color: colors.ember),
               const SizedBox(width: 6),
               Text(
-                'سريع: زي امبارح أو وجباتي',
+                'سريع: نفس إمبارح أو وجباتي',
                 style: TextStyle(
                   color: colors.textMute,
                   fontSize: 12,
@@ -58,11 +67,32 @@ class MealQuickRelogRow extends ConsumerWidget {
                     child: ActionChip(
                       avatar: const Icon(Icons.replay_rounded, size: 16),
                       label: Text(
-                        '${yesterday != null ? 'زي امبارح' : 'آخر وجبة'} (${repeat.labelAr} · ${repeat.kcal} سعرة)',
+                        yesterday != null
+                            ? '${_yesterdayLabel(slot)} (≈ ${repeat.kcal} سعرة)'
+                            : 'آخر وجبة (${repeat.labelAr} · ≈ ${repeat.kcal} سعرة)',
                       ),
                       backgroundColor: colors.surfaceRaised,
                       side: BorderSide(color: colors.line),
                       onPressed: () async {
+                        if (yesterday != null) {
+                          final kcal = await MealRelogService.quickConfirm(
+                            ref: ref,
+                            snippet: yesterday,
+                            slot: slot,
+                            context: context,
+                          );
+                          if (!context.mounted) return;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                kcal == null
+                                    ? 'مقدرتش أسجّل الوجبة دي. جرّب تاني.'
+                                    : 'اتسجلت — ≈ $kcal سعرة',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
                         final draft = await repeat.toDraft();
                         if (context.mounted) {
                           await MealReviewScreen.open(

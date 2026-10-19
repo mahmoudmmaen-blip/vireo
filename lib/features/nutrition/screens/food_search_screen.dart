@@ -3,6 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';
 import 'package:vireo/features/nutrition/data/food_db_repository.dart';
+import 'package:vireo/features/nutrition/providers/food_log_stats.dart';
+import 'package:vireo/features/nutrition/providers/meal_favorites_provider.dart';
+import 'package:vireo/features/nutrition/providers/repeat_meal_service.dart';
 
 class FoodSearchScreen extends StatefulWidget {
   const FoodSearchScreen({super.key});
@@ -15,6 +18,8 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<FoodItem> _results = [];
   List<String> _recentFoodIds = [];
+  List<String> _loggedRecentFoodIds = [];
+  List<String> _frequentFoodIds = [];
   Set<String> _favoriteFoodIds = {};
   String? _selectedCategory;
   bool _isLoading = false;
@@ -45,9 +50,21 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
 
   Future<void> _loadRecentsAndFavorites() async {
     final prefs = await SharedPreferences.getInstance();
+    final history = loadSlotMealHistory();
+    final recents = loadRecentMealSnippets();
+    final loggedRecent = FoodLogStats.recentFoodIds(
+      history: history,
+      recents: recents,
+    );
+    final frequent = FoodLogStats.frequentFoodIds(
+      history: history,
+      recents: recents,
+    );
     setState(() {
       _recentFoodIds = prefs.getStringList(_recentPrefsKey) ?? [];
       _favoriteFoodIds = (prefs.getStringList(_favoritesPrefsKey) ?? []).toSet();
+      _loggedRecentFoodIds = loggedRecent;
+      _frequentFoodIds = frequent.map((e) => e.id).toList();
     });
   }
 
@@ -125,6 +142,14 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
         .map((id) => FoodDbRepository.instance.byId(id))
         .whereType<FoodItem>()
         .toList();
+    final loggedRecentItems = _loggedRecentFoodIds
+        .map((id) => FoodDbRepository.instance.byId(id))
+        .whereType<FoodItem>()
+        .toList();
+    final frequentItems = _frequentFoodIds
+        .map((id) => FoodDbRepository.instance.byId(id))
+        .whereType<FoodItem>()
+        .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -196,43 +221,32 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
             ),
           ),
 
-          // Recents Bar (when search query is empty)
-          if (_searchController.text.isEmpty && recentItems.isNotEmpty) ...[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 6),
-              child: Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: Text(
-                  isAr ? 'عناصر بحثت عنها مؤخراً' : 'Recently Viewed',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: colors.textMute,
-                  ),
-                ),
+          // Logged recent / frequent / search-viewed (empty query)
+          if (_searchController.text.isEmpty) ...[
+            if (loggedRecentItems.isNotEmpty)
+              _FoodChipSection(
+                title: isAr ? 'أكلتها قريب' : 'Recent',
+                icon: Icons.restaurant_rounded,
+                items: loggedRecentItems,
+                isAr: isAr,
+                onSelect: _onSelectFood,
               ),
-            ),
-            SizedBox(
-              height: 40,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: recentItems.length,
-                separatorBuilder: (context, index) => const SizedBox(width: 8),
-                itemBuilder: (context, i) {
-                  final food = recentItems[i];
-                  return ActionChip(
-                    avatar: const Icon(Icons.history, size: 14),
-                    label: Text(
-                      isAr ? food.nameAr : (food.nameEn.isNotEmpty ? food.nameEn : food.nameAr),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    onPressed: () => _onSelectFood(food),
-                  );
-                },
+            if (frequentItems.isNotEmpty)
+              _FoodChipSection(
+                title: isAr ? 'بتسجلها كتير' : 'Frequent',
+                icon: Icons.repeat_rounded,
+                items: frequentItems,
+                isAr: isAr,
+                onSelect: _onSelectFood,
               ),
-            ),
-            const SizedBox(height: 6),
+            if (recentItems.isNotEmpty)
+              _FoodChipSection(
+                title: isAr ? 'عناصر بحثت عنها مؤخراً' : 'Recently Viewed',
+                icon: Icons.history,
+                items: recentItems,
+                isAr: isAr,
+                onSelect: _onSelectFood,
+              ),
           ],
 
           const Divider(height: 1),
@@ -344,6 +358,69 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _FoodChipSection extends StatelessWidget {
+  const _FoodChipSection({
+    required this.title,
+    required this.icon,
+    required this.items,
+    required this.isAr,
+    required this.onSelect,
+  });
+
+  final String title;
+  final IconData icon;
+  final List<FoodItem> items;
+  final bool isAr;
+  final ValueChanged<FoodItem> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.vireoColors;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 6),
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: colors.textMute,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 40,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: items.length,
+            separatorBuilder: (_, _) => const SizedBox(width: 8),
+            itemBuilder: (context, i) {
+              final food = items[i];
+              return ActionChip(
+                avatar: Icon(icon, size: 14),
+                label: Text(
+                  isAr
+                      ? food.nameAr
+                      : (food.nameEn.isNotEmpty ? food.nameEn : food.nameAr),
+                  style: const TextStyle(fontSize: 12),
+                ),
+                onPressed: () => onSelect(food),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 6),
+      ],
     );
   }
 }

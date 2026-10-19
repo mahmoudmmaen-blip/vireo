@@ -43,6 +43,7 @@ import 'package:vireo/features/home/widgets/today_plan_section.dart';
 import 'package:vireo/features/home/widgets/premium_steps_hero_card.dart';
 import 'package:vireo/features/home/widgets/inbody_plan_update_card.dart';
 import 'package:vireo/features/home/widgets/today_pillars_grid.dart';
+import 'package:vireo/features/home/widgets/quick_water_card.dart';
 import 'package:vireo/features/home/widgets/home_fasting_card.dart';
 import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/features/engagement/widgets/coins_header_pill.dart';
@@ -101,6 +102,8 @@ class HomeDashboardBody extends ConsumerWidget {
       const CaloriesTodayMascotCard(),
 
       const DailyScoreHeroCard(),
+
+      const QuickWaterCard(),
 
       if (dash.showCheckIn || weeklyDue)
         _CheckInBanner(onTap: () => push(const WeeklyCheckInScreen())),

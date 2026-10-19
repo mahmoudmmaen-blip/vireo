@@ -129,6 +129,9 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
       _pulseController.value = 0.0;
     }
     final permissionGranted = live?.permissionGranted ?? true;
+    final healthConnectDenied = live?.healthConnectDenied ?? false;
+    final usingPedometerFallback =
+        healthConnectDenied && (live?.sensorAvailable ?? false);
 
     if (!permissionGranted && widget.stepsCurrent == 0) {
       return Container(
@@ -237,6 +240,29 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                if (usingPedometerFallback) ...[
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    margin: const EdgeInsets.only(bottom: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      Localizations.localeOf(context).languageCode.startsWith('ar')
+                          ? 'من غير الإذن هنستخدم عداد الموبايل بس'
+                          : 'Without Health Connect permission we\'ll use the phone pedometer only',
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.9),
+                        fontSize: 12.5,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
                 // Row 1: Big steps number, goal, Distinctive Play/Pause button
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,

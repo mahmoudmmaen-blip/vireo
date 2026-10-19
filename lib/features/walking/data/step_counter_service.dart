@@ -19,6 +19,7 @@ class LiveStepsSnapshot {
     required this.source,
     required this.permissionGranted,
     required this.sensorAvailable,
+    this.healthConnectDenied = false,
     this.last7Days = const [],
   });
 
@@ -26,6 +27,9 @@ class LiveStepsSnapshot {
   final StepSource source;
   final bool permissionGranted;
   final bool sensorAvailable;
+
+  /// True when Health Connect/HealthKit is available but not granted — pedometer fallback.
+  final bool healthConnectDenied;
   final List<DailyStepCount> last7Days;
 
   static const empty = LiveStepsSnapshot(
@@ -284,11 +288,18 @@ abstract final class StepCounterService {
     final sensorSteps = pedoSteps ?? fromState;
     final sensorAvailable = pedometerHardwareSupported && !sensorError && !kIsWeb;
 
-    // Day-level fusion via StepFusion (hourly buckets when available; else max).
-    // Prefer fuller coverage — never sum both sources (no double count).
+    // P48: prefer Health Connect when granted; else pedometer. Never sum both.
     int todaySteps;
     StepSource source;
-    if (sensorAvailable && healthOk) {
+    if (healthOk && healthSteps > 0) {
+      todaySteps = healthSteps;
+      source = StepSource.health;
+      if (sensorAvailable && sensorSteps > healthSteps) {
+        // Pedometer ahead early in the day before HC syncs — take the fuller total.
+        todaySteps = sensorSteps;
+        source = StepSource.pedometer;
+      }
+    } else if (sensorAvailable && healthOk) {
       final fused = StepFusion.fuseDay(
         pedometerHours: const [],
         healthHours: const [],
@@ -315,6 +326,7 @@ abstract final class StepCounterService {
       source: source,
       permissionGranted: sensorAvailable || healthOk,
       sensorAvailable: sensorAvailable,
+      healthConnectDenied: !healthOk && HealthStepsService.isSupported,
       last7Days: last7DaysFromHistory(todaySteps: todaySteps),
     );
     if (!_controller.isClosed) _controller.add(_latest);

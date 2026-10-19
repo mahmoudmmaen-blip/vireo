@@ -1,17 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/services/hive_service.dart';
 import 'package:vireo/core/services/sync_engine.dart';
+import 'package:vireo/features/ramadan/providers/ramadan_settings_provider.dart';
 import 'package:vireo/features/water/providers/water_cup_size_provider.dart';
 import 'package:vireo/features/water/providers/water_daily_goal_provider.dart';
+import 'package:vireo/features/water/providers/water_window_key.dart';
 
 const _waterTrackerKey = 'water_tracker';
-
-String _todayDateKey() {
-  final now = DateTime.now();
-  final m = now.month.toString().padLeft(2, '0');
-  final d = now.day.toString().padLeft(2, '0');
-  return '${now.year}-$m-$d';
-}
 
 class WaterTrackerNotifier extends Notifier<int> {
   int? _lastAddedMl;
@@ -20,7 +15,18 @@ class WaterTrackerNotifier extends Notifier<int> {
   int build() {
     ref.watch(waterDailyGoalMlProvider);
     ref.watch(waterCupSizeProvider);
+    ref.watch(ramadanSettingsProvider);
+    ref.watch(ramadanPrayerTimesProvider);
     return _loadForToday();
+  }
+
+  String _storageDayKey() {
+    final ramadan = ref.read(ramadanSettingsProvider);
+    return WaterWindowKey.resolve(
+      now: DateTime.now(),
+      ramadanEnabled: ramadan.isEnabled,
+      prayer: ref.read(ramadanPrayerTimesProvider),
+    );
   }
 
   int get goalMl => ref.read(waterDailyGoalMlProvider);
@@ -44,7 +50,7 @@ class WaterTrackerNotifier extends Notifier<int> {
         final map = Map<String, dynamic>.from(raw);
         final storedDate = map['date'] as String?;
         final ml = (map['ml'] as num?)?.toInt() ?? 0;
-        if (storedDate == _todayDateKey()) {
+        if (storedDate == _storageDayKey()) {
           return ml.clamp(0, goalMl);
         }
       }
@@ -90,7 +96,7 @@ class WaterTrackerNotifier extends Notifier<int> {
   Future<void> _persistAsync(int ml) async {
     if (!HiveService.isInitialized) return;
     try {
-      final day = _todayDateKey();
+      final day = _storageDayKey();
       await HiveService.cacheBox.put(_waterTrackerKey, {
         'date': day,
         'ml': ml,

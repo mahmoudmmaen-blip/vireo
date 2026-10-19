@@ -67,7 +67,8 @@ void main() {
     });
 
     expect(overflows, isEmpty, reason: overflows.join('\n'));
-    expect(find.text('زي امبارح'), findsOneWidget);
+    // P46: slot-specific copy e.g. "نفس فطار إمبارح؟"
+    expect(find.textContaining('إمبارح'), findsOneWidget);
     expect(find.text('وجباتي'), findsOneWidget);
     expect(find.text('آخر حاجات'), findsOneWidget);
 
@@ -78,7 +79,7 @@ void main() {
     expect(chipHeight, greaterThanOrEqualTo(48));
   });
 
-  testWidgets('"زي امبارح" with nothing logged shows a friendly message',
+  testWidgets('"نفس … إمبارح؟" with nothing logged shows a friendly message',
       (tester) async {
     tester.view.physicalSize = const Size(360, 640);
     tester.view.devicePixelRatio = 1.0;
@@ -93,7 +94,7 @@ void main() {
     );
     await tester.pump(const Duration(milliseconds: 600));
 
-    await tester.tap(find.text('زي امبارح'));
+    await tester.tap(find.textContaining('إمبارح'));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('مفيش حاجة متسجلة'), findsOneWidget);
   });

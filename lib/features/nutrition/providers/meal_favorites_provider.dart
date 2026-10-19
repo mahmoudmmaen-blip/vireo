@@ -140,6 +140,30 @@ class MealFavoritesNotifier extends Notifier<List<SavedMealSnippet>> {
     await _persist(_favoritesKey, next);
   }
 
+  /// Saves a named reusable meal bundle ("احفظ كوجبة").
+  Future<void> addNamed(List<ResolvedMealLine> lines, String name) async {
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) {
+      await add(lines);
+      return;
+    }
+    final base = SavedMealSnippet.fromLines(lines);
+    final snippet = SavedMealSnippet(
+      id: base.id,
+      labelAr: trimmed,
+      labelEn: trimmed,
+      kcal: base.kcal,
+      linesJson: base.linesJson,
+      savedAt: base.savedAt,
+    );
+    final next = [
+      snippet,
+      ...state.where((e) => e.id != snippet.id && e.labelEn != trimmed),
+    ].take(30).toList();
+    state = next;
+    await _persist(_favoritesKey, next);
+  }
+
   Future<void> remove(String id) async {
     final next = state.where((e) => e.id != id).toList();
     state = next;
