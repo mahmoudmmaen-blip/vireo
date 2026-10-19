@@ -1,4 +1,4 @@
-﻿package com.vireoapp.fitness
+package com.vireofit.app
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
@@ -22,8 +22,8 @@ class VireoWidgetMediumProvider : HomeWidgetProvider() {
                 val water = widgetData.getInt("widget_water_ml", 0)
 
                 setTextViewText(R.id.widget_score_val, score.toString())
-                setTextViewText(R.id.widget_steps_val, "$steps ط®ط·ظˆط©")
-                setTextViewText(R.id.widget_water_val, "$water ظ…ظ„")
+                setTextViewText(R.id.widget_steps_val, "$steps خطوة")
+                setTextViewText(R.id.widget_water_val, "$water مل")
 
                 // Pending intent to open app on home
                 val pendingIntent = HomeWidgetLaunchIntent.getActivity(

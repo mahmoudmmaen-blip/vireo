@@ -5,7 +5,7 @@ import 'package:home_widget/home_widget.dart';
 
 /// Service coordinating data updates to Android / iOS home-screen widgets.
 class WidgetService {
-  static const String appGroupId = 'group.com.vireoapp.fitness';
+  static const String appGroupId = 'group.com.vireofit.app';
   static const String androidWidgetSmall = 'VireoWidgetSmallProvider';
   static const String androidWidgetMedium = 'VireoWidgetMediumProvider';
 

@@ -1,60 +1,61 @@
-# AGENTS.md — Vireo working environment (read this first, every task)
+# AGENTS.md — Vireo Runner Protocol
 
-You are an engineer working INSIDE this folder. The folder is the source of truth; any model (Cursor, Antigravity/Gemini, Kimi, Claude) must follow the same rules.
+You are the autonomous build agent for **Vireo: Calories, Steps, Fasting** — a Flutter Android app (Google Play first, Egyptian Arabic default UI, 10 locales).
 
-## 1. Product
-- **Vireo:** a Flutter fitness/nutrition/steps app for Egyptian & Arab users, men and women.
-- **Stack:**
-  - Flutter + Riverpod + Hive;
-  - Supabase (Auth, Postgres, Edge Functions);
-  - Gemini (vision), optional Claude (coach);
-  - RevenueCat, AdMob.
-- **Branch:** ux-v2. **Locales:** 10 ARB files. ar_EG is Egyptian Arabic and is the default for Arabic users.
+## Your loop
 
-## 2. Where things are
-| What | Where |
-|---|---|
-| Task queue (do the next item only) | docs/prompts/QUEUE_ORDER.md |
-| Task specs | docs/prompts/P*.md |
-| What each task changed | docs/P*_CHANGES.md |
-| Science & formulas | docs/SCIENCE.md, docs/ACCURACY.md |
-| Store / legal | docs/store/*, docs/legal/* |
-| Release steps | docs/RELEASE.md |
+When the user says **"run next"** or **"كمل"**, do this:
 
-## 3. Hard rules (never break)
-1. **Never** `git push`, `git reset`, `git clean`, `git checkout -- .`, rebase, or delete files/folders. The owner pushes.
-2. **Never** read, print or create secrets: key.properties, *.jks, .env, API keys. AI keys live only in Supabase secrets.
-3. Never read pub-cache files. Never wait more than 3 minutes on one command. Poll long builds.
-4. Tests: use `pump(Duration)` instead of `pumpAndSettle` when anything animates. Bound every `tearDownAll` (10 s timeout). Run each test file with `--timeout 2m`.
-5. Every task ends with: `flutter analyze` (0 errors), the task's tests, `flutter build apk --debug` (when the code changed), a docs/P*_CHANGES.md file, and ONE commit with the exact message from the spec.
-6. No stubs and no fake numbers. Science comes from formulas with sources; the LLM only explains.
-7. **Copy:**
-   - warm, positive Egyptian Arabic;
-   - gender-aware (ICU select);
-   - never blame words (عقاب/فشلت/غلطت);
-   - no Latin words in Arabic UI except brand names.
-8. **Ads:** strict G-rated, no women imagery, no dating or apparel. Pro has no ads.
-9. **Safety floors:**
-   - kcal ≥ 1200 (women) / 1500 (men);
-   - no deficit in pregnancy or under 18;
-   - weight loss ≤ 1%/week;
-   - fasting > 24 h needs a confirmation; max 72 h.
-10. **Privacy:** cycle data stays local (encrypted Hive) unless the user opts in. Remove names and IDs from body reports.
+1. Read `.runner/running/CURRENT_TASK.md`. If it does not exist, check `.runner/inbox/` for the lowest-numbered `P*.json`, move it to `.runner/running/`, and create `CURRENT_TASK.md` pointing to it.
+2. Read the task JSON. Execute its `steps` in order.
+3. Run the **gate checks** (below). If any gate fails, fix and re-run. Max 3 fix attempts, then mark the task **BLOCKED** with a clear reason.
+4. Write the report to `.runner/done/{id}_report.md` (format below), move the task JSON from `running/` to `done/`, delete `CURRENT_TASK.md`.
+5. Tell the user in Egyptian Arabic: what changed, gate results, and anything they must do manually (e.g., upload the AAB).
 
-## 4. Standard procedures
-- **New screen:**
-  - use VireoColors tokens only;
-  - 48 dp tap targets;
-  - empty, loading, error and offline states;
-  - audit test at 360×640 ar_EG with textScale 1.3.
-- **New strings:** add to all 10 ARB files, then run `flutter gen-l10n`.
-- **Edge function change:** deploy with `npx supabase functions deploy <name> --use-api`, then check one real request in the logs.
-- **When stuck** twice on the same error: write what you tried in the CHANGES doc, skip with a TODO test, and continue. Never loop forever.
+If a task is ambiguous, STOP and ask. Never guess on destructive operations.
 
-## 5. Reporting
-Finish with a 5-line summary:
-1. what shipped;
-2. tests passed/failed;
-3. the build result;
-4. the commit hash;
-5. anything the owner must do.
+## HARD RULES (never break, even if a task asks — flag it instead)
+
+1. **Package name is `com.vireofit.app` forever.** It is live on Play Console and cannot change. After ANY task touching `android/`, verify `applicationId "com.vireofit.app"` in `android/app/build.gradle`. If anything else appears, fix it before proceeding.
+2. **Never upload anything to Play Console.** No `fastlane supply`, no Play publishing APIs. AABs are built locally only; the user uploads manually.
+3. **Never touch secrets:** `key.properties`, `*.jks`, `*.keystore`, `.env`, service-account JSONs. Never print their contents. Never commit them.
+4. **Never modify the `build` script in `package.json`** (if present) or CI files to work around a failure — fix the upstream cause.
+5. **No destructive git operations** (`reset --hard`, force push, `clean -fdx`) without explicit user approval in the chat.
+
+## Gate checks (run in this order)
+
+| Gate | Command | Pass criteria |
+|---|---|---|
+| `analyze` | `flutter analyze` | 0 errors (warnings allowed, list them in the report) |
+| `test` | `flutter test` | All pass. If no tests exist for the change, say so |
+| `build:aab` | `flutter build appbundle --release` | Builds clean. Report AAB path, size, versionCode/versionName |
+| `package` | check `applicationId` | Must be `com.vireofit.app` |
+
+Run only the gates listed in the task's `gates` array, **plus `package` always**.
+
+## Product rules (apply to every change)
+
+- **RTL first:** any new/changed UI must render correctly in Arabic RTL. No mixed numeral systems on one screen.
+- **Tone of copy:** Egyptian Arabic, encouraging, **zero blame language**. Never shame the user for overeating or missing goals ("مش مشكلة، بكرة يوم جديد" — not "فشلت في هدفك").
+- **No false precision:** calorie estimates always show `≈` and keep portion/oil calibration controls visible.
+- **No medical claims:** use "تقدير" (estimate), never diagnostic language. InBody/body-composition copy stays wellness-framed.
+- **Offline-first:** logging must queue gracefully without network.
+- **Privacy:** women's module data stays on-device only. Never add sync/upload for it.
+
+## Report format — `.runner/done/{id}_report.md`
+
+```
+# {id} — {title}
+Status: DONE | BLOCKED
+## What changed
+- file: what & why (one line each)
+## Gate results
+- analyze: pass/fail (N warnings)
+- test: pass/fail
+- build:aab: path, size, versionCode X (versionName Y)
+- package: com.vireofit.app ✓
+## Manual steps for the user
+- (e.g., "upload the AAB to Play Console — internal track")
+## Follow-ups suggested
+- (next task ideas, as P-numbers)
+```

@@ -16,7 +16,7 @@ if (hasKeyProperties) {
 }
 
 android {
-    namespace = "com.vireoapp.fitness"
+    namespace = "com.vireofit.app"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -31,7 +31,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.vireoapp.fitness"
+        applicationId = "com.vireofit.app"
         minSdk = 26
         targetSdk = 36
         versionCode = flutter.versionCode

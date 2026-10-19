@@ -64,13 +64,13 @@ keyPassword=<KEY_PASSWORD>
 
 ## 4. Supabase Auth URL Configuration
 
-The application ID has been configured to `com.vireoapp.fitness`.
+The application ID is `com.vireofit.app` (fixed; never change — live on Play Console).
 
 In your **Supabase Dashboard**:
 1. Navigate to **Authentication** -> **URL Configuration**.
 2. Add the following redirect URI to **Redirect URLs**:
    ```
-   com.vireoapp.fitness://login-callback
+   com.vireofit.app://login-callback
    ```
 3. Save changes.
 

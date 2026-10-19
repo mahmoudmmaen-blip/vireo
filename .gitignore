@@ -53,3 +53,20 @@ android/key.properties
 
 # Vireo Runner (local task queue, logs)
 .runner/
+
+# === Vireo secrets - NEVER commit ===
+key.properties
+**/key.properties
+*.jks
+*.keystore
+.env
+*.log
+.tmp_flutter/
+# agent scratch files
+.analyze*.txt
+.build*.txt
+.test*.txt
+.deploy*.txt
+.space_probe.tmp
+.tmp/
+android/.kotlin/

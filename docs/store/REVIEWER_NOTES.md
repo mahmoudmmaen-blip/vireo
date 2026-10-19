@@ -1,7 +1,7 @@
 # Google Play reviewer notes — Vireo (Android)
 
-**Package:** `com.vireoapp.fitness`  
-**Version for this submission:** 1.0.0+2  
+**Package:** `com.vireofit.app`  
+**Version for this submission:** 1.0.0+3  
 **Contact:** mahmoud.mma.en@gmail.com
 
 Vireo is a fitness / nutrition / steps app (wellness, not a medical device). No account is required to explore most flows; guest mode works offline for logging.
