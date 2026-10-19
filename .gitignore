@@ -70,3 +70,5 @@ key.properties
 .space_probe.tmp
 .tmp/
 android/.kotlin/
+# Vireo Runner (local task queue, logs)
+.runner/
