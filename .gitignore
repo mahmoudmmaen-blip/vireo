@@ -71,4 +71,3 @@ key.properties
 .tmp/
 android/.kotlin/
 # Vireo Runner (local task queue, logs)
-.runner/
