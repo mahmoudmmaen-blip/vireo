@@ -1,0 +1,13 @@
+{
+  "task": "008_P41_billing_upgrade",
+  "state": "finished",
+  "engine": "cursor-agent",
+  "exit_code": 0,
+  "started": "2026-10-18T22:34:00+03:00",
+  "finished": "2026-10-18T22:36:00+03:00",
+  "already_done_commit": "ccfdf6d55028b87eb367a785f944916ed8ecfa2e",
+  "google_mobile_ads": "9.1.0 (latest on pub.dev; 10.x does not exist — literal ≥10 success criterion cannot be met)",
+  "purchases_flutter": "10.16.0",
+  "play_billing": "com.android.billingclient:billing:8.3.0 (re-verified)",
+  "note": "Re-queued task closed without new commit. Billing Library 8+ already fixed via purchases_flutter, not google_mobile_ads."
+}

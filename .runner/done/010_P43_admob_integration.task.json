@@ -1,0 +1,43 @@
+{
+  "id": "010_P43_admob_integration",
+  "title": "P43 — AdMob integration: add real App ID and Ad Unit IDs",
+  "priority": "high",
+  "context": "AdMob app and ad units have been created. Real IDs must now be added to the Flutter project. Also fix package name conflict: com.vireo.app is taken on Play Store by another app.",
+
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Update AndroidManifest.xml with real AdMob App ID",
+      "description": "In android/app/src/main/AndroidManifest.xml, find the meta-data tag for com.google.android.gms.ads.APPLICATION_ID and replace any test/placeholder value with the real App ID: ca-app-pub-9991756921251214~5695541111"
+    },
+    {
+      "id": "2",
+      "title": "Create AdMob constants file with real Ad Unit IDs",
+      "description": "Create or update lib/core/constants/admob_constants.dart with these real Ad Unit IDs:\n- bannerAdUnitId: 'ca-app-pub-9991756921251214/6267306626'\n- interstitialAdUnitId: 'ca-app-pub-9991756921251214/4382459444'\n- rewardedAdUnitId: 'ca-app-pub-9991756921251214/7364765877'\nRemove any test IDs (ca-app-pub-3940256099942544/...). Keep test IDs only in a debug/test build config if needed."
+    },
+    {
+      "id": "3",
+      "title": "Fix package name conflict",
+      "description": "The package name com.vireo.app is already taken on Google Play by another app. Change the package name to com.vireoapp.fitness throughout the project:\n- android/app/build.gradle: applicationId\n- android/app/src/main/AndroidManifest.xml: package attribute\n- android/app/src/main/kotlin/... folder name (rename folder from com/vireo/app to com/vireoapp/fitness)\n- MainActivity.kt: package declaration\n- pubspec.yaml: if package name is referenced\nMake sure all references are consistent."
+    },
+    {
+      "id": "4",
+      "title": "Verify ads initialize correctly",
+      "description": "In lib/main.dart or app initialization, confirm MobileAds.instance.initialize() is called before any ad is loaded. Add it if missing."
+    }
+  ],
+
+  "after_all_tasks": [
+    "Run flutter analyze — must be 0 errors",
+    "Run flutter build apk --debug — must succeed",
+    "Commit: 'feat(ads): add real AdMob App ID and Ad Unit IDs, fix package name'",
+    "Write status to .runner/done/010_P43_admob_integration.status.json"
+  ],
+
+  "do_not": [
+    "Never push to git",
+    "Never read or print key.properties or keystore",
+    "Never delete any files",
+    "Never print or log Ad Unit IDs or App ID to console in release builds"
+  ]
+}

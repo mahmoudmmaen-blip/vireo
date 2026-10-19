@@ -1,0 +1,77 @@
+{
+  "id": "009_P42_bugs_and_themes",
+  "title": "P42 — Bug fixes: step counter sync, meal scan speed, theme consistency, home UI polish",
+  "priority": "high",
+  "context": "Multiple UX bugs reported by owner after manual testing. Fix all items below. Branch: ux-v2.",
+
+  "tasks": [
+
+    {
+      "id": "1",
+      "title": "Step counter sync — Walking tab vs Home screen",
+      "description": "Steps shown in the Walking/Activity tab do not match steps shown on the Home screen. They should share a single source of truth. Fix: use one shared Riverpod provider (e.g. StepsProvider) that both screens read from. No duplicate pedometer streams."
+    },
+
+    {
+      "id": "2",
+      "title": "Step counter accuracy — slow and inaccurate",
+      "description": "Step counting is slow to update and inaccurate. Fix: ensure pedometer events are processed immediately (no unnecessary debounce >500ms). Validate against platform pedometer; if using 'pedometer' package, confirm it is reading step_count not step_detection."
+    },
+
+    {
+      "id": "3",
+      "title": "Meal photo scan — speed and accuracy",
+      "description": "Meal scanning via camera is slow (>5s) and results are doubted. Fix: (a) show a loading indicator immediately on capture, (b) compress image before upload (max 800px, quality 75), (c) use a faster prompt that asks for JSON only — no markdown, (d) add a confidence note in the UI if the scan result seems low-quality."
+    },
+
+    {
+      "id": "4",
+      "title": "Theme system — full audit, dark/light/orange accent, zero conflicts",
+      "description": "Full theme audit and rebuild for maximum consistency. Requirements:\n- TWO base themes: Dark (background #0D0F12, surface #1A1D21) and Light (background #F8F9FA, surface #FFFFFF)\n- ONE accent color: Orange #FF6B35 used consistently for CTAs, active icons, progress rings, highlights\n- All text colors must meet WCAG AA contrast on their background\n- No hardcoded Colors.white / Colors.black / Colors.grey anywhere in lib/ — use theme tokens only\n- AppBarTheme, BottomNavigationBarTheme, CardTheme, InputDecorationTheme, ElevatedButtonTheme all fully defined in the theme\n- Dark mode: no pure white text, use #E8E8E8 for body, #FFFFFF for headings only\n- Light mode: no pure black, use #1A1A1A for body\n- Run flutter analyze after — zero theme-related warnings"
+    },
+
+    {
+      "id": "5",
+      "title": "Home screen — Today's Calories widget redesign",
+      "description": "The 'سعراتك النهاردة' (Today's Calories) section is poorly designed: text is small and inconsistent. Redesign:\n- Large centered calorie number (32sp, bold, orange)\n- Subtitle: 'من أصل X سعرة' in 14sp muted color\n- Three macro pills below: Protein / Carbs / Fat — each with colored dot + value\n- Remaining calories in a colored badge (green if >200, orange if 50-200, red if <50)\n- Consistent padding and card elevation matching the design system"
+    },
+
+    {
+      "id": "6",
+      "title": "Meal tabs — food item rows should be compact and consistent",
+      "description": "Food item rows (e.g. 'صدر فراخ', 'أرز مطبوخ') must be compact cards:\n- Icon or food emoji on the left (40dp)\n- Food name bold 14sp + portion size 12sp muted below\n- Calories on the right bold 14sp + macros 11sp muted\n- Consistent height ~64dp, divider between items\n- No oversized text, no layout overflow"
+    },
+
+    {
+      "id": "7",
+      "title": "Walking screen — add Steps chart and Calories chart",
+      "description": "The Walking screen is missing charts. Add:\n- A bar chart showing steps per day for the last 7 days (use fl_chart BarChart)\n- A line chart showing calories burned from walking per day for the last 7 days\n- Both charts should use the orange accent color for bars/lines\n- Show a 'No data yet' empty state if fewer than 2 days of data exist\n- Charts must respect dark/light theme"
+    },
+
+    {
+      "id": "8",
+      "title": "CRITICAL — water_logs: invalid UUID id field (400 error every minute)",
+      "description": "water_logs table receives id='water_2026-10-18' which is not a valid UUID. Supabase rejects with error 22P02. This error repeats every ~60 seconds and is breaking water tracking entirely. Fix: search lib/ for any string like 'water_' used as an id. Either (a) remove the id from the insert payload and let Supabase auto-generate it (recommended), or (b) use uuid.v4() from the uuid package. Add uuid package to pubspec.yaml if not present."
+    },
+
+    {
+      "id": "9",
+      "title": "Auth 422 — 'احفظ تقدمك' Save Progress screen shows error",
+      "description": "PUT /auth/v1/user returns 422, causing 'حصل خطأ. حاول تاني.' on the Save Progress screen. Fix: check the updateUser() call — Supabase Auth only accepts fields: email, password, data (user_metadata). Move any extra fields into the data map. Also improve the error message to show a specific Arabic message instead of the generic error."
+    }
+
+  ],
+
+  "after_all_tasks": [
+    "Run flutter analyze — must be 0 errors",
+    "Run flutter build apk --debug — must succeed",
+    "Commit: 'fix(ux): step sync, meal scan speed, theme audit, home calories UI, walking charts, water logs UUID, auth 422'",
+    "Write status to .runner/done/009_P42_bugs_and_themes.status.json"
+  ],
+
+  "do_not": [
+    "Never push to git",
+    "Never read or print key.properties or keystore",
+    "Never delete any files"
+  ]
+}

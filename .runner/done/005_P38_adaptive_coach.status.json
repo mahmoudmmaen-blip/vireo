@@ -1,0 +1,9 @@
+﻿{
+    "engine":  "agent",
+    "exit_code":  0,
+    "started":  "2026-10-17T14:25:23.9693640+03:00",
+    "minutes":  22.7,
+    "state":  "finished",
+    "finished":  "2026-10-17T14:48:07.1303726+03:00",
+    "task":  "005_P38_adaptive_coach"
+}

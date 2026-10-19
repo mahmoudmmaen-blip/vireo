@@ -1,0 +1,9 @@
+﻿{
+    "engine":  "agent",
+    "exit_code":  0,
+    "started":  "2026-10-16T19:23:07.7192478+03:00",
+    "minutes":  0.2,
+    "state":  "finished",
+    "finished":  "2026-10-16T19:23:21.9376103+03:00",
+    "task":  "001_deny_rule_test"
+}

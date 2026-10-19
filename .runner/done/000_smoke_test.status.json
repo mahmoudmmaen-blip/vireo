@@ -1,0 +1,9 @@
+﻿{
+    "engine":  "agent",
+    "exit_code":  0,
+    "started":  "2026-10-16T19:22:40.0526062+03:00",
+    "minutes":  0.5,
+    "state":  "finished",
+    "finished":  "2026-10-16T19:23:07.6753671+03:00",
+    "task":  "000_smoke_test"
+}

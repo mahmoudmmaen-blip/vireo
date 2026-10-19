@@ -1,0 +1,23 @@
+{
+  "id": "P45",
+  "title": "Verify package name fix + build clean release AAB",
+  "priority": "high",
+  "goal": "Confirm P44 restored com.vireofit.app everywhere and produce a release AAB ready for manual Play Console upload",
+  "steps": [
+    "Verify applicationId \"com.vireofit.app\" in android/app/build.gradle",
+    "Search android/ for any other package id occurrences (old wrong id) — report every hit, fix only with user-visible listing",
+    "Verify AndroidManifest.xml package/namespace consistency and MainActivity path matches com.vireofit.app",
+    "flutter clean && flutter pub get",
+    "flutter analyze",
+    "flutter build appbundle --release",
+    "Report AAB absolute path, file size, versionCode, versionName"
+  ],
+  "acceptance": [
+    "applicationId == com.vireofit.app",
+    "zero analyze errors",
+    "AAB builds successfully",
+    "NOTHING uploaded to Play Console"
+  ],
+  "gates": ["analyze", "build:aab"],
+  "no_touch": ["key.properties", "*.jks", "*.keystore"]
+}

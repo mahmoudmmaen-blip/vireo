@@ -1,0 +1,20 @@
+{
+  "id": "P47",
+  "title": "Water tracker with fasting/Ramadan integration",
+  "priority": "medium",
+  "goal": "Daily-touch habit feature every competitor has; critical between iftar and suhoor",
+  "steps": [
+    "Add water card on Home: quick-add buttons (كوباية 250ml / زجاجة 500ml / custom), daily goal (default 2L, adjustable)",
+    "Progress visual consistent with the mascot-wave style language",
+    "Ramadan/fasting mode: goal window = iftar to suhoor, reminder copy: 'شربت كام كوباية من الإفطار للسحور؟'",
+    "Store locally, offline-first, sync into daily log",
+    "Egyptian Arabic strings, RTL-verified"
+  ],
+  "acceptance": [
+    "Logging a glass takes 1 tap from Home",
+    "Ramadan mode shifts the tracking window correctly",
+    "Data persists offline"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle applicationId"]
+}

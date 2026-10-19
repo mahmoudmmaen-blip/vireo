@@ -1,0 +1,20 @@
+{
+  "id": "P46",
+  "title": "Repeat-meal logging (recent / frequent / same-as-yesterday)",
+  "priority": "high",
+  "goal": "Cut logging friction for repeat meals — the #1 retention gap vs MFP/Lose It/Yazio",
+  "steps": [
+    "Add 'Recent' and 'Frequent' sections to the food search screen, ordered by recency/frequency from local DB",
+    "Add 'نفس فطار إمبارح؟' (same as yesterday) quick-action on Home for breakfast, lunch, dinner — one tap re-logs the full meal",
+    "Add 'Save as meal' (احفظ كوجبة) on any logged meal: bundles items as a named reusable meal",
+    "All UI strings in Egyptian Arabic, RTL-verified, zero-blame tone",
+    "Works fully offline (local storage only)"
+  ],
+  "acceptance": [
+    "Re-logging yesterday's breakfast takes max 2 taps from Home",
+    "Saved meals persist across app restarts",
+    "RTL layout verified in Arabic locale"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle applicationId", "key.properties"]
+}

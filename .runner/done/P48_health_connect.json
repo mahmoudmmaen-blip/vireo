@@ -1,0 +1,20 @@
+{
+  "id": "P48",
+  "title": "Health Connect integration (steps, weight, workouts) — NOT Google Fit",
+  "priority": "medium",
+  "goal": "Google Fit APIs are only supported until end of 2026; build on Health Connect from day one",
+  "steps": [
+    "Add health_connect_flutter (or current maintained plugin) via pubspec",
+    "Request READ/WRITE for Steps, Weight, ExerciseSession with rationale strings in Arabic",
+    "Steps hero card reads from Health Connect when permission granted; falls back to device pedometer otherwise",
+    "Weight logs write back to Health Connect",
+    "Handle permission-denied state gracefully with copy: 'من غير الإذن هنستخدم عداد الموبايل بس'"
+  ],
+  "acceptance": [
+    "No Google Fit dependency anywhere in the codebase",
+    "Steps sync works on a Health Connect-enabled device",
+    "Graceful fallback when permission denied"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle applicationId", "key.properties"]
+}

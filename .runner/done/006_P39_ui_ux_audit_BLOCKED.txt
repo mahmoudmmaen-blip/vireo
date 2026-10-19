@@ -1,0 +1,32 @@
+P39 UI/UX audit BLOCKED — prerequisite commit missing
+
+Date: 2026-10-16
+Branch: ux-v2
+Queue item: 7 (P39_ui_ux_audit.md)
+
+Gate check (required before starting):
+  git log --oneline -10 must show:
+  "feat(coach): adaptive TDEE, real-time rebalancing, accurate walk/run energy, smart follow-up"
+
+Result: FAIL — that commit is not in HEAD~10, and not found in the full history via
+  git log --all --grep="adaptive TDEE" or --grep="feat(coach)".
+
+Current HEAD~10:
+  137b046 feat(home+meals): calorie mascot wave, meal health score & swaps, plan/program fixes
+  46b0fd3 fix(food-db): USDA id audit, missing common foods
+  403756a feat(accuracy): round 2 matching & portions
+  03f9dd5 feat(home): living step-journey backgrounds and rotating scene packs
+  6d8409f test(accuracy): independent reference values, honest MAPE
+  fa9d579 feat(accuracy+fasting): verified-DB calorie engine, oil & portion calibration, IF timer
+  70ed02c ui(home): bigger steps counter and meal capture card
+  b93d10b feat(body+coach): flexible InBody reader, onboarding shortcut, plan-aware coach chat
+  1c11d98 feat(meals): fair scan quota + pro_grants, next-meal suggestions, household measures
+  ff7551a feat(personal): men & women modules, themes, onboarding pickers, daily journey coins
+
+Queue context:
+  Item 6 is P38_adaptive_coach_accuracy.md (NOTE: build run screen behind v1 flag;
+  men's vitality stays hidden in v1). Item 7 (P39) must start only after P38 is committed
+  and before P37.
+
+Action taken: no code, docs, tests, or commits were changed for P39.
+Unblock: complete queue item 6 (P38) with the exact commit message above, then re-run P39.

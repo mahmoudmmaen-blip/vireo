@@ -1,0 +1,9 @@
+﻿{
+    "engine":  "agent",
+    "exit_code":  0,
+    "started":  "2026-10-17T09:15:11.1121380+03:00",
+    "minutes":  120.6,
+    "state":  "finished",
+    "finished":  "2026-10-17T11:15:48.9450331+03:00",
+    "task":  "004_P40_growth_pack"
+}

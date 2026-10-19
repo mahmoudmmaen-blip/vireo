@@ -1,0 +1,28 @@
+{
+  "id": "008_P41_billing_upgrade",
+  "title": "P41 — Upgrade google_mobile_ads to fix Play Billing Library warning",
+  "priority": "high",
+  "gate": {
+    "require_committed": ["0e27b52"]
+  },
+  "context": "Play Console shows error: 'Your app currently uses Play Billing Library version 7.1.1 and must be updated to at least version 8.0.0'. This comes from google_mobile_ads ^9.1.0 which bundles an old Billing Library. Fix by upgrading to google_mobile_ads ^10.x or the latest stable version that includes Billing Library 8+.",
+  "steps": [
+    "1. Run: flutter pub outdated — note the latest version of google_mobile_ads",
+    "2. In pubspec.yaml update: google_mobile_ads: ^10.0.0 (or latest stable ≥10)",
+    "3. Run: flutter pub upgrade google_mobile_ads",
+    "4. Run: flutter pub get",
+    "5. Run: flutter analyze — fix any errors from API changes in the new version",
+    "6. Check lib/ for any google_mobile_ads imports that use deprecated APIs and update them",
+    "7. Run: flutter build apk --debug — must succeed",
+    "8. Run: flutter build appbundle --release -- must succeed with key.properties in place",
+    "9. Commit: 'fix(ads): upgrade google_mobile_ads to fix Play Billing Library 8+ requirement'",
+    "10. Write status to .runner/done/008_P41_billing_upgrade.status.json"
+  ],
+  "do_not": [
+    "Never push to git",
+    "Never read or print key.properties or keystore",
+    "Never modify key.properties or keystore",
+    "Never delete any files"
+  ],
+  "success_criteria": "flutter build appbundle --release succeeds AND google_mobile_ads version in pubspec.yaml is ≥10.0.0"
+}

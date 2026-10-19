@@ -51,8 +51,6 @@ android/key.properties
 **/*.jks
 **/*.keystore
 
-# Vireo Runner (local task queue, logs)
-.runner/
 
 # === Vireo secrets - NEVER commit ===
 key.properties
@@ -70,4 +68,3 @@ key.properties
 .space_probe.tmp
 .tmp/
 android/.kotlin/
-# Vireo Runner (local task queue, logs)

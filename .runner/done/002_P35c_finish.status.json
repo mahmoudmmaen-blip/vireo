@@ -1,0 +1,9 @@
+﻿{
+    "engine":  "agent",
+    "exit_code":  0,
+    "started":  "2026-10-16T19:23:21.9967893+03:00",
+    "minutes":  10.4,
+    "state":  "finished",
+    "finished":  "2026-10-16T19:33:44.4872193+03:00",
+    "task":  "002_P35c_finish"
+}

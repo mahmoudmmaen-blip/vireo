@@ -1,0 +1,1 @@
+Read-only smoke test. Do NOT modify any file. Run `git log --oneline -3` and `git status --short`, then reply with exactly 3 lines: the last commit message, the number of changed files, and the word RUNNER_OK.

@@ -1,0 +1,9 @@
+﻿{
+    "engine":  "agent",
+    "exit_code":  0,
+    "started":  "2026-10-17T20:07:41.4256611+03:00",
+    "minutes":  19.9,
+    "state":  "finished",
+    "finished":  "2026-10-17T20:27:34.2516663+03:00",
+    "task":  "007_P37_release_ready"
+}

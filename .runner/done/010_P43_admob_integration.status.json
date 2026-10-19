@@ -1,0 +1,14 @@
+{
+  "task": "010_P43_admob_integration",
+  "state": "finished",
+  "engine": "cursor-agent",
+  "exit_code": 0,
+  "started": "2026-10-18T22:34:00+03:00",
+  "finished": "2026-10-18T23:00:00+03:00",
+  "commit": "99f73aaf62055f92feef256a9c64d45a66121e96",
+  "application_id": "com.vireoapp.fitness",
+  "analyze": "0 errors",
+  "tests": "16 passed",
+  "debug_apk": "success",
+  "note": "Debug uses Google test ad units; release uses production banner/interstitial/rewarded. Native still test-only until owner creates a unit."
+}
