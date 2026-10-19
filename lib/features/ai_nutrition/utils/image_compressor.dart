@@ -6,7 +6,9 @@ import 'package:image/image.dart' as img;
 /// as JPEG quality 75 before upload.
 /// The `image` package's WebP encoder has no quality argument.
 abstract final class MealImageCompressor {
-  static const int maxDimension = 800;
+  /// Longest side before upload (P52). Larger than P42's 800 for clarity;
+  /// still much smaller than camera originals.
+  static const int maxDimension = 1024;
   static const int quality = 75;
   static const String mimeType = 'image/jpeg';
 

@@ -1,0 +1,19 @@
+{
+  "id": "P53",
+  "title": "Weekly charts for steps and calories (fl_chart already installed)",
+  "priority": "medium",
+  "goal": "Tester asked: where are the walking/calorie charts? Charts = retention engine",
+  "steps": [
+    "Steps: weekly bar chart from StepsRepository history",
+    "Calories: weekly line/bar vs daily goal from meal logs",
+    "Weight: existing weight logs -> trend line with projection",
+    "Entry point: 'التفاصيل' from the Home calories card + walking tab",
+    "Arabic RTL, token colors only"
+  ],
+  "acceptance": [
+    "User can see this week's steps and calories charts in max 2 taps from Home",
+    "Empty state shows friendly Arabic copy, not blank canvas"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle.kts applicationId"]
+}

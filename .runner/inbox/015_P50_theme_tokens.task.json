@@ -1,0 +1,19 @@
+{
+  "id": "P50",
+  "title": "Enforce design tokens + clean dark/light themes (orange becomes accent-only)",
+  "priority": "medium",
+  "goal": "Fix tester complaint: orange clashes; wants precise black & white themes with zero conflicts",
+  "steps": [
+    "VireoColors already exists — audit all screens and remove EVERY hardcoded color; route through tokens",
+    "Orange (ember #e8763c) becomes accent-only: CTA, FAB, today marker. No full-card orange backgrounds",
+    "Ship exactly 2 themes: dark (default, base #12151a not pure black) + light; same tokens, different values",
+    "Macro colors (protein/carb/fat) fixed across both themes",
+    "Add golden/screenshot test: Home in both themes, RTL"
+  ],
+  "acceptance": [
+    "grep finds zero hardcoded Color(0x in lib/features",
+    "Home screenshot passes in dark+light, Arabic RTL, no color clashes"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle.kts applicationId"]
+}

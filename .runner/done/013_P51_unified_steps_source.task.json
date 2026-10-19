@@ -1,0 +1,18 @@
+{
+  "id": "P51",
+  "title": "Single source of truth for steps (StepsRepository stream)",
+  "priority": "high",
+  "goal": "Fix tester bug: walking tab steps don't match Home; step count slow and inaccurate",
+  "steps": [
+    "Create one StepsRepository exposing a stream of today's steps (Health Connect when permitted, pedometer fallback)",
+    "Refactor Home steps card AND walking tab to read from this single stream — no independent listeners",
+    "Reduce update latency to max 2 seconds after sensor or Health Connect event",
+    "Arabic RTL strings, offline-first"
+  ],
+  "acceptance": [
+    "Home and walking tab always show the identical number within 2 seconds",
+    "No duplicate step counting after app restart"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle.kts applicationId"]
+}

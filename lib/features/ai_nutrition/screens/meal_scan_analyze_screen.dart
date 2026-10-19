@@ -65,7 +65,7 @@ class _MealScanAnalyzeScreenState extends ConsumerState<MealScanAnalyzeScreen> {
     final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
     if (isArabic) {
       return switch (kind) {
-        AiScanErrorKind.offline => 'مفيش اتصال بالنت.. اتأكد من شبكة الإنترنت وحاول تاني',
+        AiScanErrorKind.offline => 'هنحسبها أول ما النت يرجع',
         AiScanErrorKind.timeout => 'التحليل أخد وقت أطول من المتوقع.. حاول تاني',
         AiScanErrorKind.noFood || AiScanErrorKind.parse =>
           'مش قادرين نتعرف على الأكل في الصورة.. حاول تصوّر الوجبة بوضوح أكتر',
@@ -76,7 +76,7 @@ class _MealScanAnalyzeScreenState extends ConsumerState<MealScanAnalyzeScreen> {
       };
     }
     return switch (kind) {
-      AiScanErrorKind.offline => 'No internet connection. Please check your network and try again.',
+      AiScanErrorKind.offline => 'We\'ll analyze it as soon as you\'re back online',
       AiScanErrorKind.timeout => 'Analysis timed out. Please try again.',
       AiScanErrorKind.noFood || AiScanErrorKind.parse =>
         'Couldn\'t recognize food in the photo. Please take a clearer photo.',
@@ -97,6 +97,7 @@ class _MealScanAnalyzeScreenState extends ConsumerState<MealScanAnalyzeScreen> {
         imageBytes: widget.photos.isNotEmpty ? widget.photos.first : null,
         isError: scanState.isError,
         errorMessage: errorMsg,
+        stage: scanState is AiScanScanning ? scanState.stage : null,
         onRetry: _startAnalysis,
         onCancel: () {
           ref.read(aiScanProvider.notifier).reset();

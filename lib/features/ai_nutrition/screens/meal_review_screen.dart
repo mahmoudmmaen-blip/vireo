@@ -2229,7 +2229,7 @@ class _MfpItemRow extends StatelessWidget {
                       builder: (context) {
                         final calRange = (line.kcalLow != null && line.kcalHigh != null && (line.kcalHigh! - line.kcalLow! > 5))
                             ? '≈ ${line.kcal.round()} (${line.kcalLow!.round()}–${line.kcalHigh!.round()})'
-                            : '${line.kcal.round()} سعرة';
+                            : '≈ ${line.kcal.round()} سعرة';
                         return Text(
                           '${line.grams.round()} جم  ·  $calRange',
                           maxLines: 1,
@@ -2430,7 +2430,7 @@ class _ExpandedItemEditor extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${line.kcal.round()} سعرة  ·  P: ${line.protein.round()}g  ·  C: ${line.carbs.round()}g  ·  F: ${line.fat.round()}g',
+              '≈ ${line.kcal.round()} سعرة  ·  P: ${line.protein.round()}g  ·  C: ${line.carbs.round()}g  ·  F: ${line.fat.round()}g',
               style: TextStyle(color: colors.textMute, fontSize: 11, fontWeight: FontWeight.bold),
             ),
             IconButton(

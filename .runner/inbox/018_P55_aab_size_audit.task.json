@@ -1,0 +1,19 @@
+{
+  "id": "P55",
+  "title": "AAB size audit (77.7MB is too heavy for Egyptian prepaid data)",
+  "priority": "low",
+  "goal": "Cut download size; target under 45MB",
+  "steps": [
+    "Run flutter build appbundle --analyze-size and identify top offenders",
+    "Check assets/exercises/gifs, lottie, scene packs, food_db JSONs for compression/webp/lazy-load opportunities",
+    "Convert large PNG/GIF assets to webp/animated webp or lottie where possible",
+    "Consider deferred components or on-demand download for scene packs",
+    "Report before/after sizes"
+  ],
+  "acceptance": [
+    "AAB size reduced measurably; report includes top 10 assets by size",
+    "App still builds and all scenes render"
+  ],
+  "gates": ["analyze", "build:aab"],
+  "no_touch": ["android/app/build.gradle.kts applicationId"]
+}

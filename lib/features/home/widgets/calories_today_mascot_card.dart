@@ -6,6 +6,7 @@ import 'package:vireo/core/services/user_sex_provider.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/estimated_kcal_label.dart';
 import 'package:vireo/core/ui/pressable.dart';
+import 'package:vireo/core/ui/ring_progress.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/features/ai_nutrition/screens/ai_scan_screen.dart';
 import 'package:vireo/features/diet_programs/providers/diet_programs_provider.dart';
@@ -16,10 +17,7 @@ import 'package:vireo/features/home/providers/today_nutrition_provider.dart';
 import 'package:vireo/features/insights/screens/score_insights_screen.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
 
-/// Home card #4: "سعراتك النهارده" — mascot wave + remaining + P/C/F.
-///
-/// Does NOT duplicate Daily Score remaining-macro rectangles; Daily Score
-/// stays focused on score / tips / next-meal.
+/// Home calories card (P49): remaining kcal hero + mascot wave as progress.
 class CaloriesTodayMascotCard extends ConsumerWidget {
   const CaloriesTodayMascotCard({super.key});
 
@@ -44,6 +42,9 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
 
     final goalKcal =
         nutrition.goalKcal > 0 ? nutrition.goalKcal : goalMeta.calories;
+    final remaining = nutrition.remainingKcal;
+    final remainingAbs = remaining.abs();
+    final isOver = nutrition.isOver;
 
     final proteinRatio = nutrition.proteinTarget > 0
         ? (nutrition.proteinG / nutrition.proteinTarget).clamp(0.0, 1.0)
@@ -60,14 +61,20 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
 
     final caption = isArabic
         ? mascotCaptionAr(
-            remainingKcal: nutrition.remainingKcal.clamp(0, 99999),
-            isOver: nutrition.isOver,
+            remainingKcal: remaining.clamp(0, 99999),
+            isOver: isOver,
             isFemale: isFemale,
           )
         : mascotCaptionEn(
-            remainingKcal: nutrition.remainingKcal.clamp(0, 99999),
-            isOver: nutrition.isOver,
+            remainingKcal: remaining.clamp(0, 99999),
+            isOver: isOver,
           );
+
+    final heroColor = isOver
+        ? colors.danger
+        : remaining > 200
+            ? colors.success
+            : colors.ember;
 
     return VireoCard(
       onTap: () => ref.read(shellTabIndexProvider.notifier).goNutrition(),
@@ -99,56 +106,31 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
             style: TextStyle(color: colors.textMute, fontSize: 11.5),
           ),
           const SizedBox(height: VSpace.sm),
-          Text(
-            formatCount(nutrition.eatenKcal),
-            textAlign: TextAlign.center,
-            style: VType.number(
-              size: 32,
-              weight: FontWeight.w800,
-              color: colors.ember,
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            isArabic
-                ? 'من أصل ${formatCount(goalKcal)} سعرة'
-                : 'of ${formatCount(goalKcal)} kcal',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: colors.textMute, fontSize: 14),
-          ),
-          const SizedBox(height: VSpace.sm),
-          Center(child: _RemainingBadge(remaining: nutrition.remainingKcal)),
-          const SizedBox(height: VSpace.sm),
-          Row(
-            children: [
-              _MacroPill(
-                label: l10n.uxProtein,
-                value: nutrition.proteinG,
-                color: VMacro.protein,
+
+          // P49: remaining (فاضل) is the hero; wave (or classic ring) is progress.
+          if (settings.useClassicRing)
+            Center(
+              child: GestureDetector(
+                onTap: openInsights,
+                onLongPress: quickLog,
+                child: RingProgress(
+                  progress: goalKcal > 0
+                      ? nutrition.eatenKcal / goalKcal
+                      : 0,
+                  color: colors.ember,
+                  size: 96,
+                  stroke: 10,
+                ),
               ),
-              const SizedBox(width: 8),
-              _MacroPill(
-                label: l10n.uxCarbs,
-                value: nutrition.carbsG,
-                color: VMacro.carbs,
-              ),
-              const SizedBox(width: 8),
-              _MacroPill(
-                label: l10n.uxFat,
-                value: nutrition.fatG,
-                color: VMacro.fat,
-              ),
-            ],
-          ),
-          if (!settings.useClassicRing) ...[
-            const SizedBox(height: VSpace.sm),
+            )
+          else
             Center(
               child: CalorieMascotWave(
                 consumedKcal: nutrition.eatenKcal,
                 targetKcal: goalKcal,
                 companion: settings.companion,
-                size: 72,
-                showMacroLayers: settings.showMacroLayers,
+                size: 120,
+                showMacroLayers: false,
                 proteinRatio: proteinRatio * 0.34,
                 carbsRatio: carbsRatio * 0.33,
                 fatRatio: fatRatio * 0.33,
@@ -158,100 +140,164 @@ class CaloriesTodayMascotCard extends ConsumerWidget {
                 onLongPress: quickLog,
               ),
             ),
-          ],
-          if (!settings.useClassicRing) ...[
-            const SizedBox(height: VSpace.xs),
-            Text(
-              caption,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: colors.textMute,
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                height: 1.25,
-              ),
+          const SizedBox(height: VSpace.sm),
+
+          Text(
+            isOver
+                ? (isArabic ? 'زيادة' : 'Over')
+                : (isArabic ? 'فاضل' : 'Left'),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: colors.textMute,
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
             ),
-          ],
+          ),
+          Text(
+            '≈ ${formatCount(remainingAbs)}',
+            textAlign: TextAlign.center,
+            style: VType.number(
+              size: 40,
+              weight: FontWeight.w900,
+              color: heroColor,
+            ),
+          ),
+          Text(
+            isArabic ? 'سعرة' : 'kcal',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: colors.textMute,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            isArabic
+                ? 'أكلت ≈ ${formatCount(nutrition.eatenKcal)} من ${formatCount(goalKcal)} سعرة'
+                : 'Eaten ≈ ${formatCount(nutrition.eatenKcal)} of ${formatCount(goalKcal)} kcal',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: colors.textMute,
+              fontSize: 12.5,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: VSpace.xs),
+          Text(
+            caption,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: colors.textMute,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              height: 1.25,
+            ),
+          ),
+          const SizedBox(height: VSpace.sm),
+          Row(
+            children: [
+              _MacroGoalChip(
+                label: l10n.uxProtein,
+                valueG: nutrition.proteinG,
+                goalG: nutrition.proteinTarget.toDouble(),
+                color: VMacro.protein,
+                isArabic: isArabic,
+              ),
+              const SizedBox(width: 8),
+              _MacroGoalChip(
+                label: l10n.uxCarbs,
+                valueG: nutrition.carbsG,
+                goalG: nutrition.carbsTarget.toDouble(),
+                color: VMacro.carbs,
+                isArabic: isArabic,
+              ),
+              const SizedBox(width: 8),
+              _MacroGoalChip(
+                label: l10n.uxFat,
+                valueG: nutrition.fatG,
+                goalG: nutrition.fatTarget.toDouble(),
+                color: VMacro.fat,
+                isArabic: isArabic,
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 }
 
-class _RemainingBadge extends StatelessWidget {
-  const _RemainingBadge({required this.remaining});
-
-  final int remaining;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.vireoColors;
-    final isArabic = Localizations.localeOf(context).languageCode.startsWith('ar');
-    final color = remaining > 200
-        ? colors.success
-        : remaining >= 50
-            ? colors.ember
-            : colors.danger;
-    final label = remaining < 0
-        ? (isArabic ? 'زيادة ${formatCount(remaining.abs())}' : '${formatCount(remaining.abs())} over')
-        : (isArabic ? 'فاضل ${formatCount(remaining)}' : '${formatCount(remaining)} left');
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.16),
-        borderRadius: BorderRadius.circular(99),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 13),
-      ),
-    );
-  }
-}
-
-class _MacroPill extends StatelessWidget {
-  const _MacroPill({
+class _MacroGoalChip extends StatelessWidget {
+  const _MacroGoalChip({
     required this.label,
-    required this.value,
+    required this.valueG,
+    required this.goalG,
     required this.color,
+    required this.isArabic,
   });
 
   final String label;
-  final double value;
+  final double valueG;
+  final double goalG;
   final Color color;
+  final bool isArabic;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
+    final ratio = goalG > 0 ? (valueG / goalG).clamp(0.0, 1.0) : 0.0;
+    final unit = isArabic ? 'جم' : 'g';
+
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: const EdgeInsets.fromLTRB(8, 10, 8, 8),
         decoration: BoxDecoration(
           color: colors.background,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: colors.line),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: colors.textMute,
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-            const SizedBox(width: 6),
-            Flexible(
-              child: Text(
-                '$label ${value.round()}',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: colors.text,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                ),
+            const SizedBox(height: 2),
+            Text(
+              '${valueG.round()}',
+              textAlign: TextAlign.center,
+              style: VType.number(
+                size: 20,
+                weight: FontWeight.w900,
+                color: color,
+              ),
+            ),
+            Text(
+              '/ ${goalG.round()} $unit',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: colors.textMute,
+                fontSize: 10.5,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 6),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(99),
+              child: LinearProgressIndicator(
+                value: ratio,
+                minHeight: 3,
+                backgroundColor: color.withValues(alpha: 0.15),
+                color: color,
               ),
             ),
           ],

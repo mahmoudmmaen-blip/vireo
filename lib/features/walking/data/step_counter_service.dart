@@ -216,9 +216,9 @@ abstract final class StepCounterService {
       },
     );
 
-    // Health fusion is slower than the sensor. Step events themselves are not debounced.
+    // P51: Health Connect poll ≤2s so Home and Walk stay in sync.
     _foregroundRefreshTimer?.cancel();
-    _foregroundRefreshTimer = Timer.periodic(const Duration(seconds: 15), (_) {
+    _foregroundRefreshTimer = Timer.periodic(const Duration(seconds: 2), (_) {
       unawaited(refresh());
     });
   }
@@ -247,12 +247,13 @@ abstract final class StepCounterService {
   static Future<void> _refreshHealthCache() async {
     final fetchedAt = _healthFetchedAt;
     if (fetchedAt != null &&
-        DateTime.now().difference(fetchedAt) < const Duration(seconds: 15)) {
+        DateTime.now().difference(fetchedAt) < const Duration(seconds: 2)) {
       return;
     }
     try {
       if (!HealthStepsService.isSupported) return;
-      final snap = await HealthStepsService.fetchSnapshot();
+      // Never prompt on background poll — only read if already granted.
+      final snap = await HealthStepsService.fetchIfPermitted();
       _healthFetchedAt = DateTime.now();
       if (snap.status == HealthStepsStatus.granted) {
         _cachedHealthSteps = snap.todaySteps;
@@ -263,6 +264,21 @@ abstract final class StepCounterService {
     } catch (_) {
       _healthFetchedAt = DateTime.now();
     }
+  }
+
+  /// Manual / web entry — same stream Home and Walk consume (P51).
+  static Future<void> applyManualTodaySteps(int steps) async {
+    final clamped = steps.clamp(0, 200000);
+    await saveTodayToHistory(clamped);
+    _latest = LiveStepsSnapshot(
+      todaySteps: clamped,
+      source: StepSource.manual,
+      permissionGranted: _latest.permissionGranted,
+      sensorAvailable: _latest.sensorAvailable,
+      healthConnectDenied: _latest.healthConnectDenied,
+      last7Days: last7DaysFromHistory(todaySteps: clamped),
+    );
+    if (!_controller.isClosed) _controller.add(_latest);
   }
 
   static Future<LiveStepsSnapshot> _emitMerged({

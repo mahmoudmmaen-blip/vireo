@@ -121,6 +121,8 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
     final l10n = AppLocalizations.of(context);
     final colors = context.vireoColors;
     final live = ref.watch(liveStepsProvider).valueOrNull;
+    // P51: always read today's count from the shared stream (same as Walk tab).
+    final stepsCurrent = ref.watch(todayStepsProvider);
     final isRunning = ref.watch(isStepCounterRunningProvider);
     if (isRunning && !_pulseController.isAnimating) {
       _pulseController.repeat(reverse: true);
@@ -133,7 +135,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
     final usingPedometerFallback =
         healthConnectDenied && (live?.sensorAvailable ?? false);
 
-    if (!permissionGranted && widget.stepsCurrent == 0) {
+    if (!permissionGranted && stepsCurrent == 0) {
       return Container(
         padding: const EdgeInsets.all(VSpace.lg),
         decoration: BoxDecoration(
@@ -189,29 +191,29 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
 
     final profile = WalkingCalculations.readProfileMetrics();
     final metrics = WalkingCalculations.compute(
-      steps: widget.stepsCurrent,
+      steps: stepsCurrent,
       heightCm: profile.heightCm,
       weightKg: profile.weightKg,
       isFemale: profile.isFemale,
     );
     final effectiveGoal = widget.stepsGoal > 0 ? widget.stepsGoal : 7000;
-    final ratio = (widget.stepsCurrent / effectiveGoal).clamp(0.0, 1.0);
+    final ratio = (stepsCurrent / effectiveGoal).clamp(0.0, 1.0);
     final last7 = (live?.last7Days != null && live!.last7Days.isNotEmpty)
         ? live.last7Days
-        : StepCounterService.last7DaysFromHistory(todaySteps: widget.stepsCurrent);
+        : StepCounterService.last7DaysFromHistory(todaySteps: stepsCurrent);
 
     // Compute weekly daily average
     final totalSteps7 = last7.fold<int>(0, (s, d) => s + d.steps);
-    final dailyAvg = last7.isNotEmpty ? (totalSteps7 / last7.length).round() : widget.stepsCurrent;
+    final dailyAvg = last7.isNotEmpty ? (totalSteps7 / last7.length).round() : stepsCurrent;
 
     // Active minutes calculation: 100 steps ≈ 1 active minute
     final activeMinutes = metrics.activeMinutes > 0
         ? metrics.activeMinutes
-        : (widget.stepsCurrent / 100.0).round();
+        : (stepsCurrent / 100.0).round();
 
     final stage = widget.overrideStage != null
         ? JourneyStage.fromSteps(widget.overrideStage! * 1000)
-        : JourneyStage.fromSteps(widget.stepsCurrent);
+        : JourneyStage.fromSteps(stepsCurrent);
     final variant = ref.watch(appThemeVariantProvider);
     final rampColor = stage.ringAccent(variant);
 
@@ -231,7 +233,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
           ],
         ),
         child: LivingStepsBackground(
-          stepsCurrent: widget.stepsCurrent,
+          stepsCurrent: stepsCurrent,
           stepsGoal: effectiveGoal,
           overrideStage: widget.overrideStage,
           borderRadius: 20,
@@ -349,7 +351,7 @@ class _PremiumStepsHeroCardState extends ConsumerState<PremiumStepsHeroCard>
                             const Icon(Icons.edit, size: 16, color: Colors.white54),
                             const SizedBox(width: 6),
                             Text(
-                              NumberFormat.decimalPattern().format(widget.stepsCurrent),
+                              NumberFormat.decimalPattern().format(stepsCurrent),
                               style: const TextStyle(
                                 fontSize: 55,
                                 fontWeight: FontWeight.w900,

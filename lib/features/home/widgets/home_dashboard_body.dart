@@ -103,6 +103,9 @@ class HomeDashboardBody extends ConsumerWidget {
 
       const DailyScoreHeroCard(),
 
+      SectionHeader(title: l10n.uxSectionThisWeek, padding: _headerPad),
+      _WeekStrip(completedDays: dash.weeklyCompletedDays),
+
       const QuickWaterCard(),
 
       if (dash.showCheckIn || weeklyDue)
@@ -174,8 +177,6 @@ class HomeDashboardBody extends ConsumerWidget {
             ],
           ),
         ),
-        SectionHeader(title: l10n.uxSectionThisWeek, padding: _headerPad),
-        _WeekStrip(completedDays: dash.weeklyCompletedDays),
         _RecoveryCard(
           score: dash.recoveryScore,
           onInfo: () => showRecoveryBreakdownSheet(context, dash.recovery),
@@ -656,8 +657,8 @@ class _WeekStrip extends StatelessWidget {
     final localeCode = Localizations.localeOf(context).languageCode;
     final today = DateTime.now();
     final todayDate = DateTime(today.year, today.month, today.day);
-    // Week starts Saturday in Arabic, Monday in English.
-    final startWeekday = localeCode == 'ar' ? DateTime.saturday : DateTime.monday;
+    // P49: week always starts Saturday (Egyptian calendar feel).
+    const startWeekday = DateTime.saturday;
     final offset = (todayDate.weekday - startWeekday) % 7;
     final weekStart = todayDate.subtract(Duration(days: offset));
     final days = List<DateTime>.generate(7, (i) => weekStart.add(Duration(days: i)));
@@ -712,6 +713,7 @@ class _DayDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.vireoColors;
+    final filled = isToday || isDone;
     return Column(
       children: [
         Text(
@@ -732,16 +734,14 @@ class _DayDot extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isDone
+            color: filled
                 ? colors.ember
                 : isFuture
                     ? Colors.transparent
                     : colors.surfaceRaised,
-            border: isToday && !isDone
-                ? Border.all(color: colors.ember, width: 2)
-                : isFuture
-                    ? Border.all(color: colors.line)
-                    : null,
+            border: isFuture && !filled
+                ? Border.all(color: colors.line)
+                : null,
           ),
           child: isDone
               ? const Icon(Icons.check_rounded, size: 18, color: Colors.white)
@@ -749,8 +749,12 @@ class _DayDot extends StatelessWidget {
                   '$dayNumber',
                   style: VType.number(
                     size: 13,
-                    weight: FontWeight.w600,
-                    color: isFuture ? colors.textMute : colors.text,
+                    weight: FontWeight.w700,
+                    color: filled
+                        ? Colors.white
+                        : isFuture
+                            ? colors.textMute
+                            : colors.text,
                   ),
                 ),
         ),

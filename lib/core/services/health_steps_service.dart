@@ -42,6 +42,24 @@ abstract final class HealthStepsService {
     }
   }
 
+  /// Passive poll — never prompts; returns denied if permission not already granted.
+  static Future<HealthStepsSnapshot> fetchIfPermitted() async {
+    if (!isSupported) {
+      return const HealthStepsSnapshot(status: HealthStepsStatus.unavailable);
+    }
+    try {
+      await _ensureConfigured();
+      final hasAccess = await hasPermission();
+      if (!hasAccess) {
+        return const HealthStepsSnapshot(status: HealthStepsStatus.denied);
+      }
+      return _readTodayAndWeek();
+    } catch (_) {
+      return const HealthStepsSnapshot(status: HealthStepsStatus.denied);
+    }
+  }
+
+  /// Explicit grant flow (onboarding / Health Hub) — may show the system sheet.
   static Future<HealthStepsSnapshot> fetchSnapshot() async {
     if (!isSupported) {
       return const HealthStepsSnapshot(status: HealthStepsStatus.unavailable);
@@ -56,27 +74,29 @@ abstract final class HealthStepsService {
           return const HealthStepsSnapshot(status: HealthStepsStatus.denied);
         }
       }
-
-      final todaySteps = await _fetchStepsForDay(DateTime.now());
-      final last7Days = await Future.wait(
-        List.generate(7, (index) async {
-          final date = DateTime.now().subtract(Duration(days: 6 - index));
-          final steps = await _fetchStepsForDay(date);
-          return DailyStepCount(
-            date: DateTime(date.year, date.month, date.day),
-            steps: steps,
-          );
-        }),
-      );
-
-      return HealthStepsSnapshot(
-        status: HealthStepsStatus.granted,
-        todaySteps: todaySteps,
-        last7Days: last7Days,
-      );
+      return _readTodayAndWeek();
     } catch (_) {
       return const HealthStepsSnapshot(status: HealthStepsStatus.denied);
     }
+  }
+
+  static Future<HealthStepsSnapshot> _readTodayAndWeek() async {
+    final todaySteps = await _fetchStepsForDay(DateTime.now());
+    final last7Days = await Future.wait(
+      List.generate(7, (index) async {
+        final date = DateTime.now().subtract(Duration(days: 6 - index));
+        final steps = await _fetchStepsForDay(date);
+        return DailyStepCount(
+          date: DateTime(date.year, date.month, date.day),
+          steps: steps,
+        );
+      }),
+    );
+    return HealthStepsSnapshot(
+      status: HealthStepsStatus.granted,
+      todaySteps: todaySteps,
+      last7Days: last7Days,
+    );
   }
 
   static Future<int> _fetchStepsForDay(DateTime day) async {

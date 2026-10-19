@@ -1,21 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/features/walking/data/step_counter_service.dart';
 import 'package:vireo/features/walking/data/step_permission.dart';
+import 'package:vireo/features/walking/data/steps_repository.dart';
 
 import 'package:vireo/features/walking/data/step_foreground_service.dart';
 
-/// Live steps from the on-device pedometer (with Health fallback).
+/// Live steps from [StepsRepository] (Health Connect + pedometer).
 ///
 /// Does **not** request permission by itself — call [enableStepCounting]
 /// after showing the in-app explanation.
 final liveStepsProvider = StreamProvider<LiveStepsSnapshot>((ref) {
-  return StepCounterService.stream;
+  return StepsRepository.stream;
 });
 
-/// Today's step count (0 while loading / denied).
+/// Today's step count — **single source of truth for Home and Walk tab** (P51).
 final todayStepsProvider = Provider<int>((ref) {
   return ref.watch(liveStepsProvider).valueOrNull?.todaySteps ??
-      StepCounterService.latest.todaySteps;
+      StepsRepository.todaySteps;
 });
 
 /// StateNotifier for foreground step counting status.
@@ -58,7 +59,7 @@ final enableStepCountingProvider =
       await StepForegroundService.start();
       ref.read(isStepCounterRunningProvider.notifier).setOptimistic(true);
     }
-    await StepCounterService.refresh();
+    await StepsRepository.refresh();
     return granted;
   };
 });
@@ -68,8 +69,8 @@ final stepCounterBootstrapProvider = FutureProvider<void>((ref) async {
   if (await StepPermission.isGranted()) {
     await StepForegroundService.init();
     if (!StepForegroundService.isActive) {
-      await StepCounterService.startListening();
+      await StepsRepository.startListening();
     }
   }
-  await StepCounterService.refresh();
+  await StepsRepository.refresh();
 });

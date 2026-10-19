@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vireo/core/boot/boot_log.dart';
 import 'package:vireo/core/config/app_config.dart';
 import 'package:vireo/core/services/supabase_service.dart';
+import 'package:vireo/features/ai_nutrition/application/ai_scan_stage.dart';
 import 'package:vireo/features/ai_nutrition/domain/food_analysis_result.dart';
 import 'package:vireo/features/ai_nutrition/domain/i_food_vision_service.dart';
 import 'package:vireo/features/ai_nutrition/utils/image_compressor.dart';
@@ -93,12 +94,14 @@ abstract final class GeminiFoodServiceCore {
     String? userHint,
     bool forceReanalyze = false,
     bool alreadyCompressed = false,
+    void Function(AiScanStage stage)? onStage,
   }) async {
     if (!SupabaseService.isInitialized) {
       throw const FoodVisionOfflineException();
     }
 
     try {
+      onStage?.call(AiScanStage.readingPlate);
       final compressedImages = <Uint8List>[];
       for (final img in images.take(5)) {
         // Re-sending the exact same bytes keeps the server image hash stable,
@@ -111,6 +114,7 @@ abstract final class GeminiFoodServiceCore {
         throw const FoodVisionParseException();
       }
 
+      onStage?.call(AiScanStage.identifyingIngredients);
       final payload = <String, dynamic>{
         'images': compressedImages.map(base64Encode).toList(),
         // Keep image_base64 for backward compatibility with existing server
@@ -158,6 +162,7 @@ abstract final class GeminiFoodServiceCore {
       if (scanned.isEmpty) {
         throw const FoodVisionNoFoodException();
       }
+      onStage?.call(AiScanStage.estimatingOil);
       final fromCache = data is Map && data['cached'] == true;
       final cachedAt = data is Map && data['cached_at'] is String
           ? DateTime.tryParse(data['cached_at'] as String)

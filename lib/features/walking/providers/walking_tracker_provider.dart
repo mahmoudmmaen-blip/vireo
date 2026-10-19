@@ -6,6 +6,7 @@ import 'package:vireo/core/utils/walking_goal_calculator.dart';
 import 'package:vireo/data/models/activity_level.dart';
 import 'package:vireo/data/models/daily_step_count.dart';
 import 'package:vireo/features/walking/data/step_counter_service.dart';
+import 'package:vireo/features/walking/data/steps_repository.dart';
 import 'package:vireo/features/walking/providers/live_steps_provider.dart';
 
 class WalkingContext {
@@ -152,7 +153,8 @@ class WalkingTrackerNotifier extends AsyncNotifier<WalkingTrackerState> {
         DateTime.now().toIso8601String().substring(0, 10),
       );
     }
-    await StepCounterService.saveTodayToHistory(clamped);
+    // Push into StepsRepository so Home + Walk stay identical (P51).
+    await StepsRepository.applyManualTodaySteps(clamped);
 
     final current = state.valueOrNull;
     if (current != null) {

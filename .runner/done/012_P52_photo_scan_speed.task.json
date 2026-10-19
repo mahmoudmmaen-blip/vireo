@@ -1,0 +1,19 @@
+{
+  "id": "P52",
+  "title": "Meal photo scan speed + trust UX",
+  "priority": "high",
+  "goal": "Fix tester complaint: photo analysis very slow and accuracy doubted",
+  "steps": [
+    "Compress/resize image to max 1024px longest side before upload",
+    "Add staged progress UI during analysis: 'بنحلل الطبق… بنقدّر المكونات… بنحسب الزيت…'",
+    "Result screen always shows ≈ estimate + visible oil/portion sliders (calibration IS the UI)",
+    "Queue scan when offline: 'هنحسبها أول ما النت يرجع'",
+    "Log scan duration; target under 8 seconds on 4G"
+  ],
+  "acceptance": [
+    "P50 scan latency under 8s on average Egyptian 4G (measure via existing bench tooling)",
+    "No raw-precision calorie numbers anywhere in result UI"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle.kts applicationId"]
+}

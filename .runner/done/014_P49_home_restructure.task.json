@@ -1,0 +1,21 @@
+{
+  "id": "P49",
+  "title": "Home restructure: one CTA, remaining-kcal hero, mascot = progress",
+  "priority": "high",
+  "goal": "One primary loop: photo to calories to mascot. Kill the 7 equal-weight buttons",
+  "steps": [
+    "Make تصوير a single dominant CTA; demote the other six actions to small secondary icons",
+    "Calories card: hero number = فاضل (remaining kcal); eaten becomes a small secondary line",
+    "Mascot liquid wave IS the progress indicator — remove duplicate progress visuals on the card",
+    "Week strip: day letter + day number, today highlighted with filled accent circle, week starts Saturday",
+    "Fix truncation in last-meal line; all units localized (جم / سعرة), no English like 22g P inside Arabic UI",
+    "Macro chips: bigger numbers + thin progress bar per macro vs goal"
+  ],
+  "acceptance": [
+    "Logging a photo takes max 2 taps from Home",
+    "Remaining kcal is the largest number on the calories card",
+    "Screenshot verified in Arabic RTL"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle.kts applicationId"]
+}

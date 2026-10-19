@@ -1,0 +1,18 @@
+{
+  "id": "P54",
+  "title": "Meal result as editable component chips (صدر فراخ / أرز مطبوخ)",
+  "priority": "medium",
+  "goal": "Tester asked for items as small formatted tabs; chips make AI results editable = trust",
+  "steps": [
+    "Meal analysis result renders each component as a chip: name + grams + kcal (e.g. 'صدر فراخ مشوي 120جم • 198')",
+    "Tap chip -> edit grams/name; long-press or X -> remove; totals recalc instantly",
+    "'add component' chip at the end of the row",
+    "Chips style consistent with VireoColors tokens, RTL"
+  ],
+  "acceptance": [
+    "Editing a chip updates meal totals without leaving the screen",
+    "Components persist with the meal after save"
+  ],
+  "gates": ["analyze", "test"],
+  "no_touch": ["android/app/build.gradle.kts applicationId"]
+}

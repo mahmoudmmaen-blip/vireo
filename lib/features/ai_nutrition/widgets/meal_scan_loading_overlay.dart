@@ -4,8 +4,9 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:vireo/core/theme/vireo_colors.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
+import 'package:vireo/features/ai_nutrition/application/ai_scan_stage.dart';
 
-/// Photo with an animated scan line, rotating nutrition tips, and a 25s timeout retry button.
+/// Photo with an animated scan line, staged progress, and a 25s timeout retry.
 class MealScanLoadingOverlay extends StatefulWidget {
   const MealScanLoadingOverlay({
     super.key,
@@ -14,6 +15,7 @@ class MealScanLoadingOverlay extends StatefulWidget {
     this.isError = false,
     this.onRetry,
     this.onCancel,
+    this.stage,
   });
 
   final Uint8List? imageBytes;
@@ -22,24 +24,20 @@ class MealScanLoadingOverlay extends StatefulWidget {
   final VoidCallback? onRetry;
   final VoidCallback? onCancel;
 
+  /// When set, shows this stage label; otherwise cycles the three P52 stages.
+  final AiScanStage? stage;
+
   @override
   State<MealScanLoadingOverlay> createState() => _MealScanLoadingOverlayState();
 }
 
 class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
     with SingleTickerProviderStateMixin {
-  static const _tips = [
-    '💡 نصيحة: تصوير الطبق من زاوية 45° بوضوح بيساعد على دقة تقدير الحجم.',
-    'بنتعرّف على المكونات والأصناف…',
-    '💡 نصيحة: البروتين في كل وجبة بيساعد على الشبع وبناء العضلات.',
-    'بنحسب السعرات والماكروز بدقة…',
-    '💡 نصيحة: طبق السلطة أو الخضار بيضيف ألياف ومغذيات بسعرات قليلة.',
-    'بنراجع طريقة الطهي والكميات…',
-  ];
+  static const _stages = AiScanStage.values;
 
   late final AnimationController _scanController;
-  int _tipIndex = 0;
-  Timer? _tipTimer;
+  int _stageIndex = 0;
+  Timer? _stageTimer;
   Timer? _timeoutTimer;
   bool _timedOut = false;
 
@@ -51,9 +49,9 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
       duration: const Duration(milliseconds: 2000),
     )..repeat(reverse: true);
 
-    _tipTimer = Timer.periodic(const Duration(milliseconds: 3200), (_) {
-      if (!mounted) return;
-      setState(() => _tipIndex = (_tipIndex + 1) % _tips.length);
+    _stageTimer = Timer.periodic(const Duration(milliseconds: 2800), (_) {
+      if (!mounted || widget.stage != null) return;
+      setState(() => _stageIndex = (_stageIndex + 1) % _stages.length);
     });
 
     _timeoutTimer = Timer(const Duration(seconds: 25), () {
@@ -65,9 +63,16 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
   @override
   void dispose() {
     _timeoutTimer?.cancel();
-    _tipTimer?.cancel();
+    _stageTimer?.cancel();
     _scanController.dispose();
     super.dispose();
+  }
+
+  String _stageLabel(BuildContext context) {
+    final isAr =
+        Localizations.localeOf(context).languageCode.startsWith('ar');
+    final stage = widget.stage ?? _stages[_stageIndex];
+    return isAr ? stage.labelAr() : stage.labelEn();
   }
 
   @override
@@ -187,11 +192,27 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
                           strokeWidth: 3,
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (var i = 0; i < _stages.length; i++) ...[
+                            if (i > 0) const SizedBox(width: 8),
+                            _StageDot(
+                              active: (widget.stage ?? _stages[_stageIndex])
+                                      .index >=
+                                  i,
+                            ),
+                          ],
+                        ],
+                      ),
+                      const SizedBox(height: 16),
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 300),
                         child: Container(
-                          key: ValueKey(_tipIndex),
+                          key: ValueKey(
+                            widget.stage?.index ?? _stageIndex,
+                          ),
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                           decoration: BoxDecoration(
                             color: Colors.black.withValues(alpha: 0.65),
@@ -199,7 +220,7 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
                             border: Border.all(color: Colors.white12),
                           ),
                           child: Text(
-                            _tips[_tipIndex],
+                            _stageLabel(context),
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               color: Colors.white,
@@ -215,6 +236,25 @@ class _MealScanLoadingOverlayState extends State<MealScanLoadingOverlay>
           ),
         ),
       ],
+    );
+  }
+}
+
+class _StageDot extends StatelessWidget {
+  const _StageDot({required this.active});
+
+  final bool active;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 250),
+      width: active ? 22 : 8,
+      height: 8,
+      decoration: BoxDecoration(
+        color: active ? const Color(0xFFFF6B35) : Colors.white24,
+        borderRadius: BorderRadius.circular(99),
+      ),
     );
   }
 }
