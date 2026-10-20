@@ -10,8 +10,8 @@ abstract final class AdMobConstants {
       'ca-app-pub-9991756921251214/4382459444';
   static const rewardedAdUnitId = 'ca-app-pub-9991756921251214/7364765877';
 
-  /// No production native unit yet — keep Google test ID for debug only.
-  static const nativeAdUnitId = testNativeAdUnitId;
+  /// No production native unit yet — disabled until created in AdMob Console.
+  static const nativeAdUnitId = '';
 
   static const testAppId = 'ca-app-pub-3940256099942544~3347511713';
   static const testBannerAdUnitId =

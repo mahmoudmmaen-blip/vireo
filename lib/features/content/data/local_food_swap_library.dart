@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import 'package:vireo/core/utils/asset_json.dart';
 import 'package:vireo/features/content/models/local_food_swap.dart';
 
 /// DB-backed local swap catalog (≥100 entries). Deterministic picker helpers.
@@ -12,8 +10,8 @@ class LocalFoodSwapLibrary {
 
   Future<List<LocalFoodSwap>> load() async {
     if (_swaps != null) return _swaps!;
-    final raw = await rootBundle.loadString('assets/content/local_food_swaps.json');
-    final decoded = Map<String, dynamic>.from(jsonDecode(raw) as Map);
+    final decoded =
+        await loadGzippedJsonMap('assets/content/local_food_swaps.json.gz');
     _swaps = (decoded['swaps'] as List? ?? [])
         .whereType<Map>()
         .map((e) => LocalFoodSwap.fromJson(Map<String, dynamic>.from(e)))

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:vireo/app.dart';
 import 'package:vireo/core/boot/boot_log.dart';
@@ -12,6 +13,18 @@ Future<void> main() async {
   BootLog.step('WidgetsFlutterBinding.ensureInitialized');
   WidgetsFlutterBinding.ensureInitialized();
   BootLog.ok('WidgetsFlutterBinding.ensureInitialized');
+
+  // Initialize AdMob with content rating restrictions
+  BootLog.step('MobileAds.instance.initialize');
+  await MobileAds.instance.initialize();
+  await MobileAds.instance.updateRequestConfiguration(
+    RequestConfiguration(
+      maxAdContentRating: MaxAdContentRating.g, // General audiences only
+      tagForChildDirectedTreatment: TagForChildDirectedTreatment.no,
+      tagForUnderAgeOfConsent: TagForUnderAgeOfConsent.no,
+    ),
+  );
+  BootLog.ok('MobileAds.instance.initialize');
 
   try {
     await HiveService.init();
@@ -58,4 +71,3 @@ Future<void> main() async {
     );
   }
 }
-

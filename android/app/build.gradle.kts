@@ -37,6 +37,11 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
+        // P55: drop x86_64 (emulators only) — shrinks AAB; Play still serves arm splits.
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+        }
+
         // Production AdMob App ID. Override with -PADMOB_APP_ID=... for local test app ids.
         val admobAppId = (project.findProperty("ADMOB_APP_ID") as? String)
             ?: "ca-app-pub-9991756921251214~5695541111"
@@ -70,6 +75,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+        }
+    }
+
+    // P55: strip emulator-only JNI from dependency AARs (barhopper/sentry/etc.)
+    packaging {
+        jniLibs {
+            excludes += listOf("**/x86/**", "**/x86_64/**")
         }
     }
 }

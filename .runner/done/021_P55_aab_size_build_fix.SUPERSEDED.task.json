@@ -1,0 +1,13 @@
+{
+  "id": "P55b",
+  "title": "P55 AAB size audit - build gate failed, rerun with full log",
+  "context": "P55 failed at build:aab gate (bundleRelease exit 1). analyze and test passed, so this is a build-environment issue, not code. Capture the full 'What went wrong' Gradle section this time.",
+  "tasks": [
+    "Rerun: flutter build appbundle --release and capture complete Gradle error output to .runner/done/P55_build_log.txt",
+    "Fix the root cause (likely runner build command or daemon/memory issue)",
+    "Measure AAB size; target < 45MB (was 77.7MB): report breakdown by asset type, unused assets to delete, font subsets, image compression",
+    "Do NOT change package name, signing config, or AdMob IDs"
+  ],
+  "gates": ["analyze", "build:aab", "package"],
+  "report_to": ".runner/done/P55_report.md"
+}

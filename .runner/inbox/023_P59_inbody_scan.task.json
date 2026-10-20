@@ -1,0 +1,15 @@
+{
+  "id": "P59",
+  "title": "InBody report scan: real OCR capture + voice readout of all values",
+  "context": "Current InBody screen is a placeholder (empty frame + instructions). Needs real camera/gallery/PDF flow. Voice readout must announce ALL details (fat %, muscle, water, BMR, weight history).",
+  "tasks": [
+    "Camera screen: live preview inside the frame guide, capture -> crop -> OCR numbers",
+    "Gallery/PDF import paths with same extraction",
+    "Store reading to body-composition history (on-device only, women's module stays local)",
+    "Voice readout button: reads all extracted values aloud in Egyptian Arabic ('نسبة الدهون 24 بالمية...') using existing TTS",
+    "Manual fallback form if OCR confidence is low - show what we read and let user fix, zero-blame",
+    "Tests for the OCR field parser (sample values)"
+  ],
+  "gates": ["analyze", "test"],
+  "report_to": ".runner/done/P59_report.md"
+}

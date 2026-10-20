@@ -1,0 +1,14 @@
+{
+  "id": "P57",
+  "title": "Pro paywall discovery: visible entry points, no dark patterns",
+  "context": "Testers cannot find the Pro subscription screen. Revenue depends on paywall visibility. Never charge without an explicit Google Play purchase sheet.",
+  "tasks": [
+    "Audit all current paywall entry points and list them in report",
+    "Ensure entry points: after 3rd meal logged (soft prompt), on locked Pro feature tap, settings row, home subtle row",
+    "Show local prices only (99 EGP/mo, 499 EGP/yr, 1499 lifetime) - real charge happens only via Google Play bottom sheet",
+    "Verify RevenueCat entitlement mapping and restore-purchases button",
+    "Free vs Pro split table in report (what is locked vs free)"
+  ],
+  "gates": ["analyze", "test"],
+  "report_to": ".runner/done/P57_report.md"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "P58",
+  "title": "Voice logging for meals and exercise across the app",
+  "context": "speech_to_text is already in pubspec. Testers want: say any meal anywhere and it logs; say walking and it logs burnt calories. Egyptian Arabic speech support is a plus, not a blocker.",
+  "tasks": [
+    "Mic button on home hero + meal capture: 'سجلت 3 كوبات شاي وبيضة' -> parse to items + approx kcal (always show ≈)",
+    "Walk tab: 'مشيت 40 دقيقة' -> log exercise session with ≈ kcal estimate",
+    "Parsing fallback: if AI parse fails, show what we heard and let user correct - never silent fail, zero-blame copy",
+    "Graceful no-permission / no-speech-recognition fallback",
+    "Tests for the parser with Egyptian Arabic samples"
+  ],
+  "gates": ["analyze", "test"],
+  "report_to": ".runner/done/P58_report.md"
+}

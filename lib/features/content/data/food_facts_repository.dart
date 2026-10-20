@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import 'package:vireo/core/utils/asset_json.dart';
 import 'package:vireo/features/content/models/food_fact.dart';
 
 class FoodFactsRepository {
@@ -11,8 +9,8 @@ class FoodFactsRepository {
 
   Future<List<FoodFact>> load() async {
     if (_facts != null) return _facts!;
-    final raw = await rootBundle.loadString('assets/content/food_facts.json');
-    final decoded = Map<String, dynamic>.from(jsonDecode(raw) as Map);
+    final decoded =
+        await loadGzippedJsonMap('assets/content/food_facts.json.gz');
     _facts = (decoded['facts'] as List? ?? [])
         .whereType<Map>()
         .map((e) => FoodFact.fromJson(Map<String, dynamic>.from(e)))

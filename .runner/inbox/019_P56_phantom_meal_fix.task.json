@@ -1,0 +1,14 @@
+{
+  "id": "P56",
+  "title": "Phantom 320 kcal meal auto-appears on app open",
+  "priority": "critical",
+  "context": "Multiple internal testers report: opening the app they find a logged meal with ~320 kcal they never logged. This is the #1 trust bug. Do not blame the user in any copy.",
+  "tasks": [
+    "Audit every auto-log path: PendingMealScanQueue drain, smart-next suggestions, demo/seed data, leftover debug code, sync retries, widget deep-links",
+    "Add a one-time cleanup migration in Hive that removes meals older than X with no user confirmation (only seeds/demos), logged with console tag",
+    "Any auto-created entry must require explicit user tap to confirm — never silently added to day log",
+    "Add regression test: fresh install -> open home -> day log must be empty"
+  ],
+  "gates": ["analyze", "test"],
+  "report_to": ".runner/done/P56_report.md"
+}

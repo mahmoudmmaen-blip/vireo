@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import 'package:vireo/core/utils/asset_json.dart';
 import 'package:vireo/features/nutrition/data/food_db_models.dart';
 
 class FoodMatchResult {
@@ -31,9 +29,8 @@ class FoodDbRepository {
   Future<List<FoodItem>> load() async {
     if (_foods != null) return _foods!;
 
-    // 1. Load Egyptian/Arab curated DB
-    final rawEg = await rootBundle.loadString('assets/food_db/foods.json');
-    final decodedEg = Map<String, dynamic>.from(jsonDecode(rawEg) as Map);
+    // 1. Load Egyptian/Arab curated DB (gzipped — P55)
+    final decodedEg = await loadGzippedJsonMap('assets/food_db/foods.json.gz');
     final egList = (decodedEg['foods'] as List? ?? [])
         .whereType<Map>()
         .map((e) => FoodItem.fromJson(Map<String, dynamic>.from(e)))
@@ -44,8 +41,8 @@ class FoodDbRepository {
     // 2. Load USDA FoodData Central generic subset (~1,500 foods)
     var usdaList = <FoodItem>[];
     try {
-      final rawUsda = await rootBundle.loadString('assets/food_db/usda_foods.json');
-      final decodedUsda = Map<String, dynamic>.from(jsonDecode(rawUsda) as Map);
+      final decodedUsda =
+          await loadGzippedJsonMap('assets/food_db/usda_foods.json.gz');
       usdaList = (decodedUsda['foods'] as List? ?? [])
           .whereType<Map>()
           .map((e) => FoodItem.fromJson(Map<String, dynamic>.from(e)))

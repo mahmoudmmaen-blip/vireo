@@ -30,11 +30,9 @@ abstract final class AppConfig {
   );
 
   /// Hosted legal pages base URL (no trailing slash).
-  /// TODO(owner): set after uploading `web_legal/` to a static host, e.g.
-  /// `--dart-define=LEGAL_BASE_URL=https://vireo.app/legal`
   static const legalBaseUrl = String.fromEnvironment(
     'LEGAL_BASE_URL',
-    defaultValue: 'https://TODO_HOST_LEGAL_PAGES.example/legal',
+    defaultValue: 'https://phenomenal-melomakarona-a67c5d.netlify.app',
   );
 
   static const revenueCatAppleApiKey = String.fromEnvironment(
