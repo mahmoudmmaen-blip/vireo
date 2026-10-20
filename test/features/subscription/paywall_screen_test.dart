@@ -5,33 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vireo/core/l10n/generated/app_localizations.dart';
 import 'package:vireo/core/theme/app_theme.dart';
 import 'package:vireo/data/models/subscription_state.dart';
+import 'package:vireo/features/subscription/local_pro_prices.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/screens/paywall_screen.dart';
 
 void main() {
   Widget wrapWithTheme(Widget child, {SubscriptionSnapshot? snapshot}) {
-    final sub = snapshot ??
-        const SubscriptionSnapshot(
-          accessLevel: SubscriptionAccessLevel.free,
-          plans: [
-            SubscriptionPlan(
-              id: SubscriptionPlanId.monthly,
-              title: 'Monthly',
-              priceString: '\$9.99/mo',
-              packageIdentifier: 'monthly',
-              rawPrice: 9.99,
-              currencyCode: 'USD',
-            ),
-            SubscriptionPlan(
-              id: SubscriptionPlanId.annual,
-              title: 'Annual',
-              priceString: '\$59.99/yr',
-              packageIdentifier: 'annual',
-              rawPrice: 59.99,
-              currencyCode: 'USD',
-            ),
-          ],
-        );
+    final sub = snapshot ?? SubscriptionSnapshot.demoFree;
 
     return ProviderScope(
       overrides: [
@@ -52,8 +32,10 @@ void main() {
   }
 
   group('PaywallScreen widget test', () {
-    testWidgets('renders plans, CTA button, and legal compliance links', (tester) async {
-      tester.view.physicalSize = const Size(800, 2000);
+    testWidgets('renders Egypt list prices, lifetime, CTA, restore, legal', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(800, 2400);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() => tester.view.resetPhysicalSize());
 
@@ -62,18 +44,32 @@ void main() {
 
       expect(find.byType(PaywallScreen), findsOneWidget);
 
-      // Verify pricing plans
-      expect(find.text('\$59.99/yr'), findsOneWidget);
-      expect(find.text('\$9.99/mo'), findsOneWidget);
+      expect(
+        find.text(LocalProPrices.displayFor(SubscriptionPlanId.monthly, isAr: false)),
+        findsWidgets,
+      );
+      expect(
+        find.text(LocalProPrices.displayFor(SubscriptionPlanId.annual, isAr: false)),
+        findsWidgets,
+      );
+      expect(
+        find.text(LocalProPrices.displayFor(SubscriptionPlanId.lifetime, isAr: false)),
+        findsWidgets,
+      );
 
-      // Verify CTA button exists
       expect(find.byType(ElevatedButton), findsOneWidget);
+      expect(find.text('Restore'), findsOneWidget);
 
-      // Verify legal compliance links
       expect(find.text('Terms of Service'), findsOneWidget);
       expect(find.text('Privacy Policy'), findsOneWidget);
       expect(find.text('Medical Disclaimer'), findsOneWidget);
     });
+  });
+
+  test('local Egypt display prices match P57', () {
+    expect(LocalProPrices.monthlyEgp, 99);
+    expect(LocalProPrices.annualEgp, 499);
+    expect(LocalProPrices.lifetimeEgp, 1499);
   });
 }
 

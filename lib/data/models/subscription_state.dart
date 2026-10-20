@@ -100,28 +100,37 @@ class SubscriptionSnapshot {
     );
   }
 
+  /// Offline / unconfigured catalog — Egypt display prices (P57).
   static const demoFree = SubscriptionSnapshot(
     accessLevel: SubscriptionAccessLevel.free,
     isConfigured: false,
     plans: [
       SubscriptionPlan(
-        id: SubscriptionPlanId.monthly,
-        title: 'Monthly',
-        priceString: '\$9.99/mo',
-        packageIdentifier: 'monthly',
-        rawPrice: 9.99,
-        currencyCode: 'USD',
-      ),
-      SubscriptionPlan(
         id: SubscriptionPlanId.annual,
         title: 'Annual',
-        priceString: '\$59.99/yr',
+        priceString: '499 EGP / yr',
         packageIdentifier: 'annual',
-        rawPrice: 59.99,
-        currencyCode: 'USD',
+        rawPrice: 499,
+        currencyCode: 'EGP',
         isBestValue: true,
         trialLabel: '7-day free trial',
         trialPeriodDays: 7,
+      ),
+      SubscriptionPlan(
+        id: SubscriptionPlanId.monthly,
+        title: 'Monthly',
+        priceString: '99 EGP / mo',
+        packageIdentifier: 'monthly',
+        rawPrice: 99,
+        currencyCode: 'EGP',
+      ),
+      SubscriptionPlan(
+        id: SubscriptionPlanId.lifetime,
+        title: 'Lifetime',
+        priceString: '1499 EGP · once',
+        packageIdentifier: 'lifetime',
+        rawPrice: 1499,
+        currencyCode: 'EGP',
       ),
     ],
   );

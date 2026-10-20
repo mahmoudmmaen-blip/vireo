@@ -204,6 +204,7 @@ abstract final class RevenueCatService {
 
     SubscriptionPlan? monthly;
     SubscriptionPlan? annual;
+    SubscriptionPlan? lifetime;
 
     for (final package in offering.availablePackages) {
       final storeProduct = package.storeProduct;
@@ -213,6 +214,7 @@ abstract final class RevenueCatService {
       final plan = SubscriptionPlan(
         id: planId,
         title: storeProduct.title,
+        // UI overlays LocalProPrices; keep store string for debugging/restore.
         priceString: storeProduct.priceString,
         packageIdentifier: package.identifier,
         rawPrice: storeProduct.price,
@@ -222,16 +224,23 @@ abstract final class RevenueCatService {
         trialPeriodDays: isAnnual ? 7 : 0,
       );
 
-      if (planId == SubscriptionPlanId.monthly) {
-        monthly = plan;
-      } else if (planId == SubscriptionPlanId.annual) {
-        annual = plan;
+      switch (planId) {
+        case SubscriptionPlanId.monthly:
+          monthly = plan;
+        case SubscriptionPlanId.annual:
+          annual = plan;
+        case SubscriptionPlanId.lifetime:
+          lifetime = plan;
       }
     }
 
+    // Ensure Egypt display catalog always has all three tiers for discovery.
+    final fallback = SubscriptionSnapshot.demoFree.plans;
     return [
-      ?annual,
-      ?monthly,
+      annual ?? fallback.firstWhere((p) => p.id == SubscriptionPlanId.annual),
+      monthly ?? fallback.firstWhere((p) => p.id == SubscriptionPlanId.monthly),
+      lifetime ??
+          fallback.firstWhere((p) => p.id == SubscriptionPlanId.lifetime),
     ];
   }
 
@@ -244,10 +253,18 @@ abstract final class RevenueCatService {
   }
 
   static SubscriptionPlanId _planIdFromPackage(Package package) {
-    if (package.storeProduct.identifier == AppConfig.revenueCatAnnualProductId ||
+    final id = package.identifier.toLowerCase();
+    final productId = package.storeProduct.identifier;
+    if (productId == AppConfig.revenueCatLifetimeProductId ||
+        package.packageType == PackageType.lifetime ||
+        id.contains('lifetime') ||
+        id.contains('life_time')) {
+      return SubscriptionPlanId.lifetime;
+    }
+    if (productId == AppConfig.revenueCatAnnualProductId ||
         package.packageType == PackageType.annual ||
-        package.identifier.toLowerCase().contains('annual') ||
-        package.identifier.toLowerCase().contains('year')) {
+        id.contains('annual') ||
+        id.contains('year')) {
       return SubscriptionPlanId.annual;
     }
     return SubscriptionPlanId.monthly;
@@ -255,6 +272,10 @@ abstract final class RevenueCatService {
 
   static SubscriptionPlanId? _planFromProductId(String productId) {
     final lower = productId.toLowerCase();
+    if (productId == AppConfig.revenueCatLifetimeProductId ||
+        lower.contains('lifetime')) {
+      return SubscriptionPlanId.lifetime;
+    }
     if (productId == AppConfig.revenueCatAnnualProductId ||
         lower.contains('annual') ||
         lower.contains('year')) {

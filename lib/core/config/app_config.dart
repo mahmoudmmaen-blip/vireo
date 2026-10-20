@@ -60,6 +60,11 @@ abstract final class AppConfig {
     defaultValue: 'vireo_pro_annual',
   );
 
+  static const revenueCatLifetimeProductId = String.fromEnvironment(
+    'REVENUECAT_LIFETIME_PRODUCT_ID',
+    defaultValue: 'vireo_pro_lifetime',
+  );
+
   static const googleWebClientId = String.fromEnvironment(
     'GOOGLE_WEB_CLIENT_ID',
     defaultValue: '',

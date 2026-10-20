@@ -177,10 +177,10 @@ class _AiAnalysisSheetBody extends ConsumerWidget {
                   ref,
                   scanCountAfterSave: scanCount,
                 );
-                await maybeShowSoftPaywallAfterFirstScan(
+                await maybeShowSoftPaywallAfterThirdMeal(
                   context,
                   ref,
-                  scanCountAfterSave: scanCount,
+                  mealCountAfterSave: scanCount,
                 );
                 if (!context.mounted) return;
                 Navigator.of(context).pop();

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vireo/core/boot/boot_log.dart';
+import 'package:vireo/features/nutrition/data/phantom_meal_cleanup.dart';
 
 /// Local offline storage via Hive.
 /// On web, [Hive.initFlutter] uses IndexedDB — no filesystem paths required.
@@ -58,6 +59,14 @@ abstract final class HiveService {
       BootLog.ok('Hive.openBox(body_measurements)');
 
       _initialized = true;
+
+      // P56: strip seed/demo meal logs once — never silently count as eaten.
+      try {
+        await PhantomMealCleanup.runIfNeeded();
+      } catch (e) {
+        BootLog.warn('PhantomMealCleanup failed', e);
+      }
+
       BootLog.ok('HiveService.init');
     } catch (e) {
       BootLog.warn('HiveService.init failed', e);

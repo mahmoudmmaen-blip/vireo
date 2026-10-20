@@ -11,6 +11,7 @@ import 'package:vireo/core/ui/pressable.dart';
 import 'package:vireo/core/ui/vireo_tokens.dart';
 import 'package:vireo/data/models/subscription_state.dart';
 import 'package:vireo/features/nutrition/providers/calorie_goal_provider.dart';
+import 'package:vireo/features/subscription/local_pro_prices.dart';
 import 'package:vireo/features/subscription/providers/subscription_provider.dart';
 import 'package:vireo/features/subscription/subscription_gate.dart';
 
@@ -260,11 +261,11 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
           onRetry: () => ref.invalidate(subscriptionProvider),
         ),
         data: (snapshot) {
-          final plans = (snapshot.plans.isNotEmpty
-                  ? snapshot.plans
-                  : SubscriptionSnapshot.demoFree.plans)
-              .where((p) => p.id != SubscriptionPlanId.lifetime)
-              .toList();
+          // Prefer RevenueCat catalog when present; always fall back to local
+          // Egypt display prices (P57). Lifetime stays visible for discovery.
+          final plans = snapshot.plans.isNotEmpty
+              ? snapshot.plans
+              : LocalProPrices.demoPlans(isAr: isAr);
 
           final annualPlan = plans.firstWhere(
             (p) => p.id == SubscriptionPlanId.annual,
@@ -409,17 +410,27 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               ...plans.map((plan) {
                 final isSelected = _selected == plan.id;
                 final isAnnual = plan.id == SubscriptionPlanId.annual;
-                final title = isAnnual
-                    ? (isAr ? 'الاشتراك السنوي' : 'Annual')
-                    : (isAr ? 'الاشتراك الشهري' : 'Monthly');
+                final isLifetime = plan.id == SubscriptionPlanId.lifetime;
+                // Local Egypt list prices only — Play sheet shows the real charge.
+                final priceLabel =
+                    LocalProPrices.displayFor(plan.id, isAr: isAr);
+                final title = isLifetime
+                    ? (isAr ? 'مدى الحياة' : 'Lifetime')
+                    : isAnnual
+                        ? (isAr ? 'الاشتراك السنوي' : 'Annual')
+                        : (isAr ? 'الاشتراك الشهري' : 'Monthly');
 
-                final subtext = isAnnual
+                final subtext = isLifetime
                     ? (isAr
-                        ? 'تجربة مجانية 7 أيام · ثم ${plan.priceString}'
-                        : '7-day free trial · then ${plan.priceString}')
-                    : (isAr
-                        ? 'تجديد شهري · ${plan.priceString}'
-                        : 'Billed monthly · ${plan.priceString}');
+                        ? 'دفعة واحدة · بدون تجديد'
+                        : 'One-time · no renewal')
+                    : isAnnual
+                        ? (isAr
+                            ? 'تجربة مجانية 7 أيام · ثم $priceLabel'
+                            : '7-day free trial · then $priceLabel')
+                        : (isAr
+                            ? 'تجديد شهري · $priceLabel'
+                            : 'Billed monthly · $priceLabel');
 
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
@@ -488,7 +499,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  plan.priceString,
+                                  priceLabel,
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
@@ -522,13 +533,20 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     orElse: () => plans.first,
                   );
                   final isAnnual = activePlan.id == SubscriptionPlanId.annual;
-                  final renewalText = isAnnual
+                  final isLifetime = activePlan.id == SubscriptionPlanId.lifetime;
+                  final activePrice =
+                      LocalProPrices.displayFor(activePlan.id, isAr: isAr);
+                  final renewalText = isLifetime
                       ? (isAr
-                          ? 'مدة التجربة: 7 أيام مجاناً · سعر التجديد: ${activePlan.priceString} سنوياً'
-                          : 'Trial: 7 days free · Renewal: ${activePlan.priceString}/year')
-                      : (isAr
-                          ? 'تجديد فوري: ${activePlan.priceString} شهرياً'
-                          : 'Billed monthly: ${activePlan.priceString}');
+                          ? 'دفعة واحدة: $activePrice — بدون تجديد تلقائي'
+                          : 'One-time: $activePrice — no auto-renewal')
+                      : isAnnual
+                          ? (isAr
+                              ? 'مدة التجربة: 7 أيام مجاناً · سعر التجديد: $activePrice'
+                              : 'Trial: 7 days free · Renewal: $activePrice')
+                          : (isAr
+                              ? 'تجديد فوري: $activePrice'
+                              : 'Billed monthly: $activePrice');
 
                   return Container(
                     padding: const EdgeInsets.all(16),

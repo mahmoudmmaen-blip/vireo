@@ -687,10 +687,10 @@ class _MealReviewScreenState extends ConsumerState<MealReviewScreen> {
     if (!mounted) return;
     await syncHomeScreenWidget(ref, context: context, force: true);
     if (!mounted) return;
-    await maybeShowSoftPaywallAfterFirstScan(
+    await maybeShowSoftPaywallAfterThirdMeal(
       context,
       ref,
-      scanCountAfterSave: scanCount,
+      mealCountAfterSave: scanCount,
     );
     if (!mounted) return;
     final isPro = ref.read(isProUserProvider);

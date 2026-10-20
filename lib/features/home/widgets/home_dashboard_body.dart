@@ -51,6 +51,7 @@ import 'package:vireo/features/men_health/widgets/men_vitality_hero_card.dart';
 import 'package:vireo/features/ramadan/widgets/ramadan_countdown_card.dart';
 import 'package:vireo/features/content/widgets/daily_food_fact_card.dart';
 import 'package:vireo/features/home/widgets/home_body_composition_card.dart';
+import 'package:vireo/features/home/widgets/home_pro_teaser_row.dart';
 import 'package:vireo/features/women_health/widgets/women_health_hero_card.dart';
 
 const _headerPad = EdgeInsets.fromLTRB(4, VSpace.sm, 4, 0);
@@ -114,6 +115,9 @@ class HomeDashboardBody extends ConsumerWidget {
       const TodayPillarsGrid(),
       const SmartNextActionCard(),
       const TodayPlanSection(),
+
+      // P57: subtle Pro discovery (hidden for Pro users).
+      const HomeProTeaserRow(),
 
       // Ad never between items 1–6; earliest after #7
       const VireoNativeAdCard(),
